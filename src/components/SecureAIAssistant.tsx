@@ -493,12 +493,12 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
   }
 
   // Mobile-optimized container classes
-  const containerClasses = isMobile 
-    ? "fixed inset-0 bg-white z-50 flex flex-col"
-    : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
+const containerClasses = isMobile 
+  ? "fixed inset-0 bg-white z-50 flex flex-col"
+  : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
 
-  return (
-    <div className={containerClasses}>
+return (
+  <div className={containerClasses}>
       {/* Header */}
       <div className={`bg-blue-600 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
         <div className="flex items-center space-x-2">
@@ -970,4 +970,4 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       {/* Mobile Safe Area Bottom Padding */}
       {isMobile && <div className="h-4"></div>}
     </div>
-  };
+  )}
