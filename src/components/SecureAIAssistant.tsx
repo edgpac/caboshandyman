@@ -152,8 +152,8 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
   }, [assistantIsOpen, stream]);
 
   const sendWhatsAppNotification = async (appointmentData) => {
-  try {
-    const message = `New Appointment Scheduled:
+    try {
+      const message = `New Appointment Scheduled:
 Service: ${appointmentData.serviceType}
 Client: ${appointmentData.name}
 Phone: ${appointmentData.phone}
@@ -161,37 +161,37 @@ Details: ${appointmentData.projectDetails}
 Urgency: ${appointmentData.urgency}
 Time: ${new Date().toLocaleString()}`;
 
-    // Send to business owner (you) - using environment variable
-    await fetch('/api/send-whatsapp', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        message: message,
-        phone: process.env.BUSINESS_WHATSAPP_NUMBER
-      })
-    });
-
-    // Send confirmation to customer
-    if (appointmentData.phone) {
-      const customerMessage = `Thank you ${appointmentData.name}! Your appointment request has been received for ${appointmentData.serviceType}. We'll contact you shortly to confirm details.`;
-      
+      // Send to business owner (you) - using environment variable
       await fetch('/api/send-whatsapp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: customerMessage,
-          phone: appointmentData.phone
+          message: message,
+          phone: process.env.BUSINESS_WHATSAPP_NUMBER
         })
       });
+
+      // Send confirmation to customer
+      if (appointmentData.phone) {
+        const customerMessage = `Thank you ${appointmentData.name}! Your appointment request has been received for ${appointmentData.serviceType}. We'll contact you shortly to confirm details.`;
+        
+        await fetch('/api/send-whatsapp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: customerMessage,
+            phone: appointmentData.phone
+          })
+        });
+      }
+    } catch (error) {
+      console.error('WhatsApp notification failed:', error);
     }
-  } catch (error) {
-    console.error('WhatsApp notification failed:', error);
-  }
-};
+  };
 
   const compressImage = (file, maxWidth = isMobile ? 600 : 800, quality = 0.7) => {
     return new Promise((resolve) => {
@@ -685,15 +685,20 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               </div>
             </div>
 
-            <button 
+            <div className="border-t pt-3">
+              <p className="text-xs text-gray-600 mb-2">Prefer to call directly?</p>
+              <button 
                 onClick={() => window.open('tel:+526121698328')}
                 className="w-full bg-green-100 hover:bg-green-200 text-green-800 py-2 px-3 rounded text-sm font-semibold transition-colors flex items-center justify-center space-x-2"
->
+              >
                 <Phone size={14} />
                 <span>Call +526121698328</span>
-            </button>
+              </button>
+            </div>
+          </div>
+        )}
 
-               currentView === 'analysis' && !analysis && !isAnalyzing && (
+        {currentView === 'analysis' && !analysis && !isAnalyzing && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
@@ -768,7 +773,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     >
                       Cancel
                     </button>
-                    </div>
+                  </div>
                 </div>
               ) : selectedImage ? (
                 <div className="space-y-2">
@@ -965,5 +970,4 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       {/* Mobile Safe Area Bottom Padding */}
       {isMobile && <div className="h-4"></div>}
     </div>
-  );
-}
+  };
