@@ -486,7 +486,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       <div className={`bg-blue-600 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
         <div className="flex items-center space-x-2">
           <Wrench size={20} />
-          <span className="font-semibold">AI Assistant</span>
+          <span className="font-semibold">Quote Assistant</span>
         </div>
         <button 
           onClick={handleClose}
@@ -672,7 +672,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               <p className="text-xs text-gray-600 mb-2">Prefer to call directly?</p>
               <button className="w-full bg-green-100 hover:bg-green-200 text-green-800 py-2 px-3 rounded text-sm font-semibold transition-colors flex items-center justify-center space-x-2">
                 <Phone size={14} />
-                <span>Call (805) 555-0123</span>
+                <span>Call (612) 169-8328</span>
               </button>
             </div>
           </div>
@@ -840,7 +840,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               }`}
             >
               <Send size={16} />
-              <span>Analyze with AI</span>
+              <span>Analyze with Intelligence</span>
             </button>
           </div>
         )}
@@ -848,7 +848,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         {isAnalyzing && (
           <div className="text-center space-y-4">
             <Loader className="animate-spin mx-auto w-8 h-8 text-blue-600" />
-            <p className="text-gray-600">AI analyzing your issue...</p>
+            <p className="text-gray-600">Analyzing your issue...</p>
             <div className="text-sm text-gray-500 space-y-1">
               <p>🔍 Processing image</p>
               <p>💡 Identifying parts needed</p>
