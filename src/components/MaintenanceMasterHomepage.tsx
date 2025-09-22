@@ -9,7 +9,7 @@ import communityImage from '../assets/community-center.jpeg';
 import restaurantImage from '../assets/restaurant-buildout.jpeg';
 import homeImage from '../assets/home-addition.jpeg';
 
-export default function VenturasHandymanHomepage() {
+export default function CabosHandymanHomepage() {
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
   const [aiAssistantMode, setAiAssistantMode] = useState('services'); // 'services', 'booking', 'estimate'
 
@@ -58,9 +58,9 @@ export default function VenturasHandymanHomepage() {
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">VH</span>
+              <span className="text-primary-foreground font-bold text-xl">CH</span>
             </div>
-            <span className="text-xl font-bold text-primary">VENTURA'S HANDYMAN</span>
+            <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
           </div>
           <div className="hidden md:flex space-x-8">
           </div>
@@ -85,14 +85,14 @@ export default function VenturasHandymanHomepage() {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-block bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              🏗️ Ventura County's Premier Maintenance Company
+              🏗️ Cabo San Lucas' Premier Handyman Service
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-primary">
                 BUILDING VISIONS,<br />
                 SHAPING THE FUTURE.
             </h1>
             <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
-              Honest & reliable builders since 1994. For over 30 years, Ventura's Handyman has been transforming homes and businesses with expert craftsmanship, reliable service, and unmatched attention to detail.
+              Honest & reliable builders since 1994. For over 30 years, Cabos Handyman has been transforming homes and businesses with expert craftsmanship, reliable service, and unmatched attention to detail.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
