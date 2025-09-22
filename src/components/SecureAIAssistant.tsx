@@ -169,7 +169,7 @@ Time: ${new Date().toLocaleString()}`;
         },
         body: JSON.stringify({
           message: message,
-          phone: process.env.BUSINESS_WHATSAPP_NUMBER
+          phone: process.env.NEXT_PUBLIC_BUSINESS_WHATSAPP_NUMBER 
         })
       });
 
