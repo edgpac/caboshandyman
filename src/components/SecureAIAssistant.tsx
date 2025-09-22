@@ -152,8 +152,8 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
   }, [assistantIsOpen, stream]);
 
   const sendWhatsAppNotification = async (appointmentData) => {
-    try {
-      const message = `New Appointment Scheduled:
+  try {
+    const message = `New Appointment Scheduled:
 Service: ${appointmentData.serviceType}
 Client: ${appointmentData.name}
 Phone: ${appointmentData.phone}
@@ -161,20 +161,37 @@ Details: ${appointmentData.projectDetails}
 Urgency: ${appointmentData.urgency}
 Time: ${new Date().toLocaleString()}`;
 
+    // Send to business owner (you) - using environment variable
+    await fetch('/api/send-whatsapp', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: message,
+        phone: process.env.BUSINESS_WHATSAPP_NUMBER
+      })
+    });
+
+    // Send confirmation to customer
+    if (appointmentData.phone) {
+      const customerMessage = `Thank you ${appointmentData.name}! Your appointment request has been received for ${appointmentData.serviceType}. We'll contact you shortly to confirm details.`;
+      
       await fetch('/api/send-whatsapp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: message,
-          phone: '+1234567890'
+          message: customerMessage,
+          phone: appointmentData.phone
         })
       });
-    } catch (error) {
-      console.error('WhatsApp notification failed:', error);
     }
-  };
+  } catch (error) {
+    console.error('WhatsApp notification failed:', error);
+  }
+};
 
   const compressImage = (file, maxWidth = isMobile ? 600 : 800, quality = 0.7) => {
     return new Promise((resolve) => {
@@ -366,7 +383,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         body: JSON.stringify({
           imageBase64,
           description: analysisDescription,
-          location: location || 'Ventura County, CA',
+          location: location || 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
             title: selectedService.title,
             category: selectedService.title.toLowerCase().replace(' ', '_')
