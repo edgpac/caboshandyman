@@ -92,7 +92,7 @@ export default function CabosHandymanHomepage() {
                 SHAPING THE FUTURE.
             </h1>
             <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
-              Honest & reliable builders since 1994. For over 30 years, Cabos Handyman has been transforming homes and businesses with expert craftsmanship, reliable service, and unmatched attention to detail.
+              Transforming Cabo homes and businesses since 2019 with expert craftsmanship and reliable service.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
@@ -117,11 +117,11 @@ export default function CabosHandymanHomepage() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="transform hover:scale-105 transition-transform">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">30+</div>
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">6+</div>
               <div className="text-muted-foreground font-semibold">Years Experience</div>
             </div>
             <div className="transform hover:scale-105 transition-transform">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">500+</div>
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">300+</div>
               <div className="text-muted-foreground font-semibold">Projects Completed</div>
             </div>
             <div className="transform hover:scale-105 transition-transform">
@@ -189,7 +189,7 @@ export default function CabosHandymanHomepage() {
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to Start Your Project?</h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
-            Chat with our AI assistant to explore our services, get instant estimates, schedule emergency service, or book your free consultation.
+            Chat with our assistant to explore our services, get instant estimates, schedule emergency service, or book your free consultation.
           </p>
           <button 
             onClick={() => openAIAssistant('services')}
@@ -207,7 +207,7 @@ export default function CabosHandymanHomepage() {
               e.target.style.boxShadow = '0 8px 16px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8)';
             }}
           >
-            Start with AI Assistant
+            Start with our Assistant
             <MessageCircle className="ml-2" size={20} />
           </button>
           <div className="text-center mt-2">
