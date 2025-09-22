@@ -92,7 +92,7 @@ export default function CabosHandymanHomepage() {
                 SHAPING THE FUTURE.
             </h1>
             <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
-              Transforming Cabo homes and businesses since 2019 with expert craftsmanship and reliable service.
+              20 years of construction expertise, serving Cabo San Lucas since 2019 with quality craftsmanship and reliable service.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button 
