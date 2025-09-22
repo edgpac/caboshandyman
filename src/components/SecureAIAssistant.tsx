@@ -685,17 +685,15 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               </div>
             </div>
 
-            <div className="border-t pt-3">
-              <p className="text-xs text-gray-600 mb-2">Prefer to call directly?</p>
-              <button className="w-full bg-green-100 hover:bg-green-200 text-green-800 py-2 px-3 rounded text-sm font-semibold transition-colors flex items-center justify-center space-x-2">
+            <button 
+                onClick={() => window.open('tel:+526121698328')}
+                className="w-full bg-green-100 hover:bg-green-200 text-green-800 py-2 px-3 rounded text-sm font-semibold transition-colors flex items-center justify-center space-x-2"
+>
                 <Phone size={14} />
-                <span>Call (612) 169-8328</span>
-              </button>
-            </div>
-          </div>
-        )}
+                <span>Call +526121698328</span>
+            </button>
 
-        {currentView === 'analysis' && !analysis && !isAnalyzing && (
+               currentView === 'analysis' && !analysis && !isAnalyzing && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
               <div>
