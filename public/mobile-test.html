@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile API Test - Maintenance Master</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2563eb;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        input[type="file"],
+        textarea,
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 16px; /* Prevents zoom on iOS */
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        
+        input:focus,
+        textarea:focus {
+            border-color: #2563eb;
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .camera-section {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        #camera-button {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        
+        #analyze-button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        #analyze-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .preview {
+            margin: 15px 0;
+            text-align: center;
+        }
+        
+        .preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #6b7280;
+            margin: 20px 0;
+        }
+        
+        .results {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f3f4f6;
+            border-radius: 8px;
+        }
+        
+        .error {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .debug-info {
+            background: #e5e7eb;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        
+        #video {
+            width: 100%;
+            max-height: 250px;
+            border-radius: 8px;
+            background: #000;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 API Test Tool</h1>
+        
+        <div class="form-group">
+            <label>Image Upload</label>
+            <input type="file" id="image-input" accept="image/*" capture="environment">
+        </div>
+        
+        <div class="camera-section">
+            <button id="camera-button">📷 Use Camera</button>
+            <button id="capture-button" class="hidden">📸 Capture</button>
+            <button id="stop-camera" class="hidden">❌ Stop</button>
+        </div>
+        
+        <video id="video" class="hidden" autoplay playsinline></video>
+        
+        <div id="preview" class="preview hidden">
+            <img id="preview-image" alt="Preview">
+        </div>
+        
+        <div class="form-group">
+            <label>Description</label>
+            <textarea id="description" placeholder="Describe the maintenance issue..." required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>Location (optional)</label>
+            <input type="text" id="location" placeholder="Ventura County, CA">
+        </div>
+        
+        <button id="analyze-button" disabled>🤖 Test API</button>
+        
+        <div id="loading" class="loading hidden">
+            <p>⏳ Testing API connection...</p>
+            <p>📡 Sending image and description</p>
+            <p>🔍 Processing with AI</p>
+        </div>
+        
+        <div id="results" class="results hidden"></div>
+        
+        <div id="error" class="error hidden"></div>
+    </div>
+
+    <script>
+        let selectedFile = null;
+        let stream = null;
+        
+        const imageInput = document.getElementById('image-input');
+        const cameraButton = document.getElementById('camera-button');
+        const captureButton = document.getElementById('capture-button');
+        const stopCameraButton = document.getElementById('stop-camera');
+        const video = document.getElementById('video');
+        const preview = document.getElementById('preview');
+        const previewImage = document.getElementById('preview-image');
+        const description = document.getElementById('description');
+        const locationInput = document.getElementById('location');
+        const analyzeButton = document.getElementById('analyze-button');
+        const loading = document.getElementById('loading');
+        const results = document.getElementById('results');
+        const error = document.getElementById('error');
+        
+        // Handle file input
+        imageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                selectedFile = file;
+                showPreview(file);
+                checkIfReady();
+            }
+        });
+        
+        // Camera functionality
+        cameraButton.addEventListener('click', async () => {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: 'environment' }
+                });
+                video.srcObject = stream;
+                video.classList.remove('hidden');
+                cameraButton.classList.add('hidden');
+                captureButton.classList.remove('hidden');
+                stopCameraButton.classList.remove('hidden');
+            } catch (err) {
+                showError('Camera access denied: ' + err.message);
+            }
+        });
+        
+        captureButton.addEventListener('click', () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            ctx.drawImage(video, 0, 0);
+            
+            canvas.toBlob((blob) => {
+                selectedFile = new File([blob], 'camera-capture.jpg', { type: 'image/jpeg' });
+                const url = URL.createObjectURL(blob);
+                previewImage.src = url;
+                preview.classList.remove('hidden');
+                stopCamera();
+                checkIfReady();
+            }, 'image/jpeg', 0.8);
+        });
+        
+        stopCameraButton.addEventListener('click', stopCamera);
+        
+        function stopCamera() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+            video.classList.add('hidden');
+            cameraButton.classList.remove('hidden');
+            captureButton.classList.add('hidden');
+            stopCameraButton.classList.add('hidden');
+        }
+        
+        function showPreview(file) {
+            const url = URL.createObjectURL(file);
+            previewImage.src = url;
+            preview.classList.remove('hidden');
+        }
+        
+        function checkIfReady() {
+            const ready = selectedFile && description.value.trim();
+            analyzeButton.disabled = !ready;
+        }
+        
+        description.addEventListener('input', checkIfReady);
+        
+        // API Test
+        analyzeButton.addEventListener('click', async () => {
+            if (!selectedFile || !description.value.trim()) {
+                showError('Please select an image and enter a description');
+                return;
+            }
+            
+            showLoading(true);
+            hideError();
+            hideResults();
+            
+            try {
+                // Convert image to base64
+                const base64 = await fileToBase64(selectedFile);
+                
+                const payload = {
+                    imageBase64: base64,
+                    description: description.value.trim(),
+                    location: locationInput.value.trim() || 'Ventura County, CA',
+                    service_context: null
+                };
+                
+                console.log('Sending payload size:', JSON.stringify(payload).length);
+                
+                const response = await fetch('/api/analyze-parts', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const result = await response.json();
+                console.log('API Response:', result);
+                
+                showResults(result);
+                
+            } catch (err) {
+                console.error('API Error:', err);
+                showError('API Test Failed: ' + err.message);
+            } finally {
+                showLoading(false);
+            }
+        });
+        
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const base64 = reader.result.split(',')[1];
+                    resolve(base64);
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+        
+        function showLoading(show) {
+            loading.classList.toggle('hidden', !show);
+            analyzeButton.disabled = show;
+        }
+        
+        function showError(message) {
+            error.textContent = message;
+            error.classList.remove('hidden');
+        }
+        
+        function hideError() {
+            error.classList.add('hidden');
+        }
+        
+        function showResults(data) {
+            const analysis = data.analysis;
+            const costs = data.cost_estimate;
+            
+            results.innerHTML = `
+                <div class="success">✅ API Test Successful!</div>
+                
+                <h3>${analysis?.issue_type || 'Unknown Issue'}</h3>
+                <p><strong>Severity:</strong> ${analysis?.severity || 'Unknown'}</p>
+                <p><strong>Description:</strong> ${analysis?.description || 'No description'}</p>
+                
+                <h4>Cost Breakdown:</h4>
+                <p><strong>Materials:</strong> $${costs?.parts_cost?.min || 0} - $${costs?.parts_cost?.max || 0}</p>
+                <p><strong>Labor:</strong> $${costs?.labor_cost || 0}</p>
+                ${costs?.disposal_cost ? `<p><strong>Disposal:</strong> $${costs.disposal_cost}</p>` : ''}
+                <p><strong>Total Range:</strong> $${costs?.total_cost?.min || 0} - $${costs?.total_cost?.max || 0}</p>
+                
+                ${costs?.pricing_source ? `<p><strong>Pricing Source:</strong> ${costs.pricing_source}</p>` : ''}
+                
+                <div class="debug-info">
+                    <strong>Debug Info:</strong><br>
+                    Success: ${data.success}<br>
+                    ${data.debug_info ? JSON.stringify(data.debug_info, null, 2) : 'No debug info'}
+                </div>
+            `;
+            results.classList.remove('hidden');
+        }
+        
+        function hideResults() {
+            results.classList.add('hidden');
+        }
+        
+        // Device info
+        console.log('User Agent:', navigator.userAgent);
+        console.log('Screen size:', window.screen.width + 'x' + window.screen.height);
+        console.log('Viewport size:', window.innerWidth + 'x' + window.innerHeight);
+    </script>
+</body>
+</html>
