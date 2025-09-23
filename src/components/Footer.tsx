@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, Wrench } from 'lucide-react';
 
 export default function Footer() {
@@ -58,8 +59,8 @@ export default function Footer() {
               <span className="text-teal-500 font-medium">Licensed • Insured • Bonded</span>
               <span className="text-gray-600">&copy; 2025 Cabos Handyman. All rights reserved.</span>
               <div className="flex space-x-4">
-                <a href="#privacy" className="text-gray-600 hover:text-teal-500 transition-colors">Privacy</a>
-                <a href="#terms" className="text-gray-600 hover:text-teal-500 transition-colors">Terms</a>
+                <Link to="/privacy" className="text-gray-600 hover:text-teal-500 transition-colors">Privacy</Link>
+                <Link to="/terms" className="text-gray-600 hover:text-teal-500 transition-colors">Terms</Link>
               </div>
             </div>
           </div>
