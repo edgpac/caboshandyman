@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Calendar, ArrowRight, MessageCircle } from 'lucide-react';
+import Footer from './Footer';
 import SecureAIAssistant from './SecureAIAssistant';
 import partnersImage from '../assets/partners-section.png';
 import kitchenImage from '../assets/modern-kitchen-remodel.jpeg';
@@ -224,6 +225,9 @@ export default function CabosHandymanHomepage() {
         onClose={() => setIsAIAssistantOpen(false)}
         initialMode={aiAssistantMode}
       />
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
