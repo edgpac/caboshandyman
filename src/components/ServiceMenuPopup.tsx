@@ -20,7 +20,7 @@ interface ServiceMenuPopupProps {
 }
 
 const serviceMenus: Record<string, ServiceCategory[]> = {
-  "Modern Kitchen Remodel": [
+  "Modern Kitchen": [
     {
       title: "Plumbing Services",
       services: [
@@ -76,12 +76,15 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
       ]
     },
     {
-      title: "Tile & Flooring",
+      title: "Installation & Accessories",
       services: [
         { name: "Tile Installation", startingPrice: "$12/sq ft", duration: "1-3 days" },
         { name: "Grout Repair/Replacement", startingPrice: "$8/sq ft", duration: "1-2 days" },
         { name: "Bathroom Flooring", startingPrice: "$15/sq ft", duration: "1-2 days" },
-        { name: "Shower Waterproofing", startingPrice: "$300", duration: "1 day" }
+        { name: "Shower Waterproofing", startingPrice: "$300", duration: "1 day" },
+        { name: "Towel Rack/Holder Installation", startingPrice: "$60", duration: "30min-1hr" },
+        { name: "Mirror Hanging/Installation", startingPrice: "$80", duration: "1 hour" },
+        { name: "Bathroom Shelving", startingPrice: "$120", duration: "1-2 hours" }
       ]
     }
   ],
@@ -189,6 +192,17 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
       ]
     },
     {
+      title: "Home Improvement Basics",
+      services: [
+        { name: "TV Mounting/Installation", startingPrice: "$120", duration: "1-2 hours" },
+        { name: "Picture Hanging", startingPrice: "$40", duration: "30min-1hr" },
+        { name: "Shelf Installation", startingPrice: "$80", duration: "1-2 hours" },
+        { name: "Curtain Rod Installation", startingPrice: "$60", duration: "30min-1hr" },
+        { name: "Furniture Assembly", startingPrice: "$100", duration: "1-3 hours" },
+        { name: "Door Handle/Lock Installation", startingPrice: "$80", duration: "1 hour" }
+      ]
+    },
+    {
       title: "Systems Integration",
       services: [
         { name: "Electrical Rough-in", startingPrice: "$8/sq ft", duration: "1-2 days" },
@@ -212,6 +226,7 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType }: Servi
           <div>
             <h2 className="text-2xl font-bold">{projectType} Services</h2>
             <p className="text-teal-100 mt-1">Starting prices - Final cost may vary based on complexity</p>
+            <p className="text-teal-100 text-sm mt-1">We go beyond what's on the menu - use our estimate feature or contact us for custom pricing</p>
           </div>
           <button 
             onClick={onClose}

@@ -19,7 +19,7 @@ export default function CabosHandymanHomepage() {
 
   const projects = [
     { 
-      name: "Modern Kitchen Remodel", 
+      name: "Modern Kitchen", 
       category: "Residential", 
       image: kitchenImage
     },
@@ -108,7 +108,7 @@ export default function CabosHandymanHomepage() {
                 onClick={() => openAIAssistant('booking')}
                 className="bg-primary hover:bg-primary-hover text-primary-foreground px-8 py-4 rounded-lg text-lg font-bold transition-colors flex items-center justify-center"
               >
-                Get Free Estimate
+                Get Free Instant Estimate
                 <ArrowRight className="ml-2" size={20} />
               </button>
             </div>
@@ -126,11 +126,11 @@ export default function CabosHandymanHomepage() {
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="transform hover:scale-105 transition-transform">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">6+</div>
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">20+</div>
               <div className="text-muted-foreground font-semibold">Years Experience</div>
             </div>
             <div className="transform hover:scale-105 transition-transform">
-              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">300+</div>
+              <div className="text-4xl md:text-5xl font-bold text-primary mb-2">600+</div>
               <div className="text-muted-foreground font-semibold">Projects Completed</div>
             </div>
             <div className="transform hover:scale-105 transition-transform">
