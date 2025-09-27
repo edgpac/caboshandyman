@@ -243,6 +243,8 @@ export default function CabosHandymanHomepage() {
         isOpen={serviceMenuOpen}
         onClose={() => setServiceMenuOpen(false)}
         projectType={selectedProject}
+        onGetEstimate={() => openAIAssistant('analysis')}
+        onScheduleConsultation={() => openAIAssistant('booking')}
       />
 
       {/* Footer */}

@@ -17,6 +17,8 @@ interface ServiceMenuPopupProps {
   isOpen: boolean;
   onClose: () => void;
   projectType: string;
+  onGetEstimate?: () => void;
+  onScheduleConsultation?: () => void;
 }
 
 const serviceMenus: Record<string, ServiceCategory[]> = {
@@ -153,7 +155,7 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
         { name: "Grease Trap Installation", startingPrice: "$600", duration: "6-8 hours" },
         { name: "Exhaust Hood Installation", startingPrice: "$800", duration: "1 day" },
         { name: "Gas Line Installation", startingPrice: "$300", duration: "3-4 hours" },
-        { name: "Hot Water Heater Installation", startingPrice: "$600", duration: "4-6 hours" },
+        { name: "Hot Water Heater Installation", startingPrice: "$500", duration: "4-6 hours" },
         { name: "Water Leak Detector Installation", startingPrice: "$150", duration: "1-2 hours" }
       ]
     },
@@ -216,7 +218,7 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
   ]
 };
 
-export default function ServiceMenuPopup({ isOpen, onClose, projectType }: ServiceMenuPopupProps) {
+export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEstimate, onScheduleConsultation }: ServiceMenuPopupProps) {
   if (!isOpen) return null;
 
   const categories = serviceMenus[projectType] || [];
@@ -286,10 +288,26 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType }: Servi
 
           {/* CTA Buttons */}
           <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <button className="flex-1 bg-teal-500 hover:bg-teal-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors">
+            <button 
+              onClick={() => {
+                onClose();
+                if (onGetEstimate) {
+                  onGetEstimate();
+                }
+              }}
+              className="flex-1 bg-teal-500 hover:bg-teal-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+            >
               Get Free Estimate
             </button>
-            <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-6 rounded-lg font-semibold transition-colors">
+            <button 
+              onClick={() => {
+                onClose();
+                if (onScheduleConsultation) {
+                  onScheduleConsultation();
+                }
+              }}
+              className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-6 rounded-lg font-semibold transition-colors"
+            >
               Schedule Consultation
             </button>
           </div>
