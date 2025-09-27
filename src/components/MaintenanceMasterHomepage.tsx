@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Calendar, ArrowRight, MessageCircle } from 'lucide-react';
 import Footer from './Footer';
 import SecureAIAssistant from './SecureAIAssistant';
+import ServiceMenuPopup from './ServiceMenuPopup';
 import partnersImage from '../assets/partners-section.png';
 import kitchenImage from '../assets/modern-kitchen-remodel.jpeg';
 import bathroomImage from '../assets/luxury-bathroom.jpeg';
@@ -12,7 +13,9 @@ import homeImage from '../assets/home-addition.jpeg';
 
 export default function CabosHandymanHomepage() {
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
-  const [aiAssistantMode, setAiAssistantMode] = useState('services'); // 'services', 'booking', 'estimate'
+  const [aiAssistantMode, setAiAssistantMode] = useState('services');
+  const [serviceMenuOpen, setServiceMenuOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState('');
 
   const projects = [
     { 
@@ -50,6 +53,11 @@ export default function CabosHandymanHomepage() {
   const openAIAssistant = (mode = 'services') => {
     setAiAssistantMode(mode);
     setIsAIAssistantOpen(true);
+  };
+
+  const openServiceMenu = (projectName) => {
+    setSelectedProject(projectName);
+    setServiceMenuOpen(true);
   };
 
   return (
@@ -143,13 +151,17 @@ export default function CabosHandymanHomepage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">We Build Projects That Last</h2>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-              Explore our portfolio of completed projects across residential, commercial, and community spaces
+              Explore our portfolio of completed projects across residential, commercial, and community spaces. Click on any project to see our service menu and pricing.
             </p>
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
+              <div 
+                key={index} 
+                className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
+                onClick={() => openServiceMenu(project.name)}
+              >
                 <div className="h-64 bg-muted overflow-hidden">
                   <img 
                     src={project.image} 
@@ -163,7 +175,7 @@ export default function CabosHandymanHomepage() {
                     {project.name}
                   </h3>
                   <button className="mt-4 text-primary font-semibold text-sm hover:text-primary-hover transition-colors">
-                    View Project Details →
+                    View Services & Pricing →
                   </button>
                 </div>
               </div>
@@ -224,6 +236,13 @@ export default function CabosHandymanHomepage() {
         isOpen={isAIAssistantOpen}
         onClose={() => setIsAIAssistantOpen(false)}
         initialMode={aiAssistantMode}
+      />
+
+      {/* Service Menu Popup */}
+      <ServiceMenuPopup 
+        isOpen={serviceMenuOpen}
+        onClose={() => setServiceMenuOpen(false)}
+        projectType={selectedProject}
       />
 
       {/* Footer */}
