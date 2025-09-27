@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Clock, Wrench } from 'lucide-react';
 
 export default function Footer() {
@@ -14,7 +13,7 @@ export default function Footer() {
               <span className="font-bold text-gray-900">Cabos Handyman</span>
             </div>
             <p className="text-gray-600 text-xs">
-              Building visions, shaping the future. 20 years serving Cabo San Lucas.
+              Building visions, shaping the future. Serving Cabo San Lucas.
             </p>
           </div>
 
@@ -26,12 +25,6 @@ export default function Footer() {
                 <Phone className="h-3 w-3 text-teal-400" />
                 <a href="tel:+526121698328" className="hover:text-teal-500 transition-colors">
                   +52 612 169 8328
-                </a>
-              </div>
-              <div className="flex items-center space-x-2 text-gray-600">
-                <Mail className="h-3 w-3 text-teal-400" />
-                <a href="mailto:info@caboshandyman.com" className="hover:text-teal-500 transition-colors">
-                  info@caboshandyman.com
                 </a>
               </div>
               <div className="flex items-center space-x-2 text-gray-600">
@@ -59,8 +52,8 @@ export default function Footer() {
               <span className="text-teal-500 font-medium">Licensed • Insured • Bonded</span>
               <span className="text-gray-600">&copy; 2025 Cabos Handyman. All rights reserved.</span>
               <div className="flex space-x-4">
-                <Link to="/privacy" className="text-gray-600 hover:text-teal-500 transition-colors">Privacy</Link>
-                <Link to="/terms" className="text-gray-600 hover:text-teal-500 transition-colors">Terms</Link>
+                <a href="#privacy" className="text-gray-600 hover:text-teal-500 transition-colors">Privacy</a>
+                <a href="#terms" className="text-gray-600 hover:text-teal-500 transition-colors">Terms</a>
               </div>
             </div>
           </div>
