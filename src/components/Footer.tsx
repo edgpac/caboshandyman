@@ -29,7 +29,9 @@ export default function Footer() {
               </div>
               <div className="flex items-center space-x-2 text-gray-600">
                 <Clock className="h-3 w-3 text-teal-400" />
-                <span>24/7 Emergency Service</span>
+                <a href="tel:+526121698328" className="hover:text-teal-500 transition-colors">
+                  24/7 Emergency Service
+                </a>
               </div>
             </div>
           </div>
