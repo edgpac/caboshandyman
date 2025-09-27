@@ -40,7 +40,8 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
         { name: "Ceiling Fan Installation", startingPrice: "$180", duration: "2-3 hours" },
         { name: "Outlet Installation/Replacement", startingPrice: "$90", duration: "1 hour" },
         { name: "Under-Cabinet Lighting", startingPrice: "$160", duration: "2-3 hours" },
-        { name: "Kitchen Island Electrical", startingPrice: "$220", duration: "3-4 hours" }
+        { name: "Kitchen Island Electrical", startingPrice: "$220", duration: "3-4 hours" },
+        { name: "Smoke Detector Replacement", startingPrice: "$80", duration: "30min-1hr" }
       ]
     },
     {
@@ -151,7 +152,9 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
         { name: "Commercial Sink Installation", startingPrice: "$400", duration: "4-6 hours" },
         { name: "Grease Trap Installation", startingPrice: "$600", duration: "6-8 hours" },
         { name: "Exhaust Hood Installation", startingPrice: "$800", duration: "1 day" },
-        { name: "Gas Line Installation", startingPrice: "$300", duration: "3-4 hours" }
+        { name: "Gas Line Installation", startingPrice: "$300", duration: "3-4 hours" },
+        { name: "Hot Water Heater Installation", startingPrice: "$600", duration: "4-6 hours" },
+        { name: "Water Leak Detector Installation", startingPrice: "$150", duration: "1-2 hours" }
       ]
     },
     {
