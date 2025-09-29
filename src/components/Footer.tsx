@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Clock, Wrench, DollarSign, RefreshCw } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Wrench, DollarSign, RefreshCw, Facebook } from 'lucide-react';
 
 export default function Footer() {
   const [exchangeRate, setExchangeRate] = useState(null);
@@ -61,6 +61,12 @@ export default function Footer() {
                 <Clock className="h-3 w-3 text-teal-400" />
                 <a href="tel:+526121698328" className="hover:text-teal-500 transition-colors">
                   24/7 Emergency Service
+                </a>
+              </div>
+              <div className="flex items-center space-x-2 text-gray-600">
+                <Facebook className="h-3 w-3 text-teal-400" />
+                <a href="https://www.facebook.com/share/19wvxoz8Cy/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500 transition-colors">
+                  Follow us on Facebook
                 </a>
               </div>
             </div>
