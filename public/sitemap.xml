@@ -3,7 +3,7 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://caboshandyman.vercel.app/</loc>
+    <loc>https://caboshandyman.com/</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
@@ -11,35 +11,35 @@
 
   <!-- Services Pages -->
   <url>
-    <loc>https://caboshandyman.vercel.app/services</loc>
+    <loc>https://caboshandyman.com/services</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/services/residential-maintenance</loc>
+    <loc>https://caboshandyman.com/services/residential-maintenance</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/services/emergency-services</loc>
+    <loc>https://caboshandyman.com/services/emergency-services</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/services/commercial-projects</loc>
+    <loc>https://caboshandyman.com/services/commercial-projects</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/services/hoa-property-maintenance</loc>
+    <loc>https://caboshandyman.com/services/hoa-property-maintenance</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -47,49 +47,49 @@
 
   <!-- Portfolio/Projects -->
   <url>
-    <loc>https://caboshandyman.vercel.app/portfolio</loc>
+    <loc>https://caboshandyman.com/portfolio</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/portfolio/modern-kitchen-remodel</loc>
+    <loc>https://caboshandyman.com/portfolio/modern-kitchen</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/portfolio/luxury-bathroom</loc>
+    <loc>https://caboshandyman.com/portfolio/luxury-bathroom</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/portfolio/commercial-office</loc>
+    <loc>https://caboshandyman.com/portfolio/commercial-office</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/portfolio/community-center</loc>
+    <loc>https://caboshandyman.com/portfolio/community-center</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/portfolio/restaurant-buildout</loc>
+    <loc>https://caboshandyman.com/portfolio/restaurant-buildout</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/portfolio/home-addition</loc>
+    <loc>https://caboshandyman.com/portfolio/home-addition</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -97,21 +97,21 @@
 
   <!-- Booking & Contact -->
   <url>
-    <loc>https://caboshandyman.vercel.app/contact</loc>
+    <loc>https://caboshandyman.com/contact</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/get-estimate</loc>
+    <loc>https://caboshandyman.com/get-estimate</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/emergency</loc>
+    <loc>https://caboshandyman.com/emergency</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
@@ -119,14 +119,14 @@
 
   <!-- About & Company -->
   <url>
-    <loc>https://caboshandyman.vercel.app/about</loc>
+    <loc>https://caboshandyman.com/about</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/partners</loc>
+    <loc>https://caboshandyman.com/free quote</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
@@ -134,14 +134,14 @@
 
   <!-- Legal Pages -->
   <url>
-    <loc>https://caboshandyman.vercel.app/privacy</loc>
+    <loc>https://caboshandyman.com/privacy</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
   <url>
-    <loc>https://caboshandyman.vercel.app/terms</loc>
+    <loc>https://caboshandyman.com/terms</loc>
     <lastmod>2025-09-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
