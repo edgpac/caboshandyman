@@ -205,15 +205,16 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
     // Create comprehensive prompt for Groq with intelligent pricing for Cabo San Lucas
     const prompt = `You are an expert contractor cost estimator for Cabo San Lucas, Mexico. Analyze this maintenance/construction project and provide realistic 2024-2025 pricing in USD.
 
+IMAGES ANALYZED: ${visionAnnotationsArray.length} professional photos were analyzed using computer vision
 DESCRIPTION: ${description}
-${allDetectedItems.length > 0 ? `DETECTED ITEMS FROM ${visionAnnotationsArray.length} IMAGES: ${allDetectedItems.join(', ')}` : ''}
+${allDetectedItems.length > 0 ? `DETECTED ITEMS FROM ${visionAnnotationsArray.length} IMAGES: ${allDetectedItems.join(', ')}` : 'Images were uploaded but computer vision did not detect specific items. Base analysis on description.'}
 ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 
 Analyze and respond with a JSON object containing:
 {
   "issue_type": "specific category (Water Heater Installation, Kitchen Island Demolition, HVAC Repair, etc.)",
   "severity": "High/Medium/Low based on urgency and safety",
-  "description": "detailed analysis of the work required based on ALL uploaded images",
+  "description": "detailed analysis of the work required based on the ${visionAnnotationsArray.length} analyzed images and description provided",
   "required_parts": [{"name": "specific part/material name", "quantity": number, "estimated_cost": number}],
   "difficulty_level": "Professional/Expert Required/Skilled Handyperson",
   "crew_size": 1,
@@ -283,7 +284,7 @@ Base your estimates on REAL MARKET CONDITIONS for Cabo San Lucas, Mexico in 2024
         messages: [
           {
             role: 'system',
-            content: 'You are an expert maintenance and construction cost estimator for Cabo San Lucas, Mexico. Provide accurate, professional analysis in valid JSON format only. Always include crew_size based on job requirements. Consider ALL uploaded images in your analysis. No additional text outside the JSON.'
+            content: `You are an expert maintenance and construction cost estimator for Cabo San Lucas, Mexico. You are analyzing ${visionAnnotationsArray.length} images that have been processed by computer vision. Provide accurate, professional analysis in valid JSON format only. Always include crew_size based on job requirements. Base your analysis on the detected items from the images and the user's description. No additional text outside the JSON.`
           },
           {
             role: 'user',
