@@ -6,12 +6,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { imageBase64, description, location, service_context } = req.body;
+    const { images, description, location, service_context } = req.body;
 
-    // Validate required fields
-    if (!imageBase64 || !description) {
+    // Validate required fields - now expecting images array
+    if (!images || !Array.isArray(images) || images.length === 0 || !description) {
       return res.status(400).json({ 
-        error: 'Missing required fields: imageBase64 and description' 
+        error: 'Missing required fields: images (array) and description' 
       });
     }
 
@@ -21,66 +21,82 @@ export default async function handler(req, res) {
     
     if (payloadSize > 4000000) {
       console.log('Payload too large, processing with description only');
-      const analysis = await analyzeWithGroq(description, null, service_context);
+      const analysis = await analyzeWithGroq(description, [], service_context);
       return res.status(200).json({
         success: true,
         ...analysis,
         debug_info: { 
-          message: "Image too large, analysis based on description only",
+          message: "Images too large, analysis based on description only",
           payload_size: payloadSize 
         }
       });
     }
 
-    let visionData = null;
-    let visionError = null;
+    // Process all images with Vision API
+    const visionPromises = images.map(async (imageBase64, index) => {
+      let visionData = null;
+      let visionError = null;
 
-    // Try Google Cloud Vision API first
-    try {
-      const visionResponse = await fetch(
-        `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            requests: [
-              {
-                image: {
-                  content: imageBase64
-                },
-                features: [
-                  { type: 'OBJECT_LOCALIZATION', maxResults: 10 },
-                  { type: 'TEXT_DETECTION', maxResults: 5 },
-                  { type: 'LABEL_DETECTION', maxResults: 10 }
-                ]
-              }
-            ]
-          })
+      // Try Google Cloud Vision API for each image
+      try {
+        const visionResponse = await fetch(
+          `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              requests: [
+                {
+                  image: {
+                    content: imageBase64
+                  },
+                  features: [
+                    { type: 'OBJECT_LOCALIZATION', maxResults: 10 },
+                    { type: 'TEXT_DETECTION', maxResults: 5 },
+                    { type: 'LABEL_DETECTION', maxResults: 10 }
+                  ]
+                }
+              ]
+            })
+          }
+        );
+
+        if (visionResponse.ok) {
+          visionData = await visionResponse.json();
+          console.log(`Vision API success for image ${index + 1}`);
+        } else {
+          visionError = `Vision API error for image ${index + 1}: ${visionResponse.status}`;
+          console.error(visionError);
         }
-      );
-
-      if (visionResponse.ok) {
-        visionData = await visionResponse.json();
-        console.log('Vision API success');
-      } else {
-        visionError = `Vision API error: ${visionResponse.status}`;
+      } catch (error) {
+        visionError = `Vision API request failed for image ${index + 1}: ${error.message}`;
         console.error(visionError);
       }
-    } catch (error) {
-      visionError = `Vision API request failed: ${error.message}`;
-      console.error(visionError);
-    }
 
-    // Process with Groq (enhanced analysis)
-    const annotations = visionData?.responses?.[0] || {};
-    const analysis = await analyzeWithGroq(description, annotations, service_context);
+      return {
+        index,
+        data: visionData?.responses?.[0] || {},
+        error: visionError
+      };
+    });
+
+    const visionResults = await Promise.all(visionPromises);
+
+    // Combine all vision annotations
+    const combinedAnnotations = visionResults.map(result => result.data);
+
+    // Process with Groq (enhanced analysis with all images)
+    const analysis = await analyzeWithGroq(description, combinedAnnotations, service_context);
 
     return res.status(200).json({
       success: true,
       ...analysis,
-      debug_info: visionError ? { vision_api_error: visionError } : { vision_api: 'success' }
+      debug_info: {
+        images_processed: images.length,
+        vision_results: visionResults.map(r => r.error ? { error: r.error } : { success: true })
+      }
     });
 
   } catch (error) {
@@ -88,7 +104,7 @@ export default async function handler(req, res) {
     
     // Fallback to basic analysis
     try {
-      const fallbackAnalysis = await analyzeWithGroq(req.body.description, {}, req.body.service_context);
+      const fallbackAnalysis = await analyzeWithGroq(req.body.description, [], req.body.service_context);
       return res.status(200).json({
         success: false,
         ...fallbackAnalysis,
@@ -110,7 +126,7 @@ export default async function handler(req, res) {
 }
 
 // Web search function for current pricing using SerpAPI
-async function searchCurrentPricing(query, location = "Ventura County CA") {
+async function searchCurrentPricing(query, location = "Cabo San Lucas, Mexico") {
   try {
     // Use SerpAPI (easier setup than Bing)
     const searchQuery = `${query} cost price 2024 ${location} installation contractor`;
@@ -166,32 +182,38 @@ async function searchCurrentPricing(query, location = "Ventura County CA") {
   }
 }
 
-// Enhanced analysis using Groq with crew size detection
-async function analyzeWithGroq(description, visionAnnotations = {}, serviceContext = null) {
+// Enhanced analysis using Groq with crew size detection and multiple images
+async function analyzeWithGroq(description, visionAnnotationsArray = [], serviceContext = null) {
   try {
-    // Extract vision data
-    const objects = visionAnnotations.localizedObjectAnnotations || [];
-    const labels = visionAnnotations.labelAnnotations || [];
-    const texts = visionAnnotations.textAnnotations || [];
+    // Combine all detected items from all images
+    const allDetectedItems = [];
+    
+    visionAnnotationsArray.forEach((annotations, imageIndex) => {
+      const objects = annotations.localizedObjectAnnotations || [];
+      const labels = annotations.labelAnnotations || [];
+      const texts = annotations.textAnnotations || [];
 
-    const detectedItems = [
-      ...objects.map(obj => obj.name),
-      ...labels.map(label => label.description),
-      ...texts.slice(0, 3).map(text => text.description.substring(0, 50))
-    ].filter(Boolean);
+      const imageItems = [
+        ...objects.map(obj => `Image ${imageIndex + 1}: ${obj.name}`),
+        ...labels.map(label => `Image ${imageIndex + 1}: ${label.description}`),
+        ...texts.slice(0, 3).map(text => `Image ${imageIndex + 1}: ${text.description.substring(0, 50)}`)
+      ].filter(Boolean);
 
-    // Create comprehensive prompt for Groq with intelligent pricing
-    const prompt = `You are an expert contractor cost estimator for Ventura County, California. Analyze this maintenance/construction project and provide realistic 2024-2025 pricing.
+      allDetectedItems.push(...imageItems);
+    });
+
+    // Create comprehensive prompt for Groq with intelligent pricing for Cabo San Lucas
+    const prompt = `You are an expert contractor cost estimator for Cabo San Lucas, Mexico. Analyze this maintenance/construction project and provide realistic 2024-2025 pricing in USD.
 
 DESCRIPTION: ${description}
-${detectedItems.length > 0 ? `DETECTED ITEMS: ${detectedItems.join(', ')}` : ''}
+${allDetectedItems.length > 0 ? `DETECTED ITEMS FROM ${visionAnnotationsArray.length} IMAGES: ${allDetectedItems.join(', ')}` : ''}
 ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 
 Analyze and respond with a JSON object containing:
 {
   "issue_type": "specific category (Water Heater Installation, Kitchen Island Demolition, HVAC Repair, etc.)",
   "severity": "High/Medium/Low based on urgency and safety",
-  "description": "detailed analysis of the work required",
+  "description": "detailed analysis of the work required based on ALL uploaded images",
   "required_parts": [{"name": "specific part/material name", "quantity": number, "estimated_cost": number}],
   "difficulty_level": "Professional/Expert Required/Skilled Handyperson",
   "crew_size": 1,
@@ -206,46 +228,48 @@ Analyze and respond with a JSON object containing:
   }
 }
 
-INTELLIGENT PRICING GUIDELINES:
+INTELLIGENT PRICING GUIDELINES FOR CABO SAN LUCAS:
 
 WATER HEATER PROJECTS:
-- Standard 40-50 gallon: Parts $800-1200, Labor 4-6 hours, 2 people
-- Tankless unit: Parts $1200-2500, Labor 6-8 hours, 2 people  
-- Gas line work adds: $300-600 to parts, +2 hours labor
+- Standard 40-50 gallon: Parts $900-1400, Labor 4-6 hours, 2 people
+- Tankless unit: Parts $1400-2800, Labor 6-8 hours, 2 people  
+- Gas line work adds: $350-700 to parts, +2 hours labor
 
 KITCHEN PROJECTS:
-- Island demolition: Parts $100-300, Labor 6-8 hours, 2 people, Disposal $300
-- Cabinet installation: Parts $300-1500 per cabinet, Labor varies by complexity
-- Countertop install: Parts $800-3000, Labor 4-6 hours, 2 people
+- Island demolition: Parts $120-350, Labor 6-8 hours, 2 people, Disposal $350
+- Cabinet installation: Parts $350-1700 per cabinet, Labor varies by complexity
+- Countertop install: Parts $900-3500, Labor 4-6 hours, 2 people
 
 PLUMBING PROJECTS:
-- Pipe repair: Parts $50-200, Labor 2-4 hours, 1 person
-- Fixture replacement: Parts $150-800, Labor 2-3 hours, 1 person
-- Main line work: Parts $200-1000, Labor 4-8 hours, 2 people
+- Pipe repair: Parts $60-240, Labor 2-4 hours, 1 person
+- Fixture replacement: Parts $180-900, Labor 2-3 hours, 1 person
+- Main line work: Parts $240-1200, Labor 4-8 hours, 2 people
 
 ELECTRICAL PROJECTS:
-- Outlet/switch: Parts $25-100, Labor 1-2 hours, 1 person
-- Panel upgrade: Parts $800-2000, Labor 6-8 hours, 1 person (licensed)
-- Wiring work: Parts $200-800, Labor varies, 1-2 people
+- Outlet/switch: Parts $30-120, Labor 1-2 hours, 1 person
+- Panel upgrade: Parts $900-2400, Labor 6-8 hours, 1 person (licensed)
+- Wiring work: Parts $240-900, Labor varies, 1-2 people
 
 HVAC PROJECTS:
-- Unit replacement: Parts $3000-8000, Labor 8-12 hours, 2-3 people
-- Duct work: Parts $500-2000, Labor 4-8 hours, 2 people
-- Repair work: Parts $100-500, Labor 2-4 hours, 1-2 people
+- Unit replacement: Parts $3500-9000, Labor 8-12 hours, 2-3 people
+- Duct work: Parts $600-2400, Labor 4-8 hours, 2 people
+- Repair work: Parts $120-600, Labor 2-4 hours, 1-2 people
 
 CREW SIZE LOGIC:
 - 1 person: Simple repairs, electrical work, small plumbing, painting
 - 2 people: Heavy appliances, HVAC, large plumbing, demolition, safety-critical work
 - 3+ people: Major installations, structural work, complex commercial projects
 
-PRICING FACTORS:
-- Ventura County pricing (15-20% above national average)
-- Permit requirements (add $100-500 for major work)
+PRICING FACTORS FOR CABO SAN LUCAS:
+- Tourist area pricing (20-30% above mainland Mexico average)
+- Import costs for specialty parts (add 15-25%)
+- Permit requirements (add $120-600 for major work)
 - Access difficulty (tight spaces, high locations add 20-30%)
 - Emergency work (add 50-100% premium)
 - Material quality (standard vs premium affects parts cost significantly)
+- Language/communication premium (bilingual contractors charge 10-15% more)
 
-Base your estimates on REAL MARKET CONDITIONS for Ventura County, California in 2024-2025. Consider the complexity, materials needed, and current construction costs.`;
+Base your estimates on REAL MARKET CONDITIONS for Cabo San Lucas, Mexico in 2024-2025. Consider the complexity, materials needed, current construction costs, and ALL images provided.`;
 
     // Call Groq API
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -259,7 +283,7 @@ Base your estimates on REAL MARKET CONDITIONS for Ventura County, California in 
         messages: [
           {
             role: 'system',
-            content: 'You are an expert maintenance and construction cost estimator. Provide accurate, professional analysis in valid JSON format only. Always include crew_size based on job requirements. No additional text outside the JSON.'
+            content: 'You are an expert maintenance and construction cost estimator for Cabo San Lucas, Mexico. Provide accurate, professional analysis in valid JSON format only. Always include crew_size based on job requirements. Consider ALL uploaded images in your analysis. No additional text outside the JSON.'
           },
           {
             role: 'user',
@@ -297,7 +321,7 @@ Base your estimates on REAL MARKET CONDITIONS for Ventura County, California in 
     const crewSize = Math.max(1, groqAnalysis.crew_size || 1);
     const laborHours = groqAnalysis.labor_hours || 2;
     const baseLaborCost = groqAnalysis.cost_breakdown?.base_labor_cost || 150;
-    const laborRate = 70; // $70/hour per person
+    const laborRate = 80; // $80/hour per person in Cabo San Lucas
     
     // Calculate final labor cost with crew multiplier
     const finalLaborCost = Math.max(baseLaborCost * crewSize, laborHours * laborRate * crewSize);
@@ -306,19 +330,19 @@ Base your estimates on REAL MARKET CONDITIONS for Ventura County, California in 
     const travelOverhead = 100;
     const totalLaborWithOverhead = finalLaborCost + travelOverhead;
 
-    // Calculate disposal costs based on job type
+    // Calculate disposal costs based on job type (higher in Cabo)
     let disposalCost = 0;
     const issueType = groqAnalysis.issue_type || 'Maintenance Issue';
     if (issueType.includes('Demolition') || issueType.includes('Renovation')) {
-      disposalCost = 300; // High disposal cost for demolition
+      disposalCost = 350; // High disposal cost for demolition in Cabo
     } else if (issueType.includes('Water Damage')) {
-      disposalCost = 150;
+      disposalCost = 180;
     } else if (issueType.includes('Kitchen') || issueType.includes('Bathroom')) {
-      disposalCost = 100;
+      disposalCost = 120;
     } else if (issueType.includes('Flooring')) {
-      disposalCost = 75;
+      disposalCost = 90;
     } else if (issueType.includes('HVAC')) {
-      disposalCost = 50;
+      disposalCost = 60;
     }
 
     // Format response
@@ -354,7 +378,7 @@ Base your estimates on REAL MARKET CONDITIONS for Ventura County, California in 
   } catch (error) {
     console.error('Groq analysis failed:', error);
     // Fallback to rule-based analysis
-    const fallback = processMaintencanceIssue(visionAnnotations, description, serviceContext);
+    const fallback = processMaintencanceIssue(visionAnnotationsArray[0] || {}, description, serviceContext);
     return {
       analysis: fallback.analysis,
       cost_estimate: fallback.cost_estimate,
@@ -441,54 +465,55 @@ function processMaintencanceIssue(annotations, description, service_context) {
       detectedItems.some(item => ['pipe', 'faucet', 'toilet', 'sink', 'drain'].includes(item.toLowerCase())) ||
       ['water', 'leak', 'drain', 'faucet', 'toilet', 'pipe'].some(keyword => descriptionLower.includes(keyword))) {
     issueType = 'Plumbing Issue';
-    categoryMultiplier = 1.3;
+    categoryMultiplier = 1.4; // Higher in Cabo
   } else if (descriptionLower.includes('electric') || 
             detectedItems.some(item => ['outlet', 'switch', 'wire', 'electrical'].includes(item.toLowerCase())) ||
             ['outlet', 'switch', 'power', 'electric', 'wiring', 'breaker'].some(keyword => descriptionLower.includes(keyword))) {
     issueType = 'Electrical Issue';
-    categoryMultiplier = 1.4;
+    categoryMultiplier = 1.5; // Higher in Cabo
   } else if (['hvac', 'heating', 'cooling', 'ac', 'furnace', 'air conditioning'].some(keyword => descriptionLower.includes(keyword))) {
     issueType = 'HVAC Issue';
-    categoryMultiplier = 1.5;
+    categoryMultiplier = 1.6; // Higher in Cabo
     crewSize = 2; // HVAC typically requires 2 people
     crewJustification = "HVAC units are heavy and require 2 people";
   } else if (['roof', 'ceiling', 'leak', 'water damage'].some(keyword => descriptionLower.includes(keyword))) {
     issueType = 'Water Damage';
-    categoryMultiplier = 1.6;
+    categoryMultiplier = 1.7; // Higher in Cabo
   } else if (['paint', 'wall', 'drywall', 'ceiling', 'cosmetic'].some(keyword => descriptionLower.includes(keyword))) {
     issueType = 'Cosmetic/Painting';
-    categoryMultiplier = 0.8;
+    categoryMultiplier = 0.9; // Slightly higher in Cabo
   } else if (['floor', 'tile', 'carpet', 'hardwood'].some(keyword => descriptionLower.includes(keyword))) {
     issueType = 'Flooring Issue';
-    categoryMultiplier = 1.2;
+    categoryMultiplier = 1.3; // Higher in Cabo
     if (descriptionLower.includes('large') || descriptionLower.includes('kitchen') || descriptionLower.includes('bathroom')) {
       crewSize = 2;
       crewJustification = "Large flooring projects require 2 people for efficiency";
     }
   } else if (['kitchen', 'bathroom', 'cabinet', 'countertop'].some(keyword => descriptionLower.includes(keyword))) {
     issueType = 'Kitchen/Bathroom';
-    categoryMultiplier = 1.3;
+    categoryMultiplier = 1.4; // Higher in Cabo
     if (descriptionLower.includes('countertop') || descriptionLower.includes('island')) {
       crewSize = 2;
       crewJustification = "Heavy stone countertops require 2 people for safety";
     }
   } else if (['demolition', 'demo', 'remove', 'tear out'].some(keyword => descriptionLower.includes(keyword))) {
     issueType = 'Demolition/Renovation Issue';
-    categoryMultiplier = 1.4;
+    categoryMultiplier = 1.5; // Higher in Cabo
     crewSize = 2;
     crewJustification = "Safety and coordination requires 2 people";
   }
 
+  // Base costs adjusted for Cabo San Lucas (20-30% higher)
   const baseCosts = {
-    'Plumbing Issue': { parts: [75, 300], labor: 150, disposal: 0 },
-    'Electrical Issue': { parts: [50, 250], labor: 200, disposal: 0 },
-    'HVAC Issue': { parts: [100, 800], labor: 300, disposal: 50 },
-    'Water Damage': { parts: [200, 1500], labor: 400, disposal: 150 },
-    'Cosmetic/Painting': { parts: [25, 150], labor: 100, disposal: 25 },
-    'Flooring Issue': { parts: [100, 800], labor: 200, disposal: 75 },
-    'Kitchen/Bathroom': { parts: [150, 1000], labor: 250, disposal: 100 },
-    'Demolition/Renovation Issue': { parts: [50, 200], labor: 200, disposal: 300 }, // Higher disposal cost
-    'General Maintenance': { parts: [50, 200], labor: 125, disposal: 0 }
+    'Plumbing Issue': { parts: [90, 360], labor: 180, disposal: 0 },
+    'Electrical Issue': { parts: [60, 300], labor: 240, disposal: 0 },
+    'HVAC Issue': { parts: [120, 960], labor: 360, disposal: 60 },
+    'Water Damage': { parts: [240, 1800], labor: 480, disposal: 180 },
+    'Cosmetic/Painting': { parts: [30, 180], labor: 120, disposal: 30 },
+    'Flooring Issue': { parts: [120, 960], labor: 240, disposal: 90 },
+    'Kitchen/Bathroom': { parts: [180, 1200], labor: 300, disposal: 120 },
+    'Demolition/Renovation Issue': { parts: [60, 240], labor: 240, disposal: 350 }, // Higher disposal cost
+    'General Maintenance': { parts: [60, 240], labor: 150, disposal: 0 }
   };
 
   const costs = baseCosts[issueType] || baseCosts['General Maintenance'];
@@ -531,7 +556,7 @@ function processMaintencanceIssue(annotations, description, service_context) {
         max: finalPartsCost[1]
       },
       labor_cost: finalLaborCost, // Includes crew multiplier + $100 overhead
-      labor_hours: Math.ceil(baseLaborCost / 70), // Calculate hours at $70/hr
+      labor_hours: Math.ceil(baseLaborCost / 80), // Calculate hours at $80/hr for Cabo
       crew_size: crewSize,
       crew_justification: crewJustification,
       disposal_cost: finalDisposalCost,
@@ -546,19 +571,19 @@ function processMaintencanceIssue(annotations, description, service_context) {
 function getDefaultStores() {
   return [
     {
-      name: "Home Depot Ventura",
-      address: "1860 E Main St, Ventura, CA 93001",
-      rating: 4.2
+      name: "The Home Depot Cabo San Lucas",
+      address: "Carr. Transpeninsular Km 4.5, Cabo San Lucas, B.C.S. 23410",
+      rating: 4.3
     },
     {
-      name: "Lowe's Oxnard", 
-      address: "2655 Saviers Rd, Oxnard, CA 93033",
+      name: "Construrama Cabo",
+      address: "Blvd. Lázaro Cárdenas, Cabo San Lucas, B.C.S.",
       rating: 4.1
     },
     {
-      name: "Ace Hardware Ventura",
-      address: "1822 E Main St, Ventura, CA 93001", 
-      rating: 4.3
+      name: "Ferretería y Materiales Los Cabos",
+      address: "Av. Constituyentes, Cabo San Lucas, B.C.S.",
+      rating: 4.2
     }
   ];
 }
