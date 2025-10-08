@@ -5,7 +5,7 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
   const [isOpen, setIsOpen] = useState(false);
   const [currentView, setCurrentView] = useState('services');
   const [selectedService, setSelectedService] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImages, setSelectedImages] = useState([]);
   const [isCameraOpen, setIsCameraOpen] = useState(false);
   const [stream, setStream] = useState(null);
   const [description, setDescription] = useState('');
@@ -14,6 +14,7 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
   const [bookingData, setBookingData] = useState({
     name: '',
     phone: '',
@@ -22,7 +23,6 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
     urgency: 'normal'
   });
 
-  // Detect mobile device
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
@@ -115,6 +115,11 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
   };
 
   const capturePhoto = () => {
+    if (selectedImages.length >= 3) {
+      setError('Maximum 3 images allowed');
+      return;
+    }
+
     const video = document.getElementById('cameraVideo');
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
@@ -127,10 +132,10 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
       const file = new File([blob], `maintenance-photo-${Date.now()}.jpg`, { type: 'image/jpeg' });
       const reader = new FileReader();
       reader.onload = (e) => {
-        setSelectedImage({
+        setSelectedImages(prev => [...prev, {
           url: e.target.result,
           file: file
-        });
+        }]);
         stopCamera();
       };
       reader.readAsDataURL(file);
@@ -161,7 +166,6 @@ Details: ${appointmentData.projectDetails}
 Urgency: ${appointmentData.urgency}
 Time: ${new Date().toLocaleString()}`;
 
-      // Send to business owner (you) - using environment variable
       await fetch('/api/send-whatsapp', {
         method: 'POST',
         headers: {
@@ -173,7 +177,6 @@ Time: ${new Date().toLocaleString()}`;
         })
       });
 
-      // Send confirmation to customer
       if (appointmentData.phone) {
         const customerMessage = `Thank you ${appointmentData.name}! Your appointment request has been received for ${appointmentData.serviceType}. We'll contact you shortly to confirm details.`;
         
@@ -245,23 +248,20 @@ Time: ${new Date().toLocaleString()}`;
     }
   };
 
-  // FIXED EMAIL NOTIFICATION FUNCTION
   const handleScheduleAppointment = async (analysisData) => {
     try {
-      // Show loading state
       const loadingToast = document.createElement('div');
       loadingToast.textContent = 'Preparing appointment request...';
       loadingToast.className = 'fixed top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg z-50';
       document.body.appendChild(loadingToast);
 
-      // Use compressed image instead of raw selectedImage.url
-      let imageToSend = null;
-      if (selectedImage?.file) {
-        const compressedBase64 = await imageToBase64(selectedImage.file);
-        imageToSend = `data:image/jpeg;base64,${compressedBase64}`;
+      let imagesToSend = null;
+      if (selectedImages.length > 0) {
+        const compressedPromises = selectedImages.map(img => imageToBase64(img.file));
+        const compressedBase64Array = await Promise.all(compressedPromises);
+        imagesToSend = compressedBase64Array.map(base64 => `data:image/jpeg;base64,${base64}`);
       }
 
-      // Send email notification to your team
       const emailResponse = await fetch('/api/send-booking-email', {
         method: 'POST',
         headers: {
@@ -273,16 +273,14 @@ Time: ${new Date().toLocaleString()}`;
             userAgent: navigator.userAgent,
             timestamp: new Date().toISOString()
           },
-          imageData: imageToSend, // Use compressed image
+          imageData: imagesToSend,
           timestamp: new Date().toISOString()
         })
       });
 
-      // Remove loading toast
       document.body.removeChild(loadingToast);
 
       if (emailResponse.ok) {
-        // Show success message
         const successToast = document.createElement('div');
         successToast.textContent = 'Request sent! Redirecting to booking...';
         successToast.className = 'fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg z-50';
@@ -293,7 +291,6 @@ Time: ${new Date().toLocaleString()}`;
         }, 3000);
       }
 
-      // Continue with existing booking logic
       const analysisBookingData = {
         name: bookingData.name || '',
         phone: bookingData.phone || '',
@@ -306,10 +303,8 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         urgency: analysisData.analysis?.severity === 'high' ? 'urgent' : 'normal'
       };
       
-      // Update booking data
       setBookingData(analysisBookingData);
       
-      // Open Cal.com with pre-filled data
       const params = new URLSearchParams({
         name: analysisBookingData.name,
         phone: analysisBookingData.phone,
@@ -319,12 +314,10 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       
       const serviceUrl = selectedService?.calendlyUrl || 'https://cal.com/maintenancemaster/residential-consultation';
       
-      // Delay to let user see the success message
       setTimeout(() => {
         window.open(`${serviceUrl}?${params.toString()}`, '_blank');
       }, 1000);
       
-      // Send WhatsApp notification
       setTimeout(() => {
         sendWhatsAppNotification(analysisBookingData);
       }, 2000);
@@ -339,7 +332,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
       setTimeout(() => {
         document.body.removeChild(errorToast);
-        // Still redirect to booking even if email fails
         const serviceUrl = selectedService?.calendlyUrl || 'https://cal.com/maintenancemaster/residential-consultation';
         window.open(serviceUrl, '_blank');
       }, 2000);
@@ -369,7 +361,8 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setError(null);
 
     try {
-      const imageBase64 = await imageToBase64(selectedImage.file);
+      const imagePromises = selectedImages.map(img => imageToBase64(img.file));
+      const imagesBase64 = await Promise.all(imagePromises);
       
       const analysisDescription = selectedService 
         ? `${description} (Service context: ${selectedService.title} - ${selectedService.description})`
@@ -381,7 +374,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          imageBase64,
+          images: imagesBase64,
           description: analysisDescription,
           location: location || 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
@@ -430,24 +423,72 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
   };
 
   const handleImageUpload = (event) => {
-    const file = event.target.files[0];
-    if (file && file.type.startsWith('image/')) {
+    const files = Array.from(event.target.files);
+    const imageFiles = files.filter(file => file.type.startsWith('image/'));
+    
+    if (selectedImages.length + imageFiles.length > 3) {
+      setError('Maximum 3 images allowed');
+      return;
+    }
+
+    imageFiles.forEach(file => {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setSelectedImage({
+        setSelectedImages(prev => [...prev, {
           url: e.target.result,
           file: file
-        });
+        }]);
       };
       reader.readAsDataURL(file);
+    });
+  };
+
+  const removeImage = (index) => {
+    setSelectedImages(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+
+    const files = Array.from(e.dataTransfer.files);
+    const imageFiles = files.filter(file => file.type.startsWith('image/'));
+    
+    if (selectedImages.length + imageFiles.length > 3) {
+      setError('Maximum 3 images allowed');
+      return;
     }
+
+    imageFiles.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setSelectedImages(prev => [...prev, {
+          url: e.target.result,
+          file: file
+        }]);
+      };
+      reader.readAsDataURL(file);
+    });
   };
 
   const resetAssistant = () => {
     if (stream) {
       stopCamera();
     }
-    setSelectedImage(null);
+    setSelectedImages([]);
     setIsCameraOpen(false);
     setDescription('');
     setLocation('');
@@ -492,14 +533,12 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     );
   }
 
-  // Mobile-optimized container classes
-const containerClasses = isMobile 
-  ? "fixed inset-0 bg-white z-50 flex flex-col"
-  : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
+  const containerClasses = isMobile 
+    ? "fixed inset-0 bg-white z-50 flex flex-col"
+    : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
 
-return (
-  <div className={containerClasses}>
-      {/* Header */}
+  return (
+    <div className={containerClasses}>
       <div className={`bg-blue-600 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
         <div className="flex items-center space-x-2">
           <Wrench size={20} />
@@ -514,7 +553,6 @@ return (
         </button>
       </div>
 
-      {/* Content */}
       <div className={`p-4 overflow-y-auto flex-1 ${isMobile ? 'pb-safe' : ''}`}>
         {currentView === 'services' && !analysis && !isAnalyzing && (
           <div className="space-y-4">
@@ -612,126 +650,9 @@ return (
                 <p className="text-xs text-blue-700">{selectedService.details}</p>
               </div>
             )}
-
-            <div className="space-y-3">
-              <input
-                type="text"
-                value={bookingData.name}
-                onChange={(e) => setBookingData(prev => ({...prev, name: e.target.value}))}
-                placeholder="Your Name"
-                className={`w-full p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
-                  isMobile ? 'text-base' : ''
-                }`}
-              />
-              
-              <input
-                type="tel"
-                value={bookingData.phone}
-                onChange={(e) => setBookingData(prev => ({...prev, phone: e.target.value}))}
-                placeholder="Phone Number"
-                className={`w-full p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
-                  isMobile ? 'text-base' : ''
-                }`}
-              />
-
-              <textarea
-                value={bookingData.projectDetails}
-                onChange={(e) => setBookingData(prev => ({...prev, projectDetails: e.target.value}))}
-                placeholder="Describe your project or issue in detail..."
-                className={`w-full p-3 border border-gray-300 rounded-lg resize-none text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
-                  isMobile ? 'text-base' : ''
-                }`}
-                rows={isMobile ? 3 : 4}
-              />
-
-              <select
-                value={bookingData.urgency}
-                onChange={(e) => setBookingData(prev => ({...prev, urgency: e.target.value}))}
-                className={`w-full p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
-                  isMobile ? 'text-base' : ''
-                }`}
-              >
-                <option value="normal">Normal Priority</option>
-                <option value="urgent">Urgent (24-48 hours)</option>
-                <option value="emergency">Emergency (Same day)</option>
-              </select>
-            </div>
-
-            <div className="space-y-2">
-              <button
-                onClick={() => openCalendlyWidget(selectedService?.calendlyUrl || 'https://cal.com/maintenancemaster/residential-consultation')}
-                disabled={!bookingData.name || !bookingData.phone}
-                className={`w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
-                  isMobile ? 'py-4' : ''
-                }`}
-              >
-                <Calendar size={16} />
-                <span>Schedule Appointment</span>
-              </button>
-
-              <button
-                onClick={() => setCurrentView('analysis')}
-                className={`w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
-                  isMobile ? 'py-4' : ''
-                }`}
-              >
-                <Camera size={16} />
-                <span>Get Instant Quote</span>
-              </button>
-
-              <div className="flex items-center space-x-2 text-xs text-gray-600">
-                <MessageCircle size={12} />
-                <span>You'll receive WhatsApp confirmation after scheduling</span>
-              </div>
-            </div>
-
-            <div className="border-t pt-3">
-              <p className="text-xs text-gray-600 mb-2">Prefer to call directly?</p>
-              <button 
-                onClick={() => window.open('tel:+526121698328')}
-                className="w-full bg-green-100 hover:bg-green-200 text-green-800 py-2 px-3 rounded text-sm font-semibold transition-colors flex items-center justify-center space-x-2"
-              >
-                <Phone size={14} />
-                <span>Call +526121698328</span>
-              </button>
-            </div>
-          </div>
-        )}
-
-        {currentView === 'analysis' && !analysis && !isAnalyzing && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 className="font-semibold text-gray-800">Issue Analysis</h3>
-                {selectedService && (
-                  <p className="text-sm text-blue-600 font-medium">
-                    {selectedService.title} Analysis
-                  </p>
-                )}
-              </div>
-              <button 
-                onClick={() => {
-                  setCurrentView('services');
-                  setSelectedService(null);
-                }}
-                className="text-sm text-blue-600 hover:text-blue-800"
-              >
-                ← Back
-              </button>
-            </div>
-            
-            {selectedService && (
-              <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
-                <div className="flex items-center space-x-2 mb-2">
-                  <selectedService.icon size={16} className="text-blue-600" />
-                  <span className="text-sm font-semibold text-blue-800">{selectedService.title}</span>
-                </div>
-                <p className="text-xs text-blue-700">{selectedService.details}</p>
-              </div>
-            )}
             
             <p className="text-gray-600 text-sm">
-              Upload a photo of your maintenance issue for analysis and cost estimates.
+              Upload up to 3 photos of your maintenance issue for instant AI analysis and cost estimates.
             </p>
             
             {error && (
@@ -740,7 +661,16 @@ return (
               </div>
             )}
             
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center hover:border-blue-600 transition-colors">
+            <div 
+              className={`border-2 border-dashed rounded-lg p-4 text-center transition-colors ${
+                isDragging 
+                  ? 'border-blue-600 bg-blue-50' 
+                  : 'border-gray-300 hover:border-blue-600'
+              }`}
+              onDragOver={handleDragOver}
+              onDragLeave={handleDragLeave}
+              onDrop={handleDrop}
+            >
               {isCameraOpen ? (
                 <div className="space-y-4">
                   <video
@@ -775,30 +705,51 @@ return (
                     </button>
                   </div>
                 </div>
-              ) : selectedImage ? (
-                <div className="space-y-2">
-                  <img 
-                    src={selectedImage.url} 
-                    alt="Issue to analyze" 
-                    className={`w-full object-cover rounded ${
-                      isMobile ? 'h-48' : 'h-32'
-                    }`}
-                  />
-                  <div className={`flex space-x-2 justify-center ${
-                    isMobile ? 'flex-col space-x-0 space-y-2' : ''
-                  }`}>
-                    <button 
-                      onClick={() => setSelectedImage(null)}
-                      className="text-sm text-red-600 hover:text-red-800"
-                    >
-                      Remove Image
-                    </button>
-                    <button 
-                      onClick={startCamera}
-                      className="text-sm text-blue-600 hover:text-blue-800"
-                    >
-                      Take New Photo
-                    </button>
+              ) : selectedImages.length > 0 ? (
+                <div className="space-y-3">
+                  <div className={`grid gap-2 ${isMobile ? 'grid-cols-2' : 'grid-cols-3'}`}>
+                    {selectedImages.map((image, index) => (
+                      <div key={index} className="relative group">
+                        <img 
+                          src={image.url} 
+                          alt={`Issue ${index + 1}`}
+                          className="w-full h-24 object-cover rounded border border-gray-200"
+                        />
+                        <button
+                          onClick={() => removeImage(index)}
+                          className="absolute top-1 right-1 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-700 opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {selectedImages.length < 3 && (
+                    <div className={`grid gap-2 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
+                      <button
+                        onClick={startCamera}
+                        className="bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
+                      >
+                        <Camera size={14} />
+                        <span>Add Photo</span>
+                      </button>
+                      <label className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-2 rounded text-sm font-semibold cursor-pointer flex items-center justify-center space-x-1">
+                        <input 
+                          type="file" 
+                          accept="image/*"
+                          multiple
+                          onChange={handleImageUpload}
+                          className="hidden"
+                        />
+                        <span>📁</span>
+                        <span>Add More</span>
+                      </label>
+                    </div>
+                  )}
+                  
+                  <div className="text-xs text-center text-gray-500">
+                    {selectedImages.length}/3 images uploaded
                   </div>
                 </div>
               ) : (
@@ -806,7 +757,7 @@ return (
                   <div className="flex flex-col items-center space-y-2">
                     <Camera size={32} className="text-gray-400" />
                     <span className="text-sm text-gray-600">
-                      Capture or upload photo
+                      {isDragging ? 'Drop images here' : 'Drag & drop, capture, or upload photos (max 3)'}
                     </span>
                   </div>
                   <div className={`grid gap-2 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
@@ -820,7 +771,8 @@ return (
                     <label className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-2 rounded text-sm font-semibold cursor-pointer flex items-center justify-center space-x-1">
                       <input 
                         type="file" 
-                        accept="image/*" 
+                        accept="image/*"
+                        multiple
                         onChange={handleImageUpload}
                         className="hidden"
                       />
@@ -854,7 +806,7 @@ return (
 
             <button
               onClick={analyzeIssue}
-              disabled={!selectedImage || !description}
+              disabled={selectedImages.length === 0 || !description}
               className={`w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
                 isMobile ? 'py-4' : ''
               }`}
@@ -870,7 +822,7 @@ return (
             <Loader className="animate-spin mx-auto w-8 h-8 text-blue-600" />
             <p className="text-gray-600">Analyzing your issue...</p>
             <div className="text-sm text-gray-500 space-y-1">
-              <p>🔍 Processing image</p>
+              <p>🔍 Processing images</p>
               <p>💡 Identifying parts needed</p>
               <p>💰 Finding current prices</p>
               <p>🏪 Locating nearby stores</p>
@@ -971,3 +923,4 @@ return (
       {isMobile && <div className="h-4"></div>}
     </div>
   )}
+                  
