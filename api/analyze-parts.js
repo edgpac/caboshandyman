@@ -1,4 +1,4 @@
-// /api/analyze-parts.js - Complete Fixed Version for Mobile Vision API Issues
+// /api/analyze-parts.js - Fixed Version (Removed duplicate supportedFormats declaration)
 
 export const config = {
   maxDuration: 60,
@@ -589,7 +589,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // Validate image formats
+    // Validate image formats (SINGLE DECLARATION)
     const supportedFormats = ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp', 'tiff', 'tif', 'ico'];
     const unsupportedImages = [];
     
@@ -620,9 +620,7 @@ export default async function handler(req, res) {
     const visionAnnotations = [];
     let visionErrors = 0;
     
-    // Supported formats by Google Vision API
-    const supportedFormats = ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp', 'tiff', 'tif', 'ico'];
-    
+    // Process each image with Vision API
     for (let i = 0; i < images.length; i++) {
       try {
         // Extract format from data URI
