@@ -1,5 +1,5 @@
-// api/analyze-parts.js - FIXED VERSION
-// Restores reliable estimation while keeping improvements
+// api/analyze-parts.js - COMPLETE FIXED VERSION
+// Robust image processing with Vision API error handling
 
 export const config = {
   maxDuration: 60,
@@ -108,7 +108,7 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
 
     const detectedItemsText = allDetectedItems.length > 0 
       ? `DETECTED FROM IMAGES: ${allDetectedItems.slice(0, 10).join(', ')}`
-      : `No items detected from images. Using customer description.`;
+      : `No items detected from images. Base estimate on customer description.`;
 
     const prompt = `You are an expert contractor cost estimator for Cabo San Lucas, Mexico. Analyze this project and provide realistic 2024-2025 pricing in USD.
 
@@ -116,6 +116,8 @@ DESCRIPTION: "${description}"
 ${detectedItemsText}
 ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 ${chatContext}
+
+IMPORTANT: The customer description is the PRIMARY source. Image detection is supplementary and may be unavailable or inaccurate.
 
 Respond ONLY with valid JSON (no markdown):
 {
@@ -368,20 +370,73 @@ export default async function handler(req, res) {
       });
     }
 
+    // Validate image format
+    for (let i = 0; i < images.length; i++) {
+      if (!images[i] || typeof images[i] !== 'string') {
+        return res.status(400).json({
+          error: `Invalid image ${i + 1}: not a string`,
+          success: false
+        });
+      }
+      
+      if (!images[i].startsWith('data:image/')) {
+        return res.status(400).json({
+          error: `Invalid image ${i + 1}: missing data URI prefix`,
+          success: false
+        });
+      }
+      
+      // Check if it's a supported format
+      const formatMatch = images[i].match(/^data:image\/(\w+);base64,/);
+      if (!formatMatch) {
+        return res.status(400).json({
+          error: `Invalid image ${i + 1}: malformed data URI`,
+          success: false
+        });
+      }
+      
+      const format = formatMatch[1].toLowerCase();
+      const supportedFormats = ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp'];
+      if (!supportedFormats.includes(format)) {
+        return res.status(400).json({
+          error: `Invalid image ${i + 1}: unsupported format '${format}'. Use JPEG, PNG, GIF, BMP, or WEBP.`,
+          success: false
+        });
+      }
+    }
+
     console.log('🔄 Processing:', {
       images: images.length,
-      description: description.substring(0, 50)
+      description: description.substring(0, 50),
+      imageSizes: images.map(img => `${Math.round(img.length * 0.75 / 1024)}KB`)
     });
 
-    // REMOVED STRICT FORMAT VALIDATION - Process all images
+    // Process images with better error handling
     const visionAnnotations = [];
     let visionErrors = 0;
     
     for (let i = 0; i < images.length; i++) {
       try {
-        const imageBase64 = images[i].replace(/^data:image\/\w+;base64,/, '');
+        // Extract clean base64 (Vision API doesn't want the data URI prefix)
+        let imageBase64 = images[i];
         
-        console.log(`📸 Processing image ${i + 1}/${images.length}...`);
+        // Remove data URI prefix if present
+        if (imageBase64.includes('base64,')) {
+          imageBase64 = imageBase64.split('base64,')[1];
+        } else if (imageBase64.startsWith('data:')) {
+          console.error(`Image ${i + 1}: Invalid data URI format`);
+          visionErrors++;
+          continue;
+        }
+        
+        // Validate base64
+        if (!imageBase64 || imageBase64.length < 100) {
+          console.error(`Image ${i + 1}: Base64 string too short or empty`);
+          visionErrors++;
+          continue;
+        }
+        
+        console.log(`📸 Processing image ${i + 1}/${images.length} (${Math.round(imageBase64.length * 0.75 / 1024)}KB)...`);
         
         const visionResponse = await fetch(
           `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
@@ -398,8 +453,7 @@ export default async function handler(req, res) {
                 ]
               }]
             }),
-            // Add timeout
-            signal: AbortSignal.timeout(10000)
+            signal: AbortSignal.timeout(15000) // 15 second timeout
           }
         );
 
@@ -407,31 +461,32 @@ export default async function handler(req, res) {
           const visionData = await visionResponse.json();
           
           if (visionData.responses && visionData.responses[0]) {
-            if (!visionData.responses[0].error) {
-              visionAnnotations.push(visionData.responses[0]);
-              console.log(`✅ Image ${i + 1} processed`);
-            } else {
-              console.warn(`⚠️ Vision API error for image ${i + 1}`);
+            if (visionData.responses[0].error) {
+              console.error(`⚠️ Vision API error for image ${i + 1}:`, visionData.responses[0].error);
               visionErrors++;
+            } else {
+              visionAnnotations.push(visionData.responses[0]);
+              console.log(`✅ Image ${i + 1} processed successfully`);
             }
           }
         } else {
-          console.warn(`⚠️ Vision API failed for image ${i + 1}: ${visionResponse.status}`);
+          const errorText = await visionResponse.text().catch(() => 'Unknown error');
+          console.error(`⚠️ Vision API HTTP ${visionResponse.status} for image ${i + 1}:`, errorText);
           visionErrors++;
         }
       } catch (visionError) {
         console.error(`❌ Error processing image ${i + 1}:`, visionError.message);
         visionErrors++;
-        // Continue processing - don't fail entire request
       }
     }
 
     console.log(`Vision: ${visionAnnotations.length} success, ${visionErrors} errors`);
 
     // ALWAYS attempt Groq analysis - even with 0 vision results
+    // The description alone is often sufficient for accurate estimates
     const analysis = await analyzeWithGroq(
       description,
-      visionAnnotations,
+      visionAnnotations, // Pass whatever we got (even if empty)
       service_context,
       chat_history
     );
@@ -444,6 +499,7 @@ export default async function handler(req, res) {
       processing_time_ms: processingTime,
       vision_success_count: visionAnnotations.length,
       vision_error_count: visionErrors,
+      vision_note: visionAnnotations.length === 0 ? 'Estimate based on description only - image analysis unavailable' : null,
       ...analysis
     });
 

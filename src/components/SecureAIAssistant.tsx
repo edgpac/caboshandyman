@@ -203,96 +203,140 @@ Time: ${new Date().toLocaleString()}`;
     }
   };
 
-  const compressImage = (file, maxWidth = isMobile ? 800 : 1200, quality = 0.85) => {
+  const compressImage = (file) => {
     return new Promise((resolve, reject) => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       const img = new Image();
       
       img.onload = () => {
+        // Clean up object URL
+        URL.revokeObjectURL(img.src);
+        
         let { width, height } = img;
         
-        const maxDimension = isMobile ? 1024 : 1600;
+        // Consistent sizing for Vision API reliability
+        const maxDimension = isMobile ? 1024 : 1920;
         
         if (width > maxDimension || height > maxDimension) {
           if (width > height) {
-            height = (height * maxDimension) / width;
+            height = Math.round((height * maxDimension) / width);
             width = maxDimension;
           } else {
-            width = (width * maxDimension) / height;
+            width = Math.round((width * maxDimension) / height);
             height = maxDimension;
           }
         }
         
+        // Ensure even dimensions (some image processors prefer this)
+        width = width - (width % 2);
+        height = height - (height % 2);
+        
         canvas.width = width;
         canvas.height = height;
+        
+        // White background for transparency
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, width, height);
         
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, 0, 0, width, height);
         
+        // Always output JPEG for Vision API compatibility
+        const targetQuality = isMobile ? 0.8 : 0.85;
+        
         canvas.toBlob((blob) => {
-          if (blob) {
-            const sizeKB = blob.size / 1024;
-            console.log(`Compressed to ${Math.round(sizeKB)}KB`);
-            
-            if (sizeKB > 500) {
-              console.log('Re-compressing large image...');
-              canvas.toBlob((smallerBlob) => {
-                if (smallerBlob) {
-                  console.log(`Re-compressed to ${Math.round(smallerBlob.size / 1024)}KB`);
-                  resolve(smallerBlob);
-                } else {
-                  resolve(blob);
-                }
-              }, 'image/jpeg', 0.65);
-            } else {
-              resolve(blob);
-            }
-          } else {
-            reject(new Error('Image compression failed'));
+          if (!blob) {
+            reject(new Error('Canvas toBlob failed'));
+            return;
           }
-        }, 'image/jpeg', isMobile ? 0.75 : 0.85);
+          
+          const sizeKB = blob.size / 1024;
+          console.log(`✓ Compressed: ${width}x${height}, ${Math.round(sizeKB)}KB, quality: ${targetQuality}`);
+          
+          // Ensure reasonable size
+          if (sizeKB > 800) {
+            console.log('⚠ Large image, recompressing...');
+            canvas.toBlob((smallerBlob) => {
+              if (smallerBlob) {
+                console.log(`✓ Recompressed: ${Math.round(smallerBlob.size / 1024)}KB`);
+                resolve(smallerBlob);
+              } else {
+                resolve(blob);
+              }
+            }, 'image/jpeg', 0.7);
+          } else {
+            resolve(blob);
+          }
+        }, 'image/jpeg', targetQuality);
       };
       
-      img.onerror = () => reject(new Error('Failed to load image'));
+      img.onerror = (error) => {
+        URL.revokeObjectURL(img.src);
+        console.error('Image load error:', error);
+        reject(new Error('Failed to load image for compression'));
+      };
       
-      const objectUrl = URL.createObjectURL(file);
-      img.src = objectUrl;
+      // Create object URL for loading
+      try {
+        const objectUrl = URL.createObjectURL(file);
+        img.src = objectUrl;
+      } catch (error) {
+        reject(new Error('Failed to create image URL'));
+      }
     });
   };
 
   const imageToBase64 = async (file) => {
-  try {
-    const compressedBlob = await compressImage(file);
-    
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        // ✅ FIXED: Return full data URI, don't strip prefix
-        resolve(reader.result);
-        
-        // 🔍 Optional: Add logging to verify
-        const sizeKB = (reader.result.length * 3) / 4 / 1024;
-        console.log(`Compressed image size: ${Math.round(sizeKB)} KB`);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(compressedBlob);
-    });
-  } catch (error) {
-    console.error('Image compression failed:', error);
-    
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        // ✅ FIXED: Return full data URI here too
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
-};
+    try {
+      // Always compress to ensure compatibility
+      const compressedBlob = await compressImage(file);
+      
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result;
+          
+          // Verify it's a valid data URI
+          if (!result || typeof result !== 'string' || !result.startsWith('data:image/')) {
+            console.error('Invalid data URI generated');
+            reject(new Error('Invalid image format'));
+            return;
+          }
+          
+          const sizeKB = (result.length * 3) / 4 / 1024;
+          console.log(`✓ Image ready: ${Math.round(sizeKB)}KB, format: ${result.substring(5, result.indexOf(';'))}`);
+          
+          // Return full data URI
+          resolve(result);
+        };
+        reader.onerror = (error) => {
+          console.error('FileReader error:', error);
+          reject(error);
+        };
+        reader.readAsDataURL(compressedBlob);
+      });
+    } catch (error) {
+      console.error('Image compression failed:', error);
+      
+      // Fallback: try reading original file
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result;
+          if (!result || !result.startsWith('data:image/')) {
+            reject(new Error('Invalid image format'));
+            return;
+          }
+          console.warn('⚠ Using uncompressed image');
+          resolve(result);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+  };
 
   const handleScheduleAppointment = async (analysisData) => {
     try {
@@ -305,7 +349,7 @@ Time: ${new Date().toLocaleString()}`;
       if (selectedImages.length > 0) {
         const compressedPromises = selectedImages.map(img => imageToBase64(img.file));
         const compressedBase64Array = await Promise.all(compressedPromises);
-        imagesToSend = compressedBase64Array.map(base64 => `data:image/jpeg;base64,${base64}`);
+        imagesToSend = compressedBase64Array;
       }
 
       const emailResponse = await fetch('/api/send-booking-email', {
@@ -467,7 +511,15 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
       const imagesDataURIs = await Promise.all(imagePromises);
       
-      console.log('Images compressed successfully');
+      // Ensure all images have proper data URI format
+      const validatedImages = imagesDataURIs.map(dataUri => {
+        if (!dataUri.startsWith('data:image/')) {
+          return `data:image/jpeg;base64,${dataUri}`;
+        }
+        return dataUri;
+      });
+      
+      console.log('Images compressed successfully:', validatedImages.map(img => `${Math.round(img.length / 1024)}KB`));
       
       const analysisDescription = selectedService 
         ? `${description} (Service context: ${selectedService.title} - ${selectedService.description})`
@@ -479,7 +531,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          images: imagesDataURIs,
+          images: validatedImages,
           description: analysisDescription,
           location: location || 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
@@ -491,11 +543,23 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        console.error('API Error:', errorData);
+        console.error('API Error:', {
+          status: response.status,
+          error: errorData,
+          imageCount: validatedImages.length,
+          imageSizes: validatedImages.map(img => `${Math.round(img.length / 1024)}KB`)
+        });
         throw new Error(errorData.error || `Server error (${response.status})`);
       }
 
       const result = await response.json();
+      console.log('Analysis result:', {
+        success: result.success,
+        hasAnalysis: !!result.analysis,
+        needsClarification: result.needs_clarification,
+        visionSuccess: result.vision_success_count,
+        visionErrors: result.vision_error_count
+      });
 
       if (result.is_off_topic) {
         setError(result.message);
@@ -519,6 +583,19 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
       if (result.success) {
         setAnalysis(result);
+        
+        // Show info message if Vision API failed but we still got results
+        if (result.vision_success_count === 0 && result.vision_error_count > 0) {
+          const infoToast = document.createElement('div');
+          infoToast.textContent = 'ℹ️ Estimate based on description (image analysis unavailable)';
+          infoToast.className = 'fixed top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
+          document.body.appendChild(infoToast);
+          setTimeout(() => {
+            if (document.body.contains(infoToast)) {
+              document.body.removeChild(infoToast);
+            }
+          }, 5000);
+        }
       } else {
         setAnalysis({
           success: true,
@@ -549,7 +626,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     }
   };
   
-  // 🔧 FIX: Detect and reject unsupported formats like HEIC
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     
@@ -700,6 +776,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
 
   const maxImages = isMobile ? 1 : 3;
+  
   return (
     <div className={containerClasses}>
       <div className={`bg-blue-600 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
