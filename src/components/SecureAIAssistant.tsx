@@ -203,8 +203,8 @@ Time: ${new Date().toLocaleString()}`;
     }
   };
 
-  const compressImage = (file, maxWidth = isMobile ? 600 : 800, quality = 0.7) => {
-    return new Promise((resolve) => {
+  const compressImage = (file, maxWidth = isMobile ? 800 : 1200, quality = 0.85) => {
+    return new Promise((resolve, reject) => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
       const img = new Image();
@@ -212,37 +212,67 @@ Time: ${new Date().toLocaleString()}`;
       img.onload = () => {
         let { width, height } = img;
         
-        if (width > maxWidth) {
-          height = (height * maxWidth) / width;
-          width = maxWidth;
+        // More aggressive compression for mobile
+        const maxDimension = isMobile ? 1024 : 1600;
+        
+        if (width > maxDimension || height > maxDimension) {
+          if (width > height) {
+            height = (height * maxDimension) / width;
+            width = maxDimension;
+          } else {
+            width = (width * maxDimension) / height;
+            height = maxDimension;
+          }
         }
         
         canvas.width = width;
         canvas.height = height;
         
+        // Use better quality rendering
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, 0, 0, width, height);
-        canvas.toBlob(resolve, 'image/jpeg', quality);
+        
+        canvas.toBlob((blob) => {
+          if (blob) {
+            resolve(blob);
+          } else {
+            reject(new Error('Image compression failed'));
+          }
+        }, 'image/jpeg', isMobile ? 0.75 : 0.85);
       };
       
+      img.onerror = () => reject(new Error('Failed to load image'));
       img.src = URL.createObjectURL(file);
     });
   };
 
   const imageToBase64 = async (file) => {
     try {
-      const compressedFile = await compressImage(file);
+      const compressedBlob = await compressImage(file);
       
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
           const base64 = reader.result.split(',')[1];
+          
+          // Check base64 size (approximate KB)
+          const sizeKB = (base64.length * 3) / 4 / 1024;
+          console.log(`Compressed image size: ${Math.round(sizeKB)} KB`);
+          
+          if (sizeKB > 1500) {
+            console.warn('Image still large after compression:', Math.round(sizeKB), 'KB');
+          }
+          
           resolve(base64);
         };
         reader.onerror = reject;
-        reader.readAsDataURL(compressedFile);
+        reader.readAsDataURL(compressedBlob);
       });
     } catch (error) {
       console.error('Image compression failed:', error);
+      
+      // Fallback: try original file with lower quality
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -427,8 +457,12 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setError(null);
 
     try {
+      console.log('Starting analysis with', selectedImages.length, 'images');
+      
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
       const imagesBase64 = await Promise.all(imagePromises);
+      
+      console.log('Images compressed successfully');
       
       const analysisDescription = selectedService 
         ? `${description} (Service context: ${selectedService.title} - ${selectedService.description})`
@@ -451,7 +485,9 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorData = await response.json().catch(() => ({}));
+        console.error('API Error:', errorData);
+        throw new Error(errorData.error || `Server error (${response.status})`);
       }
 
       const result = await response.json();
@@ -492,7 +528,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
     } catch (err) {
       console.error('Analysis error:', err);
-      setError('Unable to analyze image. Please try again.');
+      setError(`Unable to analyze: ${err.message || 'Please try again'}`);
       
       setAnalysis({
         success: false,
@@ -1022,7 +1058,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                       </div>
                     </div>
                   )}
-                  
+
                   {analysis.cost_estimate.labor_cost && (
                     <div>
                       <span className="text-blue-600">Labor (Est.):</span>
