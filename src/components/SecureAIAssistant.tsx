@@ -297,6 +297,7 @@ Time: ${new Date().toLocaleString()}`;
       });
     }
   };
+
   const handleScheduleAppointment = async (analysisData) => {
     try {
       const loadingToast = document.createElement('div');
@@ -421,6 +422,8 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     try {
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
       const imagesBase64 = await Promise.all(imagePromises);
+      // 🔧 FIX: Add data URI prefix
+      const imagesWithPrefix = imagesBase64.map(base64 => `data:image/jpeg;base64,${base64}`);
 
       const response = await fetch('/api/analyze-parts', {
         method: 'POST',
@@ -428,7 +431,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          images: imagesBase64,
+          images: imagesWithPrefix, // ✅ FIXED
           description: chatInput,
           location: location || 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
@@ -469,6 +472,8 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
       const imagesBase64 = await Promise.all(imagePromises);
+      // 🔧 FIX: Add data URI prefix
+      const imagesWithPrefix = imagesBase64.map(base64 => `data:image/jpeg;base64,${base64}`);
       
       console.log('Images compressed successfully');
       
@@ -482,7 +487,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          images: imagesBase64,
+          images: imagesWithPrefix, // ✅ FIXED
           description: analysisDescription,
           location: location || 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
