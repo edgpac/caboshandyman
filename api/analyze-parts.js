@@ -1,89 +1,4 @@
-// /api/analyze-parts.js - Mobile-Optimized Version
-
-// ✅ ADD: Request size validator
-function validateRequestSize(images) {
-  const totalSize = JSON.stringify(images).length;
-  const sizeMB = (totalSize / (1024 * 1024)).toFixed(2);
-  
-  console.log(`📦 Request payload size: ${sizeMB}MB`);
-  
-  if (totalSize > 10 * 1024 * 1024) { // 10MB limit
-    throw new Error(`Request too large: ${sizeMB}MB. Please use fewer or smaller images.`);
-  }
-  
-  return sizeMB;
-}
-
-// ✅ IMPROVED: Parallel Vision API calls with timeout
-async function processImagesWithTimeout(images, timeoutMs = 30000) {
-  const visionAnnotations = [];
-  
-  // Process images in parallel with timeout
-  const imagePromises = images.map(async (imageData, index) => {
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-    
-    try {
-      const imageBase64 = imageData.replace(/^data:image\/\w+;base64,/, '');
-      
-      console.log(`🔍 Processing image ${index + 1}/${images.length}...`);
-      
-      const visionResponse = await fetch(
-        `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            requests: [{
-              image: { content: imageBase64 },
-              features: [
-                { type: 'LABEL_DETECTION', maxResults: 10 },
-                { type: 'OBJECT_LOCALIZATION', maxResults: 10 },
-                { type: 'TEXT_DETECTION', maxResults: 5 }
-              ]
-            }]
-          }),
-          signal: controller.signal
-        }
-      );
-
-      clearTimeout(timeoutId);
-
-      if (!visionResponse.ok) {
-        console.error(`❌ Vision API failed for image ${index + 1}:`, visionResponse.status);
-        return null;
-      }
-
-      const visionData = await visionResponse.json();
-      console.log(`✅ Image ${index + 1} processed successfully`);
-      return visionData.responses?.[0] || null;
-      
-    } catch (error) {
-      clearTimeout(timeoutId);
-      if (error.name === 'AbortError') {
-        console.error(`⏱️ Vision API timeout for image ${index + 1}`);
-      } else {
-        console.error(`❌ Error processing image ${index + 1}:`, error.message);
-      }
-      return null;
-    }
-  });
-
-  // Wait for all images to process (or fail)
-  const results = await Promise.all(imagePromises);
-  
-  // Filter out failed images
-  results.forEach(result => {
-    if (result) visionAnnotations.push(result);
-  });
-  
-  if (visionAnnotations.length === 0) {
-    throw new Error('All images failed to process. Please try again with different images.');
-  }
-  
-  console.log(`✅ Successfully processed ${visionAnnotations.length}/${images.length} images`);
-  return visionAnnotations;
-}
+// /api/analyze-parts.js - Complete Fixed Version
 
 // Check if description is too vague to provide accurate estimate
 function isDescriptionVague(description, imageCount) {
@@ -171,7 +86,7 @@ function isDescriptionVague(description, imageCount) {
   return { isVague: false };
 }
 
-// Generate smart clarification questions
+// Generate smart clarification questions based on context
 function generateSmartQuestions(description, detectedItems, vaguenessReason, serviceContext) {
   const desc = description.toLowerCase();
   const questions = [];
@@ -227,7 +142,7 @@ function generateSmartQuestions(description, detectedItems, vaguenessReason, ser
   return questions.slice(0, 4);
 }
 
-// ✅ IMPROVED: Reduced token usage for mobile
+// Enhanced analysis using Groq
 async function analyzeWithGroq(description, visionAnnotationsArray = [], serviceContext = null, chatHistory = null) {
   try {
     const allDetectedItems = [];
@@ -235,32 +150,38 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
     let offTopicReason = '';
     
     const offTopicKeywords = {
-      vehicles: ['car', 'automobile', 'vehicle', 'motorcycle', 'wheel', 'tire'],
-      people: ['person', 'face', 'selfie', 'portrait'],
-      animals: ['dog', 'cat', 'pet', 'animal'],
-      electronics: ['phone', 'laptop', 'computer', 'television', 'gaming'],
-      food: ['food', 'meal', 'restaurant', 'pizza'],
+      vehicles: ['car', 'automobile', 'vehicle', 'motorcycle', 'bike', 'sedan', 'suv', 'sports car', 'wheel', 'tire', 'bumper', 'headlight'],
+      people: ['person', 'face', 'man', 'woman', 'child', 'people', 'crowd', 'selfie', 'portrait'],
+      animals: ['dog', 'cat', 'pet', 'animal', 'bird', 'horse', 'fish'],
+      electronics: ['phone', 'laptop', 'computer', 'television', 'tv', 'monitor', 'tablet', 'gaming', 'xbox', 'playstation'],
+      food: ['food', 'meal', 'restaurant', 'pizza', 'burger', 'dessert', 'drink', 'beverage'],
+      clothing: ['clothing', 'shirt', 'dress', 'shoes', 'fashion', 'outfit'],
+      entertainment: ['toy', 'game', 'doll', 'action figure', 'video game']
     };
 
     const validContextKeywords = [
-      'building', 'house', 'home', 'repair', 'maintenance', 'damage', 'leak',
-      'wall', 'ceiling', 'floor', 'roof', 'door', 'window', 'pipe', 'plumbing',
-      'electrical', 'kitchen', 'bathroom', 'installation'
+      'building', 'house', 'home', 'property', 'construction', 'renovation',
+      'repair', 'maintenance', 'damage', 'broken', 'leak', 'crack', 'wall',
+      'ceiling', 'floor', 'roof', 'door', 'window', 'pipe', 'plumbing',
+      'electrical', 'hvac', 'appliance', 'kitchen', 'bathroom', 'garage',
+      'deck', 'fence', 'outdoor', 'installation', 'demolition', 'contractor',
+      'fixture', 'cabinet', 'countertop', 'tile', 'paint', 'drywall'
     ];
     
     visionAnnotationsArray.forEach((annotations, imageIndex) => {
       const objects = annotations.localizedObjectAnnotations || [];
       const labels = annotations.labelAnnotations || [];
+      const texts = annotations.textAnnotations || [];
 
-      // ✅ Only take top 3 items per image to reduce token usage
       const imageItems = [
-        ...objects.slice(0, 2).map(obj => obj.name),
-        ...labels.slice(0, 3).map(label => label.description)
+        ...objects.map(obj => `Image ${imageIndex + 1}: ${obj.name}`),
+        ...labels.map(label => `Image ${imageIndex + 1}: ${label.description}`),
+        ...texts.slice(0, 3).map(text => `Image ${imageIndex + 1}: ${text.description.substring(0, 50)}`)
       ].filter(Boolean);
 
       allDetectedItems.push(...imageItems);
 
-      const allLabelsLower = imageItems.join(' ').toLowerCase();
+      const allLabelsLower = [...objects.map(o => o.name), ...labels.map(l => l.description)].join(' ').toLowerCase();
       const descriptionLower = description.toLowerCase();
       const combinedText = `${allLabelsLower} ${descriptionLower}`;
 
@@ -269,10 +190,13 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       if (!hasValidContext && !offTopicDetected) {
         for (const [category, keywords] of Object.entries(offTopicKeywords)) {
           const matchedKeywords = keywords.filter(keyword => allLabelsLower.includes(keyword));
+          const specificMatches = ['car', 'automobile', 'motorcycle', 'selfie', 'portrait', 'pizza', 'gaming'];
+          const hasSpecificMatch = specificMatches.some(keyword => allLabelsLower.includes(keyword));
           
-          if (matchedKeywords.length >= 2) {
+          if (matchedKeywords.length >= 2 || (matchedKeywords.length >= 1 && hasSpecificMatch)) {
             offTopicDetected = true;
             offTopicReason = category;
+            console.log(`Off-topic detected: ${category} - Keywords: ${matchedKeywords.join(', ')}`);
             break;
           }
         }
@@ -292,14 +216,21 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
         cost_estimate: {
           parts_cost: { min: 0, max: 0 },
           labor_cost: 0,
+          labor_hours: 0,
+          crew_size: 1,
+          disposal_cost: 0,
           total_cost: { min: 0, max: 0 }
-        }
+        },
+        pricing: [],
+        stores: []
       };
     }
 
     const vaguenessCheck = isDescriptionVague(description, visionAnnotationsArray.length);
     
     if (vaguenessCheck.isVague) {
+      console.log(`Vague description detected: ${vaguenessCheck.reason} - "${description}"`);
+      
       const clarificationQuestions = generateSmartQuestions(
         description, 
         allDetectedItems, 
@@ -312,39 +243,53 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
         clarification_questions: clarificationQuestions,
         preliminary_info: {
           detected_items: allDetectedItems.slice(0, 5),
-          vagueness_reason: vaguenessCheck.reason
-        }
+          vagueness_reason: vaguenessCheck.reason,
+          confidence_level: 'very_low',
+          message: vaguenessCheck.message
+        },
+        analysis: {
+          issue_type: 'Information Needed',
+          severity: 'Unknown',
+          description: 'I need more information to provide an accurate estimate.'
+        },
+        cost_estimate: {
+          parts_cost: { min: 0, max: 0 },
+          labor_cost: 0,
+          labor_hours: 0,
+          crew_size: 1,
+          disposal_cost: 0,
+          total_cost: { min: 0, max: 0 }
+        },
+        pricing: [],
+        stores: []
       };
     }
 
-    // ✅ Simplified chat context for mobile
     let chatContext = '';
     if (chatHistory && chatHistory.length > 0) {
-      const recentChats = chatHistory.slice(-4); // Only last 4 messages
-      chatContext = '\n\nRecent conversation:\n' + recentChats.map(msg => 
-        `${msg.role}: ${msg.content.substring(0, 150)}`
+      chatContext = '\n\nPREVIOUS CONVERSATION:\n' + chatHistory.map(msg => 
+        `${msg.role === 'user' ? 'Customer' : 'AI'}: ${msg.content}`
       ).join('\n');
     }
 
-    // ✅ Shorter prompt for mobile
-    const detectedSummary = allDetectedItems.length > 0 
-      ? allDetectedItems.slice(0, 8).join(', ') 
-      : 'No specific items detected';
+    const prompt = `You are an expert contractor cost estimator for Cabo San Lucas, Mexico. Analyze this maintenance/construction project and provide realistic 2024-2025 pricing in USD.
 
-    const prompt = `Analyze this maintenance project for Cabo San Lucas, Mexico (2024-2025 USD pricing):
-
+IMAGES ANALYZED: ${visionAnnotationsArray.length} professional photos were analyzed using computer vision
 DESCRIPTION: ${description}
-DETECTED: ${detectedSummary}
-${serviceContext ? `SERVICE: ${serviceContext.title}` : ''}${chatContext}
+${allDetectedItems.length > 0 ? `DETECTED ITEMS FROM ${visionAnnotationsArray.length} IMAGES: ${allDetectedItems.join(', ')}` : 'Images were uploaded but computer vision did not detect specific items. Base analysis on description.'}
+${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
+${chatContext}
 
-JSON response:
+Respond with full analysis in JSON format:
 {
-  "issue_type": "category",
+  "needs_clarification": false,
+  "issue_type": "specific category",
   "severity": "High/Medium/Low",
-  "description": "brief analysis",
-  "required_parts": [{"name": "part", "quantity": 1, "estimated_cost": 100}],
-  "difficulty_level": "Professional/Expert/Skilled",
+  "description": "detailed analysis",
+  "required_parts": [{"name": "part name", "quantity": 1, "estimated_cost": 100}],
+  "difficulty_level": "Professional/Expert Required/Skilled Handyperson",
   "crew_size": 1,
+  "crew_justification": "explanation",
   "labor_hours": 4,
   "cost_breakdown": {
     "parts_min": 200,
@@ -352,11 +297,6 @@ JSON response:
     "base_labor_cost": 300
   }
 }`;
-
-    console.log(`📤 Sending to Groq (prompt length: ${prompt.length} chars)`);
-
-    const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 45000); // 45s timeout
 
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -369,7 +309,7 @@ JSON response:
         messages: [
           {
             role: 'system',
-            content: `Expert maintenance estimator. Respond in valid JSON only.`
+            content: `You are an expert maintenance and construction cost estimator for Cabo San Lucas, Mexico. Always respond in valid JSON format only.`
           },
           {
             role: 'user',
@@ -377,17 +317,12 @@ JSON response:
           }
         ],
         temperature: 0.3,
-        max_tokens: 1000
-      }),
-      signal: controller.signal
+        max_tokens: 1200
+      })
     });
 
-    clearTimeout(timeoutId);
-
     if (!groqResponse.ok) {
-      const errorText = await groqResponse.text();
-      console.error('❌ Groq error response:', errorText);
-      throw new Error(`Groq API failed: ${groqResponse.status} - ${errorText.substring(0, 200)}`);
+      throw new Error(`Groq API failed: ${groqResponse.status}`);
     }
 
     const groqData = await groqResponse.json();
@@ -402,8 +337,32 @@ JSON response:
       const cleanedContent = groqContent.replace(/```json\n?|\n?```/g, '').trim();
       groqAnalysis = JSON.parse(cleanedContent);
     } catch (parseError) {
-      console.error('JSON parse error:', parseError);
       throw new Error('Invalid JSON from Groq');
+    }
+
+    if (groqAnalysis.needs_clarification === true) {
+      return {
+        needs_clarification: true,
+        clarification_questions: groqAnalysis.clarification_questions || [
+          "Can you provide more details about the scope of work?"
+        ],
+        preliminary_info: groqAnalysis.preliminary_info || {},
+        analysis: {
+          issue_type: 'Information Needed',
+          severity: 'Unknown',
+          description: 'I need a bit more information to provide an accurate estimate.'
+        },
+        cost_estimate: {
+          parts_cost: { min: 0, max: 0 },
+          labor_cost: 0,
+          labor_hours: 0,
+          crew_size: 1,
+          disposal_cost: 0,
+          total_cost: { min: 0, max: 0 }
+        },
+        pricing: [],
+        stores: []
+      };
     }
 
     const crewSize = Math.max(1, groqAnalysis.crew_size || 1);
@@ -421,6 +380,12 @@ JSON response:
       disposalCost = 350;
     } else if (issueType.includes('Water Damage')) {
       disposalCost = 180;
+    } else if (issueType.includes('Kitchen') || issueType.includes('Bathroom')) {
+      disposalCost = 120;
+    } else if (issueType.includes('Flooring')) {
+      disposalCost = 90;
+    } else if (issueType.includes('HVAC')) {
+      disposalCost = 60;
     }
 
     return {
@@ -431,7 +396,8 @@ JSON response:
         description: groqAnalysis.description || description,
         required_parts: groqAnalysis.required_parts || [],
         difficulty_level: groqAnalysis.difficulty_level || 'Professional',
-        crew_size: crewSize
+        crew_size: crewSize,
+        crew_justification: groqAnalysis.crew_justification || `${crewSize} person${crewSize > 1 ? 's' : ''} required`
       },
       cost_estimate: {
         parts_cost: {
@@ -441,6 +407,7 @@ JSON response:
         labor_cost: totalLaborWithOverhead,
         labor_hours: laborHours,
         crew_size: crewSize,
+        crew_justification: groqAnalysis.crew_justification,
         disposal_cost: disposalCost,
         total_cost: {
           min: (groqAnalysis.cost_breakdown?.parts_min || 50) + totalLaborWithOverhead + disposalCost,
@@ -452,58 +419,71 @@ JSON response:
     };
 
   } catch (error) {
-    console.error('❌ Groq analysis failed:', error);
-    
-    // Return fallback instead of throwing
+    console.error('Groq analysis failed:', error);
+    const fallback = processMaintencanceIssue(visionAnnotationsArray[0] || {}, description, serviceContext);
     return {
       needs_clarification: false,
-      analysis: {
-        issue_type: 'Maintenance Issue Detected',
-        severity: 'Medium',
-        description: description || 'Please contact us for a detailed assessment',
-        required_parts: [],
-        difficulty_level: 'Professional',
-        crew_size: 1
-      },
-      cost_estimate: {
-        parts_cost: { min: 100, max: 300 },
-        labor_cost: 280,
-        labor_hours: 2,
-        crew_size: 1,
-        disposal_cost: 0,
-        total_cost: { min: 380, max: 580 }
-      },
+      analysis: fallback.analysis,
+      cost_estimate: fallback.cost_estimate,
       pricing: [],
-      stores: getDefaultStores(),
-      fallback_used: true
+      stores: getDefaultStores()
     };
   }
+}
+
+function processMaintencanceIssue(annotations, description, service_context) {
+  return {
+    analysis: {
+      issue_type: 'General Maintenance',
+      severity: 'Medium',
+      description: description,
+      required_parts: [],
+      difficulty_level: 'Professional',
+      crew_size: 1,
+      crew_justification: 'Standard single-person job'
+    },
+    cost_estimate: {
+      parts_cost: { min: 100, max: 300 },
+      labor_cost: 250,
+      labor_hours: 2,
+      crew_size: 1,
+      crew_justification: 'Standard single-person job',
+      disposal_cost: 0,
+      total_cost: { min: 350, max: 550 }
+    }
+  };
 }
 
 function getDefaultStores() {
   return [
     {
       name: "The Home Depot Cabo San Lucas",
-      address: "Carr. Transpeninsular Km 4.5",
+      address: "Carr. Transpeninsular Km 4.5, Cabo San Lucas, B.C.S. 23410",
       rating: 4.3
+    },
+    {
+      name: "Construrama Cabo",
+      address: "Blvd. Lázaro Cárdenas, Cabo San Lucas, B.C.S.",
+      rating: 4.1
     }
   ];
 }
 
 function getOffTopicMessage(category) {
   const messages = {
-    vehicles: "🚗 I noticed a vehicle. I specialize in home maintenance!",
-    people: "👋 I focus on property maintenance issues.",
-    animals: "🐾 Cute! But I handle property maintenance.",
-    electronics: "📱 I handle property maintenance projects.",
-    food: "🍕 I specialize in kitchen renovations!"
+    vehicles: "🚗 I noticed you uploaded an image of a vehicle. I specialize in home and property maintenance!",
+    people: "👋 I see there are people in your photo! I focus on analyzing property maintenance and construction issues.",
+    animals: "🐾 Cute! But I specialize in property maintenance, not pet care.",
+    electronics: "📱 I noticed electronics in your image. I handle property maintenance and construction projects.",
+    food: "🍕 That looks delicious! But I specialize in kitchen renovations and property maintenance.",
+    clothing: "👕 I see clothing/fashion items. I focus on home maintenance and construction.",
+    entertainment: "🎮 I noticed toys or games. I'm designed for property maintenance and construction estimates."
   };
-  return messages[category] || "I specialize in home maintenance.";
+  return messages[category] || "I specialize in home and property maintenance.";
 }
 
-// 🆕 MAIN HANDLER
+// 🆕 MAIN HANDLER - THIS IS CRITICAL!
 export default async function handler(req, res) {
-  // ✅ CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -516,57 +496,9 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // ✅ CHECK ENVIRONMENT VARIABLES FIRST
-  if (!process.env.GOOGLE_CLOUD_VISION_API_KEY) {
-    console.error('❌ GOOGLE_CLOUD_VISION_API_KEY not configured');
-    return res.status(500).json({
-      success: false,
-      error: 'Vision API not configured. Please contact support.',
-      analysis: {
-        issue_type: 'Configuration Error',
-        severity: 'High',
-        description: 'AI vision service is not properly configured.'
-      },
-      cost_estimate: {
-        parts_cost: { min: 0, max: 0 },
-        labor_cost: 0,
-        total_cost: { min: 0, max: 0 }
-      }
-    });
-  }
-
-  if (!process.env.GROQ_API_KEY) {
-    console.error('❌ GROQ_API_KEY not configured');
-    return res.status(500).json({
-      success: false,
-      error: 'AI analysis service not configured. Please contact support.',
-      analysis: {
-        issue_type: 'Configuration Error',
-        severity: 'High',
-        description: 'AI analysis service is not properly configured.'
-      },
-      cost_estimate: {
-        parts_cost: { min: 0, max: 0 },
-        labor_cost: 0,
-        total_cost: { min: 0, max: 0 }
-      }
-    });
-  }
-
-  const startTime = Date.now();
-
   try {
     const { images, description, location, service_context, chat_history } = req.body;
 
-    console.log('📥 Request received:', {
-      imageCount: images?.length || 0,
-      descriptionLength: description?.length || 0,
-      hasServiceContext: !!service_context,
-      hasChatHistory: !!chat_history,
-      timestamp: new Date().toISOString()
-    });
-
-    // ✅ Validation
     if (!images || images.length === 0) {
       return res.status(400).json({ 
         error: 'At least one image is required',
@@ -581,15 +513,54 @@ export default async function handler(req, res) {
       });
     }
 
-    // ✅ Check request size
-    const sizeMB = validateRequestSize(images);
+    console.log('Processing request:', {
+      imageCount: images.length,
+      descriptionLength: description.length,
+      hasServiceContext: !!service_context,
+      hasChatHistory: !!chat_history
+    });
 
-    // ✅ Process images in parallel with timeout
-    const visionAnnotations = await processImagesWithTimeout(images, 30000);
+    const visionAnnotations = [];
+    
+    for (let i = 0; i < images.length; i++) {
+      try {
+        const imageBase64 = images[i].replace(/^data:image\/\w+;base64,/, '');
+        
+        const visionResponse = await fetch(
+          `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              requests: [{
+                image: { content: imageBase64 },
+                features: [
+                  { type: 'LABEL_DETECTION', maxResults: 10 },
+                  { type: 'OBJECT_LOCALIZATION', maxResults: 10 },
+                  { type: 'TEXT_DETECTION', maxResults: 5 }
+                ]
+              }]
+            })
+          }
+        );
 
-    console.log(`✅ Vision processing complete (${Date.now() - startTime}ms)`);
+        if (!visionResponse.ok) {
+          console.error(`Vision API failed for image ${i + 1}:`, visionResponse.status);
+          continue;
+        }
 
-    // ✅ Analyze with Groq
+        const visionData = await visionResponse.json();
+        if (visionData.responses && visionData.responses[0]) {
+          visionAnnotations.push(visionData.responses[0]);
+        }
+      } catch (visionError) {
+        console.error(`Error processing image ${i + 1}:`, visionError);
+        continue;
+      }
+    }
+
+    console.log(`Processed ${visionAnnotations.length} images successfully`);
+
     const analysis = await analyzeWithGroq(
       description,
       visionAnnotations,
@@ -597,22 +568,13 @@ export default async function handler(req, res) {
       chat_history
     );
 
-    const totalTime = Date.now() - startTime;
-    console.log(`✅ Total processing time: ${totalTime}ms (${(totalTime/1000).toFixed(1)}s)`);
-
     return res.status(200).json({
       success: true,
-      ...analysis,
-      metadata: {
-        processing_time_ms: totalTime,
-        images_processed: visionAnnotations.length,
-        request_size_mb: sizeMB
-      }
+      ...analysis
     });
 
   } catch (error) {
-    const totalTime = Date.now() - startTime;
-    console.error('💥 API Error:', error.message);
+    console.error('API Error:', error);
     console.error('Error stack:', error.stack);
 
     return res.status(500).json({
@@ -621,17 +583,18 @@ export default async function handler(req, res) {
       analysis: {
         issue_type: 'System Error',
         severity: 'Unknown',
-        description: 'An error occurred. Please try again with fewer or smaller images.'
+        description: 'An error occurred while analyzing your request. Please try again.'
       },
       cost_estimate: {
         parts_cost: { min: 0, max: 0 },
         labor_cost: 0,
+        labor_hours: 0,
+        crew_size: 1,
+        disposal_cost: 0,
         total_cost: { min: 0, max: 0 }
       },
-      metadata: {
-        processing_time_ms: totalTime,
-        failed: true
-      }
+      pricing: [],
+      stores: []
     });
   }
 }
