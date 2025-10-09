@@ -1007,6 +1007,12 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             {analysis.cost_estimate && (
               <div className="bg-blue-50 p-3 rounded-lg">
                 <h4 className="font-semibold text-blue-800 mb-2">Cost Estimate</h4>
+                
+                {/* 🆕 Disclaimer */}
+                <div className="bg-blue-100 border border-blue-300 rounded p-2 mb-3 text-xs text-blue-700">
+                  <strong>⚠️ Preliminary Estimate:</strong> Labor costs and hours are approximate and may vary based on project complexity, site conditions, and unforeseen circumstances discovered during work.
+                </div>
+
                 <div className={`grid gap-2 text-sm ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
                   {analysis.cost_estimate.parts_cost && (
                     <div>
@@ -1016,14 +1022,15 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                       </div>
                     </div>
                   )}
+                  
                   {analysis.cost_estimate.labor_cost && (
                     <div>
-                      <span className="text-blue-600">Labor:</span>
+                      <span className="text-blue-600">Labor (Est.):</span>
                       <div className="font-semibold">
                         ${analysis.cost_estimate.labor_cost}
                         {analysis.cost_estimate.labor_hours && (
                           <div className="text-xs text-blue-500">
-                            ({analysis.cost_estimate.labor_hours} hours)
+                            (~{analysis.cost_estimate.labor_hours} hours)
                           </div>
                         )}
                       </div>
@@ -1043,7 +1050,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   )}
                 </div>
                 <div className="mt-2 pt-2 border-t border-blue-200">
-                  <span className="text-blue-600">Total Range:</span>
+                  <span className="text-blue-600">Estimated Total Range:</span>
                   <div className="font-bold text-lg text-blue-800">
                     ${analysis.cost_estimate.total_cost.min} - ${analysis.cost_estimate.total_cost.max}
                   </div>
@@ -1052,6 +1059,9 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                       Estimated time: {analysis.analysis.time_estimate}
                     </div>
                   )}
+                  <div className="text-xs text-blue-600 mt-2 italic">
+                    Final pricing confirmed after on-site inspection
+                  </div>
                 </div>
               </div>
             )}
