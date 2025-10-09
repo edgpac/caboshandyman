@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone } from 'lucide-react';
 
