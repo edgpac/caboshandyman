@@ -239,7 +239,6 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
         }
       }
     });
-
     // If off-topic content detected, return friendly rejection
     if (offTopicDetected) {
       return {
@@ -250,7 +249,17 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
           issue_type: 'Off-Topic Request',
           severity: 'N/A',
           description: getOffTopicMessage(offTopicReason)
-        }
+        },
+        cost_estimate: {
+          parts_cost: { min: 0, max: 0 },
+          labor_cost: 0,
+          labor_hours: 0,
+          crew_size: 1,
+          disposal_cost: 0,
+          total_cost: { min: 0, max: 0 }
+        },
+        pricing: [],
+        stores: []
       };
     }
 
@@ -280,7 +289,17 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
           issue_type: 'Information Needed',
           severity: 'Unknown',
           description: 'I need more information to provide an accurate estimate.'
-        }
+        },
+        cost_estimate: {
+          parts_cost: { min: 0, max: 0 },
+          labor_cost: 0,
+          labor_hours: 0,
+          crew_size: 1,
+          disposal_cost: 0,
+          total_cost: { min: 0, max: 0 }
+        },
+        pricing: [],
+        stores: []
       };
     }
 
@@ -443,7 +462,17 @@ Always respond in valid JSON format only. No additional text outside the JSON.`
           issue_type: 'Information Needed',
           severity: 'Unknown',
           description: 'I need a bit more information to provide an accurate estimate.'
-        }
+        },
+        cost_estimate: {
+          parts_cost: { min: 0, max: 0 },
+          labor_cost: 0,
+          labor_hours: 0,
+          crew_size: 1,
+          disposal_cost: 0,
+          total_cost: { min: 0, max: 0 }
+        },
+        pricing: [],
+        stores: []
       };
     }
 
