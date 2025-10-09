@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone } from 'lucide-react';
 
-export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onClose, initialMode }) {
+export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, initialMode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [currentView, setCurrentView] = useState('services');
   const [selectedService, setSelectedService] = useState(null);
