@@ -212,8 +212,8 @@ Time: ${new Date().toLocaleString()}`;
       img.onload = () => {
         let { width, height } = img;
         
-        // More aggressive compression for mobile
-        const maxDimension = isMobile ? 1024 : 1600;
+        // Much more aggressive compression for mobile to prevent timeouts
+        const maxDimension = isMobile ? 800 : 1600;
         
         if (width > maxDimension || height > maxDimension) {
           if (width > height) {
@@ -233,13 +233,25 @@ Time: ${new Date().toLocaleString()}`;
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, 0, 0, width, height);
         
+        // Lower quality for mobile to reduce payload size
         canvas.toBlob((blob) => {
           if (blob) {
-            resolve(blob);
+            // Double-check blob size (aim for <300KB per image on mobile)
+            const sizeMB = blob.size / 1024 / 1024;
+            console.log(`Compressed to ${Math.round(sizeMB * 1024)}KB`);
+            
+            if (isMobile && sizeMB > 0.5) {
+              // Re-compress with lower quality if still too large
+              canvas.toBlob((smallerBlob) => {
+                resolve(smallerBlob || blob);
+              }, 'image/jpeg', 0.6);
+            } else {
+              resolve(blob);
+            }
           } else {
             reject(new Error('Image compression failed'));
           }
-        }, 'image/jpeg', isMobile ? 0.75 : 0.85);
+        }, 'image/jpeg', isMobile ? 0.65 : 0.85);
       };
       
       img.onerror = () => reject(new Error('Failed to load image'));
