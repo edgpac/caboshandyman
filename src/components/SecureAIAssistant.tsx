@@ -16,7 +16,6 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
   const [isMobile, setIsMobile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   
-  // 🆕 NEW: Chat mode states
   const [chatMode, setChatMode] = useState(false);
   const [chatHistory, setChatHistory] = useState([]);
   const [chatInput, setChatInput] = useState('');
@@ -122,7 +121,6 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
   };
 
   const capturePhoto = () => {
-    // 🔧 FIX 1: Limit mobile to 1 image
     const maxImages = isMobile ? 1 : 3;
     if (selectedImages.length >= maxImages) {
       setError(isMobile ? 'Maximum 1 image allowed on mobile' : 'Maximum 3 images allowed');
@@ -214,8 +212,6 @@ Time: ${new Date().toLocaleString()}`;
       img.onload = () => {
         let { width, height } = img;
         
-        // Vercel has 4.5MB body limit - need aggressive compression for multiple images
-        // Target: <400KB per image on mobile to stay under limit with 3 images
         const maxDimension = isMobile ? 1024 : 1600;
         
         if (width > maxDimension || height > maxDimension) {
@@ -231,18 +227,15 @@ Time: ${new Date().toLocaleString()}`;
         canvas.width = width;
         canvas.height = height;
         
-        // Use better quality rendering
         ctx.imageSmoothingEnabled = true;
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, 0, 0, width, height);
         
-        // Balanced quality for Vercel limits
         canvas.toBlob((blob) => {
           if (blob) {
             const sizeKB = blob.size / 1024;
             console.log(`Compressed to ${Math.round(sizeKB)}KB`);
             
-            // Critical: Keep under 500KB per image for Vercel
             if (sizeKB > 500) {
               console.log('Re-compressing large image...');
               canvas.toBlob((smallerBlob) => {
@@ -264,7 +257,6 @@ Time: ${new Date().toLocaleString()}`;
       
       img.onerror = () => reject(new Error('Failed to load image'));
       
-      // Revoke object URL after image loads to prevent memory leaks
       const objectUrl = URL.createObjectURL(file);
       img.src = objectUrl;
     });
@@ -279,7 +271,6 @@ Time: ${new Date().toLocaleString()}`;
         reader.onload = () => {
           const base64 = reader.result.split(',')[1];
           
-          // Check base64 size (approximate KB)
           const sizeKB = (base64.length * 3) / 4 / 1024;
           console.log(`Compressed image size: ${Math.round(sizeKB)} KB`);
           
@@ -295,7 +286,6 @@ Time: ${new Date().toLocaleString()}`;
     } catch (error) {
       console.error('Image compression failed:', error);
       
-      // Fallback: try original file with lower quality
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.onload = () => {
@@ -416,7 +406,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     }, 2000);
   };
 
-  // 🆕 NEW: Handle chat messages
   const handleChatSend = async () => {
     if (!chatInput.trim()) return;
 
@@ -431,7 +420,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setIsAnalyzing(true);
 
     try {
-      // Re-analyze with chat history
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
       const imagesBase64 = await Promise.all(imagePromises);
 
@@ -455,14 +443,12 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       const result = await response.json();
 
       if (result.needs_clarification) {
-        // Continue chat mode
         const aiMessage = {
           role: 'assistant',
           content: result.clarification_questions.join('\n• ')
         };
         setChatHistory([...newChatHistory, aiMessage]);
       } else {
-        // Got final analysis - exit chat mode
         setChatMode(false);
         setAnalysis(result);
       }
@@ -474,7 +460,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       setIsAnalyzing(false);
     }
   };
-
   const analyzeIssue = async () => {
     setIsAnalyzing(true);
     setError(null);
@@ -515,7 +500,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
       const result = await response.json();
 
-      // 🆕 NEW: Check for off-topic content
       if (result.is_off_topic) {
         setError(result.message);
         setAnalysis(null);
@@ -523,7 +507,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         return;
       }
 
-      // 🆕 NEW: Check if clarification needed
       if (result.needs_clarification) {
         setChatMode(true);
         setClarificationNeeded(result);
@@ -573,7 +556,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     const files = Array.from(event.target.files);
     const imageFiles = files.filter(file => file.type.startsWith('image/'));
     
-    // 🔧 FIX 2: Limit mobile to 1 image
     const maxImages = isMobile ? 1 : 3;
     if (selectedImages.length + imageFiles.length > maxImages) {
       setError(isMobile ? 'Maximum 1 image allowed on mobile' : 'Maximum 3 images allowed');
@@ -616,7 +598,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     const files = Array.from(e.dataTransfer.files);
     const imageFiles = files.filter(file => file.type.startsWith('image/'));
     
-    // 🔧 FIX 3: Limit mobile to 1 image
     const maxImages = isMobile ? 1 : 3;
     if (selectedImages.length + imageFiles.length > maxImages) {
       setError(isMobile ? 'Maximum 1 image allowed on mobile' : 'Maximum 3 images allowed');
@@ -646,10 +627,10 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setAnalysis(null);
     setError(null);
     setIsAnalyzing(false);
-    setChatMode(false); // 🆕 NEW
-    setChatHistory([]); // 🆕 NEW
-    setChatInput(''); // 🆕 NEW
-    setClarificationNeeded(null); // 🆕 NEW
+    setChatMode(false);
+    setChatHistory([]);
+    setChatInput('');
+    setClarificationNeeded(null);
     setCurrentView('services');
     setSelectedService(null);
     setBookingData({
@@ -691,6 +672,8 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
   const containerClasses = isMobile 
     ? "fixed inset-0 bg-white z-50 flex flex-col"
     : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
+
+  const maxImages = isMobile ? 1 : 3;
 
   return (
     <div className={containerClasses}>
@@ -807,7 +790,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             )}
             
             <p className="text-gray-600 text-sm">
-              Upload up to 3 photos of your maintenance issue for instant AI analysis and cost estimates.
+              Upload {isMobile ? '1 photo' : 'up to 3 photos'} of your maintenance issue for instant AI analysis and cost estimates.
             </p>
             
             {error && (
@@ -880,7 +863,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     ))}
                   </div>
                   
-                  {selectedImages.length < 3 && (
+                  {selectedImages.length < maxImages && (
                     <div className={`grid gap-2 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
                       <button
                         onClick={startCamera}
@@ -893,7 +876,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                         <input 
                           type="file" 
                           accept="image/*"
-                          multiple
+                          multiple={!isMobile}
                           onChange={handleImageUpload}
                           className="hidden"
                         />
@@ -904,7 +887,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   )}
                   
                   <div className="text-xs text-center text-gray-500">
-                    {selectedImages.length}/3 images uploaded
+                    {selectedImages.length}/{maxImages} {isMobile ? 'image' : 'images'} uploaded
                   </div>
                 </div>
               ) : (
@@ -912,7 +895,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <div className="flex flex-col items-center space-y-2">
                     <Camera size={32} className="text-gray-400" />
                     <span className="text-sm text-gray-600">
-                      {isDragging ? 'Drop images here' : 'Drag & drop, capture, or upload photos (max 3)'}
+                      {isDragging ? 'Drop images here' : isMobile ? 'Capture or upload 1 photo' : 'Drag & drop, capture, or upload photos (max 3)'}
                     </span>
                   </div>
                   <div className={`grid gap-2 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
@@ -927,7 +910,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                       <input 
                         type="file" 
                         accept="image/*"
-                        multiple
+                        multiple={!isMobile}
                         onChange={handleImageUpload}
                         className="hidden"
                       />
@@ -939,7 +922,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               )}
             </div>
 
-            {/* 🆕 NEW: Chat mode interface */}
             {chatMode ? (
               <div className="space-y-3">
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
@@ -1003,7 +985,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 </button>
               </div>
             ) : (
-              // Normal description box when NOT in chat mode
               <>
                 <textarea
                   value={description}
@@ -1072,7 +1053,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               <div className="bg-blue-50 p-3 rounded-lg">
                 <h4 className="font-semibold text-blue-800 mb-2">Cost Estimate</h4>
                 
-                {/* 🆕 Disclaimer */}
                 <div className="bg-blue-100 border border-blue-300 rounded p-2 mb-3 text-xs text-blue-700">
                   <strong>⚠️ Preliminary Estimate:</strong> Labor costs and hours are approximate and may vary based on project complexity, site conditions, and unforeseen circumstances discovered during work.
                 </div>
@@ -1152,7 +1132,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         )}
       </div>
 
-      {/* Mobile Safe Area Bottom Padding */}
       {isMobile && <div className="h-4"></div>}
     </div>
   );
