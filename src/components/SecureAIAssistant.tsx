@@ -212,8 +212,9 @@ Time: ${new Date().toLocaleString()}`;
       img.onload = () => {
         let { width, height } = img;
         
-        // Much more aggressive compression for mobile to prevent timeouts
-        const maxDimension = isMobile ? 800 : 1600;
+        // Vercel has 4.5MB body limit - need aggressive compression for multiple images
+        // Target: <400KB per image on mobile to stay under limit with 3 images
+        const maxDimension = isMobile ? 1024 : 1600;
         
         if (width > maxDimension || height > maxDimension) {
           if (width > height) {
@@ -233,29 +234,37 @@ Time: ${new Date().toLocaleString()}`;
         ctx.imageSmoothingQuality = 'high';
         ctx.drawImage(img, 0, 0, width, height);
         
-        // Lower quality for mobile to reduce payload size
+        // Balanced quality for Vercel limits
         canvas.toBlob((blob) => {
           if (blob) {
-            // Double-check blob size (aim for <300KB per image on mobile)
-            const sizeMB = blob.size / 1024 / 1024;
-            console.log(`Compressed to ${Math.round(sizeMB * 1024)}KB`);
+            const sizeKB = blob.size / 1024;
+            console.log(`Compressed to ${Math.round(sizeKB)}KB`);
             
-            if (isMobile && sizeMB > 0.5) {
-              // Re-compress with lower quality if still too large
+            // Critical: Keep under 500KB per image for Vercel
+            if (sizeKB > 500) {
+              console.log('Re-compressing large image...');
               canvas.toBlob((smallerBlob) => {
-                resolve(smallerBlob || blob);
-              }, 'image/jpeg', 0.6);
+                if (smallerBlob) {
+                  console.log(`Re-compressed to ${Math.round(smallerBlob.size / 1024)}KB`);
+                  resolve(smallerBlob);
+                } else {
+                  resolve(blob);
+                }
+              }, 'image/jpeg', 0.65);
             } else {
               resolve(blob);
             }
           } else {
             reject(new Error('Image compression failed'));
           }
-        }, 'image/jpeg', isMobile ? 0.65 : 0.85);
+        }, 'image/jpeg', isMobile ? 0.75 : 0.85);
       };
       
       img.onerror = () => reject(new Error('Failed to load image'));
-      img.src = URL.createObjectURL(file);
+      
+      // Revoke object URL after image loads to prevent memory leaks
+      const objectUrl = URL.createObjectURL(file);
+      img.src = objectUrl;
     });
   };
 

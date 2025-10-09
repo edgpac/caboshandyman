@@ -1,4 +1,15 @@
-// /api/analyze-parts.js - Complete Fixed Version
+// /api/analyze-parts.js - Complete Fixed Version with Vercel Config
+
+// 🚨 CRITICAL: Vercel Configuration
+export const config = {
+  maxDuration: 60, // Requires Vercel Pro ($20/month)
+  // For Hobby plan: MUST complete in 10 seconds or will timeout
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb' // Increase body size limit for images
+    }
+  }
+};
 
 // Check if description is too vague to provide accurate estimate
 function isDescriptionVague(description, imageCount) {
@@ -482,11 +493,13 @@ function getOffTopicMessage(category) {
   return messages[category] || "I specialize in home and property maintenance.";
 }
 
-// 🆕 MAIN HANDLER - THIS IS CRITICAL!
+// 🆕 MAIN HANDLER WITH ENHANCED ERROR HANDLING
 export default async function handler(req, res) {
+  // Set headers immediately
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Cache-Control', 'no-store, max-age=0');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -496,9 +509,13 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  try {
-    const { images, description, location, service_context, chat_history } = req.body;
+  // Track timing for debugging
+  const startTime = Date.now();
 
+  try {
+    const { images, description, location, service_context, chat_history, device_type, platform } = req.body;
+
+    // Enhanced validation
     if (!images || images.length === 0) {
       return res.status(400).json({ 
         error: 'At least one image is required',
@@ -513,18 +530,28 @@ export default async function handler(req, res) {
       });
     }
 
-    console.log('Processing request:', {
+    // Warn about potential timeout on mobile with multiple images
+    if (device_type === 'mobile' && images.length > 2) {
+      console.warn('⚠️ Mobile device uploading 3 images - may approach timeout limit');
+    }
+
+    console.log('🔄 Processing request:', {
       imageCount: images.length,
       descriptionLength: description.length,
       hasServiceContext: !!service_context,
-      hasChatHistory: !!chat_history
+      hasChatHistory: !!chat_history,
+      deviceType: device_type || 'unknown',
+      platform: platform || 'unknown'
     });
 
     const visionAnnotations = [];
     
+    // Process images with timeout protection
     for (let i = 0; i < images.length; i++) {
       try {
         const imageBase64 = images[i].replace(/^data:image\/\w+;base64,/, '');
+        
+        console.log(`📸 Processing image ${i + 1}/${images.length}...`);
         
         const visionResponse = await fetch(
           `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
@@ -545,21 +572,22 @@ export default async function handler(req, res) {
         );
 
         if (!visionResponse.ok) {
-          console.error(`Vision API failed for image ${i + 1}:`, visionResponse.status);
+          console.error(`❌ Vision API failed for image ${i + 1}:`, visionResponse.status);
           continue;
         }
 
         const visionData = await visionResponse.json();
         if (visionData.responses && visionData.responses[0]) {
           visionAnnotations.push(visionData.responses[0]);
+          console.log(`✅ Image ${i + 1} processed successfully`);
         }
       } catch (visionError) {
-        console.error(`Error processing image ${i + 1}:`, visionError);
+        console.error(`❌ Error processing image ${i + 1}:`, visionError);
         continue;
       }
     }
 
-    console.log(`Processed ${visionAnnotations.length} images successfully`);
+    console.log(`✅ Processed ${visionAnnotations.length}/${images.length} images successfully`);
 
     const analysis = await analyzeWithGroq(
       description,
@@ -568,22 +596,35 @@ export default async function handler(req, res) {
       chat_history
     );
 
+    const processingTime = Date.now() - startTime;
+    console.log(`⏱️ Total processing time: ${processingTime}ms`);
+
+    // Warn if approaching timeout (Vercel Hobby = 10s, Pro = 60s)
+    if (processingTime > 8000 && !process.env.VERCEL_ENV?.includes('pro')) {
+      console.warn('⚠️ Processing time approaching Vercel Hobby timeout limit (10s)');
+    }
+
     return res.status(200).json({
       success: true,
+      processing_time_ms: processingTime,
       ...analysis
     });
 
   } catch (error) {
-    console.error('API Error:', error);
+    const processingTime = Date.now() - startTime;
+    console.error('❌ API Error:', error);
     console.error('Error stack:', error.stack);
+    console.error(`⏱️ Failed after ${processingTime}ms`);
 
+    // Enhanced error response
     return res.status(500).json({
       success: false,
       error: error.message || 'Internal server error',
+      processing_time_ms: processingTime,
       analysis: {
         issue_type: 'System Error',
         severity: 'Unknown',
-        description: 'An error occurred while analyzing your request. Please try again.'
+        description: 'An error occurred while analyzing your request. Please try again with fewer or smaller images.'
       },
       cost_estimate: {
         parts_cost: { min: 0, max: 0 },

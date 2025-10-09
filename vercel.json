@@ -1,7 +1,19 @@
 {
   "functions": {
-    "api/**/*.js": {
-      "maxDuration": 60
+    "api/analyze-parts.js": {
+      "maxDuration": 60,
+      "memory": 1024
     }
-  }
+  },
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store, max-age=0"
+        }
+      ]
+    }
+  ]
 }
