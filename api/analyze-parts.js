@@ -1,4 +1,4 @@
-// /api/analyze-parts.js - Fixed with proper image size validation
+/ /api/analyze-parts.js - Complete Fixed Version with Loop Prevention
 
 // Check if description is too vague to provide accurate estimate
 function isDescriptionVague(description, imageCount) {
@@ -140,33 +140,6 @@ function generateSmartQuestions(description, detectedItems, vaguenessReason, ser
   }
 
   return questions.slice(0, 4);
-}
-
-// 🔥 NEW: Validate and optimize image size for Vision API
-function validateAndOptimizeImage(imageBase64) {
-  // Remove data URI prefix if present
-  const cleanBase64 = imageBase64.replace(/^data:image\/\w+;base64,/, '');
-  
-  // Calculate size in bytes (base64 is ~1.37x the original size)
-  const sizeInBytes = (cleanBase64.length * 3) / 4;
-  const sizeInMB = sizeInBytes / (1024 * 1024);
-  
-  console.log(`Image size: ${sizeInMB.toFixed(2)}MB (base64 length: ${cleanBase64.length})`);
-  
-  // Google Vision API limits:
-  // - Image file: max 20MB
-  // - JSON request (base64): max 10MB
-  // - Optimal size: ~640x480 pixels
-  
-  if (sizeInMB > 8) {
-    throw new Error(`Image too large: ${sizeInMB.toFixed(2)}MB. Maximum size is 8MB for base64 requests. Please compress the image.`);
-  }
-  
-  if (sizeInBytes < 5000) { // Less than 5KB
-    throw new Error('Image too small or corrupted. Minimum size is 5KB.');
-  }
-  
-  return cleanBase64;
 }
 
 // Enhanced analysis using Groq
@@ -538,7 +511,7 @@ function getOffTopicMessage(category) {
   return messages[category] || "I specialize in home and property maintenance.";
 }
 
-// 🔥 MAIN HANDLER - WITH IMAGE SIZE VALIDATION
+// 🔥 MAIN HANDLER - WITH LOOP PREVENTION
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -587,12 +560,10 @@ export default async function handler(req, res) {
     }
 
     const visionAnnotations = [];
-    const imageErrors = [];
     
     for (let i = 0; i < images.length; i++) {
       try {
-        // 🔥 NEW: Validate image size before sending to Vision API
-        const validatedBase64 = validateAndOptimizeImage(images[i]);
+        const imageBase64 = images[i].replace(/^data:image\/\w+;base64,/, '');
         
         const visionResponse = await fetch(
           `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
@@ -601,7 +572,7 @@ export default async function handler(req, res) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               requests: [{
-                image: { content: validatedBase64 },
+                image: { content: imageBase64 },
                 features: [
                   { type: 'LABEL_DETECTION', maxResults: 10 },
                   { type: 'OBJECT_LOCALIZATION', maxResults: 10 },
@@ -613,42 +584,21 @@ export default async function handler(req, res) {
         );
 
         if (!visionResponse.ok) {
-          const errorText = await visionResponse.text();
-          console.error(`Vision API failed for image ${i + 1}: ${visionResponse.status} - ${errorText}`);
-          imageErrors.push(`Image ${i + 1}: API error (${visionResponse.status})`);
+          console.error(`Vision API failed for image ${i + 1}:`, visionResponse.status);
           continue;
         }
 
         const visionData = await visionResponse.json();
         if (visionData.responses && visionData.responses[0]) {
-          if (visionData.responses[0].error) {
-            console.error(`Vision API error for image ${i + 1}:`, visionData.responses[0].error);
-            imageErrors.push(`Image ${i + 1}: ${visionData.responses[0].error.message}`);
-          } else {
-            visionAnnotations.push(visionData.responses[0]);
-          }
+          visionAnnotations.push(visionData.responses[0]);
         }
       } catch (visionError) {
-        console.error(`Error processing image ${i + 1}:`, visionError.message);
-        imageErrors.push(`Image ${i + 1}: ${visionError.message}`);
+        console.error(`Error processing image ${i + 1}:`, visionError);
         continue;
       }
     }
 
-    console.log(`Processed ${visionAnnotations.length}/${images.length} images successfully`);
-    
-    if (imageErrors.length > 0) {
-      console.warn('Image processing errors:', imageErrors);
-    }
-
-    // If no images were successfully processed, return error
-    if (visionAnnotations.length === 0) {
-      return res.status(400).json({
-        success: false,
-        error: 'Unable to process images. Please ensure images are between 5KB and 8MB and try again.',
-        image_errors: imageErrors
-      });
-    }
+    console.log(`Processed ${visionAnnotations.length} images successfully`);
 
     // 🔥 Pass shouldForceAnalysis to Groq function
     const analysis = await analyzeWithGroq(
