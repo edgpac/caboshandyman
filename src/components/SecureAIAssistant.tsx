@@ -15,6 +15,13 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
   const [error, setError] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  
+  // 🆕 NEW: Chat mode states
+  const [chatMode, setChatMode] = useState(false);
+  const [chatHistory, setChatHistory] = useState([]);
+  const [chatInput, setChatInput] = useState('');
+  const [clarificationNeeded, setClarificationNeeded] = useState(null);
+  
   const [bookingData, setBookingData] = useState({
     name: '',
     phone: '',
@@ -356,6 +363,65 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     }, 2000);
   };
 
+  // 🆕 NEW: Handle chat messages
+  const handleChatSend = async () => {
+    if (!chatInput.trim()) return;
+
+    const userMessage = {
+      role: 'user',
+      content: chatInput
+    };
+
+    const newChatHistory = [...chatHistory, userMessage];
+    setChatHistory(newChatHistory);
+    setChatInput('');
+    setIsAnalyzing(true);
+
+    try {
+      // Re-analyze with chat history
+      const imagePromises = selectedImages.map(img => imageToBase64(img.file));
+      const imagesBase64 = await Promise.all(imagePromises);
+
+      const response = await fetch('/api/analyze-parts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          images: imagesBase64,
+          description: chatInput,
+          location: location || 'Cabo San Lucas, Mexico',
+          service_context: selectedService ? {
+            title: selectedService.title,
+            category: selectedService.title.toLowerCase().replace(' ', '_')
+          } : null,
+          chat_history: newChatHistory
+        })
+      });
+
+      const result = await response.json();
+
+      if (result.needs_clarification) {
+        // Continue chat mode
+        const aiMessage = {
+          role: 'assistant',
+          content: result.clarification_questions.join('\n• ')
+        };
+        setChatHistory([...newChatHistory, aiMessage]);
+      } else {
+        // Got final analysis - exit chat mode
+        setChatMode(false);
+        setAnalysis(result);
+      }
+
+    } catch (error) {
+      console.error('Chat error:', error);
+      setError('Unable to process your message. Please try again.');
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   const analyzeIssue = async () => {
     setIsAnalyzing(true);
     setError(null);
@@ -390,6 +456,28 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
       const result = await response.json();
 
+      // 🆕 NEW: Check for off-topic content
+      if (result.is_off_topic) {
+        setError(result.message);
+        setAnalysis(null);
+        setIsAnalyzing(false);
+        return;
+      }
+
+      // 🆕 NEW: Check if clarification needed
+      if (result.needs_clarification) {
+        setChatMode(true);
+        setClarificationNeeded(result);
+        setChatHistory([
+          {
+            role: 'assistant',
+            content: `I need a bit more information to give you an accurate estimate:\n\n• ${result.clarification_questions.join('\n• ')}`
+          }
+        ]);
+        setIsAnalyzing(false);
+        return;
+      }
+
       if (result.success) {
         setAnalysis(result);
       } else {
@@ -421,7 +509,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       setIsAnalyzing(false);
     }
   };
-
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     const imageFiles = files.filter(file => file.type.startsWith('image/'));
@@ -495,6 +582,10 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setAnalysis(null);
     setError(null);
     setIsAnalyzing(false);
+    setChatMode(false); // 🆕 NEW
+    setChatHistory([]); // 🆕 NEW
+    setChatInput(''); // 🆕 NEW
+    setClarificationNeeded(null); // 🆕 NEW
     setCurrentView('services');
     setSelectedService(null);
     setBookingData({
@@ -590,7 +681,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
             <div className="border-t pt-4">
               <button
-                onClick={() => setCurrentView('analysis')}
+                onClick={() => setCurrentView('booking')}
                 className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
               >
                 <Camera size={16} />
@@ -784,53 +875,121 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               )}
             </div>
 
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Describe the issue in detail (e.g., 'Water leaking from pipe joint under kitchen sink', 'Electrical outlet not working in bedroom')"
-              className={`w-full p-3 border border-gray-300 rounded-lg resize-none text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
-                isMobile ? 'text-base' : ''
-              }`}
-              rows={isMobile ? 3 : 4}
-            />
+            {/* 🆕 NEW: Chat mode interface */}
+            {chatMode ? (
+              <div className="space-y-3">
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <MessageCircle size={16} className="text-blue-600" />
+                    <span className="text-sm font-semibold text-blue-800">Let's get more details</span>
+                  </div>
+                  <p className="text-xs text-blue-700">I need a bit more information to provide an accurate estimate.</p>
+                </div>
 
-            <input
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              placeholder="Your location (optional - for local pricing)"
-              className={`w-full p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
-                isMobile ? 'text-base' : ''
-              }`}
-            />
+                <div className="border rounded-lg p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
+                  {chatHistory.map((msg, i) => (
+                    <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
+                        msg.role === 'user' 
+                          ? 'bg-blue-600 text-white rounded-br-none' 
+                          : 'bg-white border border-gray-200 rounded-bl-none'
+                      }`}>
+                        <div className="whitespace-pre-line">{msg.content}</div>
+                      </div>
+                    </div>
+                  ))}
+                  {isAnalyzing && (
+                    <div className="flex justify-start">
+                      <div className="bg-white border border-gray-200 p-3 rounded-lg text-sm">
+                        <Loader className="animate-spin w-4 h-4 text-blue-600" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+                
+                <div className="flex space-x-2">
+                  <input
+                    value={chatInput}
+                    onChange={(e) => setChatInput(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleChatSend()}
+                    placeholder="Type your answer..."
+                    className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
+                      isMobile ? 'text-base' : ''
+                    }`}
+                    disabled={isAnalyzing}
+                  />
+                  <button 
+                    onClick={handleChatSend}
+                    disabled={!chatInput.trim() || isAnalyzing}
+                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
+                  >
+                    <Send size={16} />
+                  </button>
+                </div>
 
-            <button
-              onClick={analyzeIssue}
-              disabled={selectedImages.length === 0 || !description}
-              className={`w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
-                isMobile ? 'py-4' : ''
-              }`}
-            >
-              <Send size={16} />
-              <span>Analyze with Intelligence</span>
-            </button>
+                <button
+                  onClick={() => {
+                    setChatMode(false);
+                    setChatHistory([]);
+                    setClarificationNeeded(null);
+                  }}
+                  className="w-full text-sm text-gray-600 hover:text-gray-800 underline"
+                >
+                  Start Over
+                </button>
+              </div>
+            ) : (
+              // Normal description box when NOT in chat mode
+              <>
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Describe the issue in detail (e.g., 'Water leaking from pipe joint under kitchen sink', 'Electrical outlet not working in bedroom')"
+                  className={`w-full p-3 border border-gray-300 rounded-lg resize-none text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
+                    isMobile ? 'text-base' : ''
+                  }`}
+                  rows={isMobile ? 3 : 4}
+                />
+
+                <input
+                  type="text"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  placeholder="Your location (optional - for local pricing)"
+                  className={`w-full p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
+                    isMobile ? 'text-base' : ''
+                  }`}
+                />
+
+                <button
+                  onClick={analyzeIssue}
+                  disabled={selectedImages.length === 0 || !description}
+                  className={`w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
+                    isMobile ? 'py-4' : ''
+                  }`}
+                >
+                  <Send size={16} />
+                  <span>Analyze with Intelligence</span>
+                </button>
+              </>
+            )}
           </div>
         )}
 
-        {isAnalyzing && (
+        {isAnalyzing && !chatMode && (
           <div className="text-center space-y-4">
             <Loader className="animate-spin mx-auto w-8 h-8 text-blue-600" />
             <p className="text-gray-600">Analyzing your issue...</p>
             <div className="text-sm text-gray-500 space-y-1">
               <p>🔍 Processing images</p>
               <p>💡 Identifying parts needed</p>
-              <p>💰 Finding current prices</p>
-              <p>🏪 Locating nearby stores</p>
+              <p>💰 Calculating costs</p>
+              <p>🏪 Finding local suppliers</p>
             </div>
           </div>
         )}
 
-        {analysis && (
+        {analysis && !chatMode && (
           <div className="space-y-4">
             <div className={`border p-3 rounded-lg ${getSeverityColor(analysis.analysis?.severity)}`}>
               <h3 className="font-semibold">{analysis.analysis?.issue_type || 'Maintenance Issue'}</h3>
@@ -922,5 +1081,5 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       {/* Mobile Safe Area Bottom Padding */}
       {isMobile && <div className="h-4"></div>}
     </div>
-  )}
-                  
+  );
+}
