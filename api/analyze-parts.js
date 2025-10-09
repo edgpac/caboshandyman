@@ -355,6 +355,9 @@ JSON response:
 
     console.log(`📤 Sending to Groq (prompt length: ${prompt.length} chars)`);
 
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 45000); // 45s timeout
+
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -374,12 +377,17 @@ JSON response:
           }
         ],
         temperature: 0.3,
-        max_tokens: 1000 // ✅ Reduced for mobile
-      })
+        max_tokens: 1000
+      }),
+      signal: controller.signal
     });
 
+    clearTimeout(timeoutId);
+
     if (!groqResponse.ok) {
-      throw new Error(`Groq API failed: ${groqResponse.status}`);
+      const errorText = await groqResponse.text();
+      console.error('❌ Groq error response:', errorText);
+      throw new Error(`Groq API failed: ${groqResponse.status} - ${errorText.substring(0, 200)}`);
     }
 
     const groqData = await groqResponse.json();
@@ -445,7 +453,30 @@ JSON response:
 
   } catch (error) {
     console.error('❌ Groq analysis failed:', error);
-    throw error; // Let main handler catch it
+    
+    // Return fallback instead of throwing
+    return {
+      needs_clarification: false,
+      analysis: {
+        issue_type: 'Maintenance Issue Detected',
+        severity: 'Medium',
+        description: description || 'Please contact us for a detailed assessment',
+        required_parts: [],
+        difficulty_level: 'Professional',
+        crew_size: 1
+      },
+      cost_estimate: {
+        parts_cost: { min: 100, max: 300 },
+        labor_cost: 280,
+        labor_hours: 2,
+        crew_size: 1,
+        disposal_cost: 0,
+        total_cost: { min: 380, max: 580 }
+      },
+      pricing: [],
+      stores: getDefaultStores(),
+      fallback_used: true
+    };
   }
 }
 
@@ -483,6 +514,43 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // ✅ CHECK ENVIRONMENT VARIABLES FIRST
+  if (!process.env.GOOGLE_CLOUD_VISION_API_KEY) {
+    console.error('❌ GOOGLE_CLOUD_VISION_API_KEY not configured');
+    return res.status(500).json({
+      success: false,
+      error: 'Vision API not configured. Please contact support.',
+      analysis: {
+        issue_type: 'Configuration Error',
+        severity: 'High',
+        description: 'AI vision service is not properly configured.'
+      },
+      cost_estimate: {
+        parts_cost: { min: 0, max: 0 },
+        labor_cost: 0,
+        total_cost: { min: 0, max: 0 }
+      }
+    });
+  }
+
+  if (!process.env.GROQ_API_KEY) {
+    console.error('❌ GROQ_API_KEY not configured');
+    return res.status(500).json({
+      success: false,
+      error: 'AI analysis service not configured. Please contact support.',
+      analysis: {
+        issue_type: 'Configuration Error',
+        severity: 'High',
+        description: 'AI analysis service is not properly configured.'
+      },
+      cost_estimate: {
+        parts_cost: { min: 0, max: 0 },
+        labor_cost: 0,
+        total_cost: { min: 0, max: 0 }
+      }
+    });
   }
 
   const startTime = Date.now();
