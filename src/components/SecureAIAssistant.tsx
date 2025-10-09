@@ -263,40 +263,36 @@ Time: ${new Date().toLocaleString()}`;
   };
 
   const imageToBase64 = async (file) => {
-    try {
-      const compressedBlob = await compressImage(file);
-      
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64 = reader.result.split(',')[1];
-          
-          const sizeKB = (base64.length * 3) / 4 / 1024;
-          console.log(`Compressed image size: ${Math.round(sizeKB)} KB`);
-          
-          if (sizeKB > 1500) {
-            console.warn('Image still large after compression:', Math.round(sizeKB), 'KB');
-          }
-          
-          resolve(base64);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(compressedBlob);
-      });
-    } catch (error) {
-      console.error('Image compression failed:', error);
-      
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const base64 = reader.result.split(',')[1];
-          resolve(base64);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
-    }
-  };
+  try {
+    const compressedBlob = await compressImage(file);
+    
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        // ✅ FIXED: Return full data URI, don't strip prefix
+        resolve(reader.result);
+        
+        // 🔍 Optional: Add logging to verify
+        const sizeKB = (reader.result.length * 3) / 4 / 1024;
+        console.log(`Compressed image size: ${Math.round(sizeKB)} KB`);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(compressedBlob);
+    });
+  } catch (error) {
+    console.error('Image compression failed:', error);
+    
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        // ✅ FIXED: Return full data URI here too
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+};
 
   const handleScheduleAppointment = async (analysisData) => {
     try {
