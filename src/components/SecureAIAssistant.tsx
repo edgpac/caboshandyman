@@ -421,9 +421,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
     try {
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
-      const imagesBase64 = await Promise.all(imagePromises);
-      // 🔧 FIX: Add data URI prefix
-      const imagesWithPrefix = imagesBase64.map(base64 => `data:image/jpeg;base64,${base64}`);
+      const imagesDataURIs = await Promise.all(imagePromises);
 
       const response = await fetch('/api/analyze-parts', {
         method: 'POST',
@@ -431,7 +429,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          images: imagesWithPrefix, // ✅ FIXED
+          images: imagesDataURIs,
           description: chatInput,
           location: location || 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
@@ -471,9 +469,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       console.log('Starting analysis with', selectedImages.length, 'images');
       
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
-      const imagesBase64 = await Promise.all(imagePromises);
-      // 🔧 FIX: Add data URI prefix
-      const imagesWithPrefix = imagesBase64.map(base64 => `data:image/jpeg;base64,${base64}`);
+      const imagesDataURIs = await Promise.all(imagePromises);
       
       console.log('Images compressed successfully');
       
@@ -487,7 +483,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          images: imagesWithPrefix, // ✅ FIXED
+          images: imagesDataURIs,
           description: analysisDescription,
           location: location || 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
