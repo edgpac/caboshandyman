@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone } from 'lucide-react';
 
@@ -122,8 +123,10 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
   };
 
   const capturePhoto = () => {
-    if (selectedImages.length >= 3) {
-      setError('Maximum 3 images allowed');
+    // 🔧 FIX 1: Limit mobile to 1 image
+    const maxImages = isMobile ? 1 : 3;
+    if (selectedImages.length >= maxImages) {
+      setError(isMobile ? 'Maximum 1 image allowed on mobile' : 'Maximum 3 images allowed');
       return;
     }
 
@@ -566,12 +569,15 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       setIsAnalyzing(false);
     }
   };
+  
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     const imageFiles = files.filter(file => file.type.startsWith('image/'));
     
-    if (selectedImages.length + imageFiles.length > 3) {
-      setError('Maximum 3 images allowed');
+    // 🔧 FIX 2: Limit mobile to 1 image
+    const maxImages = isMobile ? 1 : 3;
+    if (selectedImages.length + imageFiles.length > maxImages) {
+      setError(isMobile ? 'Maximum 1 image allowed on mobile' : 'Maximum 3 images allowed');
       return;
     }
 
@@ -611,8 +617,10 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     const files = Array.from(e.dataTransfer.files);
     const imageFiles = files.filter(file => file.type.startsWith('image/'));
     
-    if (selectedImages.length + imageFiles.length > 3) {
-      setError('Maximum 3 images allowed');
+    // 🔧 FIX 3: Limit mobile to 1 image
+    const maxImages = isMobile ? 1 : 3;
+    if (selectedImages.length + imageFiles.length > maxImages) {
+      setError(isMobile ? 'Maximum 1 image allowed on mobile' : 'Maximum 3 images allowed');
       return;
     }
 
