@@ -1,17 +1,14 @@
-// /api/analyze-parts.js - Complete Fixed Version with Vercel Config
+// /api/analyze-parts.js - Complete Fixed Version for Mobile Vision API Issues
 
-// 🚨 CRITICAL: Vercel Configuration
 export const config = {
-  maxDuration: 60, // Requires Vercel Pro ($20/month)
-  // For Hobby plan: MUST complete in 10 seconds or will timeout
+  maxDuration: 60,
   api: {
     bodyParser: {
-      sizeLimit: '10mb' // Increase body size limit for images
+      sizeLimit: '10mb'
     }
   }
 };
 
-// Check if description is too vague to provide accurate estimate
 function isDescriptionVague(description, imageCount) {
   const desc = description.toLowerCase().trim();
   
@@ -97,7 +94,6 @@ function isDescriptionVague(description, imageCount) {
   return { isVague: false };
 }
 
-// Generate smart clarification questions based on context
 function generateSmartQuestions(description, detectedItems, vaguenessReason, serviceContext) {
   const desc = description.toLowerCase();
   const questions = [];
@@ -153,7 +149,6 @@ function generateSmartQuestions(description, detectedItems, vaguenessReason, ser
   return questions.slice(0, 4);
 }
 
-// Enhanced analysis using Groq
 async function analyzeWithGroq(description, visionAnnotationsArray = [], serviceContext = null, chatHistory = null) {
   try {
     const allDetectedItems = [];
@@ -176,43 +171,48 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       'ceiling', 'floor', 'roof', 'door', 'window', 'pipe', 'plumbing',
       'electrical', 'hvac', 'appliance', 'kitchen', 'bathroom', 'garage',
       'deck', 'fence', 'outdoor', 'installation', 'demolition', 'contractor',
-      'fixture', 'cabinet', 'countertop', 'tile', 'paint', 'drywall'
+      'fixture', 'cabinet', 'countertop', 'tile', 'paint', 'drywall', 'toilet',
+      'sink', 'faucet', 'valve', 'water heater', 'furnace'
     ];
     
-    visionAnnotationsArray.forEach((annotations, imageIndex) => {
-      const objects = annotations.localizedObjectAnnotations || [];
-      const labels = annotations.labelAnnotations || [];
-      const texts = annotations.textAnnotations || [];
+    if (visionAnnotationsArray && visionAnnotationsArray.length > 0) {
+      visionAnnotationsArray.forEach((annotations, imageIndex) => {
+        if (!annotations || typeof annotations !== 'object') return;
+        
+        const objects = annotations.localizedObjectAnnotations || [];
+        const labels = annotations.labelAnnotations || [];
+        const texts = annotations.textAnnotations || [];
 
-      const imageItems = [
-        ...objects.map(obj => `Image ${imageIndex + 1}: ${obj.name}`),
-        ...labels.map(label => `Image ${imageIndex + 1}: ${label.description}`),
-        ...texts.slice(0, 3).map(text => `Image ${imageIndex + 1}: ${text.description.substring(0, 50)}`)
-      ].filter(Boolean);
+        const imageItems = [
+          ...objects.map(obj => `Image ${imageIndex + 1}: ${obj.name}`),
+          ...labels.map(label => `Image ${imageIndex + 1}: ${label.description}`),
+          ...texts.slice(0, 3).map(text => `Image ${imageIndex + 1}: ${text.description.substring(0, 50)}`)
+        ].filter(Boolean);
 
-      allDetectedItems.push(...imageItems);
+        allDetectedItems.push(...imageItems);
 
-      const allLabelsLower = [...objects.map(o => o.name), ...labels.map(l => l.description)].join(' ').toLowerCase();
-      const descriptionLower = description.toLowerCase();
-      const combinedText = `${allLabelsLower} ${descriptionLower}`;
+        const allLabelsLower = [...objects.map(o => o.name), ...labels.map(l => l.description)].join(' ').toLowerCase();
+        const descriptionLower = description.toLowerCase();
+        const combinedText = `${allLabelsLower} ${descriptionLower}`;
 
-      const hasValidContext = validContextKeywords.some(keyword => combinedText.includes(keyword));
+        const hasValidContext = validContextKeywords.some(keyword => combinedText.includes(keyword));
 
-      if (!hasValidContext && !offTopicDetected) {
-        for (const [category, keywords] of Object.entries(offTopicKeywords)) {
-          const matchedKeywords = keywords.filter(keyword => allLabelsLower.includes(keyword));
-          const specificMatches = ['car', 'automobile', 'motorcycle', 'selfie', 'portrait', 'pizza', 'gaming'];
-          const hasSpecificMatch = specificMatches.some(keyword => allLabelsLower.includes(keyword));
-          
-          if (matchedKeywords.length >= 2 || (matchedKeywords.length >= 1 && hasSpecificMatch)) {
-            offTopicDetected = true;
-            offTopicReason = category;
-            console.log(`Off-topic detected: ${category} - Keywords: ${matchedKeywords.join(', ')}`);
-            break;
+        if (!hasValidContext && !offTopicDetected) {
+          for (const [category, keywords] of Object.entries(offTopicKeywords)) {
+            const matchedKeywords = keywords.filter(keyword => allLabelsLower.includes(keyword));
+            const specificMatches = ['car', 'automobile', 'motorcycle', 'selfie', 'portrait', 'pizza', 'gaming'];
+            const hasSpecificMatch = specificMatches.some(keyword => allLabelsLower.includes(keyword));
+            
+            if (matchedKeywords.length >= 2 || (matchedKeywords.length >= 1 && hasSpecificMatch)) {
+              offTopicDetected = true;
+              offTopicReason = category;
+              console.log(`Off-topic detected: ${category}`);
+              break;
+            }
           }
         }
-      }
-    });
+      });
+    }
 
     if (offTopicDetected) {
       return {
@@ -240,7 +240,7 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
     const vaguenessCheck = isDescriptionVague(description, visionAnnotationsArray.length);
     
     if (vaguenessCheck.isVague) {
-      console.log(`Vague description detected: ${vaguenessCheck.reason} - "${description}"`);
+      console.log(`Vague description: ${vaguenessCheck.reason}`);
       
       const clarificationQuestions = generateSmartQuestions(
         description, 
@@ -283,32 +283,39 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       ).join('\n');
     }
 
+    const detectedItemsText = allDetectedItems.length > 0 
+      ? `DETECTED FROM IMAGES: ${allDetectedItems.join(', ')}`
+      : `NOTE: Images analyzed but no specific items detected. Relying on customer description.`;
+
     const prompt = `You are an expert contractor cost estimator for Cabo San Lucas, Mexico. Analyze this maintenance/construction project and provide realistic 2024-2025 pricing in USD.
 
-IMAGES ANALYZED: ${visionAnnotationsArray.length} professional photos were analyzed using computer vision
-DESCRIPTION: ${description}
-${allDetectedItems.length > 0 ? `DETECTED ITEMS FROM ${visionAnnotationsArray.length} IMAGES: ${allDetectedItems.join(', ')}` : 'Images were uploaded but computer vision did not detect specific items. Base analysis on description.'}
+DESCRIPTION: "${description}"
+${detectedItemsText}
 ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 ${chatContext}
 
-Respond with full analysis in JSON format:
+CRITICAL: The customer provided a specific description: "${description}". Even if computer vision didn't detect items, trust the customer's description and provide a complete analysis.
+
+Respond ONLY with valid JSON (no markdown, no code blocks):
 {
   "needs_clarification": false,
   "issue_type": "specific category",
   "severity": "High/Medium/Low",
-  "description": "detailed analysis",
+  "description": "detailed analysis of the issue",
   "required_parts": [{"name": "part name", "quantity": 1, "estimated_cost": 100}],
   "difficulty_level": "Professional/Expert Required/Skilled Handyperson",
   "crew_size": 1,
-  "crew_justification": "explanation",
-  "labor_hours": 4,
+  "crew_justification": "why this crew size",
+  "labor_hours": 2,
   "cost_breakdown": {
-    "parts_min": 200,
-    "parts_max": 800,
-    "base_labor_cost": 300
+    "parts_min": 50,
+    "parts_max": 200,
+    "base_labor_cost": 150
   }
 }`;
 
+    console.log('Calling Groq API...');
+    
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -320,7 +327,7 @@ Respond with full analysis in JSON format:
         messages: [
           {
             role: 'system',
-            content: `You are an expert maintenance and construction cost estimator for Cabo San Lucas, Mexico. Always respond in valid JSON format only.`
+            content: 'You are an expert maintenance and construction cost estimator for Cabo San Lucas, Mexico. Always respond with ONLY valid JSON. Never use markdown code blocks. Trust the customer description even if computer vision failed.'
           },
           {
             role: 'user',
@@ -328,11 +335,14 @@ Respond with full analysis in JSON format:
           }
         ],
         temperature: 0.3,
-        max_tokens: 1200
+        max_tokens: 1200,
+        response_format: { type: "json_object" }
       })
     });
 
     if (!groqResponse.ok) {
+      const errorText = await groqResponse.text();
+      console.error('Groq API Error:', groqResponse.status, errorText);
       throw new Error(`Groq API failed: ${groqResponse.status}`);
     }
 
@@ -340,14 +350,18 @@ Respond with full analysis in JSON format:
     const groqContent = groqData.choices[0]?.message?.content;
 
     if (!groqContent) {
-      throw new Error('No content from Groq');
+      throw new Error('No content from Groq API');
     }
+
+    console.log('Groq response received, parsing...');
 
     let groqAnalysis;
     try {
       const cleanedContent = groqContent.replace(/```json\n?|\n?```/g, '').trim();
       groqAnalysis = JSON.parse(cleanedContent);
     } catch (parseError) {
+      console.error('JSON Parse Error:', parseError);
+      console.error('Content:', groqContent.substring(0, 200));
       throw new Error('Invalid JSON from Groq');
     }
 
@@ -361,7 +375,7 @@ Respond with full analysis in JSON format:
         analysis: {
           issue_type: 'Information Needed',
           severity: 'Unknown',
-          description: 'I need a bit more information to provide an accurate estimate.'
+          description: 'I need more information to provide an accurate estimate.'
         },
         cost_estimate: {
           parts_cost: { min: 0, max: 0 },
@@ -399,6 +413,8 @@ Respond with full analysis in JSON format:
       disposalCost = 60;
     }
 
+    console.log('Analysis complete successfully');
+
     return {
       needs_clarification: false,
       analysis: {
@@ -408,7 +424,7 @@ Respond with full analysis in JSON format:
         required_parts: groqAnalysis.required_parts || [],
         difficulty_level: groqAnalysis.difficulty_level || 'Professional',
         crew_size: crewSize,
-        crew_justification: groqAnalysis.crew_justification || `${crewSize} person${crewSize > 1 ? 's' : ''} required`
+        crew_justification: groqAnalysis.crew_justification || `${crewSize} person job`
       },
       cost_estimate: {
         parts_cost: {
@@ -430,38 +446,85 @@ Respond with full analysis in JSON format:
     };
 
   } catch (error) {
-    console.error('Groq analysis failed:', error);
-    const fallback = processMaintencanceIssue(visionAnnotationsArray[0] || {}, description, serviceContext);
-    return {
-      needs_clarification: false,
-      analysis: fallback.analysis,
-      cost_estimate: fallback.cost_estimate,
-      pricing: [],
-      stores: getDefaultStores()
-    };
+    console.error('❌ Groq analysis error:', error.message);
+    
+    const fallback = createSmartFallback(description, serviceContext);
+    return fallback;
   }
 }
 
-function processMaintencanceIssue(annotations, description, service_context) {
+function createSmartFallback(description, serviceContext) {
+  const desc = description.toLowerCase();
+  let issueType = 'General Maintenance';
+  let severity = 'Medium';
+  let partsMin = 100;
+  let partsMax = 300;
+  let laborHours = 2;
+  let requiredParts = [];
+
+  if (desc.includes('toilet') && desc.includes('flush')) {
+    issueType = 'Toilet Flush Valve Replacement';
+    partsMin = 30;
+    partsMax = 80;
+    laborHours = 1;
+    severity = 'Low';
+    requiredParts = [
+      { name: 'Toilet flush valve kit', quantity: 1, estimated_cost: 50 }
+    ];
+  } else if (desc.includes('toilet')) {
+    issueType = 'Toilet Repair';
+    partsMin = 50;
+    partsMax = 150;
+    laborHours = 1.5;
+  } else if (desc.includes('faucet') || desc.includes('tap')) {
+    issueType = 'Faucet Repair/Replacement';
+    partsMin = 60;
+    partsMax = 180;
+    laborHours = 1.5;
+  } else if (desc.includes('pipe') || desc.includes('plumbing')) {
+    issueType = 'Plumbing Repair';
+    partsMin = 80;
+    partsMax = 250;
+    laborHours = 2;
+    severity = 'High';
+  } else if (desc.includes('electrical') || desc.includes('outlet') || desc.includes('switch')) {
+    issueType = 'Electrical Repair';
+    partsMin = 40;
+    partsMax = 150;
+    laborHours = 1.5;
+    severity = 'High';
+  } else if (desc.includes('leak')) {
+    issueType = 'Leak Repair';
+    partsMin = 70;
+    partsMax = 200;
+    laborHours = 2;
+    severity = 'High';
+  }
+
+  const laborCost = (laborHours * 80) + 100;
+  
   return {
+    needs_clarification: false,
     analysis: {
-      issue_type: 'General Maintenance',
-      severity: 'Medium',
-      description: description,
-      required_parts: [],
+      issue_type: issueType,
+      severity: severity,
+      description: `Based on your description: "${description}". Professional assessment recommended for accurate diagnosis.`,
+      required_parts: requiredParts,
       difficulty_level: 'Professional',
       crew_size: 1,
-      crew_justification: 'Standard single-person job'
+      crew_justification: 'Standard single-person repair'
     },
     cost_estimate: {
-      parts_cost: { min: 100, max: 300 },
-      labor_cost: 250,
-      labor_hours: 2,
+      parts_cost: { min: partsMin, max: partsMax },
+      labor_cost: laborCost,
+      labor_hours: laborHours,
       crew_size: 1,
-      crew_justification: 'Standard single-person job',
+      crew_justification: 'Standard single-person repair',
       disposal_cost: 0,
-      total_cost: { min: 350, max: 550 }
-    }
+      total_cost: { min: partsMin + laborCost, max: partsMax + laborCost }
+    },
+    pricing: [],
+    stores: getDefaultStores()
   };
 }
 
@@ -493,9 +556,7 @@ function getOffTopicMessage(category) {
   return messages[category] || "I specialize in home and property maintenance.";
 }
 
-// 🆕 MAIN HANDLER WITH ENHANCED ERROR HANDLING
 export default async function handler(req, res) {
-  // Set headers immediately
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -509,13 +570,11 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  // Track timing for debugging
   const startTime = Date.now();
 
   try {
     const { images, description, location, service_context, chat_history, device_type, platform } = req.body;
 
-    // Enhanced validation
     if (!images || images.length === 0) {
       return res.status(400).json({ 
         error: 'At least one image is required',
@@ -530,28 +589,42 @@ export default async function handler(req, res) {
       });
     }
 
-    // Warn about potential timeout on mobile with multiple images
-    if (device_type === 'mobile' && images.length > 2) {
-      console.warn('⚠️ Mobile device uploading 3 images - may approach timeout limit');
-    }
-
-    console.log('🔄 Processing request:', {
-      imageCount: images.length,
-      descriptionLength: description.length,
-      hasServiceContext: !!service_context,
-      hasChatHistory: !!chat_history,
-      deviceType: device_type || 'unknown',
-      platform: platform || 'unknown'
+    console.log('🔄 Request:', {
+      images: images.length,
+      description: description.substring(0, 50),
+      device: device_type || 'unknown'
     });
 
     const visionAnnotations = [];
+    let visionErrors = 0;
     
-    // Process images with timeout protection
+    // Supported formats by Google Vision API
+    const supportedFormats = ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp', 'tiff', 'tif', 'ico'];
+    
     for (let i = 0; i < images.length; i++) {
       try {
+        // Extract format from data URI
+        const formatMatch = images[i].match(/^data:image\/(\w+);base64,/);
+        const imageFormat = formatMatch ? formatMatch[1].toLowerCase() : null;
+        
+        // Check if format is supported
+        if (!imageFormat || !supportedFormats.includes(imageFormat)) {
+          console.warn(`⚠️ Image ${i + 1} format "${imageFormat}" not supported by Vision API. Supported: ${supportedFormats.join(', ')}`);
+          visionErrors++;
+          continue;
+        }
+        
         const imageBase64 = images[i].replace(/^data:image\/\w+;base64,/, '');
         
-        console.log(`📸 Processing image ${i + 1}/${images.length}...`);
+        // Check base64 size (approximate MB = base64.length * 0.75 / 1024 / 1024)
+        const estimatedSizeMB = (imageBase64.length * 0.75) / (1024 * 1024);
+        if (estimatedSizeMB > 10) {
+          console.warn(`⚠️ Image ${i + 1} too large: ~${estimatedSizeMB.toFixed(1)}MB. Vision API recommends <10MB for base64.`);
+          visionErrors++;
+          continue;
+        }
+        
+        console.log(`📸 Processing image ${i + 1}/${images.length} (${imageFormat}, ~${estimatedSizeMB.toFixed(1)}MB)...`);
         
         const visionResponse = await fetch(
           `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
@@ -573,21 +646,31 @@ export default async function handler(req, res) {
 
         if (!visionResponse.ok) {
           console.error(`❌ Vision API failed for image ${i + 1}:`, visionResponse.status);
+          visionErrors++;
           continue;
         }
 
         const visionData = await visionResponse.json();
+        
         if (visionData.responses && visionData.responses[0]) {
+          if (visionData.responses[0].error) {
+            console.error(`❌ Vision API error for image ${i + 1}:`, visionData.responses[0].error);
+            visionErrors++;
+            continue;
+          }
           visionAnnotations.push(visionData.responses[0]);
-          console.log(`✅ Image ${i + 1} processed successfully`);
+          console.log(`✅ Image ${i + 1} processed`);
+        } else {
+          console.warn(`⚠️ No response for image ${i + 1}`);
+          visionErrors++;
         }
       } catch (visionError) {
-        console.error(`❌ Error processing image ${i + 1}:`, visionError);
-        continue;
+        console.error(`❌ Error processing image ${i + 1}:`, visionError.message);
+        visionErrors++;
       }
     }
 
-    console.log(`✅ Processed ${visionAnnotations.length}/${images.length} images successfully`);
+    console.log(`Vision API: ${visionAnnotations.length}/${images.length} successful, ${visionErrors} errors`);
 
     const analysis = await analyzeWithGroq(
       description,
@@ -597,26 +680,21 @@ export default async function handler(req, res) {
     );
 
     const processingTime = Date.now() - startTime;
-    console.log(`⏱️ Total processing time: ${processingTime}ms`);
-
-    // Warn if approaching timeout (Vercel Hobby = 10s, Pro = 60s)
-    if (processingTime > 8000 && !process.env.VERCEL_ENV?.includes('pro')) {
-      console.warn('⚠️ Processing time approaching Vercel Hobby timeout limit (10s)');
-    }
+    console.log(`⏱️ Total time: ${processingTime}ms`);
 
     return res.status(200).json({
       success: true,
       processing_time_ms: processingTime,
+      vision_success_count: visionAnnotations.length,
+      vision_error_count: visionErrors,
       ...analysis
     });
 
   } catch (error) {
     const processingTime = Date.now() - startTime;
-    console.error('❌ API Error:', error);
-    console.error('Error stack:', error.stack);
-    console.error(`⏱️ Failed after ${processingTime}ms`);
+    console.error('❌ Handler error:', error.message);
+    console.error('Stack:', error.stack);
 
-    // Enhanced error response
     return res.status(500).json({
       success: false,
       error: error.message || 'Internal server error',
@@ -624,7 +702,7 @@ export default async function handler(req, res) {
       analysis: {
         issue_type: 'System Error',
         severity: 'Unknown',
-        description: 'An error occurred while analyzing your request. Please try again with fewer or smaller images.'
+        description: 'Unable to process your request. Please try again or contact support.'
       },
       cost_estimate: {
         parts_cost: { min: 0, max: 0 },
@@ -635,7 +713,7 @@ export default async function handler(req, res) {
         total_cost: { min: 0, max: 0 }
       },
       pricing: [],
-      stores: []
+      stores: getDefaultStores()
     });
   }
 }
