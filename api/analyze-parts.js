@@ -1,4 +1,4 @@
-// /api/analyze-parts.js - Complete Fixed Version
+// /api/analyze-parts.js - Complete Fixed Version with Loop Prevention
 
 // Check if description is too vague to provide accurate estimate
 function isDescriptionVague(description, imageCount) {
@@ -143,7 +143,7 @@ function generateSmartQuestions(description, detectedItems, vaguenessReason, ser
 }
 
 // Enhanced analysis using Groq
-async function analyzeWithGroq(description, visionAnnotationsArray = [], serviceContext = null, chatHistory = null) {
+async function analyzeWithGroq(description, visionAnnotationsArray = [], serviceContext = null, chatHistory = null, forceAnalysis = false) {
   try {
     const allDetectedItems = [];
     let offTopicDetected = false;
@@ -165,7 +165,8 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       'ceiling', 'floor', 'roof', 'door', 'window', 'pipe', 'plumbing',
       'electrical', 'hvac', 'appliance', 'kitchen', 'bathroom', 'garage',
       'deck', 'fence', 'outdoor', 'installation', 'demolition', 'contractor',
-      'fixture', 'cabinet', 'countertop', 'tile', 'paint', 'drywall'
+      'fixture', 'cabinet', 'countertop', 'tile', 'paint', 'drywall', 'faucet',
+      'sink', 'toilet', 'shower', 'tub', 'water heater', 'air conditioning'
     ];
     
     visionAnnotationsArray.forEach((annotations, imageIndex) => {
@@ -226,43 +227,48 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       };
     }
 
-    const vaguenessCheck = isDescriptionVague(description, visionAnnotationsArray.length);
-    
-    if (vaguenessCheck.isVague) {
-      console.log(`Vague description detected: ${vaguenessCheck.reason} - "${description}"`);
+    // 🔥 CRITICAL FIX: Skip vagueness check if force_analysis is true
+    if (!forceAnalysis) {
+      const vaguenessCheck = isDescriptionVague(description, visionAnnotationsArray.length);
       
-      const clarificationQuestions = generateSmartQuestions(
-        description, 
-        allDetectedItems, 
-        vaguenessCheck.reason,
-        serviceContext
-      );
-      
-      return {
-        needs_clarification: true,
-        clarification_questions: clarificationQuestions,
-        preliminary_info: {
-          detected_items: allDetectedItems.slice(0, 5),
-          vagueness_reason: vaguenessCheck.reason,
-          confidence_level: 'very_low',
-          message: vaguenessCheck.message
-        },
-        analysis: {
-          issue_type: 'Information Needed',
-          severity: 'Unknown',
-          description: 'I need more information to provide an accurate estimate.'
-        },
-        cost_estimate: {
-          parts_cost: { min: 0, max: 0 },
-          labor_cost: 0,
-          labor_hours: 0,
-          crew_size: 1,
-          disposal_cost: 0,
-          total_cost: { min: 0, max: 0 }
-        },
-        pricing: [],
-        stores: []
-      };
+      if (vaguenessCheck.isVague) {
+        console.log(`Vague description detected: ${vaguenessCheck.reason} - "${description.substring(0, 100)}"`);
+        
+        const clarificationQuestions = generateSmartQuestions(
+          description, 
+          allDetectedItems, 
+          vaguenessCheck.reason,
+          serviceContext
+        );
+        
+        return {
+          needs_clarification: true,
+          clarification_questions: clarificationQuestions,
+          preliminary_info: {
+            detected_items: allDetectedItems.slice(0, 5),
+            vagueness_reason: vaguenessCheck.reason,
+            confidence_level: 'very_low',
+            message: vaguenessCheck.message
+          },
+          analysis: {
+            issue_type: 'Information Needed',
+            severity: 'Unknown',
+            description: 'I need more information to provide an accurate estimate.'
+          },
+          cost_estimate: {
+            parts_cost: { min: 0, max: 0 },
+            labor_cost: 0,
+            labor_hours: 0,
+            crew_size: 1,
+            disposal_cost: 0,
+            total_cost: { min: 0, max: 0 }
+          },
+          pricing: [],
+          stores: []
+        };
+      }
+    } else {
+      console.log('Force analysis mode - skipping vagueness check');
     }
 
     let chatContext = '';
@@ -279,6 +285,8 @@ DESCRIPTION: ${description}
 ${allDetectedItems.length > 0 ? `DETECTED ITEMS FROM ${visionAnnotationsArray.length} IMAGES: ${allDetectedItems.join(', ')}` : 'Images were uploaded but computer vision did not detect specific items. Base analysis on description.'}
 ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 ${chatContext}
+
+${forceAnalysis ? 'IMPORTANT: User has provided all available information. Provide best estimate based on current data without asking for more clarification.' : ''}
 
 Respond with full analysis in JSON format:
 {
@@ -309,7 +317,7 @@ Respond with full analysis in JSON format:
         messages: [
           {
             role: 'system',
-            content: `You are an expert maintenance and construction cost estimator for Cabo San Lucas, Mexico. Always respond in valid JSON format only.`
+            content: `You are an expert maintenance and construction cost estimator for Cabo San Lucas, Mexico. Always respond in valid JSON format only. ${forceAnalysis ? 'When force_analysis is true, never return needs_clarification: true.' : ''}`
           },
           {
             role: 'user',
@@ -340,7 +348,28 @@ Respond with full analysis in JSON format:
       throw new Error('Invalid JSON from Groq');
     }
 
-    if (groqAnalysis.needs_clarification === true) {
+    // 🔥 CRITICAL FIX: Override needs_clarification if forceAnalysis is true
+    if (forceAnalysis && groqAnalysis.needs_clarification === true) {
+      console.log('Force analysis - overriding AI clarification request');
+      groqAnalysis.needs_clarification = false;
+      
+      // Ensure we have minimal data for estimate
+      if (!groqAnalysis.issue_type) {
+        groqAnalysis.issue_type = serviceContext?.title || 'Maintenance Service';
+      }
+      if (!groqAnalysis.description) {
+        groqAnalysis.description = 'On-site assessment recommended for detailed quote.';
+      }
+      if (!groqAnalysis.cost_breakdown) {
+        groqAnalysis.cost_breakdown = {
+          parts_min: 100,
+          parts_max: 400,
+          base_labor_cost: 250
+        };
+      }
+    }
+
+    if (groqAnalysis.needs_clarification === true && !forceAnalysis) {
       return {
         needs_clarification: true,
         clarification_questions: groqAnalysis.clarification_questions || [
@@ -434,9 +463,9 @@ Respond with full analysis in JSON format:
 function processMaintencanceIssue(annotations, description, service_context) {
   return {
     analysis: {
-      issue_type: 'General Maintenance',
+      issue_type: service_context?.title || 'General Maintenance',
       severity: 'Medium',
-      description: description,
+      description: description || 'On-site assessment recommended for accurate quote.',
       required_parts: [],
       difficulty_level: 'Professional',
       crew_size: 1,
@@ -482,7 +511,7 @@ function getOffTopicMessage(category) {
   return messages[category] || "I specialize in home and property maintenance.";
 }
 
-// 🆕 MAIN HANDLER - THIS IS CRITICAL!
+// 🔥 MAIN HANDLER - WITH LOOP PREVENTION
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -497,7 +526,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { images, description, location, service_context, chat_history } = req.body;
+    const { images, description, location, service_context, chat_history, force_analysis, skip_clarification } = req.body;
 
     if (!images || images.length === 0) {
       return res.status(400).json({ 
@@ -513,12 +542,22 @@ export default async function handler(req, res) {
       });
     }
 
+    // 🔥 CRITICAL FIX: Count user responses to prevent loops
+    const userResponseCount = (chat_history || []).filter(m => m.role === 'user').length;
+    const shouldForceAnalysis = force_analysis === true || skip_clarification === true || userResponseCount >= 2;
+
     console.log('Processing request:', {
       imageCount: images.length,
       descriptionLength: description.length,
       hasServiceContext: !!service_context,
-      hasChatHistory: !!chat_history
+      hasChatHistory: !!chat_history,
+      userResponseCount: userResponseCount,
+      forceAnalysis: shouldForceAnalysis
     });
+
+    if (shouldForceAnalysis) {
+      console.log('🔥 FORCING ANALYSIS - User has provided enough information or reached max clarifications');
+    }
 
     const visionAnnotations = [];
     
@@ -561,12 +600,43 @@ export default async function handler(req, res) {
 
     console.log(`Processed ${visionAnnotations.length} images successfully`);
 
+    // 🔥 Pass shouldForceAnalysis to Groq function
     const analysis = await analyzeWithGroq(
       description,
       visionAnnotations,
       service_context,
-      chat_history
+      chat_history,
+      shouldForceAnalysis
     );
+
+    // 🔥 FINAL SAFEGUARD: If still needs clarification after 2 rounds, force estimate
+    if (analysis.needs_clarification && userResponseCount >= 2) {
+      console.log('🔥 EMERGENCY OVERRIDE - Forcing estimate after max clarifications');
+      
+      return res.status(200).json({
+        success: true,
+        needs_clarification: false,
+        analysis: {
+          issue_type: service_context?.title || 'Maintenance Service',
+          severity: 'Medium',
+          description: `Based on the information provided: ${description.substring(0, 200)}... We recommend scheduling an on-site consultation for a detailed assessment.`,
+          required_parts: [],
+          difficulty_level: 'Professional',
+          crew_size: 1,
+          crew_justification: 'Assessment required'
+        },
+        cost_estimate: {
+          parts_cost: { min: 100, max: 400 },
+          labor_cost: 300,
+          labor_hours: 2,
+          crew_size: 1,
+          disposal_cost: 0,
+          total_cost: { min: 400, max: 700 }
+        },
+        pricing: [],
+        stores: getDefaultStores()
+      });
+    }
 
     return res.status(200).json({
       success: true,
@@ -583,7 +653,7 @@ export default async function handler(req, res) {
       analysis: {
         issue_type: 'System Error',
         severity: 'Unknown',
-        description: 'An error occurred while analyzing your request. Please try again.'
+        description: 'An error occurred while analyzing your request. Please try again or contact us directly for assistance.'
       },
       cost_estimate: {
         parts_cost: { min: 0, max: 0 },
