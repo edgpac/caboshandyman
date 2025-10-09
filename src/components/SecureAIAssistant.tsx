@@ -297,7 +297,6 @@ Time: ${new Date().toLocaleString()}`;
       });
     }
   };
-
   const handleScheduleAppointment = async (analysisData) => {
     try {
       const loadingToast = document.createElement('div');
@@ -460,6 +459,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       setIsAnalyzing(false);
     }
   };
+
   const analyzeIssue = async () => {
     setIsAnalyzing(true);
     setError(null);
@@ -552,8 +552,23 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     }
   };
   
+  // 🔧 FIX: Detect and reject unsupported formats like HEIC
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
+    
+    // Check for HEIC/HEIF files
+    const heicFiles = files.filter(file => 
+      file.type === 'image/heic' || 
+      file.type === 'image/heif' || 
+      file.name.toLowerCase().endsWith('.heic') ||
+      file.name.toLowerCase().endsWith('.heif')
+    );
+    
+    if (heicFiles.length > 0) {
+      setError('HEIC format not supported. Please use your camera to take a photo, or convert HEIC images to JPEG in your Photos app before uploading.');
+      return;
+    }
+    
     const imageFiles = files.filter(file => file.type.startsWith('image/'));
     
     const maxImages = isMobile ? 1 : 3;
@@ -596,6 +611,20 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setIsDragging(false);
 
     const files = Array.from(e.dataTransfer.files);
+    
+    // Check for HEIC/HEIF files
+    const heicFiles = files.filter(file => 
+      file.type === 'image/heic' || 
+      file.type === 'image/heif' || 
+      file.name.toLowerCase().endsWith('.heic') ||
+      file.name.toLowerCase().endsWith('.heif')
+    );
+    
+    if (heicFiles.length > 0) {
+      setError('HEIC format not supported. Please use your camera to take a photo, or convert HEIC images to JPEG in your Photos app before uploading.');
+      return;
+    }
+    
     const imageFiles = files.filter(file => file.type.startsWith('image/'));
     
     const maxImages = isMobile ? 1 : 3;
@@ -674,7 +703,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
 
   const maxImages = isMobile ? 1 : 3;
-
   return (
     <div className={containerClasses}>
       <div className={`bg-blue-600 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
@@ -875,7 +903,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                       <label className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-2 rounded text-sm font-semibold cursor-pointer flex items-center justify-center space-x-1">
                         <input 
                           type="file" 
-                          accept="image/*"
+                          accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/webp"
                           multiple={!isMobile}
                           onChange={handleImageUpload}
                           className="hidden"
@@ -909,7 +937,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     <label className="bg-gray-100 hover:bg-gray-200 text-gray-800 px-3 py-2 rounded text-sm font-semibold cursor-pointer flex items-center justify-center space-x-1">
                       <input 
                         type="file" 
-                        accept="image/*"
+                        accept="image/jpeg,image/jpg,image/png,image/gif,image/bmp,image/webp"
                         multiple={!isMobile}
                         onChange={handleImageUpload}
                         className="hidden"
