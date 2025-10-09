@@ -589,6 +589,28 @@ export default async function handler(req, res) {
       });
     }
 
+    // Validate image formats
+    const supportedFormats = ['jpeg', 'jpg', 'png', 'gif', 'bmp', 'webp', 'tiff', 'tif', 'ico'];
+    const unsupportedImages = [];
+    
+    images.forEach((img, idx) => {
+      const formatMatch = img.match(/^data:image\/(\w+);base64,/);
+      const format = formatMatch ? formatMatch[1].toLowerCase() : 'unknown';
+      if (!supportedFormats.includes(format)) {
+        unsupportedImages.push({ index: idx + 1, format });
+      }
+    });
+    
+    if (unsupportedImages.length === images.length) {
+      return res.status(400).json({
+        success: false,
+        error: `Unsupported image format(s). Please use: JPEG, PNG, GIF, BMP, WEBP, or TIFF.`,
+        unsupported_formats: unsupportedImages,
+        supported_formats: supportedFormats,
+        hint: 'If using iPhone, convert HEIC images to JPEG before uploading.'
+      });
+    }
+
     console.log('🔄 Request:', {
       images: images.length,
       description: description.substring(0, 50),
