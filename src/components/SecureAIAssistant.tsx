@@ -1225,6 +1225,9 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                           </div>
                         )}
                       </div>
+                      <div className="text-xs text-green-600 mt-1">
+                        ⏱️ You pay actual hours only. Finish early = you save!
+                      </div>
                     </div>
                   )}
                   {analysis.cost_estimate.disposal_cost > 0 && (
