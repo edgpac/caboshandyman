@@ -229,20 +229,12 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
     try {
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
       const imagesDataURIs = await Promise.all(imagePromises);
-      
-      // ✅ Extract ONLY base64 part
-      const imagesBase64Only = imagesDataURIs.map(dataUri => {
-        if (dataUri.includes('base64,')) {
-          return dataUri.split('base64,')[1];
-        }
-        return dataUri;
-      });
 
       const response = await fetch('/api/analyze-parts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          images: imagesBase64Only, // ✅ Send clean base64
+          images: imagesDataURIs, // ✅ Send FULL data URIs
           description: chatInput,
           location: location || 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
@@ -296,16 +288,9 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
         const imagePromises = selectedImages.map(img => imageToBase64(img.file));
         const imagesDataURIs = await Promise.all(imagePromises);
         
-        // ✅ CRITICAL FIX: Extract ONLY base64 part for API
-        const imagesBase64Only = imagesDataURIs.map(dataUri => {
-          if (dataUri.includes('base64,')) {
-            return dataUri.split('base64,')[1];
-          }
-          return dataUri;
-        });
-        
-        const payloadSize = imagesBase64Only.reduce((sum, img) => sum + img.length, 0);
-        const payloadMB = (payloadSize * 0.75) / (1024 * 1024);
+        // ✅ Keep FULL data URIs for Document 6 API
+        const payloadSize = imagesDataURIs.reduce((sum, img) => sum + img.length, 0);
+        const payloadMB = payloadSize / (1024 * 1024);
         console.log(`Payload: ${payloadMB.toFixed(2)}MB`);
         
         if (payloadMB > 4) {
@@ -320,7 +305,7 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            images: imagesBase64Only, // ✅ Send clean base64
+            images: imagesDataURIs, // ✅ Send FULL data URIs
             description: analysisDescription,
             location: location || 'Cabo San Lucas, Mexico',
             service_context: selectedService ? {
@@ -336,9 +321,7 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
           const errorData = await response.json().catch(() => ({}));
           console.error('API Error:', {
             status: response.status,
-            error: errorData,
-            imageCount: imagesBase64Only.length,
-            imageSizes: imagesBase64Only.map(img => `${Math.round(img.length * 0.75 / 1024)}KB`)
+            error: errorData
           });
           if (response.status === 413) throw new Error('Images too large. Use smaller photos.');
           if (response.status === 504) throw new Error('Server timeout. Try 1-2 images.');
