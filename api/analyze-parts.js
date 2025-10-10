@@ -1,5 +1,5 @@
-// api/analyze-parts.js - COMPLETE FIXED VERSION
-// Robust image processing with Vision API error handling
+// api/analyze-parts.js - COMPLETE VERSION
+// ✅ Working image sizes + Enhanced intelligence
 
 export const config = {
   maxDuration: 60,
@@ -10,24 +10,40 @@ export const config = {
   }
 };
 
-// RELAXED vagueness detection - only catch extreme cases
+// 🧠 BRAIN: Vagueness detection
 function isDescriptionVague(description, imageCount) {
   const desc = description.toLowerCase().trim();
   
-  // Only reject if EXTREMELY vague (single word with no context)
   const ultraVaguePatterns = [
-    /^help$/i, /^fix$/i, /^broken$/i, /^repair$/i
+    /^help$/i, /^i need help$/i, /^fix this$/i, /^fix it$/i,
+    /^broken$/i, /^repair$/i, /^fix$/i, /^this$/i, /^look$/i,
+    /^check$/i, /^what about this$/i, /^can you help$/i,
+    /^need help$/i, /^please help$/i
   ];
 
-  if (ultraVaguePatterns.some(pattern => pattern.test(desc)) && imageCount === 0) {
+  if (ultraVaguePatterns.some(pattern => pattern.test(desc))) {
     return {
       isVague: true,
       reason: 'ultra_vague',
-      message: 'Please provide more details'
+      message: 'The description is too brief to provide an accurate estimate'
     };
   }
 
-  // Accept anything with 2+ words or any images
+  const vagueSingleWords = [
+    'leaking', 'leak', 'damaged', 'damage', 'issue', 'problem', 
+    'question', 'estimate', 'quote', 'price', 'cost', 'install',
+    'replace', 'renovation', 'remodel', 'upgrade'
+  ];
+
+  if (desc.split(' ').length <= 2 && vagueSingleWords.includes(desc)) {
+    return {
+      isVague: true,
+      reason: 'single_word',
+      message: 'Single-word description needs more context'
+    };
+  }
+
+  // ✅ RELAXED: Accept anything with 2+ words or any images
   if (desc.split(' ').length >= 2 || imageCount > 0) {
     return { isVague: false };
   }
@@ -39,20 +55,114 @@ function isDescriptionVague(description, imageCount) {
   };
 }
 
+// 🧠 BRAIN: Smart clarification questions
 function generateSmartQuestions(description, detectedItems, vaguenessReason, serviceContext) {
-  const questions = [
-    "What specific issue or project do you need help with?",
-    "Where is this located? (e.g., kitchen, bathroom, outdoor)",
-    "Is this urgent or can it wait a few days?"
-  ];
-  
-  if (detectedItems.length > 0) {
-    questions.unshift(`I can see ${detectedItems.slice(0,2).join(', ')} - which needs work?`);
+  const desc = description.toLowerCase();
+  const questions = [];
+
+  if (vaguenessReason === 'ultra_vague' || vaguenessReason === 'too_short') {
+    questions.push("What specific issue or project do you need help with?");
+    
+    if (detectedItems.length > 0) {
+      const itemsList = detectedItems.slice(0, 3).map(item => item.split(': ')[1] || item).join(', ');
+      questions.push(`I can see ${itemsList} in the images - which one needs work?`);
+    }
+    
+    questions.push("Is this for repair, installation, or renovation?");
+    questions.push("How urgent is this - do you need it done today, this week, or is it flexible?");
   }
-  
-  return questions.slice(0, 3);
+  else if (vaguenessReason === 'missing_location') {
+    questions.push("Where exactly is this located? (e.g., under kitchen sink, bedroom wall, outdoor patio)");
+    
+    if (desc.includes('leak')) {
+      questions.push("Is it currently leaking actively, or is this preventive maintenance?");
+      questions.push("How severe is the leak - dripping slowly or flowing steadily?");
+    }
+    
+    questions.push("Is this area easily accessible or will special equipment be needed?");
+  }
+  else if (vaguenessReason === 'missing_specs') {
+    if (desc.includes('water heater')) {
+      questions.push("What size water heater do you need? (30, 40, 50 gallon, or tankless?)");
+      questions.push("Is it gas or electric powered?");
+      questions.push("Where will it be installed? (indoor closet, outdoor, garage?)");
+    }
+    else if (desc.includes('install') || desc.includes('replace')) {
+      questions.push("What specific item or fixture are you looking to install/replace?");
+      questions.push("What size or capacity do you need?");
+      questions.push("Where will this be located?");
+    }
+  }
+
+  if (serviceContext?.title === 'Emergency Services') {
+    questions.unshift("Is this an active emergency right now? (flooding, sparking, gas smell, etc.)");
+  }
+
+  return questions.slice(0, 4);
 }
 
+// 🧠 BRAIN: Off-topic detection
+function checkOffTopic(visionAnnotationsArray, description) {
+  const offTopicKeywords = {
+    vehicles: ['car', 'automobile', 'vehicle', 'motorcycle', 'bike', 'sedan', 'suv', 'wheel', 'tire'],
+    people: ['person', 'face', 'man', 'woman', 'child', 'people', 'selfie', 'portrait'],
+    animals: ['dog', 'cat', 'pet', 'animal', 'bird', 'horse', 'fish'],
+    electronics: ['phone', 'laptop', 'computer', 'television', 'tv', 'monitor', 'tablet'],
+    food: ['food', 'meal', 'restaurant', 'pizza', 'burger', 'dessert'],
+    clothing: ['clothing', 'shirt', 'dress', 'shoes', 'fashion']
+  };
+
+  const validContextKeywords = [
+    'building', 'house', 'home', 'property', 'construction', 'renovation',
+    'repair', 'maintenance', 'damage', 'broken', 'leak', 'crack', 'wall',
+    'ceiling', 'floor', 'roof', 'door', 'window', 'pipe', 'plumbing',
+    'electrical', 'hvac', 'appliance', 'kitchen', 'bathroom', 'toilet',
+    'sink', 'faucet', 'valve', 'water heater', 'fixture', 'cabinet'
+  ];
+
+  for (const annotations of visionAnnotationsArray) {
+    const objects = annotations.localizedObjectAnnotations || [];
+    const labels = annotations.labelAnnotations || [];
+    
+    const allLabelsLower = [...objects.map(o => o.name), ...labels.map(l => l.description)]
+      .join(' ').toLowerCase();
+    
+    const descriptionLower = description.toLowerCase();
+    const combinedText = `${allLabelsLower} ${descriptionLower}`;
+
+    const hasValidContext = validContextKeywords.some(keyword => combinedText.includes(keyword));
+
+    if (!hasValidContext) {
+      for (const [category, keywords] of Object.entries(offTopicKeywords)) {
+        const matchedKeywords = keywords.filter(keyword => allLabelsLower.includes(keyword));
+        
+        if (matchedKeywords.length >= 2) {
+          return {
+            isOffTopic: true,
+            category,
+            message: getOffTopicMessage(category)
+          };
+        }
+      }
+    }
+  }
+
+  return { isOffTopic: false };
+}
+
+function getOffTopicMessage(category) {
+  const messages = {
+    vehicles: "🚗 I noticed you uploaded an image of a vehicle. I specialize in home and property maintenance!",
+    people: "👋 I see there are people in your photo! I focus on property maintenance and construction issues.",
+    animals: "🐾 Cute! But I specialize in property maintenance, not pet care.",
+    electronics: "📱 I noticed electronics in your image. I handle property maintenance and construction projects.",
+    food: "🍕 That looks delicious! But I specialize in kitchen renovations and property maintenance.",
+    clothing: "👕 I see clothing/fashion items. I focus on home maintenance and construction."
+  };
+  return messages[category] || "I specialize in home and property maintenance.";
+}
+
+// 🧠 BRAIN: Enhanced Groq analysis
 async function analyzeWithGroq(description, visionAnnotationsArray = [], serviceContext = null, chatHistory = null) {
   try {
     const allDetectedItems = [];
@@ -74,12 +184,37 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       });
     }
 
-    // RELAXED vagueness check
+    // 🧠 Check if off-topic
+    const offTopicCheck = checkOffTopic(visionAnnotationsArray, description);
+    if (offTopicCheck.isOffTopic) {
+      console.log(`🚫 Off-topic detected: ${offTopicCheck.category}`);
+      return {
+        is_off_topic: true,
+        off_topic_category: offTopicCheck.category,
+        message: offTopicCheck.message,
+        analysis: {
+          issue_type: 'Off-Topic Request',
+          severity: 'N/A',
+          description: offTopicCheck.message
+        },
+        cost_estimate: {
+          parts_cost: { min: 0, max: 0 },
+          labor_cost: 0,
+          labor_hours: 0,
+          crew_size: 1,
+          disposal_cost: 0,
+          total_cost: { min: 0, max: 0 }
+        },
+        pricing: [],
+        stores: []
+      };
+    }
+
+    // 🧠 Check vagueness (RELAXED)
     const vaguenessCheck = isDescriptionVague(description, visionAnnotationsArray.length);
     
-    // Only ask for clarification in extreme cases
     if (vaguenessCheck.isVague && allDetectedItems.length === 0) {
-      console.log(`Very vague description: ${vaguenessCheck.reason}`);
+      console.log(`❓ Vague description: ${vaguenessCheck.reason}`);
       
       const clarificationQuestions = generateSmartQuestions(
         description, 
@@ -88,13 +223,13 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
         serviceContext
       );
       
-      // Still provide a basic estimate
+      // Still provide basic estimate
       const fallbackEstimate = createSmartFallback(description, serviceContext);
       
       return {
         needs_clarification: true,
         clarification_questions: clarificationQuestions,
-        ...fallbackEstimate // Include estimate even when asking questions
+        ...fallbackEstimate
       };
     }
 
@@ -117,7 +252,7 @@ ${detectedItemsText}
 ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 ${chatContext}
 
-IMPORTANT: The customer description is the PRIMARY source. Image detection is supplementary and may be unavailable or inaccurate.
+IMPORTANT: The customer description is PRIMARY. Image detection is supplementary.
 
 Respond ONLY with valid JSON (no markdown):
 {
@@ -136,7 +271,7 @@ Respond ONLY with valid JSON (no markdown):
   }
 }`;
 
-    console.log('Calling Groq API...');
+    console.log('🤖 Calling Groq API...');
     
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -234,12 +369,11 @@ Respond ONLY with valid JSON (no markdown):
 
   } catch (error) {
     console.error('❌ Groq error:', error.message);
-    
-    // ALWAYS provide fallback estimate
     return createSmartFallback(description, serviceContext);
   }
 }
 
+// Smart fallback for when AI fails
 function createSmartFallback(description, serviceContext) {
   const desc = description.toLowerCase();
   let issueType = 'General Maintenance';
@@ -250,7 +384,6 @@ function createSmartFallback(description, serviceContext) {
   let crewSize = 1;
   let disposalCost = 0;
 
-  // Toilet-specific
   if (desc.includes('toilet') && (desc.includes('flush') || desc.includes('valve'))) {
     issueType = 'Toilet Flush Valve Replacement';
     partsMin = 30;
@@ -258,35 +391,18 @@ function createSmartFallback(description, serviceContext) {
     laborHours = 1;
     severity = 'Low';
   } 
-  // General toilet
   else if (desc.includes('toilet')) {
     issueType = 'Toilet Repair';
     partsMin = 50;
     partsMax = 150;
     laborHours = 1.5;
   }
-  // Plumbing
   else if (desc.includes('pipe') || desc.includes('plumb') || desc.includes('leak')) {
     issueType = 'Plumbing Repair';
     partsMin = 80;
     partsMax = 250;
     laborHours = 2;
     severity = 'High';
-  }
-  // Electrical
-  else if (desc.includes('electrical') || desc.includes('outlet') || desc.includes('switch')) {
-    issueType = 'Electrical Repair';
-    partsMin = 40;
-    partsMax = 150;
-    laborHours = 1.5;
-    severity = 'High';
-  }
-  // Faucet
-  else if (desc.includes('faucet') || desc.includes('tap')) {
-    issueType = 'Faucet Repair';
-    partsMin = 60;
-    partsMax = 180;
-    laborHours = 1.5;
   }
 
   const laborCost = (laborHours * 80 * crewSize) + 100;
@@ -336,6 +452,7 @@ function getDefaultStores() {
   ];
 }
 
+// ✅ MAIN HANDLER - Preserves exact working image flow
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -370,7 +487,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // Validate image format
+    // ✅ WORKING IMAGE VALIDATION (from document 4)
     for (let i = 0; i < images.length; i++) {
       if (!images[i] || typeof images[i] !== 'string') {
         return res.status(400).json({
@@ -386,7 +503,6 @@ export default async function handler(req, res) {
         });
       }
       
-      // Check if it's a supported format
       const formatMatch = images[i].match(/^data:image\/(\w+);base64,/);
       if (!formatMatch) {
         return res.status(400).json({
@@ -411,7 +527,7 @@ export default async function handler(req, res) {
       imageSizes: images.map(img => `${Math.round(img.length * 0.75 / 1024)}KB`)
     });
 
-    // Process images with better error handling
+    // ✅ WORKING IMAGE PROCESSING (from document 4)
     const visionAnnotations = [];
     let visionErrors = 0;
     
@@ -453,7 +569,7 @@ export default async function handler(req, res) {
                 ]
               }]
             }),
-            signal: AbortSignal.timeout(15000) // 15 second timeout
+            signal: AbortSignal.timeout(15000)
           }
         );
 
@@ -482,11 +598,10 @@ export default async function handler(req, res) {
 
     console.log(`Vision: ${visionAnnotations.length} success, ${visionErrors} errors`);
 
-    // ALWAYS attempt Groq analysis - even with 0 vision results
-    // The description alone is often sufficient for accurate estimates
+    // ALWAYS attempt Groq analysis with 🧠 BRAIN
     const analysis = await analyzeWithGroq(
       description,
-      visionAnnotations, // Pass whatever we got (even if empty)
+      visionAnnotations,
       service_context,
       chat_history
     );
@@ -499,7 +614,7 @@ export default async function handler(req, res) {
       processing_time_ms: processingTime,
       vision_success_count: visionAnnotations.length,
       vision_error_count: visionErrors,
-      vision_note: visionAnnotations.length === 0 ? 'Estimate based on description only - image analysis unavailable' : null,
+      vision_note: visionAnnotations.length === 0 ? 'Estimate based on description only' : null,
       ...analysis
     });
 
@@ -507,13 +622,12 @@ export default async function handler(req, res) {
     const processingTime = Date.now() - startTime;
     console.error('❌ Handler error:', error.message);
 
-    // ALWAYS return a usable estimate, even on error
     const emergencyFallback = createSmartFallback(
       req.body.description || 'Maintenance issue',
       req.body.service_context
     );
 
-    return res.status(200).json({ // Return 200, not 500
+    return res.status(200).json({
       success: false,
       error: 'Analysis completed with limited information',
       processing_time_ms: processingTime,
