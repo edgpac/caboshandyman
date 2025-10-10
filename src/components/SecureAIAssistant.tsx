@@ -23,87 +23,87 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const [clarificationNeeded, setClarificationNeeded] = useState(null);
   
   const [bookingData, setBookingData] = useState({
-  name: '',
-  phone: '',
-  serviceType: '',
-  projectDetails: '',
-  urgency: 'normal'
-});
+    name: '',
+    phone: '',
+    serviceType: '',
+    projectDetails: '',
+    urgency: 'normal'
+  });
 
-const isMobile = useIsMobile();
+  const isMobile = useIsMobile();
 
-const assistantIsOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
+  const assistantIsOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
 
-useEffect(() => {
-  if (initialMode && assistantIsOpen) {
-    setCurrentView(initialMode);
-    
-    if (initialMode === 'booking') {
-      setSelectedService(null);
-      setBookingData(prev => ({
-        ...prev,
-        serviceType: 'General Consultation'
-      }));
-    }
-  }
-}, [initialMode, assistantIsOpen]);
-
-const handleClose = () => {
-  if (onClose) {
-    onClose();
-  } else {
-    setIsOpen(false);
-  }
-  resetAssistant();
-};
-
-const services = [
-  {
-    title: "Residential Maintenance",
-    description: "Kitchen, bathroom, and home renovations with premium finishes and expert craftsmanship.",
-    icon: Home,
-    details: "Complete home renovations including kitchens, bathrooms, flooring, painting, and custom installations. We handle everything from minor repairs to major remodels.",
-    calendlyUrl: "https://cal.com/maintenancemaster/residential-consultation"
-  },
-  {
-    title: "Emergency Services", 
-    description: "AI-powered response for water damage, structural issues, and urgent repairs. 30-minute response time.",
-    icon: Zap,
-    details: "24/7 emergency response for water damage, electrical issues, structural problems, and urgent repairs. Our AI system helps prioritize and dispatch the right team immediately.",
-    calendlyUrl: "https://cal.com/maintenancemaster/emergency-service-assessment"
-  },
-  {
-    title: "Commercial Projects",
-    description: "Office buildouts, retail spaces, and commercial maintenance for Ventura County businesses.",
-    icon: Building,
-    details: "Professional commercial services including office buildouts, retail renovations, restaurant construction, and ongoing maintenance contracts for businesses.",
-    calendlyUrl: "https://cal.com/maintenancemaster/commercial-project-consultation"
-  },
-  {
-    title: "HOA & Property Maintenance",
-    description: "Comprehensive maintenance solutions designed to enhance community value and resident satisfaction.",
-    icon: Users,
-    details: "Complete property management services for HOAs and multi-unit properties including landscaping, common area maintenance, and tenant improvement coordination.",
-    calendlyUrl: "https://cal.com/maintenancemaster/hoa-property-assessment"
-  }
-];
-
-const startCamera = async () => {
-  try {
-    const mediaStream = await navigator.mediaDevices.getUserMedia({
-      video: { 
-        facingMode: 'environment',
-        width: { ideal: isMobile ? 720 : 1920 },
-        height: { ideal: isMobile ? 480 : 1080 }
+  useEffect(() => {
+    if (initialMode && assistantIsOpen) {
+      setCurrentView(initialMode);
+      
+      if (initialMode === 'booking') {
+        setSelectedService(null);
+        setBookingData(prev => ({
+          ...prev,
+          serviceType: 'General Consultation'
+        }));
       }
-    });
-    setStream(mediaStream);
-    setIsCameraOpen(true);
-  } catch (error) {
-    console.error('Camera access failed:', error);
-    setError('Camera access denied. Please check permissions and try again.');
-  }
-};
+    }
+  }, [initialMode, assistantIsOpen]);
+
+  const handleClose = () => {
+    if (onClose) {
+      onClose();
+    } else {
+      setIsOpen(false);
+    }
+    resetAssistant();
+  };
+
+  const services = [
+    {
+      title: "Residential Maintenance",
+      description: "Kitchen, bathroom, and home renovations with premium finishes and expert craftsmanship.",
+      icon: Home,
+      details: "Complete home renovations including kitchens, bathrooms, flooring, painting, and custom installations. We handle everything from minor repairs to major remodels.",
+      calendlyUrl: "https://cal.com/maintenancemaster/residential-consultation"
+    },
+    {
+      title: "Emergency Services", 
+      description: "AI-powered response for water damage, structural issues, and urgent repairs. 30-minute response time.",
+      icon: Zap,
+      details: "24/7 emergency response for water damage, electrical issues, structural problems, and urgent repairs. Our AI system helps prioritize and dispatch the right team immediately.",
+      calendlyUrl: "https://cal.com/maintenancemaster/emergency-service-assessment"
+    },
+    {
+      title: "Commercial Projects",
+      description: "Office buildouts, retail spaces, and commercial maintenance for Ventura County businesses.",
+      icon: Building,
+      details: "Professional commercial services including office buildouts, retail renovations, restaurant construction, and ongoing maintenance contracts for businesses.",
+      calendlyUrl: "https://cal.com/maintenancemaster/commercial-project-consultation"
+    },
+    {
+      title: "HOA & Property Maintenance",
+      description: "Comprehensive maintenance solutions designed to enhance community value and resident satisfaction.",
+      icon: Users,
+      details: "Complete property management services for HOAs and multi-unit properties including landscaping, common area maintenance, and tenant improvement coordination.",
+      calendlyUrl: "https://cal.com/maintenancemaster/hoa-property-assessment"
+    }
+  ];
+
+  const startCamera = async () => {
+    try {
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: { 
+          facingMode: 'environment',
+          width: { ideal: isMobile ? 720 : 1920 },
+          height: { ideal: isMobile ? 480 : 1080 }
+        }
+      });
+      setStream(mediaStream);
+      setIsCameraOpen(true);
+    } catch (error) {
+      console.error('Camera access failed:', error);
+      setError('Camera access denied. Please check permissions and try again.');
+    }
+  };
 
   const stopCamera = () => {
     if (stream) {
@@ -197,147 +197,136 @@ Time: ${new Date().toLocaleString()}`;
   };
 
   const compressImage = (file) => {
-  return new Promise((resolve, reject) => {
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-    
-    img.onload = () => {
-      // Clean up object URL
-      URL.revokeObjectURL(img.src);
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
       
-      let { width, height } = img;
-      
-      // MORE AGGRESSIVE mobile sizing to prevent 413 errors
-      const maxDimension = isMobile ? 1024 : 1920;
-      
-      if (width > maxDimension || height > maxDimension) {
-        if (width > height) {
-          height = Math.round((height * maxDimension) / width);
-          width = maxDimension;
-        } else {
-          width = Math.round((width * maxDimension) / height);
-          height = maxDimension;
-        }
-      }
-      
-      // Ensure even dimensions (some image processors prefer this)
-      width = width - (width % 2);
-      height = height - (height % 2);
-      
-      canvas.width = width;
-      canvas.height = height;
-      
-      // White background for transparency
-      ctx.fillStyle = '#FFFFFF';
-      ctx.fillRect(0, 0, width, height);
-      
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = 'high';
-      ctx.drawImage(img, 0, 0, width, height);
-      
-      // CHANGED: Start with lower quality on mobile to prevent 413 errors
-      const targetQuality = isMobile ? 0.75 : 0.85;
-      
-      canvas.toBlob((blob) => {
-        if (!blob) {
-          reject(new Error('Canvas toBlob failed'));
-          return;
+      img.onload = () => {
+        URL.revokeObjectURL(img.src);
+        
+        let { width, height } = img;
+        
+        // FORCE mobile detection at runtime
+        const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+        const maxDimension = isMobileDevice ? 1024 : 1920;
+        
+        if (width > maxDimension || height > maxDimension) {
+          if (width > height) {
+            height = Math.round((height * maxDimension) / width);
+            width = maxDimension;
+          } else {
+            width = Math.round((width * maxDimension) / height);
+            height = maxDimension;
+          }
         }
         
-        const sizeKB = blob.size / 1024;
-        console.log(`✓ Compressed: ${width}x${height}, ${Math.round(sizeKB)}KB, quality: ${targetQuality}`);
+        width = width - (width % 2);
+        height = height - (height % 2);
         
-        // CHANGED: Ensure under 500KB for mobile to prevent 413
-        if (sizeKB > 500) {
-          console.log('⚠️ Large image, recompressing...');
-          canvas.toBlob((smallerBlob) => {
-            if (smallerBlob) {
-              const finalSize = Math.round(smallerBlob.size / 1024);
-              console.log(`✓ Recompressed: ${finalSize}KB`);
-              
-              // CHANGED: If STILL too large after aggressive compression, reject with helpful error
-              if (finalSize > 800) {
-                reject(new Error('Image too large. Please try taking a new photo or use a smaller image.'));
-                return;
+        canvas.width = width;
+        canvas.height = height;
+        
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, width, height);
+        
+        ctx.imageSmoothingEnabled = true;
+        ctx.imageSmoothingQuality = 'high';
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        const targetQuality = isMobileDevice ? 0.75 : 0.85;
+        
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            reject(new Error('Canvas toBlob failed'));
+            return;
+          }
+          
+          const sizeKB = blob.size / 1024;
+          console.log(`✓ Compressed: ${width}x${height}, ${Math.round(sizeKB)}KB, quality: ${targetQuality}, mobile: ${isMobileDevice}`);
+          
+          if (sizeKB > 500) {
+            console.log('⚠️ Large image, recompressing...');
+            canvas.toBlob((smallerBlob) => {
+              if (smallerBlob) {
+                const finalSize = Math.round(smallerBlob.size / 1024);
+                console.log(`✓ Recompressed: ${finalSize}KB`);
+                
+                if (finalSize > 800) {
+                  reject(new Error('Image too large. Please try taking a new photo or use a smaller image.'));
+                  return;
+                }
+                
+                resolve(smallerBlob);
+              } else {
+                resolve(blob);
               }
-              
-              resolve(smallerBlob);
-            } else {
-              resolve(blob);
-            }
-          }, 'image/jpeg', 0.6);
-        } else {
-          resolve(blob);
-        }
-      }, 'image/jpeg', targetQuality);
-    };
-    
-    img.onerror = (error) => {
-      URL.revokeObjectURL(img.src);
-      console.error('Image load error:', error);
-      reject(new Error('Failed to load image for compression'));
-    };
-    
-    // Create object URL for loading
+            }, 'image/jpeg', 0.6);
+          } else {
+            resolve(blob);
+          }
+        }, 'image/jpeg', targetQuality);
+      };
+      
+      img.onerror = (error) => {
+        URL.revokeObjectURL(img.src);
+        console.error('Image load error:', error);
+        reject(new Error('Failed to load image for compression'));
+      };
+      
+      try {
+        const objectUrl = URL.createObjectURL(file);
+        img.src = objectUrl;
+      } catch (error) {
+        reject(new Error('Failed to create image URL'));
+      }
+    });
+  };
+  const imageToBase64 = async (file) => {
     try {
-      const objectUrl = URL.createObjectURL(file);
-      img.src = objectUrl;
+      const compressedBlob = await compressImage(file);
+      
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result;
+          
+          if (!result || typeof result !== 'string' || !result.startsWith('data:image/')) {
+            console.error('Invalid data URI generated');
+            reject(new Error('Invalid image format'));
+            return;
+          }
+          
+          const sizeKB = (result.length * 3) / 4 / 1024;
+          console.log(`✓ Image ready: ${Math.round(sizeKB)}KB, format: ${result.substring(5, result.indexOf(';'))}`);
+          
+          resolve(result);
+        };
+        reader.onerror = (error) => {
+          console.error('FileReader error:', error);
+          reject(error);
+        };
+        reader.readAsDataURL(compressedBlob);
+      });
     } catch (error) {
-      reject(new Error('Failed to create image URL'));
+      console.error('Image compression failed:', error);
+      
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => {
+          const result = reader.result;
+          if (!result || !result.startsWith('data:image/')) {
+            reject(new Error('Invalid image format'));
+            return;
+          }
+          console.warn('⚠ Using uncompressed image');
+          resolve(result);
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
     }
-  });
-};
-
-const imageToBase64 = async (file) => {
-  try {
-    // Always compress to ensure compatibility
-    const compressedBlob = await compressImage(file);
-    
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const result = reader.result;
-        
-        // Verify it's a valid data URI
-        if (!result || typeof result !== 'string' || !result.startsWith('data:image/')) {
-          console.error('Invalid data URI generated');
-          reject(new Error('Invalid image format'));
-          return;
-        }
-        
-        const sizeKB = (result.length * 3) / 4 / 1024;
-        console.log(`✓ Image ready: ${Math.round(sizeKB)}KB, format: ${result.substring(5, result.indexOf(';'))}`);
-        
-        // Return full data URI
-        resolve(result);
-      };
-      reader.onerror = (error) => {
-        console.error('FileReader error:', error);
-        reject(error);
-      };
-      reader.readAsDataURL(compressedBlob);
-    });
-  } catch (error) {
-    console.error('Image compression failed:', error);
-    
-    // Fallback: try reading original file
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const result = reader.result;
-        if (!result || !result.startsWith('data:image/')) {
-          reject(new Error('Invalid image format'));
-          return;
-        }
-        console.warn('⚠ Using uncompressed image');
-        resolve(result);
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  }
-};
+  };
 
   const handleScheduleAppointment = async (analysisData) => {
     try {
@@ -512,7 +501,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
       const imagesDataURIs = await Promise.all(imagePromises);
       
-      // Ensure all images have proper data URI format
       const validatedImages = imagesDataURIs.map(dataUri => {
         if (!dataUri.startsWith('data:image/')) {
           return `data:image/jpeg;base64,${dataUri}`;
@@ -585,7 +573,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       if (result.success) {
         setAnalysis(result);
         
-        // Show info message if Vision API failed but we still got results
         if (result.vision_success_count === 0 && result.vision_error_count > 0) {
           const infoToast = document.createElement('div');
           infoToast.textContent = 'ℹ️ Estimate based on description (image analysis unavailable)';
@@ -626,11 +613,9 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       setIsAnalyzing(false);
     }
   };
-  
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     
-    // Check for HEIC/HEIF files
     const heicFiles = files.filter(file => 
       file.type === 'image/heic' || 
       file.type === 'image/heif' || 
@@ -686,7 +671,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
     const files = Array.from(e.dataTransfer.files);
     
-    // Check for HEIC/HEIF files
     const heicFiles = files.filter(file => 
       file.type === 'image/heic' || 
       file.type === 'image/heif' || 
@@ -1238,4 +1222,4 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       {isMobile && <div className="h-4"></div>}
     </div>
   );
-}// Force rebuild 1760062924
+}
