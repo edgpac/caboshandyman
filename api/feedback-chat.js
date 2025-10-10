@@ -74,10 +74,12 @@ Provide a helpful, conversational response (2-4 sentences). You can:
 - If asked about hourly rates: explain that our rates vary by project complexity, crew size, and skill level required - we don't have a single fixed hourly rate, each job is priced based on its specific scope and requirements
 
 IMPORTANT PRICING CONTEXT:
-- We do NOT have a fixed hourly rate - every project is quoted individually
+- $100 service call fee applies to all jobs (includes diagnosis + first 30 minutes of work)
+- Repair labor is then quoted separately based on the specific scope
+- We do NOT have a fixed hourly rate beyond the service call - every project is priced individually
 - Rates depend on: complexity, materials needed, crew size, skill level, urgency
-- Simple repairs might be $50-80/hour equivalent, complex work $100-150/hour equivalent
-- But we always quote by the job, not by the hour
+- Simple repairs might be completed within the service call, complex work requires additional quote
+- For large projects (remodels, commercial), we provide comprehensive quotes instead of service call pricing
 
 Be friendly, clear, and actionable. Keep prices in USD. If suggesting DIY, mention skill level needed and time required.`;
 
