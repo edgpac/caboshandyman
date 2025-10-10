@@ -228,13 +228,21 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
 
     try {
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
-      const imagesBase64 = await Promise.all(imagePromises);
+      const imagesDataURIs = await Promise.all(imagePromises);
+      
+      // ✅ Extract ONLY base64 part
+      const imagesBase64Only = imagesDataURIs.map(dataUri => {
+        if (dataUri.includes('base64,')) {
+          return dataUri.split('base64,')[1];
+        }
+        return dataUri;
+      });
 
       const response = await fetch('/api/analyze-parts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          images: imagesBase64,
+          images: imagesBase64Only, // ✅ Send clean base64
           description: chatInput,
           location: location || 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
@@ -286,9 +294,17 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
       
       const analysisPromise = (async () => {
         const imagePromises = selectedImages.map(img => imageToBase64(img.file));
-        const imagesBase64 = await Promise.all(imagePromises);
+        const imagesDataURIs = await Promise.all(imagePromises);
         
-        const payloadSize = imagesBase64.reduce((sum, img) => sum + img.length, 0);
+        // ✅ CRITICAL FIX: Extract ONLY base64 part for API
+        const imagesBase64Only = imagesDataURIs.map(dataUri => {
+          if (dataUri.includes('base64,')) {
+            return dataUri.split('base64,')[1];
+          }
+          return dataUri;
+        });
+        
+        const payloadSize = imagesBase64Only.reduce((sum, img) => sum + img.length, 0);
         const payloadMB = (payloadSize * 0.75) / (1024 * 1024);
         console.log(`Payload: ${payloadMB.toFixed(2)}MB`);
         
@@ -304,7 +320,7 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            images: imagesBase64,
+            images: imagesBase64Only, // ✅ Send clean base64
             description: analysisDescription,
             location: location || 'Cabo San Lucas, Mexico',
             service_context: selectedService ? {
@@ -318,6 +334,12 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => ({}));
+          console.error('API Error:', {
+            status: response.status,
+            error: errorData,
+            imageCount: imagesBase64Only.length,
+            imageSizes: imagesBase64Only.map(img => `${Math.round(img.length * 0.75 / 1024)}KB`)
+          });
           if (response.status === 413) throw new Error('Images too large. Use smaller photos.');
           if (response.status === 504) throw new Error('Server timeout. Try 1-2 images.');
           throw new Error(errorData.error || `Server error (${response.status})`);
@@ -339,13 +361,26 @@ export default function MobileEnhancedAIAssistant({ isOpen: externalIsOpen, onCl
         setClarificationNeeded(result);
         setChatHistory([{
           role: 'assistant',
-          content: `I need more details to provide an accurate estimate:\n\n• ${result.clarification_questions.join('\n• ')}`
+          content: `I need more details:\n\n• ${result.clarification_questions.join('\n• ')}`
         }]);
         return;
       }
 
       if (result.success) {
         setAnalysis(result);
+        
+        // Show info if image analysis failed
+        if (result.vision_success_count === 0 && result.vision_error_count > 0) {
+          const infoToast = document.createElement('div');
+          infoToast.textContent = 'ℹ️ Estimate based on description (image analysis unavailable)';
+          infoToast.className = 'fixed top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
+          document.body.appendChild(infoToast);
+          setTimeout(() => {
+            if (document.body.contains(infoToast)) {
+              document.body.removeChild(infoToast);
+            }
+          }, 5000);
+        }
       } else {
         setAnalysis({
           success: true,
