@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     const isWorkOrderQuery = workOrderKeywords.test(question);
 
     // Extract work order number if present
-    const workOrderMatch = question.match(/#?(\d{3,6})/);
+    const workOrderMatch = question.match(/(?:INV[- ]?|#)?(\d{1,6})/i);
     const workOrderNumber = workOrderMatch ? workOrderMatch[1] : null;
 
     // Extract potential name
