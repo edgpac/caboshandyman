@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile API Test - Maintenance Master</title>
+    <title>Mobile API Test - Cabos Handyman</title>
     <style>
         * {
             margin: 0;
@@ -169,7 +169,7 @@
         
         <div class="form-group">
             <label>Image Upload</label>
-            <input type="file" id="image-input" accept="image/*" capture="environment">
+            <input type="file" id="image-input" accept="image/jpeg,image/jpg,image/png" capture="environment">
         </div>
         
         <div class="camera-section">
@@ -225,8 +225,100 @@
         const results = document.getElementById('results');
         const error = document.getElementById('error');
         
+        // === COMPRESSION FUNCTION ===
+        function compressImage(file) {
+            return new Promise((resolve, reject) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                const img = new Image();
+                
+                img.onload = () => {
+                    URL.revokeObjectURL(img.src);
+                    
+                    let { width, height } = img;
+                    
+                    // Mobile-friendly max size
+                    const maxDimension = 1024;
+                    
+                    if (width > maxDimension || height > maxDimension) {
+                        if (width > height) {
+                            height = Math.round((height * maxDimension) / width);
+                            width = maxDimension;
+                        } else {
+                            width = Math.round((width * maxDimension) / height);
+                            height = maxDimension;
+                        }
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    
+                    // White background
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.fillRect(0, 0, width, height);
+                    
+                    ctx.imageSmoothingEnabled = true;
+                    ctx.imageSmoothingQuality = 'high';
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // Compress to JPEG
+                    canvas.toBlob((blob) => {
+                        if (!blob) {
+                            reject(new Error('Canvas toBlob failed'));
+                            return;
+                        }
+                        
+                        const sizeKB = blob.size / 1024;
+                        console.log(`✓ Compressed: ${width}x${height}, ${Math.round(sizeKB)}KB`);
+                        
+                        // If still too large, compress more
+                        if (sizeKB > 500) {
+                            console.log('⚠️ Still large, recompressing...');
+                            canvas.toBlob((smallerBlob) => {
+                                console.log(`✓ Final: ${Math.round(smallerBlob.size / 1024)}KB`);
+                                resolve(smallerBlob);
+                            }, 'image/jpeg', 0.6);
+                        } else {
+                            resolve(blob);
+                        }
+                    }, 'image/jpeg', 0.8);
+                };
+                
+                img.onerror = (err) => {
+                    URL.revokeObjectURL(img.src);
+                    reject(new Error('Failed to load image'));
+                };
+                
+                img.src = URL.createObjectURL(file);
+            });
+        }
+        
+        // === FILE TO BASE64 WITH COMPRESSION ===
+        async function fileToBase64(file) {
+            try {
+                console.log('Original file:', file.size, 'bytes');
+                
+                // Compress first
+                const compressedBlob = await compressImage(file);
+                
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const result = reader.result;
+                        console.log('✓ Image ready:', result.substring(0, 50) + '...');
+                        resolve(result); // Return full data URI
+                    };
+                    reader.onerror = reject;
+                    reader.readAsDataURL(compressedBlob);
+                });
+            } catch (err) {
+                console.error('Compression failed:', err);
+                throw err;
+            }
+        }
+        
         // Handle file input
-        imageInput.addEventListener('change', (e) => {
+        imageInput.addEventListener('change', async (e) => {
             const file = e.target.files[0];
             if (file) {
                 selectedFile = file;
@@ -294,7 +386,7 @@
         
         description.addEventListener('input', checkIfReady);
         
-        // API Test
+        // === API TEST ===
         analyzeButton.addEventListener('click', async () => {
             if (!selectedFile || !description.value.trim()) {
                 showError('Please select an image and enter a description');
@@ -306,17 +398,24 @@
             hideResults();
             
             try {
-                // Convert image to base64
-                const base64 = await fileToBase64(selectedFile);
+                console.log('=== STARTING ANALYSIS ===');
+                
+                // Convert and compress image
+                const dataUri = await fileToBase64(selectedFile);
                 
                 const payload = {
-                    imageBase64: base64,
+                    images: [dataUri], // Array of data URIs
                     description: description.value.trim(),
                     location: locationInput.value.trim() || 'Ventura County, CA',
                     service_context: null
                 };
                 
-                console.log('Sending payload size:', JSON.stringify(payload).length);
+                const payloadSize = JSON.stringify(payload).length;
+                console.log('Payload size:', payloadSize, 'bytes (~' + Math.round(payloadSize/1024) + 'KB)');
+                
+                if (payloadSize > 5000000) {
+                    throw new Error('Image still too large after compression. Try a different photo.');
+                }
                 
                 const response = await fetch('/api/analyze-parts', {
                     method: 'POST',
@@ -329,7 +428,8 @@
                 console.log('Response status:', response.status);
                 
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(errorData.error || `HTTP ${response.status}: ${response.statusText}`);
                 }
                 
                 const result = await response.json();
@@ -345,25 +445,20 @@
             }
         });
         
-        function fileToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => {
-                    const base64 = reader.result.split(',')[1];
-                    resolve(base64);
-                };
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
-            });
-        }
-        
         function showLoading(show) {
             loading.classList.toggle('hidden', !show);
             analyzeButton.disabled = show;
         }
         
         function showError(message) {
-            error.textContent = message;
+            error.innerHTML = `
+                <strong>Error:</strong> ${message}
+                <div class="debug-info" style="margin-top: 10px; font-size: 11px;">
+                    <strong>Debug:</strong><br>
+                    User Agent: ${navigator.userAgent.substring(0, 80)}...<br>
+                    Screen: ${window.screen.width}x${window.screen.height}<br>
+                </div>
+            `;
             error.classList.remove('hidden');
         }
         
@@ -388,12 +483,9 @@
                 ${costs?.disposal_cost ? `<p><strong>Disposal:</strong> $${costs.disposal_cost}</p>` : ''}
                 <p><strong>Total Range:</strong> $${costs?.total_cost?.min || 0} - $${costs?.total_cost?.max || 0}</p>
                 
-                ${costs?.pricing_source ? `<p><strong>Pricing Source:</strong> ${costs.pricing_source}</p>` : ''}
-                
                 <div class="debug-info">
-                    <strong>Debug Info:</strong><br>
-                    Success: ${data.success}<br>
-                    ${data.debug_info ? JSON.stringify(data.debug_info, null, 2) : 'No debug info'}
+                    <strong>Vision API:</strong> ${data.vision_success_count || 0} success, ${data.vision_error_count || 0} errors<br>
+                    <strong>Processing:</strong> ${data.processing_time_ms}ms
                 </div>
             `;
             results.classList.remove('hidden');
@@ -403,10 +495,9 @@
             results.classList.add('hidden');
         }
         
-        // Device info
-        console.log('User Agent:', navigator.userAgent);
-        console.log('Screen size:', window.screen.width + 'x' + window.screen.height);
-        console.log('Viewport size:', window.innerWidth + 'x' + window.innerHeight);
+        console.log('Mobile Tester Ready');
+        console.log('Device:', navigator.userAgent);
+        console.log('Screen:', window.screen.width + 'x' + window.screen.height);
     </script>
 </body>
 </html>
