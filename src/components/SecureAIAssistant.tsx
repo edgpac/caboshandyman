@@ -204,139 +204,147 @@ Time: ${new Date().toLocaleString()}`;
   };
 
   const compressImage = (file) => {
-    return new Promise((resolve, reject) => {
-      const canvas = document.createElement('canvas');
-      const ctx = canvas.getContext('2d');
-      const img = new Image();
+  return new Promise((resolve, reject) => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    
+    img.onload = () => {
+      // Clean up object URL
+      URL.revokeObjectURL(img.src);
       
-      img.onload = () => {
-        // Clean up object URL
-        URL.revokeObjectURL(img.src);
-        
-        let { width, height } = img;
-        
-        // Consistent sizing for Vision API reliability
-        const maxDimension = isMobile ? 1024 : 1920;
-        
-        if (width > maxDimension || height > maxDimension) {
-          if (width > height) {
-            height = Math.round((height * maxDimension) / width);
-            width = maxDimension;
-          } else {
-            width = Math.round((width * maxDimension) / height);
-            height = maxDimension;
-          }
+      let { width, height } = img;
+      
+      // MORE AGGRESSIVE mobile sizing to prevent 413 errors
+      const maxDimension = isMobile ? 1024 : 1920;
+      
+      if (width > maxDimension || height > maxDimension) {
+        if (width > height) {
+          height = Math.round((height * maxDimension) / width);
+          width = maxDimension;
+        } else {
+          width = Math.round((width * maxDimension) / height);
+          height = maxDimension;
+        }
+      }
+      
+      // Ensure even dimensions (some image processors prefer this)
+      width = width - (width % 2);
+      height = height - (height % 2);
+      
+      canvas.width = width;
+      canvas.height = height;
+      
+      // White background for transparency
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, width, height);
+      
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, 0, 0, width, height);
+      
+      // CHANGED: Start with lower quality on mobile to prevent 413 errors
+      const targetQuality = isMobile ? 0.75 : 0.85;
+      
+      canvas.toBlob((blob) => {
+        if (!blob) {
+          reject(new Error('Canvas toBlob failed'));
+          return;
         }
         
-        // Ensure even dimensions (some image processors prefer this)
-        width = width - (width % 2);
-        height = height - (height % 2);
+        const sizeKB = blob.size / 1024;
+        console.log(`✓ Compressed: ${width}x${height}, ${Math.round(sizeKB)}KB, quality: ${targetQuality}`);
         
-        canvas.width = width;
-        canvas.height = height;
-        
-        // White background for transparency
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, width, height);
-        
-        ctx.imageSmoothingEnabled = true;
-        ctx.imageSmoothingQuality = 'high';
-        ctx.drawImage(img, 0, 0, width, height);
-        
-        // Always output JPEG for Vision API compatibility
-        const targetQuality = isMobile ? 0.8 : 0.85;
-        
-        canvas.toBlob((blob) => {
-          if (!blob) {
-            reject(new Error('Canvas toBlob failed'));
-            return;
-          }
-          
-          const sizeKB = blob.size / 1024;
-          console.log(`✓ Compressed: ${width}x${height}, ${Math.round(sizeKB)}KB, quality: ${targetQuality}`);
-          
-          // Ensure reasonable size
-          if (sizeKB > 800) {
-            console.log('⚠ Large image, recompressing...');
-            canvas.toBlob((smallerBlob) => {
-              if (smallerBlob) {
-                console.log(`✓ Recompressed: ${Math.round(smallerBlob.size / 1024)}KB`);
-                resolve(smallerBlob);
-              } else {
-                resolve(blob);
+        // CHANGED: Ensure under 500KB for mobile to prevent 413
+        if (sizeKB > 500) {
+          console.log('⚠️ Large image, recompressing...');
+          canvas.toBlob((smallerBlob) => {
+            if (smallerBlob) {
+              const finalSize = Math.round(smallerBlob.size / 1024);
+              console.log(`✓ Recompressed: ${finalSize}KB`);
+              
+              // CHANGED: If STILL too large after aggressive compression, reject with helpful error
+              if (finalSize > 800) {
+                reject(new Error('Image too large. Please try taking a new photo or use a smaller image.'));
+                return;
               }
-            }, 'image/jpeg', 0.7);
-          } else {
-            resolve(blob);
-          }
-        }, 'image/jpeg', targetQuality);
-      };
-      
-      img.onerror = (error) => {
-        URL.revokeObjectURL(img.src);
-        console.error('Image load error:', error);
-        reject(new Error('Failed to load image for compression'));
-      };
-      
-      // Create object URL for loading
-      try {
-        const objectUrl = URL.createObjectURL(file);
-        img.src = objectUrl;
-      } catch (error) {
-        reject(new Error('Failed to create image URL'));
-      }
-    });
-  };
-
-  const imageToBase64 = async (file) => {
+              
+              resolve(smallerBlob);
+            } else {
+              resolve(blob);
+            }
+          }, 'image/jpeg', 0.6);
+        } else {
+          resolve(blob);
+        }
+      }, 'image/jpeg', targetQuality);
+    };
+    
+    img.onerror = (error) => {
+      URL.revokeObjectURL(img.src);
+      console.error('Image load error:', error);
+      reject(new Error('Failed to load image for compression'));
+    };
+    
+    // Create object URL for loading
     try {
-      // Always compress to ensure compatibility
-      const compressedBlob = await compressImage(file);
-      
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const result = reader.result;
-          
-          // Verify it's a valid data URI
-          if (!result || typeof result !== 'string' || !result.startsWith('data:image/')) {
-            console.error('Invalid data URI generated');
-            reject(new Error('Invalid image format'));
-            return;
-          }
-          
-          const sizeKB = (result.length * 3) / 4 / 1024;
-          console.log(`✓ Image ready: ${Math.round(sizeKB)}KB, format: ${result.substring(5, result.indexOf(';'))}`);
-          
-          // Return full data URI
-          resolve(result);
-        };
-        reader.onerror = (error) => {
-          console.error('FileReader error:', error);
-          reject(error);
-        };
-        reader.readAsDataURL(compressedBlob);
-      });
+      const objectUrl = URL.createObjectURL(file);
+      img.src = objectUrl;
     } catch (error) {
-      console.error('Image compression failed:', error);
-      
-      // Fallback: try reading original file
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = () => {
-          const result = reader.result;
-          if (!result || !result.startsWith('data:image/')) {
-            reject(new Error('Invalid image format'));
-            return;
-          }
-          console.warn('⚠ Using uncompressed image');
-          resolve(result);
-        };
-        reader.onerror = reject;
-        reader.readAsDataURL(file);
-      });
+      reject(new Error('Failed to create image URL'));
     }
-  };
+  });
+};
+
+const imageToBase64 = async (file) => {
+  try {
+    // Always compress to ensure compatibility
+    const compressedBlob = await compressImage(file);
+    
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result;
+        
+        // Verify it's a valid data URI
+        if (!result || typeof result !== 'string' || !result.startsWith('data:image/')) {
+          console.error('Invalid data URI generated');
+          reject(new Error('Invalid image format'));
+          return;
+        }
+        
+        const sizeKB = (result.length * 3) / 4 / 1024;
+        console.log(`✓ Image ready: ${Math.round(sizeKB)}KB, format: ${result.substring(5, result.indexOf(';'))}`);
+        
+        // Return full data URI
+        resolve(result);
+      };
+      reader.onerror = (error) => {
+        console.error('FileReader error:', error);
+        reject(error);
+      };
+      reader.readAsDataURL(compressedBlob);
+    });
+  } catch (error) {
+    console.error('Image compression failed:', error);
+    
+    // Fallback: try reading original file
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const result = reader.result;
+        if (!result || !result.startsWith('data:image/')) {
+          reject(new Error('Invalid image format'));
+          return;
+        }
+        console.warn('⚠ Using uncompressed image');
+        resolve(result);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+};
 
   const handleScheduleAppointment = async (analysisData) => {
     try {
