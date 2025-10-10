@@ -1,6 +1,7 @@
 // Force rebuild - mobile compression fix v2
 import React, { useState, useEffect } from 'react';
 import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone } from 'lucide-react';
+import { useIsMobile } from '../hooks/use-mobile';
 
 export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, initialMode }) {
   const [isOpen, setIsOpen] = useState(false);
