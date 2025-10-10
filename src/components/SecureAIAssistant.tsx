@@ -208,7 +208,9 @@ Time: ${new Date().toLocaleString()}`;
         let { width, height } = img;
         
         // FORCE mobile detection at runtime
-        const isMobileDevice = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent) || window.innerWidth < 768;
+        const isMobileDevice = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                       window.innerWidth <= 1024 || 
+                       ('ontouchstart' in window);
         const maxDimension = isMobileDevice ? 1024 : 1920;
         
         if (width > maxDimension || height > maxDimension) {
