@@ -1,4 +1,4 @@
-// Force rebuild - mobile compression fix v2
+// Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT
 import React, { useState, useEffect } from 'react';
 import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
@@ -21,6 +21,11 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const [chatHistory, setChatHistory] = useState([]);
   const [chatInput, setChatInput] = useState('');
   const [clarificationNeeded, setClarificationNeeded] = useState(null);
+  
+  // POST-ESTIMATE FEEDBACK CHAT
+  const [feedbackMode, setFeedbackMode] = useState(false);
+  const [feedbackInput, setFeedbackInput] = useState('');
+  const [feedbackHistory, setFeedbackHistory] = useState([]);
   
   const [bookingData, setBookingData] = useState({
     name: '',
@@ -212,7 +217,6 @@ Time: ${new Date().toLocaleString()}`;
                        window.innerWidth <= 1024 || 
                        ('ontouchstart' in window);
         const maxDimension = isMobileDevice ? 1024 : 1920;
-        
         if (width > maxDimension || height > maxDimension) {
           if (width > height) {
             height = Math.round((height * maxDimension) / width);
@@ -493,7 +497,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       setIsAnalyzing(false);
     }
   };
-
   const analyzeIssue = async () => {
     setIsAnalyzing(true);
     setError(null);
@@ -617,6 +620,58 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     }
   };
 
+  const handleFeedbackChat = async () => {
+    if (!feedbackInput.trim() || !analysis) return;
+
+    const userMessage = {
+      role: 'user',
+      content: feedbackInput
+    };
+
+    const newFeedbackHistory = [...feedbackHistory, userMessage];
+    setFeedbackHistory(newFeedbackHistory);
+    setFeedbackInput('');
+    setIsAnalyzing(true);
+
+    try {
+      const response = await fetch('/api/feedback-chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          question: feedbackInput,
+          analysis: analysis,
+          history: newFeedbackHistory,
+          service_context: selectedService
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Feedback chat failed');
+      }
+
+      const result = await response.json();
+
+      const aiMessage = {
+        role: 'assistant',
+        content: result.response
+      };
+
+      setFeedbackHistory([...newFeedbackHistory, aiMessage]);
+
+    } catch (error) {
+      console.error('Feedback chat error:', error);
+      const errorMessage = {
+        role: 'assistant',
+        content: 'Sorry, I had trouble processing that. Could you rephrase your question?'
+      };
+      setFeedbackHistory([...newFeedbackHistory, errorMessage]);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
     
@@ -731,6 +786,9 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       projectDetails: '',
       urgency: 'normal'
     });
+    setFeedbackMode(false);
+    setFeedbackInput('');
+    setFeedbackHistory([]);
   };
 
   const getSeverityColor = (severity) => {
@@ -765,7 +823,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
 
   const maxImages = isMobile ? 1 : 3;
-  
   return (
     <div className={containerClasses}>
       <div className={`bg-blue-600 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
@@ -1043,7 +1100,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     </div>
                   )}
                 </div>
-                
                 <div className="flex space-x-2">
                   <input
                     value={chatInput}
@@ -1199,6 +1255,74 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   </div>
                 </div>
               </div>
+            )}
+
+            {feedbackMode ? (
+              <div className="border-t pt-4 space-y-3">
+                <div className="bg-green-50 border border-green-200 rounded-lg p-3">
+                  <div className="flex items-center space-x-2 mb-2">
+                    <MessageCircle size={16} className="text-green-600" />
+                    <span className="text-sm font-semibold text-green-800">Questions about this estimate?</span>
+                  </div>
+                  <p className="text-xs text-green-700">Ask me anything about costs, materials, timeline, or DIY options.</p>
+                </div>
+
+                <div className="border rounded-lg p-3 bg-gray-50 max-h-48 overflow-y-auto space-y-3">
+                  {feedbackHistory.map((msg, i) => (
+                    <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                      <div className={`max-w-[85%] p-2 rounded-lg text-sm ${
+                        msg.role === 'user' 
+                          ? 'bg-blue-600 text-white rounded-br-none' 
+                          : 'bg-white border border-gray-200 rounded-bl-none'
+                      }`}>
+                        <div className="whitespace-pre-line">{msg.content}</div>
+                      </div>
+                    </div>
+                  ))}
+                  {isAnalyzing && (
+                    <div className="flex justify-start">
+                      <div className="bg-white border border-gray-200 p-2 rounded-lg">
+                        <Loader className="animate-spin w-4 h-4 text-blue-600" />
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="flex space-x-2">
+                  <input
+                    value={feedbackInput}
+                    onChange={(e) => setFeedbackInput(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
+                    placeholder="Ask about materials, timeline, DIY..."
+                    className={`flex-1 p-2 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
+                      isMobile ? 'text-base' : ''
+                    }`}
+                    disabled={isAnalyzing}
+                  />
+                  <button 
+                    onClick={handleFeedbackChat}
+                    disabled={!feedbackInput.trim() || isAnalyzing}
+                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
+                  >
+                    <Send size={16} />
+                  </button>
+                </div>
+
+                <button
+                  onClick={() => setFeedbackMode(false)}
+                  className="w-full text-xs text-gray-600 hover:text-gray-800 underline"
+                >
+                  Hide Chat
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setFeedbackMode(true)}
+                className="w-full bg-green-50 hover:bg-green-100 text-green-800 py-2 px-4 rounded-lg font-semibold text-sm border border-green-200 transition-colors flex items-center justify-center space-x-2"
+              >
+                <MessageCircle size={16} />
+                <span>Ask Questions About This Estimate</span>
+              </button>
             )}
 
             <div className="space-y-2">
