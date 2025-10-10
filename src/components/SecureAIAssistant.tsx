@@ -23,95 +23,87 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const [clarificationNeeded, setClarificationNeeded] = useState(null);
   
   const [bookingData, setBookingData] = useState({
-    name: '',
-    phone: '',
-    serviceType: '',
-    projectDetails: '',
-    urgency: 'normal'
-  });
+  name: '',
+  phone: '',
+  serviceType: '',
+  projectDetails: '',
+  urgency: 'normal'
+});
 
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
+const isMobile = useIsMobile();
+
+const assistantIsOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
+
+useEffect(() => {
+  if (initialMode && assistantIsOpen) {
+    setCurrentView(initialMode);
     
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
+    if (initialMode === 'booking') {
+      setSelectedService(null);
+      setBookingData(prev => ({
+        ...prev,
+        serviceType: 'General Consultation'
+      }));
+    }
+  }
+}, [initialMode, assistantIsOpen]);
 
-  const assistantIsOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
+const handleClose = () => {
+  if (onClose) {
+    onClose();
+  } else {
+    setIsOpen(false);
+  }
+  resetAssistant();
+};
 
-  useEffect(() => {
-    if (initialMode && assistantIsOpen) {
-      setCurrentView(initialMode);
-      
-      if (initialMode === 'booking') {
-        setSelectedService(null);
-        setBookingData(prev => ({
-          ...prev,
-          serviceType: 'General Consultation'
-        }));
+const services = [
+  {
+    title: "Residential Maintenance",
+    description: "Kitchen, bathroom, and home renovations with premium finishes and expert craftsmanship.",
+    icon: Home,
+    details: "Complete home renovations including kitchens, bathrooms, flooring, painting, and custom installations. We handle everything from minor repairs to major remodels.",
+    calendlyUrl: "https://cal.com/maintenancemaster/residential-consultation"
+  },
+  {
+    title: "Emergency Services", 
+    description: "AI-powered response for water damage, structural issues, and urgent repairs. 30-minute response time.",
+    icon: Zap,
+    details: "24/7 emergency response for water damage, electrical issues, structural problems, and urgent repairs. Our AI system helps prioritize and dispatch the right team immediately.",
+    calendlyUrl: "https://cal.com/maintenancemaster/emergency-service-assessment"
+  },
+  {
+    title: "Commercial Projects",
+    description: "Office buildouts, retail spaces, and commercial maintenance for Ventura County businesses.",
+    icon: Building,
+    details: "Professional commercial services including office buildouts, retail renovations, restaurant construction, and ongoing maintenance contracts for businesses.",
+    calendlyUrl: "https://cal.com/maintenancemaster/commercial-project-consultation"
+  },
+  {
+    title: "HOA & Property Maintenance",
+    description: "Comprehensive maintenance solutions designed to enhance community value and resident satisfaction.",
+    icon: Users,
+    details: "Complete property management services for HOAs and multi-unit properties including landscaping, common area maintenance, and tenant improvement coordination.",
+    calendlyUrl: "https://cal.com/maintenancemaster/hoa-property-assessment"
+  }
+];
+
+const startCamera = async () => {
+  try {
+    const mediaStream = await navigator.mediaDevices.getUserMedia({
+      video: { 
+        facingMode: 'environment',
+        width: { ideal: isMobile ? 720 : 1920 },
+        height: { ideal: isMobile ? 480 : 1080 }
       }
-    }
-  }, [initialMode, assistantIsOpen]);
-
-  const handleClose = () => {
-    if (onClose) {
-      onClose();
-    } else {
-      setIsOpen(false);
-    }
-    resetAssistant();
-  };
-
-  const services = [
-    {
-      title: "Residential Maintenance",
-      description: "Kitchen, bathroom, and home renovations with premium finishes and expert craftsmanship.",
-      icon: Home,
-      details: "Complete home renovations including kitchens, bathrooms, flooring, painting, and custom installations. We handle everything from minor repairs to major remodels.",
-      calendlyUrl: "https://cal.com/maintenancemaster/residential-consultation"
-    },
-    {
-      title: "Emergency Services", 
-      description: "AI-powered response for water damage, structural issues, and urgent repairs. 30-minute response time.",
-      icon: Zap,
-      details: "24/7 emergency response for water damage, electrical issues, structural problems, and urgent repairs. Our AI system helps prioritize and dispatch the right team immediately.",
-      calendlyUrl: "https://cal.com/maintenancemaster/emergency-service-assessment"
-    },
-    {
-      title: "Commercial Projects",
-      description: "Office buildouts, retail spaces, and commercial maintenance for Ventura County businesses.",
-      icon: Building,
-      details: "Professional commercial services including office buildouts, retail renovations, restaurant construction, and ongoing maintenance contracts for businesses.",
-      calendlyUrl: "https://cal.com/maintenancemaster/commercial-project-consultation"
-    },
-    {
-      title: "HOA & Property Maintenance",
-      description: "Comprehensive maintenance solutions designed to enhance community value and resident satisfaction.",
-      icon: Users,
-      details: "Complete property management services for HOAs and multi-unit properties including landscaping, common area maintenance, and tenant improvement coordination.",
-      calendlyUrl: "https://cal.com/maintenancemaster/hoa-property-assessment"
-    }
-  ];
-
-  const startCamera = async () => {
-    try {
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: { 
-          facingMode: 'environment',
-          width: { ideal: isMobile ? 720 : 1920 },
-          height: { ideal: isMobile ? 480 : 1080 }
-        }
-      });
-      setStream(mediaStream);
-      setIsCameraOpen(true);
-    } catch (error) {
-      console.error('Camera access failed:', error);
-      setError('Camera access denied. Please check permissions and try again.');
-    }
-  };
+    });
+    setStream(mediaStream);
+    setIsCameraOpen(true);
+  } catch (error) {
+    console.error('Camera access failed:', error);
+    setError('Camera access denied. Please check permissions and try again.');
+  }
+};
 
   const stopCamera = () => {
     if (stream) {
