@@ -1,4 +1,4 @@
-// api/analyze-parts.js - COMPLETE FIXED VERSION
+// api/analyze-parts.js - COMPLETE VERSION WITHOUT INTELLIGENCE
 // Robust image processing with Vision API error handling
 
 export const config = {
