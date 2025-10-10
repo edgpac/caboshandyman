@@ -15,7 +15,6 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const [analysis, setAnalysis] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [error, setError] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   
   const [chatMode, setChatMode] = useState(false);
