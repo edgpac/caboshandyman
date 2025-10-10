@@ -494,83 +494,85 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
   };
 
   const analyzeIssue = async () => {
-    setIsAnalyzing(true);
-    setError(null);
+  setIsAnalyzing(true);
+  setError(null);
 
-    try {
-      console.log('Starting analysis with', selectedImages.length, 'images');
-      
-      const imagePromises = selectedImages.map(img => imageToBase64(img.file));
-      const imagesDataURIs = await Promise.all(imagePromises);
-      
-      const validatedImages = imagesDataURIs.map(dataUri => {
-        if (!dataUri.startsWith('data:image/')) {
-          return `data:image/jpeg;base64,${dataUri}`;
+  try {
+    console.log('Starting analysis with', selectedImages.length, 'images');
+    
+    const imagePromises = selectedImages.map(img => imageToBase64(img.file));
+    const imagesDataURIs = await Promise.all(imagePromises);
+    
+    // ❌ DELETE THESE LINES (505-512):
+    // const validatedImages = imagesDataURIs.map(dataUri => {
+    //   if (!dataUri.startsWith('data:image/')) {
+    //     return `data:image/jpeg;base64,${dataUri}`;
+    //   }
+    //   return dataUri;
+    // });
+    
+    // ✅ REPLACE WITH THIS:
+    console.log('Images prepared:', imagesDataURIs.map(img => `${Math.round(img.length / 1024)}KB`));
+    
+    const analysisDescription = selectedService 
+      ? `${description} (Service context: ${selectedService.title} - ${selectedService.description})`
+      : description;
+
+    const response = await fetch('/api/analyze-parts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        images: imagesDataURIs, // ✅ CHANGED from validatedImages
+        description: analysisDescription,
+        location: location || 'Cabo San Lucas, Mexico',
+        service_context: selectedService ? {
+          title: selectedService.title,
+          category: selectedService.title.toLowerCase().replace(' ', '_')
+        } : null
+      })
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      console.error('API Error:', {
+        status: response.status,
+        error: errorData,
+        imageCount: imagesDataURIs.length, // ✅ CHANGED from validatedImages
+        imageSizes: imagesDataURIs.map(img => `${Math.round(img.length / 1024)}KB`) // ✅ CHANGED
+      });
+      throw new Error(errorData.error || `Server error (${response.status})`);
+    }
+
+    const result = await response.json();
+    console.log('Analysis result:', {
+      success: result.success,
+      hasAnalysis: !!result.analysis,
+      needsClarification: result.needs_clarification,
+      visionSuccess: result.vision_success_count,
+      visionErrors: result.vision_error_count
+    });
+
+    if (result.is_off_topic) {
+      setError(result.message);
+      setAnalysis(null);
+      setIsAnalyzing(false);
+      return;
+    }
+
+    if (result.needs_clarification) {
+      setChatMode(true);
+      setClarificationNeeded(result);
+      setChatHistory([
+        {
+          role: 'assistant',
+          content: `I need a bit more information to give you an accurate estimate:\n\n• ${result.clarification_questions.join('\n• ')}`
         }
-        return dataUri;
-      });
-      
-      console.log('Images compressed successfully:', validatedImages.map(img => `${Math.round(img.length / 1024)}KB`));
-      
-      const analysisDescription = selectedService 
-        ? `${description} (Service context: ${selectedService.title} - ${selectedService.description})`
-        : description;
-
-      const response = await fetch('/api/analyze-parts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          images: validatedImages,
-          description: analysisDescription,
-          location: location || 'Cabo San Lucas, Mexico',
-          service_context: selectedService ? {
-            title: selectedService.title,
-            category: selectedService.title.toLowerCase().replace(' ', '_')
-          } : null
-        })
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => ({}));
-        console.error('API Error:', {
-          status: response.status,
-          error: errorData,
-          imageCount: validatedImages.length,
-          imageSizes: validatedImages.map(img => `${Math.round(img.length / 1024)}KB`)
-        });
-        throw new Error(errorData.error || `Server error (${response.status})`);
-      }
-
-      const result = await response.json();
-      console.log('Analysis result:', {
-        success: result.success,
-        hasAnalysis: !!result.analysis,
-        needsClarification: result.needs_clarification,
-        visionSuccess: result.vision_success_count,
-        visionErrors: result.vision_error_count
-      });
-
-      if (result.is_off_topic) {
-        setError(result.message);
-        setAnalysis(null);
-        setIsAnalyzing(false);
-        return;
-      }
-
-      if (result.needs_clarification) {
-        setChatMode(true);
-        setClarificationNeeded(result);
-        setChatHistory([
-          {
-            role: 'assistant',
-            content: `I need a bit more information to give you an accurate estimate:\n\n• ${result.clarification_questions.join('\n• ')}`
-          }
-        ]);
-        setIsAnalyzing(false);
-        return;
-      }
+      ]);
+      setIsAnalyzing(false);
+      return;
+    }
 
       if (result.success) {
         setAnalysis(result);
