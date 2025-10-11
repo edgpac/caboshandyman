@@ -459,6 +459,7 @@ export default async function handler(req, res) {
     // ========================================
     // BUG FIX #3: MULTI-ISSUE & EMERGENCY CONSOLIDATION
     // ========================================
+    // BUG FIX #3: MULTI-ISSUE & EMERGENCY CONSOLIDATION
     if (context.hasActiveEmergency && history.length > 2) {
       const recentMessages = history.slice(-5);
       const hasMultipleIssues = recentMessages.filter(m => 
@@ -466,25 +467,34 @@ export default async function handler(req, res) {
       ).length > 0;
       
       if (hasMultipleIssues && !intent.wantsStatus && !intent.wantsCancel) {
+        const issuesList = context.mentionedIssues.length > 0 
+          ? context.mentionedIssues.map(issue => `• ${issue}`).join('\n')
+          : '• Your reported issues';
+        
         return res.status(200).json({
           success: true,
           response: `🚨 **EMERGENCY PRIORITY!** 
 
 I see you have multiple issues, but your ${context.emergencyType} needs IMMEDIATE attention to prevent serious damage.
 
-**CALL +52 612 169 8328 RIGHT NOW** - don't wait! We're available 24/7.
+**CALL +52 612 169 8328 RIGHT NOW** - we're available 24/7 and can be there in 30-60 minutes.
 
-Once we handle the emergency (within 30-60 minutes), we can address your other issues in the same visit:
-${context.mentionedIssues.map((issue, i) => `• ${issue}`).join('\n')}
+**Here's our approach:**
+- $100 service call (includes diagnosis + first 30 min of work)
+- We'll assess the emergency PLUS your other issues:
+${issuesList}
 
-Estimated combined: $${context.mentionedIssues.length * 300}-${context.mentionedIssues.length * 600}
+- Give you honest pricing for everything
+- You decide what to fix now vs later
+- If you approve work, the $100 applies to your total
 
-Stop the damage first - call now!`
+Most customers with multiple issues like yours spend $400-$800 total, but we won't know exactly until we inspect. Emergency first - call now!`
         });
       }
     }
 
     // BUG FIX #7: CONVERSATION SUMMARY FOR LONG CHATS
+    // CONVERSATION SUMMARY FOR LONG CHATS
     if (history.length > 8 && context.mentionedIssues.length > 2 && intent.wantsPricing) {
       return res.status(200).json({
         success: true,
@@ -492,14 +502,17 @@ Stop the damage first - call now!`
 
 ${context.mentionedIssues.map((issue, i) => `${i+1}. ${issue}`).join('\n')}
 
-For ${context.mentionedIssues.length} separate issues like this, I recommend calling +52 612 169 8328 so we can:
-- Assess everything properly
-- Give you an accurate combined estimate  
-- Handle it all in ONE visit (saves you $)
+For ${context.mentionedIssues.length} issues like this, here's our process:
 
-Combined estimate: $${context.mentionedIssues.length * 200}-${context.mentionedIssues.length * 700}
+**$100 Service Call Includes:**
+- Complete inspection of all ${context.mentionedIssues.length} issues
+- First 30 minutes of work
+- Honest, itemized estimate for everything
+- You decide what to fix now vs later
 
-Want to call now or use our instant quote tool first?`
+**Typical multi-issue visits:** $400-$800 depending on complexity
+
+If you approve the work, the $100 service call applies to your total. Want to call +52 612 169 8328 now or use our instant quote tool?`
       });
     }
 
