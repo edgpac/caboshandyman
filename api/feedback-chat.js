@@ -51,31 +51,30 @@ function extractName(text) {
 function analyzeIntent(text, history) {
   const lower = text.toLowerCase();
   
-  // Status/lookup intent - expanded keywords
-  const statusKeywords = ['status', 'check', 'scheduled', 'when', 'date', 'appointment', 
-                          'service', 'order', 'my', 'look up', 'find', 'what time', 
-                          'confirm', 'verify', 'schedule', 'eta', 'arrive', 'coming'];
+  // Status/lookup intent - ONLY if explicit status keywords
+  const statusKeywords = ['status', 'check my', 'my appointment', 'my order', 'when is', 
+                          'what time', 'scheduled', 'confirm my', 'look up my'];
   const hasStatusIntent = statusKeywords.some(kw => lower.includes(kw));
   
   // Cancellation intent
   const cancelKeywords = ['cancel', 'cancellation', 'delete', 'remove', 'stop', 'abort'];
   const hasCancelIntent = cancelKeywords.some(kw => lower.includes(kw));
   
-  // Reschedule intent - NEW!
+  // Reschedule intent
   const rescheduleKeywords = ['reschedule', 'change', 'move', 'different time', 'different day', 'postpone'];
   const hasRescheduleIntent = rescheduleKeywords.some(kw => lower.includes(kw));
   
-  // General service questions
+  // General service questions - PRIORITIZE THIS
   const serviceKeywords = ['how much', 'cost', 'price', 'estimate', 'quote', 
-                           'service', 'repair', 'fix', 'install', 'emergency'];
+                           'what does it cost', 'repair', 'install', 'emergency'];
   const hasServiceIntent = serviceKeywords.some(kw => lower.includes(kw));
   
-  // Greeting detection - NEW!
+  // Greeting detection
   const greetingKeywords = ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'hola'];
   const isGreeting = greetingKeywords.some(kw => lower.startsWith(kw));
   
   return {
-    wantsStatus: hasStatusIntent,
+    wantsStatus: hasStatusIntent && !hasServiceIntent, // ← CHANGED: Don't override service questions
     wantsCancel: hasCancelIntent,
     wantsReschedule: hasRescheduleIntent,
     wantsServiceInfo: hasServiceIntent,
