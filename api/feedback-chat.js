@@ -1,15 +1,8 @@
-// api/feedback-chat.js - POST-ESTIMATE FEEDBACK CHAT WITH WORK ORDER LOOKUP
+// api/feedback-chat.js - POST-ESTIMATE FEEDBACK CHAT WITH DIRECT SUPABASE LOOKUP
 
-export const config = {
-  maxDuration: 30,
-  api: {
-    bodyParser: {
-      sizeLimit: '1mb'
-    }
-  }
-};
+const { createClient } = require('@supabase/supabase-js');
 
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -23,6 +16,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Initialize Supabase
+  const supabase = createClient(
+    process.env.SUPABASE_URL || 'https://okwcasooleetwvfuwtuz.supabase.co',
+    process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9rd2Nhc29vbGVldHd2ZnV3dHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjUwMzEsImV4cCI6MjA3NDk0MTAzMX0.942cbD0ITALrlHoI0A5o8kGx3h-XQ1k4DPSxrXoIcXc'
+  );
+
   try {
     const { question, analysis, history, service_context } = req.body;
 
@@ -33,134 +32,85 @@ export default async function handler(req, res) {
     }
 
     // Check if question is about work order status
-    const workOrderKeywords = /work\s*order|order\s*status|order\s*#|pending|scheduled|my\s*order|check\s*status/i;
+    const workOrderKeywords = /work\s*order|order\s*status|order\s*#|WO-|pending|scheduled|my\s*order|check\s*status/i;
     const isWorkOrderQuery = workOrderKeywords.test(question);
 
     // Extract work order number if present
-    const workOrderMatch = question.match(/(?:INV[- ]?|#)?(\d{1,6})/i);
-    const workOrderNumber = workOrderMatch ? workOrderMatch[1] : null;
+    const workOrderMatch = question.match(/WO-(\d+)|#?(\d{3,})/i);
+    const workOrderNumber = workOrderMatch ? (workOrderMatch[1] || workOrderMatch[2]) : null;
 
     // Extract potential name
-    const nameMatch = question.match(/(?:name\s+is\s+|i'm\s+|i\s+am\s+)([a-z]+(?:\s+[a-z]+)?)/i);
+    const nameMatch = question.match(/(?:name\s+is\s+|i'm\s+|i\s+am\s+|last\s*name\s+)([a-z]+)/i);
     const clientName = nameMatch ? nameMatch[1] : null;
 
-    // If it's a work order query, try to look it up
-    if (isWorkOrderQuery && (workOrderNumber || clientName)) {
-      console.log('🔍 Detected work order query:', { workOrderNumber, clientName });
+    // If it's a work order query with both number and name, look it up directly
+    if (isWorkOrderQuery && workOrderNumber && clientName) {
+      console.log('🔍 Direct Supabase lookup:', { workOrderNumber, clientName });
 
       try {
-        // Determine search type
-        let searchType = 'unknown';
-        let lookupParams = {};
+        // Search by work_order_number field first
+        let { data, error } = await supabase
+          .from('pending')
+          .select('*')
+          .eq('work_order_number', `WO-${workOrderNumber}`)
+          .single();
 
-        if (workOrderNumber && clientName) {
-          searchType = 'verify';
-          lookupParams = { 
-            work_order_number: workOrderNumber, 
-            client_name: clientName,
-            search_type: 'verify'
-          };
-        } else if (workOrderNumber) {
-          searchType = 'by_number';
-          lookupParams = { 
-            work_order_number: workOrderNumber,
-            search_type: 'by_number'
-          };
-        } else if (clientName) {
-          searchType = 'by_name';
-          lookupParams = { 
-            client_name: clientName,
-            search_type: 'by_name'
-          };
+        // If not found, try by numeric ID
+        if (error || !data) {
+          const result = await supabase
+            .from('pending')
+            .select('*')
+            .eq('id', parseInt(workOrderNumber))
+            .single();
+          data = result.data;
+          error = result.error;
         }
 
-        // Call work order lookup API
-        const lookupResponse = await fetch(`${req.headers.origin || 'https://caboshandyman.vercel.app'}/api/work-order-status`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(lookupParams)
-        });
+        if (data) {
+          // Verify name matches
+          const nameMatch = data.client_name.toLowerCase().includes(clientName.toLowerCase());
 
-        const lookupResult = await lookupResponse.json();
+          if (nameMatch) {
+            // VERIFIED - Build response with real data
+            const totalCost = data.items?.reduce((sum, item) => sum + (item.price || 0), 0) || 0;
+            
+            let scheduledText = 'not yet scheduled';
+            if (data.scheduled_date) {
+              const date = new Date(data.scheduled_date);
+              const dayName = date.toLocaleDateString('en-US', { weekday: 'long' });
+              const fullDate = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+              scheduledText = `${dayName}, ${fullDate}${data.scheduled_time ? ` at ${data.scheduled_time}` : ''}`;
+            }
 
-        // Handle lookup results
-        if (lookupResult.verified) {
-          // VERIFIED - Show full details
-          const wo = lookupResult.work_order;
-          const itemsList = wo.items?.map(item => `• ${item.name}: $${item.price}`).join('\n') || '';
-          
-          return res.status(200).json({
-            success: true,
-            response: `✅ Work Order #${wo.id} - ${wo.client_name}
+            const crewText = data.assigned_crew ? ` Crew member ${data.assigned_crew} will be handling your job.` : '';
+            const statusText = data.status || 'Pending';
 
-${wo.description ? `**Issue:** ${wo.description}\n` : ''}
-**Status:** Pending (awaiting scheduling)
+            const itemsList = data.items?.map(item => `${item.name}: $${item.price}`).join(', ') || '';
 
-**Services Requested:**
-${itemsList}
+            return res.status(200).json({
+              success: true,
+              response: `✅ Work Order ${data.work_order_number || `#${data.id}`} - ${data.client_name}
 
-**Estimated Total:** $${wo.total_cost}
+**Status:** ${statusText}
+**Scheduled:** ${scheduledText}${crewText}
 
-We'll contact you within 24-48 hours to schedule. For urgent requests, call us at (624) 123-4567.
+**Services:** ${itemsList}
 
-Any other questions about this order?`
-          });
+**Total:** $${totalCost.toFixed(2)}
+
+${data.status === 'Scheduled' ? 'We\'ll send you a reminder 24 hours before your appointment.' : 'We\'ll contact you within 24-48 hours to schedule.'}
+
+Any other questions?`
+            });
+          }
         }
-
-        if (lookupResult.needs_verification) {
-          // Found work order, need name to verify
-          return res.status(200).json({
-            success: true,
-            response: `I found work order #${lookupResult.preview.id}! To show you the details, please confirm the last name on this order for security.`
-          });
-        }
-
-        if (lookupResult.multiple) {
-          // Multiple work orders found
-          const ordersList = lookupResult.work_orders
-            .map(wo => `• Work Order #${wo.id} - ${wo.description}`)
-            .join('\n');
-          
-          return res.status(200).json({
-            success: true,
-            response: `I found ${lookupResult.count} work orders under that name:\n\n${ordersList}\n\nWhich work order number would you like to check?`
-          });
-        }
-
-        if (!lookupResult.found) {
-          // Not found
-          return res.status(200).json({
-            success: true,
-            response: `I don't see that work order in our system. A few possibilities:
-
-- The work order might still be processing (takes 24 hours)
-- The number might be incorrect
-- It might be under a different name
-
-Would you like to:
-1. Submit a new service request
-2. Call us at (624) 123-4567 to verify
-
-I'm happy to help with a new estimate if needed!`
-          });
-        }
-
-        if (!lookupResult.verified && lookupResult.verified === false) {
-          // Name didn't match
-          return res.status(200).json({
-            success: true,
-            response: `The name doesn't match our records for that work order. For security, please call us at (624) 123-4567 to verify your identity. We're here to help!`
-          });
-        }
-
       } catch (lookupError) {
-        console.error('Work order lookup failed:', lookupError);
-        // Fall through to normal Groq response
+        console.error('Supabase lookup failed:', lookupError);
+        // Fall through to Groq response
       }
     }
 
     // NOT a work order query OR lookup failed - use Groq for general questions
-
     // Build context from the estimate (if provided)
     let estimateContext = '';
     if (analysis) {
@@ -274,4 +224,4 @@ Be friendly, clear, and actionable. Keep prices in USD. If suggesting DIY, menti
       response: 'Sorry, I had trouble processing that. Could you try rephrasing your question?'
     });
   }
-}
+};
