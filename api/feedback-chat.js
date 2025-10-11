@@ -110,17 +110,18 @@ function buildContextFromHistory(history) {
     lastAskedFor: null,
     conversationTopic: null,
     customerSeemsConfused: false,
-    // BUG FIX #2: Emergency memory tracking
     hasActiveEmergency: false,
     emergencyType: null,
     emergencyMentionedAt: null,
-    // BUG FIX #7: Issue tracking for summaries
     mentionedIssues: []
   };
   
   for (let i = Math.max(0, history.length - 8); i < history.length; i++) {
     const msg = history[i];
     
+    // ========================================
+    // ONLY SCAN USER MESSAGES FOR CONTEXT
+    // ========================================
     if (msg.role === 'user') {
       // Extract work order and name
       if (!context.workOrderNum) {
@@ -130,7 +131,7 @@ function buildContextFromHistory(history) {
         context.clientName = extractName(msg.content);
       }
       
-      // BUG FIX #2: Detect and remember emergencies
+      // Detect and remember emergencies
       if (/overflowing|flooding|burst|emergency|urgent|right now|asap|sparking|water everywhere/i.test(msg.content)) {
         context.hasActiveEmergency = true;
         const match = msg.content.match(/overflowing|flooding|burst|sparking/i);
@@ -138,7 +139,7 @@ function buildContextFromHistory(history) {
         context.emergencyMentionedAt = i;
       }
       
-      // BUG FIX #7: Track issues mentioned for summary
+      // Track issues mentioned for summary
       const issueMatches = msg.content.match(/leak|overflow|outlet.*not working|fan|electrical|plumbing|toilet|sink|faucet/gi);
       if (issueMatches) {
         issueMatches.forEach(issue => {
@@ -153,10 +154,32 @@ function buildContextFromHistory(history) {
       if (confusionWords.some(w => msg.content.toLowerCase().includes(w))) {
         context.customerSeemsConfused = true;
       }
+      
+      // ========================================
+      // TOPIC DETECTION - USER INTENT ONLY
+      // ========================================
+      const userLower = msg.content.toLowerCase();
+      
+      // Only set topic if user EXPLICITLY mentions it
+      if (/cancel|cancellation/i.test(userLower)) {
+        context.conversationTopic = 'cancellation';
+      } 
+      else if (/reschedule|change.*appointment|move.*appointment|different.*time/i.test(userLower)) {
+        context.conversationTopic = 'reschedule';
+      } 
+      else if (/status|check.*appointment|my.*order|when.*scheduled/i.test(userLower)) {
+        context.conversationTopic = 'status';
+      } 
+      else if (/warranty|you guys.*came|you.*fixed.*last|acting up again/i.test(userLower)) {
+        context.conversationTopic = 'warranty';
+      }
     }
     
+    // ========================================
+    // SCAN ASSISTANT MESSAGES - ONLY FOR TRACKING QUESTIONS
+    // ========================================
     if (msg.role === 'assistant') {
-      // Track what we asked for
+      // Track what we asked for (so we know what they're answering)
       if (/work order number/i.test(msg.content)) {
         context.lastAskedFor = 'workorder';
       }
@@ -164,16 +187,8 @@ function buildContextFromHistory(history) {
         context.lastAskedFor = 'name';
       }
       
-      // Detect conversation topic
-      if (/cancel/i.test(msg.content)) {
-        context.conversationTopic = 'cancellation';
-      } else if (/reschedule|change/i.test(msg.content)) {
-        context.conversationTopic = 'reschedule';
-      } else if (/status|scheduled|appointment/i.test(msg.content)) {
-        context.conversationTopic = 'status';
-      } else if (/warranty|previous service/i.test(msg.content)) {
-        context.conversationTopic = 'warranty';
-      }
+      // DON'T set conversationTopic from assistant messages!
+      // This prevents AI from triggering itself
     }
   }
   
