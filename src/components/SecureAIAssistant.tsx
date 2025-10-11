@@ -473,7 +473,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         body: JSON.stringify({
           images: imagesDataURIs,
           description: chatInput,
-          location: location || 'Cabo San Lucas, Mexico',
+          location: 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
             title: selectedService.title,
             category: selectedService.title.toLowerCase().replace(' ', '_')
@@ -534,7 +534,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         body: JSON.stringify({
           images: validatedImages,
           description: analysisDescription,
-          location: location || 'Cabo San Lucas, Mexico',
+          location: 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
             title: selectedService.title,
             category: selectedService.title.toLowerCase().replace(' ', '_')
@@ -864,7 +864,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <div className="mt-4 text-xs space-y-1">
                     <p>💬 "What services do you offer?"</p>
                     <p>📋 "Check work order status"</p>
-                    <p>💰 "How much to fix a leak?"</p>
+                    <p>💰 "How much to fix a water leak?"</p>
                   </div>
                 </div>
               )}
@@ -1236,15 +1236,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   rows={isMobile ? 3 : 4}
                 />
 
-                <input
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Your location (optional - for local pricing)"
-                  className={`w-full p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
-                    isMobile ? 'text-base' : ''
-                  }`}
-                />
+                {/* Location input removed - AI pricing doesn't need it */}
 
                 <button
                   onClick={analyzeIssue}
@@ -1295,6 +1287,26 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <div className="bg-blue-100 border border-blue-300 rounded p-2 mb-3 text-xs text-blue-700">
                   <strong>⚠️ Preliminary Estimate:</strong> Labor costs and hours are approximate and may vary based on project complexity, site conditions, and unforeseen circumstances discovered during work.
                 </div>
+                 
+                 {/* Quick Task Pricing Note */}
+                {analysis.cost_estimate.pricing_note && (
+                  <div className="bg-green-50 border border-green-200 rounded p-3 mb-3 text-xs text-green-700">
+                    {analysis.cost_estimate.pricing_note}
+                  </div>
+                )}
+
+                {/* Service Call Fee Display */}
+                {analysis.cost_estimate.service_call_fee && (
+                  <div className="bg-blue-50 border border-blue-200 rounded p-3 mb-3 text-sm">
+                    <div className="flex items-center justify-between">
+                      <span className="text-blue-600 font-semibold">Service Call Fee:</span>
+                      <span className="text-blue-800 font-bold">${analysis.cost_estimate.service_call_fee}</span>
+                    </div>
+                    <div className="text-xs text-blue-600 mt-1">
+                      Includes diagnosis + first 30 minutes of work
+                    </div>
+                  </div>
+                )}
 
                 <div className={`grid gap-2 text-sm ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
                   {analysis.cost_estimate.parts_cost && (

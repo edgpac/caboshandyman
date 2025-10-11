@@ -243,27 +243,24 @@ Respond ONLY with valid JSON (no markdown):
     let costEstimate;
     
     if (isQuick) {
-      // ✅ QUICK TASK - Falls under $100 service call
-      const partsMin = groqAnalysis.cost_breakdown?.parts_min || 10;
-      const partsMax = groqAnalysis.cost_breakdown?.parts_max || 50;
-      
-      costEstimate = {
-        service_call_fee: 100,
-        parts_cost: {
-          min: partsMin,
-          max: partsMax
-        },
-        labor_cost: 0, // Included in service call
-        labor_hours: 0.5,
-        crew_size: 1,
-        crew_justification: 'Quick task - 1 person can handle',
-        disposal_cost: 0,
-        total_cost: {
-          min: 100 + partsMin,
-          max: 100 + partsMax
-        },
-        pricing_note: `✨ Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional. This is a perfect "door opener" service - we can assess other issues while we're there!`
-      };
+  costEstimate = {
+    service_call_fee: 100,
+    parts_cost: {
+      min: partsMin,
+      max: partsMax
+    },
+    // Don't include labor_cost for quick tasks - it's included in service call
+    labor_hours: 0.5,
+    crew_size: 1,
+    crew_justification: 'Quick task - 1 person can handle',
+    disposal_cost: 0,
+    total_cost: {
+      min: 100 + partsMin,
+      max: 100 + partsMax
+    },
+    pricing_note: `✨ Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional. This is a perfect "door opener" service - we can assess other issues while we're there!`
+  };
+}
       
     } else {
       // 🔧 BIGGER JOB - Standard pricing
