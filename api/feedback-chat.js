@@ -157,7 +157,7 @@ async function lookupWorkOrder(workOrderNum, clientName) {
       error: 'not_found',
       message: `I couldn't find work order WO-${workOrderNum} in our system. 
 
-This could be a typo - please double-check your work order number. It should be 13 digits long (like WO-1760140602718).
+This could be a typo - please double-check your work order number. It should be 13 digits long (like WO-1234567890123).
 
 You can also:
 - Check your confirmation email for the correct number
