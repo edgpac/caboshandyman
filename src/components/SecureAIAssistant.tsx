@@ -1,10 +1,11 @@
-// Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT + CHAT-ONLY MODE
+// Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT + CHAT-ONLY MODE + UPGRADED INTERFACE
 import React, { useState, useEffect } from 'react';
-import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone } from 'lucide-react';
+import { Camera, Send, Bot, Wrench, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone, Paperclip, ChevronDown, X } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
 
 export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, initialMode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [currentView, setCurrentView] = useState('services');
   const [selectedService, setSelectedService] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -27,6 +28,16 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const [feedbackInput, setFeedbackInput] = useState('');
   const [feedbackHistory, setFeedbackHistory] = useState([]);
   
+  // NEW: Chat interface states
+  const [messages, setMessages] = useState([
+    {
+      role: 'assistant',
+      content: "Hey there 👋 I'm your Cabo Handyman assistant. What can we help you with?",
+      timestamp: new Date()
+    }
+  ]);
+  const [inputMessage, setInputMessage] = useState('');
+  
   const [bookingData, setBookingData] = useState({
     name: '',
     phone: '',
@@ -38,6 +49,13 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const isMobile = useIsMobile();
 
   const assistantIsOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
+
+  const quickActions = [
+    { label: "Check work order status", icon: "📋" },
+    { label: "Get instant quote", icon: "💰" },
+    { label: "Emergency service", icon: "🚨" },
+    { label: "Schedule appointment", icon: "📅" }
+  ];
 
   useEffect(() => {
     if (initialMode && assistantIsOpen) {
@@ -78,9 +96,9 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
     },
     {
       title: "Emergency Services", 
-      description: "AI-powered response for water damage, structural issues, and urgent repairs. 30-minute response time.",
+      description: "Intelligent response for water damage, structural issues, and urgent repairs. 30-minute response time.",
       icon: Zap,
-      details: "24/7 emergency response for water damage, electrical issues, structural problems, and urgent repairs. Our AI system helps prioritize and dispatch the right team immediately.",
+      details: "24/7 emergency response for water damage, electrical issues, structural problems, and urgent repairs. Our system helps prioritize and dispatch the right team immediately.",
       calendlyUrl: "https://cal.com/maintenancemaster/emergency-service-assessment"
     },
     {
@@ -98,7 +116,6 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
       calendlyUrl: "https://cal.com/maintenancemaster/hoa-property-assessment"
     }
   ];
-
   const startCamera = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -625,7 +642,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       setIsAnalyzing(false);
     }
   };
-
   const handleFeedbackChat = async () => {
     if (!feedbackInput.trim()) return;
 
@@ -795,6 +811,15 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setFeedbackMode(false);
     setFeedbackInput('');
     setFeedbackHistory([]);
+    setIsMinimized(false);
+    setMessages([
+      {
+        role: 'assistant',
+        content: "Hey there 👋 I'm your Cabo Handyman assistant. What can we help you with?",
+        timestamp: new Date()
+      }
+    ]);
+    setInputMessage('');
   };
 
   const getSeverityColor = (severity) => {
@@ -806,6 +831,40 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     }
   };
 
+  // NEW: Handle quick actions from chat interface
+const handleQuickAction = (action) => {
+  const newMessage = {
+    role: 'user',
+    content: action.label,
+    timestamp: new Date()
+  };
+  setMessages([...messages, newMessage]);
+  
+  // Route to appropriate view based on action
+  if (action.label.includes('quote')) {
+    setCurrentView('booking');
+  } else if (action.label.includes('Emergency')) {
+    setSelectedService(services[1]);
+    setBookingData(prev => ({...prev, serviceType: 'Emergency Service', urgency: 'urgent'}));
+    setCurrentView('booking');
+  } else if (action.label.includes('Schedule')) {
+    setCurrentView('booking');
+  } else if (action.label.includes('work order')) {
+    setFeedbackMode(true);
+    setCurrentView('chat-only');
+  }
+};
+
+// NEW: Handle image selection from chat interface
+const handleImageSelect = (e) => {
+  const files = Array.from(e.target.files);
+  const imageUrls = files.map(file => ({
+    url: URL.createObjectURL(file),
+    file: file
+  }));
+  setSelectedImages([...selectedImages, ...imageUrls]);
+};
+
   if (!assistantIsOpen) {
     if (externalIsOpen !== undefined) {
       return null;
@@ -814,35 +873,68 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 bg-teal-400 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50 ${
+        className={`fixed bottom-6 right-6 bg-teal-400 hover:bg-teal-500 text-white p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 z-50 ${
           isMobile ? 'p-3' : 'p-4'
         }`}
-        aria-label="Open AI Assistant"
+        aria-label="Open Assistant"
       >
-        <Bot size={isMobile ? 20 : 24} />
+        <MessageCircle size={isMobile ? 20 : 24} />
       </button>
+    );
+  }
+
+  if (isMinimized) {
+    return (
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          onClick={() => setIsMinimized(false)}
+          className="bg-teal-400 hover:bg-teal-500 text-white px-6 py-3 rounded-full shadow-2xl flex items-center space-x-2 transition-all duration-300"
+        >
+          <Wrench size={20} />
+          <span className="font-semibold">Quote Assistant</span>
+          <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+        </button>
+      </div>
     );
   }
 
   const containerClasses = isMobile 
     ? "fixed inset-0 bg-white z-50 flex flex-col"
-    : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
+    : "fixed bottom-6 right-6 w-[420px] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
 
   const maxImages = isMobile ? 1 : 3;
+  
   return (
     <div className={containerClasses}>
-      <div className={`bg-teal-400 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
-        <div className="flex items-center space-x-2">
-          <Wrench size={20} />
-          <span className="font-semibold">Quote Assistant</span>
+      {/* Header with new minimize/close buttons */}
+      <div className={`bg-gradient-to-r from-teal-400 to-teal-500 text-white p-4 ${isMobile ? '' : 'rounded-t-2xl'} flex items-center justify-between`}>
+        <div className="flex items-center space-x-3">
+          <div className="bg-white p-2 rounded-full">
+            <Wrench size={20} className="text-teal-500" />
+          </div>
+          <div>
+            <h3 className="font-bold text-lg">Live Support</h3>
+            <p className="text-xs opacity-90">Ask us anything</p>
+          </div>
         </div>
-        <button 
-          onClick={handleClose}
-          className="text-white hover:text-gray-200 text-xl leading-none"
-          aria-label="Close assistant"
-        >
-          ×
-        </button>
+        <div className="flex items-center space-x-2">
+          {!isMobile && (
+            <button
+              onClick={() => setIsMinimized(true)}
+              className="hover:bg-white/20 p-2 rounded-full transition-colors"
+              aria-label="Minimize"
+            >
+              <ChevronDown size={20} />
+            </button>
+          )}
+          <button 
+            onClick={handleClose}
+            className="hover:bg-white/20 p-2 rounded-full transition-colors"
+            aria-label="Close assistant"
+          >
+            <X size={20} />
+          </button>
+        </div>
       </div>
 
       <div className={`p-4 overflow-y-auto flex-1 ${isMobile ? 'pb-safe' : ''}`}>
@@ -871,12 +963,22 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               
               {feedbackHistory.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] p-3 rounded-lg text-sm ${
-                    msg.role === 'user' 
-                      ? 'bg-teal-400 text-white rounded-br-none' 
-                      : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
-                  }`}>
-                    <div className="whitespace-pre-line">{msg.content}</div>
+                  {msg.role === 'assistant' && (
+                    <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0">
+                      <Wrench size={14} className="text-teal-500" />
+                    </div>
+                  )}
+                  <div className={`max-w-[85%] ${msg.role === 'user' ? 'order-1' : 'order-2'}`}>
+                    {msg.role === 'assistant' && (
+                      <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+                    )}
+                    <div className={`p-3 rounded-2xl text-sm ${
+                      msg.role === 'user' 
+                        ? 'bg-teal-400 text-white rounded-br-none' 
+                        : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
+                    }`}>
+                      <div className="whitespace-pre-line">{msg.content}</div>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -890,13 +992,42 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               )}
             </div>
 
+            {/* Selected Images Preview in chat-only mode */}
+            {selectedImages.length > 0 && (
+              <div className="border rounded-lg p-2 bg-white">
+                <div className="flex space-x-2 overflow-x-auto">
+                  {selectedImages.map((img, idx) => (
+                    <div key={idx} className="relative flex-shrink-0">
+                      <img src={img.url} alt="" className="w-16 h-16 object-cover rounded-lg border-2 border-teal-400" />
+                      <button
+                        onClick={() => setSelectedImages(selectedImages.filter((_, i) => i !== idx))}
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="flex space-x-2">
+              <label className="cursor-pointer hover:bg-gray-100 p-2 rounded-full transition-colors flex-shrink-0">
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple={!isMobile}
+                  onChange={handleImageSelect}
+                  className="hidden"
+                />
+                <Paperclip size={20} className="text-gray-500" />
+              </label>
               <input
                 value={feedbackInput}
                 onChange={(e) => setFeedbackInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
                 placeholder="Type your message..."
-                className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-200 outline-none ${
+                className={`flex-1 p-3 border-2 border-purple-200 focus:border-teal-400 rounded-full text-sm outline-none transition-colors ${
                   isMobile ? 'text-base' : ''
                 }`}
                 disabled={isAnalyzing}
@@ -905,7 +1036,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               <button 
                 onClick={handleFeedbackChat}
                 disabled={!feedbackInput.trim() || isAnalyzing}
-                className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg transition-colors"
+                className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-full transition-colors flex-shrink-0"
               >
                 <Send size={18} />
               </button>
@@ -925,7 +1056,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   setCurrentView('services');
                   setFeedbackMode(false);
                 }}
-                className="text-xs bg-teal-100 hover:bg-blue-200 text-teal-600 px-3 py-2 rounded transition-colors"
+                className="text-xs bg-teal-100 hover:bg-teal-200 text-teal-600 px-3 py-2 rounded transition-colors"
               >
                 🔧 Get Quote
               </button>
@@ -935,9 +1066,35 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
         {currentView === 'services' && !analysis && !isAnalyzing && (
           <div className="space-y-4">
-            <div className="text-center mb-4">
-              <h3 className="font-semibold text-gray-800 mb-2">How can we help you today?</h3>
-              <p className="text-sm text-gray-600">Choose a service or analyze a specific issue</p>
+            {/* Chat-style welcome message */}
+            <div className="flex justify-start mb-4">
+              <div className="bg-white p-2 rounded-full mr-2 h-10 w-10 flex items-center justify-center flex-shrink-0">
+                <Wrench size={16} className="text-teal-500" />
+              </div>
+              <div className="max-w-[85%]">
+                <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+                <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none shadow-sm p-3">
+                  <p className="text-sm">Hey there 👋 I'm your Cabo Handyman assistant. What can we help you with?</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick action buttons with chat styling */}
+            <div className="space-y-2">
+              {quickActions.map((action, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleQuickAction(action)}
+                  className="w-full bg-white border-2 border-purple-200 hover:border-teal-400 text-purple-400 hover:text-teal-500 px-4 py-3 rounded-full text-sm font-medium transition-all duration-200 text-left flex items-center space-x-2"
+                >
+                  <span>{action.icon}</span>
+                  <span>{action.label}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="text-center my-3">
+              <span className="text-xs text-gray-500">or choose a service below</span>
             </div>
 
             <div className="space-y-3">
@@ -976,28 +1133,8 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <span>Analyze Specific Issue</span>
               </button>
             </div>
-
-            <div className={`grid ${isMobile ? 'grid-cols-1 gap-3' : 'grid-cols-2 gap-2'}`}>
-              <button 
-                onClick={() => setCurrentView('booking')}
-                className="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-3 rounded text-sm font-semibold transition-colors"
-              >
-                Schedule Consultation
-              </button>
-              <button 
-                onClick={() => {
-                  setSelectedService(services[1]);
-                  setBookingData(prev => ({...prev, serviceType: 'Emergency Service', urgency: 'urgent'}));
-                  setCurrentView('booking');
-                }}
-                className="bg-red-100 hover:bg-red-200 text-red-800 py-2 px-3 rounded text-sm font-semibold transition-colors"
-              >
-                Emergency
-              </button>
-            </div>
           </div>
         )}
-
         {currentView === 'booking' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -1031,7 +1168,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             )}
             
             <p className="text-gray-600 text-sm">
-              Upload {isMobile ? '1 photo' : 'up to 3 photos'} of your maintenance issue for instant AI analysis and cost estimates.
+              Upload {isMobile ? '1 photo' : 'up to 3 photos'} of your maintenance issue for instant analysis and cost estimates.
             </p>
             
             {error && (
@@ -1108,7 +1245,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     <div className={`grid gap-2 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
                       <button
                         onClick={startCamera}
-                        className="bg-teal-100 hover:bg-blue-200 text-teal-700 px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
+                        className="bg-teal-100 hover:bg-teal-200 text-teal-700 px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
                       >
                         <Camera size={14} />
                         <span>Add Photo</span>
@@ -1176,12 +1313,22 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <div className="border rounded-lg p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
                   {chatHistory.map((msg, i) => (
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
-                        msg.role === 'user' 
-                          ? 'bg-teal-400 text-white rounded-br-none' 
-                          : 'bg-white border border-gray-200 rounded-bl-none'
-                      }`}>
-                        <div className="whitespace-pre-line">{msg.content}</div>
+                      {msg.role === 'assistant' && (
+                        <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0">
+                          <Wrench size={14} className="text-teal-500" />
+                        </div>
+                      )}
+                      <div className={`max-w-[80%] ${msg.role === 'user' ? 'order-1' : 'order-2'}`}>
+                        {msg.role === 'assistant' && (
+                          <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+                        )}
+                        <div className={`p-3 rounded-2xl text-sm ${
+                          msg.role === 'user' 
+                            ? 'bg-teal-400 text-white rounded-br-none' 
+                            : 'bg-white border border-gray-200 rounded-bl-none'
+                        }`}>
+                          <div className="whitespace-pre-line">{msg.content}</div>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -1199,7 +1346,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     onChange={(e) => setChatInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleChatSend()}
                     placeholder="Type your answer..."
-                    className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none ${
+                    className={`flex-1 p-3 border-2 border-purple-200 focus:border-teal-400 rounded-full text-sm outline-none transition-colors ${
                       isMobile ? 'text-base' : ''
                     }`}
                     disabled={isAnalyzing}
@@ -1207,7 +1354,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <button 
                     onClick={handleChatSend}
                     disabled={!chatInput.trim() || isAnalyzing}
-                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
+                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-full"
                   >
                     <Send size={16} />
                   </button>
@@ -1230,18 +1377,16 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe the issue in detail (e.g., 'Water leaking from pipe joint under kitchen sink', 'Electrical outlet not working in bedroom')"
-                  className={`w-full p-3 border border-gray-300 rounded-lg resize-none text-sm focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none ${
+                  className={`w-full p-3 border-2 border-purple-200 focus:border-teal-400 rounded-lg resize-none text-sm outline-none transition-colors ${
                     isMobile ? 'text-base' : ''
                   }`}
                   rows={isMobile ? 3 : 4}
                 />
 
-                {/* Location input removed - AI pricing doesn't need it */}
-
                 <button
                   onClick={analyzeIssue}
                   disabled={selectedImages.length === 0 || !description}
-                  className={`w-full bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
+                  className={`w-full bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-full font-semibold transition-colors flex items-center justify-center space-x-2 ${
                     isMobile ? 'py-4' : ''
                   }`}
                 >
@@ -1265,6 +1410,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             </div>
           </div>
         )}
+
         {analysis && !chatMode && (
           <div className="space-y-4">
             <div className={`border p-3 rounded-lg ${getSeverityColor(analysis.analysis?.severity)}`}>
@@ -1314,57 +1460,56 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                       <span className="text-teal-500">Materials:</span>
                       <div className="font-semibold">
                         ${analysis.cost_estimate.parts_cost.min} - ${analysis.cost_estimate.parts_cost.max}
-                      </div>
+                        </div>
                     </div>
                   )}
-
                   {analysis.cost_estimate.labor_cost && (
-                    <div>
-                      <span className="text-teal-500">Labor (Est.):</span>
-                      <div className="font-semibold">
-                        ${analysis.cost_estimate.labor_cost}
-                        {analysis.cost_estimate.labor_hours && (
-                          <div className="text-xs text-blue-500">
-                            (~{analysis.cost_estimate.labor_hours} hours)
-                          </div>
-                        )}
+                <div>
+                  <span className="text-teal-500">Labor (Est.):</span>
+                  <div className="font-semibold">
+                    ${analysis.cost_estimate.labor_cost}
+                    {analysis.cost_estimate.labor_hours && (
+                      <div className="text-xs text-blue-500">
+                        (~{analysis.cost_estimate.labor_hours} hours)
                       </div>
-                      <div className="text-xs text-green-600 mt-1">
-                        ⏱️ You pay actual hours only. Finish early = you save!
-                      </div>
-                    </div>
-                  )}
-                  {analysis.cost_estimate.disposal_cost > 0 && (
-                    <div>
-                      <span className="text-teal-500">Disposal:</span>
-                      <div className="font-semibold">${analysis.cost_estimate.disposal_cost}</div>
-                    </div>
-                  )}
-                  {analysis.cost_estimate.permits_misc > 0 && (
-                    <div>
-                      <span className="text-teal-500">Permits/Misc:</span>
-                      <div className="font-semibold">${analysis.cost_estimate.permits_misc}</div>
-                    </div>
-                  )}
-                </div>
-                <div className="mt-2 pt-2 border-t border-teal-200">
-                  <span className="text-teal-500">Estimated Total Range:</span>
-                  <div className="font-bold text-lg text-teal-700">
-                    ${analysis.cost_estimate.total_cost.min} - ${analysis.cost_estimate.total_cost.max}
+                    )}
                   </div>
-                  {analysis.analysis?.time_estimate && analysis.analysis.time_estimate !== 'TBD' && (
-                    <div className="text-xs text-teal-500 mt-1">
-                      Estimated time: {analysis.analysis.time_estimate}
-                    </div>
-                  )}
-                  <div className="text-xs text-teal-500 mt-2 italic">
-                    Final pricing confirmed after on-site inspection
+                  <div className="text-xs text-green-600 mt-1">
+                    ⏱️ You pay actual hours only. Finish early = you save!
                   </div>
                 </div>
+              )}
+              {analysis.cost_estimate.disposal_cost > 0 && (
+                <div>
+                  <span className="text-teal-500">Disposal:</span>
+                  <div className="font-semibold">${analysis.cost_estimate.disposal_cost}</div>
+                </div>
+              )}
+              {analysis.cost_estimate.permits_misc > 0 && (
+                <div>
+                  <span className="text-teal-500">Permits/Misc:</span>
+                  <div className="font-semibold">${analysis.cost_estimate.permits_misc}</div>
+                </div>
+              )}
+            </div>
+            <div className="mt-2 pt-2 border-t border-teal-200">
+              <span className="text-teal-500">Estimated Total Range:</span>
+              <div className="font-bold text-lg text-teal-700">
+                ${analysis.cost_estimate.total_cost.min} - ${analysis.cost_estimate.total_cost.max}
               </div>
-            )}
+              {analysis.analysis?.time_estimate && analysis.analysis.time_estimate !== 'TBD' && (
+                <div className="text-xs text-teal-500 mt-1">
+                  Estimated time: {analysis.analysis.time_estimate}
+                </div>
+              )}
+              <div className="text-xs text-teal-500 mt-2 italic">
+                Final pricing confirmed after on-site inspection
+              </div>
+            </div>
+          </div>
+        )}
 
-            {feedbackMode ? (
+        {feedbackMode ? (
               <div className="border-t pt-4 space-y-3">
                 <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                   <div className="flex items-center space-x-2 mb-2">
@@ -1377,12 +1522,22 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <div className="border rounded-lg p-3 bg-gray-50 max-h-48 overflow-y-auto space-y-3">
                   {feedbackHistory.map((msg, i) => (
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      <div className={`max-w-[85%] p-2 rounded-lg text-sm ${
-                        msg.role === 'user' 
-                          ? 'bg-teal-400 text-white rounded-br-none' 
-                          : 'bg-white border border-gray-200 rounded-bl-none'
-                      }`}>
-                        <div className="whitespace-pre-line">{msg.content}</div>
+                      {msg.role === 'assistant' && (
+                        <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0">
+                          <Wrench size={14} className="text-teal-500" />
+                        </div>
+                      )}
+                      <div className={`max-w-[85%] ${msg.role === 'user' ? 'order-1' : 'order-2'}`}>
+                        {msg.role === 'assistant' && (
+                          <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+                        )}
+                        <div className={`p-2 rounded-2xl text-sm ${
+                          msg.role === 'user' 
+                            ? 'bg-teal-400 text-white rounded-br-none' 
+                            : 'bg-white border border-gray-200 rounded-bl-none'
+                        }`}>
+                          <div className="whitespace-pre-line">{msg.content}</div>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -1401,7 +1556,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     onChange={(e) => setFeedbackInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
                     placeholder="Ask about materials, timeline, DIY..."
-                    className={`flex-1 p-2 border border-gray-300 rounded-lg text-sm focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none ${
+                    className={`flex-1 p-2 border-2 border-purple-200 focus:border-teal-400 rounded-full text-sm outline-none transition-colors ${
                       isMobile ? 'text-base' : ''
                     }`}
                     disabled={isAnalyzing}
@@ -1409,7 +1564,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <button 
                     onClick={handleFeedbackChat}
                     disabled={!feedbackInput.trim() || isAnalyzing}
-                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
+                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-full"
                   >
                     <Send size={16} />
                   </button>
@@ -1455,6 +1610,16 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       </div>
 
       {isMobile && <div className="h-4"></div>}
+
+      {/* Minimize Button - Bottom Right (Desktop only) */}
+      {!isMobile && !isMinimized && (
+        <button
+          onClick={() => setIsMinimized(true)}
+          className="absolute -bottom-12 -right-2 bg-teal-400 hover:bg-teal-500 text-white p-3 rounded-full shadow-lg transition-all duration-300"
+        >
+          <ChevronDown size={20} />
+        </button>
+      )}
     </div>
   );
 }
