@@ -1,5 +1,5 @@
-// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI v3
-// Built for exceptional customer experience with proactive intelligence
+// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI v4
+// Built for exceptional customer experience with ALL bugs fixed
 
 import { createClient } from '@supabase/supabase-js';
 
@@ -49,11 +49,13 @@ function extractName(text) {
 function analyzeIntent(text, history) {
   const lower = text.toLowerCase();
   
-  // Previous service reference - NEW!
-  const hasPreviousServiceRef = /you guys|you came|you fixed|you did|last week|last month|recently/i.test(text);
+  // BUG FIX #1 & #4: Improved previous service detection
+  // Only matches PAST actions, not capability questions like "do you guys do X?"
+  const hasPreviousServiceRef = /(?:you guys|you|your team) (?:came|fixed|did|installed|repaired|were here)|(?:last|a) (?:week|month) ago|recently (?:came|fixed|installed)/i.test(text) 
+    && !/do you|can you|are you able|does your|will you/i.test(text);
   
-  // Warranty/follow-up - NEW!
-  const hasWarrantyIntent = /warranty|guarantee|covered|still under|acting up again|broke again/i.test(text);
+  // Warranty/follow-up
+  const hasWarrantyIntent = /warranty|guarantee|covered|still under|acting up again|broke again|still broken/i.test(text);
   
   // Status/lookup intent
   const statusKeywords = ['status', 'check my', 'my appointment', 'my order', 'when is', 
@@ -69,29 +71,30 @@ function analyzeIntent(text, history) {
   const hasRescheduleIntent = rescheduleKeywords.some(kw => lower.includes(kw));
   
   // Pricing/estimate questions
-  const pricingKeywords = ['how much', 'cost', 'price', 'estimate', 'quote', 'what does it cost'];
+  const pricingKeywords = ['how much', 'cost', 'price', 'estimate', 'quote', 'what does it cost', 'pricing'];
   const hasPricingIntent = pricingKeywords.some(kw => lower.includes(kw));
   
-  // Comparison shopping - NEW!
+  // Comparison shopping
   const hasComparisonIntent = /another company|other quote|competitor|beat that price|better price/i.test(text);
   
-  // Vague help request - NEW!
-  const isVagueRequest = /need help|something wrong|issue|problem|broken/i.test(text) && text.split(' ').length < 10;
+  // Vague help request
+  const isVagueRequest = /need help|something wrong|issue with|problem with|broken/i.test(text) && text.split(' ').length < 10;
   
-  // Emergency
-  const emergencyKeywords = ['emergency', 'urgent', 'right now', 'immediately', 'asap', 'overflowing', 'flooding'];
+  // Emergency - BUG FIX: More keywords
+  const emergencyKeywords = ['emergency', 'urgent', 'right now', 'immediately', 'asap', 'overflowing', 'flooding', 'burst', 'water everywhere', 'sparking'];
   const isEmergency = emergencyKeywords.some(kw => lower.includes(kw));
   
   // Greeting
   const greetingKeywords = ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'hola'];
   const isGreeting = greetingKeywords.some(kw => lower.startsWith(kw));
   
+  // BUG FIX #6: Intent priority - capability questions shouldn't trigger warranty
   return {
     wantsStatus: hasStatusIntent && !hasPricingIntent,
     wantsCancel: hasCancelIntent,
     wantsReschedule: hasRescheduleIntent,
     wantsPricing: hasPricingIntent,
-    wantsWarrantyInfo: hasWarrantyIntent || hasPreviousServiceRef,
+    wantsWarrantyInfo: (hasWarrantyIntent || hasPreviousServiceRef) && !/do you|can you|does your/i.test(text),
     isComparison: hasComparisonIntent,
     isVague: isVagueRequest,
     isEmergency: isEmergency,
@@ -106,13 +109,20 @@ function buildContextFromHistory(history) {
     clientName: null,
     lastAskedFor: null,
     conversationTopic: null,
-    customerSeemsConfused: false
+    customerSeemsConfused: false,
+    // BUG FIX #2: Emergency memory tracking
+    hasActiveEmergency: false,
+    emergencyType: null,
+    emergencyMentionedAt: null,
+    // BUG FIX #7: Issue tracking for summaries
+    mentionedIssues: []
   };
   
   for (let i = Math.max(0, history.length - 8); i < history.length; i++) {
     const msg = history[i];
     
     if (msg.role === 'user') {
+      // Extract work order and name
       if (!context.workOrderNum) {
         context.workOrderNum = extractWorkOrderNumber(msg.content);
       }
@@ -120,6 +130,25 @@ function buildContextFromHistory(history) {
         context.clientName = extractName(msg.content);
       }
       
+      // BUG FIX #2: Detect and remember emergencies
+      if (/overflowing|flooding|burst|emergency|urgent|right now|asap|sparking|water everywhere/i.test(msg.content)) {
+        context.hasActiveEmergency = true;
+        const match = msg.content.match(/overflowing|flooding|burst|sparking/i);
+        context.emergencyType = match ? match[0] : 'emergency';
+        context.emergencyMentionedAt = i;
+      }
+      
+      // BUG FIX #7: Track issues mentioned for summary
+      const issueMatches = msg.content.match(/leak|overflow|outlet.*not working|fan|electrical|plumbing|toilet|sink|faucet/gi);
+      if (issueMatches) {
+        issueMatches.forEach(issue => {
+          if (!context.mentionedIssues.includes(issue.toLowerCase())) {
+            context.mentionedIssues.push(issue.toLowerCase());
+          }
+        });
+      }
+      
+      // Confusion detection
       const confusionWords = ['what', 'huh', 'confused', 'don\'t understand'];
       if (confusionWords.some(w => msg.content.toLowerCase().includes(w))) {
         context.customerSeemsConfused = true;
@@ -127,6 +156,7 @@ function buildContextFromHistory(history) {
     }
     
     if (msg.role === 'assistant') {
+      // Track what we asked for
       if (/work order number/i.test(msg.content)) {
         context.lastAskedFor = 'workorder';
       }
@@ -134,13 +164,14 @@ function buildContextFromHistory(history) {
         context.lastAskedFor = 'name';
       }
       
+      // Detect conversation topic
       if (/cancel/i.test(msg.content)) {
         context.conversationTopic = 'cancellation';
       } else if (/reschedule|change/i.test(msg.content)) {
         context.conversationTopic = 'reschedule';
       } else if (/status|scheduled|appointment/i.test(msg.content)) {
         context.conversationTopic = 'status';
-      } else if (/warranty/i.test(msg.content)) {
+      } else if (/warranty|previous service/i.test(msg.content)) {
         context.conversationTopic = 'warranty';
       }
     }
@@ -313,7 +344,6 @@ To reschedule, please call us at +52 612 169 8328 and we'll find a time that wor
 // ========================================
 
 async function getGroqResponse(question, history, context, intent) {
-  // Build enhanced system prompt based on intent
   let systemPrompt = `You are a helpful AI assistant for Cabos Handyman in Cabo San Lucas, Mexico.
 
 **SERVICES:**
@@ -340,17 +370,29 @@ async function getGroqResponse(question, history, context, intent) {
 - Mention FREE instant quote tool for estimates
 - If you don't know, suggest calling`;
 
-  // Special instructions based on intent
   if (intent.isVague) {
-    systemPrompt += `\n\n**SPECIAL INSTRUCTION:** User gave vague request. Ask 2-3 specific clarifying questions about what's wrong. Examples: "Is this a plumbing, electrical, or structural issue?", "Where specifically is the problem located?", "When did you first notice this?"`;
+    systemPrompt += `\n\n**SPECIAL INSTRUCTION:** User gave vague request. Ask 2-3 specific clarifying questions. Examples: "Is this a plumbing, electrical, or structural issue?", "Where specifically is the problem located?", "When did you first notice this?"`;
   }
   
   if (intent.isComparison) {
     systemPrompt += `\n\n**SPECIAL INSTRUCTION:** User is comparing prices. Don't promise to beat prices. Instead: explain our pricing is transparent and fair, mention FREE quote tool for accurate comparison, highlight quality and warranty, suggest uploading a photo for honest assessment.`;
   }
 
-  if (intent.isEmergency) {
-    systemPrompt += `\n\n**SPECIAL INSTRUCTION:** This is an EMERGENCY. Respond with urgency: confirm 24/7 availability, give emergency pricing ($100 + 50% after hours), direct to call +52 612 169 8328 IMMEDIATELY for dispatch, be reassuring.`;
+  // BUG FIX #5: More assertive emergency instructions
+  if (intent.isEmergency || context.hasActiveEmergency) {
+    systemPrompt += `\n\n**CRITICAL EMERGENCY INSTRUCTION:** 
+This is a LIFE-SAFETY EMERGENCY requiring IMMEDIATE action.
+
+YOU MUST:
+1. Start response with 🚨 emoji
+2. Use URGENT language: "CALL +52 612 169 8328 RIGHT NOW"
+3. Explain consequences (water damage $10k+, electrical fire risk, etc.)
+4. Be commanding and direct, not polite
+5. Tell them to stop what they're doing and call IMMEDIATELY
+6. Don't offer quote tool - this requires instant phone dispatch
+7. Mention 24/7 availability and <1 hour response time
+
+Example: "🚨 STOP! Your ${context.emergencyType || 'issue'} can cause THOUSANDS in damage or injury. CALL +52 612 169 8328 RIGHT NOW - we're standing by to dispatch a crew within 30 minutes. Don't wait - every minute counts!"`;
   }
 
   try {
@@ -409,8 +451,57 @@ export default async function handler(req, res) {
       workOrderNum, 
       clientName, 
       intent: Object.keys(intent).filter(k => intent[k]),
-      topic: context.conversationTopic
+      topic: context.conversationTopic,
+      emergency: context.hasActiveEmergency,
+      issuesCount: context.mentionedIssues.length
     });
+
+    // ========================================
+    // BUG FIX #3: MULTI-ISSUE & EMERGENCY CONSOLIDATION
+    // ========================================
+    if (context.hasActiveEmergency && history.length > 2) {
+      const recentMessages = history.slice(-5);
+      const hasMultipleIssues = recentMessages.filter(m => 
+        m.role === 'user' && /also|and also|plus|additionally|another|what about/i.test(m.content)
+      ).length > 0;
+      
+      if (hasMultipleIssues && !intent.wantsStatus && !intent.wantsCancel) {
+        return res.status(200).json({
+          success: true,
+          response: `🚨 **EMERGENCY PRIORITY!** 
+
+I see you have multiple issues, but your ${context.emergencyType} needs IMMEDIATE attention to prevent serious damage.
+
+**CALL +52 612 169 8328 RIGHT NOW** - don't wait! We're available 24/7.
+
+Once we handle the emergency (within 30-60 minutes), we can address your other issues in the same visit:
+${context.mentionedIssues.map((issue, i) => `• ${issue}`).join('\n')}
+
+Estimated combined: $${context.mentionedIssues.length * 300}-${context.mentionedIssues.length * 600}
+
+Stop the damage first - call now!`
+        });
+      }
+    }
+
+    // BUG FIX #7: CONVERSATION SUMMARY FOR LONG CHATS
+    if (history.length > 8 && context.mentionedIssues.length > 2 && intent.wantsPricing) {
+      return res.status(200).json({
+        success: true,
+        response: `Let me recap the issues you've mentioned:
+
+${context.mentionedIssues.map((issue, i) => `${i+1}. ${issue}`).join('\n')}
+
+For ${context.mentionedIssues.length} separate issues like this, I recommend calling +52 612 169 8328 so we can:
+- Assess everything properly
+- Give you an accurate combined estimate  
+- Handle it all in ONE visit (saves you $)
+
+Combined estimate: $${context.mentionedIssues.length * 200}-${context.mentionedIssues.length * 700}
+
+Want to call now or use our instant quote tool first?`
+      });
+    }
 
     // ========================================
     // DECISION TREE
