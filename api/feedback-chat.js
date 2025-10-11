@@ -1,5 +1,5 @@
-// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI
-// Built to understand human conversation patterns, not rigid rules
+// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI v2
+// Built to understand human conversation patterns with advanced error handling
 
 import { createClient } from '@supabase/supabase-js';
 
@@ -34,10 +34,11 @@ function extractWorkOrderNumber(text) {
 }
 
 function extractName(text) {
-  // Try multiple name patterns
+  // Try multiple name patterns with better accuracy
   const patterns = [
     /(?:name\s+(?:is\s+)?|last\s*name\s*(?:is)?\s*|i'm\s+|i\s+am\s+|my\s+name\s*(?:is)?\s*|mr\.?\s+|mrs\.?\s+|ms\.?\s+)([a-z]{2,})/i,
     /^([a-z]{3,})$/i,  // Just a name by itself (3+ letters)
+    /\b([a-z]{4,})\s*$/i, // Last word if 4+ letters (common pattern)
   ];
   
   for (const pattern of patterns) {
@@ -50,26 +51,36 @@ function extractName(text) {
 function analyzeIntent(text, history) {
   const lower = text.toLowerCase();
   
-  // Status/lookup intent
+  // Status/lookup intent - expanded keywords
   const statusKeywords = ['status', 'check', 'scheduled', 'when', 'date', 'appointment', 
                           'service', 'order', 'my', 'look up', 'find', 'what time', 
-                          'confirm', 'verify', 'schedule'];
+                          'confirm', 'verify', 'schedule', 'eta', 'arrive', 'coming'];
   const hasStatusIntent = statusKeywords.some(kw => lower.includes(kw));
   
   // Cancellation intent
-  const cancelKeywords = ['cancel', 'cancellation', 'delete', 'remove', 'stop'];
+  const cancelKeywords = ['cancel', 'cancellation', 'delete', 'remove', 'stop', 'abort'];
   const hasCancelIntent = cancelKeywords.some(kw => lower.includes(kw));
+  
+  // Reschedule intent - NEW!
+  const rescheduleKeywords = ['reschedule', 'change', 'move', 'different time', 'different day', 'postpone'];
+  const hasRescheduleIntent = rescheduleKeywords.some(kw => lower.includes(kw));
   
   // General service questions
   const serviceKeywords = ['how much', 'cost', 'price', 'estimate', 'quote', 
-                           'service', 'repair', 'fix', 'install'];
+                           'service', 'repair', 'fix', 'install', 'emergency'];
   const hasServiceIntent = serviceKeywords.some(kw => lower.includes(kw));
+  
+  // Greeting detection - NEW!
+  const greetingKeywords = ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'hola'];
+  const isGreeting = greetingKeywords.some(kw => lower.startsWith(kw));
   
   return {
     wantsStatus: hasStatusIntent,
     wantsCancel: hasCancelIntent,
+    wantsReschedule: hasRescheduleIntent,
     wantsServiceInfo: hasServiceIntent,
-    isFollowUp: text.length < 50 && !hasStatusIntent && !hasCancelIntent && !hasServiceIntent
+    isGreeting: isGreeting,
+    isFollowUp: text.length < 50 && !hasStatusIntent && !hasCancelIntent && !hasServiceIntent && !isGreeting
   };
 }
 
@@ -78,7 +89,8 @@ function buildContextFromHistory(history) {
     workOrderNum: null,
     clientName: null,
     lastAskedFor: null,
-    conversationTopic: null
+    conversationTopic: null,
+    customerSeemsConfused: false
   };
   
   // Scan last 8 messages
@@ -95,6 +107,12 @@ function buildContextFromHistory(history) {
       if (!context.clientName) {
         context.clientName = extractName(msg.content);
       }
+      
+      // Detect confusion - NEW!
+      const confusionWords = ['what', 'huh', 'confused', 'don\'t understand', 'help'];
+      if (confusionWords.some(w => msg.content.toLowerCase().includes(w))) {
+        context.customerSeemsConfused = true;
+      }
     }
     
     if (msg.role === 'assistant') {
@@ -109,6 +127,8 @@ function buildContextFromHistory(history) {
       // Detect conversation topic
       if (/cancel/i.test(msg.content)) {
         context.conversationTopic = 'cancellation';
+      } else if (/reschedule|change/i.test(msg.content)) {
+        context.conversationTopic = 'reschedule';
       } else if (/status|scheduled|appointment/i.test(msg.content)) {
         context.conversationTopic = 'status';
       }
@@ -119,7 +139,7 @@ function buildContextFromHistory(history) {
 }
 
 // ========================================
-// DATABASE LOOKUP FUNCTION
+// DATABASE LOOKUP FUNCTION - IMPROVED
 // ========================================
 
 async function lookupWorkOrder(workOrderNum, clientName) {
@@ -135,7 +155,15 @@ async function lookupWorkOrder(workOrderNum, clientName) {
     return {
       success: false,
       error: 'not_found',
-      message: `I couldn't find work order WO-${workOrderNum} in our system. Please verify the number or call +52 612 169 8328.`
+      message: `I couldn't find work order WO-${workOrderNum} in our system. 
+
+This could be a typo - please double-check your work order number. It should be 13 digits long (like WO-1760140602718).
+
+You can also:
+- Check your confirmation email for the correct number
+- Call us at +52 612 169 8328 and we'll look it up by name
+
+Need help with anything else?`
     };
   }
 
@@ -143,7 +171,14 @@ async function lookupWorkOrder(workOrderNum, clientName) {
     return {
       success: false,
       error: 'name_mismatch',
-      message: `The name doesn't match our records for WO-${workOrderNum}. For security, please call +52 612 169 8328.`
+      message: `Hmm, the last name "${clientName}" doesn't match our records for WO-${workOrderNum}.
+
+This could be:
+- A typo in the name (try just your last name)
+- The work order is under a different name (spouse, business, etc.)
+- A different work order number
+
+For security, please call +52 612 169 8328 and we'll help verify your information.`
     };
   }
 
@@ -164,21 +199,37 @@ async function lookupWorkOrder(workOrderNum, clientName) {
     }
   }
 
+  // Smart status messaging - NEW!
+  let statusEmoji = '📋';
+  let statusMessage = data.status || 'Pending';
+  
+  if (data.status === 'Scheduled') {
+    statusEmoji = '✅';
+  } else if (data.status === 'In Progress') {
+    statusEmoji = '🔧';
+    statusMessage = 'In Progress - Our crew is working on it!';
+  } else if (data.status === 'Completed') {
+    statusEmoji = '✔️';
+  } else if (data.status === 'Pending') {
+    statusEmoji = '⏳';
+    statusMessage = 'Pending - We\'ll schedule you soon!';
+  }
+
   return {
     success: true,
     data: data,
-    message: `✅ **Work Order ${data.work_order_number}**
+    message: `${statusEmoji} **Work Order ${data.work_order_number}**
 
-**Status:** ${data.status || 'Pending'}
+**Status:** ${statusMessage}
 **Scheduled:** ${schedText}
 ${data.assigned_crew ? `**Crew:** ${data.assigned_crew}\n` : ''}**Total:** $${total.toFixed(2)}
 ${data.notes ? `\n**Notes:** ${data.notes}\n` : ''}
-Need anything else?`
+Need to reschedule or cancel? Just ask!`
   };
 }
 
 // ========================================
-// CANCELLATION FUNCTION
+// CANCELLATION FUNCTION - IMPROVED
 // ========================================
 
 async function processCancellation(workOrderNum, clientName) {
@@ -191,7 +242,11 @@ async function processCancellation(workOrderNum, clientName) {
   const data = lookup.data;
 
   if (data.status === 'Completed') {
-    return `Work order ${data.work_order_number} is already completed and can't be cancelled. If you have concerns, please call +52 612 169 8328.`;
+    return `Work order ${data.work_order_number} is already completed and can't be cancelled. If you have concerns about the completed work, please call +52 612 169 8328 and we'll make it right!`;
+  }
+
+  if (data.status === 'Cancellation Requested') {
+    return `Your cancellation request for ${data.work_order_number} is already being processed. We'll contact you shortly to confirm. Call +52 612 169 8328 if you need immediate assistance.`;
   }
 
   // Update to cancellation requested
@@ -207,7 +262,15 @@ async function processCancellation(workOrderNum, clientName) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        message: `🚫 CANCELLATION REQUEST\n\nWO: ${data.work_order_number}\nClient: ${data.client_name}\nScheduled: ${data.scheduled_date || 'TBD'}\nTotal: $${total.toFixed(2)}`,
+        message: `🚫 CANCELLATION REQUEST
+
+WO: ${data.work_order_number}
+Client: ${data.client_name}
+Phone: ${data.client_phone || 'N/A'}
+Scheduled: ${data.scheduled_date || 'TBD'}
+Total: $${total.toFixed(2)}
+
+Action Required: Contact customer to confirm cancellation.`,
         phone: process.env.NEXT_PUBLIC_BUSINESS_WHATSAPP_NUMBER
       })
     });
@@ -215,38 +278,75 @@ async function processCancellation(workOrderNum, clientName) {
     console.error('Notification failed');
   }
 
-  return `✅ Cancellation request submitted for ${data.work_order_number}. Our team will contact you within 1 hour to confirm. Call +52 612 169 8328 for immediate assistance.`;
+  return `✅ Cancellation request submitted for ${data.work_order_number}. 
+
+Our team will contact you within 1 hour to confirm the cancellation. 
+
+Need immediate assistance? Call +52 612 169 8328.`;
 }
 
 // ========================================
-// GROQ AI FALLBACK
+// RESCHEDULE HANDLER - NEW!
 // ========================================
 
-async function getGroqResponse(question, history) {
+async function handleReschedule(workOrderNum, clientName) {
+  const lookup = await lookupWorkOrder(workOrderNum, clientName);
+  
+  if (!lookup.success) {
+    return lookup.message;
+  }
+
+  const data = lookup.data;
+
+  if (data.status === 'Completed') {
+    return `This work order is already completed. If you need additional service, please call +52 612 169 8328 or use our instant quote tool!`;
+  }
+
+  return `I can help you reschedule work order ${data.work_order_number}! 
+
+**Current schedule:** ${data.scheduled_date ? new Date(data.scheduled_date).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' }) : 'Not yet scheduled'}
+
+To reschedule, please call us at +52 612 169 8328 and we'll find a time that works better for you. Our team can usually accommodate changes with 24-hour notice.`;
+}
+
+// ========================================
+// GROQ AI FALLBACK - IMPROVED
+// ========================================
+
+async function getGroqResponse(question, history, context) {
   const systemPrompt = `You are a helpful AI assistant for Cabos Handyman in Cabo San Lucas, Mexico.
 
 **YOUR ROLE:**
-Answer general questions about services, pricing, hours, and policies. Be friendly and concise (2-3 sentences).
+Answer general questions about services, pricing, hours, and policies. Be friendly, warm, and concise (2-3 sentences max).
 
 **SERVICES:**
-- Residential (kitchens, bathrooms, renovations)
-- Emergency 24/7 (water/electrical/structural)
-- Commercial (offices, retail)
-- HOA/Property maintenance
+- Residential Maintenance (kitchens, bathrooms, home renovations)
+- Emergency Services 24/7 (water damage, electrical, structural issues)
+- Commercial Projects (office buildouts, retail spaces)
+- HOA & Property Maintenance
 
 **PRICING EXAMPLES:**
-- Service call: $100 (includes diagnosis + 30 min)
+- Service call: $100 (includes diagnosis + first 30 minutes)
 - Leak repairs: $200-$600
 - Electrical work: $150-$500
 - Plumbing: $200-$800
-- Emergency: +50% after hours
+- Emergency service: +50% after hours
+- We provide FREE instant quotes via our photo analysis tool
 
-**IMPORTANT:**
-- Don't ask for work order numbers or customer details - the system handles that
+**BUSINESS HOURS:**
+- Monday-Saturday: 7:00 AM - 6:00 PM
+- Emergency service: 24/7
+- Located in Cabo San Lucas, Mexico
+- Phone: +52 612 169 8328
+
+**IMPORTANT RULES:**
+- DON'T ask for work order numbers or customer info - the system handles that automatically
 - If you don't know something specific, suggest calling +52 612 169 8328
-- Mention our free instant quote tool for detailed estimates
+- Mention our instant quote tool for detailed project estimates
+- Be conversational and helpful, not robotic
+- Keep responses SHORT (2-3 sentences)
 
-Be warm, helpful, and brief.`;
+Be warm, friendly, and genuinely helpful.`;
 
   try {
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -271,7 +371,7 @@ Be warm, helpful, and brief.`;
     return data.choices[0]?.message?.content || 'I\'m here to help! What can I assist you with?';
   } catch (error) {
     console.error('Groq failed:', error);
-    return 'I\'m having trouble right now. Please call +52 612 169 8328 for immediate assistance.';
+    return 'I\'m having a technical issue right now. Please call +52 612 169 8328 for immediate assistance, or try asking again in a moment.';
   }
 }
 
@@ -319,12 +419,20 @@ export default async function handler(req, res) {
     // DECISION TREE - TRULY SMART
     // ========================================
 
+    // SCENARIO 0: Friendly greeting - NEW!
+    if (intent.isGreeting && !intent.wantsStatus && !intent.wantsCancel) {
+      return res.status(200).json({
+        success: true,
+        response: "Hi there! 👋 I'm here to help you with:\n\n• Check your appointment status\n• Cancel or reschedule service\n• Answer questions about our services\n• Get instant quotes\n\nWhat can I help you with today?"
+      });
+    }
+
     // SCENARIO 1: User wants to cancel
     if (intent.wantsCancel || context.conversationTopic === 'cancellation') {
       if (!workOrderNum) {
         return res.status(200).json({
           success: true,
-          response: "I can help cancel your work order. What's your work order number?"
+          response: "I can help cancel your work order. What's your work order number? (It's in your confirmation email)"
         });
       }
       
@@ -339,7 +447,27 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, response: result });
     }
 
-    // SCENARIO 2: User wants status/appointment info
+    // SCENARIO 2: User wants to reschedule - NEW!
+    if (intent.wantsReschedule || context.conversationTopic === 'reschedule') {
+      if (!workOrderNum) {
+        return res.status(200).json({
+          success: true,
+          response: "I can help you reschedule! What's your work order number?"
+        });
+      }
+      
+      if (!clientName) {
+        return res.status(200).json({
+          success: true,
+          response: "And your last name?"
+        });
+      }
+      
+      const result = await handleReschedule(workOrderNum, clientName);
+      return res.status(200).json({ success: true, response: result });
+    }
+
+    // SCENARIO 3: User wants status/appointment info
     if (intent.wantsStatus || context.conversationTopic === 'status' || (workOrderNum && !intent.wantsServiceInfo)) {
       if (!workOrderNum) {
         return res.status(200).json({
@@ -359,7 +487,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, response: result.message });
     }
 
-    // SCENARIO 3: Follow-up response (they just answered our question)
+    // SCENARIO 4: Follow-up response (they just answered our question)
     if (intent.isFollowUp && context.lastAskedFor) {
       // They just gave us a single piece of info
       if (context.lastAskedFor === 'workorder' && workOrderNum && !clientName) {
@@ -376,15 +504,15 @@ export default async function handler(req, res) {
       }
     }
 
-    // SCENARIO 4: General service questions
-    const aiResponse = await getGroqResponse(question, history);
+    // SCENARIO 5: General service questions
+    const aiResponse = await getGroqResponse(question, history, context);
     return res.status(200).json({ success: true, response: aiResponse });
 
   } catch (error) {
     console.error('❌ Error:', error);
     return res.status(200).json({
       success: true,
-      response: 'Sorry, I had a technical issue. Please call +52 612 169 8328.'
+      response: 'Sorry, I had a technical issue. Please call +52 612 169 8328 and we\'ll help you right away!'
     });
   }
 }
