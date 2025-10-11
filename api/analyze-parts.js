@@ -261,7 +261,7 @@ Respond ONLY with valid JSON (no markdown):
           min: 100 + partsMin,
           max: 100 + partsMax
         },
-        pricing_note: `✨ Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional. This is a perfect "door opener" service - we can assess other issues while we're there!`
+        pricing_note: `✨ Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional.`
       };
     } else {
       // 🔧 BIGGER JOB - Standard pricing
