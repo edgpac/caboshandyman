@@ -1079,24 +1079,6 @@ const handleImageSelect = (e) => {
               </div>
             </div>
 
-            {/* Quick action buttons with chat styling */}
-            <div className="space-y-2">
-              {quickActions.map((action, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleQuickAction(action)}
-                  className="w-full bg-white border-2 border-purple-200 hover:border-teal-400 text-purple-400 hover:text-teal-500 px-4 py-3 rounded-full text-sm font-medium transition-all duration-200 text-left flex items-center space-x-2"
-                >
-                  <span>{action.icon}</span>
-                  <span>{action.label}</span>
-                </button>
-              ))}
-            </div>
-
-            <div className="text-center my-3">
-              <span className="text-xs text-gray-500">or choose a service below</span>
-            </div>
-
             <div className="space-y-3">
               {services.map((service, index) => {
                 const IconComponent = service.icon;
