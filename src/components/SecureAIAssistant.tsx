@@ -1,4 +1,4 @@
-// Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT
+// Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT + CHAT-ONLY MODE
 import React, { useState, useEffect } from 'react';
 import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
@@ -41,7 +41,13 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
 
   useEffect(() => {
     if (initialMode && assistantIsOpen) {
-      setCurrentView(initialMode);
+      if (initialMode === 'chat') {
+        // Chat-only mode - skip everything, go straight to feedback chat
+        setFeedbackMode(true);
+        setCurrentView('chat-only');
+      } else {
+        setCurrentView(initialMode);
+      }
       
       if (initialMode === 'booking') {
         setSelectedService(null);
@@ -334,7 +340,6 @@ Time: ${new Date().toLocaleString()}`;
       });
     }
   };
-
   const handleScheduleAppointment = async (analysisData) => {
     try {
       const loadingToast = document.createElement('div');
@@ -497,6 +502,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       setIsAnalyzing(false);
     }
   };
+
   const analyzeIssue = async () => {
     setIsAnalyzing(true);
     setError(null);
@@ -621,7 +627,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
   };
 
   const handleFeedbackChat = async () => {
-    if (!feedbackInput.trim() || !analysis) return;
+    if (!feedbackInput.trim()) return;
 
     const userMessage = {
       role: 'user',
@@ -840,6 +846,93 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       </div>
 
       <div className={`p-4 overflow-y-auto flex-1 ${isMobile ? 'pb-safe' : ''}`}>
+        {/* CHAT-ONLY MODE - NEW! */}
+        {currentView === 'chat-only' && (
+          <div className="space-y-4">
+            <div className="bg-gradient-to-r from-blue-500 to-teal-500 text-white p-4 rounded-lg">
+              <h3 className="font-semibold text-lg mb-2">👋 Hi! How can I help you today?</h3>
+              <p className="text-sm opacity-90">
+                Ask me about our services, check your work order status, get a quick quote, or ask any questions!
+              </p>
+            </div>
+
+            <div className="border rounded-lg p-3 bg-gray-50 max-h-96 overflow-y-auto space-y-3">
+              {feedbackHistory.length === 0 && (
+                <div className="text-center text-gray-500 text-sm py-8">
+                  <MessageCircle size={32} className="mx-auto mb-2 text-gray-400" />
+                  <p>Start a conversation...</p>
+                  <div className="mt-4 text-xs space-y-1">
+                    <p>💬 "What services do you offer?"</p>
+                    <p>📋 "Check work order status"</p>
+                    <p>💰 "How much to fix a leak?"</p>
+                  </div>
+                </div>
+              )}
+              
+              {feedbackHistory.map((msg, i) => (
+                <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                  <div className={`max-w-[85%] p-3 rounded-lg text-sm ${
+                    msg.role === 'user' 
+                      ? 'bg-blue-600 text-white rounded-br-none' 
+                      : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
+                  }`}>
+                    <div className="whitespace-pre-line">{msg.content}</div>
+                  </div>
+                </div>
+              ))}
+              
+              {isAnalyzing && (
+                <div className="flex justify-start">
+                  <div className="bg-white border border-gray-200 p-3 rounded-lg shadow-sm">
+                    <Loader className="animate-spin w-4 h-4 text-blue-600" />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="flex space-x-2">
+              <input
+                value={feedbackInput}
+                onChange={(e) => setFeedbackInput(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
+                placeholder="Type your message..."
+                className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none ${
+                  isMobile ? 'text-base' : ''
+                }`}
+                disabled={isAnalyzing}
+                autoFocus
+              />
+              <button 
+                onClick={handleFeedbackChat}
+                disabled={!feedbackInput.trim() || isAnalyzing}
+                className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg transition-colors"
+              >
+                <Send size={18} />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-2 pt-2 border-t">
+              <button
+                onClick={() => {
+                  setFeedbackInput("What's my work order status?");
+                }}
+                className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded transition-colors"
+              >
+                📋 Work Order Status
+              </button>
+              <button
+                onClick={() => {
+                  setCurrentView('services');
+                  setFeedbackMode(false);
+                }}
+                className="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-2 rounded transition-colors"
+              >
+                🔧 Get Quote
+              </button>
+            </div>
+          </div>
+        )}
+
         {currentView === 'services' && !analysis && !isAnalyzing && (
           <div className="space-y-4">
             <div className="text-center mb-4">
@@ -1180,7 +1273,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             </div>
           </div>
         )}
-
         {analysis && !chatMode && (
           <div className="space-y-4">
             <div className={`border p-3 rounded-lg ${getSeverityColor(analysis.analysis?.severity)}`}>
