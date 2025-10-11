@@ -1,22 +1,9 @@
-// api/work-order-status.js - Work Order Status Lookup
+// api/work-order-status.js - Work Order Status Lookup (CommonJS for Vercel)
 
-import { createClient } from '@supabase/supabase-js';
+const { createClient } = require('@supabase/supabase-js');
 
-export const config = {
-  maxDuration: 30,
-  api: {
-    bodyParser: {
-      sizeLimit: '1mb'
-    }
-  }
-};
-
-const supabase = createClient(
-  process.env.SUPABASE_URL || 'https://okwcasooleetwvfuwtuz.supabase.co',
-  process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9rd2Nhc29vbGVldHd2ZnV3dHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjUwMzEsImV4cCI6MjA3NDk0MTAzMX0.942cbD0ITALrlHoI0A5o8kGx3h-XQ1k4DPSxrXoIcXc'
-);
-
-export default async function handler(req, res) {
+module.exports = async (req, res) => {
+  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -28,6 +15,12 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
+  // Initialize Supabase
+  const supabase = createClient(
+    process.env.SUPABASE_URL || 'https://okwcasooleetwvfuwtuz.supabase.co',
+    process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9rd2Nhc29vbGVldHd2ZnV3dHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjUwMzEsImV4cCI6MjA3NDk0MTAzMX0.942cbD0ITALrlHoI0A5o8kGx3h-XQ1k4DPSxrXoIcXc'
+  );
 
   try {
     const { work_order_number, client_name, search_type } = req.body;
@@ -226,7 +219,7 @@ export default async function handler(req, res) {
     return res.status(500).json({
       success: false,
       error: 'Unable to lookup work order',
-      message: 'Please try again or call us for assistance.'
+      message: error.message || 'Please try again or call us for assistance.'
     });
   }
-}
+};
