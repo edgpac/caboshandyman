@@ -12,8 +12,8 @@ export const config = {
 };
 
 const supabase = createClient(
-  'https://okwcasooleetwvfuwtuz.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9rd2Nhc29vbGVldHd2ZnV3dHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjUwMzEsImV4cCI6MjA3NDk0MTAzMX0.942cbD0ITALrlHoI0A5o8kGx3h-XQ1k4DPSxrXoIcXc'
+  process.env.SUPABASE_URL || 'https://okwcasooleetwvfuwtuz.supabase.co',
+  process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9rd2Nhc29vbGVldHd2ZnV3dHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjUwMzEsImV4cCI6MjA3NDk0MTAzMX0.942cbD0ITALrlHoI0A5o8kGx3h-XQ1k4DPSxrXoIcXc'
 );
 
 export default async function handler(req, res) {
@@ -34,19 +34,41 @@ export default async function handler(req, res) {
 
     console.log('🔍 Work order lookup:', { work_order_number, client_name, search_type });
 
+    // Extract numeric ID from work order number (strip WO- prefix if present)
+    const extractNumericId = (woNumber) => {
+      if (!woNumber) return null;
+      const cleaned = woNumber.toString().replace(/^WO-/i, '');
+      return parseInt(cleaned);
+    };
+
     // SEARCH BY WORK ORDER NUMBER
     if (search_type === 'by_number' && work_order_number) {
-      const { data, error } = await supabase
+      // Try searching by work_order_number field first (exact match)
+      let { data, error } = await supabase
         .from('pending')
         .select('*')
-        .eq('id', parseInt(work_order_number))
+        .eq('work_order_number', work_order_number)
         .single();
+
+      // If not found, try by numeric ID
+      if (error || !data) {
+        const numericId = extractNumericId(work_order_number);
+        if (numericId) {
+          const result = await supabase
+            .from('pending')
+            .select('*')
+            .eq('id', numericId)
+            .single();
+          data = result.data;
+          error = result.error;
+        }
+      }
 
       if (error || !data) {
         return res.status(200).json({
           success: false,
           found: false,
-          message: `Work order #${work_order_number} not found in our system.`
+          message: `Work order ${work_order_number} not found in our system.`
         });
       }
 
@@ -57,6 +79,7 @@ export default async function handler(req, res) {
         needs_verification: true,
         preview: {
           id: data.id,
+          work_order_number: data.work_order_number,
           client_name: data.client_name,
           description: data.description,
           items_count: data.items?.length || 0
@@ -92,6 +115,7 @@ export default async function handler(req, res) {
           needs_verification: true,
           preview: {
             id: data[0].id,
+            work_order_number: data[0].work_order_number,
             description: data[0].description,
             items_count: data[0].items?.length || 0
           }
@@ -106,6 +130,7 @@ export default async function handler(req, res) {
         multiple: true,
         work_orders: data.map(wo => ({
           id: wo.id,
+          work_order_number: wo.work_order_number,
           description: wo.description
         })),
         message: `Found ${data.length} work orders for "${client_name}". Please provide the work order number.`
@@ -114,11 +139,26 @@ export default async function handler(req, res) {
 
     // VERIFY AND SHOW FULL DETAILS
     if (search_type === 'verify' && work_order_number && client_name) {
-      const { data, error } = await supabase
+      // Try searching by work_order_number field first
+      let { data, error } = await supabase
         .from('pending')
         .select('*')
-        .eq('id', parseInt(work_order_number))
+        .eq('work_order_number', work_order_number)
         .single();
+
+      // If not found, try by numeric ID
+      if (error || !data) {
+        const numericId = extractNumericId(work_order_number);
+        if (numericId) {
+          const result = await supabase
+            .from('pending')
+            .select('*')
+            .eq('id', numericId)
+            .single();
+          data = result.data;
+          error = result.error;
+        }
+      }
 
       if (error || !data) {
         return res.status(200).json({
@@ -139,20 +179,39 @@ export default async function handler(req, res) {
         });
       }
 
-      // VERIFIED - Return full details
+      // VERIFIED - Return full details with NEW FIELDS
       const totalCost = data.items?.reduce((sum, item) => sum + (item.price || 0), 0) || 0;
+
+      // Format scheduled date and time
+      let scheduledInfo = null;
+      if (data.scheduled_date) {
+        const date = new Date(data.scheduled_date);
+        scheduledInfo = {
+          date: data.scheduled_date,
+          time: data.scheduled_time || null,
+          formatted: date.toLocaleDateString('en-US', { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          })
+        };
+      }
 
       return res.status(200).json({
         success: true,
         verified: true,
         work_order: {
           id: data.id,
+          work_order_number: data.work_order_number,
           client_name: data.client_name,
           description: data.description,
           items: data.items,
           total_cost: totalCost,
           work_photo: data.work_photo,
-          status: 'Pending' // You can expand this if you add status field
+          status: data.status || 'Pending',
+          scheduled: scheduledInfo,
+          assigned_crew: data.assigned_crew || null
         }
       });
     }
