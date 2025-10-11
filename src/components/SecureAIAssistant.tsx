@@ -344,7 +344,7 @@ Time: ${new Date().toLocaleString()}`;
     try {
       const loadingToast = document.createElement('div');
       loadingToast.textContent = 'Preparing appointment request...';
-      loadingToast.className = 'fixed top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+      loadingToast.className = 'fixed top-4 right-4 bg-teal-400 text-white px-4 py-2 rounded-lg shadow-lg z-50';
       document.body.appendChild(loadingToast);
 
       let imagesToSend = null;
@@ -588,7 +588,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         if (result.vision_success_count === 0 && result.vision_error_count > 0) {
           const infoToast = document.createElement('div');
           infoToast.textContent = 'ℹ️ Estimate based on description (image analysis unavailable)';
-          infoToast.className = 'fixed top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
+          infoToast.className = 'fixed top-4 right-4 bg-teal-400 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
           document.body.appendChild(infoToast);
           setTimeout(() => {
             if (document.body.contains(infoToast)) {
@@ -814,7 +814,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50 ${
+        className={`fixed bottom-6 right-6 bg-teal-400 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50 ${
           isMobile ? 'p-3' : 'p-4'
         }`}
         aria-label="Open AI Assistant"
@@ -831,7 +831,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
   const maxImages = isMobile ? 1 : 3;
   return (
     <div className={containerClasses}>
-      <div className={`bg-blue-600 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
+      <div className={`bg-teal-400 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
         <div className="flex items-center space-x-2">
           <Wrench size={20} />
           <span className="font-semibold">Quote Assistant</span>
@@ -873,7 +873,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   <div className={`max-w-[85%] p-3 rounded-lg text-sm ${
                     msg.role === 'user' 
-                      ? 'bg-blue-600 text-white rounded-br-none' 
+                      ? 'bg-teal-400 text-white rounded-br-none' 
                       : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
                   }`}>
                     <div className="whitespace-pre-line">{msg.content}</div>
@@ -884,7 +884,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               {isAnalyzing && (
                 <div className="flex justify-start">
                   <div className="bg-white border border-gray-200 p-3 rounded-lg shadow-sm">
-                    <Loader className="animate-spin w-4 h-4 text-blue-600" />
+                    <Loader className="animate-spin w-4 h-4 text-teal-500" />
                   </div>
                 </div>
               )}
@@ -896,7 +896,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 onChange={(e) => setFeedbackInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
                 placeholder="Type your message..."
-                className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-2 focus:ring-blue-200 outline-none ${
+                className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-200 outline-none ${
                   isMobile ? 'text-base' : ''
                 }`}
                 disabled={isAnalyzing}
@@ -905,7 +905,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               <button 
                 onClick={handleFeedbackChat}
                 disabled={!feedbackInput.trim() || isAnalyzing}
-                className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg transition-colors"
+                className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg transition-colors"
               >
                 <Send size={18} />
               </button>
@@ -925,7 +925,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   setCurrentView('services');
                   setFeedbackMode(false);
                 }}
-                className="text-xs bg-blue-100 hover:bg-blue-200 text-blue-700 px-3 py-2 rounded transition-colors"
+                className="text-xs bg-teal-100 hover:bg-blue-200 text-teal-600 px-3 py-2 rounded transition-colors"
               >
                 🔧 Get Quote
               </button>
@@ -946,8 +946,8 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 return (
                   <div 
                     key={index}
-                    className={`border border-gray-200 rounded-lg p-3 hover:border-blue-600 hover:bg-gray-50 cursor-pointer transition-colors ${
-                      isMobile ? 'active:bg-blue-50' : ''
+                    className={`border border-gray-200 rounded-lg p-3 hover:border-teal-400 hover:bg-gray-50 cursor-pointer transition-colors ${
+                      isMobile ? 'active:bg-teal-50' : ''
                     }`}
                     onClick={() => {
                       setSelectedService(service);
@@ -956,7 +956,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     }}
                   >
                     <div className="flex items-start space-x-3">
-                      <IconComponent size={20} className="text-blue-600 mt-1 flex-shrink-0" />
+                      <IconComponent size={20} className="text-teal-500 mt-1 flex-shrink-0" />
                       <div className="flex-1">
                         <h4 className="font-semibold text-sm text-gray-800">{service.title}</h4>
                         <p className="text-xs text-gray-600 mt-1">{service.description}</p>
@@ -970,7 +970,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             <div className="border-t pt-4">
               <button
                 onClick={() => setCurrentView('booking')}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
+                className="w-full bg-teal-400 hover:bg-teal-500 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
               >
                 <Camera size={16} />
                 <span>Analyze Specific Issue</span>
@@ -1004,7 +1004,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               <div>
                 <h3 className="font-semibold text-gray-800">Schedule Appointment</h3>
                 {selectedService && (
-                  <p className="text-sm text-blue-600 font-medium">
+                  <p className="text-sm text-teal-500 font-medium">
                     {selectedService.title}
                   </p>
                 )}
@@ -1014,19 +1014,19 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   setCurrentView('services');
                   setSelectedService(null);
                 }}
-                className="text-sm text-blue-600 hover:text-blue-800"
+                className="text-sm text-teal-500 hover:text-teal-700"
               >
                 ← Back
               </button>
             </div>
 
             {selectedService && (
-              <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
+              <div className="bg-teal-50 p-3 rounded-lg border border-teal-200">
                 <div className="flex items-center space-x-2 mb-2">
-                  <selectedService.icon size={16} className="text-blue-600" />
-                  <span className="text-sm font-semibold text-blue-800">{selectedService.title}</span>
+                  <selectedService.icon size={16} className="text-teal-500" />
+                  <span className="text-sm font-semibold text-teal-700">{selectedService.title}</span>
                 </div>
-                <p className="text-xs text-blue-700">{selectedService.details}</p>
+                <p className="text-xs text-teal-600">{selectedService.details}</p>
               </div>
             )}
             
@@ -1043,8 +1043,8 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             <div 
               className={`border-2 border-dashed rounded-lg p-4 text-center transition-colors ${
                 isDragging 
-                  ? 'border-blue-600 bg-blue-50' 
-                  : 'border-gray-300 hover:border-blue-600'
+                  ? 'border-teal-400 bg-teal-50' 
+                  : 'border-gray-300 hover:border-teal-400'
               }`}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -1071,7 +1071,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   }`}>
                     <button
                       onClick={capturePhoto}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold flex items-center justify-center space-x-2"
+                      className="bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded-lg font-semibold flex items-center justify-center space-x-2"
                     >
                       <Camera size={16} />
                       <span>Capture</span>
@@ -1108,7 +1108,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     <div className={`grid gap-2 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
                       <button
                         onClick={startCamera}
-                        className="bg-blue-100 hover:bg-blue-200 text-blue-800 px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
+                        className="bg-teal-100 hover:bg-blue-200 text-teal-700 px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
                       >
                         <Camera size={14} />
                         <span>Add Photo</span>
@@ -1142,7 +1142,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <div className={`grid gap-2 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
                     <button
                       onClick={startCamera}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
+                      className="bg-teal-400 hover:bg-teal-500 text-white px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
                     >
                       <Camera size={14} />
                       <span>Take Photo</span>
@@ -1165,12 +1165,12 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
             {chatMode ? (
               <div className="space-y-3">
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <div className="bg-teal-50 border border-teal-200 rounded-lg p-3">
                   <div className="flex items-center space-x-2 mb-2">
-                    <MessageCircle size={16} className="text-blue-600" />
-                    <span className="text-sm font-semibold text-blue-800">Let's get more details</span>
+                    <MessageCircle size={16} className="text-teal-500" />
+                    <span className="text-sm font-semibold text-teal-700">Let's get more details</span>
                   </div>
-                  <p className="text-xs text-blue-700">I need a bit more information to provide an accurate estimate.</p>
+                  <p className="text-xs text-teal-600">I need a bit more information to provide an accurate estimate.</p>
                 </div>
 
                 <div className="border rounded-lg p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
@@ -1178,7 +1178,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
                         msg.role === 'user' 
-                          ? 'bg-blue-600 text-white rounded-br-none' 
+                          ? 'bg-teal-400 text-white rounded-br-none' 
                           : 'bg-white border border-gray-200 rounded-bl-none'
                       }`}>
                         <div className="whitespace-pre-line">{msg.content}</div>
@@ -1188,7 +1188,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   {isAnalyzing && (
                     <div className="flex justify-start">
                       <div className="bg-white border border-gray-200 p-3 rounded-lg text-sm">
-                        <Loader className="animate-spin w-4 h-4 text-blue-600" />
+                        <Loader className="animate-spin w-4 h-4 text-teal-500" />
                       </div>
                     </div>
                   )}
@@ -1199,7 +1199,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     onChange={(e) => setChatInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleChatSend()}
                     placeholder="Type your answer..."
-                    className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
+                    className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none ${
                       isMobile ? 'text-base' : ''
                     }`}
                     disabled={isAnalyzing}
@@ -1207,7 +1207,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <button 
                     onClick={handleChatSend}
                     disabled={!chatInput.trim() || isAnalyzing}
-                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
+                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
                   >
                     <Send size={16} />
                   </button>
@@ -1230,7 +1230,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe the issue in detail (e.g., 'Water leaking from pipe joint under kitchen sink', 'Electrical outlet not working in bedroom')"
-                  className={`w-full p-3 border border-gray-300 rounded-lg resize-none text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
+                  className={`w-full p-3 border border-gray-300 rounded-lg resize-none text-sm focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none ${
                     isMobile ? 'text-base' : ''
                   }`}
                   rows={isMobile ? 3 : 4}
@@ -1241,7 +1241,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <button
                   onClick={analyzeIssue}
                   disabled={selectedImages.length === 0 || !description}
-                  className={`w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
+                  className={`w-full bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
                     isMobile ? 'py-4' : ''
                   }`}
                 >
@@ -1255,7 +1255,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
         {isAnalyzing && !chatMode && (
           <div className="text-center space-y-4">
-            <Loader className="animate-spin mx-auto w-8 h-8 text-blue-600" />
+            <Loader className="animate-spin mx-auto w-8 h-8 text-teal-500" />
             <p className="text-gray-600">Analyzing your issue...</p>
             <div className="text-sm text-gray-500 space-y-1">
               <p>🔍 Processing images</p>
@@ -1281,10 +1281,10 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             </div>
 
             {analysis.cost_estimate && (
-              <div className="bg-blue-50 p-3 rounded-lg">
-                <h4 className="font-semibold text-blue-800 mb-2">Cost Estimate</h4>
+              <div className="bg-teal-50 p-3 rounded-lg">
+                <h4 className="font-semibold text-teal-700 mb-2">Cost Estimate</h4>
                 
-                <div className="bg-blue-100 border border-blue-300 rounded p-2 mb-3 text-xs text-blue-700">
+                <div className="bg-teal-100 border border-teal-300 rounded p-2 mb-3 text-xs text-teal-600">
                   <strong>⚠️ Preliminary Estimate:</strong> Labor costs and hours are approximate and may vary based on project complexity, site conditions, and unforeseen circumstances discovered during work.
                 </div>
                  
@@ -1297,12 +1297,12 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
                 {/* Service Call Fee Display */}
                 {analysis.cost_estimate.service_call_fee && (
-                  <div className="bg-blue-50 border border-blue-200 rounded p-3 mb-3 text-sm">
+                  <div className="bg-teal-50 border border-teal-200 rounded p-3 mb-3 text-sm">
                     <div className="flex items-center justify-between">
-                      <span className="text-blue-600 font-semibold">Service Call Fee:</span>
-                      <span className="text-blue-800 font-bold">${analysis.cost_estimate.service_call_fee}</span>
+                      <span className="text-teal-500 font-semibold">Service Call Fee:</span>
+                      <span className="text-teal-700 font-bold">${analysis.cost_estimate.service_call_fee}</span>
                     </div>
-                    <div className="text-xs text-blue-600 mt-1">
+                    <div className="text-xs text-teal-500 mt-1">
                       Includes diagnosis + first 30 minutes of work
                     </div>
                   </div>
@@ -1311,7 +1311,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <div className={`grid gap-2 text-sm ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
                   {analysis.cost_estimate.parts_cost && (
                     <div>
-                      <span className="text-blue-600">Materials:</span>
+                      <span className="text-teal-500">Materials:</span>
                       <div className="font-semibold">
                         ${analysis.cost_estimate.parts_cost.min} - ${analysis.cost_estimate.parts_cost.max}
                       </div>
@@ -1320,7 +1320,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
 
                   {analysis.cost_estimate.labor_cost && (
                     <div>
-                      <span className="text-blue-600">Labor (Est.):</span>
+                      <span className="text-teal-500">Labor (Est.):</span>
                       <div className="font-semibold">
                         ${analysis.cost_estimate.labor_cost}
                         {analysis.cost_estimate.labor_hours && (
@@ -1336,28 +1336,28 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   )}
                   {analysis.cost_estimate.disposal_cost > 0 && (
                     <div>
-                      <span className="text-blue-600">Disposal:</span>
+                      <span className="text-teal-500">Disposal:</span>
                       <div className="font-semibold">${analysis.cost_estimate.disposal_cost}</div>
                     </div>
                   )}
                   {analysis.cost_estimate.permits_misc > 0 && (
                     <div>
-                      <span className="text-blue-600">Permits/Misc:</span>
+                      <span className="text-teal-500">Permits/Misc:</span>
                       <div className="font-semibold">${analysis.cost_estimate.permits_misc}</div>
                     </div>
                   )}
                 </div>
-                <div className="mt-2 pt-2 border-t border-blue-200">
-                  <span className="text-blue-600">Estimated Total Range:</span>
-                  <div className="font-bold text-lg text-blue-800">
+                <div className="mt-2 pt-2 border-t border-teal-200">
+                  <span className="text-teal-500">Estimated Total Range:</span>
+                  <div className="font-bold text-lg text-teal-700">
                     ${analysis.cost_estimate.total_cost.min} - ${analysis.cost_estimate.total_cost.max}
                   </div>
                   {analysis.analysis?.time_estimate && analysis.analysis.time_estimate !== 'TBD' && (
-                    <div className="text-xs text-blue-600 mt-1">
+                    <div className="text-xs text-teal-500 mt-1">
                       Estimated time: {analysis.analysis.time_estimate}
                     </div>
                   )}
-                  <div className="text-xs text-blue-600 mt-2 italic">
+                  <div className="text-xs text-teal-500 mt-2 italic">
                     Final pricing confirmed after on-site inspection
                   </div>
                 </div>
@@ -1379,7 +1379,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[85%] p-2 rounded-lg text-sm ${
                         msg.role === 'user' 
-                          ? 'bg-blue-600 text-white rounded-br-none' 
+                          ? 'bg-teal-400 text-white rounded-br-none' 
                           : 'bg-white border border-gray-200 rounded-bl-none'
                       }`}>
                         <div className="whitespace-pre-line">{msg.content}</div>
@@ -1389,7 +1389,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   {isAnalyzing && (
                     <div className="flex justify-start">
                       <div className="bg-white border border-gray-200 p-2 rounded-lg">
-                        <Loader className="animate-spin w-4 h-4 text-blue-600" />
+                        <Loader className="animate-spin w-4 h-4 text-teal-500" />
                       </div>
                     </div>
                   )}
@@ -1401,7 +1401,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     onChange={(e) => setFeedbackInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
                     placeholder="Ask about materials, timeline, DIY..."
-                    className={`flex-1 p-2 border border-gray-300 rounded-lg text-sm focus:border-blue-600 focus:ring-1 focus:ring-blue-600 outline-none ${
+                    className={`flex-1 p-2 border border-gray-300 rounded-lg text-sm focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none ${
                       isMobile ? 'text-base' : ''
                     }`}
                     disabled={isAnalyzing}
@@ -1409,7 +1409,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <button 
                     onClick={handleFeedbackChat}
                     disabled={!feedbackInput.trim() || isAnalyzing}
-                    className="bg-blue-600 hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
+                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
                   >
                     <Send size={16} />
                   </button>
@@ -1435,7 +1435,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             <div className="space-y-2">
               <button 
                 onClick={() => handleScheduleAppointment(analysis)}
-                className={`w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-semibold text-sm ${
+                className={`w-full bg-teal-400 hover:bg-teal-500 text-white py-2 px-4 rounded-lg font-semibold text-sm ${
                   isMobile ? 'py-3' : ''
                 }`}
               >
