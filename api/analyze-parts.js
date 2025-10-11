@@ -1,5 +1,5 @@
-// api/analyze-parts.js - COMPLETE VERSION WITHOUT INTELLIGENCE
-// Robust image processing with Vision API error handling
+// api/analyze-parts.js - COMPLETE VERSION WITH $100 SERVICE CALL LOGIC
+// Robust image processing with Vision API error handling + Smart pricing for quick tasks
 
 export const config = {
   maxDuration: 60,
@@ -10,11 +10,54 @@ export const config = {
   }
 };
 
-// RELAXED vagueness detection - only catch extreme cases
+// ========================================
+// QUICK TASK DETECTION - $100 SERVICE CALL
+// ========================================
+
+const quickTaskKeywords = [
+  // Plumbing quick fixes (under 30 min)
+  'flush valve', 'flapper', 'toilet seat', 'toilet paper holder', 'towel bar',
+  'showerhead', 'handheld sprayer', 'faucet aerator', 'leaky washer',
+  'door knob', 'door handle', 'cabinet knob', 'drawer pull',
+  
+  // Electrical quick fixes (under 30 min)
+  'light switch', 'outlet cover', 'smoke detector battery', 'co alarm battery',
+  'light fixture', 'ceiling light', 'thermostat cover', 'doorbell button',
+  
+  // Hardware quick fixes (under 30 min)
+  'door stopper', 'hinge pin', 'weatherstripping', 'window screen',
+  'curtain rod', 'blind', 'shade', 'picture frame', 'mirror', 'coat rack',
+  
+  // Small maintenance (under 30 min)
+  'air vent cover', 'hvac filter', 'range hood filter', 'door sweep',
+  'mailbox', 'house numbers', 'shelf', 'hook'
+];
+
+function isQuickTask(description, issueType) {
+  const lower = description.toLowerCase();
+  const issueTypeLower = (issueType || '').toLowerCase();
+  
+  // Check if any quick task keywords match
+  const hasQuickTaskKeyword = quickTaskKeywords.some(keyword => 
+    lower.includes(keyword) || issueTypeLower.includes(keyword)
+  );
+  
+  // Exclude if it's complex/major work
+  const isComplex = /multiple|several|many|complex|major|install new|replace entire|demo|demolition|renovation/i.test(lower);
+  
+  // Exclude plumbing/electrical if it mentions "install" (vs "replace")
+  const isInstallation = /install\s+(?:new|a)\s+(?:toilet|sink|faucet|outlet|switch)/i.test(lower);
+  
+  return hasQuickTaskKeyword && !isComplex && !isInstallation;
+}
+
+// ========================================
+// VAGUENESS DETECTION
+// ========================================
+
 function isDescriptionVague(description, imageCount) {
   const desc = description.toLowerCase().trim();
   
-  // Only reject if EXTREMELY vague (single word with no context)
   const ultraVaguePatterns = [
     /^help$/i, /^fix$/i, /^broken$/i, /^repair$/i
   ];
@@ -27,7 +70,6 @@ function isDescriptionVague(description, imageCount) {
     };
   }
 
-  // Accept anything with 2+ words or any images
   if (desc.split(' ').length >= 2 || imageCount > 0) {
     return { isVague: false };
   }
@@ -53,11 +95,14 @@ function generateSmartQuestions(description, detectedItems, vaguenessReason, ser
   return questions.slice(0, 3);
 }
 
+// ========================================
+// GROQ ANALYSIS WITH QUICK TASK DETECTION
+// ========================================
+
 async function analyzeWithGroq(description, visionAnnotationsArray = [], serviceContext = null, chatHistory = null) {
   try {
     const allDetectedItems = [];
     
-    // Extract detected items from all images
     if (visionAnnotationsArray && visionAnnotationsArray.length > 0) {
       visionAnnotationsArray.forEach((annotations, imageIndex) => {
         if (!annotations || typeof annotations !== 'object') return;
@@ -74,10 +119,8 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       });
     }
 
-    // RELAXED vagueness check
     const vaguenessCheck = isDescriptionVague(description, visionAnnotationsArray.length);
     
-    // Only ask for clarification in extreme cases
     if (vaguenessCheck.isVague && allDetectedItems.length === 0) {
       console.log(`Very vague description: ${vaguenessCheck.reason}`);
       
@@ -88,17 +131,16 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
         serviceContext
       );
       
-      // Still provide a basic estimate
       const fallbackEstimate = createSmartFallback(description, serviceContext);
       
       return {
         needs_clarification: true,
         clarification_questions: clarificationQuestions,
-        ...fallbackEstimate // Include estimate even when asking questions
+        ...fallbackEstimate
       };
     }
 
-    // Build context for Groq
+    // Build context
     let chatContext = '';
     if (chatHistory && chatHistory.length > 0) {
       chatContext = '\n\nPREVIOUS CONVERSATION:\n' + chatHistory.map(msg => 
@@ -117,7 +159,10 @@ ${detectedItemsText}
 ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 ${chatContext}
 
-IMPORTANT: The customer description is the PRIMARY source. Image detection is supplementary and may be unavailable or inaccurate.
+IMPORTANT PRICING RULES:
+1. If this is a QUICK TASK (under 30 minutes) like replacing a door knob, toilet seat, light switch, cabinet hardware, etc., set labor_hours to 0.5 and base_labor_cost to 0 (it falls under the $100 service call).
+2. For BIGGER JOBS (over 30 minutes), calculate normal labor at $80/hour + $100 service call overhead.
+3. The customer description is the PRIMARY source. Image detection is supplementary.
 
 Respond ONLY with valid JSON (no markdown):
 {
@@ -129,6 +174,7 @@ Respond ONLY with valid JSON (no markdown):
   "crew_size": 1,
   "crew_justification": "why this crew size",
   "labor_hours": 2,
+  "is_quick_task": false,
   "cost_breakdown": {
     "parts_min": 50,
     "parts_max": 200,
@@ -149,7 +195,7 @@ Respond ONLY with valid JSON (no markdown):
         messages: [
           {
             role: 'system',
-            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Trust customer descriptions.'
+            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) accurately.'
           },
           {
             role: 'user',
@@ -183,62 +229,107 @@ Respond ONLY with valid JSON (no markdown):
       throw new Error('Invalid JSON from Groq');
     }
 
-    // Calculate costs
+    // ========================================
+    // SMART COST CALCULATION WITH QUICK TASK LOGIC
+    // ========================================
+    
+    const issueType = groqAnalysis.issue_type || 'Maintenance Issue';
     const crewSize = Math.max(1, groqAnalysis.crew_size || 1);
     const laborHours = groqAnalysis.labor_hours || 2;
-    const baseLaborCost = groqAnalysis.cost_breakdown?.base_labor_cost || 150;
-    const laborRate = 80;
     
-    const finalLaborCost = Math.max(baseLaborCost * crewSize, laborHours * laborRate * crewSize);
-    const travelOverhead = 100;
-    const totalLaborWithOverhead = finalLaborCost + travelOverhead;
+    // Check if this is a quick task (either from Groq or our own detection)
+    const isQuick = groqAnalysis.is_quick_task || isQuickTask(description, issueType);
+    
+    let costEstimate;
+    
+    if (isQuick) {
+      // ✅ QUICK TASK - Falls under $100 service call
+      const partsMin = groqAnalysis.cost_breakdown?.parts_min || 10;
+      const partsMax = groqAnalysis.cost_breakdown?.parts_max || 50;
+      
+      costEstimate = {
+        service_call_fee: 100,
+        parts_cost: {
+          min: partsMin,
+          max: partsMax
+        },
+        labor_cost: 0, // Included in service call
+        labor_hours: 0.5,
+        crew_size: 1,
+        crew_justification: 'Quick task - 1 person can handle',
+        disposal_cost: 0,
+        total_cost: {
+          min: 100 + partsMin,
+          max: 100 + partsMax
+        },
+        pricing_note: `✨ Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional. This is a perfect "door opener" service - we can assess other issues while we're there!`
+      };
+      
+    } else {
+      // 🔧 BIGGER JOB - Standard pricing
+      const baseLaborCost = groqAnalysis.cost_breakdown?.base_labor_cost || 150;
+      const laborRate = 80;
+      
+      const finalLaborCost = Math.max(baseLaborCost * crewSize, laborHours * laborRate * crewSize);
+      const serviceCallFee = 100; // Drive time + overhead
+      const totalLaborWithOverhead = finalLaborCost + serviceCallFee;
 
-    // Calculate disposal
-    let disposalCost = 0;
-    const issueType = groqAnalysis.issue_type || 'Maintenance Issue';
-    if (issueType.includes('Demolition')) disposalCost = 350;
-    else if (issueType.includes('Water Damage')) disposalCost = 180;
-    else if (issueType.includes('Kitchen') || issueType.includes('Bathroom')) disposalCost = 120;
+      // Calculate disposal
+      let disposalCost = 0;
+      if (issueType.includes('Demolition')) disposalCost = 350;
+      else if (issueType.includes('Water Damage')) disposalCost = 180;
+      else if (issueType.includes('Kitchen') || issueType.includes('Bathroom')) disposalCost = 120;
 
-    console.log('✅ Analysis complete');
+      const partsMin = groqAnalysis.cost_breakdown?.parts_min || 50;
+      const partsMax = groqAnalysis.cost_breakdown?.parts_max || 200;
+
+      costEstimate = {
+        service_call_fee: serviceCallFee,
+        parts_cost: {
+          min: partsMin,
+          max: partsMax
+        },
+        labor_cost: totalLaborWithOverhead,
+        labor_hours: laborHours,
+        crew_size: crewSize,
+        crew_justification: groqAnalysis.crew_justification || `${crewSize} person job`,
+        disposal_cost: disposalCost,
+        total_cost: {
+          min: partsMin + totalLaborWithOverhead + disposalCost,
+          max: partsMax + totalLaborWithOverhead + disposalCost
+        },
+        pricing_note: `$100 service call includes diagnosis + first 30 minutes of work. If you approve, it applies to your total. You only pay for actual hours worked - finish early and you save!`
+      };
+    }
+
+    console.log('✅ Analysis complete', isQuick ? '(Quick Task)' : '(Standard Job)');
 
     return {
       needs_clarification: false,
       analysis: {
-        issue_type: groqAnalysis.issue_type || 'Maintenance Issue',
+        issue_type: issueType,
         severity: groqAnalysis.severity || 'Medium',
         description: groqAnalysis.description || description,
         required_parts: groqAnalysis.required_parts || [],
         difficulty_level: groqAnalysis.difficulty_level || 'Professional',
         crew_size: crewSize,
-        crew_justification: groqAnalysis.crew_justification || `${crewSize} person job`
+        crew_justification: groqAnalysis.crew_justification || `${crewSize} person job`,
+        is_quick_task: isQuick
       },
-      cost_estimate: {
-        parts_cost: {
-          min: groqAnalysis.cost_breakdown?.parts_min || 50,
-          max: groqAnalysis.cost_breakdown?.parts_max || 200
-        },
-        labor_cost: totalLaborWithOverhead,
-        labor_hours: laborHours,
-        crew_size: crewSize,
-        crew_justification: groqAnalysis.crew_justification,
-        disposal_cost: disposalCost,
-        total_cost: {
-          min: (groqAnalysis.cost_breakdown?.parts_min || 50) + totalLaborWithOverhead + disposalCost,
-          max: (groqAnalysis.cost_breakdown?.parts_max || 200) + totalLaborWithOverhead + disposalCost
-        }
-      },
+      cost_estimate: costEstimate,
       pricing: [],
       stores: getDefaultStores()
     };
 
   } catch (error) {
     console.error('❌ Groq error:', error.message);
-    
-    // ALWAYS provide fallback estimate
     return createSmartFallback(description, serviceContext);
   }
 }
+
+// ========================================
+// SMART FALLBACK ESTIMATOR
+// ========================================
 
 function createSmartFallback(description, serviceContext) {
   const desc = description.toLowerCase();
@@ -249,23 +340,48 @@ function createSmartFallback(description, serviceContext) {
   let laborHours = 2;
   let crewSize = 1;
   let disposalCost = 0;
+  let isQuick = false;
 
-  // Toilet-specific
-  if (desc.includes('toilet') && (desc.includes('flush') || desc.includes('valve'))) {
-    issueType = 'Toilet Flush Valve Replacement';
-    partsMin = 30;
+  // Quick tasks
+  if (desc.includes('door knob') || desc.includes('door handle')) {
+    issueType = 'Door Hardware Replacement';
+    partsMin = 20;
     partsMax = 80;
-    laborHours = 1;
+    laborHours = 0.5;
     severity = 'Low';
-  } 
-  // General toilet
-  else if (desc.includes('toilet')) {
+    isQuick = true;
+  }
+  else if (desc.includes('toilet seat')) {
+    issueType = 'Toilet Seat Replacement';
+    partsMin = 25;
+    partsMax = 60;
+    laborHours = 0.5;
+    severity = 'Low';
+    isQuick = true;
+  }
+  else if (desc.includes('flush') || desc.includes('flapper')) {
+    issueType = 'Toilet Flush Valve/Flapper Replacement';
+    partsMin = 15;
+    partsMax = 50;
+    laborHours = 0.5;
+    severity = 'Low';
+    isQuick = true;
+  }
+  else if (desc.includes('light switch') || desc.includes('outlet cover')) {
+    issueType = 'Switch/Outlet Cover Replacement';
+    partsMin = 5;
+    partsMax = 25;
+    laborHours = 0.5;
+    severity = 'Low';
+    isQuick = true;
+  }
+  // Standard jobs
+  else if (desc.includes('toilet') && !isQuick) {
     issueType = 'Toilet Repair';
     partsMin = 50;
     partsMax = 150;
     laborHours = 1.5;
   }
-  // Plumbing
   else if (desc.includes('pipe') || desc.includes('plumb') || desc.includes('leak')) {
     issueType = 'Plumbing Repair';
     partsMin = 80;
@@ -273,7 +389,6 @@ function createSmartFallback(description, serviceContext) {
     laborHours = 2;
     severity = 'High';
   }
-  // Electrical
   else if (desc.includes('electrical') || desc.includes('outlet') || desc.includes('switch')) {
     issueType = 'Electrical Repair';
     partsMin = 40;
@@ -281,7 +396,6 @@ function createSmartFallback(description, serviceContext) {
     laborHours = 1.5;
     severity = 'High';
   }
-  // Faucet
   else if (desc.includes('faucet') || desc.includes('tap')) {
     issueType = 'Faucet Repair';
     partsMin = 60;
@@ -289,7 +403,40 @@ function createSmartFallback(description, serviceContext) {
     laborHours = 1.5;
   }
 
-  const laborCost = (laborHours * 80 * crewSize) + 100;
+  let costEstimate;
+  
+  if (isQuick) {
+    costEstimate = {
+      service_call_fee: 100,
+      parts_cost: { min: partsMin, max: partsMax },
+      labor_cost: 0,
+      labor_hours: 0.5,
+      crew_size: 1,
+      crew_justification: 'Quick task - 1 person',
+      disposal_cost: 0,
+      total_cost: { 
+        min: 100 + partsMin, 
+        max: 100 + partsMax 
+      },
+      pricing_note: `✨ Great news! This is a quick task that falls under our $100 service call (includes diagnosis + first 30 min). Only materials are additional!`
+    };
+  } else {
+    const laborCost = (laborHours * 80 * crewSize) + 100;
+    costEstimate = {
+      service_call_fee: 100,
+      parts_cost: { min: partsMin, max: partsMax },
+      labor_cost: laborCost,
+      labor_hours: laborHours,
+      crew_size: crewSize,
+      crew_justification: 'Standard repair',
+      disposal_cost: disposalCost,
+      total_cost: { 
+        min: partsMin + laborCost + disposalCost, 
+        max: partsMax + laborCost + disposalCost 
+      },
+      pricing_note: `$100 service call includes diagnosis + first 30 min. You pay actual hours only - finish early and save!`
+    };
+  }
   
   return {
     needs_clarification: false,
@@ -302,20 +449,10 @@ function createSmartFallback(description, serviceContext) {
       ],
       difficulty_level: severity === 'High' ? 'Expert Required' : 'Professional',
       crew_size: crewSize,
-      crew_justification: 'Standard repair'
-    },
-    cost_estimate: {
-      parts_cost: { min: partsMin, max: partsMax },
-      labor_cost: laborCost,
-      labor_hours: laborHours,
-      crew_size: crewSize,
       crew_justification: 'Standard repair',
-      disposal_cost: disposalCost,
-      total_cost: { 
-        min: partsMin + laborCost + disposalCost, 
-        max: partsMax + laborCost + disposalCost 
-      }
+      is_quick_task: isQuick
     },
+    cost_estimate: costEstimate,
     pricing: [],
     stores: getDefaultStores()
   };
@@ -336,6 +473,10 @@ function getDefaultStores() {
   ];
 }
 
+// ========================================
+// MAIN HANDLER
+// ========================================
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -355,7 +496,6 @@ export default async function handler(req, res) {
   try {
     const { images, description, location, service_context, chat_history } = req.body;
 
-    // Validate inputs
     if (!images || images.length === 0) {
       return res.status(400).json({ 
         error: 'At least one image is required',
@@ -386,7 +526,6 @@ export default async function handler(req, res) {
         });
       }
       
-      // Check if it's a supported format
       const formatMatch = images[i].match(/^data:image\/(\w+);base64,/);
       if (!formatMatch) {
         return res.status(400).json({
@@ -411,16 +550,14 @@ export default async function handler(req, res) {
       imageSizes: images.map(img => `${Math.round(img.length * 0.75 / 1024)}KB`)
     });
 
-    // Process images with better error handling
+    // Process images with error handling
     const visionAnnotations = [];
     let visionErrors = 0;
     
     for (let i = 0; i < images.length; i++) {
       try {
-        // Extract clean base64 (Vision API doesn't want the data URI prefix)
         let imageBase64 = images[i];
         
-        // Remove data URI prefix if present
         if (imageBase64.includes('base64,')) {
           imageBase64 = imageBase64.split('base64,')[1];
         } else if (imageBase64.startsWith('data:')) {
@@ -429,7 +566,6 @@ export default async function handler(req, res) {
           continue;
         }
         
-        // Validate base64
         if (!imageBase64 || imageBase64.length < 100) {
           console.error(`Image ${i + 1}: Base64 string too short or empty`);
           visionErrors++;
@@ -453,7 +589,7 @@ export default async function handler(req, res) {
                 ]
               }]
             }),
-            signal: AbortSignal.timeout(15000) // 15 second timeout
+            signal: AbortSignal.timeout(15000)
           }
         );
 
@@ -482,11 +618,9 @@ export default async function handler(req, res) {
 
     console.log(`Vision: ${visionAnnotations.length} success, ${visionErrors} errors`);
 
-    // ALWAYS attempt Groq analysis - even with 0 vision results
-    // The description alone is often sufficient for accurate estimates
     const analysis = await analyzeWithGroq(
       description,
-      visionAnnotations, // Pass whatever we got (even if empty)
+      visionAnnotations,
       service_context,
       chat_history
     );
@@ -507,13 +641,12 @@ export default async function handler(req, res) {
     const processingTime = Date.now() - startTime;
     console.error('❌ Handler error:', error.message);
 
-    // ALWAYS return a usable estimate, even on error
     const emergencyFallback = createSmartFallback(
       req.body.description || 'Maintenance issue',
       req.body.service_context
     );
 
-    return res.status(200).json({ // Return 200, not 500
+    return res.status(200).json({
       success: false,
       error: 'Analysis completed with limited information',
       processing_time_ms: processingTime,
