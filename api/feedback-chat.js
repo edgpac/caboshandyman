@@ -162,7 +162,7 @@ export default async function handler(req, res) {
     // STATUS LOOKUP FLOW
     // ========================================
     
-    if (wantsStatus) {
+    if (wantsStatus || (workOrderNum && !clientName)) {
       // Need work order number
       if (!workOrderNum && !conversationContext.hasAskedForWO) {
         return res.status(200).json({
