@@ -231,6 +231,23 @@ export default function CabosHandymanHomepage() {
         </div>
       </section>
 
+      {/* FLOATING CHAT BUTTON - NEW! */}
+      <button
+        onClick={() => openAIAssistant('chat')}
+        className="fixed bottom-6 right-6 z-50 bg-primary hover:bg-primary-hover text-primary-foreground rounded-full p-4 shadow-2xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group"
+        style={{
+          width: '64px',
+          height: '64px',
+          boxShadow: '0 8px 24px rgba(2, 175, 159, 0.4), 0 4px 12px rgba(0,0,0,0.2)'
+        }}
+        aria-label="Open chat assistant"
+      >
+        <MessageCircle size={28} className="group-hover:scale-110 transition-transform" />
+        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold animate-pulse">
+          ?
+        </span>
+      </button>
+
       {/* SecureAIAssistant */}
       <SecureAIAssistant 
         isOpen={isAIAssistantOpen}
