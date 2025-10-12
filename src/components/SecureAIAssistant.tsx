@@ -26,7 +26,7 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const [feedbackMode, setFeedbackMode] = useState(false);
   const [feedbackInput, setFeedbackInput] = useState('');
   const [feedbackHistory, setFeedbackHistory] = useState([]);
-  
+
   const [bookingData, setBookingData] = useState({
     name: '',
     phone: '',
@@ -78,9 +78,9 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
     },
     {
       title: "Emergency Services", 
-      description: "AI-powered response for water damage, structural issues, and urgent repairs. 30-minute response time.",
+      description: "Intelligent response for water damage, structural issues, and urgent repairs. 30-minute response time.",
       icon: Zap,
-      details: "24/7 emergency response for water damage, electrical issues, structural problems, and urgent repairs. Our AI system helps prioritize and dispatch the right team immediately.",
+      details: "24/7 emergency response for water damage, electrical issues, structural problems, and urgent repairs. Our system helps prioritize and dispatch the right team immediately.",
       calendlyUrl: "https://cal.com/maintenancemaster/emergency-service-assessment"
     },
     {
@@ -98,7 +98,6 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
       calendlyUrl: "https://cal.com/maintenancemaster/hoa-property-assessment"
     }
   ];
-
   const startCamera = async () => {
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -218,7 +217,6 @@ Time: ${new Date().toLocaleString()}`;
         
         let { width, height } = img;
         
-        // FORCE mobile detection at runtime
         const isMobileDevice = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                        window.innerWidth <= 1024 || 
                        ('ontouchstart' in window);
@@ -340,6 +338,7 @@ Time: ${new Date().toLocaleString()}`;
       });
     }
   };
+
   const handleScheduleAppointment = async (analysisData) => {
     try {
       const loadingToast = document.createElement('div');
@@ -795,6 +794,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setFeedbackMode(false);
     setFeedbackInput('');
     setFeedbackHistory([]);
+    setIsMinimized(false);
   };
 
   const getSeverityColor = (severity) => {
@@ -804,6 +804,15 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       case 'low': return 'text-green-600 bg-green-50 border-green-200';
       default: return 'text-gray-600 bg-gray-50 border-gray-200';
     }
+  };
+
+  const handleImageSelect = (e) => {
+    const files = Array.from(e.target.files);
+    const imageUrls = files.map(file => ({
+      url: URL.createObjectURL(file),
+      file: file
+    }));
+    setSelectedImages([...selectedImages, ...imageUrls]);
   };
 
   if (!assistantIsOpen) {
@@ -817,43 +826,82 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         className={`fixed bottom-6 right-6 bg-teal-400 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50 ${
           isMobile ? 'p-3' : 'p-4'
         }`}
-        aria-label="Open AI Assistant"
+        aria-label="Open Assistant"
       >
-        <Bot size={isMobile ? 20 : 24} />
+        <MessageCircle size={isMobile ? 20 : 24} />
       </button>
+    );
+  }
+
+  if (isMinimized) {
+    return (
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          onClick={() => setIsMinimized(false)}
+          className="bg-teal-400 hover:bg-teal-500 text-white px-6 py-3 rounded-full shadow-2xl flex items-center space-x-2 transition-all duration-300"
+        >
+          <Wrench size={20} />
+          <span className="font-semibold">Live Support</span>
+          <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+        </button>
+      </div>
     );
   }
 
   const containerClasses = isMobile 
     ? "fixed inset-0 bg-white z-50 flex flex-col"
-    : "fixed bottom-6 right-6 w-[420px] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
+    : "fixed bottom-6 right-6 w-[420px] bg-white rounded-2xl shadow-2xl border border-gray-200 z-50 max-h-[80vh] flex flex-col";
 
   const maxImages = isMobile ? 1 : 3;
+  
   return (
     <div className={containerClasses}>
-      <div className={`bg-teal-400 text-white p-4 ${isMobile ? '' : 'rounded-t-lg'} flex items-center justify-between`}>
-        <div className="flex items-center space-x-2">
-          <Wrench size={20} />
-          <span className="font-semibold">Quote Assistant</span>
+      {/* UPDATED HEADER WITH MINIMIZE/CLOSE */}
+      <div className={`bg-gradient-to-r from-teal-400 to-teal-500 text-white p-4 ${isMobile ? '' : 'rounded-t-2xl'} flex items-center justify-between`}>
+        <div className="flex items-center space-x-3">
+          <div className="bg-white p-2 rounded-full">
+            <Wrench size={20} className="text-teal-500" />
+          </div>
+          <div>
+            <h3 className="font-bold text-lg">Live Support</h3>
+            <p className="text-xs opacity-90">How can we help you?</p>
+          </div>
         </div>
-        <button 
-          onClick={handleClose}
-          className="text-white hover:text-gray-200 text-xl leading-none"
-          aria-label="Close assistant"
-        >
-          ×
-        </button>
+        <div className="flex items-center space-x-2">
+          {!isMobile && (
+            <button
+              onClick={() => setIsMinimized(true)}
+              className="hover:bg-white/20 p-2 rounded-full transition-colors"
+              aria-label="Minimize"
+            >
+              <ChevronDown size={20} />
+            </button>
+          )}
+          <button 
+            onClick={handleClose}
+            className="hover:bg-white/20 p-2 rounded-full transition-colors"
+            aria-label="Close assistant"
+          >
+            <X size={20} />
+          </button>
+        </div>
       </div>
 
       <div className={`p-4 overflow-y-auto flex-1 ${isMobile ? 'pb-safe' : ''}`}>
-        {/* CHAT-ONLY MODE - NEW! */}
+        {/* UPDATED CHAT-ONLY MODE - REDBUBBLE STYLE! */}
         {currentView === 'chat-only' && (
           <div className="space-y-4">
-            <div className="bg-gradient-to-r from-blue-500 to-teal-500 text-white p-4 rounded-lg">
-              <h3 className="font-semibold text-lg mb-2">👋 Hi! How can I help you today?</h3>
-              <p className="text-sm opacity-90">
-                Ask me about our services, check your work order status, get a quick quote, or ask any questions!
-              </p>
+            <div className="flex justify-start mb-4">
+              <div className="bg-white p-2 rounded-full mr-2 h-10 w-10 flex items-center justify-center flex-shrink-0 shadow-sm">
+                <Wrench size={16} className="text-teal-500" />
+              </div>
+              <div className="max-w-[85%]">
+                <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+                <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none shadow-sm p-3">
+                  <p className="text-sm">Hey there 👋 I'm the Cabo Handyman bot.</p>
+                  <p className="text-sm mt-1">What can we help you with?</p>
+                </div>
+              </div>
             </div>
 
             <div className="border rounded-lg p-3 bg-gray-50 max-h-96 overflow-y-auto space-y-3">
@@ -861,42 +909,80 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <div className="text-center text-gray-500 text-sm py-8">
                   <MessageCircle size={32} className="mx-auto mb-2 text-gray-400" />
                   <p>Start a conversation...</p>
-                  <div className="mt-4 text-xs space-y-1">
-                    <p>💬 "What services do you offer?"</p>
-                    <p>📋 "Check work order status"</p>
-                    <p>💰 "How much to fix a water leak?"</p>
-                  </div>
                 </div>
               )}
               
               {feedbackHistory.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] p-3 rounded-lg text-sm ${
-                    msg.role === 'user' 
-                      ? 'bg-teal-400 text-white rounded-br-none' 
-                      : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
-                  }`}>
-                    <div className="whitespace-pre-line">{msg.content}</div>
+                  {msg.role === 'assistant' && (
+                    <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0 shadow-sm">
+                      <Wrench size={14} className="text-teal-500" />
+                    </div>
+                  )}
+                  <div className={`max-w-[85%] ${msg.role === 'user' ? 'order-1' : 'order-2'}`}>
+                    {msg.role === 'assistant' && (
+                      <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+                    )}
+                    <div className={`p-3 rounded-2xl text-sm ${
+                      msg.role === 'user' 
+                        ? 'bg-teal-400 text-white rounded-br-none shadow-sm' 
+                        : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
+                    }`}>
+                      <div className="whitespace-pre-line">{msg.content}</div>
+                    </div>
                   </div>
                 </div>
               ))}
               
               {isAnalyzing && (
                 <div className="flex justify-start">
-                  <div className="bg-white border border-gray-200 p-3 rounded-lg shadow-sm">
+                  <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0 shadow-sm">
+                    <Wrench size={14} className="text-teal-500" />
+                  </div>
+                  <div className="bg-white border border-gray-200 p-3 rounded-2xl rounded-bl-none shadow-sm">
                     <Loader className="animate-spin w-4 h-4 text-teal-500" />
                   </div>
                 </div>
               )}
             </div>
 
+            {/* Image Preview */}
+            {selectedImages.length > 0 && (
+              <div className="border rounded-lg p-2 bg-white">
+                <div className="flex space-x-2 overflow-x-auto">
+                  {selectedImages.map((img, idx) => (
+                    <div key={idx} className="relative flex-shrink-0">
+                      <img src={img.url} alt="" className="w-16 h-16 object-cover rounded-lg border-2 border-teal-400" />
+                      <button
+                        onClick={() => setSelectedImages(selectedImages.filter((_, i) => i !== idx))}
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                      >
+                        ×
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Input with Paperclip */}
             <div className="flex space-x-2">
+              <label className="cursor-pointer hover:bg-gray-100 p-2 rounded-full transition-colors flex-shrink-0">
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple={!isMobile}
+                  onChange={handleImageSelect}
+                  className="hidden"
+                />
+                <Paperclip size={20} className="text-gray-500" />
+              </label>
               <input
                 value={feedbackInput}
                 onChange={(e) => setFeedbackInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
-                placeholder="Type your message..."
-                className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-teal-400 focus:ring-2 focus:ring-teal-200 outline-none ${
+                placeholder="Type a message"
+                className={`flex-1 p-3 border-2 border-gray-200 focus:border-teal-400 rounded-full text-sm outline-none transition-colors ${
                   isMobile ? 'text-base' : ''
                 }`}
                 disabled={isAnalyzing}
@@ -905,34 +991,28 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               <button 
                 onClick={handleFeedbackChat}
                 disabled={!feedbackInput.trim() || isAnalyzing}
-                className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg transition-colors"
+                className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-full transition-colors flex-shrink-0"
               >
                 <Send size={18} />
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 pt-2 border-t">
+            {/* Quick Action Button - Only Work Order Status */}
+            <div className="pt-2 border-t">
               <button
                 onClick={() => {
                   setFeedbackInput("What's my work order status?");
                 }}
-                className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded transition-colors"
+                className="w-full text-sm bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-full border border-gray-200 transition-colors text-left flex items-center space-x-2"
               >
-                📋 Work Order Status
-              </button>
-              <button
-                onClick={() => {
-                  setCurrentView('services');
-                  setFeedbackMode(false);
-                }}
-                className="text-xs bg-teal-100 hover:bg-blue-200 text-teal-600 px-3 py-2 rounded transition-colors"
-              >
-                🔧 Get Quote
+                <span>📋</span>
+                <span>Check work order status</span>
               </button>
             </div>
           </div>
         )}
 
+        {/* REST OF THE VIEWS REMAIN UNCHANGED */}
         {currentView === 'services' && !analysis && !isAnalyzing && (
           <div className="space-y-4">
             <div className="text-center mb-4">
@@ -1031,7 +1111,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             )}
             
             <p className="text-gray-600 text-sm">
-              Upload {isMobile ? '1 photo' : 'up to 3 photos'} of your maintenance issue for instant AI analysis and cost estimates.
+              Upload {isMobile ? '1 photo' : 'up to 3 photos'} of your maintenance issue for instant analysis and cost estimates.
             </p>
             
             {error && (
@@ -1108,7 +1188,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     <div className={`grid gap-2 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
                       <button
                         onClick={startCamera}
-                        className="bg-teal-100 hover:bg-blue-200 text-teal-700 px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
+                        className="bg-teal-100 hover:bg-teal-200 text-teal-700 px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
                       >
                         <Camera size={14} />
                         <span>Add Photo</span>
@@ -1236,8 +1316,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   rows={isMobile ? 3 : 4}
                 />
 
-                {/* Location input removed - AI pricing doesn't need it */}
-
                 <button
                   onClick={analyzeIssue}
                   disabled={selectedImages.length === 0 || !description}
@@ -1265,6 +1343,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             </div>
           </div>
         )}
+
         {analysis && !chatMode && (
           <div className="space-y-4">
             <div className={`border p-3 rounded-lg ${getSeverityColor(analysis.analysis?.severity)}`}>
@@ -1288,14 +1367,12 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <strong>⚠️ Preliminary Estimate:</strong> Labor costs and hours are approximate and may vary based on project complexity, site conditions, and unforeseen circumstances discovered during work.
                 </div>
                  
-                 {/* Quick Task Pricing Note */}
                 {analysis.cost_estimate.pricing_note && (
                   <div className="bg-green-50 border border-green-200 rounded p-3 mb-3 text-xs text-green-700">
                     {analysis.cost_estimate.pricing_note}
                   </div>
                 )}
 
-                {/* Service Call Fee Display */}
                 {analysis.cost_estimate.service_call_fee && (
                   <div className="bg-teal-50 border border-teal-200 rounded p-3 mb-3 text-sm">
                     <div className="flex items-center justify-between">

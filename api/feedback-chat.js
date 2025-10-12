@@ -33,6 +33,10 @@ function extractWorkOrderNumber(text) {
 }
 
 function extractName(text) {
+  // Ignore greetings and common words
+  const greetings = ['hello', 'hi', 'hey', 'hola', 'good', 'morning', 'afternoon', 'evening', 'thanks', 'thank', 'please', 'yes', 'yeah', 'ok', 'okay'];
+  const lowerText = text.toLowerCase().trim();
+  
   const patterns = [
     /(?:name\s+(?:is\s+)?|last\s*name\s*(?:is)?\s*|i'm\s+|i\s+am\s+|my\s+name\s*(?:is)?\s*|mr\.?\s+|mrs\.?\s+|ms\.?\s+)([a-z]{2,})/i,
     /^([a-z]{3,})$/i,
@@ -41,7 +45,12 @@ function extractName(text) {
   
   for (const pattern of patterns) {
     const match = text.match(pattern);
-    if (match) return match[1];
+    if (match) {
+      const name = match[1].toLowerCase();
+      // Skip if it's a greeting or common word
+      if (greetings.includes(name)) continue;
+      return match[1];
+    }
   }
   return null;
 }
