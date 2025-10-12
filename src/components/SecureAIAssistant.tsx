@@ -1,6 +1,6 @@
-// Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT + CHAT-ONLY MODE + UPGRADED INTERFACE
+// Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT + CHAT-ONLY MODE
 import React, { useState, useEffect } from 'react';
-import { Camera, Send, Bot, Wrench, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone, Paperclip, ChevronDown, X } from 'lucide-react';
+import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone, Paperclip, ChevronDown, X } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
 
 export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, initialMode }) {
@@ -27,17 +27,6 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const [feedbackMode, setFeedbackMode] = useState(false);
   const [feedbackInput, setFeedbackInput] = useState('');
   const [feedbackHistory, setFeedbackHistory] = useState([]);
-  
-  // NEW: Chat interface states
-  const [messages, setMessages] = useState([
-    {
-      role: 'assistant',
-      content: "Hey there 👋 I'm your Cabo Handyman assistant. What can we help you with?",
-      timestamp: new Date()
-    }
-  ]);
-  const [inputMessage, setInputMessage] = useState('');
-  
   const [bookingData, setBookingData] = useState({
     name: '',
     phone: '',
@@ -49,13 +38,6 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const isMobile = useIsMobile();
 
   const assistantIsOpen = externalIsOpen !== undefined ? externalIsOpen : isOpen;
-
-  const quickActions = [
-    { label: "Check work order status", icon: "📋" },
-    { label: "Get instant quote", icon: "💰" },
-    { label: "Emergency service", icon: "🚨" },
-    { label: "Schedule appointment", icon: "📅" }
-  ];
 
   useEffect(() => {
     if (initialMode && assistantIsOpen) {
@@ -235,7 +217,6 @@ Time: ${new Date().toLocaleString()}`;
         
         let { width, height } = img;
         
-        // FORCE mobile detection at runtime
         const isMobileDevice = /iPhone|iPad|iPod|Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
                        window.innerWidth <= 1024 || 
                        ('ontouchstart' in window);
@@ -357,6 +338,7 @@ Time: ${new Date().toLocaleString()}`;
       });
     }
   };
+
   const handleScheduleAppointment = async (analysisData) => {
     try {
       const loadingToast = document.createElement('div');
@@ -642,6 +624,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       setIsAnalyzing(false);
     }
   };
+
   const handleFeedbackChat = async () => {
     if (!feedbackInput.trim()) return;
 
@@ -812,14 +795,6 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setFeedbackInput('');
     setFeedbackHistory([]);
     setIsMinimized(false);
-    setMessages([
-      {
-        role: 'assistant',
-        content: "Hey there 👋 I'm your Cabo Handyman assistant. What can we help you with?",
-        timestamp: new Date()
-      }
-    ]);
-    setInputMessage('');
   };
 
   const getSeverityColor = (severity) => {
@@ -831,53 +806,14 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     }
   };
 
-  // NEW: Handle quick actions from chat interface
-const handleQuickAction = (action) => {
-  const newMessage = {
-    role: 'user',
-    content: action.label,
-    timestamp: new Date()
+  const handleImageSelect = (e) => {
+    const files = Array.from(e.target.files);
+    const imageUrls = files.map(file => ({
+      url: URL.createObjectURL(file),
+      file: file
+    }));
+    setSelectedImages([...selectedImages, ...imageUrls]);
   };
-  setMessages([...messages, newMessage]);
-  
-  // Route to appropriate view based on action
-  if (action.label.includes('quote')) {
-    setCurrentView('booking');
-  } else if (action.label.includes('Emergency')) {
-    setSelectedService(services[1]);
-    setBookingData(prev => ({...prev, serviceType: 'Emergency Service', urgency: 'urgent'}));
-    setCurrentView('booking');
-  } else if (action.label.includes('Schedule')) {
-    setCurrentView('booking');
-  } else if (action.label.includes('work order')) {
-    setFeedbackMode(true);
-    setCurrentView('chat-only');
-  }
-};
-
-const handleQuickChat = () => {
-  if (!inputMessage.trim()) return;
-  
-  setFeedbackInput(inputMessage);
-  setInputMessage('');
-  setFeedbackMode(true);
-  setCurrentView('chat-only');
-  
-  setTimeout(() => {
-    handleFeedbackChat();
-  }, 100);
-};
-
-// NEW: Handle image selection from chat interface
-const handleImageSelect = (e) => {
-  const files = Array.from(e.target.files);
-  const imageUrls = files.map(file => ({
-    url: URL.createObjectURL(file),
-    file: file
-  }));
-  setSelectedImages([...selectedImages, ...imageUrls]);
-};
-
   if (!assistantIsOpen) {
     if (externalIsOpen !== undefined) {
       return null;
@@ -886,7 +822,7 @@ const handleImageSelect = (e) => {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 bg-teal-400 hover:bg-teal-500 text-white p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 z-50 ${
+        className={`fixed bottom-6 right-6 bg-teal-400 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50 ${
           isMobile ? 'p-3' : 'p-4'
         }`}
         aria-label="Open Assistant"
@@ -904,7 +840,7 @@ const handleImageSelect = (e) => {
           className="bg-teal-400 hover:bg-teal-500 text-white px-6 py-3 rounded-full shadow-2xl flex items-center space-x-2 transition-all duration-300"
         >
           <Wrench size={20} />
-          <span className="font-semibold">Quote Assistant</span>
+          <span className="font-semibold">Live Support</span>
           <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
         </button>
       </div>
@@ -919,7 +855,7 @@ const handleImageSelect = (e) => {
   
   return (
     <div className={containerClasses}>
-      {/* Header with new minimize/close buttons */}
+      {/* UPDATED HEADER WITH MINIMIZE/CLOSE */}
       <div className={`bg-gradient-to-r from-teal-400 to-teal-500 text-white p-4 ${isMobile ? '' : 'rounded-t-2xl'} flex items-center justify-between`}>
         <div className="flex items-center space-x-3">
           <div className="bg-white p-2 rounded-full">
@@ -927,7 +863,7 @@ const handleImageSelect = (e) => {
           </div>
           <div>
             <h3 className="font-bold text-lg">Live Support</h3>
-            <p className="text-xs opacity-90">Ask us anything</p>
+            <p className="text-xs opacity-90">How can we help you?</p>
           </div>
         </div>
         <div className="flex items-center space-x-2">
@@ -951,14 +887,20 @@ const handleImageSelect = (e) => {
       </div>
 
       <div className={`p-4 overflow-y-auto flex-1 ${isMobile ? 'pb-safe' : ''}`}>
-        {/* CHAT-ONLY MODE - NEW! */}
+        {/* UPDATED CHAT-ONLY MODE - REDBUBBLE STYLE! */}
         {currentView === 'chat-only' && (
           <div className="space-y-4">
-            <div className="bg-gradient-to-r from-blue-500 to-teal-500 text-white p-4 rounded-lg">
-              <h3 className="font-semibold text-lg mb-2">👋 Hi! How can I help you today?</h3>
-              <p className="text-sm opacity-90">
-                Ask me about our services, check your work order status, get a quick quote, or ask any questions!
-              </p>
+            <div className="flex justify-start mb-4">
+              <div className="bg-white p-2 rounded-full mr-2 h-10 w-10 flex items-center justify-center flex-shrink-0 shadow-sm">
+                <Wrench size={16} className="text-teal-500" />
+              </div>
+              <div className="max-w-[85%]">
+                <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+                <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none shadow-sm p-3">
+                  <p className="text-sm">Hey there 👋 I'm the Cabo Handyman bot.</p>
+                  <p className="text-sm mt-1">What can we help you with?</p>
+                </div>
+              </div>
             </div>
 
             <div className="border rounded-lg p-3 bg-gray-50 max-h-96 overflow-y-auto space-y-3">
@@ -966,18 +908,13 @@ const handleImageSelect = (e) => {
                 <div className="text-center text-gray-500 text-sm py-8">
                   <MessageCircle size={32} className="mx-auto mb-2 text-gray-400" />
                   <p>Start a conversation...</p>
-                  <div className="mt-4 text-xs space-y-1">
-                    <p>💬 "What services do you offer?"</p>
-                    <p>📋 "Check work order status"</p>
-                    <p>💰 "How much to fix a water leak?"</p>
-                  </div>
                 </div>
               )}
               
               {feedbackHistory.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                   {msg.role === 'assistant' && (
-                    <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0">
+                    <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0 shadow-sm">
                       <Wrench size={14} className="text-teal-500" />
                     </div>
                   )}
@@ -987,7 +924,7 @@ const handleImageSelect = (e) => {
                     )}
                     <div className={`p-3 rounded-2xl text-sm ${
                       msg.role === 'user' 
-                        ? 'bg-teal-400 text-white rounded-br-none' 
+                        ? 'bg-teal-400 text-white rounded-br-none shadow-sm' 
                         : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
                     }`}>
                       <div className="whitespace-pre-line">{msg.content}</div>
@@ -998,14 +935,17 @@ const handleImageSelect = (e) => {
               
               {isAnalyzing && (
                 <div className="flex justify-start">
-                  <div className="bg-white border border-gray-200 p-3 rounded-lg shadow-sm">
+                  <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0 shadow-sm">
+                    <Wrench size={14} className="text-teal-500" />
+                  </div>
+                  <div className="bg-white border border-gray-200 p-3 rounded-2xl rounded-bl-none shadow-sm">
                     <Loader className="animate-spin w-4 h-4 text-teal-500" />
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Selected Images Preview in chat-only mode */}
+            {/* Image Preview */}
             {selectedImages.length > 0 && (
               <div className="border rounded-lg p-2 bg-white">
                 <div className="flex space-x-2 overflow-x-auto">
@@ -1024,6 +964,7 @@ const handleImageSelect = (e) => {
               </div>
             )}
 
+            {/* Input with Paperclip */}
             <div className="flex space-x-2">
               <label className="cursor-pointer hover:bg-gray-100 p-2 rounded-full transition-colors flex-shrink-0">
                 <input
@@ -1039,8 +980,8 @@ const handleImageSelect = (e) => {
                 value={feedbackInput}
                 onChange={(e) => setFeedbackInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
-                placeholder="Type your message..."
-                className={`flex-1 p-3 border-2 border-purple-200 focus:border-teal-400 rounded-full text-sm outline-none transition-colors ${
+                placeholder="Type a message"
+                className={`flex-1 p-3 border-2 border-gray-200 focus:border-teal-400 rounded-full text-sm outline-none transition-colors ${
                   isMobile ? 'text-base' : ''
                 }`}
                 disabled={isAnalyzing}
@@ -1055,100 +996,86 @@ const handleImageSelect = (e) => {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 pt-2 border-t">
+            {/* Quick Action Button - Only Work Order Status */}
+            <div className="pt-2 border-t">
               <button
                 onClick={() => {
                   setFeedbackInput("What's my work order status?");
                 }}
-                className="text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 px-3 py-2 rounded transition-colors"
+                className="w-full text-sm bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-full border border-gray-200 transition-colors text-left flex items-center space-x-2"
               >
-                📋 Work Order Status
-              </button>
-              <button
-                onClick={() => {
-                  setCurrentView('services');
-                  setFeedbackMode(false);
-                }}
-                className="text-xs bg-teal-100 hover:bg-teal-200 text-teal-600 px-3 py-2 rounded transition-colors"
-              >
-                🔧 Get Quote
+                <span>📋</span>
+                <span>Check work order status</span>
               </button>
             </div>
           </div>
         )}
 
+        {/* REST OF THE VIEWS REMAIN UNCHANGED */}
         {currentView === 'services' && !analysis && !isAnalyzing && (
-  <div className="space-y-4">
-    {/* Chat-style welcome message */}
-    <div className="flex justify-start mb-4">
-      <div className="bg-white p-2 rounded-full mr-2 h-10 w-10 flex items-center justify-center flex-shrink-0">
-        <Wrench size={16} className="text-teal-500" />
-      </div>
-      <div className="max-w-[85%]">
-        <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
-        <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none shadow-sm p-3">
-          <p className="text-sm">Hey there 👋 I'm your Cabo Handyman assistant. What can we help you with?</p>
-        </div>
-      </div>
-    </div>
+          <div className="space-y-4">
+            <div className="text-center mb-4">
+              <h3 className="font-semibold text-gray-800 mb-2">How can we help you today?</h3>
+              <p className="text-sm text-gray-600">Choose a service or analyze a specific issue</p>
+            </div>
 
-    <div className="space-y-3">
-      {services.map((service, index) => {
-        const IconComponent = service.icon;
-        return (
-          <div 
-            key={index}
-            className={`border border-gray-200 rounded-lg p-3 hover:border-teal-400 hover:bg-gray-50 cursor-pointer transition-colors ${
-              isMobile ? 'active:bg-teal-50' : ''
-            }`}
-            onClick={() => {
-              setSelectedService(service);
-              setBookingData(prev => ({...prev, serviceType: service.title}));
-              setCurrentView('booking');
-            }}
-          >
-            <div className="flex items-start space-x-3">
-              <IconComponent size={20} className="text-teal-500 mt-1 flex-shrink-0" />
-              <div className="flex-1">
-                <h4 className="font-semibold text-sm text-gray-800">{service.title}</h4>
-                <p className="text-xs text-gray-600 mt-1">{service.description}</p>
-              </div>
+            <div className="space-y-3">
+              {services.map((service, index) => {
+                const IconComponent = service.icon;
+                return (
+                  <div 
+                    key={index}
+                    className={`border border-gray-200 rounded-lg p-3 hover:border-teal-400 hover:bg-gray-50 cursor-pointer transition-colors ${
+                      isMobile ? 'active:bg-teal-50' : ''
+                    }`}
+                    onClick={() => {
+                      setSelectedService(service);
+                      setBookingData(prev => ({...prev, serviceType: service.title}));
+                      setCurrentView('booking');
+                    }}
+                  >
+                    <div className="flex items-start space-x-3">
+                      <IconComponent size={20} className="text-teal-500 mt-1 flex-shrink-0" />
+                      <div className="flex-1">
+                        <h4 className="font-semibold text-sm text-gray-800">{service.title}</h4>
+                        <p className="text-xs text-gray-600 mt-1">{service.description}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            <div className="border-t pt-4">
+              <button
+                onClick={() => setCurrentView('booking')}
+                className="w-full bg-teal-400 hover:bg-teal-500 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
+              >
+                <Camera size={16} />
+                <span>Analyze Specific Issue</span>
+              </button>
+            </div>
+
+            <div className={`grid ${isMobile ? 'grid-cols-1 gap-3' : 'grid-cols-2 gap-2'}`}>
+              <button 
+                onClick={() => setCurrentView('booking')}
+                className="bg-gray-100 hover:bg-gray-200 text-gray-800 py-2 px-3 rounded text-sm font-semibold transition-colors"
+              >
+                Schedule Consultation
+              </button>
+              <button 
+                onClick={() => {
+                  setSelectedService(services[1]);
+                  setBookingData(prev => ({...prev, serviceType: 'Emergency Service', urgency: 'urgent'}));
+                  setCurrentView('booking');
+                }}
+                className="bg-red-100 hover:bg-red-200 text-red-800 py-2 px-3 rounded text-sm font-semibold transition-colors"
+              >
+                Emergency
+              </button>
             </div>
           </div>
-        );
-      })}
-    </div>
-
-    {/* NEW: Quick chat input */}
-    <div className="flex space-x-2 mt-4">
-      <input
-        type="text"
-        value={inputMessage}
-        onChange={(e) => setInputMessage(e.target.value)}
-        onKeyPress={(e) => e.key === 'Enter' && inputMessage.trim() && handleQuickChat()}
-        placeholder="Or ask us a question..."
-        className="flex-1 p-3 border-2 border-purple-200 focus:border-teal-400 rounded-full text-sm outline-none"
-      />
-      <button 
-        onClick={handleQuickChat}
-        disabled={!inputMessage.trim()}
-        className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 text-white px-4 rounded-full transition-colors"
-      >
-        <Send size={18} />
-      </button>
-    </div>
-
-    <div className="border-t pt-4">
-      <button
-        onClick={() => setCurrentView('booking')}
-        className="w-full bg-teal-400 hover:bg-teal-500 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
-      >
-        <Camera size={16} />
-        <span>Analyze Specific Issue</span>
-      </button>
-    </div>
-    </div>
-     )}
+        )}
         {currentView === 'booking' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
@@ -1327,22 +1254,12 @@ const handleImageSelect = (e) => {
                 <div className="border rounded-lg p-3 bg-gray-50 max-h-64 overflow-y-auto space-y-3">
                   {chatHistory.map((msg, i) => (
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      {msg.role === 'assistant' && (
-                        <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0">
-                          <Wrench size={14} className="text-teal-500" />
-                        </div>
-                      )}
-                      <div className={`max-w-[80%] ${msg.role === 'user' ? 'order-1' : 'order-2'}`}>
-                        {msg.role === 'assistant' && (
-                          <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
-                        )}
-                        <div className={`p-3 rounded-2xl text-sm ${
-                          msg.role === 'user' 
-                            ? 'bg-teal-400 text-white rounded-br-none' 
-                            : 'bg-white border border-gray-200 rounded-bl-none'
-                        }`}>
-                          <div className="whitespace-pre-line">{msg.content}</div>
-                        </div>
+                      <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
+                        msg.role === 'user' 
+                          ? 'bg-teal-400 text-white rounded-br-none' 
+                          : 'bg-white border border-gray-200 rounded-bl-none'
+                      }`}>
+                        <div className="whitespace-pre-line">{msg.content}</div>
                       </div>
                     </div>
                   ))}
@@ -1360,7 +1277,7 @@ const handleImageSelect = (e) => {
                     onChange={(e) => setChatInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleChatSend()}
                     placeholder="Type your answer..."
-                    className={`flex-1 p-3 border-2 border-purple-200 focus:border-teal-400 rounded-full text-sm outline-none transition-colors ${
+                    className={`flex-1 p-3 border border-gray-300 rounded-lg text-sm focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none ${
                       isMobile ? 'text-base' : ''
                     }`}
                     disabled={isAnalyzing}
@@ -1368,7 +1285,7 @@ const handleImageSelect = (e) => {
                   <button 
                     onClick={handleChatSend}
                     disabled={!chatInput.trim() || isAnalyzing}
-                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-full"
+                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
                   >
                     <Send size={16} />
                   </button>
@@ -1391,7 +1308,7 @@ const handleImageSelect = (e) => {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   placeholder="Describe the issue in detail (e.g., 'Water leaking from pipe joint under kitchen sink', 'Electrical outlet not working in bedroom')"
-                  className={`w-full p-3 border-2 border-purple-200 focus:border-teal-400 rounded-lg resize-none text-sm outline-none transition-colors ${
+                  className={`w-full p-3 border border-gray-300 rounded-lg resize-none text-sm focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none ${
                     isMobile ? 'text-base' : ''
                   }`}
                   rows={isMobile ? 3 : 4}
@@ -1400,7 +1317,7 @@ const handleImageSelect = (e) => {
                 <button
                   onClick={analyzeIssue}
                   disabled={selectedImages.length === 0 || !description}
-                  className={`w-full bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-full font-semibold transition-colors flex items-center justify-center space-x-2 ${
+                  className={`w-full bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
                     isMobile ? 'py-4' : ''
                   }`}
                 >
@@ -1448,14 +1365,12 @@ const handleImageSelect = (e) => {
                   <strong>⚠️ Preliminary Estimate:</strong> Labor costs and hours are approximate and may vary based on project complexity, site conditions, and unforeseen circumstances discovered during work.
                 </div>
                  
-                 {/* Quick Task Pricing Note */}
                 {analysis.cost_estimate.pricing_note && (
                   <div className="bg-green-50 border border-green-200 rounded p-3 mb-3 text-xs text-green-700">
                     {analysis.cost_estimate.pricing_note}
                   </div>
                 )}
 
-                {/* Service Call Fee Display */}
                 {analysis.cost_estimate.service_call_fee && (
                   <div className="bg-teal-50 border border-teal-200 rounded p-3 mb-3 text-sm">
                     <div className="flex items-center justify-between">
@@ -1474,56 +1389,57 @@ const handleImageSelect = (e) => {
                       <span className="text-teal-500">Materials:</span>
                       <div className="font-semibold">
                         ${analysis.cost_estimate.parts_cost.min} - ${analysis.cost_estimate.parts_cost.max}
-                        </div>
+                      </div>
                     </div>
                   )}
-                  {analysis.cost_estimate.labor_cost && (
-                <div>
-                  <span className="text-teal-500">Labor (Est.):</span>
-                  <div className="font-semibold">
-                    ${analysis.cost_estimate.labor_cost}
-                    {analysis.cost_estimate.labor_hours && (
-                      <div className="text-xs text-blue-500">
-                        (~{analysis.cost_estimate.labor_hours} hours)
-                      </div>
-                    )}
-                  </div>
-                  <div className="text-xs text-green-600 mt-1">
-                    ⏱️ You pay actual hours only. Finish early = you save!
-                  </div>
-                </div>
-              )}
-              {analysis.cost_estimate.disposal_cost > 0 && (
-                <div>
-                  <span className="text-teal-500">Disposal:</span>
-                  <div className="font-semibold">${analysis.cost_estimate.disposal_cost}</div>
-                </div>
-              )}
-              {analysis.cost_estimate.permits_misc > 0 && (
-                <div>
-                  <span className="text-teal-500">Permits/Misc:</span>
-                  <div className="font-semibold">${analysis.cost_estimate.permits_misc}</div>
-                </div>
-              )}
-            </div>
-            <div className="mt-2 pt-2 border-t border-teal-200">
-              <span className="text-teal-500">Estimated Total Range:</span>
-              <div className="font-bold text-lg text-teal-700">
-                ${analysis.cost_estimate.total_cost.min} - ${analysis.cost_estimate.total_cost.max}
-              </div>
-              {analysis.analysis?.time_estimate && analysis.analysis.time_estimate !== 'TBD' && (
-                <div className="text-xs text-teal-500 mt-1">
-                  Estimated time: {analysis.analysis.time_estimate}
-                </div>
-              )}
-              <div className="text-xs text-teal-500 mt-2 italic">
-                Final pricing confirmed after on-site inspection
-              </div>
-            </div>
-          </div>
-        )}
 
-        {feedbackMode ? (
+                  {analysis.cost_estimate.labor_cost && (
+                    <div>
+                      <span className="text-teal-500">Labor (Est.):</span>
+                      <div className="font-semibold">
+                        ${analysis.cost_estimate.labor_cost}
+                        {analysis.cost_estimate.labor_hours && (
+                          <div className="text-xs text-blue-500">
+                            (~{analysis.cost_estimate.labor_hours} hours)
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-xs text-green-600 mt-1">
+                        ⏱️ You pay actual hours only. Finish early = you save!
+                      </div>
+                    </div>
+                  )}
+                  {analysis.cost_estimate.disposal_cost > 0 && (
+                    <div>
+                      <span className="text-teal-500">Disposal:</span>
+                      <div className="font-semibold">${analysis.cost_estimate.disposal_cost}</div>
+                    </div>
+                  )}
+                  {analysis.cost_estimate.permits_misc > 0 && (
+                    <div>
+                      <span className="text-teal-500">Permits/Misc:</span>
+                      <div className="font-semibold">${analysis.cost_estimate.permits_misc}</div>
+                    </div>
+                  )}
+                </div>
+                <div className="mt-2 pt-2 border-t border-teal-200">
+                  <span className="text-teal-500">Estimated Total Range:</span>
+                  <div className="font-bold text-lg text-teal-700">
+                    ${analysis.cost_estimate.total_cost.min} - ${analysis.cost_estimate.total_cost.max}
+                  </div>
+                  {analysis.analysis?.time_estimate && analysis.analysis.time_estimate !== 'TBD' && (
+                    <div className="text-xs text-teal-500 mt-1">
+                      Estimated time: {analysis.analysis.time_estimate}
+                    </div>
+                  )}
+                  <div className="text-xs text-teal-500 mt-2 italic">
+                    Final pricing confirmed after on-site inspection
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {feedbackMode ? (
               <div className="border-t pt-4 space-y-3">
                 <div className="bg-green-50 border border-green-200 rounded-lg p-3">
                   <div className="flex items-center space-x-2 mb-2">
@@ -1536,22 +1452,12 @@ const handleImageSelect = (e) => {
                 <div className="border rounded-lg p-3 bg-gray-50 max-h-48 overflow-y-auto space-y-3">
                   {feedbackHistory.map((msg, i) => (
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                      {msg.role === 'assistant' && (
-                        <div className="bg-white p-2 rounded-full mr-2 h-8 w-8 flex items-center justify-center flex-shrink-0">
-                          <Wrench size={14} className="text-teal-500" />
-                        </div>
-                      )}
-                      <div className={`max-w-[85%] ${msg.role === 'user' ? 'order-1' : 'order-2'}`}>
-                        {msg.role === 'assistant' && (
-                          <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
-                        )}
-                        <div className={`p-2 rounded-2xl text-sm ${
-                          msg.role === 'user' 
-                            ? 'bg-teal-400 text-white rounded-br-none' 
-                            : 'bg-white border border-gray-200 rounded-bl-none'
-                        }`}>
-                          <div className="whitespace-pre-line">{msg.content}</div>
-                        </div>
+                      <div className={`max-w-[85%] p-2 rounded-lg text-sm ${
+                        msg.role === 'user' 
+                          ? 'bg-teal-400 text-white rounded-br-none' 
+                          : 'bg-white border border-gray-200 rounded-bl-none'
+                      }`}>
+                        <div className="whitespace-pre-line">{msg.content}</div>
                       </div>
                     </div>
                   ))}
@@ -1570,7 +1476,7 @@ const handleImageSelect = (e) => {
                     onChange={(e) => setFeedbackInput(e.target.value)}
                     onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
                     placeholder="Ask about materials, timeline, DIY..."
-                    className={`flex-1 p-2 border-2 border-purple-200 focus:border-teal-400 rounded-full text-sm outline-none transition-colors ${
+                    className={`flex-1 p-2 border border-gray-300 rounded-lg text-sm focus:border-teal-400 focus:ring-1 focus:ring-teal-400 outline-none ${
                       isMobile ? 'text-base' : ''
                     }`}
                     disabled={isAnalyzing}
@@ -1578,7 +1484,7 @@ const handleImageSelect = (e) => {
                   <button 
                     onClick={handleFeedbackChat}
                     disabled={!feedbackInput.trim() || isAnalyzing}
-                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-full"
+                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
                   >
                     <Send size={16} />
                   </button>
@@ -1624,16 +1530,6 @@ const handleImageSelect = (e) => {
       </div>
 
       {isMobile && <div className="h-4"></div>}
-
-      {/* Minimize Button - Bottom Right (Desktop only) */}
-      {!isMobile && !isMinimized && (
-        <button
-          onClick={() => setIsMinimized(true)}
-          className="absolute -bottom-12 -right-2 bg-teal-400 hover:bg-teal-500 text-white p-3 rounded-full shadow-lg transition-all duration-300"
-        >
-          <ChevronDown size={20} />
-        </button>
-      )}
     </div>
   );
 }
