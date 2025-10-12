@@ -464,22 +464,18 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       const imagePromises = selectedImages.map(img => imageToBase64(img.file));
       const imagesDataURIs = await Promise.all(imagePromises);
 
-      const response = await fetch('/api/analyze-parts', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          images: imagesDataURIs,
-          description: chatInput,
-          location: 'Cabo San Lucas, Mexico',
-          service_context: selectedService ? {
-            title: selectedService.title,
-            category: selectedService.title.toLowerCase().replace(' ', '_')
-          } : null,
-          chat_history: newChatHistory
-        })
-      });
+      const response = await fetch('/api/feedback-chat', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    question: chatInput,
+    history: newChatHistory,
+    analysis: null,
+    service_context: selectedService
+  })
+});
 
       const result = await response.json();
 
