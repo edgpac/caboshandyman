@@ -897,7 +897,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <Wrench size={16} className="text-teal-500" />
               </div>
               <div className="max-w-[85%]">
-                <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+                <div className="text-xs text-gray-500 mb-1 ml-1">Cabos Handyman</div>
                 <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none shadow-sm p-3">
                   <p className="text-sm">Hey there 👋 I'm the Cabo Handyman bot.</p>
                   <p className="text-sm mt-1">What can we help you with?</p>
@@ -922,7 +922,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   )}
                   <div className={`max-w-[85%] ${msg.role === 'user' ? 'order-1' : 'order-2'}`}>
                     {msg.role === 'assistant' && (
-                      <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+                      <div className="text-xs text-gray-500 mb-1 ml-1">Cabos Handyman</div>
                     )}
                     <div className={`p-3 rounded-2xl text-sm ${
                       msg.role === 'user' 
