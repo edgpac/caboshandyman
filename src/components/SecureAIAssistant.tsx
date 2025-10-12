@@ -86,7 +86,7 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
     },
     {
       title: "Commercial Projects",
-      description: "Office buildouts, retail spaces, and commercial maintenance for Ventura County businesses.",
+      description: "Office buildouts, retail spaces, and commercial maintenance for Cabo San Lucas businesses.",
       icon: Building,
       details: "Professional commercial services including office buildouts, retail renovations, restaurant construction, and ongoing maintenance contracts for businesses.",
       calendlyUrl: "https://cal.com/maintenancemaster/commercial-project-consultation"
