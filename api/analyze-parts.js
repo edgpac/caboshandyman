@@ -1,6 +1,7 @@
 // api/analyze-parts.js - ULTRA-INTELLIGENT MULTI-TASK IMAGE ANALYSIS v3
 // Full parity with feedback-chat.js + Enhanced image detection + Smart bundling
 // FIXED: Description is now primary source of truth for task count
+// FIXED: Follow-up requests now properly bundle with previous tasks
 
 export const config = {
   maxDuration: 60,
@@ -153,10 +154,52 @@ function isQuickTask(description, issueType) {
 }
 
 // ========================================
+// CHAT HISTORY ANALYSIS FOR FOLLOW-UP DETECTION
+// ========================================
+
+function extractPreviousTaskInfo(chatHistory) {
+  if (!chatHistory || chatHistory.length === 0) return null;
+  
+  // Look for the most recent AI response containing cost estimate
+  let previousTaskCount = 0;
+  let previousTaskDescriptions = [];
+  
+  for (let i = chatHistory.length - 1; i >= 0; i--) {
+    const msg = chatHistory[i];
+    if (msg.role === 'assistant' && msg.content) {
+      const content = msg.content.toLowerCase();
+      
+      // Look for task count indicators
+      const taskCountMatch = content.match(/(\d+)\s+(?:quick\s+)?tasks?|both.*?tasks?|all\s+(\d+)/i);
+      if (taskCountMatch) {
+        previousTaskCount = parseInt(taskCountMatch[1] || taskCountMatch[2]) || 1;
+      }
+      
+      // Look for quick task keywords mentioned
+      previousTaskDescriptions = quickTaskKeywords.filter(kw => content.includes(kw));
+      
+      if (previousTaskCount > 0 || previousTaskDescriptions.length > 0) {
+        break;
+      }
+    }
+  }
+  
+  return {
+    taskCount: previousTaskCount,
+    taskDescriptions: previousTaskDescriptions,
+    hasEstimate: previousTaskCount > 0 || previousTaskDescriptions.length > 0
+  };
+}
+
+function isFollowUpRequest(description) {
+  return /can i add|add to|also|do you|can you|bundle|same visit|together|while you|at the same time/i.test(description);
+}
+
+// ========================================
 // ENHANCED MULTI-TASK DETECTION WITH IMAGE ANALYSIS
 // ========================================
 
-function analyzeMultipleTasks(description, detectedItems = []) {
+function analyzeMultipleTasks(description, detectedItems = [], previousTaskInfo = null) {
   const desc = description.toLowerCase();
   
   // Detect multiple indicators in description
@@ -199,17 +242,29 @@ function analyzeMultipleTasks(description, detectedItems = []) {
     totalQuickTasks = 2;
   }
   
-  const estimatedMinutes = totalQuickTasks * 12; // 12 min average per task
+  // FOLLOW-UP LOGIC: If this is a follow-up request, add to previous task count
+  const isFollowUp = isFollowUpRequest(description);
+  let finalTaskCount = totalQuickTasks;
+  let isBundledFollowUp = false;
   
-  const isMultiple = totalQuickTasks > 1 || hasMultipleInDescription;
+  if (isFollowUp && previousTaskInfo && previousTaskInfo.hasEstimate) {
+    finalTaskCount = previousTaskInfo.taskCount + totalQuickTasks;
+    isBundledFollowUp = true;
+  }
+  
+  const estimatedMinutes = finalTaskCount * 12; // 12 min average per task
+  
+  const isMultiple = finalTaskCount > 1 || hasMultipleInDescription;
   
   return {
     isMultiple: isMultiple,
-    taskCount: Math.max(totalQuickTasks, isMultiple ? 2 : 1),
+    taskCount: Math.max(finalTaskCount, isMultiple ? 2 : 1),
     fitsInServiceCall: estimatedMinutes <= 30,
     estimatedMinutes: estimatedMinutes,
     tasks: [...new Set([...mentionedQuickTasks, ...quickTasksInImages])],
-    hasFollowUpIntent: /can i add|add to|also do|include|while you|at same time/i.test(desc)
+    hasFollowUpIntent: isFollowUp,
+    isBundledFollowUp: isBundledFollowUp,
+    previousTaskInfo: previousTaskInfo
   };
 }
 
@@ -302,8 +357,11 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       };
     }
 
-    // ENHANCED: Multi-task analysis with image detection (FIXED version)
-    const multiTaskAnalysis = analyzeMultipleTasks(description, allDetectedItems);
+    // Extract previous task info for follow-up detection
+    const previousTaskInfo = extractPreviousTaskInfo(chatHistory);
+    
+    // ENHANCED: Multi-task analysis with image detection and follow-up bundling
+    const multiTaskAnalysis = analyzeMultipleTasks(description, allDetectedItems, previousTaskInfo);
     
     console.log('Multi-task analysis:', {
       isMultiple: multiTaskAnalysis.isMultiple,
@@ -311,6 +369,7 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       fitsInServiceCall: multiTaskAnalysis.fitsInServiceCall,
       estimatedMinutes: multiTaskAnalysis.estimatedMinutes,
       hasFollowUpIntent: multiTaskAnalysis.hasFollowUpIntent,
+      isBundledFollowUp: multiTaskAnalysis.isBundledFollowUp,
       detectedItems: allDetectedItems.length
     });
 
@@ -330,7 +389,7 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
 - ${multiTaskAnalysis.taskCount} quick tasks identified
 - Estimated time: ${multiTaskAnalysis.estimatedMinutes} minutes total
 - ${multiTaskAnalysis.fitsInServiceCall ? 'ALL FIT IN ONE $100 SERVICE CALL! Bundle pricing applies.' : 'Exceeds 30 min - may need extended time or multiple visits.'}
-- ${multiTaskAnalysis.hasFollowUpIntent ? 'Customer is adding tasks to existing quote.' : ''}`
+- ${multiTaskAnalysis.isBundledFollowUp ? 'FOLLOW-UP REQUEST: Customer is adding tasks to existing work order.' : multiTaskAnalysis.hasFollowUpIntent ? 'Customer is adding tasks to existing quote.' : ''}`
       : '';
 
     const prompt = `You are an expert contractor cost estimator for Cabo San Lucas, Mexico. Analyze this project and provide realistic 2024-2025 pricing in USD.
@@ -353,9 +412,15 @@ CRITICAL PRICING RULES:
    - Set is_multi_task to true
    - Emphasize VALUE of bundling vs separate visits
 
-3. **BIGGER JOBS (over 30 minutes):** Calculate normal labor at $80/hour + $100 service call overhead
+3. **FOLLOW-UP BUNDLING:** If this is a follow-up request adding tasks to an existing work order:
+   - ALL tasks still fit under the SAME $100 service call
+   - Do NOT charge an additional $100 service call fee
+   - Only charge for new materials
+   - Emphasize convenience and savings of bundling
 
-4. **PRIORITY:** Customer description is PRIMARY. Image detection is supplementary.
+4. **BIGGER JOBS (over 30 minutes):** Calculate normal labor at $80/hour + $100 service call overhead
+
+5. **PRIORITY:** Customer description is PRIMARY. Image detection is supplementary.
 
 Respond ONLY with valid JSON (no markdown):
 {
@@ -390,7 +455,7 @@ Respond ONLY with valid JSON (no markdown):
         messages: [
           {
             role: 'system',
-            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) and multi-task scenarios accurately. Multiple quick tasks under 30 min total = ONE $100 service call + materials only.'
+            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) and multi-task scenarios accurately. Multiple quick tasks under 30 min total = ONE $100 service call + materials only. Follow-up requests that add tasks to existing work orders still use the same $100 service call - do not charge twice.'
           },
           {
             role: 'user',
@@ -446,7 +511,10 @@ Respond ONLY with valid JSON (no markdown):
       
       let pricingNote;
       
-      if (isMulti) {
+      if (multiTaskAnalysis.isBundledFollowUp) {
+        // Follow-up request bundling
+        pricingNote = `Perfect! Adding ${groqAnalysis.description || 'this task'} to your existing work order. Since all ${taskCount} tasks fit in one visit and take about ${multiTaskAnalysis.estimatedMinutes} minutes total, you still only pay the $100 service call + materials. No additional service fee!`;
+      } else if (isMulti) {
         pricingNote = multiTaskAnalysis.hasFollowUpIntent
           ? `Perfect! Both/All ${taskCount} of these tasks fit into ONE $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $100 service call + materials. Adding tasks to the same visit saves you money!`
           : `Excellent news! All ${taskCount} of these are quick tasks that fit into our $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $100 service call + materials. This is MUCH better value than doing them separately!`;
@@ -473,9 +541,11 @@ Respond ONLY with valid JSON (no markdown):
         pricing_note: pricingNote,
         is_multi_task: isMulti,
         task_count: taskCount,
-        value_message: isMulti ? `You save $${(taskCount - 1) * 100} by bundling vs ${taskCount} separate $100 service calls!` : null
+        is_bundled_followup: multiTaskAnalysis.isBundledFollowUp,
+        value_message: isMulti && !multiTaskAnalysis.isBundledFollowUp ? `You save $${(taskCount - 1) * 100} by bundling vs ${taskCount} separate $100 service calls!` : null
       };
     } else {
+      
       // BIGGER JOB - Standard pricing
       const baseLaborCost = groqAnalysis.cost_breakdown?.base_labor_cost || 150;
       const laborRate = 80;
@@ -517,6 +587,7 @@ Respond ONLY with valid JSON (no markdown):
     console.log('Analysis complete:', {
       type: isQuick || isMulti ? `Quick Task${isMulti ? 's' : ''}` : 'Standard Job',
       taskCount: taskCount,
+      isBundledFollowUp: multiTaskAnalysis.isBundledFollowUp,
       total: `$${costEstimate.total_cost.min}-$${costEstimate.total_cost.max}`
     });
 
@@ -533,6 +604,7 @@ Respond ONLY with valid JSON (no markdown):
         is_quick_task: isQuick || isMulti,
         is_multi_task: isMulti,
         task_count: taskCount,
+        is_bundled_followup: multiTaskAnalysis.isBundledFollowUp,
         detected_items: allDetectedItems.length > 0 ? allDetectedItems.slice(0, 10) : []
       },
       cost_estimate: costEstimate,
