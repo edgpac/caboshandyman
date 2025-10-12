@@ -5,6 +5,7 @@ import { useIsMobile } from '../hooks/use-mobile';
 
 export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, initialMode }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [currentView, setCurrentView] = useState('services');
   const [selectedService, setSelectedService] = useState(null);
   const [selectedImages, setSelectedImages] = useState([]);
