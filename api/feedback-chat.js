@@ -1,5 +1,5 @@
-// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI v6
-// Built for exceptional customer experience with 200+ quick task detection + MULTI-TASK INTELLIGENCE
+// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI v7
+// Built for exceptional customer experience with 200+ quick task detection + Multi-task intelligence + Follow-up detection
 
 import { createClient } from '@supabase/supabase-js';
 
@@ -33,7 +33,6 @@ function extractWorkOrderNumber(text) {
 }
 
 function extractName(text) {
-  // Ignore greetings and common words
   const greetings = ['hello', 'hi', 'hey', 'hola', 'good', 'morning', 'afternoon', 'evening', 'thanks', 'thank', 'please', 'yes', 'yeah', 'ok', 'okay'];
   const lowerText = text.toLowerCase().trim();
   
@@ -47,7 +46,6 @@ function extractName(text) {
     const match = text.match(pattern);
     if (match) {
       const name = match[1].toLowerCase();
-      // Skip if it's a greeting or common word
       if (greetings.includes(name)) continue;
       return match[1];
     }
@@ -60,7 +58,6 @@ function extractName(text) {
 // ========================================
 
 const quickTaskKeywords = [
-  // PLUMBING QUICK FIXES (under 30 min)
   'flush valve', 'flapper', 'fill valve', 'toilet seat', 'toilet handle', 'toilet chain',
   'toilet lever', 'toilet paper holder', 'towel bar', 'towel rack', 'towel ring', 
   'robe hook', 'toilet brush holder', 'soap dish', 'toothbrush holder',
@@ -74,8 +71,6 @@ const quickTaskKeywords = [
   'sprayer hose', 'kitchen sprayer', 'side sprayer', 'soap dispenser', 'lotion dispenser',
   'shower drain cover', 'tub drain cover', 'sink drain', 'shower basket', 'hair catcher',
   'faucet handle', 'single handle', 'two handle', 'widespread faucet part',
-  
-  // DOORS & HARDWARE (under 30 min)
   'door knob', 'door handle', 'doorknob', 'door lever', 'passage knob', 'privacy knob',
   'deadbolt', 'door lock', 'keyed lock', 'thumbturn', 'door latch', 'spring latch',
   'cabinet knob', 'cabinet handle', 'cabinet pull', 'drawer pull', 'drawer knob', 
@@ -88,8 +83,6 @@ const quickTaskKeywords = [
   'mailbox', 'mail slot', 'door knocker', 'door escutcheon', 'keyhole cover',
   'door bumper', 'door silencer', 'magnetic catch', 'roller catch', 'ball catch',
   'coat hook', 'door hook', 'over-the-door hook', 'closet rod bracket', 'shelf pin',
-  
-  // ELECTRICAL QUICK FIXES (under 30 min)
   'light switch', 'toggle switch', 'rocker switch', 'dimmer switch', 'fan switch',
   '3-way switch', 'outlet cover', 'switch plate', 'wall plate', 'cover plate',
   'decorator plate', 'outlet', 'receptacle', 'duplex outlet', 'gfci outlet', 
@@ -103,8 +96,6 @@ const quickTaskKeywords = [
   'motion sensor', 'motion detector', 'occupancy sensor', 'night light', 'plug-in light',
   'ceiling fan pull chain', 'fan chain', 'light chain', 'pull switch', 'canopy cover',
   'outlet tester', 'surge protector', 'power strip', 'extension cord holder',
-  
-  // WINDOW TREATMENTS & COVERINGS (under 30 min)
   'curtain rod', 'drapery rod', 'shower curtain rod', 'tension rod', 'cafe rod',
   'curtain bracket', 'rod bracket', 'rod end', 'finial', 'curtain ring', 'clip ring',
   'blind', 'shade', 'roller shade', 'cellular shade', 'honeycomb shade', 'roman shade',
@@ -113,8 +104,6 @@ const quickTaskKeywords = [
   'window screen', 'screen frame', 'screen mesh', 'screen spline', 'screen door',
   'window lock', 'sash lock', 'window latch', 'window crank', 'casement crank',
   'blind cord', 'lift cord', 'tilt wand', 'cordless blind', 'valance clip',
-  
-  // WALLS & HANGING (under 30 min)
   'picture frame', 'photo frame', 'wall art', 'canvas', 'poster frame',
   'mirror', 'wall mirror', 'bathroom mirror', 'decorative mirror', 'accent mirror',
   'coat rack', 'wall coat rack', 'coat hook', 'wall hook', 'utility hook',
@@ -125,9 +114,6 @@ const quickTaskKeywords = [
   'wall anchor', 'drywall anchor', 'toggle bolt', 'molly bolt', 'plastic anchor',
   'picture hook', 'picture hanger', 'sawtooth hanger', 'd-ring hanger', 'wire hanger',
   'key holder', 'key rack', 'mail organizer', 'wall organizer', 'magazine rack',
-  
-  // KITCHEN & BATH ACCESSORIES (under 30 min)
-  'soap dispenser', 'lotion dispenser', 'hand soap pump', 'dish soap dispenser',
   'shower caddy', 'corner caddy', 'hanging caddy', 'suction caddy', 'tension caddy',
   'shower curtain', 'curtain liner', 'curtain hooks', 'shower rings',
   'grab bar', 'safety bar', 'balance bar', 'towel warmer', 'heated towel rack',
@@ -136,25 +122,17 @@ const quickTaskKeywords = [
   'utensil holder', 'utensil crock', 'knife block', 'knife holder', 'magnetic strip',
   'cutting board rack', 'dish rack', 'drying rack', 'cup holder', 'mug hook',
   'sink grid', 'sink mat', 'drain board', 'dish drainer', 'silverware tray',
-  
-  // HVAC & VENTILATION (under 30 min)
   'air vent cover', 'vent cover', 'register cover', 'floor register', 'wall register',
   'ceiling register', 'grille cover', 'return air cover', 'return vent', 'air grille',
   'hvac filter', 'air filter', 'furnace filter', 'ac filter', 'pleated filter',
   'range hood filter', 'grease filter', 'charcoal filter', 'exhaust filter',
   'bathroom fan cover', 'exhaust fan cover', 'fan grille', 'dryer vent cover',
   'vent flap', 'damper', 'vent cap', 'soffit vent', 'gable vent',
-  
-  // SMALL APPLIANCE FIXES (under 30 min)
   'garbage disposal reset', 'disposal wrench', 'dishwasher filter', 'dishwasher basket',
   'refrigerator filter', 'water filter', 'ice maker filter', 'fridge light',
   'microwave turntable', 'turntable roller', 'microwave light', 'oven light',
-  'range hood light', 'hood bulb', 'exhaust fan cover', 'dryer lint trap',
+  'range hood light', 'hood bulb', 'dryer lint trap',
   'washer hose', 'washer filter', 'appliance foot', 'appliance leveling leg',
-  
-  // OUTDOOR & EXTERIOR (under 30 min)
-  'house numbers', 'address numbers', 'address plaque', 'number plate',
-  'mailbox post', 'mailbox flag', 'small mailbox', 'wall mailbox', 'mounted mailbox',
   'porch light', 'outdoor light', 'exterior light', 'wall lantern', 'wall sconce',
   'motion light', 'motion sensor light', 'security light', 'flood light bulb',
   'landscape light', 'path light', 'solar light', 'stake light', 'garden light',
@@ -162,15 +140,11 @@ const quickTaskKeywords = [
   'garden hook', 'plant hook', 'hanging basket', 'shepherd hook', 'planter hook',
   'flag holder', 'flag bracket', 'welcome mat', 'door mat', 'boot tray',
   'gutter guard', 'downspout extension', 'splash block', 'window well cover',
-  
-  // SAFETY & SECURITY (under 30 min)
   'door chain', 'security chain', 'chain guard', 'door guard', 'barrel bolt',
   'slide bolt', 'surface bolt', 'cabinet lock', 'child lock', 'safety latch',
   'baby gate', 'pressure gate', 'hardware mount gate', 'gate extension',
-  'window lock', 'sash lock', 'sliding door lock', 'patio door lock', 'pin lock',
+  'sliding door lock', 'patio door lock', 'pin lock',
   'security bar', 'window bar', 'door brace', 'security wedge',
-  
-  // MISCELLANEOUS QUICK TASKS (under 30 min)
   'caulk', 'caulking', 're-caulk', 'silicone caulk', 'tub caulk', 'grout caulk',
   'grout touch-up', 'grout pen', 'tile touch-up', 'small patch', 'drywall patch',
   'spackle', 'hole patch', 'nail hole', 'screw hole', 'wall repair',
@@ -188,21 +162,17 @@ const quickTaskKeywords = [
 function isQuickTask(text) {
   const lower = text.toLowerCase();
   const hasQuickKeyword = quickTaskKeywords.some(keyword => lower.includes(keyword));
-  
-  // Exclude if it's complex/major work
   const isComplex = /multiple|several|many|complex|major|install new|replace entire|demo|demolition|renovation|remodel|gut|remove wall|add wall/i.test(lower);
-  
   return hasQuickKeyword && !isComplex;
 }
 
 // ========================================
-// NEW: MULTI-TASK INTELLIGENCE
+// MULTI-TASK DETECTION
 // ========================================
 
 function analyzeMultipleTasks(text) {
   const lower = text.toLowerCase();
   
-  // Detect if user is asking about multiple things
   const multipleIndicators = [
     /and|&|plus|\+/i,
     /also|as well/i,
@@ -214,11 +184,8 @@ function analyzeMultipleTasks(text) {
   
   if (!hasMultiple) return { isMultiple: false };
   
-  // Count how many quick tasks are mentioned
   const mentionedTasks = quickTaskKeywords.filter(keyword => lower.includes(keyword));
-  
-  // Estimate time (most quick tasks: 10-15 min each)
-  const estimatedMinutes = mentionedTasks.length * 12; // Conservative estimate
+  const estimatedMinutes = mentionedTasks.length * 12;
   
   return {
     isMultiple: true,
@@ -232,57 +199,49 @@ function analyzeMultipleTasks(text) {
 function analyzeIntent(text, history) {
   const lower = text.toLowerCase();
   
-  // BUG FIX #1 & #4: Improved previous service detection
-  // Only matches PAST actions, not capability questions like "do you guys do X?"
   const hasPreviousServiceRef = /(?:you guys|you|your team) (?:came|fixed|did|installed|repaired|were here)|(?:last|a) (?:week|month) ago|recently (?:came|fixed|installed)/i.test(text) 
     && !/do you|can you|are you able|does your|will you/i.test(text);
   
-  // Warranty/follow-up
   const hasWarrantyIntent = /warranty|guarantee|covered|still under|acting up again|broke again|still broken/i.test(text);
   
-  // Status/lookup intent
   const statusKeywords = ['status', 'check my', 'my appointment', 'my order', 'when is', 
                           'what time', 'scheduled', 'confirm my', 'look up my'];
   const hasStatusIntent = statusKeywords.some(kw => lower.includes(kw));
   
-  // Cancellation intent
   const cancelKeywords = ['cancel', 'cancellation', 'delete', 'remove', 'stop', 'abort'];
   const hasCancelIntent = cancelKeywords.some(kw => lower.includes(kw));
   
-  // Reschedule intent
-  const rescheduleKeywords = ['reschedule', 'change', 'move', 'different time', 'different day', 'postpone'];
-  const hasRescheduleIntent = rescheduleKeywords.some(kw => lower.includes(kw));
+  // FIXED: More specific reschedule detection
+  const rescheduleKeywords = ['reschedule', 'change appointment', 'change my appointment', 'move appointment', 'move my appointment', 'different time', 'different day', 'postpone'];
+  const hasRescheduleIntent = rescheduleKeywords.some(kw => lower.includes(kw)) && !/can i add|add to|include|also do|while you|at same time/i.test(lower);
   
-  // Pricing/estimate questions
   const pricingKeywords = ['how much', 'cost', 'price', 'estimate', 'quote', 'what does it cost', 'pricing'];
   const hasPricingIntent = pricingKeywords.some(kw => lower.includes(kw));
   
-  // DETECT QUICK TASK PRICING QUESTIONS
   const isQuickTaskQuestion = hasPricingIntent && isQuickTask(text);
-  const multiTaskAnalysis = analyzeMultipleTasks(text); // NEW
+  const multiTaskAnalysis = analyzeMultipleTasks(text);
   
-  // Comparison shopping
+  // NEW: Multi-task follow-up detection
+  const multiTaskFollowUp = /can i add|add to|also do|include|while (you|they|he|she)|at (the )?same time|bundle|combine/i.test(text);
+  
   const hasComparisonIntent = /another company|other quote|competitor|beat that price|better price/i.test(text);
   
-  // Vague help request
   const isVagueRequest = /need help|something wrong|issue with|problem with|broken/i.test(text) && text.split(' ').length < 10;
   
-  // Emergency - BUG FIX: More keywords
   const emergencyKeywords = ['emergency', 'urgent', 'right now', 'immediately', 'asap', 'overflowing', 'flooding', 'burst', 'water everywhere', 'sparking'];
   const isEmergency = emergencyKeywords.some(kw => lower.includes(kw));
   
-  // Greeting
   const greetingKeywords = ['hello', 'hi', 'hey', 'good morning', 'good afternoon', 'hola'];
   const isGreeting = greetingKeywords.some(kw => lower.startsWith(kw));
   
-  // BUG FIX #6: Intent priority - capability questions shouldn't trigger warranty
   return {
     wantsStatus: hasStatusIntent && !hasPricingIntent,
     wantsCancel: hasCancelIntent,
     wantsReschedule: hasRescheduleIntent,
     wantsPricing: hasPricingIntent,
     isQuickTaskPricing: isQuickTaskQuestion,
-    multiTask: multiTaskAnalysis, // NEW
+    multiTask: multiTaskAnalysis,
+    isMultiTaskFollowUp: multiTaskFollowUp,
     wantsWarrantyInfo: (hasWarrantyIntent || hasPreviousServiceRef) && !/do you|can you|does your/i.test(text),
     isComparison: hasComparisonIntent,
     isVague: isVagueRequest,
@@ -291,6 +250,7 @@ function analyzeIntent(text, history) {
     isFollowUp: text.length < 50 && !hasStatusIntent && !hasCancelIntent && !hasPricingIntent && !isGreeting
   };
 }
+
 function buildContextFromHistory(history) {
   let context = {
     workOrderNum: null,
@@ -307,11 +267,7 @@ function buildContextFromHistory(history) {
   for (let i = Math.max(0, history.length - 8); i < history.length; i++) {
     const msg = history[i];
     
-    // ========================================
-    // ONLY SCAN USER MESSAGES FOR CONTEXT
-    // ========================================
     if (msg.role === 'user') {
-      // Extract work order and name
       if (!context.workOrderNum) {
         context.workOrderNum = extractWorkOrderNumber(msg.content);
       }
@@ -319,7 +275,6 @@ function buildContextFromHistory(history) {
         context.clientName = extractName(msg.content);
       }
       
-      // Detect and remember emergencies
       if (/overflowing|flooding|burst|emergency|urgent|right now|asap|sparking|water everywhere/i.test(msg.content)) {
         context.hasActiveEmergency = true;
         const match = msg.content.match(/overflowing|flooding|burst|sparking/i);
@@ -327,7 +282,6 @@ function buildContextFromHistory(history) {
         context.emergencyMentionedAt = i;
       }
       
-      // Track issues mentioned for summary
       const issueMatches = msg.content.match(/leak|overflow|outlet.*not working|fan|electrical|plumbing|toilet|sink|faucet/gi);
       if (issueMatches) {
         issueMatches.forEach(issue => {
@@ -337,18 +291,13 @@ function buildContextFromHistory(history) {
         });
       }
       
-      // Confusion detection
       const confusionWords = ['what', 'huh', 'confused', 'don\'t understand'];
       if (confusionWords.some(w => msg.content.toLowerCase().includes(w))) {
         context.customerSeemsConfused = true;
       }
       
-      // ========================================
-      // TOPIC DETECTION - USER INTENT ONLY
-      // ========================================
       const userLower = msg.content.toLowerCase();
       
-      // Only set topic if user EXPLICITLY mentions it
       if (/cancel|cancellation/i.test(userLower)) {
         context.conversationTopic = 'cancellation';
       } 
@@ -363,20 +312,13 @@ function buildContextFromHistory(history) {
       }
     }
     
-    // ========================================
-    // SCAN ASSISTANT MESSAGES - ONLY FOR TRACKING QUESTIONS
-    // ========================================
     if (msg.role === 'assistant') {
-      // Track what we asked for (so we know what they're answering)
       if (/work order number/i.test(msg.content)) {
         context.lastAskedFor = 'workorder';
       }
       if (/last name|your name/i.test(msg.content)) {
         context.lastAskedFor = 'name';
       }
-      
-      // DON'T set conversationTopic from assistant messages!
-      // This prevents AI from triggering itself
     }
   }
   
@@ -547,7 +489,7 @@ To reschedule, please call us at +52 612 169 8328 and we'll find a time that wor
 // ========================================
 
 async function getGroqResponse(question, history, context, intent) {
-  let systemPrompt = `You are a helpful AI assistant for Cabos Handyman in Cabo San Lucas, Mexico.
+  let systemPrompt = `You are Cabos Handyman Helper, a helpful AI assistant for Cabos Handyman in Cabo San Lucas, Mexico.
 
 **SERVICES:**
 - Residential (kitchens, bathrooms, renovations)
@@ -592,7 +534,7 @@ These tasks fall under our $100 service call which includes diagnosis + first 30
 5. Mention FREE instant quote tool for complex estimates
 6. If you don't know, suggest calling`;
 
-  // NEW: Multi-task quick task pricing
+  // Multi-task quick task pricing
   if (intent.multiTask && intent.multiTask.isMultiple && intent.multiTask.fitsInServiceCall && intent.wantsPricing) {
     const taskCount = intent.multiTask.taskCount;
     const minMaterials = taskCount * 10;
@@ -611,7 +553,6 @@ Want to schedule? Call +52 612 169 8328 or use our instant quote tool!"
 
 DO NOT treat them as separate visits. Emphasize the VALUE of bundling.`;
   }
-  // Special instruction for single quick task pricing
   else if (intent.isQuickTaskPricing) {
     systemPrompt += `\n\n**IMMEDIATE ACTION REQUIRED:** The user is asking about a QUICK TASK. You MUST respond using this exact format:
 
@@ -630,7 +571,6 @@ DO NOT give a generic $200-$800 range. This is a quick task under $200 total.`;
     systemPrompt += `\n\n**SPECIAL INSTRUCTION:** User is comparing prices. Don't promise to beat prices. Instead: explain our pricing is transparent and fair, mention FREE quote tool for accurate comparison, highlight quality and warranty, suggest uploading a photo for honest assessment.`;
   }
 
-  // BUG FIX #5: More assertive emergency instructions
   if (intent.isEmergency || context.hasActiveEmergency) {
     systemPrompt += `\n\n**CRITICAL EMERGENCY INSTRUCTION:** 
 This is a LIFE-SAFETY EMERGENCY requiring IMMEDIATE action.
@@ -710,7 +650,7 @@ export default async function handler(req, res) {
     });
 
     // ========================================
-    // BUG FIX #3: MULTI-ISSUE & EMERGENCY CONSOLIDATION
+    // MULTI-ISSUE & EMERGENCY CONSOLIDATION
     // ========================================
     if (context.hasActiveEmergency && history.length > 2) {
       const recentMessages = history.slice(-5);
@@ -745,7 +685,9 @@ Most customers with multiple issues like yours spend $400-$800 total, but we won
       }
     }
 
-    // BUG FIX #7: CONVERSATION SUMMARY FOR LONG CHATS
+    // ========================================
+    // CONVERSATION SUMMARY FOR LONG CHATS
+    // ========================================
     if (history.length > 8 && context.mentionedIssues.length > 2 && intent.wantsPricing) {
       return res.status(200).json({
         success: true,
@@ -775,8 +717,36 @@ If you approve the work, the $100 service call applies to your total. Want to ca
     if (intent.isGreeting && !intent.wantsStatus && !intent.wantsCancel) {
       return res.status(200).json({
         success: true,
-        response: "Hi there! 👋 I'm here to help you with:\n\n• Check your appointment status\n• Cancel or reschedule service\n• Answer questions about our services\n• Get instant quotes\n\nWhat can I help you with today?"
+        response: "Hi there! 👋 I'm Cabos Handyman Helper. I'm here to help you with:\n\n• Check your appointment status\n• Cancel or reschedule service\n• Answer questions about our services\n• Get instant quotes\n\nWhat can I help you with today?"
       });
+    }
+
+    // NEW: Multi-task follow-up (adding more tasks to existing quote)
+    if (intent.isMultiTaskFollowUp && !intent.wantsStatus && !intent.wantsCancel) {
+      const multiTaskAnalysis = analyzeMultipleTasks(question);
+      
+      if (multiTaskAnalysis.isMultiple && multiTaskAnalysis.fitsInServiceCall) {
+        const taskCount = multiTaskAnalysis.taskCount;
+        const minMaterials = taskCount * 10;
+        const maxMaterials = taskCount * 60;
+        
+        return res.status(200).json({
+          success: true,
+          response: `✨ Absolutely! Both/All of these are quick tasks that fit into ONE $100 service call (includes diagnosis + first 30 minutes of work).
+
+💰 **Updated Estimate:**
+- $100 service call (covers all ${taskCount} tasks)
+- $${minMaterials}-$${maxMaterials} materials for all tasks
+- **Total: $${100 + minMaterials}-$${100 + maxMaterials}**
+
+This is MUCH better value than doing them separately! Each additional quick task is essentially just the cost of materials.
+
+Ready to schedule? Call +52 612 169 8328 or use our instant quote tool!`
+        });
+      } else {
+        const aiResponse = await getGroqResponse(question, history, context, intent);
+        return res.status(200).json({ success: true, response: aiResponse });
+      }
     }
 
     // Warranty/Previous service follow-up
