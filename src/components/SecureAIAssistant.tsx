@@ -855,6 +855,19 @@ const handleQuickAction = (action) => {
   }
 };
 
+const handleQuickChat = () => {
+  if (!inputMessage.trim()) return;
+  
+  setFeedbackInput(inputMessage);
+  setInputMessage('');
+  setFeedbackMode(true);
+  setCurrentView('chat-only');
+  
+  setTimeout(() => {
+    handleFeedbackChat();
+  }, 100);
+};
+
 // NEW: Handle image selection from chat interface
 const handleImageSelect = (e) => {
   const files = Array.from(e.target.files);
@@ -1065,58 +1078,77 @@ const handleImageSelect = (e) => {
         )}
 
         {currentView === 'services' && !analysis && !isAnalyzing && (
-          <div className="space-y-4">
-            {/* Chat-style welcome message */}
-            <div className="flex justify-start mb-4">
-              <div className="bg-white p-2 rounded-full mr-2 h-10 w-10 flex items-center justify-center flex-shrink-0">
-                <Wrench size={16} className="text-teal-500" />
-              </div>
-              <div className="max-w-[85%]">
-                <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
-                <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none shadow-sm p-3">
-                  <p className="text-sm">Hey there 👋 I'm your Cabo Handyman assistant. What can we help you with?</p>
-                </div>
-              </div>
-            </div>
+  <div className="space-y-4">
+    {/* Chat-style welcome message */}
+    <div className="flex justify-start mb-4">
+      <div className="bg-white p-2 rounded-full mr-2 h-10 w-10 flex items-center justify-center flex-shrink-0">
+        <Wrench size={16} className="text-teal-500" />
+      </div>
+      <div className="max-w-[85%]">
+        <div className="text-xs text-gray-500 mb-1 ml-1">Cabo Handyman Bot</div>
+        <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none shadow-sm p-3">
+          <p className="text-sm">Hey there 👋 I'm your Cabo Handyman assistant. What can we help you with?</p>
+        </div>
+      </div>
+    </div>
 
-            <div className="space-y-3">
-              {services.map((service, index) => {
-                const IconComponent = service.icon;
-                return (
-                  <div 
-                    key={index}
-                    className={`border border-gray-200 rounded-lg p-3 hover:border-teal-400 hover:bg-gray-50 cursor-pointer transition-colors ${
-                      isMobile ? 'active:bg-teal-50' : ''
-                    }`}
-                    onClick={() => {
-                      setSelectedService(service);
-                      setBookingData(prev => ({...prev, serviceType: service.title}));
-                      setCurrentView('booking');
-                    }}
-                  >
-                    <div className="flex items-start space-x-3">
-                      <IconComponent size={20} className="text-teal-500 mt-1 flex-shrink-0" />
-                      <div className="flex-1">
-                        <h4 className="font-semibold text-sm text-gray-800">{service.title}</h4>
-                        <p className="text-xs text-gray-600 mt-1">{service.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="border-t pt-4">
-              <button
-                onClick={() => setCurrentView('booking')}
-                className="w-full bg-teal-400 hover:bg-teal-500 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
-              >
-                <Camera size={16} />
-                <span>Analyze Specific Issue</span>
-              </button>
+    <div className="space-y-3">
+      {services.map((service, index) => {
+        const IconComponent = service.icon;
+        return (
+          <div 
+            key={index}
+            className={`border border-gray-200 rounded-lg p-3 hover:border-teal-400 hover:bg-gray-50 cursor-pointer transition-colors ${
+              isMobile ? 'active:bg-teal-50' : ''
+            }`}
+            onClick={() => {
+              setSelectedService(service);
+              setBookingData(prev => ({...prev, serviceType: service.title}));
+              setCurrentView('booking');
+            }}
+          >
+            <div className="flex items-start space-x-3">
+              <IconComponent size={20} className="text-teal-500 mt-1 flex-shrink-0" />
+              <div className="flex-1">
+                <h4 className="font-semibold text-sm text-gray-800">{service.title}</h4>
+                <p className="text-xs text-gray-600 mt-1">{service.description}</p>
+              </div>
             </div>
           </div>
-        )}
+        );
+      })}
+    </div>
+
+    {/* NEW: Quick chat input */}
+    <div className="flex space-x-2 mt-4">
+      <input
+        type="text"
+        value={inputMessage}
+        onChange={(e) => setInputMessage(e.target.value)}
+        onKeyPress={(e) => e.key === 'Enter' && inputMessage.trim() && handleQuickChat()}
+        placeholder="Or ask us a question..."
+        className="flex-1 p-3 border-2 border-purple-200 focus:border-teal-400 rounded-full text-sm outline-none"
+      />
+      <button 
+        onClick={handleQuickChat}
+        disabled={!inputMessage.trim()}
+        className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 text-white px-4 rounded-full transition-colors"
+      >
+        <Send size={18} />
+      </button>
+    </div>
+
+    <div className="border-t pt-4">
+      <button
+        onClick={() => setCurrentView('booking')}
+        className="w-full bg-teal-400 hover:bg-teal-500 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
+      >
+        <Camera size={16} />
+        <span>Analyze Specific Issue</span>
+      </button>
+    </div>
+    </div>
+     )}
         {currentView === 'booking' && (
           <div className="space-y-4">
             <div className="flex items-center justify-between">
