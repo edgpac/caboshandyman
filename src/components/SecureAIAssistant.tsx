@@ -448,55 +448,59 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
   };
 
   const handleChatSend = async () => {
-    if (!chatInput.trim()) return;
+  if (!chatInput.trim()) return;
 
-    const userMessage = {
-      role: 'user',
-      content: chatInput
-    };
-
-    const newChatHistory = [...chatHistory, userMessage];
-    setChatHistory(newChatHistory);
-    setChatInput('');
-    setIsAnalyzing(true);
-
-    try {
-      const imagePromises = selectedImages.map(img => imageToBase64(img.file));
-      const imagesDataURIs = await Promise.all(imagePromises);
-
-      const response = await fetch('/api/feedback-chat', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    question: chatInput,
-    history: newChatHistory,
-    analysis: null,
-    service_context: selectedService
-  })
-});
-
-      const result = await response.json();
-
-      if (result.needs_clarification) {
-        const aiMessage = {
-          role: 'assistant',
-          content: result.clarification_questions.join('\n• ')
-        };
-        setChatHistory([...newChatHistory, aiMessage]);
-      } else {
-        setChatMode(false);
-        setAnalysis(result);
-      }
-
-    } catch (error) {
-      console.error('Chat error:', error);
-      setError('Unable to process your message. Please try again.');
-    } finally {
-      setIsAnalyzing(false);
-    }
+  const userMessage = {
+    role: 'user',
+    content: chatInput
   };
+
+  const newChatHistory = [...chatHistory, userMessage];
+  setChatHistory(newChatHistory);
+  setChatInput('');
+  setIsAnalyzing(true);
+
+  try {
+    const imagePromises = selectedImages.map(img => imageToBase64(img.file));
+    const imagesDataURIs = await Promise.all(imagePromises);
+
+    const response = await fetch('/api/analyze-parts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        images: imagesDataURIs,
+        description: chatInput,
+        location: 'Cabo San Lucas, Mexico',
+        service_context: selectedService ? {
+          title: selectedService.title,
+          category: selectedService.title.toLowerCase().replace(' ', '_')
+        } : null,
+        chat_history: newChatHistory
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.needs_clarification) {
+      const aiMessage = {
+        role: 'assistant',
+        content: result.clarification_questions.join('\n• ')
+      };
+      setChatHistory([...newChatHistory, aiMessage]);
+    } else {
+      setChatMode(false);
+      setAnalysis(result);
+    }
+
+  } catch (error) {
+    console.error('Chat error:', error);
+    setError('Unable to process your message. Please try again.');
+  } finally {
+    setIsAnalyzing(false);
+  }
+};
 
   const analyzeIssue = async () => {
     setIsAnalyzing(true);
