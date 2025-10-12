@@ -1,5 +1,6 @@
 // api/analyze-parts.js - ULTRA-INTELLIGENT MULTI-TASK IMAGE ANALYSIS v3
 // Full parity with feedback-chat.js + Enhanced image detection + Smart bundling
+// FIXED: Description is now primary source of truth for task count
 
 export const config = {
   maxDuration: 60,
@@ -169,28 +170,32 @@ function analyzeMultipleTasks(description, detectedItems = []) {
   
   const hasMultipleInDescription = multipleIndicators.some(pattern => pattern.test(desc));
   
-  // Count quick tasks in description
+  // Count quick tasks in description (PRIMARY SOURCE)
   const mentionedQuickTasks = quickTaskKeywords.filter(keyword => desc.includes(keyword));
   
-  // Count quick tasks in detected items from images
+  // Count quick tasks in detected items from images (SUPPLEMENTARY ONLY)
   const quickTasksInImages = detectedItems.filter(item => {
     const itemLower = item.toLowerCase();
     return quickTaskKeywords.some(keyword => itemLower.includes(keyword));
   });
   
-  // Smart counting: Use the highest count
-  let totalQuickTasks = Math.max(
-    mentionedQuickTasks.length,
-    quickTasksInImages.length
-  );
+  // FIXED: Description is primary source of truth
+  // Only use image detection if description doesn't specify tasks
+  let totalQuickTasks;
   
-  // If we detect multiple items in images but no specific keywords, assume they're quick tasks
-  if (detectedItems.length > 1 && totalQuickTasks === 0) {
-    totalQuickTasks = detectedItems.length;
+  if (mentionedQuickTasks.length > 0) {
+    // Use description count if it has specific keywords
+    totalQuickTasks = mentionedQuickTasks.length;
+  } else if (hasMultipleInDescription && quickTasksInImages.length > 0) {
+    // If description says "multiple" but no specific keywords, and images show quick tasks
+    totalQuickTasks = quickTasksInImages.length;
+  } else {
+    // Default to 1 task from description
+    totalQuickTasks = 1;
   }
   
-  // If description has multiple indicators and we found at least one task, assume at least 2
-  if (hasMultipleInDescription && totalQuickTasks === 1) {
+  // If description has multiple indicators but we only found one task, boost to 2
+  if (hasMultipleInDescription && totalQuickTasks === 1 && mentionedQuickTasks.length > 0) {
     totalQuickTasks = 2;
   }
   
@@ -297,10 +302,10 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       };
     }
 
-    // ENHANCED: Multi-task analysis with image detection
+    // ENHANCED: Multi-task analysis with image detection (FIXED version)
     const multiTaskAnalysis = analyzeMultipleTasks(description, allDetectedItems);
     
-    console.log('🔍 Multi-task analysis:', {
+    console.log('Multi-task analysis:', {
       isMultiple: multiTaskAnalysis.isMultiple,
       taskCount: multiTaskAnalysis.taskCount,
       fitsInServiceCall: multiTaskAnalysis.fitsInServiceCall,
@@ -321,11 +326,11 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       : `No items detected from images. Base estimate on customer description.`;
 
     const multiTaskContext = multiTaskAnalysis.isMultiple 
-      ? `\n\n🎯 MULTI-TASK SCENARIO DETECTED:
+      ? `\n\nMULTI-TASK SCENARIO DETECTED:
 - ${multiTaskAnalysis.taskCount} quick tasks identified
 - Estimated time: ${multiTaskAnalysis.estimatedMinutes} minutes total
-- ${multiTaskAnalysis.fitsInServiceCall ? '✅ ALL FIT IN ONE $100 SERVICE CALL! Bundle pricing applies.' : '⏰ Exceeds 30 min - may need extended time or multiple visits.'}
-- ${multiTaskAnalysis.hasFollowUpIntent ? '📝 Customer is adding tasks to existing quote.' : ''}`
+- ${multiTaskAnalysis.fitsInServiceCall ? 'ALL FIT IN ONE $100 SERVICE CALL! Bundle pricing applies.' : 'Exceeds 30 min - may need extended time or multiple visits.'}
+- ${multiTaskAnalysis.hasFollowUpIntent ? 'Customer is adding tasks to existing quote.' : ''}`
       : '';
 
     const prompt = `You are an expert contractor cost estimator for Cabo San Lucas, Mexico. Analyze this project and provide realistic 2024-2025 pricing in USD.
@@ -372,7 +377,7 @@ Respond ONLY with valid JSON (no markdown):
   }
 }`;
 
-    console.log('📞 Calling Groq API...');
+    console.log('Calling Groq API...');
     
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -399,7 +404,7 @@ Respond ONLY with valid JSON (no markdown):
     });
 
     if (!groqResponse.ok) {
-      console.error('❌ Groq API Error:', groqResponse.status);
+      console.error('Groq API Error:', groqResponse.status);
       throw new Error(`Groq API failed: ${groqResponse.status}`);
     }
 
@@ -415,7 +420,7 @@ Respond ONLY with valid JSON (no markdown):
       const cleanedContent = groqContent.replace(/```json\n?|\n?```/g, '').trim();
       groqAnalysis = JSON.parse(cleanedContent);
     } catch (parseError) {
-      console.error('❌ JSON Parse Error:', parseError);
+      console.error('JSON Parse Error:', parseError);
       throw new Error('Invalid JSON from Groq');
     }
 
@@ -435,7 +440,7 @@ Respond ONLY with valid JSON (no markdown):
     let costEstimate;
     
     if (isQuick || isMulti) {
-      // ✨ QUICK TASK(S) - Falls under $100 service call
+      // QUICK TASK(S) - Falls under $100 service call
       const partsMin = groqAnalysis.cost_breakdown?.parts_min || (taskCount * 10);
       const partsMax = groqAnalysis.cost_breakdown?.parts_max || (taskCount * 60);
       
@@ -443,10 +448,10 @@ Respond ONLY with valid JSON (no markdown):
       
       if (isMulti) {
         pricingNote = multiTaskAnalysis.hasFollowUpIntent
-          ? `✨ Perfect! Both/All ${taskCount} of these tasks fit into ONE $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $100 service call + materials. Adding tasks to the same visit saves you money!`
-          : `✨ Excellent news! All ${taskCount} of these are quick tasks that fit into our $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $100 service call + materials. This is MUCH better value than doing them separately!`;
+          ? `Perfect! Both/All ${taskCount} of these tasks fit into ONE $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $100 service call + materials. Adding tasks to the same visit saves you money!`
+          : `Excellent news! All ${taskCount} of these are quick tasks that fit into our $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $100 service call + materials. This is MUCH better value than doing them separately!`;
       } else {
-        pricingNote = `✨ Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional.`;
+        pricingNote = `Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional.`;
       }
       
       costEstimate = {
@@ -468,10 +473,10 @@ Respond ONLY with valid JSON (no markdown):
         pricing_note: pricingNote,
         is_multi_task: isMulti,
         task_count: taskCount,
-        value_message: isMulti ? `💰 You save $${(taskCount - 1) * 100} by bundling vs ${taskCount} separate $100 service calls!` : null
+        value_message: isMulti ? `You save $${(taskCount - 1) * 100} by bundling vs ${taskCount} separate $100 service calls!` : null
       };
     } else {
-      // 🔧 BIGGER JOB - Standard pricing
+      // BIGGER JOB - Standard pricing
       const baseLaborCost = groqAnalysis.cost_breakdown?.base_labor_cost || 150;
       const laborRate = 80;
       
@@ -509,7 +514,7 @@ Respond ONLY with valid JSON (no markdown):
       };
     }
 
-    console.log('✅ Analysis complete:', {
+    console.log('Analysis complete:', {
       type: isQuick || isMulti ? `Quick Task${isMulti ? 's' : ''}` : 'Standard Job',
       taskCount: taskCount,
       total: `$${costEstimate.total_cost.min}-$${costEstimate.total_cost.max}`
@@ -536,7 +541,7 @@ Respond ONLY with valid JSON (no markdown):
     };
 
   } catch (error) {
-    console.error('❌ Groq error:', error.message);
+    console.error('Groq error:', error.message);
     return createSmartFallback(description, serviceContext);
   }
 }
@@ -640,7 +645,7 @@ function createSmartFallback(description, serviceContext) {
         min: 100 + partsMin, 
         max: 100 + partsMax 
       },
-      pricing_note: `✨ Great news! This is a quick task that falls under our $100 service call (includes diagnosis + first 30 min). Only materials are additional!`
+      pricing_note: `Great news! This is a quick task that falls under our $100 service call (includes diagnosis + first 30 min). Only materials are additional!`
     };
   } else {
     const laborCost = (laborHours * 80 * crewSize) + 100;
@@ -766,7 +771,7 @@ export default async function handler(req, res) {
       }
     }
 
-    console.log('🔄 Processing:', {
+    console.log('Processing:', {
       images: images.length,
       description: description.substring(0, 50),
       imageSizes: images.map(img => `${Math.round(img.length * 0.75 / 1024)}KB`)
@@ -794,7 +799,7 @@ export default async function handler(req, res) {
           continue;
         }
         
-        console.log(`📸 Processing image ${i + 1}/${images.length} (${Math.round(imageBase64.length * 0.75 / 1024)}KB)...`);
+        console.log(`Processing image ${i + 1}/${images.length} (${Math.round(imageBase64.length * 0.75 / 1024)}KB)...`);
         
         const visionResponse = await fetch(
           `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
@@ -820,20 +825,20 @@ export default async function handler(req, res) {
           
           if (visionData.responses && visionData.responses[0]) {
             if (visionData.responses[0].error) {
-              console.error(`⚠️ Vision API error for image ${i + 1}:`, visionData.responses[0].error);
+              console.error(`Vision API error for image ${i + 1}:`, visionData.responses[0].error);
               visionErrors++;
             } else {
               visionAnnotations.push(visionData.responses[0]);
-              console.log(`✅ Image ${i + 1} processed successfully`);
+              console.log(`Image ${i + 1} processed successfully`);
             }
           }
         } else {
           const errorText = await visionResponse.text().catch(() => 'Unknown error');
-          console.error(`⚠️ Vision API HTTP ${visionResponse.status} for image ${i + 1}:`, errorText);
+          console.error(`Vision API HTTP ${visionResponse.status} for image ${i + 1}:`, errorText);
           visionErrors++;
         }
       } catch (visionError) {
-        console.error(`❌ Error processing image ${i + 1}:`, visionError.message);
+        console.error(`Error processing image ${i + 1}:`, visionError.message);
         visionErrors++;
       }
     }
@@ -848,7 +853,7 @@ export default async function handler(req, res) {
     );
 
     const processingTime = Date.now() - startTime;
-    console.log(`⏱️ Total: ${processingTime}ms`);
+    console.log(`Total: ${processingTime}ms`);
 
     return res.status(200).json({
       success: true,
@@ -861,7 +866,7 @@ export default async function handler(req, res) {
 
   } catch (error) {
     const processingTime = Date.now() - startTime;
-    console.error('❌ Handler error:', error.message);
+    console.error('Handler error:', error.message);
 
     const emergencyFallback = createSmartFallback(
       req.body.description || 'Maintenance issue',
