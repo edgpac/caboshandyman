@@ -1,5 +1,5 @@
-// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI v4
-// Built for exceptional customer experience with ALL bugs fixed
+// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI v5
+// Built for exceptional customer experience with 200+ quick task detection
 
 import { createClient } from '@supabase/supabase-js';
 
@@ -55,6 +55,146 @@ function extractName(text) {
   return null;
 }
 
+// ========================================
+// QUICK TASK DETECTION - $100 SERVICE CALL (200+ TASKS)
+// ========================================
+
+const quickTaskKeywords = [
+  // PLUMBING QUICK FIXES (under 30 min)
+  'flush valve', 'flapper', 'fill valve', 'toilet seat', 'toilet handle', 'toilet chain',
+  'toilet lever', 'toilet paper holder', 'towel bar', 'towel rack', 'towel ring', 
+  'robe hook', 'toilet brush holder', 'soap dish', 'toothbrush holder',
+  'showerhead', 'shower head', 'handheld sprayer', 'shower hose', 'faucet aerator', 
+  'sink stopper', 'drain stopper', 'pop-up drain', 'basket strainer', 'sink strainer',
+  'p-trap', 'leaky washer', 'faucet cartridge', 'shower cartridge', 'toilet wax ring', 
+  'toilet bolts', 'toilet tank bolts', 'supply line', 'water supply line', 'braided line',
+  'angle stop', 'shutoff valve', 'quarter turn valve', 'hose bib', 'outdoor spigot', 
+  'frost-free spigot', 'garden hose connector', 'hose adapter', 'vacuum breaker',
+  'shower arm', 'tub spout', 'diverter', 'diverter valve', 'aerator screen', 
+  'sprayer hose', 'kitchen sprayer', 'side sprayer', 'soap dispenser', 'lotion dispenser',
+  'shower drain cover', 'tub drain cover', 'sink drain', 'shower basket', 'hair catcher',
+  'faucet handle', 'single handle', 'two handle', 'widespread faucet part',
+  
+  // DOORS & HARDWARE (under 30 min)
+  'door knob', 'door handle', 'doorknob', 'door lever', 'passage knob', 'privacy knob',
+  'deadbolt', 'door lock', 'keyed lock', 'thumbturn', 'door latch', 'spring latch',
+  'cabinet knob', 'cabinet handle', 'cabinet pull', 'drawer pull', 'drawer knob', 
+  'drawer slide', 'soft-close hinge', 'door hinge', 'cabinet hinge', 'euro hinge',
+  'door closer', 'hydraulic closer', 'door stopper', 'door stop', 'floor stop', 
+  'wall stop', 'hinge stop', 'hinge pin', 'strike plate', 'latch plate', 'catch plate',
+  'door sweep', 'door bottom seal', 'weatherstrip', 'weatherstripping', 'door seal', 
+  'threshold', 'door threshold', 'saddle', 'transition strip',
+  'peephole', 'door viewer', 'security viewer', 'house numbers', 'address numbers',
+  'mailbox', 'mail slot', 'door knocker', 'door escutcheon', 'keyhole cover',
+  'door bumper', 'door silencer', 'magnetic catch', 'roller catch', 'ball catch',
+  'coat hook', 'door hook', 'over-the-door hook', 'closet rod bracket', 'shelf pin',
+  
+  // ELECTRICAL QUICK FIXES (under 30 min)
+  'light switch', 'toggle switch', 'rocker switch', 'dimmer switch', 'fan switch',
+  '3-way switch', 'outlet cover', 'switch plate', 'wall plate', 'cover plate',
+  'decorator plate', 'outlet', 'receptacle', 'duplex outlet', 'gfci outlet', 
+  'gfi outlet', 'ground fault outlet', 'usb outlet', 'usb charger outlet',
+  'smoke detector', 'smoke alarm', 'co detector', 'co alarm', 'carbon monoxide detector', 
+  'alarm battery', '9v battery', 'detector battery', 'backup battery',
+  'light bulb', 'led bulb', 'cfl bulb', 'incandescent bulb', 'halogen bulb',
+  'ceiling light', 'ceiling fixture', 'light fixture', 'vanity light', 'bath bar light',
+  'door chime', 'doorbell', 'doorbell button', 'doorbell cover', 'chime cover',
+  'thermostat', 'thermostat cover', 'thermostat battery', 'programmable thermostat',
+  'motion sensor', 'motion detector', 'occupancy sensor', 'night light', 'plug-in light',
+  'ceiling fan pull chain', 'fan chain', 'light chain', 'pull switch', 'canopy cover',
+  'outlet tester', 'surge protector', 'power strip', 'extension cord holder',
+  
+  // WINDOW TREATMENTS & COVERINGS (under 30 min)
+  'curtain rod', 'drapery rod', 'shower curtain rod', 'tension rod', 'cafe rod',
+  'curtain bracket', 'rod bracket', 'rod end', 'finial', 'curtain ring', 'clip ring',
+  'blind', 'shade', 'roller shade', 'cellular shade', 'honeycomb shade', 'roman shade',
+  'venetian blind', 'mini blind', 'aluminum blind', 'vinyl blind', 'wood blind',
+  'vertical blind', 'vertical vane', 'plantation shutter', 'shutter panel',
+  'window screen', 'screen frame', 'screen mesh', 'screen spline', 'screen door',
+  'window lock', 'sash lock', 'window latch', 'window crank', 'casement crank',
+  'blind cord', 'lift cord', 'tilt wand', 'cordless blind', 'valance clip',
+  
+  // WALLS & HANGING (under 30 min)
+  'picture frame', 'photo frame', 'wall art', 'canvas', 'poster frame',
+  'mirror', 'wall mirror', 'bathroom mirror', 'decorative mirror', 'accent mirror',
+  'coat rack', 'wall coat rack', 'coat hook', 'wall hook', 'utility hook',
+  'adhesive hook', 'command hook', 'heavy duty hook', 'j-hook', 's-hook',
+  'shelf bracket', 'l-bracket', 'floating shelf', 'floating shelf bracket',
+  'small shelf', 'decorative shelf', 'corner shelf', 'towel shelf', 'shower shelf',
+  'closet rod', 'clothing rod', 'wardrobe rod', 'closet shelf', 'wire shelf',
+  'wall anchor', 'drywall anchor', 'toggle bolt', 'molly bolt', 'plastic anchor',
+  'picture hook', 'picture hanger', 'sawtooth hanger', 'd-ring hanger', 'wire hanger',
+  'key holder', 'key rack', 'mail organizer', 'wall organizer', 'magazine rack',
+  
+  // KITCHEN & BATH ACCESSORIES (under 30 min)
+  'soap dispenser', 'lotion dispenser', 'hand soap pump', 'dish soap dispenser',
+  'shower caddy', 'corner caddy', 'hanging caddy', 'suction caddy', 'tension caddy',
+  'shower curtain', 'curtain liner', 'curtain hooks', 'shower rings',
+  'grab bar', 'safety bar', 'balance bar', 'towel warmer', 'heated towel rack',
+  'paper towel holder', 'under cabinet holder', 'wall mount holder', 'standing holder',
+  'spice rack', 'spice shelf', 'spice organizer', 'pot rack', 'pan organizer',
+  'utensil holder', 'utensil crock', 'knife block', 'knife holder', 'magnetic strip',
+  'cutting board rack', 'dish rack', 'drying rack', 'cup holder', 'mug hook',
+  'sink grid', 'sink mat', 'drain board', 'dish drainer', 'silverware tray',
+  
+  // HVAC & VENTILATION (under 30 min)
+  'air vent cover', 'vent cover', 'register cover', 'floor register', 'wall register',
+  'ceiling register', 'grille cover', 'return air cover', 'return vent', 'air grille',
+  'hvac filter', 'air filter', 'furnace filter', 'ac filter', 'pleated filter',
+  'range hood filter', 'grease filter', 'charcoal filter', 'exhaust filter',
+  'bathroom fan cover', 'exhaust fan cover', 'fan grille', 'dryer vent cover',
+  'vent flap', 'damper', 'vent cap', 'soffit vent', 'gable vent',
+  
+  // SMALL APPLIANCE FIXES (under 30 min)
+  'garbage disposal reset', 'disposal wrench', 'dishwasher filter', 'dishwasher basket',
+  'refrigerator filter', 'water filter', 'ice maker filter', 'fridge light',
+  'microwave turntable', 'turntable roller', 'microwave light', 'oven light',
+  'range hood light', 'hood bulb', 'exhaust fan cover', 'dryer lint trap',
+  'washer hose', 'washer filter', 'appliance foot', 'appliance leveling leg',
+  
+  // OUTDOOR & EXTERIOR (under 30 min)
+  'house numbers', 'address numbers', 'address plaque', 'number plate',
+  'mailbox post', 'mailbox flag', 'small mailbox', 'wall mailbox', 'mounted mailbox',
+  'porch light', 'outdoor light', 'exterior light', 'wall lantern', 'wall sconce',
+  'motion light', 'motion sensor light', 'security light', 'flood light bulb',
+  'landscape light', 'path light', 'solar light', 'stake light', 'garden light',
+  'hose holder', 'hose reel', 'hose hanger', 'hose guide', 'hose pot',
+  'garden hook', 'plant hook', 'hanging basket', 'shepherd hook', 'planter hook',
+  'flag holder', 'flag bracket', 'welcome mat', 'door mat', 'boot tray',
+  'gutter guard', 'downspout extension', 'splash block', 'window well cover',
+  
+  // SAFETY & SECURITY (under 30 min)
+  'door chain', 'security chain', 'chain guard', 'door guard', 'barrel bolt',
+  'slide bolt', 'surface bolt', 'cabinet lock', 'child lock', 'safety latch',
+  'baby gate', 'pressure gate', 'hardware mount gate', 'gate extension',
+  'window lock', 'sash lock', 'sliding door lock', 'patio door lock', 'pin lock',
+  'security bar', 'window bar', 'door brace', 'security wedge',
+  
+  // MISCELLANEOUS QUICK TASKS (under 30 min)
+  'caulk', 'caulking', 're-caulk', 'silicone caulk', 'tub caulk', 'grout caulk',
+  'grout touch-up', 'grout pen', 'tile touch-up', 'small patch', 'drywall patch',
+  'spackle', 'hole patch', 'nail hole', 'screw hole', 'wall repair',
+  'loose screw', 'tighten screws', 'tighten bolt', 'adjust door', 'adjust hinge',
+  'align door', 'reset gfci', 'reset breaker', 'flip breaker', 'replace gasket',
+  'seal gap', 'fill gap', 'foam gap', 'silicone seal', 'weather seal',
+  'touch-up paint', 'paint chip', 'scratch repair', 'replace battery', 'install battery',
+  'lubricate hinge', 'oil hinge', 'grease hinge', 'wd-40', 'adjust closer',
+  'stop squeak', 'fix squeak', 'squeaky hinge', 'squeaky door', 'tighten handle',
+  'replace knob', 'replace handle', 'furniture leg', 'furniture glide', 'felt pad',
+  'bumper pad', 'drawer liner', 'shelf liner', 'contact paper', 'adhesive paper',
+  'cord cover', 'cable management', 'wire cover', 'cord organizer', 'cable clip'
+];
+
+function isQuickTask(text) {
+  const lower = text.toLowerCase();
+  const hasQuickKeyword = quickTaskKeywords.some(keyword => lower.includes(keyword));
+  
+  // Exclude if it's complex/major work
+  const isComplex = /multiple|several|many|complex|major|install new|replace entire|demo|demolition|renovation|remodel|gut|remove wall|add wall/i.test(lower);
+  
+  return hasQuickKeyword && !isComplex;
+}
+
 function analyzeIntent(text, history) {
   const lower = text.toLowerCase();
   
@@ -83,6 +223,9 @@ function analyzeIntent(text, history) {
   const pricingKeywords = ['how much', 'cost', 'price', 'estimate', 'quote', 'what does it cost', 'pricing'];
   const hasPricingIntent = pricingKeywords.some(kw => lower.includes(kw));
   
+  // DETECT QUICK TASK PRICING QUESTIONS
+  const isQuickTaskQuestion = hasPricingIntent && isQuickTask(text);
+  
   // Comparison shopping
   const hasComparisonIntent = /another company|other quote|competitor|beat that price|better price/i.test(text);
   
@@ -103,6 +246,7 @@ function analyzeIntent(text, history) {
     wantsCancel: hasCancelIntent,
     wantsReschedule: hasRescheduleIntent,
     wantsPricing: hasPricingIntent,
+    isQuickTaskPricing: isQuickTaskQuestion,
     wantsWarrantyInfo: (hasWarrantyIntent || hasPreviousServiceRef) && !/do you|can you|does your/i.test(text),
     isComparison: hasComparisonIntent,
     isVague: isVagueRequest,
@@ -364,7 +508,7 @@ To reschedule, please call us at +52 612 169 8328 and we'll find a time that wor
 }
 
 // ========================================
-// GROQ AI - ENHANCED
+// GROQ AI - ENHANCED WITH QUICK TASK INTELLIGENCE
 // ========================================
 
 async function getGroqResponse(question, history, context, intent) {
@@ -376,11 +520,28 @@ async function getGroqResponse(question, history, context, intent) {
 - Commercial (offices, retail)
 - HOA/Property maintenance
 
-**PRICING:**
-- Service call: $100 (diagnosis + 30 min)
-- Leak repairs: $200-$600
-- Electrical: $150-$500
-- Plumbing: $200-$800
+**PRICING STRUCTURE:**
+
+**QUICK TASKS (under 30 minutes) - $100 SERVICE CALL:**
+These tasks fall under our $100 service call which includes diagnosis + first 30 minutes of work:
+- Toilet parts: flush valves, flappers, fill valves, toilet seats, handles, chains, wax rings ($5-$60 parts)
+- Door hardware: knobs, handles, hinges, locks, deadbolts, closers, sweeps, thresholds ($15-$100 parts)
+- Cabinet hardware: knobs, pulls, handles, hinges, catches, slides ($5-$80 parts)
+- Electrical: switches, outlets, covers, plates, smoke detectors, doorbells, thermostats ($5-$60 parts)
+- Plumbing fixtures: aerators, supply lines, angle stops, shower heads, towel bars, soap dishes ($10-$80 parts)
+- Window treatments: curtain rods, blinds, shades, screens, locks ($15-$100 parts)
+- Wall hanging: shelves, mirrors, pictures, hooks, coat racks, grab bars ($5-$80 parts)
+- HVAC: filters, vent covers, registers, grilles ($10-$50 parts)
+- Small fixes: caulking, weatherstripping, touch-ups, adjustments, lubrication ($5-$40 materials)
+
+**QUICK TASK PRICING FORMAT:**
+"✨ Great news! [Task name] is a quick task that falls under our $100 service call (includes diagnosis + first 30 minutes of work). Materials typically cost $[X]-$[Y], so your total estimate is $[100+X]-$[100+Y]."
+
+**STANDARD JOBS (over 30 minutes):**
+- $100 service call + $80/hour labor + materials
+- Leak repairs: $300-$700 total
+- Electrical repairs: $250-$600 total
+- Plumbing repairs: $300-$900 total
 - Emergency: +50% after hours
 
 **HOURS:**
@@ -388,11 +549,24 @@ async function getGroqResponse(question, history, context, intent) {
 - Emergency: 24/7
 - Phone: +52 612 169 8328
 
-**RULES:**
-- Be warm, friendly, and concise (2-3 sentences)
-- DON'T ask for work order numbers - system handles that
-- Mention FREE instant quote tool for estimates
-- If you don't know, suggest calling`;
+**CRITICAL INSTRUCTIONS:**
+1. ALWAYS check if the question is about a quick task FIRST before giving any price
+2. If it's a quick task, use the exact format above with the ✨ emoji
+3. Be warm, friendly, and concise (2-3 sentences)
+4. DON'T ask for work order numbers - system handles that
+5. Mention FREE instant quote tool for complex estimates
+6. If you don't know, suggest calling`;
+
+  // Special instruction for quick task pricing
+  if (intent.isQuickTaskPricing) {
+    systemPrompt += `\n\n**IMMEDIATE ACTION REQUIRED:** The user is asking about a QUICK TASK. You MUST respond using this exact format:
+
+"✨ Great news! [Task name] is a quick task that falls under our $100 service call (includes diagnosis + first 30 minutes of work). Materials typically cost $[X]-$[Y], so your total estimate is $[total range].
+
+Want to schedule? Call +52 612 169 8328 or use our instant quote tool to upload a photo!"
+
+DO NOT give a generic $200-$800 range. This is a quick task under $200 total.`;
+  }
 
   if (intent.isVague) {
     systemPrompt += `\n\n**SPECIAL INSTRUCTION:** User gave vague request. Ask 2-3 specific clarifying questions. Examples: "Is this a plumbing, electrical, or structural issue?", "Where specifically is the problem located?", "When did you first notice this?"`;
@@ -477,13 +651,13 @@ export default async function handler(req, res) {
       intent: Object.keys(intent).filter(k => intent[k]),
       topic: context.conversationTopic,
       emergency: context.hasActiveEmergency,
-      issuesCount: context.mentionedIssues.length
+      issuesCount: context.mentionedIssues.length,
+      isQuickTask: intent.isQuickTaskPricing
     });
 
     // ========================================
     // BUG FIX #3: MULTI-ISSUE & EMERGENCY CONSOLIDATION
     // ========================================
-    // BUG FIX #3: MULTI-ISSUE & EMERGENCY CONSOLIDATION
     if (context.hasActiveEmergency && history.length > 2) {
       const recentMessages = history.slice(-5);
       const hasMultipleIssues = recentMessages.filter(m => 
@@ -518,7 +692,6 @@ Most customers with multiple issues like yours spend $400-$800 total, but we won
     }
 
     // BUG FIX #7: CONVERSATION SUMMARY FOR LONG CHATS
-    // CONVERSATION SUMMARY FOR LONG CHATS
     if (history.length > 8 && context.mentionedIssues.length > 2 && intent.wantsPricing) {
       return res.status(200).json({
         success: true,
