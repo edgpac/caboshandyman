@@ -1,4 +1,4 @@
-// api/analyze-parts.js - COMPLETE VERSION WITH MULTI-TASK INTELLIGENCE
+// api/analyze-parts.js - COMPLETE VERSION WITH MULTI-TASK INTELLIGENCE v2
 // Robust image processing with Vision API error handling + Smart pricing for quick tasks + Multi-task bundling
 
 export const config = {
@@ -24,7 +24,6 @@ const quickTaskKeywords = [
   'p-trap', 'leaky washer', 'faucet cartridge', 'shower cartridge', 'toilet wax ring', 
   'toilet bolts', 'toilet tank bolts', 'supply line', 'water supply line', 'braided line',
   'angle stop', 'shutoff valve', 'quarter turn valve', 'hose bib', 'outdoor spigot', 
-  'frost-free spigot', 'garden hose connector', 'hose adapter', 'vacuum breaker',
   
   // DOORS & HARDWARE (under 30 min)
   'door knob', 'door handle', 'doorknob', 'door lever', 'passage knob', 'privacy knob',
@@ -34,59 +33,34 @@ const quickTaskKeywords = [
   'door closer', 'hydraulic closer', 'door stopper', 'door stop', 'floor stop', 
   'wall stop', 'hinge stop', 'hinge pin', 'strike plate', 'latch plate', 'catch plate',
   'door sweep', 'door bottom seal', 'weatherstrip', 'weatherstripping', 'door seal', 
-  'threshold', 'door threshold', 'saddle', 'transition strip',
   
   // ELECTRICAL QUICK FIXES (under 30 min)
   'light switch', 'toggle switch', 'rocker switch', 'dimmer switch', 'fan switch',
-  '3-way switch', 'outlet cover', 'switch plate', 'wall plate', 'cover plate',
-  'decorator plate', 'outlet', 'receptacle', 'duplex outlet', 'gfci outlet', 
-  'gfi outlet', 'ground fault outlet', 'usb outlet', 'usb charger outlet',
+  'outlet cover', 'switch plate', 'wall plate', 'cover plate',
   'smoke detector', 'smoke alarm', 'co detector', 'co alarm', 'carbon monoxide detector', 
   'alarm battery', '9v battery', 'detector battery', 'backup battery',
   'light bulb', 'led bulb', 'cfl bulb', 'incandescent bulb', 'halogen bulb',
   'ceiling light', 'ceiling fixture', 'light fixture', 'vanity light', 'bath bar light',
-  'door chime', 'doorbell', 'doorbell button', 'doorbell cover', 'chime cover',
-  'thermostat', 'thermostat cover', 'thermostat battery', 'programmable thermostat',
+  'doorbell', 'doorbell button', 'thermostat battery',
   
-  // WINDOW TREATMENTS & COVERINGS (under 30 min)
-  'curtain rod', 'drapery rod', 'shower curtain rod', 'tension rod', 'cafe rod',
-  'curtain bracket', 'rod bracket', 'rod end', 'finial', 'curtain ring', 'clip ring',
-  'blind', 'shade', 'roller shade', 'cellular shade', 'honeycomb shade', 'roman shade',
-  'venetian blind', 'mini blind', 'aluminum blind', 'vinyl blind', 'wood blind',
-  'window screen', 'screen frame', 'screen mesh', 'screen spline', 'screen door',
+  // WINDOW & WALLS (under 30 min)
+  'curtain rod', 'blind', 'shade', 'window screen',
+  'picture frame', 'mirror', 'coat rack', 'wall hook', 'shelf bracket',
   
-  // WALLS & HANGING (under 30 min)
-  'picture frame', 'photo frame', 'wall art', 'canvas', 'poster frame',
-  'mirror', 'wall mirror', 'bathroom mirror', 'decorative mirror', 'accent mirror',
-  'coat rack', 'wall coat rack', 'coat hook', 'wall hook', 'utility hook',
-  'adhesive hook', 'command hook', 'heavy duty hook', 'j-hook', 's-hook',
-  'shelf bracket', 'l-bracket', 'floating shelf', 'floating shelf bracket',
-  'small shelf', 'decorative shelf', 'corner shelf', 'towel shelf', 'shower shelf',
-  
-  // HVAC & VENTILATION (under 30 min)
-  'air vent cover', 'vent cover', 'register cover', 'floor register', 'wall register',
-  'ceiling register', 'grille cover', 'return air cover', 'return vent', 'air grille',
-  'hvac filter', 'air filter', 'furnace filter', 'ac filter', 'pleated filter',
-  'range hood filter', 'grease filter', 'charcoal filter', 'exhaust filter',
-  
-  // OUTDOOR & MISC (under 30 min)
-  'mailbox', 'mail slot', 'door knocker', 'house numbers', 'address numbers',
-  'porch light', 'outdoor light', 'exterior light', 'wall lantern', 'wall sconce'
+  // HVAC & MISC (under 30 min)
+  'air vent cover', 'hvac filter', 'air filter', 'range hood filter',
+  'mailbox', 'house numbers', 'address numbers'
 ];
 
 function isQuickTask(description, issueType) {
   const lower = description.toLowerCase();
   const issueTypeLower = (issueType || '').toLowerCase();
   
-  // Check if any quick task keywords match
   const hasQuickTaskKeyword = quickTaskKeywords.some(keyword => 
     lower.includes(keyword) || issueTypeLower.includes(keyword)
   );
   
-  // Exclude if it's complex/major work
   const isComplex = /multiple|several|many|complex|major|install new|replace entire|demo|demolition|renovation/i.test(lower);
-  
-  // Exclude plumbing/electrical if it mentions "install" (vs "replace")
   const isInstallation = /install\s+(?:new|a)\s+(?:toilet|sink|faucet|outlet|switch)/i.test(lower);
   
   return hasQuickTaskKeyword && !isComplex && !isInstallation;
@@ -99,7 +73,6 @@ function isQuickTask(description, issueType) {
 function analyzeMultipleTasks(description, detectedItems = []) {
   const desc = description.toLowerCase();
   
-  // Detect if multiple things are mentioned
   const multipleIndicators = [
     /and|&|plus|\+/i,
     /also|as well/i,
@@ -113,12 +86,10 @@ function analyzeMultipleTasks(description, detectedItems = []) {
     return { isMultiple: false };
   }
   
-  // Count quick tasks mentioned in description
   const mentionedQuickTasks = quickTaskKeywords.filter(keyword => 
     desc.includes(keyword) || detectedItems.some(item => item.toLowerCase().includes(keyword))
   );
   
-  // Count from detected items (images)
   const quickTasksInImages = detectedItems.filter(item => {
     const itemLower = item.toLowerCase();
     return quickTaskKeywords.some(keyword => itemLower.includes(keyword));
@@ -130,7 +101,6 @@ function analyzeMultipleTasks(description, detectedItems = []) {
     detectedItems.length > 1 ? detectedItems.length : 0
   );
   
-  // Estimate time (average 12 minutes per quick task)
   const estimatedMinutes = totalQuickTasks * 12;
   
   return {
@@ -231,10 +201,8 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       };
     }
 
-    // NEW: Analyze for multiple tasks
     const multiTaskAnalysis = analyzeMultipleTasks(description, allDetectedItems);
 
-    // Build context
     let chatContext = '';
     if (chatHistory && chatHistory.length > 0) {
       chatContext = '\n\nPREVIOUS CONVERSATION:\n' + chatHistory.map(msg => 
@@ -275,8 +243,6 @@ Respond ONLY with valid JSON (no markdown):
   "crew_justification": "why this crew size",
   "labor_hours": 2,
   "is_quick_task": false,
-  "is_multi_task": false,
-  "task_count": 1,
   "cost_breakdown": {
     "parts_min": 50,
     "parts_max": 200,
@@ -285,7 +251,6 @@ Respond ONLY with valid JSON (no markdown):
 }`;
 
     console.log('Calling Groq API...');
-    console.log('Multi-task analysis:', multiTaskAnalysis);
     
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -298,7 +263,7 @@ Respond ONLY with valid JSON (no markdown):
         messages: [
           {
             role: 'system',
-            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) and multi-task scenarios accurately. Multiple quick tasks under 30 min total = ONE $100 service call.'
+            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) and multi-task scenarios accurately.'
           },
           {
             role: 'user',
@@ -332,19 +297,13 @@ Respond ONLY with valid JSON (no markdown):
       throw new Error('Invalid JSON from Groq');
     }
 
-    // ========================================
-    // SMART COST CALCULATION WITH MULTI-TASK LOGIC
-    // ========================================
-    
     const issueType = groqAnalysis.issue_type || 'Maintenance Issue';
     const crewSize = Math.max(1, groqAnalysis.crew_size || 1);
     const laborHours = groqAnalysis.labor_hours || 2;
     
-    // Check if this is a quick task (from Groq, our detection, or multi-task analysis)
     const isQuick = groqAnalysis.is_quick_task || isQuickTask(description, issueType) || multiTaskAnalysis.fitsInServiceCall;
     const isMulti = multiTaskAnalysis.isMultiple && multiTaskAnalysis.fitsInServiceCall;
     const taskCount = isMulti ? multiTaskAnalysis.taskCount : 1;
-    
     let costEstimate;
     
     if (isQuick || isMulti) {
@@ -380,10 +339,9 @@ Respond ONLY with valid JSON (no markdown):
       const laborRate = 80;
       
       const finalLaborCost = Math.max(baseLaborCost * crewSize, laborHours * laborRate * crewSize);
-      const serviceCallFee = 100; // Drive time + overhead
+      const serviceCallFee = 100;
       const totalLaborWithOverhead = finalLaborCost + serviceCallFee;
 
-      // Calculate disposal
       let disposalCost = 0;
       if (issueType.includes('Demolition')) disposalCost = 350;
       else if (issueType.includes('Water Damage')) disposalCost = 180;
@@ -455,7 +413,6 @@ function createSmartFallback(description, serviceContext) {
   let disposalCost = 0;
   let isQuick = false;
 
-  // Quick tasks
   if (desc.includes('door knob') || desc.includes('door handle')) {
     issueType = 'Door Hardware Replacement';
     partsMin = 20;
@@ -496,7 +453,6 @@ function createSmartFallback(description, serviceContext) {
     severity = 'Low';
     isQuick = true;
   }
-  // Standard jobs
   else if (desc.includes('toilet') && !isQuick) {
     issueType = 'Toilet Repair';
     partsMin = 50;
@@ -687,8 +643,7 @@ export default async function handler(req, res) {
           continue;
         }
         
-        if (!imageBase64 || imageBase64.length <
-          if (!imageBase64 || imageBase64.length < 100) {
+        if (!imageBase64 || imageBase64.length < 100) {
           console.error(`Image ${i + 1}: Base64 string too short or empty`);
           visionErrors++;
           continue;
