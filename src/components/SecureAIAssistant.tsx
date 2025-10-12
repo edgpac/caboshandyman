@@ -527,13 +527,14 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          images: validatedImages,
-          description: analysisDescription,
+          images: imagesDataURIs,
+          description: chatInput,
           location: 'Cabo San Lucas, Mexico',
           service_context: selectedService ? {
             title: selectedService.title,
             category: selectedService.title.toLowerCase().replace(' ', '_')
-          } : null
+          } : null,
+          chat_history: newChatHistory
         })
       });
 
@@ -622,56 +623,56 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
   };
 
   const handleFeedbackChat = async () => {
-    if (!feedbackInput.trim()) return;
+  if (!feedbackInput.trim()) return;
 
-    const userMessage = {
-      role: 'user',
-      content: feedbackInput
+  const userMessage = {
+    role: 'user',
+    content: feedbackInput
+  };
+
+  const newFeedbackHistory = [...feedbackHistory, userMessage];
+  setFeedbackHistory(newFeedbackHistory);
+  setFeedbackInput('');
+  setIsAnalyzing(true);
+
+  try {
+    const response = await fetch('/api/feedback-chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: feedbackInput,
+        history: newFeedbackHistory,
+        analysis: analysis || null,
+        service_context: selectedService || null
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Feedback chat failed');
+    }
+
+    const result = await response.json();
+
+    const aiMessage = {
+      role: 'assistant',
+      content: result.response
     };
 
-    const newFeedbackHistory = [...feedbackHistory, userMessage];
-    setFeedbackHistory(newFeedbackHistory);
-    setFeedbackInput('');
-    setIsAnalyzing(true);
+    setFeedbackHistory([...newFeedbackHistory, aiMessage]);
 
-    try {
-      const response = await fetch('/api/feedback-chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          question: feedbackInput,
-          analysis: analysis,
-          history: newFeedbackHistory,
-          service_context: selectedService
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Feedback chat failed');
-      }
-
-      const result = await response.json();
-
-      const aiMessage = {
-        role: 'assistant',
-        content: result.response
-      };
-
-      setFeedbackHistory([...newFeedbackHistory, aiMessage]);
-
-    } catch (error) {
-      console.error('Feedback chat error:', error);
-      const errorMessage = {
-        role: 'assistant',
-        content: 'Sorry, I had trouble processing that. Could you rephrase your question?'
-      };
-      setFeedbackHistory([...newFeedbackHistory, errorMessage]);
-    } finally {
-      setIsAnalyzing(false);
-    }
-  };
+  } catch (error) {
+    console.error('Feedback chat error:', error);
+    const errorMessage = {
+      role: 'assistant',
+      content: 'Sorry, I had trouble processing that. Could you rephrase your question?'
+    };
+    setFeedbackHistory([...newFeedbackHistory, errorMessage]);
+  } finally {
+    setIsAnalyzing(false);
+  }
+};
 
   const handleImageUpload = (event) => {
     const files = Array.from(event.target.files);
