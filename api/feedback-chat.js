@@ -1,5 +1,5 @@
-// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI v5
-// Built for exceptional customer experience with 200+ quick task detection
+// api/feedback-chat.js - TRULY INTELLIGENT CONVERSATIONAL AI v6
+// Built for exceptional customer experience with 200+ quick task detection + MULTI-TASK INTELLIGENCE
 
 import { createClient } from '@supabase/supabase-js';
 
@@ -195,6 +195,40 @@ function isQuickTask(text) {
   return hasQuickKeyword && !isComplex;
 }
 
+// ========================================
+// NEW: MULTI-TASK INTELLIGENCE
+// ========================================
+
+function analyzeMultipleTasks(text) {
+  const lower = text.toLowerCase();
+  
+  // Detect if user is asking about multiple things
+  const multipleIndicators = [
+    /and|&|plus|\+/i,
+    /also|as well/i,
+    /both|couple|few/i,
+    /\d+\s+(things|tasks|items|repairs)/i
+  ];
+  
+  const hasMultiple = multipleIndicators.some(pattern => pattern.test(lower));
+  
+  if (!hasMultiple) return { isMultiple: false };
+  
+  // Count how many quick tasks are mentioned
+  const mentionedTasks = quickTaskKeywords.filter(keyword => lower.includes(keyword));
+  
+  // Estimate time (most quick tasks: 10-15 min each)
+  const estimatedMinutes = mentionedTasks.length * 12; // Conservative estimate
+  
+  return {
+    isMultiple: true,
+    taskCount: mentionedTasks.length,
+    fitsInServiceCall: estimatedMinutes <= 30,
+    estimatedMinutes: estimatedMinutes,
+    tasks: mentionedTasks
+  };
+}
+
 function analyzeIntent(text, history) {
   const lower = text.toLowerCase();
   
@@ -225,6 +259,7 @@ function analyzeIntent(text, history) {
   
   // DETECT QUICK TASK PRICING QUESTIONS
   const isQuickTaskQuestion = hasPricingIntent && isQuickTask(text);
+  const multiTaskAnalysis = analyzeMultipleTasks(text); // NEW
   
   // Comparison shopping
   const hasComparisonIntent = /another company|other quote|competitor|beat that price|better price/i.test(text);
@@ -247,6 +282,7 @@ function analyzeIntent(text, history) {
     wantsReschedule: hasRescheduleIntent,
     wantsPricing: hasPricingIntent,
     isQuickTaskPricing: isQuickTaskQuestion,
+    multiTask: multiTaskAnalysis, // NEW
     wantsWarrantyInfo: (hasWarrantyIntent || hasPreviousServiceRef) && !/do you|can you|does your/i.test(text),
     isComparison: hasComparisonIntent,
     isVague: isVagueRequest,
@@ -255,7 +291,6 @@ function analyzeIntent(text, history) {
     isFollowUp: text.length < 50 && !hasStatusIntent && !hasCancelIntent && !hasPricingIntent && !isGreeting
   };
 }
-
 function buildContextFromHistory(history) {
   let context = {
     workOrderNum: null,
@@ -508,7 +543,7 @@ To reschedule, please call us at +52 612 169 8328 and we'll find a time that wor
 }
 
 // ========================================
-// GROQ AI - ENHANCED WITH QUICK TASK INTELLIGENCE
+// GROQ AI - ENHANCED WITH MULTI-TASK INTELLIGENCE
 // ========================================
 
 async function getGroqResponse(question, history, context, intent) {
@@ -557,8 +592,27 @@ These tasks fall under our $100 service call which includes diagnosis + first 30
 5. Mention FREE instant quote tool for complex estimates
 6. If you don't know, suggest calling`;
 
-  // Special instruction for quick task pricing
-  if (intent.isQuickTaskPricing) {
+  // NEW: Multi-task quick task pricing
+  if (intent.multiTask && intent.multiTask.isMultiple && intent.multiTask.fitsInServiceCall && intent.wantsPricing) {
+    const taskCount = intent.multiTask.taskCount;
+    const minMaterials = taskCount * 10;
+    const maxMaterials = taskCount * 60;
+    
+    systemPrompt += `\n\n**MULTI-TASK SPECIAL PRICING:** The user is asking about ${taskCount} quick tasks that ALL fit into ONE $100 service call!
+
+You MUST respond:
+"✨ Excellent news! Both/All ${taskCount} of these are quick tasks that fit into our $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${intent.multiTask.estimatedMinutes} minutes combined, you'll only pay:
+
+💰 **$100 service call + $${minMaterials}-$${maxMaterials} materials = $${100 + minMaterials}-$${100 + maxMaterials} total**
+
+This is MUCH better value than doing them separately! Each additional quick task after the service call is essentially just the cost of materials.
+
+Want to schedule? Call +52 612 169 8328 or use our instant quote tool!"
+
+DO NOT treat them as separate visits. Emphasize the VALUE of bundling.`;
+  }
+  // Special instruction for single quick task pricing
+  else if (intent.isQuickTaskPricing) {
     systemPrompt += `\n\n**IMMEDIATE ACTION REQUIRED:** The user is asking about a QUICK TASK. You MUST respond using this exact format:
 
 "✨ Great news! [Task name] is a quick task that falls under our $100 service call (includes diagnosis + first 30 minutes of work). Materials typically cost $[X]-$[Y], so your total estimate is $[total range].
@@ -648,11 +702,11 @@ export default async function handler(req, res) {
     console.log('🧠 Intelligence:', { 
       workOrderNum, 
       clientName, 
-      intent: Object.keys(intent).filter(k => intent[k]),
+      intent: Object.keys(intent).filter(k => intent[k] && k !== 'multiTask'),
+      multiTask: intent.multiTask?.isMultiple ? `${intent.multiTask.taskCount} tasks, ${intent.multiTask.estimatedMinutes}min, fits=${intent.multiTask.fitsInServiceCall}` : 'none',
       topic: context.conversationTopic,
       emergency: context.hasActiveEmergency,
-      issuesCount: context.mentionedIssues.length,
-      isQuickTask: intent.isQuickTaskPricing
+      issuesCount: context.mentionedIssues.length
     });
 
     // ========================================

@@ -1,5 +1,5 @@
-// api/analyze-parts.js - COMPLETE VERSION WITH $100 SERVICE CALL LOGIC
-// Robust image processing with Vision API error handling + Smart pricing for quick tasks
+// api/analyze-parts.js - COMPLETE VERSION WITH MULTI-TASK INTELLIGENCE
+// Robust image processing with Vision API error handling + Smart pricing for quick tasks + Multi-task bundling
 
 export const config = {
   maxDuration: 60,
@@ -11,26 +11,67 @@ export const config = {
 };
 
 // ========================================
-// QUICK TASK DETECTION - $100 SERVICE CALL
+// QUICK TASK DETECTION - $100 SERVICE CALL (200+ TASKS)
 // ========================================
 
 const quickTaskKeywords = [
-  // Plumbing quick fixes (under 30 min)
-  'flush valve', 'flapper', 'toilet seat', 'toilet paper holder', 'towel bar',
-  'showerhead', 'handheld sprayer', 'faucet aerator', 'leaky washer',
-  'door knob', 'door handle', 'cabinet knob', 'drawer pull',
+  // PLUMBING QUICK FIXES (under 30 min)
+  'flush valve', 'flapper', 'fill valve', 'toilet seat', 'toilet handle', 'toilet chain',
+  'toilet lever', 'toilet paper holder', 'towel bar', 'towel rack', 'towel ring', 
+  'robe hook', 'toilet brush holder', 'soap dish', 'toothbrush holder',
+  'showerhead', 'shower head', 'handheld sprayer', 'shower hose', 'faucet aerator', 
+  'sink stopper', 'drain stopper', 'pop-up drain', 'basket strainer', 'sink strainer',
+  'p-trap', 'leaky washer', 'faucet cartridge', 'shower cartridge', 'toilet wax ring', 
+  'toilet bolts', 'toilet tank bolts', 'supply line', 'water supply line', 'braided line',
+  'angle stop', 'shutoff valve', 'quarter turn valve', 'hose bib', 'outdoor spigot', 
+  'frost-free spigot', 'garden hose connector', 'hose adapter', 'vacuum breaker',
   
-  // Electrical quick fixes (under 30 min)
-  'light switch', 'outlet cover', 'smoke detector battery', 'co alarm battery',
-  'light fixture', 'ceiling light', 'thermostat cover', 'doorbell button',
+  // DOORS & HARDWARE (under 30 min)
+  'door knob', 'door handle', 'doorknob', 'door lever', 'passage knob', 'privacy knob',
+  'deadbolt', 'door lock', 'keyed lock', 'thumbturn', 'door latch', 'spring latch',
+  'cabinet knob', 'cabinet handle', 'cabinet pull', 'drawer pull', 'drawer knob', 
+  'drawer slide', 'soft-close hinge', 'door hinge', 'cabinet hinge', 'euro hinge',
+  'door closer', 'hydraulic closer', 'door stopper', 'door stop', 'floor stop', 
+  'wall stop', 'hinge stop', 'hinge pin', 'strike plate', 'latch plate', 'catch plate',
+  'door sweep', 'door bottom seal', 'weatherstrip', 'weatherstripping', 'door seal', 
+  'threshold', 'door threshold', 'saddle', 'transition strip',
   
-  // Hardware quick fixes (under 30 min)
-  'door stopper', 'hinge pin', 'weatherstripping', 'window screen',
-  'curtain rod', 'blind', 'shade', 'picture frame', 'mirror', 'coat rack',
+  // ELECTRICAL QUICK FIXES (under 30 min)
+  'light switch', 'toggle switch', 'rocker switch', 'dimmer switch', 'fan switch',
+  '3-way switch', 'outlet cover', 'switch plate', 'wall plate', 'cover plate',
+  'decorator plate', 'outlet', 'receptacle', 'duplex outlet', 'gfci outlet', 
+  'gfi outlet', 'ground fault outlet', 'usb outlet', 'usb charger outlet',
+  'smoke detector', 'smoke alarm', 'co detector', 'co alarm', 'carbon monoxide detector', 
+  'alarm battery', '9v battery', 'detector battery', 'backup battery',
+  'light bulb', 'led bulb', 'cfl bulb', 'incandescent bulb', 'halogen bulb',
+  'ceiling light', 'ceiling fixture', 'light fixture', 'vanity light', 'bath bar light',
+  'door chime', 'doorbell', 'doorbell button', 'doorbell cover', 'chime cover',
+  'thermostat', 'thermostat cover', 'thermostat battery', 'programmable thermostat',
   
-  // Small maintenance (under 30 min)
-  'air vent cover', 'hvac filter', 'range hood filter', 'door sweep',
-  'mailbox', 'house numbers', 'shelf', 'hook'
+  // WINDOW TREATMENTS & COVERINGS (under 30 min)
+  'curtain rod', 'drapery rod', 'shower curtain rod', 'tension rod', 'cafe rod',
+  'curtain bracket', 'rod bracket', 'rod end', 'finial', 'curtain ring', 'clip ring',
+  'blind', 'shade', 'roller shade', 'cellular shade', 'honeycomb shade', 'roman shade',
+  'venetian blind', 'mini blind', 'aluminum blind', 'vinyl blind', 'wood blind',
+  'window screen', 'screen frame', 'screen mesh', 'screen spline', 'screen door',
+  
+  // WALLS & HANGING (under 30 min)
+  'picture frame', 'photo frame', 'wall art', 'canvas', 'poster frame',
+  'mirror', 'wall mirror', 'bathroom mirror', 'decorative mirror', 'accent mirror',
+  'coat rack', 'wall coat rack', 'coat hook', 'wall hook', 'utility hook',
+  'adhesive hook', 'command hook', 'heavy duty hook', 'j-hook', 's-hook',
+  'shelf bracket', 'l-bracket', 'floating shelf', 'floating shelf bracket',
+  'small shelf', 'decorative shelf', 'corner shelf', 'towel shelf', 'shower shelf',
+  
+  // HVAC & VENTILATION (under 30 min)
+  'air vent cover', 'vent cover', 'register cover', 'floor register', 'wall register',
+  'ceiling register', 'grille cover', 'return air cover', 'return vent', 'air grille',
+  'hvac filter', 'air filter', 'furnace filter', 'ac filter', 'pleated filter',
+  'range hood filter', 'grease filter', 'charcoal filter', 'exhaust filter',
+  
+  // OUTDOOR & MISC (under 30 min)
+  'mailbox', 'mail slot', 'door knocker', 'house numbers', 'address numbers',
+  'porch light', 'outdoor light', 'exterior light', 'wall lantern', 'wall sconce'
 ];
 
 function isQuickTask(description, issueType) {
@@ -49,6 +90,56 @@ function isQuickTask(description, issueType) {
   const isInstallation = /install\s+(?:new|a)\s+(?:toilet|sink|faucet|outlet|switch)/i.test(lower);
   
   return hasQuickTaskKeyword && !isComplex && !isInstallation;
+}
+
+// ========================================
+// MULTI-TASK DETECTION
+// ========================================
+
+function analyzeMultipleTasks(description, detectedItems = []) {
+  const desc = description.toLowerCase();
+  
+  // Detect if multiple things are mentioned
+  const multipleIndicators = [
+    /and|&|plus|\+/i,
+    /also|as well/i,
+    /both|couple|few|several/i,
+    /\d+\s+(things|tasks|items|repairs|issues)/i
+  ];
+  
+  const hasMultiple = multipleIndicators.some(pattern => pattern.test(desc));
+  
+  if (!hasMultiple && detectedItems.length <= 1) {
+    return { isMultiple: false };
+  }
+  
+  // Count quick tasks mentioned in description
+  const mentionedQuickTasks = quickTaskKeywords.filter(keyword => 
+    desc.includes(keyword) || detectedItems.some(item => item.toLowerCase().includes(keyword))
+  );
+  
+  // Count from detected items (images)
+  const quickTasksInImages = detectedItems.filter(item => {
+    const itemLower = item.toLowerCase();
+    return quickTaskKeywords.some(keyword => itemLower.includes(keyword));
+  });
+  
+  const totalQuickTasks = Math.max(
+    mentionedQuickTasks.length, 
+    quickTasksInImages.length, 
+    detectedItems.length > 1 ? detectedItems.length : 0
+  );
+  
+  // Estimate time (average 12 minutes per quick task)
+  const estimatedMinutes = totalQuickTasks * 12;
+  
+  return {
+    isMultiple: totalQuickTasks > 1,
+    taskCount: totalQuickTasks,
+    fitsInServiceCall: estimatedMinutes <= 30,
+    estimatedMinutes: estimatedMinutes,
+    tasks: [...new Set([...mentionedQuickTasks, ...quickTasksInImages])]
+  };
 }
 
 // ========================================
@@ -96,7 +187,7 @@ function generateSmartQuestions(description, detectedItems, vaguenessReason, ser
 }
 
 // ========================================
-// GROQ ANALYSIS WITH QUICK TASK DETECTION
+// GROQ ANALYSIS WITH MULTI-TASK INTELLIGENCE
 // ========================================
 
 async function analyzeWithGroq(description, visionAnnotationsArray = [], serviceContext = null, chatHistory = null) {
@@ -140,6 +231,9 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       };
     }
 
+    // NEW: Analyze for multiple tasks
+    const multiTaskAnalysis = analyzeMultipleTasks(description, allDetectedItems);
+
     // Build context
     let chatContext = '';
     if (chatHistory && chatHistory.length > 0) {
@@ -152,17 +246,23 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       ? `DETECTED FROM IMAGES: ${allDetectedItems.slice(0, 10).join(', ')}`
       : `No items detected from images. Base estimate on customer description.`;
 
+    const multiTaskContext = multiTaskAnalysis.isMultiple 
+      ? `\n\n⚠️ MULTI-TASK DETECTED: ${multiTaskAnalysis.taskCount} quick tasks identified (estimated ${multiTaskAnalysis.estimatedMinutes} minutes total). ${multiTaskAnalysis.fitsInServiceCall ? '✅ ALL FIT IN ONE $100 SERVICE CALL!' : '⏰ May need multiple visits or extended time.'}`
+      : '';
+
     const prompt = `You are an expert contractor cost estimator for Cabo San Lucas, Mexico. Analyze this project and provide realistic 2024-2025 pricing in USD.
 
 DESCRIPTION: "${description}"
 ${detectedItemsText}
 ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
+${multiTaskContext}
 ${chatContext}
 
 IMPORTANT PRICING RULES:
-1. If this is a QUICK TASK (under 30 minutes) like replacing a door knob, toilet seat, light switch, cabinet hardware, etc., set labor_hours to 0.5 and base_labor_cost to 0 (it falls under the $100 service call).
-2. For BIGGER JOBS (over 30 minutes), calculate normal labor at $80/hour + $100 service call overhead.
-3. The customer description is the PRIMARY source. Image detection is supplementary.
+1. If this is a QUICK TASK (under 30 minutes) like replacing a door knob, toilet seat, light switch, cabinet hardware, smoke detector battery, etc., set labor_hours to 0.5 and base_labor_cost to 0 (it falls under the $100 service call).
+2. If MULTIPLE QUICK TASKS are detected and they fit in 30 minutes total, they ALL fall under ONE $100 service call. Only materials are additional.
+3. For BIGGER JOBS (over 30 minutes), calculate normal labor at $80/hour + $100 service call overhead.
+4. The customer description is the PRIMARY source. Image detection is supplementary.
 
 Respond ONLY with valid JSON (no markdown):
 {
@@ -175,6 +275,8 @@ Respond ONLY with valid JSON (no markdown):
   "crew_justification": "why this crew size",
   "labor_hours": 2,
   "is_quick_task": false,
+  "is_multi_task": false,
+  "task_count": 1,
   "cost_breakdown": {
     "parts_min": 50,
     "parts_max": 200,
@@ -183,6 +285,7 @@ Respond ONLY with valid JSON (no markdown):
 }`;
 
     console.log('Calling Groq API...');
+    console.log('Multi-task analysis:', multiTaskAnalysis);
     
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
@@ -195,7 +298,7 @@ Respond ONLY with valid JSON (no markdown):
         messages: [
           {
             role: 'system',
-            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) accurately.'
+            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) and multi-task scenarios accurately. Multiple quick tasks under 30 min total = ONE $100 service call.'
           },
           {
             role: 'user',
@@ -230,22 +333,28 @@ Respond ONLY with valid JSON (no markdown):
     }
 
     // ========================================
-    // SMART COST CALCULATION WITH QUICK TASK LOGIC
+    // SMART COST CALCULATION WITH MULTI-TASK LOGIC
     // ========================================
     
     const issueType = groqAnalysis.issue_type || 'Maintenance Issue';
     const crewSize = Math.max(1, groqAnalysis.crew_size || 1);
     const laborHours = groqAnalysis.labor_hours || 2;
     
-    // Check if this is a quick task (either from Groq or our own detection)
-    const isQuick = groqAnalysis.is_quick_task || isQuickTask(description, issueType);
+    // Check if this is a quick task (from Groq, our detection, or multi-task analysis)
+    const isQuick = groqAnalysis.is_quick_task || isQuickTask(description, issueType) || multiTaskAnalysis.fitsInServiceCall;
+    const isMulti = multiTaskAnalysis.isMultiple && multiTaskAnalysis.fitsInServiceCall;
+    const taskCount = isMulti ? multiTaskAnalysis.taskCount : 1;
     
     let costEstimate;
     
-    if (isQuick) {
-      // ✅ QUICK TASK - Falls under $100 service call
-      const partsMin = groqAnalysis.cost_breakdown?.parts_min || 10;
-      const partsMax = groqAnalysis.cost_breakdown?.parts_max || 50;
+    if (isQuick || isMulti) {
+      // ✨ QUICK TASK(S) - Falls under $100 service call
+      const partsMin = groqAnalysis.cost_breakdown?.parts_min || (taskCount * 10);
+      const partsMax = groqAnalysis.cost_breakdown?.parts_max || (taskCount * 50);
+      
+      const pricingNote = isMulti 
+        ? `✨ Excellent news! All ${taskCount} of these are quick tasks that fit into our $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $100 service call + materials. This is MUCH better value than doing them separately!`
+        : `✨ Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional.`;
       
       costEstimate = {
         service_call_fee: 100,
@@ -255,13 +364,15 @@ Respond ONLY with valid JSON (no markdown):
         },
         labor_hours: 0.5,
         crew_size: 1,
-        crew_justification: 'Quick task - 1 person can handle',
+        crew_justification: isMulti ? `Multiple quick tasks - 1 person can handle all ${taskCount}` : 'Quick task - 1 person can handle',
         disposal_cost: 0,
         total_cost: {
           min: 100 + partsMin,
           max: 100 + partsMax
         },
-        pricing_note: `✨ Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional.`
+        pricing_note: pricingNote,
+        is_multi_task: isMulti,
+        task_count: taskCount
       };
     } else {
       // 🔧 BIGGER JOB - Standard pricing
@@ -296,11 +407,13 @@ Respond ONLY with valid JSON (no markdown):
           min: partsMin + totalLaborWithOverhead + disposalCost,
           max: partsMax + totalLaborWithOverhead + disposalCost
         },
-        pricing_note: `$100 service call includes diagnosis + first 30 minutes of work. If you approve, it applies to your total. You only pay for actual hours worked - finish early and you save!`
+        pricing_note: `$100 service call includes diagnosis + first 30 minutes of work. If you approve, it applies to your total. You only pay for actual hours worked - finish early and you save!`,
+        is_multi_task: false,
+        task_count: 1
       };
     }
 
-    console.log('✅ Analysis complete', isQuick ? '(Quick Task)' : '(Standard Job)');
+    console.log('✅ Analysis complete', isQuick || isMulti ? `(Quick Task${isMulti ? 's - ' + taskCount : ''})` : '(Standard Job)');
 
     return {
       needs_clarification: false,
@@ -312,7 +425,9 @@ Respond ONLY with valid JSON (no markdown):
         difficulty_level: groqAnalysis.difficulty_level || 'Professional',
         crew_size: crewSize,
         crew_justification: groqAnalysis.crew_justification || `${crewSize} person job`,
-        is_quick_task: isQuick
+        is_quick_task: isQuick || isMulti,
+        is_multi_task: isMulti,
+        task_count: taskCount
       },
       cost_estimate: costEstimate,
       pricing: [],
@@ -369,6 +484,14 @@ function createSmartFallback(description, serviceContext) {
     issueType = 'Switch/Outlet Cover Replacement';
     partsMin = 5;
     partsMax = 25;
+    laborHours = 0.5;
+    severity = 'Low';
+    isQuick = true;
+  }
+  else if (desc.includes('smoke detector') && desc.includes('battery')) {
+    issueType = 'Smoke Detector Battery Replacement';
+    partsMin = 5;
+    partsMax = 15;
     laborHours = 0.5;
     severity = 'Low';
     isQuick = true;
@@ -564,7 +687,8 @@ export default async function handler(req, res) {
           continue;
         }
         
-        if (!imageBase64 || imageBase64.length < 100) {
+        if (!imageBase64 || imageBase64.length <
+          if (!imageBase64 || imageBase64.length < 100) {
           console.error(`Image ${i + 1}: Base64 string too short or empty`);
           visionErrors++;
           continue;
