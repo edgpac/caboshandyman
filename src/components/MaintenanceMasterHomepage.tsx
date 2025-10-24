@@ -63,7 +63,7 @@ export default function CabosHandymanHomepage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav className="bg-dark-surface text-white py-4 sticky top-0 z-40">
+      <nav className="bg-dark-surface text-white py-4 sticky top-0 z-40 shadow-lg">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center space-x-3">
             <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
@@ -71,10 +71,20 @@ export default function CabosHandymanHomepage() {
             </div>
             <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
           </div>
-          <div className="hidden md:flex space-x-8">
-            <a href="/contact" className="text-white hover:text-primary transition-colors font-semibold flex items-center gap-2">
+          <div className="flex items-center space-x-6">
+            <a 
+              href="tel:+526121698328" 
+              className="hidden sm:flex items-center gap-2 text-white hover:text-primary transition-colors font-semibold"
+            >
+              <Phone size={18} />
+              <span className="hidden lg:inline">612 169 8328</span>
+            </a>
+            <a 
+              href="/contact" 
+              className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground px-4 py-2 rounded-lg transition-colors font-semibold"
+            >
               <Mail size={18} />
-              Contact
+              Contact Us
             </a>
           </div>
         </div>
