@@ -20,26 +20,35 @@ const ContactPage = () => {
     setIsSubmitting(true);
     setSubmitStatus('');
     
+    // Create email content
+    const emailSubject = `New Contact - ${formData.urgency} - ${formData.service || 'General Inquiry'}`;
+    const emailBody = `
+New Contact Form Submission - Cabos Handyman
+
+Customer Information:
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+
+Service Request:
+Service Type: ${formData.service || 'Not specified'}
+Urgency Level: ${formData.urgency}
+
+Message:
+${formData.message}
+
+Submitted: ${new Date().toLocaleString()}
+    `.trim();
+
+    // Open mailto link
+    const mailtoLink = `mailto:loscabohandyman@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    
     try {
-      const response = await fetch('/api/send-contact-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          service: formData.service,
-          urgency: formData.urgency,
-          message: formData.message,
-          timestamp: new Date().toISOString()
-        })
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
+      // Open email client
+      window.location.href = mailtoLink;
+      
+      // Show success message
+      setTimeout(() => {
         setSubmitStatus('success');
         setFormData({
           name: '',
@@ -49,13 +58,12 @@ const ContactPage = () => {
           urgency: 'normal',
           message: '',
         });
-      } else {
-        setSubmitStatus('error');
-      }
+        setIsSubmitting(false);
+      }, 1000);
+      
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmitStatus('error');
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -202,13 +210,13 @@ const ContactPage = () => {
                 
                 {submitStatus === 'success' && (
                   <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                    ✓ Message sent successfully! We'll respond within 24 hours.
+                    ✓ Your email client will open with your message. Click send to complete!
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
                   <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                    ✗ Failed to send message. Please call or WhatsApp us directly.
+                    ✗ Please call or WhatsApp us directly for immediate assistance.
                   </div>
                 )}
                 
@@ -259,16 +267,16 @@ const ContactPage = () => {
                       className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     >
                       <option value="">Select a service</option>
-                      <option value="kitchen">Kitchen Remodeling</option>
-                      <option value="bathroom">Bathroom Renovation</option>
-                      <option value="plumbing">Plumbing Repairs</option>
-                      <option value="electrical">Electrical Services</option>
-                      <option value="painting">Painting & Drywall</option>
-                      <option value="carpentry">Carpentry & Installation</option>
-                      <option value="commercial">Commercial Construction</option>
-                      <option value="hoa">HOA Maintenance</option>
-                      <option value="emergency">Emergency Repair</option>
-                      <option value="other">Other / General Inquiry</option>
+                      <option value="Kitchen Remodeling">Kitchen Remodeling</option>
+                      <option value="Bathroom Renovation">Bathroom Renovation</option>
+                      <option value="Plumbing Repairs">Plumbing Repairs</option>
+                      <option value="Electrical Services">Electrical Services</option>
+                      <option value="Painting & Drywall">Painting & Drywall</option>
+                      <option value="Carpentry & Installation">Carpentry & Installation</option>
+                      <option value="Commercial Construction">Commercial Construction</option>
+                      <option value="HOA Maintenance">HOA Maintenance</option>
+                      <option value="Emergency Repair">Emergency Repair</option>
+                      <option value="Other / General Inquiry">Other / General Inquiry</option>
                     </select>
                   </div>
 
@@ -279,10 +287,10 @@ const ContactPage = () => {
                       onChange={(e) => setFormData({...formData, urgency: e.target.value})}
                       className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
                     >
-                      <option value="normal">Normal - Within a week</option>
-                      <option value="soon">Soon - Within 2-3 days</option>
-                      <option value="urgent">Urgent - Within 24 hours (call instead)</option>
-                      <option value="emergency">Emergency - Immediate (call now!)</option>
+                      <option value="Normal">Normal - Within a week</option>
+                      <option value="Soon">Soon - Within 2-3 days</option>
+                      <option value="Urgent">Urgent - Within 24 hours</option>
+                      <option value="Emergency">Emergency - Immediate</option>
                     </select>
                   </div>
 
@@ -303,13 +311,13 @@ const ContactPage = () => {
                     disabled={isSubmitting}
                     className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {isSubmitting ? "Opening Email..." : "Send Message"}
                     <Send className="h-5 w-5" />
                   </button>
 
                   <div className="text-center space-y-2">
                     <p className="text-sm text-gray-600">
-                      We typically respond within 24 hours during business hours
+                      Your email client will open with your message pre-filled
                     </p>
                     <p className="text-sm font-semibold text-red-600">
                       ⚡ For urgent requests, please call or WhatsApp instead
