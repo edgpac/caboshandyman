@@ -72,6 +72,10 @@ export default function CabosHandymanHomepage() {
             <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
           </div>
           <div className="hidden md:flex space-x-8">
+            <a href="/contact" className="text-white hover:text-primary transition-colors font-semibold flex items-center gap-2">
+              <Mail size={18} />
+              Contact
+            </a>
           </div>
         </div>
       </nav>
