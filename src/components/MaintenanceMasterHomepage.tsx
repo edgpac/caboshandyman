@@ -124,7 +124,7 @@ export default function CabosHandymanHomepage() {
                 onClick={() => openAIAssistant('booking')}
                 className="bg-primary hover:bg-primary-hover text-primary-foreground px-8 py-4 rounded-lg text-lg font-bold transition-colors flex items-center justify-center"
               >
-                Get Free Instant Estimate
+                Free Instant Estimate
                 <ArrowRight className="ml-2" size={20} />
               </button>
             </div>
@@ -236,7 +236,7 @@ export default function CabosHandymanHomepage() {
               e.target.style.boxShadow = '0 8px 16px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8)';
             }}
           >
-            Start with our Assistant
+            Scheduling Assistant
             <MessageCircle className="ml-2" size={20} />
           </button>
           <div className="text-center mt-2">
