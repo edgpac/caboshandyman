@@ -31,8 +31,8 @@ export default async function handler(req, res) {
     }
 
     // Validate email configuration
-    if (!process.env.EMAIL_APP_PASSWORD) {
-      console.error('EMAIL_APP_PASSWORD not configured');
+    if (!process.env.CONTACTEMAIL_APP_PASSWORD) {
+      console.error('CONTACTEMAIL_APP_PASSWORD not configured');
       return res.status(500).json({ 
         success: false, 
         error: 'Email service not configured. Please contact us directly at loscabohandyman@gmail.com' 
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
       service: 'gmail',
       auth: {
         user: process.env.GMAIL_USER || 'loscabohandyman@gmail.com',
-        pass: process.env.EMAIL_APP_PASSWORD
+        pass: process.env.CONTACTEMAIL_APP_PASSWORD
       }
     });
 
