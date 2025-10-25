@@ -33,7 +33,6 @@ const ContactPage = () => {
           service: formData.service,
           urgency: formData.urgency,
           message: formData.message,
-          timestamp: new Date().toISOString()
         })
       });
 
@@ -106,7 +105,7 @@ const ContactPage = () => {
                       <a href="tel:+526121698328" className="text-lg text-gray-700 hover:text-teal-600 transition-colors">
                         +52 612 169 8328
                       </a>
-                      <p className="text-sm text-gray-600 mt-1">Available 7 AM - 5 PM</p>
+                      <p className="text-sm text-gray-600 mt-1">Click to call - Available 7 AM - 5 PM</p>
                     </div>
                   </div>
                 </div>
@@ -118,10 +117,10 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold mb-1 text-gray-900">Email</h3>
-                      <a href="mailto:loscabohandyman@gmail.com" className="text-lg text-gray-700 hover:text-blue-600 transition-colors">
+                      <a href="mailto:loscabohandyman@gmail.com" className="text-lg text-gray-700 hover:text-blue-600 transition-colors break-all">
                         loscabohandyman@gmail.com
                       </a>
-                      <p className="text-sm text-gray-600 mt-1">We reply within 24 hours</p>
+                      <p className="text-sm text-gray-600 mt-1">For non-urgent inquiries - We reply within 24 hours</p>
                     </div>
                   </div>
                 </div>
@@ -136,7 +135,7 @@ const ContactPage = () => {
                       <a href="https://wa.me/526121698328" target="_blank" rel="noopener noreferrer" className="text-lg text-gray-700 hover:text-green-600 transition-colors">
                         +52 612 169 8328
                       </a>
-                      <p className="text-sm text-gray-600 mt-1">Fastest response</p>
+                      <p className="text-sm text-gray-600 mt-1">Chat with us instantly - Fastest response</p>
                     </div>
                   </div>
                 </div>
@@ -151,7 +150,8 @@ const ContactPage = () => {
                       <p className="text-gray-700">
                         Cabo San Lucas<br />
                         San José del Cabo<br />
-                        All of Los Cabos, BCS
+                        Tourist Corridor<br />
+                        All of Los Cabos, BCS, Mexico
                       </p>
                     </div>
                   </div>
@@ -165,14 +165,33 @@ const ContactPage = () => {
                     <div>
                       <h3 className="font-semibold mb-1 text-gray-900">Business Hours</h3>
                       <div className="text-gray-700">
-                        <p>Mon-Fri: 7:00 AM - 5:00 PM</p>
-                        <p>Sat: 9:00 AM - 2:00 PM</p>
-                        <p>Sun: Closed</p>
-                        <p className="text-sm mt-2 text-red-600 font-semibold">🚨 24/7 Emergency</p>
+                        <p>Monday - Friday: 7:00 AM - 5:00 PM</p>
+                        <p>Saturday: 9:00 AM - 2:00 PM</p>
+                        <p>Sunday: Closed</p>
+                        <p className="text-sm mt-2 text-red-600 font-semibold">
+                          🚨 Emergency service available 24/7
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+
+              {/* Service Call Info */}
+              <div className="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl border-2 border-teal-200">
+                <h3 className="text-xl font-bold mb-3 text-gray-900 flex items-center gap-2">
+                  <Wrench className="w-5 h-5 text-teal-600" />
+                  Service Call Information
+                </h3>
+                <p className="text-gray-700 mb-2">
+                  <strong className="text-teal-700">$100 USD</strong> service call includes:
+                </p>
+                <ul className="text-sm text-gray-700 space-y-1 ml-4">
+                  <li>✓ Professional diagnosis</li>
+                  <li>✓ First 30 minutes of labor</li>
+                  <li>✓ Written estimate for additional work</li>
+                  <li>✓ Expert recommendations</li>
+                </ul>
               </div>
             </div>
 
@@ -180,65 +199,79 @@ const ContactPage = () => {
             <div>
               <div className="bg-white p-8 rounded-xl shadow-2xl">
                 <h2 className="text-3xl font-bold mb-2 text-gray-900">Send Us a Message</h2>
-                <p className="text-gray-600 mb-6">For non-urgent requests</p>
+                <p className="text-gray-600 mb-6">For non-urgent requests and general inquiries</p>
                 
                 {submitStatus === 'success' && (
                   <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                    ✓ Message sent! We'll respond within 24 hours.
+                    <strong>✓ Message sent successfully!</strong>
+                    <p className="text-sm mt-1">We'll respond within 24 hours. Check your email for confirmation.</p>
                   </div>
                 )}
 
                 {submitStatus === 'error' && (
                   <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
-                    ✗ Failed to send. Please call or WhatsApp us.
+                    <strong>✗ Failed to send message.</strong>
+                    <p className="text-sm mt-1">Please call or WhatsApp us at +52 612 169 8328</p>
                   </div>
                 )}
                 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Your Name *</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Your Name *
+                    </label>
                     <input
                       required
                       type="text"
                       placeholder="John Doe"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      disabled={isSubmitting}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Email *
+                      </label>
                       <input
                         required
                         type="email"
                         placeholder="john@example.com"
                         value={formData.email}
                         onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                        disabled={isSubmitting}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Phone *</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Phone *
+                      </label>
                       <input
                         required
                         type="tel"
                         placeholder="+52 612 123 4567"
                         value={formData.phone}
                         onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                        disabled={isSubmitting}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Service Needed</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Service Needed
+                    </label>
                     <select 
                       value={formData.service} 
                       onChange={(e) => setFormData({...formData, service: e.target.value})}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      disabled={isSubmitting}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                     >
                       <option value="">Select a service</option>
                       <option value="kitchen">Kitchen Remodeling</option>
@@ -247,36 +280,47 @@ const ContactPage = () => {
                       <option value="electrical">Electrical Services</option>
                       <option value="painting">Painting & Drywall</option>
                       <option value="carpentry">Carpentry</option>
-                      <option value="commercial">Commercial</option>
-                      <option value="hoa">HOA Maintenance</option>
-                      <option value="emergency">Emergency</option>
-                      <option value="other">Other</option>
+                      <option value="commercial">Commercial Projects</option>
+                      <option value="hoa">HOA Property Maintenance</option>
+                      <option value="emergency">Emergency Repairs</option>
+                      <option value="other">Other / General Inquiry</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Urgency</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Urgency Level
+                    </label>
                     <select 
                       value={formData.urgency} 
                       onChange={(e) => setFormData({...formData, urgency: e.target.value})}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                      disabled={isSubmitting}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
                     >
-                      <option value="normal">Normal</option>
-                      <option value="soon">Within 2-3 days</option>
-                      <option value="urgent">Within 24 hours</option>
-                      <option value="emergency">Emergency</option>
+                      <option value="normal">Normal - Within a week</option>
+                      <option value="soon">Soon - Within 2-3 days</option>
+                      <option value="urgent">Urgent - Within 24 hours</option>
+                      <option value="emergency">🚨 Emergency - Immediate</option>
                     </select>
+                    {formData.urgency === 'emergency' && (
+                      <p className="text-sm text-red-600 mt-2 font-semibold">
+                        For emergencies, please call us immediately: +52 612 169 8328
+                      </p>
+                    )}
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Message *</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Project Details *
+                    </label>
                     <textarea
                       required
-                      placeholder="Describe your project..."
+                      placeholder="Describe your handyman needs, project details, or ask us any questions..."
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
                       rows={6}
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+                      disabled={isSubmitting}
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
                     />
                   </div>
 
@@ -285,12 +329,24 @@ const ContactPage = () => {
                     disabled={isSubmitting}
                     className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                    <Send className="h-5 w-5" />
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        Send Message
+                        <Send className="h-5 w-5" />
+                      </>
+                    )}
                   </button>
 
                   <p className="text-sm text-center text-gray-600">
-                    We respond within 24 hours
+                    ✉️ We typically respond within 24 hours during business hours
                   </p>
                 </form>
               </div>

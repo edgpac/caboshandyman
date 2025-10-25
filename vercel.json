@@ -10,6 +10,10 @@
     "api/feedback-chat.js": {
       "maxDuration": 30,
       "memory": 512
+    },
+    "api/send-contact-email.js": {
+      "maxDuration": 30,
+      "memory": 512
     }
   },
   "headers": [
