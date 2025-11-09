@@ -2,14 +2,12 @@ import { SitemapStream, streamToPromise } from 'sitemap';
 import { createWriteStream } from 'fs';
 import { resolve } from 'path';
 
-const today = new Date().toISOString().split('T')[0];
-
 const links = [
-  { url: '/', changefreq: 'weekly', priority: 1.0, lastmod: today },
-  { url: '/services', changefreq: 'monthly', priority: 0.8, lastmod: today },
-  { url: '/about', changefreq: 'monthly', priority: 0.7, lastmod: today },
-  { url: '/contact', changefreq: 'monthly', priority: 0.9, lastmod: today },
-  { url: '/gallery', changefreq: 'weekly', priority: 0.6, lastmod: today },
+  { url: '/', changefreq: 'weekly', priority: 1.0 },
+  { url: '/services', changefreq: 'monthly', priority: 0.8 },
+  { url: '/about', changefreq: 'monthly', priority: 0.7 },
+  { url: '/contact', changefreq: 'monthly', priority: 0.9 },
+  { url: '/gallery', changefreq: 'weekly', priority: 0.6 },
 ];
 
 const sitemap = new SitemapStream({ 
