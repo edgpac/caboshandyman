@@ -193,8 +193,9 @@ export default function ReviewsCarousel() {
                     {[...Array(review.rating)].map((_, i) => (
                       <Star
                         key={i}
-                        size={20}
-                        className="fill-yellow-400 text-yellow-400"
+                        size={22}
+                        className="fill-yellow-500 text-yellow-500"
+                        style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))' }}
                       />
                     ))}
                   </div>
