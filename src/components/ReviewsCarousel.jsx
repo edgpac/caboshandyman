@@ -167,7 +167,7 @@ export default function ReviewsCarousel() {
             What Our Clients Say
           </h2>
           <p className="text-xl text-white/90 max-w-2xl mx-auto">
-            Real reviews from real customers across Los Cabos
+            Reviews from customers across Los Cabos
           </p>
         </div>
 
