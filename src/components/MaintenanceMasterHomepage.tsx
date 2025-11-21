@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Calendar, ArrowRight, MessageCircle } from 'lucide
 import Footer from './Footer';
 import SecureAIAssistant from './SecureAIAssistant';
 import ServiceMenuPopup from './ServiceMenuPopup';
-import partnersImage from '../assets/partners-section.png';
+import ReviewsCarousel from './ReviewsCarousel';
 import kitchenImage from '../assets/modern-kitchen-remodel.jpeg';
 import bathroomImage from '../assets/luxury-bathroom.jpeg';
 import officeImage from '../assets/commercial-office.jpeg';
@@ -200,18 +200,8 @@ export default function CabosHandymanHomepage() {
         </div>
       </section>
 
-      {/* Partners Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto">
-            <img 
-              src={partnersImage} 
-              alt="Our Partners - Opendoor, Invitation Homes, Concord Consulting, Quanta Finance, London Management, PMP Management, Community Memorial Healthcare, and CPM"
-              className="w-full h-auto rounded-lg"
-            />
-          </div>
-        </div>
-      </section>
+      {/* Reviews Carousel - REPLACES Partners Section */}
+      <ReviewsCarousel />
 
       {/* CTA Section */}
       <section className="py-20" style={{backgroundColor: '#02af9f'}}>
