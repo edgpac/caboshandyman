@@ -145,11 +145,16 @@ export default function Footer() {
         {/* Legal - Full Width Bottom Row */}
         <div className="mt-8 pt-6 border-t border-gray-200">
           <div className="flex flex-col md:flex-row justify-between items-center text-xs">
-            <div className="flex items-center space-x-4 mb-2 md:mb-0">
-              <span className="text-teal-500 font-medium">Licensed • Insured • Bonded</span>
-              <span className="text-gray-600">&copy; 2025 Cabos Handyman. All rights reserved.</span>
+            <div className="flex flex-col items-start md:items-center space-y-1">
+              <div className="flex items-center space-x-4">
+                <span className="text-teal-500 font-medium">Licensed • Insured • Bonded</span>
+                <span className="text-gray-600">&copy; 2025 Cabos Handyman. All rights reserved.</span>
+              </div>
+              <div className="text-[10px] text-gray-400">
+                To hire the architect of this website call +52 612 169 8328
+              </div>
             </div>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 mt-2 md:mt-0">
               <a href="#privacy" className="text-gray-600 hover:text-teal-500 transition-colors">Privacy</a>
               <a href="#terms" className="text-gray-600 hover:text-teal-500 transition-colors">Terms</a>
             </div>
