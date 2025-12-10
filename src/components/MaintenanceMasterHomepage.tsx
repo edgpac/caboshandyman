@@ -22,32 +22,38 @@ export default function CabosHandymanHomepage() {
     { 
       name: "Modern Kitchen", 
       category: "Residential", 
-      image: kitchenImage
+      image: kitchenImage,
+      alt: "Modern kitchen remodeling project in Cabo San Lucas featuring custom cabinets, granite countertops, and stainless steel appliances by Cabos Handyman"
     },
     { 
       name: "Luxury Bathroom", 
       category: "Residential", 
-      image: bathroomImage
+      image: bathroomImage,
+      alt: "Luxury bathroom renovation in Cabo San Lucas with custom tile work, modern fixtures, and elegant design by Cabos Handyman"
     },
     { 
       name: "Commercial Office", 
       category: "Commercial", 
-      image: officeImage
+      image: officeImage,
+      alt: "Commercial office construction and renovation project in Cabo San Lucas with professional workspace design by Cabos Handyman"
     },
     { 
       name: "Community Center", 
       category: "HOA", 
-      image: communityImage
+      image: communityImage,
+      alt: "Community center construction and maintenance project in Cabo San Lucas for HOA and residential communities by Cabos Handyman"
     },
     { 
       name: "Restaurant Buildout", 
       category: "Commercial", 
-      image: restaurantImage
+      image: restaurantImage,
+      alt: "Restaurant construction and commercial buildout project in Cabo San Lucas with custom design and professional finishing by Cabos Handyman"
     },
     { 
       name: "Home Addition", 
       category: "Residential", 
-      image: homeImage
+      image: homeImage,
+      alt: "Home addition and expansion project in Cabo San Lucas featuring new construction, structural work, and seamless integration by Cabos Handyman"
     }
   ];
 
@@ -188,7 +194,7 @@ export default function CabosHandymanHomepage() {
                   <div className="h-64 bg-muted overflow-hidden">
                     <img 
                       src={project.image} 
-                      alt={project.name}
+                      alt={project.alt}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
@@ -232,7 +238,7 @@ export default function CabosHandymanHomepage() {
                 e.target.style.transform = 'translateY(0) scale(1)';
                 e.target.style.boxShadow = '0 8px 16px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8)';
               }}
-            >
+             >
               Scheduling Assistant
               <MessageCircle className="ml-2" size={20} />
             </button>
