@@ -155,8 +155,8 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex space-x-4 mt-2 md:mt-0">
-              <a href="#privacy" className="text-gray-600 hover:text-teal-500 transition-colors">Privacy</a>
-              <a href="#terms" className="text-gray-600 hover:text-teal-500 transition-colors">Terms</a>
+              <a href="/privacy" className="text-gray-600 hover:text-teal-500 transition-colors">Privacy</a>
+              <a href="/terms" className="text-gray-600 hover:text-teal-500 transition-colors">Terms</a>
             </div>
           </div>
         </div>

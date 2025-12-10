@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft, Shield, Phone, Mail, MapPin } from 'lucide-react';
 
 export default function PrivacyPolicy() {
+  useEffect(() => {
+    document.title = 'Privacy Policy - Cabos Handyman';
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}

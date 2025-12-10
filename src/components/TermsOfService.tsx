@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ArrowLeft, FileText, Phone, Mail, MapPin } from 'lucide-react';
 
 export default function TermsOfService() {
+  useEffect(() => {
+    document.title = 'Terms of Service - Cabos Handyman';
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
