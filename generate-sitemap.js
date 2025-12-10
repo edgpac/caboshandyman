@@ -1,29 +1,73 @@
-import { SitemapStream, streamToPromise } from 'sitemap';
-import { createWriteStream } from 'fs';
-import { resolve } from 'path';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const links = [
-  { url: '/', changefreq: 'weekly', priority: 1.0 },
-  { url: '/services', changefreq: 'monthly', priority: 0.8 },
-  { url: '/about', changefreq: 'monthly', priority: 0.7 },
-  { url: '/contact', changefreq: 'monthly', priority: 0.9 },
-  { url: '/gallery', changefreq: 'weekly', priority: 0.6 },
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const SITE_URL = 'https://www.caboshandyman.com';
+const OUTPUT_PATH = path.join(__dirname, 'public', 'sitemap.xml');
+
+const staticPages = [
+  { url: '/', changefreq: 'weekly', priority: '1.0' },
+  { url: '/contact', changefreq: 'monthly', priority: '0.9' },
+  { url: '/privacy', changefreq: 'yearly', priority: '0.3' },
+  { url: '/terms', changefreq: 'yearly', priority: '0.3' },
 ];
 
-const sitemap = new SitemapStream({ 
-  hostname: 'https://www.caboshandyman.com',
-  xmlns: {
-    news: false,
-    xhtml: false,
-    image: false,
-    video: false
+function getBlogPosts() {
+  try {
+    const blogPostsFile = path.join(__dirname, 'src', 'blog-posts.json');
+    if (fs.existsSync(blogPostsFile)) {
+      const data = fs.readFileSync(blogPostsFile, 'utf8');
+      return JSON.parse(data);
+    }
+  } catch (error) {
+    console.warn('No blog-posts.json found, using static pages only');
   }
-});
+  return [];
+}
 
-const writeStream = createWriteStream(resolve('public', 'sitemap.xml'));
+function generateSitemap() {
+  const blogPosts = getBlogPosts();
+  
+  let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
+  xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
+  
+  staticPages.forEach(page => {
+    xml += '  <url>\n';
+    xml += `    <loc>${SITE_URL}${page.url}</loc>\n`;
+    xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
+    xml += `    <priority>${page.priority}</priority>\n`;
+    xml += '  </url>\n';
+  });
+  
+  blogPosts.forEach(post => {
+    xml += '  <url>\n';
+    xml += `    <loc>${SITE_URL}/blog/${post.slug}</loc>\n`;
+    xml += `    <lastmod>${post.publishDate}</lastmod>\n`;
+    xml += `    <changefreq>monthly</changefreq>\n`;
+    xml += `    <priority>0.8</priority>\n`;
+    xml += '  </url>\n';
+  });
+  
+  xml += '</urlset>';
+  return xml;
+}
 
-sitemap.pipe(writeStream);
-links.forEach(link => sitemap.write(link));
-sitemap.end();
+function writeSitemap() {
+  try {
+    const sitemap = generateSitemap();
+    const publicDir = path.join(__dirname, 'public');
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
+    }
+    fs.writeFileSync(OUTPUT_PATH, sitemap);
+    console.log('✅ Sitemap generated:', OUTPUT_PATH);
+  } catch (error) {
+    console.error('❌ Error:', error);
+    process.exit(1);
+  }
+}
 
-streamToPromise(sitemap).then(() => console.log('✅ Sitemap generated successfully!'));
+writeSitemap();
