@@ -247,8 +247,8 @@ export default function CabosHandymanHomepage() {
         {/* FLOATING BUTTONS - Bottom Right */}
         <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
           {/* WhatsApp Button */}
-          
-            href="https://wa.me/526121698328?text=Hi!%20I%27m%20interested%20in%20your%20handyman%20services"
+           <a
+           href="https://wa.me/526121698328?text=Hi!%20I%27m%20interested%20in%20your%20handyman%20services"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-2xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group"
