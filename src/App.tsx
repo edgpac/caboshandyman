@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import TermsOfService from "./components/TermsOfService";
 import ContactPage from "./components/ContactPage";
+import BlogPost from "./components/BlogPost";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,6 +32,7 @@ const App = () => {
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
             <Route path="/terms" element={<TermsOfService />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
