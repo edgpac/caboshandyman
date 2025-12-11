@@ -124,11 +124,10 @@ export default function CabosHandymanHomepage() {
                 🏗️ Cabo San Lucas' Premier Handyman Service
               </div>
               <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-snug text-primary text-center">
-                 LOS CABOS HANDYMAN,<br />
-                 Quality You Can See.<br />Trust You Can Feel.
+                 LOS CABOS HANDYMAN,<br />Your Go To for Every Fix.
               </h1>
               <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
-                 With many years of maintenance and construction expertise, we proudly serve Cabo San Lucas with quality, honesty, and reliable service, and offer a <strong>$100 USD service call</strong> that includes diagnosis and the first 30 minutes of labor.
+                 Cabo’s trusted handyman — <strong>$100 USD service call</strong>.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
