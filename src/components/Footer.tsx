@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Clock, Wrench, DollarSign, RefreshCw, Facebook, Calendar } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, Wrench, DollarSign, RefreshCw, Facebook, Calendar, HelpCircle } from 'lucide-react';
 
 export default function Footer() {
   const [exchangeRate, setExchangeRate] = useState(null);
@@ -84,15 +84,19 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Services */}
+          {/* FAQ Section - REPLACES Services */}
           <div>
-            <h3 className="font-semibold mb-3 text-gray-900">Services</h3>
-            <div className="space-y-2 text-xs text-gray-600">
-              <div>Residential Maintenance</div>
-              <div>Emergency Services</div>
-              <div>Commercial Projects</div>
-              <div>HOA & Property Maintenance</div>
-            </div>
+            <h3 className="font-semibold mb-3 text-gray-900">Have Questions?</h3>
+            <p className="text-xs text-gray-600 mb-4">
+              Get instant answers to common questions about our services, pricing, and areas we serve.
+            </p>
+            <a 
+              href="/faq" 
+              className="inline-flex items-center space-x-2 bg-white border-2 border-teal-400 text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-lg text-xs font-semibold transition-colors shadow-sm"
+            >
+              <HelpCircle className="h-4 w-4" />
+              <span>View FAQ</span>
+            </a>
           </div>
 
           {/* Currency Converter */}
@@ -157,6 +161,7 @@ export default function Footer() {
             <div className="flex space-x-4 mt-2 md:mt-0">
               <a href="/privacy" className="text-gray-600 hover:text-teal-500 transition-colors">Privacy</a>
               <a href="/terms" className="text-gray-600 hover:text-teal-500 transition-colors">Terms</a>
+              <a href="/faq" className="text-gray-600 hover:text-teal-500 transition-colors">FAQ</a>
             </div>
           </div>
         </div>
