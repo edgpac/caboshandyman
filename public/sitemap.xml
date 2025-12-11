@@ -20,4 +20,16 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  <url>
+    <loc>https://www.caboshandyman.com/blog/professional-handyman-services-cabo-san-lucas</loc>
+    <lastmod>2025-12-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.caboshandyman.com/blog/tv-mounting-ceiling-fans-cabo</loc>
+    <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
 </urlset>

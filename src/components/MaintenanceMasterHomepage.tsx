@@ -9,7 +9,7 @@ import kitchenImage from '../assets/modern-kitchen-remodel.jpeg';
 import bathroomImage from '../assets/luxury-bathroom.jpeg';
 import officeImage from '../assets/commercial-office.jpeg';
 import communityImage from '../assets/community-center.jpeg';
-import restaurantImage from '../assets/restaurant-buildout.jpeg';
+import restaurantImage from '../assets/commercial-office.jpeg';
 import homeImage from '../assets/home-addition.jpeg';
 
 export default function CabosHandymanHomepage() {
