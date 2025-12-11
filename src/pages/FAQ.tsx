@@ -107,7 +107,7 @@ export default function FAQ() {
         <div className="bg-gradient-to-br from-teal-500 to-teal-600 text-white py-16 px-4 text-center">
           <h1 className="text-4xl font-bold mb-4">Frequently Asked Questions</h1>
           <p className="text-xl max-w-3xl mx-auto">
-            Everything you need to know about Cabos Handyman services in Cabo San Lucas
+            Everything you need to know about <br /> Cabos Handyman services in Cabo San Lucas
           </p>
         </div>
 
