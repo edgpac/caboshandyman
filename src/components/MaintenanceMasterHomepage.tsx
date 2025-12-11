@@ -125,13 +125,11 @@ export default function CabosHandymanHomepage() {
               </div>
               <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-snug text-primary text-center">
                  LOS CABOS HANDYMAN,<br />
-                 Quality You Can See. Trust You Can Feel.
+                 Quality You Can See.<br />Trust You Can Feel.
               </h1>
               <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
-                  Many years of maintenance and construction expertise, serving Cabo San Lucas 
-                  with quality, honesty, and reliable service. <br />
-         <strong>$100 USD service call</strong> — includes diagnosis and the first 30 minutes of labor.
-               </p>
+                 With many years of maintenance and construction expertise, we proudly serve Cabo San Lucas with quality, honesty, and reliable service, and offer a <strong>$100 USD service call</strong> that includes diagnosis and the first 30 minutes of labor.
+              </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
                   onClick={() => openAIAssistant('booking')}
