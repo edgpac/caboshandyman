@@ -127,7 +127,7 @@ export default function CabosHandymanHomepage() {
                  LOS CABOS HANDYMAN,<br />Solutions You Can Count On.
               </h1>
               <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
-                 Cabo’s trusted handyman — <strong>$100 USD service call</strong>.
+                 Service starting at a <strong>$100 USD service call</strong> with diagnosis and 30 minutes of labor included.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
