@@ -121,7 +121,7 @@ export default function CabosHandymanHomepage() {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               <div className="inline-block bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                🏗️ Cabo San Lucas' Premier Handyman Service
+                🏗️ Cabo San Lucas' Leading Handyman Service
               </div>
               <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-snug text-primary text-center">
                  LOS CABOS HANDYMAN,<br />Solutions You Can Count On.
