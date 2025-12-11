@@ -123,9 +123,9 @@ export default function CabosHandymanHomepage() {
               <div className="inline-block bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold mb-6">
                 🏗️ Cabo San Lucas' Premier Handyman Service
               </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-primary">
-                  BUILDING VISIONS,<br />
-                  SHAPING THE FUTURE.
+              <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-snug text-primary text-center">
+                 LOS CABOS HANDYMAN,<br />
+                 Quality You Can See. Trust You Can Feel.
               </h1>
               <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
                   Many years of maintenance and construction expertise, serving Cabo San Lucas 
