@@ -79,9 +79,11 @@ export default function CabosHandymanHomepage() {
         <nav className="bg-dark-surface text-white py-4 sticky top-0 z-40 shadow-lg">
           <div className="container mx-auto px-6 flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">CH</span>
-              </div>
+              <img
+                src="/CHLOGO.png"
+                alt="Cabos Handyman Logo"
+                className="w-12 h-12 object-contain"
+              />
               <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
             </div>
             <div className="flex items-center space-x-6">
