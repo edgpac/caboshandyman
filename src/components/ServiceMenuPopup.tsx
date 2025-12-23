@@ -195,6 +195,7 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
       services: [
         { name: "Drywall Installation", startingPrice: "$3/sq ft", duration: "2-3 days" },
         { name: "Interior Painting", startingPrice: "$2/sq ft", duration: "2-3 days" },
+        { name: "Wall Panels", startingPrice: "$4/sq ft", duration: "2-3 days" },
         { name: "Flooring Installation", startingPrice: "$12/sq ft", duration: "2-4 days" },
         { name: "Trim Work", startingPrice: "$8/linear ft", duration: "1-2 days" }
       ]
@@ -204,6 +205,7 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
       services: [
         { name: "TV Mounting/Installation", startingPrice: "$120", duration: "1-2 hours" },
         { name: "Picture Hanging", startingPrice: "$40", duration: "30min-1hr" },
+        { name: "Starlink installation", startingPrice: "$80", duration: "1hr-2hr" },
         { name: "Shelf Installation", startingPrice: "$80", duration: "1-2 hours" },
         { name: "Curtain Rod Installation", startingPrice: "$60", duration: "30min-1hr" },
         { name: "Furniture Assembly", startingPrice: "$100", duration: "1-3 hours" },
