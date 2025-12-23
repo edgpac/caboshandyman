@@ -30,6 +30,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       <h4>Kitchen Remodeling and Repairs</h4>
       <ul>
         <li>Custom cabinet installation and refinishing</li>
+        <li>Cabinet manufacturing and installation</li>
         <li>Countertop replacement (granite, quartz, tile)</li>
         <li>Plumbing fixture upgrades</li>
         <li>Electrical work for modern appliances</li>
@@ -48,10 +49,11 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       <h4>Interior Repairs and Improvements</h4>
       <ul>
         <li>Drywall repair and painting</li>
-        <li>Door and window installations</li>
+        <li>Door and window, wall panel installations</li>
         <li>Flooring installation (tile, hardwood, laminate)</li>
         <li>Crown molding and trim work</li>
         <li>Built-in shelving and storage solutions</li>
+        <li>Furniture assembly and installation</li>
       </ul>
 
       <h4>Exterior Maintenance</h4>
@@ -82,6 +84,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       <ul>
         <li>Common area repairs and improvements</li>
         <li>Pool area maintenance</li>
+        <li>Painting</li>
         <li>Clubhouse renovations</li>
         <li>Emergency repair response for shared facilities</li>
         <li>Regular maintenance scheduling</li>
@@ -207,6 +210,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
         <li>Palapa construction and repair</li>
         <li>Outdoor kitchen installations</li>
         <li>Landscape lighting</li>
+        <li>Painting</li>
         <li>Irrigation system repairs</li>
       </ul>
 
@@ -229,7 +233,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
         <strong>Typical Project Ranges:</strong>
       </p>
       <ul>
-        <li>Minor repairs: $150-500 USD</li>
+        <li>Minor repairs: $100-500 USD</li>
         <li>Bathroom remodel: $3,000-15,000 USD</li>
         <li>Kitchen renovation: $5,000-25,000 USD</li>
         <li>Room additions: $10,000-50,000+ USD</li>
@@ -309,13 +313,13 @@ export default function ProfessionalHandymanServicesCaboArticle() {
         <li><strong>Service Area:</strong> All of Cabo San Lucas and Los Cabos region</li>
       </ul>
       <p>
-        Get your <strong>free instant estimate</strong> today through the AI-powered scheduling assistant at <strong>caboshandyman.com</strong>, or call for immediate assistance with emergency repairs.
+        Get your <strong>free instant estimate</strong> today through the scheduling assistant at <strong>caboshandyman.com</strong>, or call for immediate assistance with emergency repairs.
       </p>
 
       <hr className="my-8" />
 
       <p className="text-sm text-muted-foreground italic">
-        Cabos Handyman has been providing professional handyman services in Cabo San Lucas for over 20 years. With 600+ completed projects and 24/7 emergency service, we're your trusted partner for all residential, commercial, and HOA maintenance needs in Los Cabos.
+        Cabos Handyman has been providing professional handyman services for over 20 years. With 600+ completed projects and 24/7 emergency service, we're your trusted partner for all residential, commercial, and HOA maintenance needs in Los Cabos.
       </p>
     </>
   );
