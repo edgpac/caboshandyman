@@ -53,7 +53,9 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
         { name: "Countertop Installation", startingPrice: "$400", duration: "4-6 hours" },
         { name: "Backsplash Installation", startingPrice: "$250", duration: "3-5 hours" },
         { name: "Kitchen Hardware Installation", startingPrice: "$80", duration: "1-2 hours" },
-        { name: "Pantry Shelving", startingPrice: "$200", duration: "2-4 hours" }
+        { name: "Pantry Shelving", startingPrice: "$200", duration: "2-4 hours" },
+        { name: "Wall Panels", startingPrice: "$150", duration: "2-4 hours" },
+        { name: "Furniture Assembly", startingPrice: "$65", duration: "1-2 hours" }
       ]
     }
   ],
@@ -75,7 +77,8 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
         { name: "Bathroom Lighting", startingPrice: "$100", duration: "1-2 hours" },
         { name: "Exhaust Fan Installation", startingPrice: "$180", duration: "2-3 hours" },
         { name: "GFCI Outlet Installation", startingPrice: "$120", duration: "1-2 hours" },
-        { name: "Heated Towel Rack", startingPrice: "$220", duration: "2-3 hours" }
+        { name: "Heated Towel Rack", startingPrice: "$220", duration: "2-3 hours" },
+        { name: "Electrical Mirrors", startingPrice: "$125", duration: "1-2 hours" }
       ]
     },
     {
