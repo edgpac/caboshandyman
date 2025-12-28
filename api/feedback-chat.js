@@ -66,7 +66,7 @@ function extractName(text) {
 }
 
 // ========================================
-// QUICK TASK DETECTION - $100 SERVICE CALL (200+ TASKS)
+// QUICK TASK DETECTION - $60 SERVICE CALL (200+ TASKS)
 // ========================================
 
 const quickTaskKeywords = [
