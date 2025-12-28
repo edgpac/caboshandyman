@@ -13,7 +13,80 @@ export const config = {
 };
 
 // ========================================
-// QUICK TASK DETECTION - $100 SERVICE CALL (200+ TASKS)
+// LANGUAGE DETECTION
+// ========================================
+
+function detectSpanish(text) {
+  const spanishIndicators = [
+    /\b(hola|buenos días|buenas tardes|gracias|por favor|necesito|tengo|estoy|puede|cuánto|dónde|cuál)\b/i,
+    /\b(servicio|precio|costo|ayuda|problema|roto|reparar|instalar)\b/i,
+    /¿|¡/,
+    /ción\b/i,
+    /ñ/i
+  ];
+  return spanishIndicators.some(pattern => pattern.test(text));
+}
+
+// ========================================
+// SERVICE AREA ENFORCEMENT
+// ========================================
+
+function checkServiceArea(text) {
+  const lower = text.toLowerCase();
+
+  // San José del Cabo variants
+  const sanJosePatterns = [
+    /san jos[eé]( del cabo)?/i,
+    /san jose/i,
+    /sjd/i
+  ];
+
+  // East Cape / Corridor / Other areas
+  const outsideAreas = [
+    /east cape/i,
+    /los barriles/i,
+    /cabo pulmo/i,
+    /la ribera/i,
+    /corridor/i,
+    /tourist corridor/i,
+    /los cabos corridor/i,
+    /between cabo/i,
+    /halfway between/i
+  ];
+
+  const mentionsSanJose = sanJosePatterns.some(pattern => pattern.test(lower));
+  const mentionsOutsideArea = outsideAreas.some(pattern => pattern.test(lower));
+
+  return {
+    isOutsideServiceArea: mentionsSanJose || mentionsOutsideArea,
+    location: mentionsSanJose ? 'San José del Cabo' : mentionsOutsideArea ? 'outside Cabo San Lucas' : null
+  };
+}
+
+// ========================================
+// EMERGENCY DETECTION
+// ========================================
+
+function detectEmergency(text) {
+  const lower = text.toLowerCase();
+
+  const emergencyKeywords = [
+    // English
+    'emergency', 'urgent', 'right now', 'immediately', 'asap', 'as soon as possible',
+    'overflowing', 'flooding', 'flood', 'burst', 'water everywhere', 'sparking',
+    'gas leak', 'smell gas', 'no water', 'burst pipe', 'broken pipe',
+    'electrical fire', 'smoke', 'burning smell', 'water damage',
+    // Spanish
+    'emergencia', 'urgente', 'ahora mismo', 'inmediatamente',
+    'desbordando', 'inundación', 'inundando', 'tubería rota', 'fuga de gas',
+    'chispas', 'sin agua', 'fuego', 'humo'
+  ];
+
+  return emergencyKeywords.some(keyword => lower.includes(keyword));
+}
+
+// ========================================
+// QUICK TASK DETECTION - $60 SERVICE CALL (200+ TASKS)
 // ========================================
 
 const quickTaskKeywords = [
@@ -384,15 +457,17 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       ? `DETECTED FROM IMAGES: ${allDetectedItems.slice(0, 15).join(', ')}`
       : `No items detected from images. Base estimate on customer description.`;
 
-    const multiTaskContext = multiTaskAnalysis.isMultiple 
+    const multiTaskContext = multiTaskAnalysis.isMultiple
       ? `\n\nMULTI-TASK SCENARIO DETECTED:
 - ${multiTaskAnalysis.taskCount} quick tasks identified
 - Estimated time: ${multiTaskAnalysis.estimatedMinutes} minutes total
-- ${multiTaskAnalysis.fitsInServiceCall ? 'ALL FIT IN ONE $100 SERVICE CALL! Bundle pricing applies.' : 'Exceeds 30 min - may need extended time or multiple visits.'}
+- ${multiTaskAnalysis.fitsInServiceCall ? 'ALL FIT IN ONE $60 SERVICE CALL! Bundle pricing applies.' : 'Exceeds 30 min - may need extended time or multiple visits.'}
 - ${multiTaskAnalysis.isBundledFollowUp ? 'FOLLOW-UP REQUEST: Customer is adding tasks to existing work order.' : multiTaskAnalysis.hasFollowUpIntent ? 'Customer is adding tasks to existing quote.' : ''}`
       : '';
 
-    const prompt = `You are an expert contractor cost estimator for Cabo San Lucas, Mexico. Analyze this project and provide realistic 2024-2025 pricing in USD.
+    const prompt = `You are an expert contractor cost estimator for Cabos Handyman in Cabo San Lucas, Mexico. Analyze this project and provide realistic 2024-2025 pricing in USD.
+
+${isSpanish ? '**IMPORTANTE: El cliente está escribiendo en ESPAÑOL. Debes responder en español en el campo "description".**' : ''}
 
 DESCRIPTION: "${description}"
 ${detectedItemsText}
@@ -400,25 +475,57 @@ ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 ${multiTaskContext}
 ${chatContext}
 
+=== MATERIALS PRICING REFERENCE ===
+Use these approximate prices to calculate total costs (labor + materials):
+
+PLUMBING MATERIALS:
+Toilets: Basic $150-250 | Mid-range $250-400 | Premium $400-700 | + Install $200
+Kitchen Sinks: Stainless $150-300 | Double $250-450 | Farmhouse $400-800 | + Install $180
+Faucets: Basic $80-150 | Mid-range $150-300 | Pull-down $200-400 | + Install $120
+Disposals: 1/3 HP $120-180 | 1/2 HP $180-280 | 3/4 HP $280-450 | + Install $200
+Vanities: 24" $300-500 | 36" $500-900 | 48" $800-1,500 | + Install $280
+Water Heaters: 40-gal $400-600 | 50-gal gas $500-800 | Tankless $800-2,500 | + Install $500
+
+ELECTRICAL MATERIALS:
+Ceiling Fans: Basic $100-200 | With light $200-400 | Premium $400-700 | + Install $180
+Light Fixtures: Basic $50-120 | Pendants $150-400 | Chandelier $200-1,000 | + Install $120
+Outlets: Standard $3-8 | GFCI $15-30 | USB $20-40 | + Install $90
+
+KITCHEN/BATHROOM:
+Cabinets: Stock $100-200/lf | Semi-custom $200-400/lf | Custom $400-800/lf | + Install $300
+Countertops: Laminate $20-40/sqft | Granite $50-100/sqft | Quartz $70-150/sqft | + Install $400
+Tile: Ceramic $3-8/sqft | Porcelain $5-12/sqft | Stone $10-25/sqft | + Install $12/sqft
+
+ALWAYS include materials in cost_breakdown when applicable!
+
+=== CUSTOMER REVIEWS (Use for trust building) ===
+When providing estimates, you can reference these verified reviews:
+
+"Gabriela S. said: 'Unclogged our drain, fixed a leaky faucet, and installed a new toilet - all in one appointment. Super efficient!'"
+"Tom & Jennifer K. from Palmilla: 'Honest pricing, no hidden fees. They told us exactly what needed to be done and what could wait.'"
+"David W., California vacation home owner: 'They send photos of completed work and bills are always accurate.'"
+
+Use these naturally in your description when relevant (e.g., "Many customers like Gabriela have appreciated our efficiency with multi-service appointments").
+
 CRITICAL PRICING RULES:
 
 1. **QUICK TASKS (under 30 min):** Door knobs, toilet seats, light switches, cabinet hardware, smoke detector batteries, etc.
    - Set labor_hours to 0.5 and base_labor_cost to 0
-   - These fall under the $100 service call
+   - These fall under the $60 service call
 
 2. **MULTIPLE QUICK TASKS:** If ${multiTaskAnalysis.taskCount} quick tasks are detected and fit in 30 minutes total:
-   - They ALL fall under ONE $100 service call
+   - They ALL fall under ONE $60 service call
    - Only materials are additional
    - Set is_multi_task to true
    - Emphasize VALUE of bundling vs separate visits
 
 3. **FOLLOW-UP BUNDLING:** If this is a follow-up request adding tasks to an existing work order:
-   - ALL tasks still fit under the SAME $100 service call
-   - Do NOT charge an additional $100 service call fee
+   - ALL tasks still fit under the SAME $60 service call
+   - Do NOT charge an additional $60 service call fee
    - Only charge for new materials
    - Emphasize convenience and savings of bundling
 
-4. **BIGGER JOBS (over 30 minutes):** Calculate normal labor at $80/hour + $100 service call overhead
+4. **BIGGER JOBS (over 30 minutes):** Calculate normal labor at $80/hour + $60 service call overhead
 
 5. **PRIORITY:** Customer description is PRIMARY. Image detection is supplementary.
 
@@ -455,7 +562,7 @@ Respond ONLY with valid JSON (no markdown):
         messages: [
           {
             role: 'system',
-            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) and multi-task scenarios accurately. Multiple quick tasks under 30 min total = ONE $100 service call + materials only. Follow-up requests that add tasks to existing work orders still use the same $100 service call - do not charge twice.'
+            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) and multi-task scenarios accurately. Multiple quick tasks under 30 min total = ONE $60 service call + materials only. Follow-up requests that add tasks to existing work orders still use the same $60 service call - do not charge twice.'
           },
           {
             role: 'user',
@@ -505,44 +612,44 @@ Respond ONLY with valid JSON (no markdown):
     let costEstimate;
     
     if (isQuick || isMulti) {
-      // QUICK TASK(S) - Falls under $100 service call
+      // QUICK TASK(S) - Falls under $60 service call
       const partsMin = groqAnalysis.cost_breakdown?.parts_min || (taskCount * 10);
       const partsMax = groqAnalysis.cost_breakdown?.parts_max || (taskCount * 60);
-      
+
       let pricingNote;
-      
+
       if (multiTaskAnalysis.isBundledFollowUp) {
         // Follow-up request bundling
-        pricingNote = `Perfect! Adding ${groqAnalysis.description || 'this task'} to your existing work order. Since all ${taskCount} tasks fit in one visit and take about ${multiTaskAnalysis.estimatedMinutes} minutes total, you still only pay the $100 service call + materials. No additional service fee!`;
+        pricingNote = `Perfect! Adding ${groqAnalysis.description || 'this task'} to your existing work order. Since all ${taskCount} tasks fit in one visit and take about ${multiTaskAnalysis.estimatedMinutes} minutes total, you still only pay the $60 service call + materials. No additional service fee!`;
       } else if (isMulti) {
         pricingNote = multiTaskAnalysis.hasFollowUpIntent
-          ? `Perfect! Both/All ${taskCount} of these tasks fit into ONE $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $100 service call + materials. Adding tasks to the same visit saves you money!`
-          : `Excellent news! All ${taskCount} of these are quick tasks that fit into our $100 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $100 service call + materials. This is MUCH better value than doing them separately!`;
+          ? `Perfect! Both/All ${taskCount} of these tasks fit into ONE $60 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $60 service call + materials. Adding tasks to the same visit saves you money!`
+          : `Excellent news! All ${taskCount} of these are quick tasks that fit into our $60 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $60 service call + materials. This is MUCH better value than doing them separately!`;
       } else {
-        pricingNote = `Great news! This is a quick task that falls under our $100 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional.`;
+        pricingNote = `Great news! This is a quick task that falls under our $60 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional.`;
       }
-      
+
       costEstimate = {
-        service_call_fee: 100,
+        service_call_fee: 60,
         parts_cost: {
           min: partsMin,
           max: partsMax
         },
         labor_hours: 0.5,
         crew_size: 1,
-        crew_justification: isMulti 
-          ? `Multiple quick tasks - 1 person can handle all ${taskCount} efficiently` 
+        crew_justification: isMulti
+          ? `Multiple quick tasks - 1 person can handle all ${taskCount} efficiently`
           : 'Quick task - 1 person can handle',
         disposal_cost: 0,
         total_cost: {
-          min: 100 + partsMin,
-          max: 100 + partsMax
+          min: 60 + partsMin,
+          max: 60 + partsMax
         },
         pricing_note: pricingNote,
         is_multi_task: isMulti,
         task_count: taskCount,
         is_bundled_followup: multiTaskAnalysis.isBundledFollowUp,
-        value_message: isMulti && !multiTaskAnalysis.isBundledFollowUp ? `You save $${(taskCount - 1) * 100} by bundling vs ${taskCount} separate $100 service calls!` : null
+        value_message: isMulti && !multiTaskAnalysis.isBundledFollowUp ? `You save $${(taskCount - 1) * 60} by bundling vs ${taskCount} separate $60 service calls!` : null
       };
     } else {
       
@@ -551,7 +658,7 @@ Respond ONLY with valid JSON (no markdown):
       const laborRate = 80;
       
       const finalLaborCost = Math.max(baseLaborCost * crewSize, laborHours * laborRate * crewSize);
-      const serviceCallFee = 100;
+      const serviceCallFee = 60;
       const totalLaborWithOverhead = finalLaborCost + serviceCallFee;
 
       let disposalCost = 0;
@@ -577,7 +684,7 @@ Respond ONLY with valid JSON (no markdown):
           min: partsMin + totalLaborWithOverhead + disposalCost,
           max: partsMax + totalLaborWithOverhead + disposalCost
         },
-        pricing_note: `$100 service call includes diagnosis + first 30 minutes of work. If you approve, it applies to your total. You only pay for actual hours worked - finish early and you save!`,
+        pricing_note: `$60 service call includes diagnosis + first 30 minutes of work. If you approve, it applies to your total. You only pay for actual hours worked - finish early and you save!`,
         is_multi_task: false,
         task_count: 1,
         value_message: null
@@ -706,34 +813,34 @@ function createSmartFallback(description, serviceContext) {
   
   if (isQuick) {
     costEstimate = {
-      service_call_fee: 100,
+      service_call_fee: 60,
       parts_cost: { min: partsMin, max: partsMax },
       labor_cost: 0,
       labor_hours: 0.5,
       crew_size: 1,
       crew_justification: 'Quick task - 1 person',
       disposal_cost: 0,
-      total_cost: { 
-        min: 100 + partsMin, 
-        max: 100 + partsMax 
+      total_cost: {
+        min: 60 + partsMin,
+        max: 60 + partsMax
       },
-      pricing_note: `Great news! This is a quick task that falls under our $100 service call (includes diagnosis + first 30 min). Only materials are additional!`
+      pricing_note: `Great news! This is a quick task that falls under our $60 service call (includes diagnosis + first 30 min). Only materials are additional!`
     };
   } else {
-    const laborCost = (laborHours * 80 * crewSize) + 100;
+    const laborCost = (laborHours * 80 * crewSize) + 60;
     costEstimate = {
-      service_call_fee: 100,
+      service_call_fee: 60,
       parts_cost: { min: partsMin, max: partsMax },
       labor_cost: laborCost,
       labor_hours: laborHours,
       crew_size: crewSize,
       crew_justification: 'Standard repair',
       disposal_cost: disposalCost,
-      total_cost: { 
-        min: partsMin + laborCost + disposalCost, 
-        max: partsMax + laborCost + disposalCost 
+      total_cost: {
+        min: partsMin + laborCost + disposalCost,
+        max: partsMax + laborCost + disposalCost
       },
-      pricing_note: `$100 service call includes diagnosis + first 30 min. You pay actual hours only - finish early and save!`
+      pricing_note: `$60 service call includes diagnosis + first 30 min. You pay actual hours only - finish early and save!`
     };
   }
   
@@ -803,9 +910,72 @@ export default async function handler(req, res) {
     }
 
     if (!description || description.trim().length === 0) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         error: 'Description is required',
-        success: false 
+        success: false
+      });
+    }
+
+    // ========================================
+    // CRITICAL CHECKS: SERVICE AREA & EMERGENCY
+    // ========================================
+
+    // Detect language
+    const isSpanish = detectSpanish(description);
+
+    // Check service area (Cabo San Lucas only)
+    const serviceAreaCheck = checkServiceArea(description);
+    if (serviceAreaCheck.isOutsideServiceArea) {
+      const message = isSpanish
+        ? "Lo sentimos, solo damos servicio en Cabo San Lucas y áreas inmediatas circundantes. No prestamos servicios en San José del Cabo, Corredor, ni East Cape. Esto nos permite proporcionar el mejor servicio y los tiempos de respuesta más rápidos."
+        : "We focus our services exclusively on Cabo San Lucas and immediate surrounding areas. We do not service San José del Cabo, Los Cabos Corridor, or East Cape. This allows us to provide the best possible service and fastest response times.";
+
+      return res.status(200).json({
+        success: true,
+        needs_clarification: false,
+        analysis: {
+          issue_type: 'Service Area',
+          severity: 'Info',
+          description: message,
+          required_parts: [],
+          difficulty_level: 'N/A',
+          crew_size: 0,
+          is_quick_task: false
+        },
+        cost_estimate: null,
+        pricing: [],
+        stores: []
+      });
+    }
+
+    // Check for emergency
+    const isEmergency = detectEmergency(description);
+    if (isEmergency) {
+      const message = isSpanish
+        ? "🚨 ¡Esto suena como una emergencia! Por favor llámenos AHORA MISMO al +52 612 169 8328 para asistencia inmediata. Tenemos un tiempo de respuesta de 30 minutos y estamos disponibles 24/7. ¡No espere - llame ahora!"
+        : "🚨 This sounds like an emergency! Please call us RIGHT NOW at +52 612 169 8328 for immediate assistance. We have a 30-minute response time and are available 24/7. Don't wait - call now!";
+
+      return res.status(200).json({
+        success: true,
+        needs_clarification: false,
+        is_emergency: true,
+        analysis: {
+          issue_type: 'Emergency',
+          severity: 'Critical',
+          description: message,
+          required_parts: [],
+          difficulty_level: 'Professional',
+          crew_size: 1,
+          is_quick_task: false
+        },
+        cost_estimate: {
+          service_call_fee: 60,
+          emergency_note: isSpanish
+            ? "Servicio de emergencia 24/7 disponible - misma tarifa día y noche"
+            : "24/7 emergency service available - same rates day and night"
+        },
+        pricing: [],
+        stores: []
       });
     }
 

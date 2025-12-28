@@ -450,16 +450,18 @@ export default function TVMountingCeilingFansCaboArticle() {
 
       <h3>Service Coverage</h3>
       <p>
-        Serving all of Cabo San Lucas and the Los Cabos region including:
+        Serving Cabo San Lucas and immediate surrounding areas including:
       </p>
       <ul>
         <li>Downtown Cabo San Lucas</li>
-        <li>San José del Cabo</li>
-        <li>Corridor communities</li>
         <li>Pedregal and hillside neighborhoods</li>
         <li>Marina and waterfront properties</li>
         <li>Residential communities and HOAs</li>
+        <li>All Cabo San Lucas communities</li>
       </ul>
+      <p className="text-sm text-gray-600 mt-2">
+        <strong>Note:</strong> Call +52 612 169 8328 to confirm we service your specific location.
+      </p>
 
       <h3>Why Wait?</h3>
       <p>

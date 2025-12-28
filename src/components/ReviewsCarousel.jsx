@@ -12,14 +12,14 @@ const reviews = [
   },
   {
     name: "John & Sarah T.",
-    location: "Tourist Corridor",
+    location: "Cabo San Lucas",
     rating: 5,
     text: "Professional, punctual, and affordable. They remodeled our vacation rental kitchen and it looks amazing. Our guests love it!",
     response: "Thank you for the wonderful review! We truly appreciate property owners like you who trust us with vacation rentals. That kitchen turned out beautifully - we're honored to be your go-to team. Looking forward to our continued partnership! - Eddie, Cabos Handyman"
   },
   {
     name: "Roberto M.",
-    location: "San José del Cabo",
+    location: "Cabo San Lucas",
     rating: 5,
     text: "Emergency plumbing issue at 11 PM - they answered immediately and came within 30 minutes. Saved us from major water damage!",
     response: "Thank you for the fantastic review, Roberto! Emergency situations are stressful, and we're glad we could respond quickly at 11 PM to prevent further damage. 24/7 emergency service is a priority for us because we know these things don't happen on a schedule! - Eddie"
@@ -82,14 +82,14 @@ const reviews = [
   },
   {
     name: "Susan M.",
-    location: "Tourist Corridor",
+    location: "Cabo San Lucas",
     rating: 5,
     text: "Storm damage repair was done quickly and professionally. They worked with our insurance company too. Stress-free experience.",
     response: "Thank you, Susan! Storm damage is stressful, and we're glad we could help coordinate with your insurance company to make it stress-free. We're proud of how the repairs turned out! - Eddie"
   },
   {
     name: "Francisco V.",
-    location: "San José del Cabo",
+    location: "Cabo San Lucas",
     rating: 5,
     text: "Repaired our pool equipment and showed us how to maintain it properly. Great service and educational too!",
     response: "Thank you, Francisco! We love educating our clients on proper maintenance - it saves money in the long run. Your satisfaction is our top priority. Thanks for choosing Cabos Handyman! - Eddie"

@@ -22,7 +22,7 @@ export default function FAQ() {
                 "name": "What areas do you serve in Los Cabos?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "We provide professional handyman and construction services throughout Cabo San Lucas and the entire Los Cabos area, including San José del Cabo, the Cabo Corridor, Pacific-side communities, and downtown areas. We're available 24/7 for emergency repairs. We serve both residential and commercial properties, including vacation rentals and property management companies."
+                  "text": "We focus our services exclusively on Cabo San Lucas and immediate surrounding areas to ensure the fastest response times and highest quality service. This allows us to maintain our 30-minute emergency response guarantee. We're available 24/7 for emergency repairs. We serve both residential and commercial properties, including vacation rentals and property management companies."
                 }
               },
               {
@@ -120,7 +120,7 @@ export default function FAQ() {
               What areas do you serve in Los Cabos?
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              We provide professional handyman and construction services throughout <strong>Cabo San Lucas</strong> and the entire <strong>Los Cabos area</strong>, including San José del Cabo, the Cabo Corridor, Pacific-side communities, and downtown areas. We're available 24/7 for emergency repairs. Call <a href="tel:+526121698328" className="text-teal-600 font-semibold hover:text-teal-700">+52 612 169 8328</a> to confirm we service your area!
+              We focus our services exclusively on <strong>Cabo San Lucas and immediate surrounding areas</strong> to ensure the fastest response times and highest quality service. This allows us to maintain our 30-minute emergency response guarantee and provide the best possible service to our Cabo San Lucas clients. We're available 24/7 for emergency repairs. Call <a href="tel:+526121698328" className="text-teal-600 font-semibold hover:text-teal-700">+52 612 169 8328</a> to confirm we service your specific location!
             </p>
           </div>
 

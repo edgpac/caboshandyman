@@ -155,10 +155,10 @@ const ContactPage = () => {
                       <div>
                         <h3 className="font-semibold mb-1 text-gray-900">Service Area</h3>
                         <p className="text-gray-700">
-                          Cabo San Lucas<br />
-                          San José del Cabo<br />
-                          Tourist Corridor<br />
-                          All of Los Cabos, BCS, Mexico
+                          Cabo San Lucas and immediate surrounding areas only
+                        </p>
+                        <p className="text-sm text-gray-600 mt-2">
+                          <strong>Note:</strong> To ensure the fastest response times and highest quality service, we focus exclusively on Cabo San Lucas. Call +52 612 169 8328 to confirm we service your specific location.
                         </p>
                       </div>
                     </div>

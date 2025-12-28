@@ -18,7 +18,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
         <li><strong>Nearly 20 years</strong> of hands-on plumbing experience</li>
         <li><strong>Custom home construction background</strong> - We've installed complete plumbing systems from the ground up</li>
         <li><strong>600+ completed projects</strong> across residential, commercial, and custom home builds</li>
-        <li><strong>El Cardonal to Cabo San Lucas</strong> - Serving the entire Los Cabos region</li>
+        <li><strong>Cabo San Lucas focused service</strong> - Fast response times in our primary service area</li>
         <li><strong>24/7 emergency availability</strong> with 30-minute response time</li>
       </ul>
 
@@ -406,7 +406,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
 
       <h3>What areas do you serve?</h3>
       <p>
-        We serve all of Cabo San Lucas, San José del Cabo, the Corridor between them, El Cardonal, the East Cape, and surrounding Los Cabos communities. If you're in the region and need plumbing service, give us a call.
+        We focus our services on Cabo San Lucas and immediate surrounding areas to ensure the fastest response times and highest quality service. This allows us to maintain our 30-minute emergency response guarantee. Call +52 612 169 8328 to confirm we service your specific location.
       </p>
 
       <h2>Schedule Your Plumbing Service Today</h2>
@@ -420,7 +420,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
         <li><strong>Website:</strong> caboshandyman.com</li>
         <li><strong>Email:</strong> loscabohandyman@gmail.com</li>
         <li><strong>WhatsApp:</strong> +52 612 169 8328 (Fast response)</li>
-        <li><strong>Service Area:</strong> All of Los Cabos region</li>
+        <li><strong>Service Area:</strong> Cabo San Lucas and immediate surrounding areas</li>
       </ul>
 
       <h3>What to Expect When You Call</h3>

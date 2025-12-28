@@ -156,7 +156,7 @@ export default async function handler(req, res) {
             <p style="margin: 10px 0;">📞 Our team will contact you ${urgency === 'urgent' ? 'within 2-4 hours' : urgency === 'soon' ? 'within 24 hours' : 'within 24-48 hours'}</p>
             <p style="margin: 10px 0;">🔧 We'll discuss your project and schedule a service call</p>
             <p style="margin: 10px 0; padding: 10px; background: #fef3c7; border-radius: 4px;">
-              <strong>Service Call:</strong> $100 USD (includes diagnosis and first 30 minutes of labor)
+              <strong>Service Call:</strong> $60 USD (includes diagnosis and first 30 minutes of labor)
             </p>
           </div>
           
