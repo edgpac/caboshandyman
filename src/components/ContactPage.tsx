@@ -191,7 +191,7 @@ const ContactPage = () => {
                     Service Call Information
                   </h3>
                   <p className="text-gray-700 mb-2">
-                    <strong className="text-teal-700">$100 USD</strong> service call includes:
+                    <strong className="text-teal-700">$60 USD</strong> service call includes:
                   </p>
                   <ul className="text-sm text-gray-700 space-y-1 ml-4">
                     <li>✓ Professional diagnosis</li>

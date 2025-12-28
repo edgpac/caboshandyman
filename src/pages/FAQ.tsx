@@ -30,7 +30,7 @@ export default function FAQ() {
                 "name": "Do you offer free estimates?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes! We provide completely free estimates for all remodeling projects including kitchen and bathroom renovations, painting, tile work, and carpentry. For quick repairs and small jobs, there's a $100 USD service call fee, which is fully credited toward your project if you decide to proceed."
+                  "text": "Yes! We provide completely free estimates for all remodeling projects including kitchen and bathroom renovations, painting, tile work, and carpentry. For quick repairs and small jobs, there's a $60 USD service call fee, which is fully credited toward your project if you decide to proceed."
                 }
               },
               {
@@ -62,7 +62,7 @@ export default function FAQ() {
                 "name": "What is your service call fee and what does it include?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Our service call fee is $100 USD and includes: Professional on-site diagnosis of your issue, first 30 minutes of labor, written estimate for additional work needed, and expert recommendations. This service call fee is fully credited toward your project if you proceed with the work. For large remodeling projects over $1,000, we waive the service call fee entirely and provide free consultations."
+                  "text": "Our service call fee is $60 USD and includes: Professional on-site diagnosis of your issue, first 30 minutes of labor, written estimate for additional work needed, and expert recommendations. This service call fee is fully credited toward your project if you proceed with the work. For large remodeling projects over $1,000, we waive the service call fee entirely and provide free consultations."
                 }
               },
               {
@@ -130,7 +130,7 @@ export default function FAQ() {
               Do you offer free estimates?
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              <strong>Yes!</strong> We provide completely free estimates for all remodeling projects including kitchen and bathroom renovations, painting, tile work, and carpentry. For quick repairs and small jobs, there's a <strong>$100 USD service call fee</strong>, which is fully credited toward your project if you decide to proceed. Call <a href="tel:+526121698328" className="text-teal-600 font-semibold hover:text-teal-700">+52 612 169 8328</a> for your free estimate today!
+              <strong>Yes!</strong> We provide completely free estimates for all remodeling projects including kitchen and bathroom renovations, painting, tile work, and carpentry. For quick repairs and small jobs, there's a <strong>$60 USD service call fee</strong>, which is fully credited toward your project if you decide to proceed. Call <a href="tel:+526121698328" className="text-teal-600 font-semibold hover:text-teal-700">+52 612 169 8328</a> for your free estimate today!
             </p>
           </div>
 
@@ -188,7 +188,7 @@ export default function FAQ() {
               What is your service call fee and what does it include?
             </h2>
             <p className="text-gray-700 leading-relaxed mb-3">
-              Our service call fee is <strong>$100 USD</strong> and includes:
+              Our service call fee is <strong>$60 USD</strong> and includes:
             </p>
             <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
               <li>Professional on-site diagnosis of your issue</li>

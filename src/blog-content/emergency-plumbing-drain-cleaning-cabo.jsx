@@ -341,7 +341,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
 
       <h3>Standard Service Call</h3>
       <p>
-        <strong>$100 USD service call</strong> includes:
+        <strong>$60 USD service call</strong> includes:
       </p>
       <ul>
         <li>Professional diagnosis of your plumbing problem</li>
@@ -381,7 +381,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
 
       <h3>Do you charge extra for after-hours emergency service?</h3>
       <p>
-        No. Unlike many plumbing services, we charge the same rates 24/7. A plumbing emergency at 2 AM costs the same as one at 2 PM. Our standard $100 service call applies around the clock.
+        No. Unlike many plumbing services, we charge the same rates 24/7. A plumbing emergency at 2 AM costs the same as one at 2 PM. Our standard $60 service call applies around the clock.
       </p>
 
       <h3>Can you really fix a clogged toilet that has a toy stuck in it?</h3>
