@@ -66,7 +66,7 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
         { name: "Toilet Installation/Replacement", startingPrice: "$200", duration: "2-3 hours" },
         { name: "Vanity Installation", startingPrice: "$280", duration: "3-4 hours" },
         { name: "Shower Installation", startingPrice: "$600", duration: "1-2 days" },
-        { name: "Bathtub Installation", startingPrice: "$800", duration: "1-2 days" },
+        { name: "Toilet Unclogging", startingPrice: "$80", duration: "1-3 hours" },
         { name: "Bathroom Faucet Installation", startingPrice: "$120", duration: "1-2 hours" },
         { name: "Shower Head Replacement", startingPrice: "$80", duration: "30min-1hr" }
       ]
