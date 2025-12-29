@@ -90,7 +90,7 @@ function detectEmergency(text) {
 // ========================================
 
 const quickTaskKeywords = [
-  // PLUMBING QUICK FIXES (under 1 hour)
+  // PLUMBING QUICK FIXES (under 30 min)
   'flush valve', 'flapper', 'fill valve', 'toilet seat', 'toilet handle', 'toilet chain',
   'toilet lever', 'toilet paper holder', 'towel bar', 'towel rack', 'towel ring', 
   'robe hook', 'toilet brush holder', 'soap dish', 'toothbrush holder',
@@ -105,7 +105,7 @@ const quickTaskKeywords = [
   'shower drain cover', 'tub drain cover', 'sink drain', 'shower basket', 'hair catcher',
   'faucet handle', 'single handle', 'two handle', 'widespread faucet part',
   
-  // DOORS & HARDWARE (under 1 hour)
+  // DOORS & HARDWARE (under 30 min)
   'door knob', 'door handle', 'doorknob', 'door lever', 'passage knob', 'privacy knob',
   'deadbolt', 'door lock', 'keyed lock', 'thumbturn', 'door latch', 'spring latch',
   'cabinet knob', 'cabinet handle', 'cabinet pull', 'drawer pull', 'drawer knob', 
@@ -119,7 +119,7 @@ const quickTaskKeywords = [
   'door bumper', 'door silencer', 'magnetic catch', 'roller catch', 'ball catch',
   'coat hook', 'door hook', 'over-the-door hook', 'closet rod bracket', 'shelf pin',
   
-  // ELECTRICAL QUICK FIXES (under 1 hour)
+  // ELECTRICAL QUICK FIXES (under 30 min)
   'light switch', 'toggle switch', 'rocker switch', 'dimmer switch', 'fan switch',
   '3-way switch', 'outlet cover', 'switch plate', 'wall plate', 'cover plate',
   'decorator plate', 'outlet', 'receptacle', 'duplex outlet', 'gfci outlet', 
@@ -134,7 +134,7 @@ const quickTaskKeywords = [
   'ceiling fan pull chain', 'fan chain', 'light chain', 'pull switch', 'canopy cover',
   'outlet tester', 'surge protector', 'power strip', 'extension cord holder',
   
-  // WINDOW TREATMENTS & COVERINGS (under 1 hour)
+  // WINDOW TREATMENTS & COVERINGS (under 30 min)
   'curtain rod', 'drapery rod', 'shower curtain rod', 'tension rod', 'cafe rod',
   'curtain bracket', 'rod bracket', 'rod end', 'finial', 'curtain ring', 'clip ring',
   'blind', 'shade', 'roller shade', 'cellular shade', 'honeycomb shade', 'roman shade',
@@ -144,7 +144,7 @@ const quickTaskKeywords = [
   'window lock', 'sash lock', 'window latch', 'window crank', 'casement crank',
   'blind cord', 'lift cord', 'tilt wand', 'cordless blind', 'valance clip',
   
-  // WALLS & HANGING (under 1 hour)
+  // WALLS & HANGING (under 30 min)
   'picture frame', 'photo frame', 'wall art', 'canvas', 'poster frame',
   'mirror', 'wall mirror', 'bathroom mirror', 'decorative mirror', 'accent mirror',
   'coat rack', 'wall coat rack', 'coat hook', 'wall hook', 'utility hook',
@@ -156,7 +156,7 @@ const quickTaskKeywords = [
   'picture hook', 'picture hanger', 'sawtooth hanger', 'd-ring hanger', 'wire hanger',
   'key holder', 'key rack', 'mail organizer', 'wall organizer', 'magazine rack',
   
-  // KITCHEN & BATH ACCESSORIES (under 1 hour)
+  // KITCHEN & BATH ACCESSORIES (under 30 min)
   'shower caddy', 'corner caddy', 'hanging caddy', 'suction caddy', 'tension caddy',
   'shower curtain', 'curtain liner', 'curtain hooks', 'shower rings',
   'grab bar', 'safety bar', 'balance bar', 'towel warmer', 'heated towel rack',
@@ -166,7 +166,7 @@ const quickTaskKeywords = [
   'cutting board rack', 'dish rack', 'drying rack', 'cup holder', 'mug hook',
   'sink grid', 'sink mat', 'drain board', 'dish drainer', 'silverware tray',
   
-  // HVAC & VENTILATION (under 1 hour)
+  // HVAC & VENTILATION (under 30 min)
   'air vent cover', 'vent cover', 'register cover', 'floor register', 'wall register',
   'ceiling register', 'grille cover', 'return air cover', 'return vent', 'air grille',
   'hvac filter', 'air filter', 'furnace filter', 'ac filter', 'pleated filter',
@@ -174,14 +174,14 @@ const quickTaskKeywords = [
   'bathroom fan cover', 'exhaust fan cover', 'fan grille', 'dryer vent cover',
   'vent flap', 'damper', 'vent cap', 'soffit vent', 'gable vent',
   
-  // SMALL APPLIANCE FIXES (under 1 hour)
+  // SMALL APPLIANCE FIXES (under 30 min)
   'garbage disposal reset', 'disposal wrench', 'dishwasher filter', 'dishwasher basket',
   'refrigerator filter', 'water filter', 'ice maker filter', 'fridge light',
   'microwave turntable', 'turntable roller', 'microwave light', 'oven light',
   'range hood light', 'hood bulb', 'dryer lint trap',
   'washer hose', 'washer filter', 'appliance foot', 'appliance leveling leg',
   
-  // OUTDOOR & EXTERIOR (under 1 hour)
+  // OUTDOOR & EXTERIOR (under 30 min)
   'porch light', 'outdoor light', 'exterior light', 'wall lantern', 'wall sconce',
   'motion light', 'motion sensor light', 'security light', 'flood light bulb',
   'landscape light', 'path light', 'solar light', 'stake light', 'garden light',
@@ -190,14 +190,14 @@ const quickTaskKeywords = [
   'flag holder', 'flag bracket', 'welcome mat', 'door mat', 'boot tray',
   'gutter guard', 'downspout extension', 'splash block', 'window well cover',
   
-  // SAFETY & SECURITY (under 1 hour)
+  // SAFETY & SECURITY (under 30 min)
   'door chain', 'security chain', 'chain guard', 'door guard', 'barrel bolt',
   'slide bolt', 'surface bolt', 'cabinet lock', 'child lock', 'safety latch',
   'baby gate', 'pressure gate', 'hardware mount gate', 'gate extension',
   'sliding door lock', 'patio door lock', 'pin lock',
   'security bar', 'window bar', 'door brace', 'security wedge',
   
-  // MISCELLANEOUS QUICK TASKS (under 1 hour)
+  // MISCELLANEOUS QUICK TASKS (under 30 min)
   'caulk', 'caulking', 're-caulk', 'silicone caulk', 'tub caulk', 'grout caulk',
   'grout touch-up', 'grout pen', 'tile touch-up', 'small patch', 'drywall patch',
   'spackle', 'hole patch', 'nail hole', 'screw hole', 'wall repair',
@@ -461,7 +461,7 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
       ? `\n\nMULTI-TASK SCENARIO DETECTED:
 - ${multiTaskAnalysis.taskCount} quick tasks identified
 - Estimated time: ${multiTaskAnalysis.estimatedMinutes} minutes total
-- ${multiTaskAnalysis.fitsInServiceCall ? 'ALL FIT IN ONE $60 SERVICE CALL! Bundle pricing applies.' : 'Exceeds 1 hour - may need extended time or multiple visits.'}
+- ${multiTaskAnalysis.fitsInServiceCall ? 'ALL FIT IN ONE $60 SERVICE CALL! Bundle pricing applies.' : 'Exceeds 30 min - may need extended time or multiple visits.'}
 - ${multiTaskAnalysis.isBundledFollowUp ? 'FOLLOW-UP REQUEST: Customer is adding tasks to existing work order.' : multiTaskAnalysis.hasFollowUpIntent ? 'Customer is adding tasks to existing quote.' : ''}`
       : '';
 
@@ -478,42 +478,42 @@ ${chatContext}
 === LABOR PRICING STRUCTURE ===
 **BASE RATE: $60 per hour PER PERSON**
 
-SERVICE CALL: $60 (includes diagnosis + FIRST FULL HOUR of labor)
-ADDITIONAL LABOR: $60/hour per person for hours beyond the first hour
+SERVICE CALL: $60 (includes first 30 minutes + diagnosis)
+ADDITIONAL LABOR: $60/hour per person for time beyond 30 minutes
 
 **CALCULATION FORMULA:**
-Total Labor = $60 service call + [(Total Hours - 1) × Number of People × $60/hour]
+Total Labor = $60 service call + [(Total Hours - 0.5) × Number of People × $60/hour]
 
 **CREW SIZE BY COMPLEXITY:**
 
 1 PERSON (Simple tasks - 30min to 3 hours):
-- Toilet repair/replacement (2hrs = $120 labor)
-- Faucet installation (1.5hrs = $90 labor)
-- Light fixture installation (1hr = $60 labor)
-- Outlet/switch work (1hr = $60 labor)
+- Toilet repair/replacement (2hrs = $150 labor)
+- Faucet installation (1.5hrs = $120 labor)
+- Light fixture installation (1hr = $90 labor)
+- Outlet/switch work (1hr = $90 labor)
 - Picture hanging, small repairs
 - Drain cleaning
 
 1-2 PEOPLE (Medium tasks - 2-6 hours):
-- Cabinet installation (6hrs, 2 people = $660 labor)
-- Vanity installation (4hrs, 1 person = $240 labor)
-- Ceiling fan installation (2hrs, 1 person = $120 labor)
-- Small tile work (4hrs, 1 person = $240 labor)
+- Cabinet installation (6hrs, 2 people = $720 labor)
+- Vanity installation (4hrs, 1 person = $270 labor)
+- Ceiling fan installation (2hrs, 1 person = $150 labor)
+- Small tile work (4hrs, 1 person = $270 labor)
 - Painting single room
 - Appliance installation
 
 2-3 PEOPLE (Complex tasks - 4+ hours or heavy):
-- Full kitchen remodel (20hrs, 2 people = $2,340 labor)
-- Full bathroom remodel (16hrs, 2 people = $1,860 labor)
-- Large tile jobs (12hrs, 2 people = $1,380 labor)
+- Full kitchen remodel (20hrs, 2 people = $2,460 labor)
+- Full bathroom remodel (16hrs, 2 people = $1,920 labor)
+- Large tile jobs (12hrs, 2 people = $1,440 labor)
 - Deck construction
 - Major renovations
 
 **EXAMPLES:**
-- Toilet replacement (2 hours, 1 person): $60 + (1 × 1 × $60) = $120 labor
-- Cabinet install (6 hours, 2 people): $60 + (5 × 2 × $60) = $660 labor
-- Ceiling fan (2 hours, 1 person): $60 + (1 × 1 × $60) = $120 labor
-- 1-hour faucet install (1 person): $60 service call only (first hour included)
+- Toilet replacement (2 hours, 1 person): $60 + (1.5 × 1 × $60) = $150 labor
+- Cabinet install (6 hours, 2 people): $60 + (5.5 × 2 × $60) = $720 labor
+- Ceiling fan (2 hours, 1 person): $60 + (1.5 × 1 × $60) = $150 labor
+- Quick faucet (30 min, 1 person): $60 service call only (no additional labor)
 
 === MATERIALS PRICING REFERENCE ===
 Use these approximate prices to calculate total costs (labor + materials):
@@ -549,11 +549,11 @@ Use these naturally in your description when relevant (e.g., "Many customers lik
 
 CRITICAL PRICING RULES:
 
-1. **QUICK TASKS (under 1 hour):** Door knobs, toilet seats, light switches, cabinet hardware, smoke detector batteries, etc.
-   - Set labor_hours to 1.0 and base_labor_cost to 0
+1. **QUICK TASKS (under 30 min):** Door knobs, toilet seats, light switches, cabinet hardware, smoke detector batteries, etc.
+   - Set labor_hours to 0.5 and base_labor_cost to 0
    - These fall under the $60 service call
 
-2. **MULTIPLE QUICK TASKS:** If ${multiTaskAnalysis.taskCount} quick tasks are detected and fit in 1 hour total:
+2. **MULTIPLE QUICK TASKS:** If ${multiTaskAnalysis.taskCount} quick tasks are detected and fit in 30 minutes total:
    - They ALL fall under ONE $60 service call
    - Only materials are additional
    - Set is_multi_task to true
@@ -565,9 +565,9 @@ CRITICAL PRICING RULES:
    - Only charge for new materials
    - Emphasize convenience and savings of bundling
 
-4. **BIGGER JOBS (over 1 hour):** Calculate normal labor at $60/hour PER PERSON + $60 service call overhead
-   - Formula: Labor = (Hours - 1) × People × $60/hour + $60 service call
-   - Example: 2 hours, 1 person = (2 - 1) × 1 × $60 + $60 = $60 + $60 = $120 total labor
+4. **BIGGER JOBS (over 30 minutes):** Calculate normal labor at $60/hour PER PERSON + $60 service call overhead
+   - Formula: Labor = (Hours - 0.5) × People × $60/hour + $60 service call
+   - Example: 2 hours, 1 person = (2 - 0.5) × 1 × $60 + $60 = $90 + $60 = $150 total labor
 
 5. **PRIORITY:** Customer description is PRIMARY. Image detection is supplementary.
 
@@ -604,7 +604,7 @@ Respond ONLY with valid JSON (no markdown):
         messages: [
           {
             role: 'system',
-            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 1 hour) and multi-task scenarios accurately. Multiple quick tasks under 1 hour total = ONE $60 service call + materials only. Follow-up requests that add tasks to existing work orders still use the same $60 service call - do not charge twice.'
+            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 30 min) and multi-task scenarios accurately. Multiple quick tasks under 30 min total = ONE $60 service call + materials only. Follow-up requests that add tasks to existing work orders still use the same $60 service call - do not charge twice.'
           },
           {
             role: 'user',
@@ -665,10 +665,10 @@ Respond ONLY with valid JSON (no markdown):
         pricingNote = `Perfect! Adding ${groqAnalysis.description || 'this task'} to your existing work order. Since all ${taskCount} tasks fit in one visit and take about ${multiTaskAnalysis.estimatedMinutes} minutes total, you still only pay the $60 service call + materials. No additional service fee!`;
       } else if (isMulti) {
         pricingNote = multiTaskAnalysis.hasFollowUpIntent
-          ? `Perfect! Both/All ${taskCount} of these tasks fit into ONE $60 service call (includes diagnosis + first full hour of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $60 service call + materials. Adding tasks to the same visit saves you money!`
-          : `Excellent news! All ${taskCount} of these are quick tasks that fit into our $60 service call (includes diagnosis + first full hour of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $60 service call + materials. This is MUCH better value than doing them separately!`;
+          ? `Perfect! Both/All ${taskCount} of these tasks fit into ONE $60 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $60 service call + materials. Adding tasks to the same visit saves you money!`
+          : `Excellent news! All ${taskCount} of these are quick tasks that fit into our $60 service call (includes diagnosis + first 30 minutes of work). Since they take about ${multiTaskAnalysis.estimatedMinutes} minutes combined, you'll only pay the $60 service call + materials. This is MUCH better value than doing them separately!`;
       } else {
-        pricingNote = `Great news! This is a quick task that falls under our $60 service call, which includes diagnosis and the first full hour of work. Only materials are additional.`;
+        pricingNote = `Great news! This is a quick task that falls under our $60 service call, which includes diagnosis and the first 30 minutes of work. Only materials are additional.`;
       }
 
       costEstimate = {
@@ -677,7 +677,7 @@ Respond ONLY with valid JSON (no markdown):
           min: partsMin,
           max: partsMax
         },
-        labor_hours: 1.0,
+        labor_hours: 0.5,
         crew_size: 1,
         crew_justification: isMulti
           ? `Multiple quick tasks - 1 person can handle all ${taskCount} efficiently`
@@ -698,10 +698,10 @@ Respond ONLY with valid JSON (no markdown):
       // BIGGER JOB - Standard pricing
       const baseLaborCost = groqAnalysis.cost_breakdown?.base_labor_cost || 150;
       const laborRate = 60; // $60 per hour per person (CORRECT RATE)
-      const serviceCallFee = 60; // Includes first full hour
+      const serviceCallFee = 60; // Includes first 30 minutes
 
-      // CRITICAL: Subtract first full hour (included in service call) before calculating additional labor
-      const additionalHours = Math.max(0, laborHours - 1);
+      // CRITICAL: Subtract first 30 minutes (included in service call) before calculating additional labor
+      const additionalHours = Math.max(0, laborHours - 0.5);
       const calculatedLabor = serviceCallFee + (additionalHours * laborRate * crewSize);
       const totalLaborWithOverhead = Math.max(baseLaborCost * crewSize, calculatedLabor);
 
@@ -728,7 +728,7 @@ Respond ONLY with valid JSON (no markdown):
           min: partsMin + totalLaborWithOverhead + disposalCost,
           max: partsMax + totalLaborWithOverhead + disposalCost
         },
-        pricing_note: `$60 service call includes diagnosis + first full hour of work. If you approve, it applies to your total. You only pay for actual hours worked - finish early and you save!`,
+        pricing_note: `$60 service call includes diagnosis + first 30 minutes of work. If you approve, it applies to your total. You only pay for actual hours worked - finish early and you save!`,
         is_multi_task: false,
         task_count: 1,
         value_message: null
@@ -789,7 +789,7 @@ function createSmartFallback(description, serviceContext) {
     issueType = 'Door Hardware Replacement';
     partsMin = 20;
     partsMax = 80;
-    laborHours = 1.0;
+    laborHours = 0.5;
     severity = 'Low';
     isQuick = true;
   }
@@ -797,7 +797,7 @@ function createSmartFallback(description, serviceContext) {
     issueType = 'Toilet Seat Replacement';
     partsMin = 25;
     partsMax = 60;
-    laborHours = 1.0;
+    laborHours = 0.5;
     severity = 'Low';
     isQuick = true;
   }
@@ -805,7 +805,7 @@ function createSmartFallback(description, serviceContext) {
     issueType = 'Toilet Flush Valve/Flapper Replacement';
     partsMin = 15;
     partsMax = 50;
-    laborHours = 1.0;
+    laborHours = 0.5;
     severity = 'Low';
     isQuick = true;
   }
@@ -813,7 +813,7 @@ function createSmartFallback(description, serviceContext) {
     issueType = 'Switch/Outlet Cover Replacement';
     partsMin = 5;
     partsMax = 25;
-    laborHours = 1.0;
+    laborHours = 0.5;
     severity = 'Low';
     isQuick = true;
   }
@@ -821,7 +821,7 @@ function createSmartFallback(description, serviceContext) {
     issueType = 'Smoke Detector Battery Replacement';
     partsMin = 5;
     partsMax = 15;
-    laborHours = 1.0;
+    laborHours = 0.5;
     severity = 'Low';
     isQuick = true;
   }
@@ -860,7 +860,7 @@ function createSmartFallback(description, serviceContext) {
       service_call_fee: 60,
       parts_cost: { min: partsMin, max: partsMax },
       labor_cost: 0,
-      labor_hours: 1.0,
+      labor_hours: 0.5,
       crew_size: 1,
       crew_justification: 'Quick task - 1 person',
       disposal_cost: 0,
@@ -868,11 +868,11 @@ function createSmartFallback(description, serviceContext) {
         min: 60 + partsMin,
         max: 60 + partsMax
       },
-      pricing_note: `Great news! This is a quick task that falls under our $60 service call (includes diagnosis + first full hour). Only materials are additional!`
+      pricing_note: `Great news! This is a quick task that falls under our $60 service call (includes diagnosis + first 30 min). Only materials are additional!`
     };
   } else {
-    // CRITICAL: Subtract first full hour (included in $60 service call) before calculating additional labor
-    const additionalHours = Math.max(0, laborHours - 1);
+    // CRITICAL: Subtract first 30 minutes (included in $60 service call) before calculating additional labor
+    const additionalHours = Math.max(0, laborHours - 0.5);
     const laborCost = 60 + (additionalHours * 60 * crewSize); // $60 service call + additional hours
     costEstimate = {
       service_call_fee: 60,
@@ -886,7 +886,7 @@ function createSmartFallback(description, serviceContext) {
         min: partsMin + laborCost + disposalCost,
         max: partsMax + laborCost + disposalCost
       },
-      pricing_note: `$60 service call includes diagnosis + first full hour. You pay actual hours only - finish early and save!`
+      pricing_note: `$60 service call includes diagnosis + first 30 min. You pay actual hours only - finish early and save!`
     };
   }
   
