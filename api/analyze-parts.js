@@ -1,7 +1,9 @@
-// api/analyze-parts.js - ULTRA-INTELLIGENT MULTI-TASK IMAGE ANALYSIS v3
+// api/analyze-parts.js - ULTRA-INTELLIGENT MULTI-TASK IMAGE ANALYSIS v4
 // Full parity with feedback-chat.js + Enhanced image detection + Smart bundling
 // FIXED: Description is now primary source of truth for task count
 // FIXED: Follow-up requests now properly bundle with previous tasks
+// FIXED: AI labor estimation now references actual service menu durations
+// FIXED: Quick tasks correctly identified (doorknobs, switches = 0.5-1hr, not 2hr)
 
 export const config = {
   maxDuration: 60,
@@ -11,6 +13,161 @@ export const config = {
     }
   }
 };
+
+// ============================================================
+// SERVICE MENU REFERENCE DATA - SOURCE OF TRUTH FOR LABOR TIMES
+// ============================================================
+// Extracted from ServiceMenuPopup.tsx - our actual service menu
+
+const serviceMenuDurations = {
+  // PLUMBING - Kitchen
+  'sink installation': '2-4 hours',
+  'sink replacement': '2-4 hours',
+  'faucet installation': '1-2 hours',
+  'faucet replacement': '1-2 hours',
+  'garbage disposal': '2-3 hours',
+  'dishwasher installation': '3-4 hours',
+  'kitchen drain': '2-3 hours',
+  'shut-off valve': '1-2 hours',
+  'sink unclogging': '30min-1hr',
+
+  // PLUMBING - Bathroom
+  'toilet installation': '2-3 hours',
+  'toilet replacement': '2-3 hours',
+  'vanity installation': '3-4 hours',
+  'shower installation': '1-2 days',
+  'toilet unclogging': '30min-1hr',
+  'tub unclogging': '30min-1hr',
+  'bathroom faucet': '1-2 hours',
+  'shower head': '30min-1hr',
+  'drain cleaning': '30min-1hr',
+
+  // ELECTRICAL - Kitchen
+  'ceiling light': '1-2 hours',
+  'ceiling fan': '2-3 hours',
+  'outlet installation': '1 hour',
+  'outlet replacement': '1 hour',
+  'under-cabinet lighting': '2-3 hours',
+  'smoke detector': '30min-1hr',
+
+  // ELECTRICAL - Bathroom
+  'bathroom lighting': '1-2 hours',
+  'exhaust fan': '2-3 hours',
+  'gfci outlet': '1-2 hours',
+  'heated towel rack': '2-3 hours',
+
+  // INSTALLATION & CARPENTRY
+  'cabinet installation': '4-8 hours',
+  'countertop installation': '4-6 hours',
+  'backsplash': '3-5 hours',
+  'kitchen hardware': '1-2 hours',
+  'pantry shelving': '2-4 hours',
+  'furniture assembly': '1-3 hours',
+
+  // BATHROOM ACCESSORIES
+  'tile installation': '1-3 days',
+  'grout repair': '1-2 days',
+  'bathroom flooring': '1-2 days',
+  'towel rack': '30min-1hr',
+  'mirror hanging': '1 hour',
+  'bathroom shelving': '1-2 hours',
+
+  // HOME BASICS
+  'tv mounting': '1-2 hours',
+  'picture hanging': '30min-1hr',
+  'starlink installation': '1-2 hours',
+  'shelf installation': '1-2 hours',
+  'curtain rod': '30min-1hr',
+  'door handle': '1 hour',
+  'door lock': '1 hour',
+  'doorknob': '30min-1hr',
+  'lock installation': '1 hour',
+
+  // OFFICE & COMMERCIAL
+  'office lighting': '2-3 hours',
+  'data cable': '1-2 hours',
+  'panel upgrade': '4-6 hours',
+  'partition wall': '1-2 days',
+  'office door': '2-4 hours',
+
+  // COMMERCIAL KITCHEN
+  'commercial sink': '4-6 hours',
+  'grease trap': '6-8 hours',
+  'exhaust hood': '1 day',
+  'gas line': '3-4 hours',
+
+  // MAINTENANCE
+  'pool pump': '3-4 hours',
+  'pool equipment': '1-2 hours',
+  'window repair': '1-3 hours',
+  'paint touch-up': '2-4 hours',
+  'fire extinguisher': '30min-1hr',
+};
+
+// Convert duration string to hours (average)
+function parseDuration(durationStr) {
+  if (!durationStr) return 1.0;
+
+  // Handle ranges like "2-4 hours" → average 3
+  const rangeMatch = durationStr.match(/(\d+)-(\d+)\s*hours?/);
+  if (rangeMatch) {
+    const low = parseInt(rangeMatch[1]);
+    const high = parseInt(rangeMatch[2]);
+    return (low + high) / 2;
+  }
+
+  // Handle "30min-1hr" → 0.75 hours
+  const minHrMatch = durationStr.match(/(\d+)min-(\d+)h?r?/);
+  if (minHrMatch) {
+    const mins = parseInt(minHrMatch[1]);
+    const hrs = parseInt(minHrMatch[2]);
+    return (mins / 60 + hrs) / 2;
+  }
+
+  // Handle "1 hour" → 1.0
+  const singleMatch = durationStr.match(/(\d+)\s*hours?/);
+  if (singleMatch) {
+    return parseInt(singleMatch[1]);
+  }
+
+  // Handle days "1-2 days" → 12 hours (average)
+  const daysMatch = durationStr.match(/(\d+)-(\d+)\s*days?/);
+  if (daysMatch) {
+    const low = parseInt(daysMatch[1]);
+    const high = parseInt(daysMatch[2]);
+    return ((low + high) / 2) * 8; // 8 hours per day
+  }
+
+  // Handle single day "1 day" → 8 hours
+  const singleDayMatch = durationStr.match(/(\d+)\s*days?/);
+  if (singleDayMatch) {
+    return parseInt(singleDayMatch[1]) * 8;
+  }
+
+  return 1.0; // Default fallback
+}
+
+// Lookup service in menu
+function lookupServiceDuration(description) {
+  const lower = description.toLowerCase();
+
+  // Check for exact matches first
+  for (const [service, duration] of Object.entries(serviceMenuDurations)) {
+    if (lower.includes(service)) {
+      const hours = parseDuration(duration);
+      console.log(`✓ SERVICE MENU MATCH: "${service}" = ${duration} (${hours} hrs average)`);
+      return {
+        found: true,
+        service: service,
+        duration: duration,
+        hours: hours
+      };
+    }
+  }
+
+  console.log(`✗ Not found in service menu: "${description}"`);
+  return { found: false, hours: 1.0 };
+}
 
 // ========================================
 // LANGUAGE DETECTION
@@ -465,6 +622,9 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
 - ${multiTaskAnalysis.isBundledFollowUp ? 'FOLLOW-UP REQUEST: Customer is adding tasks to existing work order.' : multiTaskAnalysis.hasFollowUpIntent ? 'Customer is adding tasks to existing quote.' : ''}`
       : '';
 
+    // Lookup service in menu BEFORE building prompt
+    const menuLookup = lookupServiceDuration(description);
+
     const prompt = `You are an expert contractor cost estimator for Cabos Handyman in Cabo San Lucas, Mexico. Analyze this project and provide realistic 2024-2025 pricing in USD.
 
 ${isSpanish ? '**IMPORTANTE: El cliente está escribiendo en ESPAÑOL. Debes responder en español en el campo "description".**' : ''}
@@ -475,24 +635,67 @@ ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 ${multiTaskContext}
 ${chatContext}
 
-=== LABOR PRICING STRUCTURE ===
-**BASE RATE: $60 per hour PER PERSON**
+=== CRITICAL PRICING RULES - FOLLOW THESE FIRST! ===
 
-SERVICE CALL: $60 (includes diagnosis + FIRST FULL HOUR of labor)
-ADDITIONAL LABOR: $60/hour per person for hours beyond the first hour
+**YOUR #1 JOB:** Correctly identify quick tasks vs. standard jobs!
+
+**SERVICE MENU REFERENCE FOR THIS REQUEST:**
+${menuLookup.found
+  ? `✓ FOUND IN OUR SERVICE MENU: "${menuLookup.service}" takes ${menuLookup.duration}
+   → Use ${menuLookup.hours} hours as your labor_hours estimate
+   → This is our advertised pricing - USE THIS DURATION!`
+  : `✗ Not found in service menu - estimate based on similar tasks below`
+}
+
+**QUICK TASKS (0.5-1 hour max):**
+Examples: Door knobs, door locks, light switches, outlet covers, smoke detectors, picture hanging,
+towel bars, toilet seats, cabinet hardware, shower heads, drain unclogging, curtain rods
+
+- These take 15-60 minutes maximum
+- Set labor_hours to 0.5, 0.75, or 1.0 (never more!)
+- Set is_quick_task to true
+- These fall under the $60 service call ONLY
+- NO additional labor charges
+
+**STANDARD JOBS (1-4 hours):**
+Examples: Faucets, toilets, ceiling fans, vanities, small tile work
+- Set labor_hours to realistic estimate (1.5, 2, 2.5, 3, etc.)
+- Set is_quick_task to false
+- Calculate labor normally using formula below
+
+**REFERENCE OUR SERVICE MENU DURATIONS:**
+When estimating, check if the task matches our standard services (menu lookup shown above).
+If found in menu, USE THAT DURATION - it's our advertised pricing!
+
+Common menu services:
+- Doorknob/door lock: 30min-1hr (0.75hrs)
+- Picture hanging: 30min-1hr (0.75hrs)
+- Smoke detector: 30min-1hr (0.75hrs)
+- Outlet installation: 1 hour
+- Drain unclogging: 30min-1hr (0.75hrs)
+- Faucet installation: 1-2 hours (1.5hrs)
+- Toilet installation: 2-3 hours (2.5hrs)
+- Ceiling fan: 2-3 hours (2.5hrs)
+- Cabinet installation: 4-8 hours (6hrs)
+
+=== NOW APPLY DETAILED PRICING STRUCTURE BELOW ===
+
+**BASE RATE: $60 per hour PER PERSON**
+**Service Call: $60 (includes diagnosis + first hour of labor)**
 
 **CALCULATION FORMULA:**
 Total Labor = $60 service call + [(Total Hours - 1) × Number of People × $60/hour]
 
 **CREW SIZE BY COMPLEXITY:**
 
-1 PERSON (Simple tasks - 30min to 3 hours):
-- Toilet repair/replacement (2hrs = $120 labor)
+1 PERSON (Quick & Simple - 0.5-3 hours):
+- Doorknob/lock replacement (0.75hrs = $60 service call ONLY) ← QUICK!
+- Light switch/outlet (1hr = $60 service call ONLY) ← QUICK!
+- Picture hanging (0.75hrs = $60 service call ONLY) ← QUICK!
+- Drain unclogging (0.75hrs = $60 service call ONLY) ← QUICK!
 - Faucet installation (1.5hrs = $90 labor)
-- Light fixture installation (1hr = $60 labor)
-- Outlet/switch work (1hr = $60 labor)
-- Picture hanging, small repairs
-- Drain cleaning
+- Toilet installation (2.5hrs = $150 labor)
+- Small repairs (varies)
 
 1-2 PEOPLE (Medium tasks - 2-6 hours):
 - Cabinet installation (6hrs, 2 people = $660 labor)
@@ -592,7 +795,7 @@ Respond ONLY with valid JSON (no markdown):
 }`;
 
     console.log('Calling Groq API...');
-    
+
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -604,7 +807,7 @@ Respond ONLY with valid JSON (no markdown):
         messages: [
           {
             role: 'system',
-            content: 'You are an expert contractor cost estimator. Respond with ONLY valid JSON. Detect quick tasks (under 1 hour) and multi-task scenarios accurately. Multiple quick tasks under 1 hour total = ONE $60 service call + materials only. Follow-up requests that add tasks to existing work orders still use the same $60 service call - do not charge twice.'
+            content: 'You are an expert contractor cost estimator. TOP PRIORITY: Correctly identify quick tasks (under 1 hour) like doorknobs, switches, picture hanging, drain unclogging - these should have labor_hours=0.5-1.0 and is_quick_task=true. Reference our service menu durations when available. Only use 2+ hours for actual complex work like toilet installation, ceiling fans, or renovations. Respond with ONLY valid JSON. Multiple quick tasks under 1 hour total = ONE $60 service call + materials only.'
           },
           {
             role: 'user',
@@ -639,17 +842,33 @@ Respond ONLY with valid JSON (no markdown):
     }
 
     // ========================================
-    // INTELLIGENT COST CALCULATION WITH MULTI-TASK LOGIC
+    // INTELLIGENT COST CALCULATION WITH MULTI-TASK LOGIC + SERVICE MENU REFERENCE
     // ========================================
-    
+
     const issueType = groqAnalysis.issue_type || 'Maintenance Issue';
     const crewSize = Math.max(1, groqAnalysis.crew_size || 1);
-    const laborHours = groqAnalysis.labor_hours || 2;
-    
-    // Check if quick task (from Groq, our detection, OR multi-task analysis)
-    const isQuick = groqAnalysis.is_quick_task || isQuickTask(description, issueType) || multiTaskAnalysis.fitsInServiceCall;
+
+    // FIX #2: Changed default from 2 to 1 hour, and prioritize menu lookup
+    const laborHours = groqAnalysis.labor_hours || menuLookup.hours || 1;
+
+    // FIX #5: Prioritize local detection and menu lookup over AI
+    const localQuickDetection = isQuickTask(description, issueType);
+    const isMenuQuick = menuLookup.found && menuLookup.hours <= 1;
+
+    const isQuick = localQuickDetection || isMenuQuick || groqAnalysis.is_quick_task || multiTaskAnalysis.fitsInServiceCall;
     const isMulti = (groqAnalysis.is_multi_task || multiTaskAnalysis.isMultiple) && multiTaskAnalysis.fitsInServiceCall;
     const taskCount = isMulti ? multiTaskAnalysis.taskCount : (groqAnalysis.task_count || 1);
+
+    console.log('Labor calculation:', {
+      description: description.substring(0, 50),
+      menuFound: menuLookup.found,
+      menuHours: menuLookup.hours,
+      groqHours: groqAnalysis.labor_hours,
+      finalHours: laborHours,
+      localQuickDetect: localQuickDetection,
+      isMenuQuick: isMenuQuick,
+      finalIsQuick: isQuick
+    });
     
     let costEstimate;
     
@@ -775,14 +994,18 @@ Respond ONLY with valid JSON (no markdown):
 
 function createSmartFallback(description, serviceContext) {
   const desc = description.toLowerCase();
+
+  // Check service menu first
+  const menuLookup = lookupServiceDuration(description);
+
   let issueType = 'General Maintenance';
   let severity = 'Medium';
   let partsMin = 100;
   let partsMax = 300;
-  let laborHours = 2;
+  let laborHours = menuLookup.hours || 1; // FIX #2: Changed default from 2 to 1, prioritize menu
   let crewSize = 1;
   let disposalCost = 0;
-  let isQuick = false;
+  let isQuick = menuLookup.found && menuLookup.hours <= 1;
 
   // Quick tasks
   if (desc.includes('door knob') || desc.includes('door handle')) {
