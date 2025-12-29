@@ -149,10 +149,27 @@ export default function ServicesPage() {
         {/* Visible Header */}
         <div className="bg-gradient-to-br from-teal-500 to-teal-600 text-white py-16 px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Complete Service Menu & Pricing</h2>
-          <p className="text-xl max-w-3xl mx-auto">
-            Transparent pricing for all handyman services in Cabo San Lucas<br />
-            $60 service call includes first hour of labor
-          </p>
+          <div className="max-w-3xl mx-auto text-center space-y-3 mt-4">
+            <p className="text-2xl text-white font-semibold">
+              Pricing Reference Guide
+            </p>
+            <p className="text-lg text-white/90">
+              Browse our most common services and starting prices below.
+            </p>
+            <p className="text-lg text-white/90">
+              Every job is unique -{' '}
+              <a
+                href="tel:+526121698328"
+                className="text-white font-bold hover:underline transition-all"
+              >
+                call us
+              </a>
+              {' '}for a personalized quote based on your specific project or issue.
+            </p>
+            <p className="text-lg text-white font-medium">
+              $60 service call includes diagnosis + first hour of labor (credited toward work)
+            </p>
+          </div>
         </div>
 
         {/* Service Categories */}
