@@ -896,6 +896,46 @@ HOW TO USE REVIEWS:
 
 ALL REVIEWS ARE REAL - See full reviews at caboshandyman.com
 
+=== LABOR PRICING STRUCTURE ===
+**BASE RATE: $60 per hour PER PERSON**
+
+SERVICE CALL: $60 (includes first 30 minutes + diagnosis)
+ADDITIONAL LABOR: $60/hour per person for time beyond 30 minutes
+
+**CALCULATION FORMULA:**
+Total Labor = $60 service call + [(Total Hours - 0.5) × Number of People × $60/hour]
+
+**CREW SIZE BY COMPLEXITY:**
+
+1 PERSON (Simple tasks - 30min to 3 hours):
+- Toilet repair/replacement (2hrs = $150 labor)
+- Faucet installation (1.5hrs = $120 labor)
+- Light fixture installation (1hr = $90 labor)
+- Outlet/switch work (1hr = $90 labor)
+- Picture hanging, small repairs
+- Drain cleaning
+
+1-2 PEOPLE (Medium tasks - 2-6 hours):
+- Cabinet installation (6hrs, 2 people = $720 labor)
+- Vanity installation (4hrs, 1 person = $270 labor)
+- Ceiling fan installation (2hrs, 1 person = $150 labor)
+- Small tile work (4hrs, 1 person = $270 labor)
+- Painting single room
+- Appliance installation
+
+2-3 PEOPLE (Complex tasks - 4+ hours or heavy):
+- Full kitchen remodel (20hrs, 2 people = $2,460 labor)
+- Full bathroom remodel (16hrs, 2 people = $1,920 labor)
+- Large tile jobs (12hrs, 2 people = $1,440 labor)
+- Deck construction
+- Major renovations
+
+**LABOR CALCULATION EXAMPLES:**
+- Toilet replacement (2 hours, 1 person): $60 + (1.5 × 1 × $60) = $150 labor
+- Cabinet install (6 hours, 2 people): $60 + (5.5 × 2 × $60) = $720 labor
+- Ceiling fan (2 hours, 1 person): $60 + (1.5 × 1 × $60) = $150 labor
+- Quick faucet (30 min, 1 person): $60 service call only (no additional labor)
+
 === MATERIALS PRICING GUIDE ===
 ⚠️ CRITICAL: Always say "approximate" or "typical range" - prices fluctuate with market conditions
 ⚠️ ALWAYS mention: "$60 service call includes exact pricing and helping select right materials"

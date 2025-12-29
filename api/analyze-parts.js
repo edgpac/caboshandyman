@@ -475,6 +475,46 @@ ${serviceContext ? `SERVICE CONTEXT: ${serviceContext.title}` : ''}
 ${multiTaskContext}
 ${chatContext}
 
+=== LABOR PRICING STRUCTURE ===
+**BASE RATE: $60 per hour PER PERSON**
+
+SERVICE CALL: $60 (includes first 30 minutes + diagnosis)
+ADDITIONAL LABOR: $60/hour per person for time beyond 30 minutes
+
+**CALCULATION FORMULA:**
+Total Labor = $60 service call + [(Total Hours - 0.5) × Number of People × $60/hour]
+
+**CREW SIZE BY COMPLEXITY:**
+
+1 PERSON (Simple tasks - 30min to 3 hours):
+- Toilet repair/replacement (2hrs = $150 labor)
+- Faucet installation (1.5hrs = $120 labor)
+- Light fixture installation (1hr = $90 labor)
+- Outlet/switch work (1hr = $90 labor)
+- Picture hanging, small repairs
+- Drain cleaning
+
+1-2 PEOPLE (Medium tasks - 2-6 hours):
+- Cabinet installation (6hrs, 2 people = $720 labor)
+- Vanity installation (4hrs, 1 person = $270 labor)
+- Ceiling fan installation (2hrs, 1 person = $150 labor)
+- Small tile work (4hrs, 1 person = $270 labor)
+- Painting single room
+- Appliance installation
+
+2-3 PEOPLE (Complex tasks - 4+ hours or heavy):
+- Full kitchen remodel (20hrs, 2 people = $2,460 labor)
+- Full bathroom remodel (16hrs, 2 people = $1,920 labor)
+- Large tile jobs (12hrs, 2 people = $1,440 labor)
+- Deck construction
+- Major renovations
+
+**EXAMPLES:**
+- Toilet replacement (2 hours, 1 person): $60 + (1.5 × 1 × $60) = $150 labor
+- Cabinet install (6 hours, 2 people): $60 + (5.5 × 2 × $60) = $720 labor
+- Ceiling fan (2 hours, 1 person): $60 + (1.5 × 1 × $60) = $150 labor
+- Quick faucet (30 min, 1 person): $60 service call only (no additional labor)
+
 === MATERIALS PRICING REFERENCE ===
 Use these approximate prices to calculate total costs (labor + materials):
 
@@ -525,7 +565,9 @@ CRITICAL PRICING RULES:
    - Only charge for new materials
    - Emphasize convenience and savings of bundling
 
-4. **BIGGER JOBS (over 30 minutes):** Calculate normal labor at $80/hour + $60 service call overhead
+4. **BIGGER JOBS (over 30 minutes):** Calculate normal labor at $60/hour PER PERSON + $60 service call overhead
+   - Formula: Labor = (Hours - 0.5) × People × $60/hour + $60 service call
+   - Example: 2 hours, 1 person = (2 - 0.5) × 1 × $60 + $60 = $90 + $60 = $150 total labor
 
 5. **PRIORITY:** Customer description is PRIMARY. Image detection is supplementary.
 
@@ -655,8 +697,8 @@ Respond ONLY with valid JSON (no markdown):
       
       // BIGGER JOB - Standard pricing
       const baseLaborCost = groqAnalysis.cost_breakdown?.base_labor_cost || 150;
-      const laborRate = 80;
-      
+      const laborRate = 60; // $60 per hour per person (CORRECT RATE)
+
       const finalLaborCost = Math.max(baseLaborCost * crewSize, laborHours * laborRate * crewSize);
       const serviceCallFee = 60;
       const totalLaborWithOverhead = finalLaborCost + serviceCallFee;
@@ -827,7 +869,7 @@ function createSmartFallback(description, serviceContext) {
       pricing_note: `Great news! This is a quick task that falls under our $60 service call (includes diagnosis + first 30 min). Only materials are additional!`
     };
   } else {
-    const laborCost = (laborHours * 80 * crewSize) + 60;
+    const laborCost = (laborHours * 60 * crewSize) + 60; // $60/hour per person (CORRECT RATE)
     costEstimate = {
       service_call_fee: 60,
       parts_cost: { min: partsMin, max: partsMax },
