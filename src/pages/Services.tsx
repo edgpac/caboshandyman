@@ -148,7 +148,7 @@ export default function ServicesPage() {
 
         {/* Visible Header */}
         <div className="bg-gradient-to-br from-teal-500 to-teal-600 text-white py-16 px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Complete Service Menu & Pricing</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Service Menu & Pricing</h2>
           <div className="max-w-3xl mx-auto text-center space-y-3 mt-4">
             <p className="text-2xl text-white font-semibold">
               Pricing Reference Guide
@@ -166,7 +166,7 @@ export default function ServicesPage() {
               {' '}for a personalized quote based on your project or issue.
             </p>
             <p className="text-lg text-white font-medium">
-              $60 service call includes diagnosis + first hour of labor (credited toward work)
+              $60 service call includes diagnosis
             </p>
           </div>
         </div>
@@ -202,7 +202,7 @@ export default function ServicesPage() {
           {/* CTA */}
           <div className="bg-teal-500 text-white rounded-xl p-8 text-center">
             <h3 className="text-3xl font-bold mb-4">Need a Custom Quote?</h3>
-            <p className="text-lg mb-6">Call us for a free estimate on your specific project</p>
+            <p className="text-lg mb-6">Call us for a free estimate on your project or issue</p>
             <a
               href="tel:+526121698328"
               className="inline-block bg-white text-teal-600 px-8 py-4 rounded-lg text-xl font-bold hover:bg-gray-100 transition-colors"
