@@ -1381,7 +1381,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                       <span className="text-teal-700 font-bold">${analysis.cost_estimate.service_call_fee}</span>
                     </div>
                     <div className="text-xs text-teal-500 mt-1">
-                      Includes diagnosis + first 30 minutes of work
+                      Includes diagnosis + first hour of work
                     </div>
                   </div>
                 )}

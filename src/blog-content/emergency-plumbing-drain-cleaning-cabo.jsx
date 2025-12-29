@@ -345,7 +345,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
       </p>
       <ul>
         <li>Professional diagnosis of your plumbing problem</li>
-        <li>First 30 minutes of labor</li>
+        <li>First hour of labor</li>
         <li>Detailed explanation of the issue</li>
         <li>Written estimate for any additional work needed</li>
         <li>Minor repairs completed during initial visit when possible</li>

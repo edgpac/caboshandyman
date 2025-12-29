@@ -62,7 +62,7 @@ export default function FAQ() {
                 "name": "What is your service call fee and what does it include?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Our service call fee is $60 USD and includes: Professional on-site diagnosis of your issue, first 30 minutes of labor, written estimate for additional work needed, and expert recommendations. This service call fee is fully credited toward your project if you proceed with the work. For large remodeling projects over $1,000, we waive the service call fee entirely and provide free consultations."
+                  "text": "Our service call fee is $60 USD and includes: Professional on-site diagnosis of your issue, first hour of labor, written estimate for additional work needed, and expert recommendations. This service call fee is fully credited toward your project if you proceed with the work. For large remodeling projects over $1,000, we waive the service call fee entirely and provide free consultations."
                 }
               },
               {
@@ -192,7 +192,7 @@ export default function FAQ() {
             </p>
             <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
               <li>Professional on-site diagnosis of your issue</li>
-              <li>First 30 minutes of labor</li>
+              <li>First hour of labor</li>
               <li>Written estimate for additional work needed</li>
               <li>Expert recommendations</li>
             </ul>

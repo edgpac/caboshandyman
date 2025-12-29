@@ -195,7 +195,7 @@ const ContactPage = () => {
                   </p>
                   <ul className="text-sm text-gray-700 space-y-1 ml-4">
                     <li>✓ Professional diagnosis</li>
-                    <li>✓ First 30 minutes of labor</li>
+                    <li>✓ First hour of labor</li>
                     <li>✓ Written estimate for additional work</li>
                     <li>✓ Expert recommendations</li>
                   </ul>
