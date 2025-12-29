@@ -149,23 +149,38 @@ export default function ServicesPage() {
         {/* Visible Header */}
         <div className="bg-gradient-to-br from-teal-500 to-teal-600 text-white py-16 px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Service Menu & Pricing</h2>
-          <div className="max-w-3xl mx-auto text-center space-y-3 mt-4">
-            <p className="text-2xl text-white font-semibold">
+          <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 mt-4 sm:mt-6">
+            {/* Main Subtitle */}
+            <p className="text-xl sm:text-2xl text-white font-semibold mb-3 sm:mb-4">
               Pricing Reference Guide
             </p>
-            <p className="text-lg text-white/90">
-              Browse our most common services and starting prices below.
-            </p>
-            <p className="text-lg text-white/90">
-              <a
-                href="tel:+526121698328"
-                className="text-white font-bold hover:underline transition-all"
-              >
-                Call us
-              </a>
-              {' '}for a personalized quote based on your project or issue.
-            </p>
-            <p className="text-lg text-white font-medium">
+
+            {/* Description Lines */}
+            <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-5">
+              <p className="text-base sm:text-lg text-white/90 leading-relaxed">
+                Browse our most common services and starting prices below.
+              </p>
+              <p className="text-base sm:text-lg text-white/90 leading-relaxed">
+                <a
+                  href="tel:+526121698328"
+                  className="text-white font-bold hover:underline transition-all"
+                >
+                  Call us
+                </a>
+                {' '}for a personalized quote based on your project or issue.
+              </p>
+            </div>
+
+            {/* Service Call Pricing - Highlighted */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 sm:px-6 sm:py-4 border border-white/20 mb-3 sm:mb-4">
+              <p className="text-base sm:text-lg text-white font-medium leading-relaxed">
+                $60 service call includes diagnosis + first hour of labor<br className="hidden sm:inline" />
+                <span className="block sm:inline"> (credited toward work)</span>
+              </p>
+            </div>
+
+            {/* Services Not Limited Note */}
+            <p className="text-sm sm:text-base text-white/80 font-medium">
               Services not limited to this list
             </p>
           </div>
