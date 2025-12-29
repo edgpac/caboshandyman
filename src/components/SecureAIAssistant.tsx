@@ -899,7 +899,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               <div className="max-w-[85%]">
                 <div className="text-xs text-gray-500 mb-1 ml-1">Cabos Handyman</div>
                 <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none shadow-sm p-3">
-                  <p className="text-sm">Hey there 👋 I'm the Cabo Handyman bot.</p>
+                  <p className="text-sm">Hey there 👋 I'm your Cabos Handyman Assistant.</p>
                   <p className="text-sm mt-1">What can we help you with?</p>
                 </div>
               </div>
