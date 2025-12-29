@@ -166,7 +166,7 @@ export default function ServicesPage() {
               {' '}for a personalized quote based on your project or issue.
             </p>
             <p className="text-lg text-white font-medium">
-              $60 service call includes diagnosis
+              Services not limited to this list
             </p>
           </div>
         </div>
