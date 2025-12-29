@@ -11,6 +11,12 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://www.caboshandyman.com/services</loc>
+    <lastmod>2025-12-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://www.caboshandyman.com/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
@@ -29,6 +35,12 @@
   <url>
     <loc>https://www.caboshandyman.com/blog/tv-mounting-ceiling-fans-cabo</loc>
     <lastmod>2025-12-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.caboshandyman.com/blog/emergency-plumbing-drain-cleaning-cabo</loc>
+    <lastmod>2025-12-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

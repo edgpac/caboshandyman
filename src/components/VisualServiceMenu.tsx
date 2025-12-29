@@ -1,5 +1,5 @@
-import React from 'react';
-import { X, Wrench, DollarSign, Clock } from 'lucide-react';
+import React, { useState } from 'react';
+import { Clock, Award } from 'lucide-react';
 
 interface ServiceItem {
   name: string;
@@ -13,33 +13,25 @@ interface ServiceCategory {
   services: ServiceItem[];
 }
 
-interface ServiceMenuPopupProps {
-  isOpen: boolean;
-  onClose: () => void;
-  projectType: string;
-  onGetEstimate?: () => void;
-  onScheduleConsultation?: () => void;
-}
-
 const serviceMenus: Record<string, ServiceCategory[]> = {
   "Modern Kitchen": [
     {
       title: "Plumbing Services",
       services: [
         { name: "Sink Installation/Replacement", startingPrice: "$180", duration: "2-4 hours" },
-        { name: "Faucet Installation Cabo San Lucas", startingPrice: "$120", duration: "1-2 hours" },
-        { name: "Garbage Disposal Installation Cabo", startingPrice: "$200", duration: "2-3 hours" },
+        { name: "Faucet Installation/Replacement", startingPrice: "$120", duration: "1-2 hours" },
+        { name: "Garbage Disposal Installation", startingPrice: "$200", duration: "2-3 hours" },
         { name: "Dishwasher Installation", startingPrice: "$250", duration: "3-4 hours" },
         { name: "Kitchen Drain Plumbing", startingPrice: "$150", duration: "2-3 hours" },
         { name: "Shut-off Valve Replacement", startingPrice: "$100", duration: "1-2 hours" },
-        { name: "Sink Unclogging Cabo San Lucas", startingPrice: "$60", duration: "30min-1hr" }
+        { name: "Sink Unclogging", startingPrice: "$80", duration: "30min-1hr" }
       ]
     },
     {
       title: "Electrical Services",
       services: [
         { name: "Ceiling Light Installation", startingPrice: "$120", duration: "1-2 hours" },
-        { name: "Ceiling Fan Installation Cabo San Lucas", startingPrice: "$180", duration: "2-3 hours" },
+        { name: "Ceiling Fan Installation", startingPrice: "$180", duration: "2-3 hours" },
         { name: "Outlet Installation/Replacement", startingPrice: "$90", duration: "1 hour" },
         { name: "Under-Cabinet Lighting", startingPrice: "$160", duration: "2-3 hours" },
         { name: "Kitchen Island Electrical", startingPrice: "$220", duration: "3-4 hours" },
@@ -63,10 +55,10 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
     {
       title: "Plumbing Services",
       services: [
-        { name: "Toilet Installation Cabo San Lucas", startingPrice: "$200", duration: "2-3 hours" },
-        { name: "Vanity Installation Cabo San Lucas", startingPrice: "$280", duration: "3-4 hours" },
-        { name: "Shower Installation Cabo San Lucas", startingPrice: "$600", duration: "1-2 days" },
-        { name: "Toilet & Tub Unclogging Cabo San Lucas", startingPrice: "$60", duration: "30min-1 hour" },
+        { name: "Toilet Installation/Replacement", startingPrice: "$200", duration: "2-3 hours" },
+        { name: "Vanity Installation", startingPrice: "$280", duration: "3-4 hours" },
+        { name: "Shower Installation", startingPrice: "$600", duration: "1-2 days" },
+        { name: "Toilet/Tub Unclogging", startingPrice: "$80", duration: "1-3 hours" },
         { name: "Bathroom Faucet Installation", startingPrice: "$120", duration: "1-2 hours" },
         { name: "Shower Head Replacement", startingPrice: "$80", duration: "30min-1hr" }
       ]
@@ -201,19 +193,10 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
       ]
     },
     {
-      title: "Emergency Plumbing Services",
-      services: [
-        { name: "Toilet Unclogging Cabo San Lucas", startingPrice: "$60", duration: "30min-1 hour" },
-        { name: "Tub & Shower Drain Cleaning", startingPrice: "$60", duration: "30min-1 hour" },
-        { name: "Kitchen Sink Drain Cleaning", startingPrice: "$60", duration: "30min-1 hour" },
-        { name: "Main Sewer Line Cleaning", startingPrice: "$150", duration: "2-4 hours" }
-      ]
-    },
-    {
       title: "Home Improvement Basics",
       services: [
-        { name: "TV Mounting Cabo San Lucas", startingPrice: "$120", duration: "1-2 hours" },
-        { name: "Picture Hanging Cabo", startingPrice: "$40", duration: "30min-1hr" },
+        { name: "TV Mounting/Installation", startingPrice: "$120", duration: "1-2 hours" },
+        { name: "Picture Hanging", startingPrice: "$40", duration: "30min-1hr" },
         { name: "Starlink installation", startingPrice: "$80", duration: "1hr-2hr" },
         { name: "Shelf Installation", startingPrice: "$80", duration: "1-2 hours" },
         { name: "Curtain Rod Installation", startingPrice: "$60", duration: "30min-1hr" },
@@ -232,55 +215,87 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
   ]
 };
 
-export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEstimate, onScheduleConsultation }: ServiceMenuPopupProps) {
-  if (!isOpen) return null;
-
-  const categories = serviceMenus[projectType] || [];
+export default function VisualServiceMenu() {
+  const projectTypes = Object.keys(serviceMenus);
+  const [activeProject, setActiveProject] = useState(projectTypes[0]);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
-        {/* Header */}
-        <div className="bg-teal-500 text-white p-6 flex justify-between items-center">
-          <div>
-            <h2 className="text-2xl font-bold">{projectType} Services</h2>
-            <p className="text-teal-100 mt-1">Starting prices - Final cost may vary based on complexity</p>
-            <p className="text-teal-100 text-sm mt-1">We go beyond what's on the menu - use our estimate feature or contact us for custom pricing</p>
+    <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-amber-100 py-12 px-4">
+      <div className="w-full max-w-6xl mx-auto bg-white shadow-2xl rounded-lg overflow-hidden">
+        {/* Menu Header - Elegant Restaurant Style */}
+        <div className="bg-gradient-to-r from-teal-800 to-teal-700 text-white py-8 px-8">
+          <div className="text-center border-b border-teal-500 pb-6 mb-6">
+            <h1 className="text-5xl font-serif font-bold tracking-wide mb-2">
+              Cabo's Handyman Service Menu
+            </h1>
+            <div className="flex items-center justify-center gap-2 text-teal-200">
+              <Award className="h-4 w-4" />
+              <p className="text-sm uppercase tracking-widest">Licensed & Insured in Cabo San Lucas</p>
+            </div>
           </div>
-          <button 
-            onClick={onClose}
-            className="text-white hover:text-teal-200 transition-colors"
-          >
-            <X size={24} />
-          </button>
+          
+          {/* Project Type Selector - Like Menu Sections */}
+          <div className="flex flex-wrap justify-center gap-3">
+            {projectTypes.map((type) => (
+              <button
+                key={type}
+                onClick={() => setActiveProject(type)}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 ${
+                  activeProject === type
+                    ? "bg-white text-teal-800 shadow-lg scale-105"
+                    : "bg-teal-700 text-teal-100 hover:bg-teal-600 border border-teal-600"
+                }`}
+              >
+                {type}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Content */}
-        <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {categories.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="bg-gray-50 rounded-lg p-4">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                  <Wrench className="h-5 w-5 text-teal-500 mr-2" />
-                  {category.title}
-                </h3>
-                <div className="space-y-3">
-                  {category.services.map((service, serviceIndex) => (
-                    <div key={serviceIndex} className="bg-white rounded-lg p-3 border border-gray-200">
-                      <h4 className="font-medium text-gray-900 text-sm mb-2">{service.name}</h4>
-                      <div className="flex justify-between items-center text-xs">
-                        <div className="flex items-center text-green-600">
-                          <DollarSign className="h-3 w-3 mr-1" />
-                          <span className="font-semibold">{service.startingPrice}</span>
-                        </div>
-                        <div className="flex items-center text-gray-500">
-                          <Clock className="h-3 w-3 mr-1" />
-                          <span>{service.duration}</span>
-                        </div>
+        {/* Menu Content - Two Column Restaurant Layout */}
+        <div className="bg-gradient-to-b from-amber-50 to-white p-10">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl font-serif font-bold text-gray-800 mb-1">
+              {activeProject}
+            </h2>
+            <p className="text-sm text-gray-500 italic">Starting prices · Materials additional</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-10">
+            {serviceMenus[activeProject]?.map((category, idx) => (
+              <div key={idx}>
+                {/* Category Title with Decorative Line */}
+                <div className="mb-6">
+                  <h3 className="text-xl font-serif font-semibold text-gray-900 mb-2 text-center">
+                    {category.title}
+                  </h3>
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="h-px bg-gradient-to-r from-transparent via-teal-400 to-transparent w-full"></div>
+                  </div>
+                </div>
+
+                {/* Service Items */}
+                <div className="space-y-4">
+                  {category.services.map((service: ServiceItem, sidx: number) => (
+                    <div key={sidx} className="group">
+                      {/* Service Name and Price Line */}
+                      <div className="flex items-start justify-between gap-3 mb-1">
+                        <span className="font-medium text-gray-800 leading-tight flex-grow">
+                          {service.name}
+                        </span>
+                        <span className="font-semibold text-teal-700 whitespace-nowrap text-lg">
+                          {service.startingPrice}
+                        </span>
                       </div>
-                      {service.description && (
-                        <p className="text-xs text-gray-600 mt-2">{service.description}</p>
-                      )}
+                      
+                      {/* Dotted Line - Classic Menu Style */}
+                      <div className="border-b border-dotted border-gray-300 mb-1"></div>
+                      
+                      {/* Duration */}
+                      <div className="flex items-center text-xs text-gray-500 italic">
+                        <Clock className="h-3 w-3 mr-1.5" />
+                        <span>{service.duration}</span>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -288,42 +303,28 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
             ))}
           </div>
 
-          {/* Footer Notes */}
-          <div className="mt-8 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <h4 className="font-semibold text-blue-900 mb-2">Important Notes:</h4>
-            <ul className="text-sm text-blue-800 space-y-1">
-              <li>• Prices shown are starting estimates and may vary based on project complexity</li>
-              <li>• Material costs are additional unless specified</li>
-              <li>• Emergency services available 24/7 with premium rates</li>
-              <li>• All work includes 1-year workmanship warranty</li>
-              <li>• Licensed, insured, and bonded in Cabo San Lucas</li>
-            </ul>
+          {/* Menu Footer Notes */}
+          <div className="mt-12 pt-8 border-t-2 border-gray-200">
+            <div className="bg-amber-50 rounded-lg p-6 border border-amber-200">
+              <h4 className="font-serif font-semibold text-gray-900 mb-3 text-center text-lg">
+                Important Notes
+              </h4>
+              <div className="grid md:grid-cols-2 gap-x-8 gap-y-2 text-sm text-gray-700">
+                <p>• Prices are starting estimates based on standard installations</p>
+                <p>• Material costs additional unless specified</p>
+                <p>• Emergency services available 24/7 with premium rates</p>
+                <p>• All work includes 1-year workmanship warranty</p>
+                <p>• Custom projects welcome - contact for pricing</p>
+                <p>• Free estimates and consultations available</p>
+              </div>
+            </div>
           </div>
 
-          {/* CTA Buttons */}
-          <div className="mt-6 flex flex-col sm:flex-row gap-3">
-            <button 
-              onClick={() => {
-                onClose();
-                if (onGetEstimate) {
-                  onGetEstimate();
-                }
-              }}
-              className="flex-1 bg-teal-500 hover:bg-teal-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
-            >
-              Get Free Estimate
-            </button>
-            <button 
-              onClick={() => {
-                onClose();
-                if (onScheduleConsultation) {
-                  onScheduleConsultation();
-                }
-              }}
-              className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 py-3 px-6 rounded-lg font-semibold transition-colors"
-            >
-              Schedule Consultation
-            </button>
+          {/* Bottom Tagline */}
+          <div className="mt-8 text-center">
+            <p className="text-sm text-gray-500 italic font-serif">
+              "Beyond what's on the menu - We bring your vision to life"
+            </p>
           </div>
         </div>
       </div>

@@ -10,6 +10,13 @@ export default function ProfessionalHandymanServicesCaboArticle() {
         The unique climate and coastal environment of Los Cabos creates specific maintenance challenges that require experienced professionals. Salt air, intense sun exposure, and occasional tropical storms can take a toll on residential and commercial properties. That's why <strong>caboshandyman.com</strong> has been serving the area for over 20 years, completing more than 600 successful projects.
       </p>
       <p>
+        For a complete list of our services with transparent pricing, visit our{' '}
+        <a href="/services" className="text-teal-600 hover:underline font-medium">
+          service menu
+        </a>
+        {' '}featuring 70+ handyman services in Cabo San Lucas.
+      </p>
+      <p>
         Professional handyman services provide homeowners and business owners with:
       </p>
       <ul>

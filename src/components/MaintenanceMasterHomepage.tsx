@@ -87,15 +87,21 @@ export default function CabosHandymanHomepage() {
               <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
             </div>
             <div className="flex items-center space-x-6">
-              <a 
-                href="tel:+526121698328" 
-                className="hidden sm:flex items-center gap-2 text-white hover:text-primary transition-colors font-semibold"
+              <a
+                href="/services"
+                className="hidden md:flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-semibold"
+              >
+                Services & Pricing
+              </a>
+              <a
+                href="tel:+526121698328"
+                className="hidden sm:flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-semibold"
               >
                 <Phone size={18} />
                 <span className="hidden lg:inline">612 169 8328</span>
               </a>
-              <a 
-                href="/contact" 
+              <a
+                href="/contact"
                 className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground px-4 py-2 rounded-lg transition-colors font-semibold"
               >
                 <Mail size={18} />

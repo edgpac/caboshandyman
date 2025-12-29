@@ -362,7 +362,18 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
 
       <h3>Transparent Estimates</h3>
       <p>
-        We believe in honest, upfront pricing:
+        We believe in honest, upfront pricing. Need emergency drain cleaning or toilet unclogging? Our{' '}
+        <a href="/services" className="text-teal-600 hover:underline font-medium">
+          $60 service call
+        </a>
+        {' '}covers most clogs in under an hour. Available 24/7 in Cabo San Lucas.
+      </p>
+      <p>
+        For a complete list of our plumbing and handyman services with transparent pricing, visit our{' '}
+        <a href="/services" className="text-teal-600 hover:underline font-medium">
+          service menu
+        </a>
+        {' '}featuring 70+ services in Cabo San Lucas.
       </p>
       <ul>
         <li>Free estimates for larger projects</li>
