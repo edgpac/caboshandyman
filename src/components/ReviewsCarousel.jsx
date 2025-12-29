@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Star } from 'lucide-react';
+import logo from '../assets/CHLOGO.png';
 
 const reviews = [
   {
@@ -71,7 +72,7 @@ const reviews = [
     location: "Cabo San Lucas",
     rating: 5,
     text: "Eddy and his team did a great job installing ledger stone on a large wall. They were clean, punctual, and true perfectionists.",
-    response: "Thank you so much! Honesty and transparency are core values here. We believe in treating every client with respect and giving fair, accurate estimates. We're grateful for your trust and recommendation! - Eddie"
+    response: "Thank you so much, Tom & Jennifer! We're thrilled the ledger stone wall turned out beautifully. Cleanliness and punctuality are priorities on every job - your home is as important to us as the work itself. Our team takes great pride in that attention to detail you noticed. We truly appreciate your kind words and recommendation! - Eddie"
   },
   {
     name: "Eduardo F.",
@@ -221,9 +222,11 @@ export default function ReviewsCarousel() {
                 <div className="bg-gray-50 px-8 py-6 border-t border-gray-200">
                   <div className="flex items-start gap-3">
                     <div className="flex-shrink-0">
-                      <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">CH</span>
-                      </div>
+                      <img
+                        src={logo}
+                        alt="Cabos Handyman"
+                        className="w-10 h-10 rounded-full object-contain bg-white border-2 border-teal-500"
+                      />
                     </div>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-900 text-sm mb-1">
