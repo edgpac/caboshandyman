@@ -698,10 +698,12 @@ Respond ONLY with valid JSON (no markdown):
       // BIGGER JOB - Standard pricing
       const baseLaborCost = groqAnalysis.cost_breakdown?.base_labor_cost || 150;
       const laborRate = 60; // $60 per hour per person (CORRECT RATE)
+      const serviceCallFee = 60; // Includes first 30 minutes
 
-      const finalLaborCost = Math.max(baseLaborCost * crewSize, laborHours * laborRate * crewSize);
-      const serviceCallFee = 60;
-      const totalLaborWithOverhead = finalLaborCost + serviceCallFee;
+      // CRITICAL: Subtract first 30 minutes (included in service call) before calculating additional labor
+      const additionalHours = Math.max(0, laborHours - 0.5);
+      const calculatedLabor = serviceCallFee + (additionalHours * laborRate * crewSize);
+      const totalLaborWithOverhead = Math.max(baseLaborCost * crewSize, calculatedLabor);
 
       let disposalCost = 0;
       if (issueType.includes('Demolition')) disposalCost = 350;
@@ -869,7 +871,9 @@ function createSmartFallback(description, serviceContext) {
       pricing_note: `Great news! This is a quick task that falls under our $60 service call (includes diagnosis + first 30 min). Only materials are additional!`
     };
   } else {
-    const laborCost = (laborHours * 60 * crewSize) + 60; // $60/hour per person (CORRECT RATE)
+    // CRITICAL: Subtract first 30 minutes (included in $60 service call) before calculating additional labor
+    const additionalHours = Math.max(0, laborHours - 0.5);
+    const laborCost = 60 + (additionalHours * 60 * crewSize); // $60 service call + additional hours
     costEstimate = {
       service_call_fee: 60,
       parts_cost: { min: partsMin, max: partsMax },
