@@ -36,11 +36,20 @@ const serviceMenuDurations = {
   'toilet replacement': '2-3 hours',
   'vanity installation': '3-4 hours',
   'shower installation': '1-2 days',
-  'toilet unclogging': '30min-1hr',
-  'tub unclogging': '30min-1hr',
+  'toilet unclogging': '30min-1hr', // SIMPLE CLOG - $60 service call covers this
+  'toilet clog': '30min-1hr', // SIMPLE CLOG - $60 service call
+  'tub unclogging': '30min-1hr', // SIMPLE CLOG - $60 service call
+  'shower clog': '30min-1hr', // SIMPLE CLOG - $60 service call
   'bathroom faucet': '1-2 hours',
   'shower head': '30min-1hr',
-  'drain cleaning': '30min-1hr',
+
+  // DRAIN SERVICES - Critical distinction
+  'simple clog': '30min-1hr', // $60 service call - plunger/hand snake
+  'drain cleaning': '2-4 hours', // PROFESSIONAL - $150-400 - main line/hydro-jetting
+  'hydro jetting': '2-4 hours', // PROFESSIONAL - $200-500
+  'hydro-jetting': '2-4 hours', // PROFESSIONAL - $200-500
+  'main sewer line': '2-4 hours', // PROFESSIONAL - $150-400
+  'sewer line cleaning': '2-4 hours', // PROFESSIONAL - $150-400
 
   // ELECTRICAL - Kitchen
   'ceiling light': '1-2 hours',
@@ -639,6 +648,56 @@ ${chatContext}
 
 **YOUR #1 JOB:** Correctly identify quick tasks vs. standard jobs!
 
+=== CLOG vs DRAIN CLEANING - CRITICAL DISTINCTION ===
+
+**SIMPLE CLOGS (90-95% of cases) - $60 SERVICE CALL ONLY:**
+
+Customer says:
+- "My toilet is clogged" / "Toilet backup" / "Toilet won't flush"
+- "Sink won't drain" / "Sink clogged"
+- "Slow drain" / "Shower drain slow"
+- "Tub won't drain"
+
+Response:
+- Price: $60 service call covers most clogs
+- Time: 30min-1 hour (labor_hours: 0.5-1.0)
+- is_quick_task: true
+- Tools: Standard plunger, hand snake, basic equipment
+- Success rate: 90%+ resolved in first visit
+
+**DO NOT mention "drain cleaning" or "$150-400" for simple clogs!**
+
+Example description for simple clog:
+"Most toilet/sink clogs are resolved quickly with our $60 service call, which includes diagnosis and up to 1 hour of work. Our technician will use a plunger or hand snake to clear the blockage. If it's a simple clog (which 90% are), you're all set for just $60 + any parts if needed."
+
+---
+
+**PROFESSIONAL DRAIN CLEANING (5-10% of cases) - $150-400:**
+
+Customer specifically says:
+- "Need hydro-jetting" / "Need drain cleaning"
+- "Tree roots in pipes" / "Roots blocking sewer"
+- "Main sewer line blocked" / "Main line issue"
+- "All drains backing up" (multiple drains = main line)
+- "Grease buildup in line"
+- "Professional drain cleaning service"
+
+OR after simple unclogging fails:
+"If the clog is in the main sewer line or requires specialized equipment like hydro-jetting, that would be $150-400 depending on severity. But let's start with the $60 service call - we'll only recommend drain cleaning if absolutely necessary."
+
+---
+
+**DECISION RULES:**
+
+1. "Toilet clogged" → Simple clog → $60 service call (labor_hours: 0.5)
+2. "Need drain cleaning" → Professional → $150-400 (labor_hours: 2-4)
+3. "Slow drains throughout house" → Might be main line → Start with $60 diagnosis
+4. "Toilet clogged for 3rd time" → Recurring → Start with $60, may need inspection
+
+**DEFAULT:** Unless customer specifically asks about drain cleaning, jetting, or main line service, OR multiple drains are backing up simultaneously, assume it's a simple clog covered by $60 service call.
+
+---
+
 **SERVICE MENU REFERENCE FOR THIS REQUEST:**
 ${menuLookup.found
   ? `✓ FOUND IN OUR SERVICE MENU: "${menuLookup.service}" takes ${menuLookup.duration}
@@ -672,11 +731,58 @@ Common menu services:
 - Picture hanging: 30min-1hr (0.75hrs)
 - Smoke detector: 30min-1hr (0.75hrs)
 - Outlet installation: 1 hour
-- Drain unclogging: 30min-1hr (0.75hrs)
+- Toilet/sink/shower clog: 30min-1hr (0.75hrs) ← SIMPLE CLOG = $60!
 - Faucet installation: 1-2 hours (1.5hrs)
 - Toilet installation: 2-3 hours (2.5hrs)
 - Ceiling fan: 2-3 hours (2.5hrs)
 - Cabinet installation: 4-8 hours (6hrs)
+- Professional drain cleaning: 2-4 hours (3hrs) ← ONLY if customer asks!
+
+---
+
+**TRAINING EXAMPLES - CLOG SCENARIOS:**
+
+Example 1: "My toilet is clogged, help!"
+✓ CORRECT Response:
+- issue_type: "Toilet Unclogging"
+- severity: "High" (emergency)
+- labor_hours: 0.5
+- is_quick_task: true
+- cost_breakdown: { parts_min: 0, parts_max: 0, base_labor_cost: 0 }
+- description: "Most toilet clogs are resolved with our $60 service call (includes diagnosis + up to 1 hour). We'll use a plunger or hand snake to clear it. 90% success rate on first visit!"
+- DO NOT mention "drain cleaning" or "$150-400"
+
+Example 2: "Kitchen sink won't drain"
+✓ CORRECT Response:
+- issue_type: "Sink Unclogging"
+- labor_hours: 0.75
+- is_quick_task: true
+- description: "$60 service call covers most sink clogs. Quick fix with standard tools."
+- DO NOT mention "drain cleaning"
+
+Example 3: "Need hydro-jetting for my drains"
+✓ CORRECT Response:
+- issue_type: "Professional Drain Cleaning"
+- labor_hours: 3
+- is_quick_task: false
+- cost_breakdown: { parts_min: 150, parts_max: 400, base_labor_cost: 240 }
+- description: "Professional drain cleaning with hydro-jetting runs $150-400 depending on severity and length of line."
+- NOW you can mention drain cleaning (they specifically asked!)
+
+Example 4: "All drains in house backing up"
+✓ CORRECT Response:
+- issue_type: "Main Sewer Line Issue"
+- labor_hours: 0.5 (for diagnosis first)
+- description: "This sounds like a main sewer line issue. Let's start with our $60 service call to diagnose. If it requires professional drain cleaning, that would be $150-400 additional. We'll know more after inspection."
+- Mention both options, but START with $60 diagnosis
+
+Example 5: "Shower drain is slow"
+✓ CORRECT Response:
+- issue_type: "Drain Unclogging"
+- labor_hours: 0.5
+- is_quick_task: true
+- description: "$60 service call to clear your shower drain. Usually resolved quickly with hand snake."
+- DO NOT mention "drain cleaning"
 
 === NOW APPLY DETAILED PRICING STRUCTURE BELOW ===
 
@@ -807,7 +913,7 @@ Respond ONLY with valid JSON (no markdown):
         messages: [
           {
             role: 'system',
-            content: 'You are an expert contractor cost estimator. TOP PRIORITY: Correctly identify quick tasks (under 1 hour) like doorknobs, switches, picture hanging, drain unclogging - these should have labor_hours=0.5-1.0 and is_quick_task=true. Reference our service menu durations when available. Only use 2+ hours for actual complex work like toilet installation, ceiling fans, or renovations. Respond with ONLY valid JSON. Multiple quick tasks under 1 hour total = ONE $60 service call + materials only.'
+            content: 'You are an expert contractor cost estimator. TOP PRIORITIES: (1) CRITICAL: Differentiate simple clogs ($60 service call) from professional drain cleaning ($150-400). Simple clogs = toilet clogs, sink clogs, shower drains - these are $60 with labor_hours=0.5-1.0. Only mention drain cleaning if customer asks about jetting, main line, tree roots, or ALL drains backing up. (2) Correctly identify quick tasks like doorknobs, switches, picture hanging - labor_hours=0.5-1.0 and is_quick_task=true. Reference service menu durations. Most clogs = $60, NOT drain cleaning! Respond with ONLY valid JSON.'
           },
           {
             role: 'user',
