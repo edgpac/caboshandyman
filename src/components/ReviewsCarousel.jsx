@@ -8,105 +8,105 @@ const reviews = [
     location: "Pedregal, Cabo San Lucas",
     rating: 5,
     text: "Best handyman service in Cabo! They fixed my AC in less than 2 hours during the hottest week of summer. Highly recommend!",
-    response: "Thank you so much for the fantastic review, Maria! We're thrilled we could get your AC fixed so quickly during that heat wave. Fast, reliable service is what we're all about here at Cabos Handyman. We appreciate your trust! - Eddie"
+    response: "Thank you so much for the fantastic review, Maria! We're thrilled we could get your AC fixed so quickly during that heat wave. Fast, reliable service is what we're all about here at Cabos Handyman. We appreciate your trust! - Eddy"
   },
   {
     name: "John & Sarah T.",
     location: "Cabo San Lucas",
     rating: 5,
     text: "Professional, punctual, and affordable. They remodeled our vacation rental kitchen and it looks amazing. Our guests love it!",
-    response: "Thank you for the wonderful review! We truly appreciate property owners like you who trust us with vacation rentals. That kitchen turned out beautifully - we're honored to be your go-to team. Looking forward to our continued partnership! - Eddie, Cabos Handyman"
+    response: "Thank you for the wonderful review! We truly appreciate property owners like you who trust us with vacation rentals. That kitchen turned out beautifully - we're honored to be your go-to team. Looking forward to our continued partnership! - Eddy, Cabos Handyman"
   },
   {
     name: "Roberto M.",
     location: "Cabo San Lucas",
     rating: 5,
     text: "Emergency plumbing issue at 11 PM - they answered immediately and came within 30 minutes. Saved us from major water damage!",
-    response: "Thank you for the fantastic review, Roberto! Emergency situations are stressful, and we're glad we could respond quickly at 11 PM to prevent further damage. 24/7 emergency service is a priority for us because we know these things don't happen on a schedule! - Eddie"
+    response: "Thank you for the fantastic review, Roberto! Emergency situations are stressful, and we're glad we could respond quickly at 11 PM to prevent further damage. 24/7 emergency service is a priority for us because we know these things don't happen on a schedule! - Eddy"
   },
   {
     name: "Lisa P.",
     location: "Property Manager, Cabo San Lucas",
     rating: 5,
     text: "We manage 5 rental properties and Cabos Handyman is our go-to for everything. Reliable, fast, and great pricing.",
-    response: "Thank you, Lisa! We truly appreciate property managers like you who trust us with multiple units. Reliability and quality work are essential for vacation rentals. We're honored to be your go-to team! - Eddie, Cabos Handyman"
+    response: "Thank you, Lisa! We truly appreciate property managers like you who trust us with multiple units. Reliability and quality work are essential for vacation rentals. We're honored to be your go-to team! - Eddy, Cabos Handyman"
   },
   {
     name: "Carlos & Ana R.",
     location: "Cabo San Lucas",
     rating: 5,
     text: "Painted our entire house exterior in 3 days. Clean work, no mess, and the price was very fair. Excellent team!",
-    response: "Thank you so much for your kind words! We're thrilled with how your exterior turned out. Clean work with no mess left behind - that's our standard. Our team takes great pride in quality craftsmanship! - Eddie"
+    response: "Thank you so much for your kind words! We're thrilled with how your exterior turned out. Clean work with no mess left behind - that's our standard. Our team takes great pride in quality craftsmanship! - Eddy"
   },
   {
     name: "Michael D.",
     location: "Cabo Bello",
     rating: 5,
     text: "Electrical work can be scary, but these guys knew exactly what they were doing. Fixed all our outlet issues in one visit.",
-    response: "Thank you, Michael! Safety is our #1 priority with electrical work. We're glad we could solve your outlet issues quickly and safely. Our certified electricians ensure everything meets code! - Eddie, Cabos Handyman"
+    response: "Thank you, Michael! Safety is our #1 priority with electrical work. We're glad we could solve your outlet issues quickly and safely. Our certified electricians ensure everything meets code! - Eddy, Cabos Handyman"
   },
   {
     name: "Patricia L.",
     location: "El Tezal",
     rating: 5,
     text: "Built us a beautiful custom deck with palapa. It's now our favorite spot in the house. Quality craftsmanship!",
-    response: "Thank you so much, Patricia! We're thrilled the deck with palapa turned out beautifully. Quality craftsmanship that lasts - that's our promise. Enjoy your new favorite spot! - Eddie"
+    response: "Thank you so much, Patricia! We're thrilled the deck with palapa turned out beautifully. Quality craftsmanship that lasts - that's our promise. Enjoy your new favorite spot! - Eddy"
   },
   {
     name: "David W.",
     location: "California / Cabo vacation home",
     rating: 5,
     text: "As an absentee owner, I needed someone trustworthy. They send photos of completed work and bills are always accurate.",
-    response: "Thank you, David! Honesty and transparency are core values at Cabos Handyman. We understand absentee owners need extra peace of mind - we treat every home like it's our own. We're grateful for your trust! - Eddie"
+    response: "Thank you, David! Honesty and transparency are core values at Cabos Handyman. We understand absentee owners need extra peace of mind - we treat every home like it's our own. We're grateful for your trust! - Eddy"
   },
   {
     name: "Gabriela S.",
     location: "Cabo San Lucas",
     rating: 5,
     text: "Unclogged our drain, fixed a leaky faucet, and installed a new toilet - all in one appointment. Super efficient!",
-    response: "Thank you, Gabriela! We're happy your plumbing is working perfectly now. Efficiency and getting everything done in one visit saves you time and money. We appreciate your business! - Eddie, Cabos Handyman"
+    response: "Thank you, Gabriela! We're happy your plumbing is working perfectly now. Efficiency and getting everything done in one visit saves you time and money. We appreciate your business! - Eddy, Cabos Handyman"
   },
   {
     name: "Tom & Jennifer K.",
     location: "Cabo San Lucas",
     rating: 5,
     text: "Eddy and his team did a great job installing ledger stone on a large wall. They were clean, punctual, and true perfectionists.",
-    response: "Thank you so much, Tom & Jennifer! We're thrilled the ledger stone wall turned out beautifully. Cleanliness and punctuality are priorities on every job - your home is as important to us as the work itself. Our team takes great pride in that attention to detail you noticed. We truly appreciate your kind words and recommendation! - Eddie"
+    response: "Thank you so much, Tom & Jennifer! We're thrilled the ledger stone wall turned out beautifully. Cleanliness and punctuality are priorities on every job. Our team takes great pride in that attention to detail you noticed. We truly appreciate your kind words and recommendation! - Eddy"
   },
   {
     name: "Eduardo F.",
     location: "Cabo San Lucas",
     rating: 5,
     text: "They installed smart home devices throughout our house. Now we can control everything from our phones. Love it!",
-    response: "Thank you, Eduardo! Smart home technology is the future, and we're glad we could modernize your home. Communication and professionalism are core to everything we do. Enjoy your new setup! - Eddie, Cabos Handyman"
+    response: "Thank you, Eduardo! Smart home technology is the future, and we're glad we could modernize your home. Communication and professionalism are core to everything we do. Enjoy your new setup! - Eddy, Cabos Handyman"
   },
   {
     name: "Susan M.",
     location: "Cabo San Lucas",
     rating: 5,
     text: "Storm damage repair was done quickly and professionally. They worked with our insurance company too. Stress-free experience.",
-    response: "Thank you, Susan! Storm damage is stressful, and we're glad we could help coordinate with your insurance company to make it stress-free. We're proud of how the repairs turned out! - Eddie"
+    response: "Thank you, Susan! Storm damage is stressful, and we're glad we could help coordinate with your insurance company to make it stress-free. We're proud of how the repairs turned out! - Eddy"
   },
   {
     name: "Francisco V.",
     location: "Cabo San Lucas",
     rating: 5,
     text: "Repaired our pool equipment and showed us how to maintain it properly. Great service and educational too!",
-    response: "Thank you, Francisco! We love educating our clients on proper maintenance - it saves money in the long run. Your satisfaction is our top priority. Thanks for choosing Cabos Handyman! - Eddie"
+    response: "Thank you, Francisco! We love educating our clients on proper maintenance - it saves money in the long run. Your satisfaction is our top priority. Thanks for choosing Cabos Handyman! - Eddy"
   },
   {
     name: "Amanda R.",
     location: "Commercial Property, Cabo",
     rating: 5,
     text: "Bilingual service made everything so easy. They explained everything in English and Spanish for our staff.",
-    response: "Thank you, Amanda! Bilingual service is essential in Los Cabos. We're glad we could communicate clearly with your entire team. Communication and professionalism are core to everything we do! - Eddie, Cabos Handyman"
+    response: "Thank you, Amanda! Bilingual service is essential in Los Cabos. We're glad we could communicate clearly with your entire team. Communication and professionalism are core to everything we do! - Eddy, Cabos Handyman"
   },
   {
     name: "James & Linda H.",
     location: "Vacation Rental Owners, Cabo San Lucas",
     rating: 5,
     text: "5 years using their services for our vacation rentals. Never disappointed. They're like family now!",
-    response: "Thank you so much, James & Linda! 5 years of partnership means the world to us. We're honored to be part of your team and grateful for your continued trust. Here's to many more years! - Eddie"
+    response: "Thank you so much, James & Linda! 5 years of partnership means the world to us. We're honored to be part of your team and grateful for your continued trust. Here's to many more years! - Eddy"
   }
 ];
 
