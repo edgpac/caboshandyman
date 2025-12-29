@@ -26,14 +26,14 @@ const reviews = [
   },
   {
     name: "Lisa P.",
-    location: "Property Manager, Los Cabos",
+    location: "Property Manager, Cabo San Lucas",
     rating: 5,
     text: "We manage 5 rental properties and Cabos Handyman is our go-to for everything. Reliable, fast, and great pricing.",
     response: "Thank you, Lisa! We truly appreciate property managers like you who trust us with multiple units. Reliability and quality work are essential for vacation rentals. We're honored to be your go-to team! - Eddie, Cabos Handyman"
   },
   {
     name: "Carlos & Ana R.",
-    location: "Todos Santos",
+    location: "Cabo San Lucas",
     rating: 5,
     text: "Painted our entire house exterior in 3 days. Clean work, no mess, and the price was very fair. Excellent team!",
     response: "Thank you so much for your kind words! We're thrilled with how your exterior turned out. Clean work with no mess left behind - that's our standard. Our team takes great pride in quality craftsmanship! - Eddie"
@@ -68,14 +68,14 @@ const reviews = [
   },
   {
     name: "Tom & Jennifer K.",
-    location: "Palmilla",
+    location: "Cabo San Lucas",
     rating: 5,
-    text: "Honest pricing, no hidden fees. They told us exactly what needed to be done and what could wait. Very trustworthy!",
+    text: "Eddy and his team did a great job installing ledger stone on a large wall. They were clean, punctual, and true perfectionists.",
     response: "Thank you so much! Honesty and transparency are core values here. We believe in treating every client with respect and giving fair, accurate estimates. We're grateful for your trust and recommendation! - Eddie"
   },
   {
     name: "Eduardo F.",
-    location: "Puerto Los Cabos",
+    location: "Cabo San Lucas",
     rating: 5,
     text: "They installed smart home devices throughout our house. Now we can control everything from our phones. Love it!",
     response: "Thank you, Eduardo! Smart home technology is the future, and we're glad we could modernize your home. Communication and professionalism are core to everything we do. Enjoy your new setup! - Eddie, Cabos Handyman"
@@ -103,7 +103,7 @@ const reviews = [
   },
   {
     name: "James & Linda H.",
-    location: "Multiple properties, Los Cabos",
+    location: "Vacation Rental Owners, Cabo San Lucas",
     rating: 5,
     text: "5 years using their services for our vacation rentals. Never disappointed. They're like family now!",
     response: "Thank you so much, James & Linda! 5 years of partnership means the world to us. We're honored to be part of your team and grateful for your continued trust. Here's to many more years! - Eddie"
