@@ -1,5 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import ServiceMenuPopup from '../components/ServiceMenuPopup';
 
 export default function ServicesPage() {
@@ -127,6 +129,17 @@ export default function ServicesPage() {
       </Helmet>
 
       <div className="min-h-screen bg-gray-50 pt-20">
+        {/* Back to Home Button */}
+        <div className="container mx-auto px-6 py-4">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-semibold transition-colors group"
+          >
+            <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Home</span>
+          </Link>
+        </div>
+
         {/* SEO Header - Hidden but crawlable */}
         <div className="sr-only">
           <h1>Handyman Services Cabo San Lucas - Professional Home Repair & Maintenance</h1>
@@ -181,6 +194,17 @@ export default function ServicesPage() {
               Call +52 612 169 8328
             </a>
           </div>
+        </div>
+
+        {/* Bottom Back to Home Button */}
+        <div className="container mx-auto px-6 py-8 text-center">
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+          >
+            <ArrowLeft size={20} />
+            <span>Back to Home</span>
+          </Link>
         </div>
 
         <ServiceMenuPopup
