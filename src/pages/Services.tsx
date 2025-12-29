@@ -157,14 +157,13 @@ export default function ServicesPage() {
               Browse our most common services and starting prices below.
             </p>
             <p className="text-lg text-white/90">
-              Every job is unique -{' '}
               <a
                 href="tel:+526121698328"
                 className="text-white font-bold hover:underline transition-all"
               >
-                call us
+                Call us
               </a>
-              {' '}for a personalized quote based on your specific project or issue.
+              {' '}for a personalized quote based on your project or issue.
             </p>
             <p className="text-lg text-white font-medium">
               $60 service call includes diagnosis + first hour of labor (credited toward work)
