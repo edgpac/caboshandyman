@@ -238,8 +238,8 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
   const categories = serviceMenus[projectType] || [];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-2 sm:p-4">
+      <div className="bg-white rounded-lg max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="bg-teal-500 text-white p-6 flex justify-between items-center">
           <div>
@@ -247,9 +247,10 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
             <p className="text-teal-100 mt-1">Starting prices - Final cost may vary based on complexity</p>
             <p className="text-teal-100 text-sm mt-1">We go beyond what's on the menu - use our estimate feature or contact us for custom pricing</p>
           </div>
-          <button 
+          <button
             onClick={onClose}
-            className="text-white hover:text-teal-200 transition-colors"
+            className="text-white hover:text-teal-200 transition-colors p-2 min-h-[44px] min-w-[44px] flex items-center justify-center -mr-2"
+            aria-label="Close menu"
           >
             <X size={24} />
           </button>
@@ -267,19 +268,19 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
                 <div className="space-y-3">
                   {category.services.map((service, serviceIndex) => (
                     <div key={serviceIndex} className="bg-white rounded-lg p-3 border border-gray-200">
-                      <h4 className="font-medium text-gray-900 text-sm mb-2">{service.name}</h4>
-                      <div className="flex justify-between items-center text-xs">
+                      <h4 className="font-medium text-gray-900 text-base mb-2">{service.name}</h4>
+                      <div className="flex justify-between items-center text-sm">
                         <div className="flex items-center text-green-600">
-                          <DollarSign className="h-3 w-3 mr-1" />
-                          <span className="font-semibold">{service.startingPrice}</span>
+                          <DollarSign className="h-4 w-4 mr-1" />
+                          <span className="font-semibold text-base">{service.startingPrice}</span>
                         </div>
                         <div className="flex items-center text-gray-500">
-                          <Clock className="h-3 w-3 mr-1" />
+                          <Clock className="h-4 w-4 mr-1" />
                           <span>{service.duration}</span>
                         </div>
                       </div>
                       {service.description && (
-                        <p className="text-xs text-gray-600 mt-2">{service.description}</p>
+                        <p className="text-sm text-gray-600 mt-2">{service.description}</p>
                       )}
                     </div>
                   ))}

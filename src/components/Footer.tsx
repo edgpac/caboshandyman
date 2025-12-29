@@ -50,34 +50,34 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h3 className="font-semibold mb-3 text-gray-900">Contact</h3>
-            <div className="space-y-2 text-xs">
+            <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2 text-gray-600">
-                <Phone className="h-3 w-3 text-teal-400" />
+                <Phone className="h-4 w-4 text-teal-400" />
                 <a href="tel:+526121698328" className="hover:text-teal-500 transition-colors">
                   +52 612 169 8328
                 </a>
               </div>
               <div className="flex items-center space-x-2 text-gray-600">
-                <Clock className="h-3 w-3 text-teal-400" />
+                <Clock className="h-4 w-4 text-teal-400" />
                 <a href="tel:+526121698328" className="hover:text-teal-500 transition-colors">
                   24/7 Emergency Service
                 </a>
               </div>
               <div className="flex items-center space-x-2 text-gray-600">
-                <Facebook className="h-3 w-3 text-teal-400" />
+                <Facebook className="h-4 w-4 text-teal-400" />
                 <a href="https://www.facebook.com/share/19wvxoz8Cy/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500 transition-colors">
                   Follow us on Facebook
                 </a>
               </div>
               {/* Schedule Service Button */}
               <div className="pt-2">
-                <a 
-                  href="https://cal.com/maintenancemaster/residential-consultation" 
-                  target="_blank" 
+                <a
+                  href="https://cal.com/maintenancemaster/residential-consultation"
+                  target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded-lg text-xs font-semibold transition-colors shadow-sm"
+                  className="inline-flex items-center space-x-2 bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm"
                 >
-                  <Calendar className="h-3 w-3" />
+                  <Calendar className="h-4 w-4" />
                   <span>Schedule Service</span>
                 </a>
               </div>
@@ -87,12 +87,12 @@ export default function Footer() {
           {/* FAQ Section - REPLACES Services */}
           <div>
             <h3 className="font-semibold mb-3 text-gray-900">Have Questions?</h3>
-            <p className="text-xs text-gray-600 mb-4">
+            <p className="text-sm text-gray-600 mb-4">
               Get instant answers to common questions about our services, pricing, and areas we serve.
             </p>
-            <a 
-              href="/faq" 
-              className="inline-flex items-center space-x-2 bg-white border-2 border-teal-400 text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-lg text-xs font-semibold transition-colors shadow-sm"
+            <a
+              href="/faq"
+              className="inline-flex items-center space-x-2 bg-white border-2 border-teal-400 text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm"
             >
               <HelpCircle className="h-4 w-4" />
               <span>View FAQ</span>
@@ -111,10 +111,10 @@ export default function Footer() {
                   type="number"
                   value={usdAmount}
                   onChange={(e) => setUsdAmount(e.target.value)}
-                  className="w-16 px-2 py-1 text-xs border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-teal-400"
+                  className="w-full sm:w-20 px-4 py-3 text-base border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-teal-400"
                   placeholder="100"
                 />
-                <span className="text-xs text-gray-600">USD</span>
+                <span className="text-sm text-gray-600">USD</span>
               </div>
               
               <div className="flex items-center space-x-2">
@@ -124,10 +124,11 @@ export default function Footer() {
                 <button
                   onClick={fetchExchangeRate}
                   disabled={loading}
-                  className="p-1 text-gray-400 hover:text-teal-500 transition-colors disabled:opacity-50"
+                  className="p-3 text-gray-400 hover:text-teal-500 transition-colors disabled:opacity-50 min-h-[44px] min-w-[44px] flex items-center justify-center"
                   title="Refresh rate"
+                  aria-label="Refresh exchange rate"
                 >
-                  <RefreshCw className={`h-3 w-3 ${loading ? 'animate-spin' : ''}`} />
+                  <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
                 </button>
               </div>
               

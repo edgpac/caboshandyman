@@ -158,7 +158,7 @@ export default function CabosHandymanHomepage() {
         {/* Stats Section */}
         <section className="py-16 bg-muted/20">
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
               <div className="transform hover:scale-105 transition-transform">
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">20+</div>
                 <div className="text-muted-foreground font-semibold">Years Experience</div>
@@ -257,7 +257,7 @@ export default function CabosHandymanHomepage() {
         </section>
 
         {/* FLOATING BUTTONS - Bottom Right */}
-        <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col gap-3">
           {/* WhatsApp Button */}
            <a
            href="https://wa.me/526121698328?text=Hi!%20I%27m%20interested%20in%20your%20handyman%20services"
