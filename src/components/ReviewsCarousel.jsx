@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Star } from 'lucide-react';
-import logo from '../assets/CHLOGO.png';
 
 const reviews = [
   {
@@ -223,7 +222,7 @@ export default function ReviewsCarousel() {
                   <div className="flex items-start gap-3">
                     <div className="flex-shrink-0">
                       <img
-                        src={logo}
+                        src="/CHLOGO.png"
                         alt="Cabos Handyman"
                         className="w-10 h-10 rounded-full object-contain bg-white border-2 border-teal-500"
                       />
