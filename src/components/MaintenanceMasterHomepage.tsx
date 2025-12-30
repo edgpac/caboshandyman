@@ -79,7 +79,7 @@ export default function CabosHandymanHomepage() {
         <nav className="bg-dark-surface text-white py-4 sticky top-0 z-40 shadow-lg">
           <div className="container mx-auto px-6 flex justify-between items-center">
             {/* Left: Logo + Phone */}
-            <div className="flex flex-col">
+            <div className="flex flex-col items-center">
               <div className="flex items-center space-x-3">
                 <img
                   src="/CHLOGO.png"
@@ -90,7 +90,7 @@ export default function CabosHandymanHomepage() {
               </div>
               <a
                 href="tel:+526121698328"
-                className="flex items-center gap-1 text-primary hover:text-primary-hover transition-colors text-sm ml-15 mt-1"
+                className="flex items-center gap-1 text-primary hover:text-primary-hover transition-colors text-sm mt-1"
               >
                 <Phone size={14} />
                 <span>612 169 8328</span>
@@ -238,7 +238,7 @@ export default function CabosHandymanHomepage() {
         <ReviewsCarousel />
 
         {/* CTA Section - Care Plans Focus */}
-        <section className="py-16 bg-gradient-to-r from-teal-500 to-cyan-600">
+        <section className="py-16 bg-[#02b19f]">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center text-white">
 
@@ -275,7 +275,7 @@ export default function CabosHandymanHomepage() {
                 {/* Button 1: View Care Plans (New - Primary) */}
                 <a
                   href="/property-care-plans"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-teal-600 font-bold text-lg rounded-lg hover:bg-gray-100 transition shadow-lg min-w-[250px]"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#02b19f] font-bold text-lg rounded-lg hover:bg-gray-100 transition shadow-lg min-w-[250px]"
                 >
                   <span className="mr-2">🛡️</span>
                   View Care Plans
@@ -284,7 +284,7 @@ export default function CabosHandymanHomepage() {
                 {/* Button 2: Scheduling Assistant (Existing - Secondary) */}
                 <button
                   onClick={() => openAIAssistant('services')}
-                  className="inline-flex items-center justify-center px-8 py-4 bg-teal-700 text-white font-bold text-lg rounded-lg hover:bg-teal-800 transition border-2 border-white min-w-[250px]"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-[#018c7e] text-white font-bold text-lg rounded-lg hover:bg-[#017168] transition border-2 border-white min-w-[250px]"
                 >
                   <span className="mr-2">💬</span>
                   Scheduling Assistant
