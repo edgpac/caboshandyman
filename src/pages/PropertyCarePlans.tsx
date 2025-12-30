@@ -365,12 +365,12 @@ export default function PropertyCarePlans() {
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Choose Your Property Care Plan</h2>
 
             <div className="grid md:grid-cols-3 gap-8 mb-8">
-              {/* Basic Care */}
-              <div className="bg-white rounded-lg shadow-xl border-2 border-gray-300 overflow-hidden hover:shadow-2xl transition-all">
-                <div className="bg-gradient-to-br from-gray-600 to-gray-700 text-white p-6 text-center">
+              {/* Basic Care - ORANGE for action/conversion */}
+              <div className="bg-white rounded-lg shadow-xl border-2 border-orange-400 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
+                <div className="bg-gradient-to-br from-orange-500 to-red-500 text-white p-6 text-center">
                   <h3 className="text-2xl font-bold mb-2">Basic Care</h3>
                   <div className="text-5xl font-bold mb-2">$99</div>
-                  <div className="text-gray-200 mb-4">per month</div>
+                  <div className="text-white/90 mb-4">per month</div>
 
                   {/* Annual Pricing Option */}
                   <div className="bg-green-600 border border-green-400 rounded-lg p-3">
@@ -378,35 +378,35 @@ export default function PropertyCarePlans() {
                       💰 PAY ANNUALLY & SAVE
                     </div>
                     <div className="text-2xl font-bold text-white">$1,089</div>
-                    <div className="text-xs text-green-100">
+                    <div className="text-xs text-white/90">
                       ($90.75/month - Save $99!)
                     </div>
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="p-6 bg-white">
                   <ul className="space-y-4 mb-6">
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>Monthly inspection</strong> (plumbing, electrical, fixtures)</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>1 FREE unclog per month</strong> (toilet, tub, OR sink - $60 value)</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>15% discount</strong> on all repair services</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>Priority emergency response</strong> (4-hour guarantee)</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>Monthly inspection report</strong> (email summary)</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>Cancel anytime</strong> (no long-term contract)</span>
                     </li>
                   </ul>
@@ -415,7 +415,7 @@ export default function PropertyCarePlans() {
                   </p>
                   <a
                     href="/contact"
-                    className="block w-full bg-gray-600 hover:bg-gray-700 text-white text-center py-3 rounded-lg font-semibold transition-colors"
+                    className="block w-full bg-orange-600 hover:bg-orange-700 text-white text-center py-3 rounded-lg font-semibold transition-colors shadow-lg"
                   >
                     Choose Basic Care
                   </a>
