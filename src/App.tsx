@@ -20,6 +20,9 @@ const HandymanCaboSanLucas = lazy(() => import("./pages/HandymanCaboSanLucas"));
 const PlumberCaboSanLucas = lazy(() => import("./pages/PlumberCaboSanLucas"));
 const ToiletTubUncloggingCabo = lazy(() => import("./pages/ToiletTubUncloggingCabo"));
 const CeilingFanInstallationCabo = lazy(() => import("./pages/CeilingFanInstallationCabo"));
+const KitchenServicesCabo = lazy(() => import("./pages/KitchenServicesCabo"));
+const BathroomServicesCabo = lazy(() => import("./pages/BathroomServicesCabo"));
+const ElectricalServicesCabo = lazy(() => import("./pages/ElectricalServicesCabo"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -57,6 +60,9 @@ const App = () => {
               <Route path="/plumber-cabo-san-lucas" element={<PlumberCaboSanLucas />} />
               <Route path="/toilet-tub-unclogging-cabo" element={<ToiletTubUncloggingCabo />} />
               <Route path="/ceiling-fan-installation-cabo" element={<CeilingFanInstallationCabo />} />
+              <Route path="/kitchen-services-cabo" element={<KitchenServicesCabo />} />
+              <Route path="/bathroom-services-cabo" element={<BathroomServicesCabo />} />
+              <Route path="/electrical-services-cabo" element={<ElectricalServicesCabo />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

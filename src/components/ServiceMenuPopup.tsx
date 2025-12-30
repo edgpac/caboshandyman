@@ -235,6 +235,11 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
 // Helper function to determine if a service should be clickable and get its link
 function getServiceLink(serviceName: string): string | null {
   const linkMap: Record<string, string> = {
+    // Category page links
+    "Modern Kitchen": "/kitchen-services-cabo",
+    "Luxury Bathroom": "/bathroom-services-cabo",
+    "Electrical Services": "/electrical-services-cabo",
+    // Individual service page links
     "Ceiling Fan Installation Cabo San Lucas": "/ceiling-fan-installation-cabo",
     "TV Mounting Cabo San Lucas": "/tv-mounting-cabo",
     "Furniture Assembly": "/furniture-assembly-cabo",

@@ -21,6 +21,21 @@
     <priority>0.3</priority>
   </url>
   <url>
+    <loc>https://www.caboshandyman.com/kitchen-services-cabo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.caboshandyman.com/bathroom-services-cabo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://www.caboshandyman.com/electrical-services-cabo</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.caboshandyman.com/blog/professional-handyman-services-cabo-san-lucas</loc>
     <lastmod>2025-12-10</lastmod>
     <changefreq>monthly</changefreq>

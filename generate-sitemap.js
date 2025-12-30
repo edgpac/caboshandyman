@@ -13,6 +13,9 @@ const staticPages = [
   { url: '/contact', changefreq: 'monthly', priority: '0.9' },
   { url: '/privacy', changefreq: 'yearly', priority: '0.3' },
   { url: '/terms', changefreq: 'yearly', priority: '0.3' },
+  { url: '/kitchen-services-cabo', changefreq: 'monthly', priority: '0.85' },
+  { url: '/bathroom-services-cabo', changefreq: 'monthly', priority: '0.85' },
+  { url: '/electrical-services-cabo', changefreq: 'monthly', priority: '0.85' },
 ];
 
 function getBlogPosts() {
