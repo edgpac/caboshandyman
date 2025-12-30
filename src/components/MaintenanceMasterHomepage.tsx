@@ -78,15 +78,27 @@ export default function CabosHandymanHomepage() {
         {/* Navigation */}
         <nav className="bg-dark-surface text-white py-4 sticky top-0 z-40 shadow-lg">
           <div className="container mx-auto px-6 flex justify-between items-center">
-            <div className="flex items-center space-x-3">
-              <img
-                src="/CHLOGO.png"
-                alt="Cabos Handyman Logo"
-                className="w-12 h-12 object-contain"
-              />
-              <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
+            {/* Left: Logo + Phone */}
+            <div className="flex flex-col">
+              <div className="flex items-center space-x-3">
+                <img
+                  src="/CHLOGO.png"
+                  alt="Cabos Handyman Logo"
+                  className="w-12 h-12 object-contain"
+                />
+                <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
+              </div>
+              <a
+                href="tel:+526121698328"
+                className="flex items-center gap-1 text-primary hover:text-primary-hover transition-colors text-sm ml-15 mt-1"
+              >
+                <Phone size={14} />
+                <span>612 169 8328</span>
+              </a>
             </div>
-            <div className="flex items-center space-x-6">
+
+            {/* Right: Navigation Links */}
+            <div className="flex items-center space-x-4">
               <a
                 href="/services"
                 className="hidden md:flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-semibold"
@@ -102,13 +114,6 @@ export default function CabosHandymanHomepage() {
                 <span className="ml-1 text-xs bg-white/20 px-2 py-0.5 rounded-full">
                   NEW
                 </span>
-              </a>
-              <a
-                href="tel:+526121698328"
-                className="hidden sm:flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-semibold"
-              >
-                <Phone size={18} />
-                <span className="hidden lg:inline">612 169 8328</span>
               </a>
               <a
                 href="/contact"

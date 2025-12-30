@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Wrench, AlertCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Wrench, AlertCircle, ArrowLeft } from 'lucide-react';
 import Footer from './Footer';
 import SEO from './SEO';
 
@@ -62,12 +62,26 @@ const ContactPage = () => {
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Contact Cabos Handyman - Free Estimates in Cabo San Lucas"
         description="Get in touch with Cabos Handyman for free estimates. 24/7 emergency service, 30-minute response time. Call +52 612 169 8328 or schedule online."
         canonicalUrl="/contact"
       />
-      <div className="min-h-screen pt-20 bg-gray-50">
+
+      {/* Back to Home Button */}
+      <div className="bg-gray-50 pt-20 py-4">
+        <div className="container mx-auto px-6">
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-semibold transition-colors group"
+          >
+            <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Home</span>
+          </a>
+        </div>
+      </div>
+
+      <div className="min-h-screen bg-gray-50">
         {/* Hero */}
         <section className="py-20 bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700 text-white">
           <div className="container mx-auto px-4 text-center">
