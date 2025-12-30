@@ -23,6 +23,7 @@ const CeilingFanInstallationCabo = lazy(() => import("./pages/CeilingFanInstalla
 const KitchenServicesCabo = lazy(() => import("./pages/KitchenServicesCabo"));
 const BathroomServicesCabo = lazy(() => import("./pages/BathroomServicesCabo"));
 const ElectricalServicesCabo = lazy(() => import("./pages/ElectricalServicesCabo"));
+const PropertyCarePlans = lazy(() => import("./pages/PropertyCarePlans"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -63,6 +64,7 @@ const App = () => {
               <Route path="/kitchen-services-cabo" element={<KitchenServicesCabo />} />
               <Route path="/bathroom-services-cabo" element={<BathroomServicesCabo />} />
               <Route path="/electrical-services-cabo" element={<ElectricalServicesCabo />} />
+              <Route path="/property-care-plans" element={<PropertyCarePlans />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

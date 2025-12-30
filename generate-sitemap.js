@@ -16,6 +16,7 @@ const staticPages = [
   { url: '/kitchen-services-cabo', changefreq: 'monthly', priority: '0.85' },
   { url: '/bathroom-services-cabo', changefreq: 'monthly', priority: '0.85' },
   { url: '/electrical-services-cabo', changefreq: 'monthly', priority: '0.85' },
+  { url: '/property-care-plans', changefreq: 'monthly', priority: '0.9' },
 ];
 
 function getBlogPosts() {
