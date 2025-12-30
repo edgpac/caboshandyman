@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Wrench, DollarSign, Clock } from 'lucide-react';
+import { X, Wrench, DollarSign, Clock, Home, Star, Droplet, ArrowRight } from 'lucide-react';
 
 interface ServiceItem {
   name: string;
@@ -232,6 +232,22 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
   ]
 };
 
+// Helper function to determine if a service should be clickable and get its link
+function getServiceLink(serviceName: string): string | null {
+  const linkMap: Record<string, string> = {
+    "Ceiling Fan Installation Cabo San Lucas": "/ceiling-fan-installation-cabo",
+    "TV Mounting Cabo San Lucas": "/tv-mounting-cabo",
+    "Furniture Assembly": "/furniture-assembly-cabo",
+    "Toilet & Tub Unclogging Cabo San Lucas": "/toilet-tub-unclogging-cabo",
+    "Toilet Unclogging Cabo San Lucas": "/toilet-tub-unclogging-cabo",
+    "Sink Unclogging Cabo San Lucas": "/toilet-tub-unclogging-cabo",
+    "Tub & Shower Drain Cleaning": "/toilet-tub-unclogging-cabo",
+    "Kitchen Sink Drain Cleaning": "/toilet-tub-unclogging-cabo"
+  };
+
+  return linkMap[serviceName] || null;
+}
+
 export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEstimate, onScheduleConsultation }: ServiceMenuPopupProps) {
   if (!isOpen) return null;
 
@@ -258,6 +274,77 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
 
         {/* Content */}
         <div className="p-6 overflow-y-auto max-h-[calc(90vh-120px)]">
+          {/* Featured Service Cards */}
+          <div className="mb-8 grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <a
+              href="/property-setup-cabo"
+              className="bg-gradient-to-br from-teal-50 to-teal-100 border-2 border-teal-500 rounded-lg p-4 hover:shadow-lg transition-all group cursor-pointer"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="bg-teal-500 w-10 h-10 rounded-full flex items-center justify-center">
+                  <Home className="text-white" size={20} />
+                </div>
+                <h3 className="font-bold text-gray-900 group-hover:text-teal-600 transition-colors">Property Setup</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-2">Complete move-in packages</p>
+              <div className="flex items-center gap-1 text-teal-600 font-semibold text-sm">
+                <span>Learn More</span>
+                <ArrowRight size={14} />
+              </div>
+            </a>
+
+            <a
+              href="/vacation-rental-setup-cabo"
+              className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-500 rounded-lg p-4 hover:shadow-lg transition-all group cursor-pointer"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center">
+                  <Star className="text-white" size={20} />
+                </div>
+                <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Rental Service</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-2">Airbnb/VRBO maintenance</p>
+              <div className="flex items-center gap-1 text-blue-600 font-semibold text-sm">
+                <span>Learn More</span>
+                <ArrowRight size={14} />
+              </div>
+            </a>
+
+            <a
+              href="/plumber-cabo-san-lucas"
+              className="bg-gradient-to-br from-cyan-50 to-cyan-100 border-2 border-cyan-500 rounded-lg p-4 hover:shadow-lg transition-all group cursor-pointer"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="bg-cyan-500 w-10 h-10 rounded-full flex items-center justify-center">
+                  <Droplet className="text-white" size={20} />
+                </div>
+                <h3 className="font-bold text-gray-900 group-hover:text-cyan-600 transition-colors">Plumber 24/7</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-2">Emergency plumbing service</p>
+              <div className="flex items-center gap-1 text-cyan-600 font-semibold text-sm">
+                <span>Learn More</span>
+                <ArrowRight size={14} />
+              </div>
+            </a>
+
+            <a
+              href="/services"
+              className="bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-400 rounded-lg p-4 hover:shadow-lg transition-all group cursor-pointer"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="bg-gray-600 w-10 h-10 rounded-full flex items-center justify-center">
+                  <Wrench className="text-white" size={20} />
+                </div>
+                <h3 className="font-bold text-gray-900 group-hover:text-gray-700 transition-colors">All Services</h3>
+              </div>
+              <p className="text-sm text-gray-600 mb-2">Browse 70+ services</p>
+              <div className="flex items-center gap-1 text-gray-700 font-semibold text-sm">
+                <span>View Menu</span>
+                <ArrowRight size={14} />
+              </div>
+            </a>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categories.map((category, categoryIndex) => (
               <div key={categoryIndex} className="bg-gray-50 rounded-lg p-4">
@@ -266,24 +353,35 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
                   {category.title}
                 </h3>
                 <div className="space-y-3">
-                  {category.services.map((service, serviceIndex) => (
-                    <div key={serviceIndex} className="bg-white rounded-lg p-3 border border-gray-200">
-                      <h4 className="font-medium text-gray-900 text-base mb-2">{service.name}</h4>
-                      <div className="flex justify-between items-center text-sm">
-                        <div className="flex items-center text-green-600">
-                          <DollarSign className="h-4 w-4 mr-1" />
-                          <span className="font-semibold text-base">{service.startingPrice}</span>
+                  {category.services.map((service, serviceIndex) => {
+                    const serviceLink = getServiceLink(service.name);
+                    const ServiceWrapper = serviceLink ? 'a' : 'div';
+                    const wrapperProps = serviceLink
+                      ? { href: serviceLink, className: "bg-white rounded-lg p-3 border border-gray-200 block hover:border-teal-500 hover:shadow-md transition-all cursor-pointer" }
+                      : { className: "bg-white rounded-lg p-3 border border-gray-200" };
+
+                    return (
+                      <ServiceWrapper key={serviceIndex} {...wrapperProps}>
+                        <h4 className="font-medium text-gray-900 text-base mb-2 flex items-center justify-between">
+                          <span>{service.name}</span>
+                          {serviceLink && <ArrowRight className="text-teal-500" size={16} />}
+                        </h4>
+                        <div className="flex justify-between items-center text-sm">
+                          <div className="flex items-center text-green-600">
+                            <DollarSign className="h-4 w-4 mr-1" />
+                            <span className="font-semibold text-base">{service.startingPrice}</span>
+                          </div>
+                          <div className="flex items-center text-gray-500">
+                            <Clock className="h-4 w-4 mr-1" />
+                            <span>{service.duration}</span>
+                          </div>
                         </div>
-                        <div className="flex items-center text-gray-500">
-                          <Clock className="h-4 w-4 mr-1" />
-                          <span>{service.duration}</span>
-                        </div>
-                      </div>
-                      {service.description && (
-                        <p className="text-sm text-gray-600 mt-2">{service.description}</p>
-                      )}
-                    </div>
-                  ))}
+                        {service.description && (
+                          <p className="text-sm text-gray-600 mt-2">{service.description}</p>
+                        )}
+                      </ServiceWrapper>
+                    );
+                  })}
                 </div>
               </div>
             ))}

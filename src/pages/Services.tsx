@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Home, Star, Droplet, Wrench, ArrowRight } from 'lucide-react';
 import ServiceMenuPopup from '../components/ServiceMenuPopup';
 
 export default function ServicesPage() {
@@ -188,6 +188,84 @@ export default function ServicesPage() {
 
         {/* Service Categories */}
         <div className="container mx-auto px-4 py-12">
+          {/* Featured Service Cards */}
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Featured Services</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Link
+                to="/property-setup-cabo"
+                className="bg-gradient-to-br from-teal-50 to-teal-100 border-2 border-teal-500 rounded-lg p-6 hover:shadow-lg transition-all group"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="bg-teal-500 w-12 h-12 rounded-full flex items-center justify-center">
+                    <Home className="text-white" size={24} />
+                  </div>
+                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-teal-600 transition-colors">Property Setup</h3>
+                </div>
+                <p className="text-gray-600 mb-3">Complete move-in ready service. Furniture assembly, TV mounting, ceiling fans.</p>
+                <p className="text-teal-600 font-semibold text-sm">Packages from $500</p>
+                <div className="flex items-center gap-1 text-teal-600 font-semibold text-sm mt-3">
+                  <span>Learn More</span>
+                  <ArrowRight size={14} />
+                </div>
+              </Link>
+
+              <Link
+                to="/vacation-rental-setup-cabo"
+                className="bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-500 rounded-lg p-6 hover:shadow-lg transition-all group"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="bg-blue-500 w-12 h-12 rounded-full flex items-center justify-center">
+                    <Star className="text-white" size={24} />
+                  </div>
+                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">Rental Service</h3>
+                </div>
+                <p className="text-gray-600 mb-3">Airbnb & VRBO maintenance contracts. Protect your 5-star rating.</p>
+                <p className="text-blue-600 font-semibold text-sm">From $300/month</p>
+                <div className="flex items-center gap-1 text-blue-600 font-semibold text-sm mt-3">
+                  <span>Learn More</span>
+                  <ArrowRight size={14} />
+                </div>
+              </Link>
+
+              <Link
+                to="/plumber-cabo-san-lucas"
+                className="bg-gradient-to-br from-cyan-50 to-cyan-100 border-2 border-cyan-500 rounded-lg p-6 hover:shadow-lg transition-all group"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="bg-cyan-500 w-12 h-12 rounded-full flex items-center justify-center">
+                    <Droplet className="text-white" size={24} />
+                  </div>
+                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-cyan-600 transition-colors">Plumber 24/7</h3>
+                </div>
+                <p className="text-gray-600 mb-3">Emergency plumbing service. 30-minute response time for urgent situations.</p>
+                <p className="text-cyan-600 font-semibold text-sm">Starting at $60</p>
+                <div className="flex items-center gap-1 text-cyan-600 font-semibold text-sm mt-3">
+                  <span>Learn More</span>
+                  <ArrowRight size={14} />
+                </div>
+              </Link>
+
+              <Link
+                to="/handyman-cabo-san-lucas"
+                className="bg-gradient-to-br from-gray-50 to-gray-100 border-2 border-gray-400 rounded-lg p-6 hover:shadow-lg transition-all group"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="bg-gray-600 w-12 h-12 rounded-full flex items-center justify-center">
+                    <Wrench className="text-white" size={24} />
+                  </div>
+                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-gray-700 transition-colors">All Services</h3>
+                </div>
+                <p className="text-gray-600 mb-3">Complete handyman services. 20+ years experience, 600+ projects completed.</p>
+                <p className="text-gray-700 font-semibold text-sm">View All Services</p>
+                <div className="flex items-center gap-1 text-gray-700 font-semibold text-sm mt-3">
+                  <span>Learn More</span>
+                  <ArrowRight size={14} />
+                </div>
+              </Link>
+            </div>
+          </div>
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {[
               { name: 'Modern Kitchen', icon: '🍳', description: 'Plumbing, electrical, installation' },

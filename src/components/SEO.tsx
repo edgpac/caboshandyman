@@ -5,9 +5,13 @@ interface SEOProps {
   description: string;
   canonicalUrl?: string;
   ogImage?: string;
+  geoRegion?: string;
+  geoPlacename?: string;
+  geoPosition?: string;
+  schemaMarkup?: object;
 }
 
-export default function SEO({ title, description, canonicalUrl, ogImage }: SEOProps) {
+export default function SEO({ title, description, canonicalUrl, ogImage, geoRegion, geoPlacename, geoPosition, schemaMarkup }: SEOProps) {
   const defaultOgImage = '/images/cabos-handyman-og.jpg';
   const siteUrl = 'https://caboshandyman.com';
   const fullCanonicalUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
@@ -34,6 +38,23 @@ export default function SEO({ title, description, canonicalUrl, ogImage }: SEOPr
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={fullOgImage} />
+
+      {/* Geographic Targeting */}
+      {geoRegion && <meta name="geo.region" content={geoRegion} />}
+      {geoPlacename && <meta name="geo.placename" content={geoPlacename} />}
+      {geoPosition && (
+        <>
+          <meta name="geo.position" content={geoPosition} />
+          <meta name="ICBM" content={geoPosition} />
+        </>
+      )}
+
+      {/* Schema.org Structured Data */}
+      {schemaMarkup && (
+        <script type="application/ld+json">
+          {JSON.stringify(schemaMarkup)}
+        </script>
+      )}
     </Helmet>
   );
 }
