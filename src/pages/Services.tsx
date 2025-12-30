@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Home, Star, Droplet, Wrench, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Home, Star, Droplet, Wrench, ArrowRight, Shield } from 'lucide-react';
 import ServiceMenuPopup from '../components/ServiceMenuPopup';
 
 export default function ServicesPage() {
@@ -191,7 +191,7 @@ export default function ServicesPage() {
           {/* Featured Service Cards */}
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Featured Services</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
               <Link
                 to="/property-setup-cabo"
                 className="bg-gradient-to-br from-teal-50 to-teal-100 border-2 border-teal-500 rounded-lg p-6 hover:shadow-lg transition-all group"
@@ -242,6 +242,28 @@ export default function ServicesPage() {
                 <p className="text-cyan-600 font-semibold text-sm">Starting at $60</p>
                 <div className="flex items-center gap-1 text-cyan-600 font-semibold text-sm mt-3">
                   <span>Learn More</span>
+                  <ArrowRight size={14} />
+                </div>
+              </Link>
+
+              <Link
+                to="/property-care-plans"
+                className="bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-500 rounded-lg p-6 hover:shadow-lg transition-all group relative"
+              >
+                {/* NEW badge */}
+                <div className="absolute -top-2 -right-2 bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  NEW!
+                </div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center">
+                    <Shield className="text-white" size={24} />
+                  </div>
+                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-purple-600 transition-colors">Care Plans</h3>
+                </div>
+                <p className="text-gray-600 mb-3">Preventive maintenance subscription. FREE monthly unclog included!</p>
+                <p className="text-purple-600 font-semibold text-sm">From $99/month</p>
+                <div className="flex items-center gap-1 text-purple-600 font-semibold text-sm mt-3">
+                  <span>View Plans</span>
                   <ArrowRight size={14} />
                 </div>
               </Link>

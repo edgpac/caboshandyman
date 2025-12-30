@@ -357,7 +357,18 @@ export default function PropertyCarePlans() {
                 <div className="bg-gradient-to-br from-gray-600 to-gray-700 text-white p-6 text-center">
                   <h3 className="text-2xl font-bold mb-2">Basic Care</h3>
                   <div className="text-5xl font-bold mb-2">$99</div>
-                  <div className="text-gray-200">per month</div>
+                  <div className="text-gray-200 mb-4">per month</div>
+
+                  {/* Annual Pricing Option */}
+                  <div className="bg-green-600 border border-green-400 rounded-lg p-3">
+                    <div className="text-sm font-bold text-white mb-1">
+                      💰 PAY ANNUALLY & SAVE
+                    </div>
+                    <div className="text-2xl font-bold text-white">$1,089</div>
+                    <div className="text-xs text-green-100">
+                      ($90.75/month - Save $99!)
+                    </div>
+                  </div>
                 </div>
                 <div className="p-6">
                   <ul className="space-y-4 mb-6">
@@ -406,7 +417,18 @@ export default function PropertyCarePlans() {
                 <div className="bg-gradient-to-br from-blue-600 to-cyan-700 text-white p-6 text-center">
                   <h3 className="text-2xl font-bold mb-2">Premium Care</h3>
                   <div className="text-5xl font-bold mb-2">$199</div>
-                  <div className="text-blue-100">per month</div>
+                  <div className="text-blue-100 mb-4">per month</div>
+
+                  {/* Annual Pricing Option */}
+                  <div className="bg-green-600 border border-green-400 rounded-lg p-3">
+                    <div className="text-sm font-bold text-white mb-1">
+                      💰 PAY ANNUALLY & SAVE
+                    </div>
+                    <div className="text-2xl font-bold text-white">$2,189</div>
+                    <div className="text-xs text-green-100">
+                      ($182.42/month - Save $199!)
+                    </div>
+                  </div>
                 </div>
                 <div className="p-6">
                   <ul className="space-y-4 mb-6">
@@ -456,7 +478,18 @@ export default function PropertyCarePlans() {
                 <div className="bg-gradient-to-br from-purple-600 to-pink-700 text-white p-6 text-center">
                   <h3 className="text-2xl font-bold mb-2">Elite Care</h3>
                   <div className="text-5xl font-bold mb-2">$299</div>
-                  <div className="text-purple-100">per month</div>
+                  <div className="text-purple-100 mb-4">per month</div>
+
+                  {/* Annual Pricing Option */}
+                  <div className="bg-green-600 border border-green-400 rounded-lg p-3">
+                    <div className="text-sm font-bold text-white mb-1">
+                      💰 PAY ANNUALLY & SAVE
+                    </div>
+                    <div className="text-2xl font-bold text-white">$3,289</div>
+                    <div className="text-xs text-green-100">
+                      ($274.08/month - Save $299!)
+                    </div>
+                  </div>
                 </div>
                 <div className="p-6">
                   <ul className="space-y-4 mb-6">
@@ -507,10 +540,11 @@ export default function PropertyCarePlans() {
             </div>
 
             {/* Pricing Notes */}
-            <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6">
+            <div className="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6 mb-8">
               <h3 className="font-bold text-gray-900 mb-3 text-center text-lg">Plan Details & Policies</h3>
               <div className="grid md:grid-cols-2 gap-x-8 gap-y-2 text-sm text-gray-700">
-                <p>• All plans require 3-month minimum commitment</p>
+                <p>• Monthly plans bill month-to-month with 3-month minimum</p>
+                <p>• Annual plans require upfront payment (save one month!)</p>
                 <p>• Unused monthly unclogs DO NOT roll over to next month</p>
                 <p>• Emergency service available 24/7 for all members</p>
                 <p>• Repair discounts apply to labor and materials</p>
@@ -518,6 +552,38 @@ export default function PropertyCarePlans() {
                 <p>• Cancel with 30-day notice after minimum period</p>
                 <p>• Property must be within 15km of Cabo San Lucas</p>
                 <p>• Multiple properties qualify for portfolio discounts</p>
+                <p>• Annual plan refunds prorated if cancelled early</p>
+              </div>
+            </div>
+
+            {/* Annual Pricing FAQ */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-lg p-8">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">💰 Annual Plan Benefits</h3>
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800 mb-2">
+                    What's the difference between monthly and annual plans?
+                  </h4>
+                  <p className="text-gray-700">
+                    Monthly plans bill month-to-month with no long-term contract (3-month minimum). Annual plans require upfront payment for 11 months of service—<strong>you get the 12th month FREE</strong>, saving you 8.3%. Annual plans are perfect for committed Care Partners who want maximum savings and don't require monthly flexibility.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800 mb-2">
+                    Can I switch from monthly to annual?
+                  </h4>
+                  <p className="text-gray-700">
+                    Yes! You can upgrade to an annual plan at any time. We'll credit your current month and apply it toward your annual payment. Contact us to upgrade and start saving immediately.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800 mb-2">
+                    What if I need to cancel my annual plan early?
+                  </h4>
+                  <p className="text-gray-700">
+                    Annual plans are refundable on a prorated basis after the 3-month minimum period. For example, if you paid for an annual Basic Care plan ($1,089) and cancel after 6 months, you'll receive a refund for the remaining 6 months ($544.50).
+                  </p>
+                </div>
               </div>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Calendar, ArrowRight, MessageCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Calendar, ArrowRight, MessageCircle, Shield } from 'lucide-react';
 import Footer from './Footer';
 import SEO from './SEO';
 import SecureAIAssistant from './SecureAIAssistant';
@@ -92,6 +92,16 @@ export default function CabosHandymanHomepage() {
                 className="hidden md:flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-semibold"
               >
                 Services & Pricing
+              </a>
+              <a
+                href="/property-care-plans"
+                className="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold hover:from-purple-600 hover:to-indigo-600 transition shadow-lg"
+              >
+                <Shield size={18} />
+                Care Plans
+                <span className="ml-1 text-xs bg-white/20 px-2 py-0.5 rounded-full">
+                  NEW
+                </span>
               </a>
               <a
                 href="tel:+526121698328"
@@ -222,36 +232,65 @@ export default function CabosHandymanHomepage() {
         {/* Reviews Carousel - REPLACES Partners Section */}
         <ReviewsCarousel />
 
-        {/* CTA Section */}
-        <section className="py-20" style={{backgroundColor: '#02af9f'}}>
-          <div className="container mx-auto px-6 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to Start Your Project?</h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto text-white/90">
-              Chat with our assistant to explore our services, get instant estimates, schedule emergency service, or book your free consultation.
-            </p>
-            <button 
-              onClick={() => openAIAssistant('services')}
-              className="px-8 py-4 rounded-lg text-lg font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-xl inline-flex items-center bg-white text-black shadow-lg hover:shadow-2xl"
-              style={{
-                boxShadow: '0 8px 16px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8)',
-                transform: 'translateY(0)',
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.transform = 'translateY(-2px) scale(1.05)';
-                e.target.style.boxShadow = '0 12px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.9)';
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.transform = 'translateY(0) scale(1)';
-                e.target.style.boxShadow = '0 8px 16px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.8)';
-              }}
-             >
-              Scheduling Assistant
-              <MessageCircle className="ml-2" size={20} />
-            </button>
-            <div className="text-center mt-2">
-              <p className="text-xs text-white/70">
+        {/* CTA Section - Care Plans Focus */}
+        <section className="py-16 bg-gradient-to-r from-teal-500 to-cyan-600">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto text-center text-white">
+
+              {/* Updated Title - Subscription Focus */}
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Save Money as a Care Partner
+              </h2>
+
+              {/* Updated Subtitle */}
+              <p className="text-xl mb-8 text-white/90">
+                Get preventive maintenance with a <strong>FREE monthly unclog</strong> for just $99/month.
+                Or save even more with annual plans - <strong>pay for 11 months, get 1 month FREE!</strong>
+              </p>
+
+              {/* Annual Savings Highlight */}
+              <div className="inline-block bg-white/20 backdrop-blur-sm rounded-lg px-6 py-3 mb-8">
+                <div className="text-sm font-semibold mb-1">💰 ANNUAL PARTNER SAVINGS</div>
+                <div className="flex flex-wrap justify-center gap-6 text-sm">
+                  <div>
+                    <strong>Basic:</strong> Save $99/year
+                  </div>
+                  <div>
+                    <strong>Premium:</strong> Save $199/year
+                  </div>
+                  <div>
+                    <strong>Elite:</strong> Save $299/year
+                  </div>
+                </div>
+              </div>
+
+              {/* Two Buttons Side by Side */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+
+                {/* Button 1: View Care Plans (New - Primary) */}
+                <a
+                  href="/property-care-plans"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-teal-600 font-bold text-lg rounded-lg hover:bg-gray-100 transition shadow-lg min-w-[250px]"
+                >
+                  <span className="mr-2">🛡️</span>
+                  View Care Plans
+                </a>
+
+                {/* Button 2: Scheduling Assistant (Existing - Secondary) */}
+                <button
+                  onClick={() => openAIAssistant('services')}
+                  className="inline-flex items-center justify-center px-8 py-4 bg-teal-700 text-white font-bold text-lg rounded-lg hover:bg-teal-800 transition border-2 border-white min-w-[250px]"
+                >
+                  <span className="mr-2">💬</span>
+                  Scheduling Assistant
+                </button>
+              </div>
+
+              {/* Desktop Note */}
+              <p className="text-sm text-white/70 mt-6">
                 Full scheduling and analysis features work best on desktop/laptop computers
               </p>
+
             </div>
           </div>
         </section>
