@@ -112,10 +112,7 @@ export default function CabosHandymanHomepage() {
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold hover:from-purple-600 hover:to-indigo-600 transition shadow-lg"
                 >
                   <Shield size={18} />
-                  Care Plans
-                  <span className="ml-1 text-xs bg-white/20 px-2 py-0.5 rounded-full">
-                    NEW
-                  </span>
+                  Property Care
                 </a>
                 <a
                   href="/contact"
@@ -157,10 +154,7 @@ export default function CabosHandymanHomepage() {
                   className="flex items-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold hover:from-purple-600 hover:to-indigo-600 transition shadow-lg"
                 >
                   <Shield size={18} />
-                  Care Plans
-                  <span className="ml-auto text-xs bg-white/20 px-2 py-0.5 rounded-full">
-                    NEW
-                  </span>
+                  Property Care
                 </a>
                 <a
                   href="/contact"
@@ -321,13 +315,13 @@ export default function CabosHandymanHomepage() {
               {/* Two Buttons Side by Side */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
 
-                {/* Button 1: View Care Plans (New - Primary) */}
+                {/* Button 1: View Property Care Plans (Primary) */}
                 <a
                   href="/property-care-plans"
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#02b19f] font-bold text-lg rounded-lg hover:bg-gray-100 transition shadow-lg min-w-[250px]"
                 >
                   <span className="mr-2">🛡️</span>
-                  View Care Plans
+                  View Property Care Plans
                 </a>
 
                 {/* Button 2: Scheduling Assistant (Existing - Secondary) */}

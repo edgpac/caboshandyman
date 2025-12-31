@@ -248,19 +248,15 @@ export default function ServicesPage() {
 
               <Link
                 to="/property-care-plans"
-                className="bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-500 rounded-lg p-6 hover:shadow-lg transition-all group relative"
+                className="bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-500 rounded-lg p-6 hover:shadow-lg transition-all group"
               >
-                {/* NEW badge */}
-                <div className="absolute -top-2 -right-2 bg-purple-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                  NEW!
-                </div>
                 <div className="flex items-center gap-3 mb-3">
                   <div className="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center">
                     <Shield className="text-white" size={24} />
                   </div>
-                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-purple-600 transition-colors">Care Plans</h3>
+                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-purple-600 transition-colors">Property Care</h3>
                 </div>
-                <p className="text-gray-600 mb-3">Preventive maintenance subscription. FREE monthly unclog included!</p>
+                <p className="text-gray-600 mb-3">Preventive maintenance plans. FREE monthly unclog included!</p>
                 <p className="text-purple-600 font-semibold text-sm">From $99/month</p>
                 <div className="flex items-center gap-1 text-purple-600 font-semibold text-sm mt-3">
                   <span>View Plans</span>
