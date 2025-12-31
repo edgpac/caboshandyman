@@ -159,7 +159,7 @@ export default function Footer() {
             <div className="flex flex-col items-start md:items-center space-y-1">
               <div className="flex items-center space-x-4">
                 <span className="text-teal-500 font-medium">Licensed • Insured • Bonded</span>
-                <span className="text-gray-600">&copy; 2025 Cabos Handyman. All rights reserved.</span>
+                <span className="text-gray-600">&copy; 2026 Cabos Handyman. All rights reserved.</span>
               </div>
               <div className="text-[10px] text-gray-400">
                 To hire the architect of this website call +52 612 169 8328
