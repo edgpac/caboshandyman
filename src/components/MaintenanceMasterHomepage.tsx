@@ -287,7 +287,7 @@ export default function CabosHandymanHomepage() {
 
               {/* Updated Title - Subscription Focus */}
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Save Money as a Care Partner
+                Smart Property Owners Choose Prevention
               </h2>
 
               {/* Updated Subtitle */}
