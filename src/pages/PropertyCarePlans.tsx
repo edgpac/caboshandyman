@@ -682,7 +682,7 @@ export default function PropertyCarePlans() {
               </a>
             </div>
             <p className="mt-6 text-blue-100 text-sm">
-              Serving Cabo San Lucas, San José del Cabo, and the Los Cabos Corridor
+              Serving Cabo San Lucas and the nearby Tourist Corridor
             </p>
           </div>
 
