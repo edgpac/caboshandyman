@@ -399,6 +399,10 @@ export default function PropertyCarePlans() {
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
+                      <span><strong>24/7 Emergency Access</strong> - Get emergency service anytime, even after midnight (4-hour response)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>Priority emergency response</strong> (4-hour guarantee)</span>
                     </li>
                     <li className="flex items-start gap-3">
@@ -456,6 +460,10 @@ export default function PropertyCarePlans() {
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>20% discount</strong> on all repair services</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <span><strong>24/7 Emergency Access</strong> - Priority emergency service anytime, even after midnight (4-hour response)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
@@ -520,6 +528,10 @@ export default function PropertyCarePlans() {
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <span><strong>24/7 VIP Emergency Access</strong> - Fastest emergency response anytime, even after midnight (2-hour response)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>VIP emergency service</strong> (1-hour guarantee, 24/7)</span>
                     </li>
                     <li className="flex items-start gap-3">
@@ -549,6 +561,114 @@ export default function PropertyCarePlans() {
                     Choose Elite Care
                   </a>
                 </div>
+              </div>
+            </div>
+
+            {/* Emergency Service Comparison */}
+            <div className="bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-200 rounded-lg p-6 md:p-8 mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 text-center">
+                🚨 Why 24/7 Access Matters
+              </h3>
+              <p className="text-center text-gray-700 mb-6">
+                Plumbing emergencies don't wait for business hours. Here's the difference between members and non-members when disaster strikes at 2am:
+              </p>
+
+              {/* Desktop Table */}
+              <div className="hidden md:block overflow-x-auto">
+                <table className="w-full bg-white rounded-lg overflow-hidden shadow-lg">
+                  <thead>
+                    <tr className="bg-gray-800 text-white">
+                      <th className="text-left py-4 px-6 font-bold">Scenario</th>
+                      <th className="text-center py-4 px-6 font-bold">Non-Member</th>
+                      <th className="text-center py-4 px-6 font-bold bg-green-600">Property Care Member</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-4 px-6 font-semibold">Emergency at 2am</td>
+                      <td className="text-center py-4 px-6">
+                        <div className="text-red-600 font-bold mb-1">❌ Not Available</div>
+                        <div className="text-sm text-gray-600">Must wait until 7am</div>
+                        <div className="text-xs text-red-500 mt-1">Could be $1,000s in damage overnight</div>
+                      </td>
+                      <td className="text-center py-4 px-6 bg-green-50">
+                        <div className="text-green-600 font-bold mb-1">✅ We're On Our Way</div>
+                        <div className="text-sm text-gray-700">2-4 hour response</div>
+                        <div className="text-xs text-green-600 mt-1">Problem stopped quickly</div>
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-4 px-6 font-semibold">Emergency Cost</td>
+                      <td className="text-center py-4 px-6">
+                        <div className="text-red-600 font-bold mb-1">$300 callout + 2x rates</div>
+                        <div className="text-sm text-gray-600">Total: $500-800 per emergency</div>
+                      </td>
+                      <td className="text-center py-4 px-6 bg-green-50">
+                        <div className="text-green-600 font-bold mb-1">$0 Extra Fee</div>
+                        <div className="text-sm text-gray-700">Included in monthly plan</div>
+                        <div className="text-xs text-green-600 mt-1">Plus 15-25% discount on repairs</div>
+                      </td>
+                    </tr>
+                    <tr className="border-b border-gray-200">
+                      <td className="py-4 px-6 font-semibold">Annual Cost (2 emergencies)</td>
+                      <td className="text-center py-4 px-6">
+                        <div className="font-bold text-gray-800 mb-1">$1,000-1,600</div>
+                        <div className="text-sm text-gray-600">Pay as you go</div>
+                      </td>
+                      <td className="text-center py-4 px-6 bg-green-50">
+                        <div className="font-bold text-green-600 mb-1">$1,188-3,588/year</div>
+                        <div className="text-sm text-gray-700">PLUS:</div>
+                        <ul className="text-xs text-gray-600 mt-1 text-left inline-block">
+                          <li>• 4-26 inspections/year</li>
+                          <li>• 12-24 free unclogs/year</li>
+                          <li>• 15-25% off all repairs</li>
+                          <li>• Prevention = fewer emergencies</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-4 px-6 font-semibold">Peace of Mind</td>
+                      <td className="text-center py-4 px-6">
+                        <div className="text-gray-600">😰 Hope nothing breaks at night</div>
+                      </td>
+                      <td className="text-center py-4 px-6 bg-green-50">
+                        <div className="text-green-600">😴 Sleep soundly - help is one call away</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Mobile Cards */}
+              <div className="md:hidden space-y-4">
+                <div className="bg-white rounded-lg p-4 border-2 border-red-300">
+                  <h4 className="font-bold text-gray-800 mb-2">❌ Non-Member</h4>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li><strong>2am Emergency:</strong> Not available until 7am</li>
+                    <li><strong>Cost:</strong> $500-800 per emergency call</li>
+                    <li><strong>Annual:</strong> $1,000-1,600 (just emergencies)</li>
+                    <li><strong>Peace of Mind:</strong> 😰 Hope nothing breaks</li>
+                  </ul>
+                </div>
+
+                <div className="bg-green-50 rounded-lg p-4 border-2 border-green-500">
+                  <h4 className="font-bold text-green-800 mb-2">✅ Property Care Member</h4>
+                  <ul className="space-y-2 text-sm text-gray-700">
+                    <li><strong>2am Emergency:</strong> We're on our way (2-4 hours)</li>
+                    <li><strong>Cost:</strong> $0 extra (included in plan)</li>
+                    <li><strong>Annual:</strong> $1,188-3,588 + inspections + free unclogs</li>
+                    <li><strong>Peace of Mind:</strong> 😴 Sleep soundly</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="mt-6 text-center">
+                <p className="text-lg font-bold text-gray-800 mb-2">
+                  One late-night emergency could cost what you'd pay for 3-6 months of membership!
+                </p>
+                <p className="text-gray-700">
+                  Plus members prevent most emergencies with regular inspections.
+                </p>
               </div>
             </div>
 
@@ -595,6 +715,28 @@ export default function PropertyCarePlans() {
                   </h4>
                   <p className="text-gray-700">
                     Annual plans are refundable on a prorated basis after the 3-month minimum period. For example, if you paid for an annual Basic Care plan ($1,089) and cancel after 6 months, you'll receive a refund for the remaining 6 months ($544.50).
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800 mb-2">
+                    What are your emergency service hours?
+                  </h4>
+                  <p className="text-gray-700 mb-2">
+                    For <strong>Property Care members</strong>, we offer 24/7 emergency service including after midnight. Response times are 2-4 hours depending on your plan.
+                  </p>
+                  <p className="text-gray-700">
+                    For <strong>non-members</strong>, emergency service is available 7am-6pm for safety reasons. After 6pm emergencies are available to members only. This policy ensures we can safely respond to established customers we already know. Non-members can schedule priority service starting at 7am, or join Property Care for 24/7 access.
+                  </p>
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-gray-800 mb-2">
+                    What if I'm not a member and have a flooding emergency at midnight?
+                  </h4>
+                  <p className="text-gray-700 mb-2">
+                    We can schedule you as our first appointment at 7am (priority scheduling), and we'll provide free phone guidance to shut off your water immediately to minimize damage.
+                  </p>
+                  <p className="text-gray-700">
+                    For extreme flooding emergencies after hours, there is a $300 emergency callout fee plus 2x standard service rates for non-members. Most customers find it more cost-effective to join Property Care for 24/7 included access.
                   </p>
                 </div>
               </div>

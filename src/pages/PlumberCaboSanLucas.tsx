@@ -37,8 +37,8 @@ export default function PlumberCaboSanLucas() {
   return (
     <>
       <SEO
-        title="Plumber Cabo San Lucas | 24/7 Emergency Plumbing | Cabos Handyman"
-        description="Professional plumber in Cabo San Lucas with 24/7 emergency service. Licensed plumbers for repairs, installations, water heaters, and drain cleaning. 30-minute response time."
+        title="Plumber Cabo San Lucas | 24/7 Emergency Plumbing for Members | Cabos Handyman"
+        description="Professional plumber in Cabo San Lucas with 24/7 emergency service for Property Care members. Licensed plumbers for repairs, installations, water heaters, and drain cleaning. 2-4 hour response time."
         canonicalUrl="/plumber-cabo-san-lucas"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -56,10 +56,10 @@ export default function PlumberCaboSanLucas() {
               <span className="text-sm font-medium">Licensed Professional Plumbers</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              24/7 Emergency Plumber in Cabo San Lucas
+              Professional Plumber in Cabo San Lucas
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Licensed plumbers available 24/7 for emergency repairs, installations, and maintenance. 30-minute response time for urgent situations. Serving all of Los Cabos.
+              Licensed plumbers for emergency repairs, installations, and maintenance. 24/7 service for Property Care members. Emergency service 7am-6pm for non-members. Serving all of Los Cabos.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -78,7 +78,7 @@ export default function PlumberCaboSanLucas() {
             </div>
             <p className="mt-6 text-white/80 text-lg">
               <Clock className="inline mr-2" size={20} />
-              <strong>30-Minute Emergency Response</strong> • Available 24/7/365
+              <strong>2-4 Hour Emergency Response</strong> • 24/7 for Property Care Members
             </p>
           </div>
         </div>
@@ -91,18 +91,99 @@ export default function PlumberCaboSanLucas() {
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-gray-700 leading-relaxed">
-              Plumbing emergencies don't wait for business hours. A burst pipe at 2 AM, a clogged toilet before guests arrive, or a failed water heater in the middle of summer demands immediate professional help. With over 20 years serving Cabo San Lucas, our licensed plumbers provide 24/7 emergency service with a 30-minute response time for critical situations.
+              Plumbing emergencies don't wait for business hours. A burst pipe at 2 AM, a clogged toilet before guests arrive, or a failed water heater in the middle of summer demands immediate professional help. With over 20 years serving Cabo San Lucas, our licensed plumbers provide 24/7 emergency service for Property Care members with a 2-4 hour response time for critical situations.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               From simple repairs to complete system installations, our bilingual team (English/Spanish) handles all plumbing needs for residential, commercial, and vacation rental properties throughout Los Cabos. We combine local expertise with professional-grade equipment to solve plumbing problems quickly and correctly the first time.
             </p>
           </div>
 
+          {/* Emergency Service Hours */}
+          <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border-l-4 border-yellow-500 rounded-lg p-6 md:p-8 mb-8 shadow-lg">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 flex items-center">
+              <Clock className="mr-3 text-yellow-600" size={32} />
+              🚨 Emergency Service Hours
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-6">
+
+              {/* Property Care Members */}
+              <div className="bg-white rounded-lg p-6 border-2 border-green-500 shadow-md">
+                <div className="flex items-center mb-3">
+                  <Shield className="text-green-500 mr-3" size={28} />
+                  <h3 className="text-xl font-bold text-gray-800">Property Care Members</h3>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center text-green-600 font-bold text-lg mb-2">
+                    <CheckCircle2 className="mr-2" size={20} />
+                    24/7 Emergency Service
+                  </div>
+                  <p className="text-gray-700">
+                    Members get priority emergency response ANY TIME - even after midnight:
+                  </p>
+                  <ul className="text-gray-700 space-y-1 ml-6">
+                    <li>• <strong>Elite:</strong> 2-hour response</li>
+                    <li>• <strong>Premium:</strong> 4-hour response</li>
+                    <li>• <strong>Basic:</strong> 4-hour response</li>
+                  </ul>
+                  <p className="text-sm text-green-600 font-semibold mt-3">
+                    No extra fees for after-hours emergencies!
+                  </p>
+                </div>
+              </div>
+
+              {/* Non-Members */}
+              <div className="bg-white rounded-lg p-6 border-2 border-gray-300 shadow-md">
+                <div className="flex items-center mb-3">
+                  <Clock className="text-gray-500 mr-3" size={28} />
+                  <h3 className="text-xl font-bold text-gray-800">Non-Members</h3>
+                </div>
+                <div className="space-y-2">
+                  <div className="flex items-center text-gray-700 font-bold text-lg mb-2">
+                    <Clock className="mr-2" size={20} />
+                    Emergency Service: 7am - 6pm
+                  </div>
+                  <p className="text-gray-700">
+                    Same-day emergency service available between 7am-6pm.
+                  </p>
+                  <p className="text-gray-700 mt-2">
+                    <strong>After 6pm:</strong> Emergency service available to Property Care members only for safety reasons.
+                  </p>
+                  <div className="bg-yellow-50 rounded p-3 mt-3 text-sm">
+                    <p className="text-gray-700 mb-2">
+                      <strong>Extreme flooding emergency after hours?</strong>
+                    </p>
+                    <p className="text-gray-600">
+                      • $300 emergency callout fee<br/>
+                      • Plus 2x standard service rates<br/>
+                      • Payment required upfront
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* CTA */}
+            <div className="mt-6 text-center bg-white rounded-lg p-4">
+              <p className="text-gray-800 font-bold mb-2">
+                Need 24/7 emergency access? Property Care members save hundreds on emergencies.
+              </p>
+              <a
+                href="/property-care-plans"
+                className="inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold rounded-lg hover:from-purple-600 hover:to-indigo-600 transition shadow-lg"
+              >
+                <Shield className="mr-2" size={20} />
+                View Property Care Plans
+              </a>
+            </div>
+          </div>
+
           {/* Emergency Banner */}
           <div className="bg-gradient-to-br from-red-50 to-orange-50 border-l-4 border-red-600 p-8 rounded-lg mb-12 shadow-sm">
             <h3 className="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-3">
               <AlertCircle className="text-red-600" size={28} />
-              Plumbing Emergency? We're Here 24/7
+              Plumbing Emergency? Call Now!
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
               <div>

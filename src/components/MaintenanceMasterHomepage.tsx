@@ -70,9 +70,9 @@ export default function CabosHandymanHomepage() {
 
   return (
     <>
-      <SEO 
+      <SEO
         title="Cabos Handyman - Professional Services in Cabo San Lucas"
-        description="Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed, 24/7 emergency service. Licensed, insured, and bonded."
+        description="Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed, 24/7 emergency service for Property Care members. Licensed, insured, and bonded."
         canonicalUrl="/"
       />
       <div className="min-h-screen bg-background">
@@ -238,8 +238,9 @@ export default function CabosHandymanHomepage() {
                 <div className="text-muted-foreground font-semibold">Projects Completed</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">24/7</div>
-                <div className="text-muted-foreground font-semibold">Customer Service</div>
+                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">24/7*</div>
+                <div className="text-muted-foreground font-semibold text-sm">Emergency Service</div>
+                <div className="text-xs text-muted-foreground mt-1">*For members</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
                 <div className="text-4xl md:text-5xl font-bold text-primary mb-2">100%</div>

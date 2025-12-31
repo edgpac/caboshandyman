@@ -64,7 +64,7 @@ const ContactPage = () => {
     <>
       <SEO
         title="Contact Cabos Handyman - Free Estimates in Cabo San Lucas"
-        description="Get in touch with Cabos Handyman for free estimates. 24/7 emergency service, 30-minute response time. Call +52 612 169 8328 or schedule online."
+        description="Get in touch with Cabos Handyman for free estimates. 24/7 emergency service for Property Care members. Call +52 612 169 8328 or schedule online."
         canonicalUrl="/contact"
       />
 
@@ -101,7 +101,7 @@ const ContactPage = () => {
             <div className="flex items-center justify-center gap-2">
               <AlertCircle className="w-5 h-5" />
               <p className="font-semibold">
-                EMERGENCY? Call or WhatsApp +52 612 169 8328 for 24/7 immediate service
+                EMERGENCY? Call or WhatsApp +52 612 169 8328 (24/7 for Property Care members, 7am-6pm for non-members)
               </p>
             </div>
           </div>
@@ -189,9 +189,14 @@ const ContactPage = () => {
                           <p>Monday - Friday: 7:00 AM - 5:00 PM</p>
                           <p>Saturday: 9:00 AM - 2:00 PM</p>
                           <p>Sunday: Closed</p>
-                          <p className="text-sm mt-2 text-red-600 font-semibold">
-                            🚨 Emergency service available 24/7
-                          </p>
+                          <div className="bg-yellow-50 border-l-4 border-yellow-500 p-3 mt-3 rounded text-sm">
+                            <h4 className="font-bold text-gray-800 mb-1">Emergency Service Hours</h4>
+                            <p className="text-gray-700"><strong>Property Care Members:</strong> 24/7 emergency service</p>
+                            <p className="text-gray-700"><strong>Non-Members:</strong> 7am-6pm emergency service</p>
+                            <p className="text-xs text-gray-600 mt-1">
+                              For 24/7 access, <a href="/property-care-plans" className="text-teal-600 hover:underline">join Property Care</a>.
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>

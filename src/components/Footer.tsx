@@ -57,11 +57,17 @@ export default function Footer() {
                   +52 612 169 8328
                 </a>
               </div>
-              <div className="flex items-center space-x-2 text-gray-600">
-                <Clock className="h-4 w-4 text-teal-400" />
-                <a href="tel:+526121698328" className="hover:text-teal-500 transition-colors">
-                  24/7 Emergency Service
-                </a>
+              <div className="flex flex-col space-y-1">
+                <div className="flex items-center space-x-2 text-gray-600">
+                  <Clock className="h-4 w-4 text-teal-400" />
+                  <span className="text-sm">Emergency Service:</span>
+                </div>
+                <div className="ml-6 text-xs text-gray-500">
+                  7am-6pm daily<br/>
+                  <a href="/property-care-plans" className="text-teal-600 hover:underline">
+                    Members: 24/7 access
+                  </a>
+                </div>
               </div>
               <div className="flex items-center space-x-2 text-gray-600">
                 <Facebook className="h-4 w-4 text-teal-400" />
