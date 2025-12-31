@@ -293,7 +293,7 @@ export default function CabosHandymanHomepage() {
               {/* Updated Subtitle */}
               <p className="text-xl mb-8 text-white/90">
                 Get preventive maintenance with a <strong>FREE monthly unclog</strong> for just $99/month.
-                Or save even more with annual plans - <strong>pay for 11 months, get 1 month FREE!</strong>
+                <br />Or save even more with annual plans - <strong>pay for 11 months, get 1 month FREE!</strong>
               </p>
 
               {/* Annual Savings Highlight */}
