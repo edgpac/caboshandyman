@@ -193,7 +193,7 @@ export default function CabosHandymanHomepage() {
                  LOS CABOS HANDYMAN<br />Solutions You Can Count On
               </h1>
               <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
-                 Service starts at <strong>$60 USD</strong><br />includes diagnosis and the first hour of labor.
+                 Service from <strong>$60 USD</strong><br />includes diagnosis and the first hour of labor.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
