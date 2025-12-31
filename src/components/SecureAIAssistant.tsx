@@ -1,7 +1,55 @@
-// Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT + CHAT-ONLY MODE
+// Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT + CHAT-ONLY MODE + CLICKABLE PHONE
 import React, { useState, useEffect } from 'react';
 import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone, Paperclip, ChevronDown, X } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
+
+// Format phone numbers in text to clickable links
+function formatPhoneNumbers(text: string): React.ReactNode {
+  // Match various phone number formats
+  const phoneRegex = /(\+?\d{1,3}[\s-]?)?\(?\d{2,4}\)?[\s.-]?\d{3,4}[\s.-]?\d{3,4}/g;
+  const parts = text.split(phoneRegex);
+  const matches = text.match(phoneRegex);
+
+  if (!matches) {
+    return text;
+  }
+
+  const result: React.ReactNode[] = [];
+  let matchIndex = 0;
+
+  parts.forEach((part, index) => {
+    if (part) {
+      result.push(part);
+    }
+    if (matchIndex < matches.length && index < parts.length - 1) {
+      const phoneNumber = matches[matchIndex];
+      const cleanNumber = phoneNumber.replace(/[\s()-]/g, '');
+
+      result.push(
+        <a
+          key={`phone-${matchIndex}`}
+          href={`tel:${cleanNumber}`}
+          className="inline-flex items-center gap-1 text-teal-600 hover:text-teal-700 underline font-semibold"
+          style={{
+            minHeight: '44px',
+            minWidth: '44px',
+            touchAction: 'manipulation',
+            display: 'inline-flex',
+            alignItems: 'center',
+            paddingTop: '4px',
+            paddingBottom: '4px'
+          }}
+        >
+          <Phone size={14} className="flex-shrink-0" />
+          <span>{phoneNumber}</span>
+        </a>
+      );
+      matchIndex++;
+    }
+  });
+
+  return <>{result}</>;
+}
 
 export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, initialMode }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -925,11 +973,11 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                       <div className="text-xs text-gray-500 mb-1 ml-1">Cabos Handyman</div>
                     )}
                     <div className={`p-3 rounded-2xl text-sm ${
-                      msg.role === 'user' 
-                        ? 'bg-teal-400 text-white rounded-br-none shadow-sm' 
+                      msg.role === 'user'
+                        ? 'bg-teal-400 text-white rounded-br-none shadow-sm'
                         : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
                     }`}>
-                      <div className="whitespace-pre-line">{msg.content}</div>
+                      <div className="whitespace-pre-line">{formatPhoneNumbers(msg.content)}</div>
                     </div>
                   </div>
                 </div>
@@ -1258,11 +1306,11 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   {chatHistory.map((msg, i) => (
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
-                        msg.role === 'user' 
-                          ? 'bg-teal-400 text-white rounded-br-none' 
+                        msg.role === 'user'
+                          ? 'bg-teal-400 text-white rounded-br-none'
                           : 'bg-white border border-gray-200 rounded-bl-none'
                       }`}>
-                        <div className="whitespace-pre-line">{msg.content}</div>
+                        <div className="whitespace-pre-line">{formatPhoneNumbers(msg.content)}</div>
                       </div>
                     </div>
                   ))}
@@ -1456,11 +1504,11 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   {feedbackHistory.map((msg, i) => (
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[85%] p-2 rounded-lg text-sm ${
-                        msg.role === 'user' 
-                          ? 'bg-teal-400 text-white rounded-br-none' 
+                        msg.role === 'user'
+                          ? 'bg-teal-400 text-white rounded-br-none'
                           : 'bg-white border border-gray-200 rounded-bl-none'
                       }`}>
-                        <div className="whitespace-pre-line">{msg.content}</div>
+                        <div className="whitespace-pre-line">{formatPhoneNumbers(msg.content)}</div>
                       </div>
                     </div>
                   ))}
