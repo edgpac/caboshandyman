@@ -88,7 +88,7 @@ export default function CabosHandymanHomepage() {
                     alt="Cabos Handyman Logo"
                     className="w-12 h-12 object-contain"
                   />
-                  <span className="text-xl font-bold text-primary">LOS CABOS HANDYMAN</span>
+                  <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
                 </div>
                 <a
                   href="tel:+526121698328"
@@ -190,7 +190,7 @@ export default function CabosHandymanHomepage() {
                 🏗️ Cabo San Lucas' Leading Handyman Service
               </div>
               <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-snug text-primary text-center">
-                 LOS CABOS HANDYMAN<br />Solutions You Can Count On
+                 CABOS HANDYMAN<br />Solutions You Can Count On
               </h1>
               <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
                  Service from <strong>$60 USD</strong><br />includes diagnosis and the first hour of labor.
