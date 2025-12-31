@@ -243,7 +243,7 @@ export default function CabosHandymanHomepage() {
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">We Build Projects That Last</h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Explore our completed projects across residential and commercial spaces.<br />Click on any project to see our service menu and pricing.
+                Explore our completed residential and commercial projects.<br />Click on any project to see our service menu and pricing.
               </p>
             </div>
             
