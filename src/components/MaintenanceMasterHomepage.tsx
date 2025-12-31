@@ -186,14 +186,26 @@ export default function CabosHandymanHomepage() {
           
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              <div className="inline-block bg-primary text-primary-foreground px-4 py-2 rounded-full text-sm font-semibold mb-6">
-                🏗️ Cabo San Lucas' Leading Handyman Service
+              {/* Badge - Smaller on Mobile */}
+              <div className="inline-block bg-primary text-primary-foreground px-3 py-1 md:px-4 md:py-2 rounded-full mb-3 md:mb-6">
+                <span className="text-xs md:text-sm font-semibold">
+                  🏗️ Cabo San Lucas' Leading Handyman Service
+                </span>
               </div>
-              <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-snug text-primary text-center">
-                 CABOS HANDYMAN<br />Solutions You Can Count On
+
+              {/* Business Name - Light & Small on Mobile */}
+              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold mb-2 text-primary text-center leading-tight">
+                CABOS HANDYMAN
               </h1>
-              <p className="text-xl md:text-2xl text-primary mb-8 max-w-3xl mx-auto">
-                 Service from <strong>$60 USD</strong><br />includes diagnosis and the first hour of labor.
+
+              {/* Tagline - Light & Small on Mobile */}
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal md:font-semibold text-primary mb-4 md:mb-6">
+                Solutions You Can Count On
+              </p>
+
+              {/* Pricing - Smaller on Mobile */}
+              <p className="text-sm md:text-xl text-primary mb-6 md:mb-8 max-w-3xl mx-auto">
+                Service from <strong>$60 USD</strong><br className="md:hidden" /><span className="hidden md:inline"> </span>includes diagnosis and the first hour of labor.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <button 
