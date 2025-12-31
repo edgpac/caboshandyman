@@ -92,7 +92,7 @@ export default function PropertyCarePlans() {
               <span className="text-sm font-medium">Preventive Property Maintenance</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Property Care Plans in Cabo San Lucas
+              Property Care Plans<br />in Cabo San Lucas
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
               Preventive maintenance saves thousands in water damage. Regular inspections catch small issues before they become expensive emergencies.
