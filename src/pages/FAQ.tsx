@@ -12,6 +12,7 @@ export default function FAQ() {
       <Helmet>
         <title>FAQ - Cabos Handyman | Cabo San Lucas Handyman Services</title>
         <meta name="description" content="Get answers to common questions about Cabos Handyman services in Cabo San Lucas. Free estimates, emergency services, bilingual team, licensed and insured." />
+        <link rel="canonical" href="https://caboshandyman.com/faq" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -19,10 +20,10 @@ export default function FAQ() {
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "What areas do you serve in Los Cabos?",
+                "name": "What areas do you serve?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "We focus our services exclusively on Cabo San Lucas and immediate surrounding areas to ensure the fastest response times and highest quality service. This allows us to maintain our 30-minute emergency response guarantee. We're available 24/7 for emergency repairs. We serve both residential and commercial properties, including vacation rentals and property management companies."
+                  "text": "We serve Cabo San Lucas and immediate surrounding areas to ensure the fastest response times. We specialize in residential and vacation rental property maintenance in Cabo San Lucas. This focused service area allows us to provide 24/7 emergency response and maintain the highest quality service standards for our clients."
                 }
               },
               {
@@ -38,7 +39,7 @@ export default function FAQ() {
                 "name": "Do you offer emergency handyman services?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Absolutely! We offer 24/7 emergency handyman services for urgent repairs in Cabo San Lucas and Los Cabos. Emergency services include plumbing leaks, burst pipes, electrical issues, power outages, lock-outs, broken doors or windows, water damage, storm damage, and any urgent fixes that can't wait."
+                  "text": "Absolutely! We offer 24/7 emergency handyman services for urgent repairs in Cabo San Lucas. Emergency services include plumbing leaks, burst pipes, electrical issues, power outages, lock-outs, broken doors or windows, water damage, storm damage, and any urgent fixes that can't wait."
                 }
               },
               {
@@ -78,7 +79,7 @@ export default function FAQ() {
                 "name": "Are you licensed and insured?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes, Cabos Handyman is fully licensed, insured, and bonded to operate in Cabo San Lucas and throughout Baja California Sur. We carry comprehensive liability insurance to protect both our clients and our team members. With over 20 years of experience in the Los Cabos area and more than 600 completed projects, we maintain the highest standards of professionalism and quality workmanship."
+                  "text": "Yes, Cabos Handyman is fully licensed, insured, and bonded to operate in Cabo San Lucas and throughout Baja California Sur. We carry comprehensive liability insurance to protect both our clients and our team members. With over 20 years of experience in Cabo San Lucas and more than 600 completed projects, we maintain the highest standards of professionalism and quality workmanship."
                 }
               },
               {
@@ -86,15 +87,15 @@ export default function FAQ() {
                 "name": "Do you work with property managers and vacation rental owners?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes! A significant portion of our business comes from property managers and vacation rental owners throughout Los Cabos. We understand the unique needs of property management - fast turnaround times, flexible scheduling between guest check-outs, detailed invoicing, and reliable communication. We offer same-day emergency repairs, flexible scheduling around guest bookings, detailed photo documentation, net-30 payment terms for established companies, and priority scheduling for property management clients."
+                  "text": "Yes! A significant portion of our business comes from property managers and vacation rental owners in Cabo San Lucas. We understand the unique needs of property management - fast turnaround times, flexible scheduling between guest check-outs, detailed invoicing, and reliable communication. We offer same-day emergency repairs, flexible scheduling around guest bookings, detailed photo documentation, net-30 payment terms for established companies, and priority scheduling for property management clients."
                 }
               },
               {
                 "@type": "Question",
-                "name": "What makes Cabos Handyman different from other handymen in Los Cabos?",
+                "name": "What makes Cabos Handyman different from other handymen in Cabo San Lucas?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "We stand out through our 20+ years of experience in Los Cabos, fully bilingual team (English and Spanish), 24/7 emergency availability, licensed and insured operations, 600+ completed projects, property management expertise, comprehensive services (from small repairs to full remodels), same-day service availability, and transparent pricing with no hidden fees. We serve both the expat community and local residents with equal dedication to quality and professionalism."
+                  "text": "We stand out through our 20+ years of experience in Cabo San Lucas, fully bilingual team (English and Spanish), 24/7 emergency availability, licensed and insured operations, 600+ completed projects, property management expertise, comprehensive services (from small repairs to full remodels), same-day service availability, and transparent pricing with no hidden fees. We serve both the expat community and local residents with equal dedication to quality and professionalism."
                 }
               }
             ]
@@ -117,10 +118,10 @@ export default function FAQ() {
           {/* FAQ 1 */}
           <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
             <h2 className="text-xl font-bold text-gray-900 mb-3">
-              What areas do you serve in Los Cabos?
+              What areas do you serve?
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              We focus our services exclusively on <strong>Cabo San Lucas and immediate surrounding areas</strong> to ensure the fastest response times and highest quality service. This allows us to maintain our 30-minute emergency response guarantee and provide the best possible service to our Cabo San Lucas clients. We're available 24/7 for emergency repairs. Call <a href="tel:+526121698328" className="text-teal-600 font-semibold hover:text-teal-700">+52 612 169 8328</a> to confirm we service your specific location!
+              We serve <strong>Cabo San Lucas and immediate surrounding areas</strong> to ensure the fastest response times and highest quality service. We specialize in residential and vacation rental property maintenance in Cabo San Lucas. This focused service area allows us to provide 24/7 emergency response and maintain the highest quality service standards for our clients. Call <a href="tel:+526121698328" className="text-teal-600 font-semibold hover:text-teal-700">+52 612 169 8328</a> to confirm we service your specific location!
             </p>
           </div>
 
@@ -140,7 +141,7 @@ export default function FAQ() {
               Do you offer emergency handyman services?
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              <strong>Absolutely!</strong> We offer <strong>24/7 emergency handyman services</strong> for urgent repairs in Cabo San Lucas and Los Cabos. Emergency services include plumbing leaks, burst pipes, electrical issues, power outages, lock-outs, broken doors or windows, water damage, storm damage, and any urgent fixes that can't wait. Call <a href="tel:+526121698328" className="text-teal-600 font-semibold hover:text-teal-700">+52 612 169 8328</a> anytime, day or night!
+              <strong>Absolutely!</strong> We offer <strong>24/7 emergency handyman services</strong> for urgent repairs in Cabo San Lucas. Emergency services include plumbing leaks, burst pipes, electrical issues, power outages, lock-outs, broken doors or windows, water damage, storm damage, and any urgent fixes that can't wait. Call <a href="tel:+526121698328" className="text-teal-600 font-semibold hover:text-teal-700">+52 612 169 8328</a> anytime, day or night!
             </p>
           </div>
 
@@ -175,7 +176,7 @@ export default function FAQ() {
               Do you speak English? What payment methods do you accept?
             </h2>
             <p className="text-gray-700 leading-relaxed mb-3">
-              <strong>Yes!</strong> We are fully bilingual and speak both <strong>English and Spanish fluently</strong>. Our entire team is comfortable communicating in English, which is especially appreciated by expats, American and Canadian homeowners, vacation rental owners, and international property managers throughout Los Cabos.
+              <strong>Yes!</strong> We are fully bilingual and speak both <strong>English and Spanish fluently</strong>. Our entire team is comfortable communicating in English, which is especially appreciated by expats, American and Canadian homeowners, vacation rental owners, and international property managers in Cabo San Lucas.
             </p>
             <p className="text-gray-700 leading-relaxed">
               <strong>Payment Methods:</strong> Cash (USD or MXN), Credit Cards (Visa, Zelle, Mastercard, Amex), Debit Cards, Bank Transfers (both Mexican and international), and invoicing for property management companies.
@@ -217,7 +218,7 @@ export default function FAQ() {
               Are you licensed and insured?
             </h2>
             <p className="text-gray-700 leading-relaxed">
-              Yes, Cabos Handyman is <strong>fully licensed, insured, and bonded</strong> to operate in Cabo San Lucas and throughout Baja California Sur. We carry comprehensive liability insurance to protect both our clients and our team members. With over 20 years of experience in the Los Cabos area and more than 600 completed projects, we maintain the highest standards of professionalism and quality workmanship. We comply with all local building codes and regulations.
+              Yes, Cabos Handyman is <strong>fully licensed, insured, and bonded</strong> to operate in Cabo San Lucas and throughout Baja California Sur. We carry comprehensive liability insurance to protect both our clients and our team members. With over 20 years of experience in Cabo San Lucas and more than 600 completed projects, we maintain the highest standards of professionalism and quality workmanship. We comply with all local building codes and regulations.
             </p>
           </div>
 
@@ -227,7 +228,7 @@ export default function FAQ() {
               Do you work with property managers and vacation rental owners?
             </h2>
             <p className="text-gray-700 leading-relaxed mb-3">
-              <strong>Yes!</strong> A significant portion of our business comes from property managers and vacation rental owners throughout Los Cabos. We understand the unique needs of property management - fast turnaround times, flexible scheduling between guest check-outs, detailed invoicing for property owners, and reliable communication.
+              <strong>Yes!</strong> A significant portion of our business comes from property managers and vacation rental owners in Cabo San Lucas. We understand the unique needs of property management - fast turnaround times, flexible scheduling between guest check-outs, detailed invoicing for property owners, and reliable communication.
             </p>
             <p className="text-gray-700 leading-relaxed mb-3">
               <strong>We offer:</strong>
@@ -248,13 +249,13 @@ export default function FAQ() {
           {/* FAQ 10 - NEW */}
           <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
             <h2 className="text-xl font-bold text-gray-900 mb-3">
-              What makes Cabos Handyman different from other handymen in Los Cabos?
+              What makes Cabos Handyman different from other handymen in Cabo San Lucas?
             </h2>
             <p className="text-gray-700 leading-relaxed mb-3">
               We stand out in several key ways:
             </p>
             <ul className="list-disc list-inside text-gray-700 space-y-2 ml-4">
-              <li><strong>20+ years of experience</strong> specifically in the Los Cabos area</li>
+              <li><strong>20+ years of experience</strong> specifically in Cabo San Lucas</li>
               <li><strong>Fully bilingual team</strong> - English and Spanish fluency</li>
               <li><strong>24/7 emergency availability</strong> - we answer the phone anytime</li>
               <li><strong>Licensed, insured, and bonded</strong> - full legal compliance</li>
