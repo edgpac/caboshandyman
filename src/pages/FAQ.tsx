@@ -348,7 +348,7 @@ export default function FAQ() {
   return (
     <>
       <Helmet>
-        <title>FAQ - Cabos Handyman | 50+ Answers About Handyman Services in Cabo San Lucas</title>
+        <title>FAQ - Cabos Handyman | 50+ FAQ About Handyman Services in Cabo San Lucas</title>
         <meta name="description" content="Get answers to 50+ common questions about handyman services, emergency repairs, vacation rental maintenance, plumbing, electrical, remodeling, pricing, and more in Cabo San Lucas. 24/7 emergency service available!" />
         <link rel="canonical" href="https://caboshandyman.com/faq" />
         <script type="application/ld+json">
@@ -365,10 +365,10 @@ export default function FAQ() {
             Frequently Asked Questions
           </h1>
           <p className="text-xl md:text-2xl max-w-4xl mx-auto">
-            Everything you need to know about Cabos Handyman services in Cabo San Lucas
+            Everything you need to know about Cabos Handyman services.
           </p>
           <p className="text-lg mt-4 max-w-3xl mx-auto">
-            50+ detailed answers covering emergency services, vacation rentals, pricing, remodeling, and more
+            50+ FAQ covering emergency services, vacation rentals, pricing, remodeling, and more
           </p>
         </div>
 
