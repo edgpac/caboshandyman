@@ -8,7 +8,7 @@ import Footer from '../components/Footer';
 
 export default function ServicesPage() {
   const [selectedProject, setSelectedProject] = React.useState<string>('Modern Kitchen');
-  const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(true);
+  const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
 
   return (
     <>
