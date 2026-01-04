@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Phone, Mail, Shield, Menu, ChevronDown } from 'lucide-react';
 
 export default function Navigation() {
@@ -51,12 +51,6 @@ export default function Navigation() {
               <Mail size={18} />
               Contact Us
             </a>
-            <a
-              href="/faq"
-              className="flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-semibold"
-            >
-              FAQ
-            </a>
           </div>
 
           {/* Mobile: Hamburger Menu Button */}
@@ -99,13 +93,6 @@ export default function Navigation() {
             >
               <Mail size={18} />
               Contact Us
-            </a>
-            <a
-              href="/faq"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-semibold py-3 px-4 rounded-lg hover:bg-dark-surface"
-            >
-              FAQ
             </a>
           </div>
         )}
