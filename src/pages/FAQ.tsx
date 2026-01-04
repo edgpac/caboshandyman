@@ -365,7 +365,7 @@ export default function FAQ() {
             Frequently Asked Questions
           </h1>
           <p className="text-xl md:text-2xl max-w-4xl mx-auto">
-            Everything you need to know about Cabos Handyman services.
+            Everything you need to know about Cabos Handyman services
           </p>
           <p className="text-lg mt-4 max-w-3xl mx-auto">
             50+ FAQ covering emergency services, vacation rentals, pricing, remodeling, and more
