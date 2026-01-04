@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
-import { ChevronDown } from 'lucide-react';
+import { ChevronDown, ArrowLeft } from 'lucide-react';
 
 export default function FAQ() {
   const [openSection, setOpenSection] = useState<number | null>(null);
@@ -353,6 +353,19 @@ export default function FAQ() {
           {JSON.stringify(generateSchemaMarkup())}
         </script>
       </Helmet>
+
+      {/* Back to Home Button */}
+      <div className="bg-gray-50 pt-20 py-4">
+        <div className="container mx-auto px-6">
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-semibold transition-colors group"
+          >
+            <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Home</span>
+          </a>
+        </div>
+      </div>
 
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
