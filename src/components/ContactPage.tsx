@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Wrench, AlertCircle, ArrowLeft } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Wrench, AlertCircle } from 'lucide-react';
 import Footer from './Footer';
 import SEO from './SEO';
+import Navigation from './Navigation';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -68,18 +69,7 @@ const ContactPage = () => {
         canonicalUrl="/contact"
       />
 
-      {/* Back to Home Button */}
-      <div className="bg-gray-50 pt-20 py-4">
-        <div className="container mx-auto px-6">
-          <a
-            href="/"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-semibold transition-colors group"
-          >
-            <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-            <span>Back to Home</span>
-          </a>
-        </div>
-      </div>
+      <Navigation />
 
       <div className="min-h-screen bg-gray-50">
         {/* Hero */}

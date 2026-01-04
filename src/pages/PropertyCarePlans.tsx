@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import SEO from '@/components/SEO';
-import { Shield, Droplet, Clock, CheckCircle2, AlertCircle, Home, ArrowRight, ArrowLeft, Calendar, DollarSign } from 'lucide-react';
+import { Shield, Droplet, Clock, CheckCircle2, AlertCircle, Home, ArrowRight, Calendar, DollarSign } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -69,18 +70,7 @@ export default function PropertyCarePlans() {
         schemaMarkup={schemaMarkup}
       />
 
-      {/* Back to Home Button */}
-      <div className="bg-gray-50 py-4">
-        <div className="container mx-auto px-6">
-          <a
-            href="/"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary-hover font-semibold transition-colors group"
-          >
-            <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-            <span>Back to Home</span>
-          </a>
-        </div>
-      </div>
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-blue-600 to-cyan-700 text-white overflow-hidden">
