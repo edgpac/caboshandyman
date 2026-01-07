@@ -1,4 +1,12 @@
 {
+  "redirects": [
+    {
+      "source": "https://www.caboshandyman.com/:path*",
+      "destination": "https://caboshandyman.com/:path*",
+      "permanent": true,
+      "statusCode": 301
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ],
@@ -23,6 +31,15 @@
         {
           "key": "Cache-Control",
           "value": "no-store, max-age=0"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
         }
       ]
     }

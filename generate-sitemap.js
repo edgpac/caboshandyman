@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SITE_URL = 'https://www.caboshandyman.com';
+const SITE_URL = 'https://caboshandyman.com';
 const OUTPUT_PATH = path.join(__dirname, 'public', 'sitemap.xml');
 
 const staticPages = [

@@ -199,7 +199,7 @@ export default async function handler(req, res) {
           <p style="margin: 5px 0; font-size: 12px;">20+ Years Experience | Licensed & Insured</p>
           <p style="margin: 5px 0; font-size: 12px;">Cabo San Lucas, BCS, Mexico</p>
           <p style="margin: 5px 0; font-size: 12px;">
-            <a href="https://caboshandyman.com" style="color: #02af9f;">www.caboshandyman.com</a>
+            <a href="https://caboshandyman.com" style="color: #02af9f;">caboshandyman.com</a>
           </p>
         </div>
       </div>
