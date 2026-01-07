@@ -10,14 +10,25 @@ const OUTPUT_PATH = path.join(__dirname, 'public', 'sitemap.xml');
 
 const staticPages = [
   { url: '/', changefreq: 'weekly', priority: '1.0' },
+  { url: '/services-pricing', changefreq: 'monthly', priority: '0.9' },
   { url: '/contact', changefreq: 'monthly', priority: '0.9' },
   { url: '/privacy', changefreq: 'yearly', priority: '0.3' },
   { url: '/terms', changefreq: 'yearly', priority: '0.3' },
   { url: '/faq', changefreq: 'monthly', priority: '0.8' },
-  { url: '/kitchen-services-cabo', changefreq: 'monthly', priority: '0.85' },
+
+  // Service pages - HIGH PRIORITY
+  { url: '/plumber-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
+  { url: '/handyman-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
+  { url: '/property-care-plans', changefreq: 'monthly', priority: '0.95' },
+  { url: '/kitchen-services-cabo', changefreq: 'monthly', priority: '0.90' },
+  { url: '/property-setup-cabo', changefreq: 'monthly', priority: '0.90' },
   { url: '/bathroom-services-cabo', changefreq: 'monthly', priority: '0.85' },
   { url: '/electrical-services-cabo', changefreq: 'monthly', priority: '0.85' },
-  { url: '/property-care-plans', changefreq: 'monthly', priority: '0.9' },
+  { url: '/furniture-assembly-cabo', changefreq: 'monthly', priority: '0.85' },
+  { url: '/tv-mounting-cabo', changefreq: 'monthly', priority: '0.85' },
+  { url: '/ceiling-fan-installation-cabo', changefreq: 'monthly', priority: '0.85' },
+  { url: '/toilet-tub-unclogging-cabo', changefreq: 'monthly', priority: '0.85' },
+  { url: '/vacation-rental-setup-cabo', changefreq: 'monthly', priority: '0.85' },
 ];
 
 function getBlogPosts() {
