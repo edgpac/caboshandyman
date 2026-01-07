@@ -12,26 +12,6 @@
       "permanent": true
     }
   ],
-  "rewrites": [
-    {
-      "source": "/((?!api|sitemap\\.xml|robots\\.txt|favicon\\.ico|_next|assets).*)",
-      "destination": "/index.html"
-    }
-  ],
-  "functions": {
-    "api/analyze-parts.js": {
-      "maxDuration": 60,
-      "memory": 1024
-    },
-    "api/feedback-chat.js": {
-      "maxDuration": 30,
-      "memory": 512
-    },
-    "api/send-contact-email.js": {
-      "maxDuration": 30,
-      "memory": 512
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
@@ -51,5 +31,19 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/analyze-parts.js": {
+      "maxDuration": 60,
+      "memory": 1024
+    },
+    "api/feedback-chat.js": {
+      "maxDuration": 30,
+      "memory": 512
+    },
+    "api/send-contact-email.js": {
+      "maxDuration": 30,
+      "memory": 512
+    }
+  }
 }
