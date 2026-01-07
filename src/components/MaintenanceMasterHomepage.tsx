@@ -20,41 +20,47 @@ export default function CabosHandymanHomepage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const projects = [
-    { 
-      name: "Modern Kitchen", 
-      category: "Residential", 
+    {
+      name: "Modern Kitchen",
+      category: "Residential",
       image: kitchenImage,
-      alt: "Modern kitchen remodeling project in Cabo San Lucas featuring custom cabinets, granite countertops, and stainless steel appliances by Cabos Handyman"
+      alt: "Modern kitchen remodeling project in Cabo San Lucas featuring custom cabinets, granite countertops, and stainless steel appliances by Cabos Handyman",
+      imagePosition: "center 30%"
     },
-    { 
-      name: "Luxury Bathroom", 
-      category: "Residential", 
+    {
+      name: "Luxury Bathroom",
+      category: "Residential",
       image: bathroomImage,
-      alt: "Luxury bathroom renovation in Cabo San Lucas with custom tile work, modern fixtures, and elegant design by Cabos Handyman"
+      alt: "Luxury bathroom renovation in Cabo San Lucas with custom tile work, modern fixtures, and elegant design by Cabos Handyman",
+      imagePosition: "center 35%"
     },
-    { 
-      name: "Commercial Office", 
-      category: "Commercial", 
+    {
+      name: "Commercial Office",
+      category: "Commercial",
       image: officeImage,
-      alt: "Commercial office construction and renovation project in Cabo San Lucas with professional workspace design by Cabos Handyman"
+      alt: "Commercial office construction and renovation project in Cabo San Lucas with professional workspace design by Cabos Handyman",
+      imagePosition: "center 30%"
     },
-    { 
-      name: "Community Center", 
-      category: "HOA", 
+    {
+      name: "Community Center",
+      category: "HOA",
       image: communityImage,
-      alt: "Community center construction and maintenance project in Cabo San Lucas for HOA and residential communities by Cabos Handyman"
+      alt: "Community center construction and maintenance project in Cabo San Lucas for HOA and residential communities by Cabos Handyman",
+      imagePosition: "center 25%"
     },
-    { 
-      name: "Restaurant Buildout", 
-      category: "Commercial", 
+    {
+      name: "Restaurant Buildout",
+      category: "Commercial",
       image: restaurantImage,
-      alt: "Restaurant construction and commercial buildout project in Cabo San Lucas with custom design and professional finishing by Cabos Handyman"
+      alt: "Restaurant construction and commercial buildout project in Cabo San Lucas with custom design and professional finishing by Cabos Handyman",
+      imagePosition: "center 35%"
     },
-    { 
-      name: "Home Addition", 
-      category: "Residential", 
+    {
+      name: "Home Addition",
+      category: "Residential",
       image: homeImage,
-      alt: "Home addition and expansion project in Cabo San Lucas featuring new construction, structural work, and seamless integration by Cabos Handyman"
+      alt: "Home addition and expansion project in Cabo San Lucas featuring new construction, structural work, and seamless integration by Cabos Handyman",
+      imagePosition: "center 35%"
     }
   ];
 
@@ -273,7 +279,7 @@ export default function CabosHandymanHomepage() {
                       alt={project.alt}
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      style={project.name === "Restaurant Buildout" ? { objectPosition: 'center 35%' } : undefined}
+                      style={{ objectPosition: project.imagePosition }}
                     />
                   </div>
                   <div className="p-6">
