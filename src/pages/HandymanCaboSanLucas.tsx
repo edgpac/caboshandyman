@@ -1,10 +1,12 @@
-import { lazy } from 'react';
+import { lazy, useState } from 'react';
 import SEO from '@/components/SEO';
-import { CheckCircle2, Wrench, Home, Zap, Droplet, Fan, Package, Monitor, Users, Clock, Star, Shield, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Wrench, Home, Zap, Droplet, Fan, Package, Monitor, Users, Clock, Star, Shield, ArrowRight, ChevronDown } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
 export default function HandymanCaboSanLucas() {
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
+
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -494,6 +496,383 @@ export default function HandymanCaboSanLucas() {
               <p className="text-gray-600 text-sm text-center italic">
                 For complete service pricing, visit our <a href="/services" className="text-teal-600 hover:underline font-medium">service menu</a> with 70+ transparent prices.
               </p>
+            </div>
+          </div>
+
+          {/* FAQ Section */}
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+              Frequently Asked Questions About Handyman Services in Cabo
+            </h2>
+            <div className="max-w-3xl mx-auto space-y-4">
+
+              {/* FAQ 1 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq1' ? null : 'faq1')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    How much does a handyman cost in Cabo San Lucas?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-teal-600 transition-transform ${openQuestion === 'faq1' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq1' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Our standard service call is <strong>$60, which includes the first hour of labor and diagnosis</strong>. This transparent pricing means you know exactly what you're paying before we even arrive.
+                    </p>
+                    <p className="mb-3">
+                      For larger projects, we provide free written estimates with detailed scope of work. Package pricing is available when you bundle multiple services (furniture assembly + TV mounting + ceiling fan installation, for example).
+                    </p>
+                    <p>
+                      <strong>Property Care Plan members</strong> receive discounted rates and priority scheduling. Call <a href="tel:+526121698328" className="text-teal-600 hover:underline font-medium">+52 612 169 8328</a> for a free quote on your specific project.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 2 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq2' ? null : 'faq2')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    What areas do you serve in Los Cabos?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-teal-600 transition-transform ${openQuestion === 'faq2' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq2' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      We serve <strong>all of Los Cabos</strong>, including Cabo San Lucas, San José del Cabo, the Tourist Corridor, and surrounding areas like El Tezal, Pedregal, Palmilla, and Puerto Los Cabos.
+                    </p>
+                    <p className="mb-3">
+                      With 20+ years as a local handyman, we know every neighborhood in Los Cabos and can navigate quickly to your property. We regularly service vacation rentals in Médano Beach, luxury homes in Pedregal, and commercial properties throughout the corridor.
+                    </p>
+                    <p>
+                      Service area extends approximately 30km from Cabo San Lucas. For locations outside this range, please call <a href="tel:+526121698328" className="text-teal-600 hover:underline font-medium">+52 612 169 8328</a> to confirm availability.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 3 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq3' ? null : 'faq3')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Do you service vacation rentals and Airbnb properties?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-teal-600 transition-transform ${openQuestion === 'faq3' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq3' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      <strong>Absolutely! Vacation rental service is one of our specialties.</strong> We understand that when you have guests arriving in 24 hours, repairs need to happen NOW—not "sometime this week."
+                    </p>
+                    <p className="mb-3">
+                      We offer:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-3 ml-4">
+                      <li>Same-day emergency response for rental turnovers</li>
+                      <li>Between-guest maintenance visits</li>
+                      <li>Monthly Property Care Plans starting at $99/month</li>
+                      <li>Bilingual communication with property managers and guests</li>
+                      <li>Understanding of Airbnb/VRBO standards for 5-star ratings</li>
+                    </ul>
+                    <p>
+                      We currently maintain 50+ vacation rental properties throughout Los Cabos. Call <a href="tel:+526121698328" className="text-teal-600 hover:underline font-medium">+52 612 169 8328</a> to discuss a maintenance plan for your rental.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 4 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq4' ? null : 'faq4')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Are you licensed and insured to work in Mexico?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-teal-600 transition-transform ${openQuestion === 'faq4' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq4' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Yes. We are <strong>fully licensed for construction and handyman work in Mexico</strong>, carry comprehensive liability insurance to protect your property, and comply with all local building codes and regulations in Baja California Sur.
+                    </p>
+                    <p className="mb-3">
+                      Our team includes:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-3 ml-4">
+                      <li>Licensed electricians for all electrical work</li>
+                      <li>Licensed plumbers for plumbing installations</li>
+                      <li>Certified AC technicians for HVAC service</li>
+                      <li>20+ years experience with local building standards</li>
+                    </ul>
+                    <p>
+                      We provide a <strong>90-day warranty on all workmanship</strong>. If you're not completely satisfied, we make it right at no additional charge.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 5 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq5' ? null : 'faq5')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    How quickly can you respond to urgent repair requests?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-teal-600 transition-transform ${openQuestion === 'faq5' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq5' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Response times depend on your Property Care Plan status:
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 mb-3 ml-4">
+                      <li><strong>Property Care Members:</strong> 24/7 emergency service with 30-minute response time for critical situations (flooding, electrical hazards, AC failure in summer)</li>
+                      <li><strong>Non-Members:</strong> Same-day or next-day service during business hours (7am-6pm), with emergency service available for urgent situations at premium rates</li>
+                    </ul>
+                    <p className="mb-3">
+                      Most routine repairs (fixing a door, installing a ceiling fan, minor plumbing) can be scheduled within 24-48 hours depending on our current workload.
+                    </p>
+                    <p>
+                      For immediate service needs, call <a href="tel:+526121698328" className="text-teal-600 hover:underline font-medium">+52 612 169 8328</a> and we'll prioritize your request.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 6 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq6' ? null : 'faq6')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Can you handle large renovation projects or just small repairs?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-teal-600 transition-transform ${openQuestion === 'faq6' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq6' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      <strong>We handle everything from hanging a picture to complete home renovations.</strong> With 20+ years of experience and 600+ completed projects, no job is too big or too small.
+                    </p>
+                    <p className="mb-3">
+                      Recent projects include:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-3 ml-4">
+                      <li>Complete kitchen and bathroom remodels ($5,000-30,000)</li>
+                      <li>Vacation rental property setup packages ($500-2,000)</li>
+                      <li>Commercial space build-outs for restaurants and offices</li>
+                      <li>Hurricane damage repairs and restoration</li>
+                      <li>Simple jobs like TV mounting, furniture assembly, and minor repairs ($60-200)</li>
+                    </ul>
+                    <p>
+                      We provide free detailed estimates for all projects over $500. Contact us at <a href="tel:+526121698328" className="text-teal-600 hover:underline font-medium">+52 612 169 8328</a> to discuss your project scope.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </div>
+
+          {/* Property Care Plans CTA */}
+          <div className="mb-12 bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-200 rounded-2xl p-8 md:p-12">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 bg-purple-100 px-4 py-2 rounded-full mb-4">
+                  <Shield className="text-purple-600" size={20} />
+                  <span className="text-purple-900 font-semibold text-sm">STRESS-FREE PROPERTY OWNERSHIP</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Property Care Plans: Your On-Call Handyman Team
+                </h2>
+                <p className="text-xl text-gray-700 leading-relaxed">
+                  Stop scrambling to find a handyman every time something breaks. Property Care members get priority scheduling, discounted rates, and peace of mind knowing help is just one call away.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+
+                {/* Basic Care - $99/mo */}
+                <div className="bg-white rounded-xl p-6 border-2 border-orange-300 shadow-lg">
+                  <div className="text-center mb-4">
+                    <div className="text-3xl font-bold text-orange-600 mb-1">$99/mo</div>
+                    <div className="text-sm text-gray-600">Basic Care</div>
+                  </div>
+                  <ul className="space-y-3 text-sm text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>Priority scheduling</strong> (within 24-48 hours)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>10% discount</strong> on all labor</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>1 FREE service call/month</strong> ($60 value)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Dedicated account manager</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Maintenance reminder service</span>
+                    </li>
+                  </ul>
+                  <p className="mt-4 text-xs text-gray-500 italic">Perfect for homeowners and single vacation rentals</p>
+                </div>
+
+                {/* Premium Care - $199/mo - HIGHLIGHTED */}
+                <div className="bg-gradient-to-br from-blue-600 to-cyan-700 rounded-xl p-6 shadow-xl transform scale-105 relative">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-gray-900 px-4 py-1 rounded-full text-xs font-bold">
+                    MOST POPULAR
+                  </div>
+                  <div className="text-center mb-4">
+                    <div className="text-3xl font-bold text-white mb-1">$199/mo</div>
+                    <div className="text-sm text-cyan-100">Premium Care</div>
+                  </div>
+                  <ul className="space-y-3 text-sm text-white">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>24/7 emergency service included</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>20% discount on all labor</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>2 FREE service calls/month</strong> ($120 value)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>Quarterly property inspections</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Same-day service guarantee</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Photo documentation of all work</span>
+                    </li>
+                  </ul>
+                  <p className="mt-4 text-xs text-cyan-100 italic">Best for vacation rentals and property managers</p>
+                </div>
+
+                {/* Elite Care - $299/mo */}
+                <div className="bg-white rounded-xl p-6 border-2 border-purple-300 shadow-lg">
+                  <div className="text-center mb-4">
+                    <div className="text-3xl font-bold text-purple-600 mb-1">$299/mo</div>
+                    <div className="text-sm text-gray-600">Elite Care</div>
+                  </div>
+                  <ul className="space-y-3 text-sm text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>Everything in Premium, PLUS:</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>3 FREE service calls/month</strong> ($180 value)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>Monthly preventive maintenance visits</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>25% discount on all labor</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Property condition reports</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Hurricane season prep & post-storm inspection</span>
+                    </li>
+                  </ul>
+                  <p className="mt-4 text-xs text-gray-500 italic">Ideal for luxury properties and multi-unit managers</p>
+                </div>
+
+              </div>
+
+              {/* ROI Comparison */}
+              <div className="bg-white rounded-lg p-6 mb-6">
+                <h3 className="font-bold text-gray-900 mb-3 text-center">Why Property Care Plans Save You Money</h3>
+                <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+                  <div>
+                    <p className="font-semibold mb-2">Without Property Care (Typical Year):</p>
+                    <ul className="space-y-1 ml-4">
+                      <li>• 6 service calls @ $60 each: <strong>$360</strong></li>
+                      <li>• 15 hours labor @ $80/hr: <strong>$1,200</strong></li>
+                      <li>• 1 emergency call premium: <strong>$500</strong></li>
+                      <li>• Lost rental income (delays): <strong>$300-800</strong></li>
+                      <li className="pt-2 border-t border-gray-300"><strong>Total: $2,360-2,860/year</strong></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-2">With Premium Property Care:</p>
+                    <ul className="space-y-1 ml-4">
+                      <li>• Monthly plan: <strong>$199/month</strong> = $2,388/year</li>
+                      <li>• 24 FREE service calls: <strong>$1,440 value</strong></li>
+                      <li>• 20% labor discount: <strong>~$240 savings</strong></li>
+                      <li>• No emergency premiums: <strong>$500+ saved</strong></li>
+                      <li>• Zero rental downtime: <strong>Priceless</strong></li>
+                      <li className="pt-2 border-t border-gray-300 text-green-700"><strong>Saves $500-1,200/year + peace of mind</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              {/* CTA Button */}
+              <div className="text-center">
+                <a
+                  href="/property-care-plans"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-indigo-700 transition-all shadow-xl"
+                >
+                  <Shield size={20} />
+                  View All Property Care Plans & Pricing
+                  <ArrowRight size={20} />
+                </a>
+                <p className="mt-4 text-sm text-gray-600">
+                  Questions? Call <a href="tel:+526121698328" className="text-purple-600 hover:underline font-medium">+52 612 169 8328</a> to discuss which plan is right for your property.
+                </p>
+              </div>
             </div>
           </div>
 

@@ -1,11 +1,13 @@
-import { lazy } from 'react';
+import { lazy, useState } from 'react';
 import SEO from '@/components/SEO';
-import { Shield, Droplet, Clock, CheckCircle2, AlertCircle, Home, ArrowRight, Calendar, DollarSign } from 'lucide-react';
+import { Shield, Droplet, Clock, CheckCircle2, AlertCircle, Home, ArrowRight, Calendar, DollarSign, ChevronDown } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
 export default function PropertyCarePlans() {
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
+
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -62,7 +64,7 @@ export default function PropertyCarePlans() {
     <>
       <SEO
         title="Property Care Plans Cabo San Lucas | Preventive Maintenance | Cabos Handyman"
-        description="Preventive property maintenance plans in Cabo San Lucas. Monthly inspections, free unclog service, priority emergency response. Save thousands on water damage. Perfect for vacation rentals and remote property owners. Plans from $99/month."
+        description="Preventive property maintenance plans in Cabo San Lucas. Monthly inspections, free unclog service, 24/7 emergency response. Save thousands on water damage. Perfect for vacation rentals. Plans from $99/month. Call +52 612 169 8328"
         canonicalUrl="/property-care-plans"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -784,6 +786,279 @@ export default function PropertyCarePlans() {
                   From preventive maintenance to major repairs, we handle it all. Plumbing, electrical, carpentry, painting—one trusted team for everything.
                 </p>
               </div>
+            </div>
+          </div>
+
+          {/* FAQ Section */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+              Frequently Asked Questions About Property Care Plans
+            </h2>
+            <div className="max-w-3xl mx-auto space-y-4">
+
+              {/* FAQ 1 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq1' ? null : 'faq1')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    What exactly is included in the monthly inspection?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-blue-600 transition-transform ${openQuestion === 'faq1' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq1' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Our comprehensive property inspections include:
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 mb-3 ml-4">
+                      <li><strong>Plumbing system check:</strong> Faucets, toilets, showers, water heater, visible pipes, and leak detection</li>
+                      <li><strong>Drain testing:</strong> All sinks, tubs, and showers checked for slow drainage or clogs</li>
+                      <li><strong>Electrical inspection:</strong> Outlets, switches, circuit breaker, visible wiring</li>
+                      <li><strong>Fixtures & hardware:</strong> Doors, windows, locks, ceiling fans, light fixtures</li>
+                      <li><strong>Water damage screening:</strong> Check under sinks, around toilets, near water heater for moisture</li>
+                      <li><strong>HVAC check:</strong> AC unit operation, filter condition, thermostat function</li>
+                      <li><strong>Exterior assessment:</strong> Roof condition, gutters, visible corrosion from salt air</li>
+                    </ul>
+                    <p>
+                      Premium and Elite members receive more frequent inspections with detailed photo documentation. All inspections include a written report delivered within 24 hours. Call <a href="tel:+526121698328" className="text-blue-600 hover:underline font-medium">+52 612 169 8328</a> to learn more.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 2 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq2' ? null : 'faq2')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    How does the FREE monthly unclog service work?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-blue-600 transition-transform ${openQuestion === 'faq2' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq2' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Every Property Care Plan includes <strong>at least one FREE drain unclog per month</strong> (Basic: 1/month, Premium: 2/month, Elite: unlimited). This covers:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-3 ml-4">
+                      <li>Toilet clogs (standard unclog, not major blockages)</li>
+                      <li>Tub or shower drain clogs</li>
+                      <li>Kitchen or bathroom sink clogs</li>
+                      <li>Preventive drain cleaning to avoid future clogs</li>
+                    </ul>
+                    <p className="mb-3">
+                      <strong>How it works:</strong> Simply call or text when you need drain service. We'll schedule it during your next inspection or send someone same-day if urgent. There's no extra charge—it's included in your monthly plan. This alone is a <strong>$60-120 value per month</strong> depending on your plan tier.
+                    </p>
+                    <p className="mb-3">
+                      <strong>Important:</strong> Unused monthly unclogs do NOT roll over to the next month. However, many members use them preventively—requesting drain cleaning on drains that are draining slowly before they become full clogs.
+                    </p>
+                    <p>
+                      For severe blockages requiring hydro-jetting or sewer line work, members receive 15-25% discount on those services.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 3 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq3' ? null : 'faq3')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Is Property Care worth it for vacation rentals?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-blue-600 transition-transform ${openQuestion === 'faq3' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq3' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      <strong>Absolutely—vacation rentals benefit the MOST from Property Care Plans.</strong> Here's why:
+                    </p>
+                    <p className="mb-3">
+                      <strong>Protect Your Reviews & Revenue:</strong> One plumbing emergency during a guest stay can destroy your 5-star rating and cost you thousands in lost bookings. Property Care members get priority same-day service to fix problems before guests even notice.
+                    </p>
+                    <p className="mb-3">
+                      <strong>High Guest Turnover = More Wear:</strong> Vacation rentals experience 10-50x more drain usage than regular homes. Guests flush things they shouldn't, overload garbage disposals, and use excessive hot water. Regular inspections catch these issues immediately.
+                    </p>
+                    <p className="mb-3">
+                      <strong>Remote Owner Peace of Mind:</strong> Most Cabo vacation rental owners live in the US or Canada. Premium/Elite plans include detailed photo reports showing exactly what was checked and any issues found. You can show these reports to prospective guests as proof of professional maintenance.
+                    </p>
+                    <p className="mb-3">
+                      <strong>ROI Example:</strong> Premium Care at $199/month includes:
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-3 ml-4">
+                      <li>24 FREE drain unclogs/year ($1,440 value)</li>
+                      <li>24 bi-monthly inspections catching problems early</li>
+                      <li>24/7 emergency service (no guest inconvenience)</li>
+                      <li>20% discount on all repairs</li>
+                    </ul>
+                    <p>
+                      <strong>One bad review from a plumbing emergency could cost you $5,000+ in lost bookings.</strong> Property Care pays for itself many times over. Call <a href="tel:+526121698328" className="text-blue-600 hover:underline font-medium">+52 612 169 8328</a> to discuss your rental property needs.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 4 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq4' ? null : 'faq4')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Can I cancel my Property Care Plan if I sell my property?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-blue-600 transition-transform ${openQuestion === 'faq4' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq4' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Yes. All Property Care Plans have a <strong>3-month minimum commitment</strong>, after which you can cancel with 30-day notice. This policy protects both you and us—we invest in understanding your property's unique needs, and you get consistent service from a team that knows your property.
+                    </p>
+                    <p className="mb-3">
+                      <strong>For monthly plans:</strong> After 3 months, cancel anytime with 30-day written notice. You'll receive service through the end of your final paid month.
+                    </p>
+                    <p className="mb-3">
+                      <strong>For annual plans:</strong> If you prepaid annually and need to cancel after 3 months (due to property sale, relocation, etc.), we'll refund the remaining months on a prorated basis. For example, if you paid $1,089 for Basic Care annually and cancel after 6 months, you receive a refund of $544.50 for the unused 6 months.
+                    </p>
+                    <p className="mb-3">
+                      <strong>Transferable to new owner:</strong> Many sellers transfer their Property Care Plan to the new property owner as a selling point ("property comes with established maintenance plan"). This adds value to your sale and ensures continuity of care. We'll coordinate the transfer at no charge.
+                    </p>
+                    <p>
+                      We're flexible and fair. If your situation changes, we'll work with you to find a solution.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 5 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq5' ? null : 'faq5')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    What's the difference between Basic, Premium, and Elite plans?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-blue-600 transition-transform ${openQuestion === 'faq5' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq5' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      The main differences are <strong>inspection frequency, number of free unclogs, and emergency response time:</strong>
+                    </p>
+
+                    <div className="mb-4 p-4 bg-orange-50 rounded-lg border border-orange-200">
+                      <p className="font-bold text-gray-900 mb-2">💼 Basic Care ($99/month):</p>
+                      <ul className="text-sm space-y-1 ml-4">
+                        <li>• Monthly inspections (12/year)</li>
+                        <li>• 1 FREE unclog/month (12/year)</li>
+                        <li>• 15% repair discount</li>
+                        <li>• 4-hour emergency response</li>
+                        <li>• Perfect for: Single homes, part-time residents</li>
+                      </ul>
+                    </div>
+
+                    <div className="mb-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+                      <p className="font-bold text-gray-900 mb-2">⭐ Premium Care ($199/month) - MOST POPULAR:</p>
+                      <ul className="text-sm space-y-1 ml-4">
+                        <li>• Bi-monthly inspections (24/year - every 2 weeks)</li>
+                        <li>• 2 FREE unclogs/month (24/year)</li>
+                        <li>• 20% repair discount</li>
+                        <li>• 2-hour emergency response</li>
+                        <li>• Photo reports + quarterly air filter replacement</li>
+                        <li>• Perfect for: Vacation rentals, high-value properties, remote owners</li>
+                      </ul>
+                    </div>
+
+                    <div className="mb-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
+                      <p className="font-bold text-gray-900 mb-2">👑 Elite Care ($299/month):</p>
+                      <ul className="text-sm space-y-1 ml-4">
+                        <li>• Weekly inspections (48+/year)</li>
+                        <li>• UNLIMITED unclogs</li>
+                        <li>• 25% repair discount</li>
+                        <li>• 1-hour VIP emergency response</li>
+                        <li>• Video reports + $100/month free minor repairs</li>
+                        <li>• Dedicated technician + concierge coordination</li>
+                        <li>• Perfect for: Luxury rentals, property portfolios, commercial properties</li>
+                      </ul>
+                    </div>
+
+                    <p>
+                      <strong>Not sure which plan is right for you?</strong> Call <a href="tel:+526121698328" className="text-blue-600 hover:underline font-medium">+52 612 169 8328</a> and we'll help you choose based on your property type, usage, and budget. You can also upgrade or downgrade plans anytime after your first 3 months.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 6 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq6' ? null : 'faq6')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Do you offer discounts for multiple properties?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-blue-600 transition-transform ${openQuestion === 'faq6' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq6' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      <strong>Yes! We offer portfolio pricing for property managers and owners with multiple properties.</strong>
+                    </p>
+                    <p className="mb-3">
+                      <strong>Portfolio Discounts:</strong>
+                    </p>
+                    <ul className="list-disc list-inside space-y-2 mb-3 ml-4">
+                      <li><strong>2-3 properties:</strong> 10% discount on all plans</li>
+                      <li><strong>4-6 properties:</strong> 15% discount on all plans</li>
+                      <li><strong>7-10 properties:</strong> 20% discount on all plans</li>
+                      <li><strong>11+ properties:</strong> Custom portfolio pricing (call for quote)</li>
+                    </ul>
+                    <p className="mb-3">
+                      <strong>Example Portfolio Savings:</strong> A property manager with 5 vacation rentals on Premium Care would normally pay $995/month ($199 x 5). With 15% portfolio discount, they pay only <strong>$846/month—saving $1,788/year</strong>.
+                    </p>
+                    <p className="mb-3">
+                      <strong>Additional Portfolio Benefits:</strong>
+                    </p>
+                    <ul className="list-disc list-inside space-y-1 mb-3 ml-4">
+                      <li>Single consolidated monthly invoice for all properties</li>
+                      <li>Dedicated portfolio manager as your single point of contact</li>
+                      <li>Coordinated scheduling across all properties</li>
+                      <li>Bulk pricing on repairs and materials across portfolio</li>
+                      <li>Monthly portfolio summary reports for property owners</li>
+                    </ul>
+                    <p>
+                      Call <a href="tel:+526121698328" className="text-blue-600 hover:underline font-medium">+52 612 169 8328</a> to discuss portfolio pricing for your properties. We currently manage 50+ vacation rental properties throughout Los Cabos.
+                    </p>
+                  </div>
+                )}
+              </div>
+
             </div>
           </div>
 

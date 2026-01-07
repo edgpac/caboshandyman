@@ -1,10 +1,12 @@
-import { lazy } from 'react';
+import { lazy, useState } from 'react';
 import SEO from '@/components/SEO';
-import { CheckCircle2, Droplet, Wrench, Clock, Shield, Zap, ArrowRight, AlertCircle } from 'lucide-react';
+import { CheckCircle2, Droplet, Wrench, Clock, Shield, Zap, ArrowRight, AlertCircle, ChevronDown } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
 export default function PlumberCaboSanLucas() {
+  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
+
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -489,6 +491,373 @@ export default function PlumberCaboSanLucas() {
               <p className="text-gray-600 text-sm text-center italic">
                 Prices include labor. Parts billed at cost. Free estimates for larger projects.
               </p>
+            </div>
+          </div>
+
+          {/* FAQ Section */}
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Frequently Asked Questions About Plumbing in Cabo</h2>
+            <div className="max-w-3xl mx-auto space-y-4">
+
+              {/* FAQ 1 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq1' ? null : 'faq1')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Do you offer 24/7 emergency plumbing service in Cabo San Lucas?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-cyan-600 transition-transform ${openQuestion === 'faq1' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq1' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Yes! Property Care members receive true 24/7 emergency plumbing service, including after midnight. We provide 2-4 hour response times depending on your plan level (Elite: 2 hours, Premium/Basic: 4 hours).
+                    </p>
+                    <p className="mb-3">
+                      For non-members, emergency service is available 7am-6pm for safety reasons. After 6pm, emergency service is available to Property Care members only. For extreme flooding emergencies after hours, non-members can request service for a $300 callout fee plus 2x standard rates.
+                    </p>
+                    <p>
+                      <strong>Call +52 612 169 8328</strong> for immediate emergency assistance or to join Property Care for 24/7 access.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 2 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq2' ? null : 'faq2')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    How much does a plumber cost in Cabo San Lucas?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-cyan-600 transition-transform ${openQuestion === 'faq2' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq2' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Our plumbing service starts at <strong>$60</strong>, which includes the service call, diagnosis, and the first hour of labor. This transparent pricing ensures you know what you're paying upfront with no hidden fees.
+                    </p>
+                    <p className="mb-3">
+                      <strong>Common plumbing costs in Cabo:</strong>
+                    </p>
+                    <ul className="list-disc ml-6 mb-3 space-y-1">
+                      <li>Simple drain clogs: $60-120</li>
+                      <li>Faucet replacement: $80-200</li>
+                      <li>Toilet repair/replacement: $120-350</li>
+                      <li>Water heater repair: $150-400</li>
+                      <li>Water heater replacement: $800-2,500</li>
+                    </ul>
+                    <p>
+                      Parts are billed at cost. Property Care members receive 15-25% discounts on all services. Emergency calls do NOT have inflated pricing—we charge standard rates even at 2am.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 3 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq3' ? null : 'faq3')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Why do pipes corrode faster in Cabo San Lucas?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-cyan-600 transition-transform ${openQuestion === 'faq3' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq3' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Cabo's coastal environment creates the perfect storm for plumbing corrosion:
+                    </p>
+                    <ul className="list-disc ml-6 mb-3 space-y-2">
+                      <li><strong>Salt air:</strong> Ocean salt accelerates corrosion on exposed pipes, fittings, and fixtures</li>
+                      <li><strong>Hard water:</strong> Extremely high mineral content causes scale buildup that restricts flow and damages equipment</li>
+                      <li><strong>High humidity:</strong> Promotes rust and corrosion on metal components</li>
+                      <li><strong>UV exposure:</strong> Harsh sun degrades plastic pipes and fittings faster</li>
+                    </ul>
+                    <p>
+                      Our plumbers understand these challenges and use corrosion-resistant materials (PEX, marine-grade fixtures) and proper sealing techniques. Regular inspections through Property Care Plans catch corrosion early before it causes expensive failures.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 4 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq4' ? null : 'faq4')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Can you fix plumbing problems same-day in Cabo?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-cyan-600 transition-transform ${openQuestion === 'faq4' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq4' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Yes! Most plumbing repairs can be completed the same day, and emergencies typically get 30-minute response times. Our service trucks are fully stocked with common parts (faucets, valves, toilet components, pipes, fittings, etc.) so we can complete repairs on the first visit.
+                    </p>
+                    <p className="mb-3">
+                      <strong>Same-day repair examples:</strong>
+                    </p>
+                    <ul className="list-disc ml-6 mb-3 space-y-1">
+                      <li>Leak repairs (faucets, pipes, toilets)</li>
+                      <li>Drain clogs and cleaning</li>
+                      <li>Toilet repairs and replacements</li>
+                      <li>Faucet installations</li>
+                      <li>Water heater repairs (most issues)</li>
+                      <li>Burst pipe emergency repairs</li>
+                    </ul>
+                    <p>
+                      For larger projects (water heater replacements, re-piping, bathroom remodels), we'll provide a detailed estimate and schedule the work at your convenience. Call <strong>+52 612 169 8328</strong> to schedule same-day service.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 5 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq5' ? null : 'faq5')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Do you service vacation rentals in Cabo San Lucas?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-cyan-600 transition-transform ${openQuestion === 'faq5' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq5' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Absolutely! Vacation rental plumbing is one of our specialties. We understand the urgency—a clogged toilet or broken shower between guest turnovers can cost you thousands in lost bookings and damage your 5-star rating.
+                    </p>
+                    <p className="mb-3">
+                      <strong>Vacation rental services:</strong>
+                    </p>
+                    <ul className="list-disc ml-6 mb-3 space-y-1">
+                      <li>Emergency same-day repairs between guest checkouts</li>
+                      <li>Preventive maintenance through Property Care Plans</li>
+                      <li>Monthly inspections to catch issues before guests arrive</li>
+                      <li>Direct billing to property managers</li>
+                      <li>Coordination with cleaning crews and property managers</li>
+                    </ul>
+                    <p>
+                      Many Cabo vacation rental owners choose our Premium Property Care Plan ($199/month) for bi-monthly inspections, 2 free drain cleanings per month, and 2-hour emergency response. This prevents costly guest complaints and maintains your property's reputation.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* FAQ 6 */}
+              <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  onClick={() => setOpenQuestion(openQuestion === 'faq6' ? null : 'faq6')}
+                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
+                >
+                  <span className="text-lg font-semibold text-gray-900 pr-4">
+                    Are your plumbers licensed and insured?
+                  </span>
+                  <ChevronDown
+                    className={`flex-shrink-0 text-cyan-600 transition-transform ${openQuestion === 'faq6' ? 'rotate-180' : ''}`}
+                    size={24}
+                  />
+                </button>
+                {openQuestion === 'faq6' && (
+                  <div className="px-6 pb-6 text-gray-700 leading-relaxed">
+                    <p className="mb-3">
+                      Yes! All our plumbers are licensed professionals with 15-20+ years of experience. We are fully insured and bonded, protecting both you and our team during every job.
+                    </p>
+                    <p className="mb-3">
+                      <strong>Our credentials:</strong>
+                    </p>
+                    <ul className="list-disc ml-6 mb-3 space-y-1">
+                      <li>Licensed plumbers (not unlicensed handymen)</li>
+                      <li>Comprehensive liability insurance</li>
+                      <li>Workers' compensation for all employees</li>
+                      <li>Background-checked and uniformed staff</li>
+                      <li>Ongoing training on latest plumbing techniques</li>
+                      <li>20+ years serving Los Cabos</li>
+                    </ul>
+                    <p>
+                      We guarantee our work with a 90-day labor warranty. If a repair fails due to our workmanship within 90 days, we'll fix it free. Call <strong>+52 612 169 8328</strong> to work with Cabo's most trusted licensed plumbers.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </div>
+
+          {/* Property Care Plans CTA */}
+          <div className="mb-12 bg-gradient-to-br from-purple-50 to-indigo-50 border-2 border-purple-200 rounded-2xl p-8 md:p-12">
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center mb-8">
+                <div className="inline-flex items-center gap-2 bg-purple-100 px-4 py-2 rounded-full mb-4">
+                  <Shield className="text-purple-600" size={20} />
+                  <span className="text-purple-900 font-semibold text-sm">PREVENT PLUMBING EMERGENCIES</span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                  Property Care Plans: Never Pay Emergency Fees Again
+                </h2>
+                <p className="text-xl text-gray-700 leading-relaxed">
+                  One plumbing emergency can cost $500-800. Property Care members get 24/7 emergency service included, FREE monthly drain cleaning, and 15-25% off all repairs for just $99-299/month.
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                {/* Basic Care */}
+                <div className="bg-white rounded-xl p-6 border-2 border-orange-300 shadow-lg">
+                  <div className="text-center mb-4">
+                    <div className="text-3xl font-bold text-orange-600 mb-1">$99/mo</div>
+                    <div className="text-sm text-gray-600">Basic Care</div>
+                  </div>
+                  <ul className="space-y-3 text-sm text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>1 FREE unclog/month</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>24/7 emergency access</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>4-hour emergency response</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>15% off all repairs</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Monthly inspection</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Premium Care - Highlighted */}
+                <div className="bg-gradient-to-br from-blue-600 to-cyan-700 rounded-xl p-6 shadow-xl transform scale-105 relative">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-yellow-400 text-gray-900 px-4 py-1 rounded-full text-xs font-bold">
+                    MOST POPULAR
+                  </div>
+                  <div className="text-center mb-4">
+                    <div className="text-3xl font-bold text-white mb-1">$199/mo</div>
+                    <div className="text-sm text-blue-100">Premium Care</div>
+                  </div>
+                  <ul className="space-y-3 text-sm text-white">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-white flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>2 FREE unclogs/month</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-white flex-shrink-0 mt-0.5" size={16} />
+                      <span>24/7 emergency access</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-white flex-shrink-0 mt-0.5" size={16} />
+                      <span>2-hour emergency response</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-white flex-shrink-0 mt-0.5" size={16} />
+                      <span>20% off all repairs</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-white flex-shrink-0 mt-0.5" size={16} />
+                      <span>Bi-monthly inspections</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Elite Care */}
+                <div className="bg-white rounded-xl p-6 border-2 border-purple-300 shadow-lg">
+                  <div className="text-center mb-4">
+                    <div className="text-3xl font-bold text-purple-600 mb-1">$299/mo</div>
+                    <div className="text-sm text-gray-600">Elite Care</div>
+                  </div>
+                  <ul className="space-y-3 text-sm text-gray-700">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>UNLIMITED unclogs</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>24/7 VIP emergency access</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>1-hour emergency response</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>25% off all repairs</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Weekly inspections</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-lg p-6 mb-6">
+                <h3 className="font-bold text-gray-900 mb-3 text-center">💰 Why Property Care Pays for Itself</h3>
+                <div className="grid md:grid-cols-2 gap-4 text-sm text-gray-700">
+                  <div>
+                    <p className="font-semibold mb-2">Without Property Care (Pay-Per-Call):</p>
+                    <ul className="space-y-1 ml-4">
+                      <li>• 1 emergency call: $500-800</li>
+                      <li>• 2 drain clogs: $120-240</li>
+                      <li>• No preventive inspections</li>
+                      <li>• <strong>Total: $620-1,040+/year</strong></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="font-semibold mb-2">With Basic Property Care:</p>
+                    <ul className="space-y-1 ml-4">
+                      <li>• <strong>$99/month</strong> = $1,188/year</li>
+                      <li>• Unlimited emergencies: $0</li>
+                      <li>• 12 FREE drain clogs: $720 value</li>
+                      <li>• Monthly inspections prevent issues</li>
+                      <li>• <strong>Save $500+ on first emergency</strong></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <a
+                  href="/property-care-plans"
+                  className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:from-purple-700 hover:to-indigo-700 transition-all shadow-xl"
+                >
+                  <Shield size={20} />
+                  View All Property Care Plans & Pricing
+                  <ArrowRight size={20} />
+                </a>
+                <p className="text-sm text-gray-600 mt-4">
+                  Join 200+ Cabo property owners who never worry about plumbing emergencies
+                </p>
+              </div>
             </div>
           </div>
 
