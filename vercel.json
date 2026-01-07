@@ -1,17 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/:path((?!assets|favicon|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.svg|.*\\.ico|.*\\.webmanifest|.*\\.xml|.*\\.txt).*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.caboshandyman.com"
-        }
-      ],
-      "destination": "https://caboshandyman.com/:path*",
-      "permanent": true
-    }
-  ],
   "rewrites": [
     {
       "source": "/((?!api/).*)",
@@ -19,6 +6,15 @@
     }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
+      ]
+    },
     {
       "source": "/sitemap.xml",
       "headers": [
@@ -43,19 +39,6 @@
         {
           "key": "Cache-Control",
           "value": "no-store, max-age=0"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "index, follow"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
         }
       ]
     }
