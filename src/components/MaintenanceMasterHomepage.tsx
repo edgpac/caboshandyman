@@ -262,17 +262,18 @@ export default function CabosHandymanHomepage() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, index) => (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
                   onClick={() => openServiceMenu(project.name)}
                 >
                   <div className="h-64 bg-muted overflow-hidden">
-                    <img 
-                      src={project.image} 
+                    <img
+                      src={project.image}
                       alt={project.alt}
                       loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      style={project.name === "Restaurant Buildout" ? { objectPosition: 'center 35%' } : undefined}
                     />
                   </div>
                   <div className="p-6">
