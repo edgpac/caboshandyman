@@ -249,7 +249,8 @@ export default function CabosHandymanHomepage() {
                   *24/7 emergency service available for Property Care Plan members
                 </p>
                 <p className="text-xs text-gray-400 mt-1">
-                  Full scheduling and analysis features work best on desktop/laptop computers
+                  Handyman services for vacation rentals and homes.<br />
+                  Service calls starting at $60 for most repairs.
                 </p>
               </div>
             </div>
