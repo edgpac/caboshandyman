@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Wrench, AlertCircle } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, MessageCircle, Send, Wrench, AlertCircle, Navigation as NavigationIcon } from 'lucide-react';
 import Footer from './Footer';
 import SEO from './SEO';
 import Navigation from './Navigation';
@@ -390,19 +390,51 @@ const ContactPage = () => {
                     />
                   </div>
 
-                  <div className="mt-4 text-sm text-gray-700">
-                    <p className="font-semibold text-gray-900 mb-1">Cabos Handyman</p>
-                    <p>Blvd. Paseo de la Marina s/n</p>
-                    <p>Centro, Marina</p>
-                    <p>23450 Cabo San Lucas, B.C.S., Mexico</p>
-                    <p className="mt-2">📞 <a href="tel:+526121698328" className="text-purple-600 hover:text-purple-700 transition-colors">+52 612 169 8328</a></p>
+                  <div className="mt-4">
+                    {/* Business Name */}
+                    <p className="text-base font-semibold text-gray-900 mb-3">Cabos Handyman Services</p>
+
+                    {/* Clickable Address - Opens Street View */}
                     <a
-                      href="https://maps.google.com/?q=22.8866974,-109.9139710"
+                      href="https://www.google.com/maps/@22.8866974,-109.9139710,3a,75y,90t/data=!3m6!1e1!3m4!1s0:0!7e1!8i13312!9i6656"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 mt-3 text-purple-600 hover:text-purple-700 font-medium transition-colors"
+                      className="block text-sm text-gray-700 hover:text-purple-600 transition-colors group mb-4"
                     >
-                      Get Directions →
+                      <div className="flex items-start gap-2">
+                        <MapPin className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
+                        <div className="flex-1">
+                          <p className="group-hover:underline">Boulevard Marina s/n y Vicente Guerrero s/n</p>
+                          <p className="group-hover:underline">Manzana 31-A, Colonia Centro</p>
+                          <p className="group-hover:underline">Cabo San Lucas, Baja California Sur</p>
+                          <p className="group-hover:underline">México, C.P. 23400</p>
+                          <span className="text-xs text-purple-600 mt-1 inline-block">
+                            📷 Click to see Street View →
+                          </span>
+                        </div>
+                      </div>
+                    </a>
+
+                    {/* Phone Number */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <Phone className="h-4 w-4 text-purple-600" />
+                      <a
+                        href="tel:+526121698328"
+                        className="text-sm text-gray-700 hover:text-purple-600 transition-colors"
+                      >
+                        +52 612 169 8328
+                      </a>
+                    </div>
+
+                    {/* Get Directions Button */}
+                    <a
+                      href="https://www.google.com/maps/dir/?api=1&destination=22.8866974,-109.9139710"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium text-sm"
+                    >
+                      <NavigationIcon className="h-4 w-4" />
+                      Get Directions
                     </a>
                   </div>
                 </div>
