@@ -396,7 +396,7 @@ const ContactPage = () => {
 
                     {/* Clickable Address - Opens Street View */}
                     <a
-                      href="https://www.google.com/maps/@22.8866974,-109.9139710,3a,75y,90t/data=!3m6!1e1!3m4!1s0:0!7e1!8i13312!9i6656"
+                      href="https://www.google.com/maps/@22.882526,-109.911990,3a,75y,90t/data=!3m6!1e1!3m4!1s0:0!7e1!8i13312!9i6656"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block text-sm text-gray-700 hover:text-purple-600 transition-colors group mb-4"
@@ -404,8 +404,8 @@ const ContactPage = () => {
                       <div className="flex items-start gap-2">
                         <MapPin className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
                         <div className="flex-1">
-                          <p className="group-hover:underline">Boulevard Marina s/n y Vicente Guerrero s/n</p>
-                          <p className="group-hover:underline">Manzana 31-A, Colonia Centro</p>
+                          <p className="group-hover:underline">Boulevard Marina s/n</p>
+                          <p className="group-hover:underline">Manzana 31, Colonia Centro</p>
                           <p className="group-hover:underline">Cabo San Lucas, Baja California Sur</p>
                           <p className="group-hover:underline">México, C.P. 23400</p>
                           <span className="text-xs text-purple-600 mt-1 inline-block">
