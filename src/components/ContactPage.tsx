@@ -378,26 +378,26 @@ const ContactPage = () => {
 
                   <div className="w-full aspect-video rounded-lg overflow-hidden shadow-sm">
                     <iframe
-                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.8!2d-109.9167!3d22.8905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDUzJzI1LjgiTiAxMDnCsDU1JzAwLjEiVw!5e0!3m2!1sen!2smx!4v1704931200000"
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3673.0826087634545!2d-109.91639708549385!3d22.88669738287896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86af4b3b6b6b6b6b%3A0x0!2zMjLCsDUzJzEyLjEiTiAxMDnCsDU0JzUwLjMiVw!5e0!3m2!1sen!2smx!4v1704931200000"
                       width="100%"
                       height="100%"
                       style={{ border: 0 }}
                       allowFullScreen
                       loading="lazy"
                       referrerPolicy="no-referrer-when-downgrade"
-                      title="Cabos Handyman Location - Cabo San Lucas"
-                      aria-label="Google Maps showing Cabos Handyman service area in Cabo San Lucas"
+                      title="Cabos Handyman Location - Blvd. Paseo de la Marina, Cabo San Lucas"
+                      aria-label="Google Maps showing Cabos Handyman at Blvd. Paseo de la Marina s/n, Cabo San Lucas"
                     />
                   </div>
 
                   <div className="mt-4 text-sm text-gray-700">
-                    <p className="font-semibold text-gray-900 mb-1">Cabos Handyman Services</p>
+                    <p className="font-semibold text-gray-900 mb-1">Cabos Handyman</p>
                     <p>Blvd. Paseo de la Marina s/n</p>
                     <p>Centro, Marina</p>
-                    <p>23450 Cabo San Lucas, B.C.S.</p>
-                    <p className="mt-2">📞 <a href="tel:+526121698328" className="text-purple-600 hover:text-purple-700">+52 612 169 8328</a></p>
+                    <p>23450 Cabo San Lucas, B.C.S., Mexico</p>
+                    <p className="mt-2">📞 <a href="tel:+526121698328" className="text-purple-600 hover:text-purple-700 transition-colors">+52 612 169 8328</a></p>
                     <a
-                      href="https://maps.google.com/?q=22.8905,-109.9167"
+                      href="https://maps.google.com/?q=22.8866974,-109.9139710"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center gap-1 mt-3 text-purple-600 hover:text-purple-700 font-medium transition-colors"

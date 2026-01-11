@@ -21,8 +21,8 @@ export default function VacationRentalSetupCabo() {
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "22.8905",
-        "longitude": "-109.9167"
+        "latitude": "22.8866974",
+        "longitude": "-109.9139710"
       },
       "telephone": "+52-612-169-8328",
       "priceRange": "$300-$1500",
@@ -48,7 +48,7 @@ export default function VacationRentalSetupCabo() {
         canonicalUrl="/vacation-rental-setup-cabo"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
-        geoPosition="22.8905;-109.9167"
+        geoPosition="22.8866974;-109.9139710"
         schemaMarkup={schemaMarkup}
       />
 

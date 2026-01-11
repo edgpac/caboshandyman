@@ -48,8 +48,8 @@ export default function ServicesPage() {
             },
             "geo": {
               "@type": "GeoCoordinates",
-              "latitude": "22.8905",
-              "longitude": "-109.9167"
+              "latitude": "22.8866974",
+              "longitude": "-109.9139710"
             },
             "priceRange": "$60-$1200",
             "openingHours": "Mo-Su 00:00-23:59",
