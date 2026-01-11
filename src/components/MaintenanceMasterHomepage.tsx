@@ -381,7 +381,7 @@ export default function CabosHandymanHomepage() {
 
               {/* Desktop Note */}
               <p className="text-sm text-white/70 mt-6">
-                Full scheduling and analysis features work best on desktop/laptop computers
+                Handyman service calls starting at $60 for most repairs.
               </p>
 
             </div>
