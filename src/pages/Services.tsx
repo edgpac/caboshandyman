@@ -168,7 +168,12 @@ export default function ServicesPage() {
             <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 sm:px-6 sm:py-4 border border-white/20 mb-3 sm:mb-4">
               <p className="text-base sm:text-lg text-white font-medium leading-relaxed">
                 Handyman service calls starting at $60 for most repairs.<br className="hidden sm:inline" />
-                <span className="block sm:inline"> (free estimate: +52 612 169 8328)</span>
+                <span className="block sm:inline"> (free estimate: <a
+                  href="tel:+526121698328"
+                  className="font-semibold hover:underline transition-all cursor-pointer"
+                >
+                  +52 612 169 8328
+                </a>)</span>
               </p>
             </div>
 
