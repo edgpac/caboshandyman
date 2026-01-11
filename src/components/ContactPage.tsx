@@ -366,6 +366,46 @@ const ContactPage = () => {
                     </p>
                   </form>
                 </div>
+
+                {/* Google Maps - Find Us */}
+                <div className="bg-white p-6 rounded-xl shadow-md mt-8">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="bg-purple-100 p-3 rounded-xl flex-shrink-0">
+                      <MapPin className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-gray-900">Find Us</h3>
+                  </div>
+
+                  <div className="w-full aspect-video rounded-lg overflow-hidden shadow-sm">
+                    <iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3672.8!2d-109.9167!3d22.8905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDUzJzI1LjgiTiAxMDnCsDU1JzAwLjEiVw!5e0!3m2!1sen!2smx!4v1704931200000"
+                      width="100%"
+                      height="100%"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Cabos Handyman Location - Cabo San Lucas"
+                      aria-label="Google Maps showing Cabos Handyman service area in Cabo San Lucas"
+                    />
+                  </div>
+
+                  <div className="mt-4 text-sm text-gray-700">
+                    <p className="font-semibold text-gray-900 mb-1">Cabos Handyman Services</p>
+                    <p>Blvd. Paseo de la Marina s/n</p>
+                    <p>Centro, Marina</p>
+                    <p>23450 Cabo San Lucas, B.C.S.</p>
+                    <p className="mt-2">📞 <a href="tel:+526121698328" className="text-purple-600 hover:text-purple-700">+52 612 169 8328</a></p>
+                    <a
+                      href="https://maps.google.com/?q=22.8905,-109.9167"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 mt-3 text-purple-600 hover:text-purple-700 font-medium transition-colors"
+                    >
+                      Get Directions →
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
