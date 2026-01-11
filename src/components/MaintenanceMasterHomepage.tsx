@@ -246,10 +246,9 @@ export default function CabosHandymanHomepage() {
               </div>
               <div className="text-center mt-4">
                 <p className="text-xs text-gray-400">
-                  *24/7 emergency service available for Property Care Plan members
+                  *Handyman services for vacation rentals and homes.
                 </p>
                 <p className="text-xs text-gray-400 mt-1">
-                  Handyman services for vacation rentals and homes.<br />
                   Service calls starting at $60 for most repairs.
                 </p>
               </div>
