@@ -211,8 +211,8 @@ export default function CabosHandymanHomepage() {
 
               {/* Value Proposition - No Pricing */}
               <p className="text-base md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
-                Licensed, insured, and bonded handyman service with 20+ years of experience.<br />
-                Serving Cabo San Lucas with 600+ completed projects and a 100% satisfaction rate.
+                Use our Property Care Plans Protect Your Investment<br />
+                Serving Cabo San Lucas with 100% satisfaction rate.
               </p>
 
               {/* Trust Signals */}
