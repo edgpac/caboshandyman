@@ -167,8 +167,8 @@ export default function ServicesPage() {
             {/* Service Call Pricing - Highlighted */}
             <div className="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3 sm:px-6 sm:py-4 border border-white/20 mb-3 sm:mb-4">
               <p className="text-base sm:text-lg text-white font-medium leading-relaxed">
-                $60 service call includes diagnosis + first hour of labor<br className="hidden sm:inline" />
-                <span className="block sm:inline"> (credited toward work)</span>
+                Handyman service calls starting at $60 for most repairs.<br className="hidden sm:inline" />
+                <span className="block sm:inline"> (free estimate: +52 612 169 8328)</span>
               </p>
             </div>
 
