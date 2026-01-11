@@ -80,7 +80,7 @@ const ContactPage = () => {
               Get In Touch
             </h1>
             <p className="text-xl max-w-3xl mx-auto text-teal-50">
-              Licensed, insured, and ready to help with your home improvement project in Cabo San Lucas
+              Licensed, insured, and ready to help with your<br />home improvement project in Cabo San Lucas
             </p>
           </div>
         </section>
