@@ -209,21 +209,46 @@ export default function CabosHandymanHomepage() {
                 Solutions You Can Count On
               </p>
 
-              {/* Pricing - Smaller on Mobile */}
-              <p className="text-sm md:text-xl text-primary mb-6 md:mb-8 max-w-3xl mx-auto">
-                Service from <strong>$60 USD</strong><br className="md:hidden" /><span className="hidden md:inline"> </span>includes diagnosis and the first hour of labor.
+              {/* Value Proposition - No Pricing */}
+              <p className="text-base md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
+                Licensed, insured, and bonded handyman service with 20+ years of experience.<br />
+                Serving Cabo San Lucas with 600+ completed projects and a 100% satisfaction rate.
               </p>
+
+              {/* Trust Signals */}
+              <div className="flex flex-wrap justify-center gap-4 mb-8 text-sm md:text-base">
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                  <Shield size={18} className="text-primary" />
+                  <span className="text-white font-semibold">Licensed & Insured</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                  <Calendar size={18} className="text-primary" />
+                  <span className="text-white font-semibold">24/7 Emergency Service*</span>
+                </div>
+              </div>
+
+              {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button 
-                  onClick={() => openAIAssistant('booking')}
+                <a
+                  href="tel:+526121698328"
                   className="bg-primary hover:bg-primary-hover text-primary-foreground px-8 py-4 rounded-lg text-lg font-bold transition-colors flex items-center justify-center"
                 >
-                  Free Instant Estimate
+                  <Phone className="mr-2" size={20} />
+                  Call for Free Estimate
+                </a>
+                <button
+                  onClick={() => openAIAssistant('booking')}
+                  className="bg-white/10 backdrop-blur-sm hover:bg-white/20 text-white border-2 border-primary px-8 py-4 rounded-lg text-lg font-bold transition-colors flex items-center justify-center"
+                >
+                  Schedule Service
                   <ArrowRight className="ml-2" size={20} />
                 </button>
               </div>
-              <div className="text-center mt-2">
+              <div className="text-center mt-4">
                 <p className="text-xs text-gray-400">
+                  *24/7 emergency service available for Property Care Plan members
+                </p>
+                <p className="text-xs text-gray-400 mt-1">
                   Full scheduling and analysis features work best on desktop/laptop computers
                 </p>
               </div>

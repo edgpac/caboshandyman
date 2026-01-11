@@ -387,6 +387,10 @@ export default function PropertyCarePlans() {
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
+                      <span><strong>1 AC filter cleaning</strong> per monthly visit (first filter cleaned during inspection)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>15% discount</strong> on all repair services</span>
                     </li>
                     <li className="flex items-start gap-3">
@@ -448,6 +452,10 @@ export default function PropertyCarePlans() {
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>2 FREE unclogs per month</strong> (any drains - $120 value)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <span><strong>3 AC filter cleanings</strong> per bi-monthly visit (3 filters cleaned during each inspection)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
@@ -513,6 +521,10 @@ export default function PropertyCarePlans() {
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
                       <span><strong>UNLIMITED unclogs</strong> (all drains, any time)</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
+                      <span><strong>UNLIMITED AC filter cleanings</strong> per weekly visit (all filters cleaned during each inspection)</span>
                     </li>
                     <li className="flex items-start gap-3">
                       <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={20} />
@@ -661,6 +673,56 @@ export default function PropertyCarePlans() {
                 <p className="text-gray-700">
                   Plus members prevent most emergencies with regular inspections.
                 </p>
+              </div>
+            </div>
+
+            {/* AC Filter Cleaning Explanation */}
+            <div className="bg-gradient-to-br from-cyan-50 to-blue-50 border-2 border-cyan-300 rounded-lg p-8 mb-8">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="bg-cyan-600 w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+                  <span className="text-2xl">❄️</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    Understanding AC Filter Cleanings
+                  </h3>
+                  <p className="text-gray-700 text-lg">
+                    Your monthly AC filter cleaning benefit works just like your drain unclog service—it's included in your regular inspection visit.
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-4 text-gray-700">
+                <div className="bg-white rounded-lg p-5 border-l-4 border-cyan-600">
+                  <p className="font-semibold mb-2">🔹 All Cleanings Happen in ONE Visit</p>
+                  <p>
+                    When our technician arrives for your monthly/bi-monthly/weekly inspection, they clean <strong>all included AC filters during that same visit</strong>. For example, Premium Care members get 3 filters cleaned per inspection—not 3 separate visits.
+                  </p>
+                </div>
+
+                <div className="bg-white rounded-lg p-5 border-l-4 border-cyan-600">
+                  <p className="font-semibold mb-2">🔹 Perfect for Multi-Unit Properties</p>
+                  <p>
+                    Vacation rental managers with multiple units can have filters cleaned across different properties during the inspection. For instance, Premium members can clean 1 filter at Property A, 1 filter at Property B, and 1 filter at Property C—all scheduled during your bi-monthly service window.
+                  </p>
+                </div>
+
+                <div className="bg-white rounded-lg p-5 border-l-4 border-cyan-600">
+                  <p className="font-semibold mb-2">🔹 Filter Cleaning vs. Filter Replacement</p>
+                  <p className="mb-2">
+                    <strong>Included:</strong> We remove, clean, and reinstall reusable AC filters using professional cleaning methods. This extends filter life and maintains optimal AC performance.
+                  </p>
+                  <p>
+                    <strong>Not Included:</strong> Disposable filter replacement (paper filters). If your system uses disposable filters, we'll clean the protective grill and inspect the AC, but you'll need to provide replacement filters.
+                  </p>
+                </div>
+
+                <div className="bg-white rounded-lg p-5 border-l-4 border-cyan-600">
+                  <p className="font-semibold mb-2">🔹 Why This Matters for Cabo Properties</p>
+                  <p>
+                    Los Cabos' dusty desert climate and salt air quickly clog AC filters, reducing cooling efficiency and increasing electricity costs. Regular cleaning prevents AC breakdowns during peak summer heat when your rental guests need it most. Clean filters = happy guests = 5-star reviews.
+                  </p>
+                </div>
               </div>
             </div>
 
