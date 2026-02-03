@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import SEO from '@/components/SEO';
 import { CheckCircle2, Home, Calendar, DollarSign, Star, ArrowRight, Clock } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -51,6 +52,8 @@ export default function VacationRentalSetupCabo() {
         geoPosition="22.8866974;-109.9139710"
         schemaMarkup={schemaMarkup}
       />
+
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-blue-600 to-blue-700 text-white overflow-hidden">

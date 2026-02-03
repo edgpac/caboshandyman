@@ -25,6 +25,7 @@ const BathroomServicesCabo = lazy(() => import("./pages/BathroomServicesCabo"));
 const ElectricalServicesCabo = lazy(() => import("./pages/ElectricalServicesCabo"));
 const PropertyCarePlans = lazy(() => import("./pages/PropertyCarePlans"));
 const FAQ = lazy(() => import("./pages/FAQ"));
+const About = lazy(() => import("./pages/About"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -67,6 +68,7 @@ const App = () => {
               <Route path="/electrical-services-cabo" element={<ElectricalServicesCabo />} />
               <Route path="/property-care-plans" element={<PropertyCarePlans />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
