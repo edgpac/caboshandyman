@@ -239,7 +239,7 @@ export default function VacationRentalSetupCabo() {
               <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 transition-colors">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Single Property</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">$400</div>
+                  <div className="text-4xl font-bold text-blue-600 mb-2">$250</div>
                   <p className="text-gray-500">Per month</p>
                 </div>
                 <ul className="space-y-3 mb-6">
@@ -257,7 +257,7 @@ export default function VacationRentalSetupCabo() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">10% discount on repairs</span>
+                    <span className="text-gray-700">15% discount on repairs</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
@@ -276,7 +276,7 @@ export default function VacationRentalSetupCabo() {
                 </div>
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold mb-2">Multi-Property</h3>
-                  <div className="text-4xl font-bold mb-2">$900</div>
+                  <div className="text-4xl font-bold mb-2">$600</div>
                   <p className="text-blue-100">For 3 properties</p>
                 </div>
                 <ul className="space-y-3 mb-6">
@@ -294,7 +294,7 @@ export default function VacationRentalSetupCabo() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
-                    <span>15% discount on all repairs</span>
+                    <span>25% discount on all repairs</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
@@ -310,7 +310,7 @@ export default function VacationRentalSetupCabo() {
               <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 transition-colors">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Portfolio (6+)</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">$1,200+</div>
+                  <div className="text-4xl font-bold text-blue-600 mb-2">$1,000+</div>
                   <p className="text-gray-500">Custom pricing</p>
                 </div>
                 <ul className="space-y-3 mb-6">
@@ -328,7 +328,7 @@ export default function VacationRentalSetupCabo() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">20% discount on repairs</span>
+                    <span className="text-gray-700">30% discount on repairs</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
