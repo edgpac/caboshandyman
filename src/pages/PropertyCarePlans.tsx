@@ -7,6 +7,7 @@ const Footer = lazy(() => import('@/components/Footer'));
 
 export default function PropertyCarePlans() {
   const [openQuestion, setOpenQuestion] = useState<string | null>(null);
+  const [isFaqOpen, setIsFaqOpen] = useState(false);
 
   const schemaMarkup = {
     "@context": "https://schema.org",
@@ -860,9 +861,22 @@ export default function PropertyCarePlans() {
 
           {/* FAQ Section */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
-              Frequently Asked Questions About Property Care Plans
-            </h2>
+            <button
+              onClick={() => setIsFaqOpen(!isFaqOpen)}
+              className="w-full flex items-center justify-between mb-6 hover:opacity-80 transition-opacity"
+            >
+              <h2 className="text-3xl font-bold text-gray-900">
+                Frequently Asked Questions About Property Care Plans
+              </h2>
+              <ChevronDown
+                size={32}
+                className={`text-blue-600 flex-shrink-0 transition-transform duration-300 ${
+                  isFaqOpen ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+
+            {isFaqOpen && (
             <div className="max-w-3xl mx-auto space-y-4">
 
               {/* FAQ 1 */}
@@ -1129,6 +1143,7 @@ export default function PropertyCarePlans() {
               </div>
 
             </div>
+            )}
           </div>
 
           {/* CTA Section */}
