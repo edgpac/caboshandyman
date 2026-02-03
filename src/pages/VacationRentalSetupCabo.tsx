@@ -134,7 +134,7 @@ export default function VacationRentalSetupCabo() {
           {/* Services Overview */}
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Complete Vacation Rental Services</h2>
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
                   <Home className="text-blue-600" size={24} />
@@ -206,6 +206,24 @@ export default function VacationRentalSetupCabo() {
                   <li>• Direct communication with guests (bilingual)</li>
                 </ul>
               </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <Home className="text-blue-600" size={24} />
+                  Window Screen Repair & Rescreening
+                </h3>
+                <p className="text-gray-600 mb-3">
+                  Keep bugs out and ocean breeze flowing:
+                </p>
+                <ul className="space-y-1 text-gray-700 text-sm">
+                  <li>• Torn or damaged screen replacement</li>
+                  <li>• Salt air and UV damage repair</li>
+                  <li>• Pet-resistant heavy-duty mesh available</li>
+                  <li>• Standard and solar-blocking screen options</li>
+                  <li>• Perfect for Cabo's harsh coastal environment</li>
+                  <li>• Custom estimates based on quantity and size</li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -221,7 +239,7 @@ export default function VacationRentalSetupCabo() {
               <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 transition-colors">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Single Property</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">$300-$500</div>
+                  <div className="text-4xl font-bold text-blue-600 mb-2">$400</div>
                   <p className="text-gray-500">Per month</p>
                 </div>
                 <ul className="space-y-3 mb-6">
@@ -258,8 +276,8 @@ export default function VacationRentalSetupCabo() {
                 </div>
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold mb-2">Multi-Property</h3>
-                  <div className="text-4xl font-bold mb-2">$800-$1,200</div>
-                  <p className="text-blue-100">3-5 properties</p>
+                  <div className="text-4xl font-bold mb-2">$900</div>
+                  <p className="text-blue-100">For 3 properties</p>
                 </div>
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start gap-2">
@@ -268,7 +286,7 @@ export default function VacationRentalSetupCabo() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
-                    <span>Volume pricing ($250-300/property)</span>
+                    <span>Volume pricing ($300/property)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
