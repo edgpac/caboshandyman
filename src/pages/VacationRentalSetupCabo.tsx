@@ -242,7 +242,7 @@ export default function VacationRentalSetupCabo() {
                   <li>• Volume discounts for multiple properties</li>
                   <li>• Transparent estimates with no hidden fees</li>
                   <li>• Professional consultation included</li>
-                  <li>• Same-day quotes available</li>
+                  <li>• Same-day estimates available</li>
                 </ul>
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   <p className="text-gray-700 font-semibold mb-3">Get Your Custom Quote:</p>

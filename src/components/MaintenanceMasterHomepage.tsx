@@ -278,6 +278,11 @@ export default function CabosHandymanHomepage() {
                 <div className="text-muted-foreground font-semibold">Satisfaction Rate</div>
               </div>
             </div>
+            <div className="text-center mt-8">
+              <a href="/about" className="text-primary hover:underline font-medium text-sm">
+                Learn more about our team &rarr;
+              </a>
+            </div>
           </div>
         </section>
 

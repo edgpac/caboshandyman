@@ -478,6 +478,9 @@ export default function FAQ() {
           <p className="mt-8 text-lg">
             24/7 Emergency Service Available for Property Care Plan Members
           </p>
+          <a href="/about" className="inline-block mt-4 text-white/80 hover:text-white underline text-sm">
+            Learn more about our company &rarr;
+          </a>
         </div>
       </div>
 

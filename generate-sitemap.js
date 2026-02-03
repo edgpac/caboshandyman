@@ -10,11 +10,12 @@ const OUTPUT_PATH = path.join(__dirname, 'public', 'sitemap.xml');
 
 const staticPages = [
   { url: '/', changefreq: 'weekly', priority: '1.0' },
-  { url: '/services-pricing', changefreq: 'monthly', priority: '0.9' },
+  { url: '/services', changefreq: 'monthly', priority: '0.9' },
   { url: '/contact', changefreq: 'monthly', priority: '0.9' },
   { url: '/privacy', changefreq: 'yearly', priority: '0.3' },
   { url: '/terms', changefreq: 'yearly', priority: '0.3' },
   { url: '/faq', changefreq: 'monthly', priority: '0.8' },
+  { url: '/about', changefreq: 'monthly', priority: '0.8' },
 
   // Service pages - HIGH PRIORITY
   { url: '/plumber-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
