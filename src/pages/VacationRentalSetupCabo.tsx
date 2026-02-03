@@ -25,7 +25,7 @@ export default function VacationRentalSetupCabo() {
         "longitude": "-109.9139710"
       },
       "telephone": "+52-612-169-8328",
-      "priceRange": "$300-$1500",
+      "priceRange": "$250-$1000",
       "openingHours": "Mo-Su 00:00-23:59"
     },
     "areaServed": {
@@ -35,8 +35,8 @@ export default function VacationRentalSetupCabo() {
     "offers": {
       "@type": "AggregateOffer",
       "priceCurrency": "USD",
-      "lowPrice": "300",
-      "highPrice": "1500"
+      "lowPrice": "250",
+      "highPrice": "1000"
     }
   };
 
@@ -44,7 +44,7 @@ export default function VacationRentalSetupCabo() {
     <>
       <SEO
         title="Vacation Rental Setup Cabo San Lucas | Airbnb & VRBO Maintenance | Cabos Handyman"
-        description="Complete vacation rental setup and maintenance service in Cabo San Lucas. Turnover service, ongoing maintenance contracts, and emergency repairs for Airbnb and VRBO properties. Packages from $300/month."
+        description="Complete vacation rental setup and maintenance service in Cabo San Lucas. Turnover service, ongoing maintenance contracts, and emergency repairs for Airbnb and VRBO properties. Packages from $250/month."
         canonicalUrl="/vacation-rental-setup-cabo"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -127,7 +127,7 @@ export default function VacationRentalSetupCabo() {
               </li>
             </ul>
             <p className="text-gray-700 font-semibold">
-              <strong>Our Solution:</strong> Monthly maintenance contract ($450/month for 5 properties) that includes preventive maintenance, priority emergency response, and turnover coordination. Their review rating recovered to 4.9 stars within 3 months, and they've added 3 more properties to their portfolio.
+              <strong>Our Solution:</strong> Monthly maintenance contract ($250/month per property) that includes preventive maintenance, priority emergency response, and turnover coordination. Their review rating recovered to 4.9 stars within 3 months, and they've added 3 more properties to their portfolio.
             </p>
           </div>
 
@@ -223,6 +223,35 @@ export default function VacationRentalSetupCabo() {
                   <li>• Perfect for Cabo's harsh coastal environment</li>
                   <li>• Custom estimates based on quantity and size</li>
                 </ul>
+              </div>
+
+              <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
+                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <Calendar className="text-blue-600" size={24} />
+                  Custom Service Quotes
+                </h3>
+                <p className="text-gray-600 mb-3">
+                  Every property and maintenance need is unique. We provide personalized estimates tailored to your specific requirements:
+                </p>
+                <ul className="space-y-1 text-gray-700 text-sm">
+                  <li>• Custom pricing based on property size and needs</li>
+                  <li>• Flexible service packages and scheduling</li>
+                  <li>• Volume discounts for multiple properties</li>
+                  <li>• Transparent estimates with no hidden fees</li>
+                  <li>• Professional consultation included</li>
+                  <li>• Same-day quotes available</li>
+                </ul>
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <p className="text-gray-700 font-semibold mb-3">Get Your Custom Quote:</p>
+                  <div className="space-y-2">
+                    <a href="tel:+526121698328" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">
+                      <span>📞</span> +52 612 169 8328
+                    </a>
+                    <a href="mailto:loscabohandyman@gmail.com" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">
+                      <span>✉️</span> loscabohandyman@gmail.com
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -391,13 +420,13 @@ export default function VacationRentalSetupCabo() {
                 </ul>
               </div>
               <div>
-                <p className="font-bold mb-2">WITH Maintenance Contract ($400/month):</p>
+                <p className="font-bold mb-2">WITH Maintenance Contract ($250/month):</p>
                 <ul className="space-y-1 text-sm">
                   <li>• Preventive maintenance catches issues early</li>
                   <li>• Priority emergency response (no price gouging)</li>
-                  <li>• 10-15% discount on all repairs</li>
+                  <li>• 15-25% discount on all repairs</li>
                   <li>• One point of contact for everything</li>
-                  <li className="font-bold pt-2">Cost per property/year: $4,800</li>
+                  <li className="font-bold pt-2">Cost per property/year: $3,000</li>
                 </ul>
               </div>
             </div>
