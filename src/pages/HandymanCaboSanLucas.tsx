@@ -185,7 +185,7 @@ export default function HandymanCaboSanLucas() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 mb-2">Transparent Pricing</h3>
-                  <p className="text-gray-600">$60 service call includes first hour of labor. No hidden fees. Written quotes for larger projects. You know exactly what you're paying.</p>
+                  <p className="text-gray-600">$60 service call includes first hour of labor for most repairs. No hidden fees. Written quotes for larger projects. You know exactly what you're paying.</p>
                 </div>
               </div>
             </div>
@@ -470,7 +470,7 @@ export default function HandymanCaboSanLucas() {
             <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-xl p-8 max-w-2xl mx-auto border border-teal-200">
               <div className="text-center mb-6">
                 <div className="text-5xl font-bold text-teal-600 mb-2">$60</div>
-                <p className="text-gray-600">Service call includes diagnosis and first hour of labor</p>
+                <p className="text-gray-600">Service call includes diagnosis and first hour of labor for most repairs</p>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2">
