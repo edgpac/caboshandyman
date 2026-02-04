@@ -731,7 +731,7 @@ export default function HandymanCaboSanLucas() {
                   <span className="text-purple-900 font-semibold text-sm">STRESS-FREE PROPERTY OWNERSHIP</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  Property Care Plans: Your On-Call Handyman Team
+                  Property Care Plans:<br />Your On-Call Handyman Team
                 </h2>
                 <p className="text-xl text-gray-700 leading-relaxed">
                   Stop scrambling to find a handyman every time something breaks. Property Care members get priority scheduling, discounted rates, and peace of mind knowing help is just one call away.

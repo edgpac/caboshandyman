@@ -65,7 +65,7 @@ export default function VacationRentalSetupCabo() {
               <span className="text-sm font-medium">Vacation Rental Professionals</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Vacation Rental Setup & Maintenance in Cabo San Lucas
+              Vacation Rental Setup & Maintenance in Los Cabos
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
               Keep your Airbnb and VRBO properties guest-ready with professional turnover service, ongoing maintenance contracts, and 24/7 emergency repairs. Maximize your 5-star reviews and rental income.

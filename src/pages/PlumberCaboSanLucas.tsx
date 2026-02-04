@@ -59,7 +59,7 @@ export default function PlumberCaboSanLucas() {
               <span className="text-sm font-medium">Licensed Professional Plumbers</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Professional Plumber in Cabo San Lucas
+              Professional Plumber<br />in Cabo San Lucas
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
               Licensed plumbers for emergency repairs, installations, and maintenance. 24/7 service for Property Care members. Emergency service 7am-6pm for non-members. Serving all of Los Cabos.

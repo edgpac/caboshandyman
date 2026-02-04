@@ -639,10 +639,10 @@ export default function PropertySetupCabo() {
                   <span className="text-purple-900 font-semibold text-sm">KEEP YOUR PROPERTY PERFECT</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  Property Care Plans: Ongoing Maintenance After Setup
+                  Property Care Plans:<br />Ongoing Maintenance After Setup
                 </h2>
                 <p className="text-xl text-gray-700 leading-relaxed">
-                  You've invested in professional setup—now protect your property with regular maintenance. Property Care members get priority service, monthly inspections, and catch small issues before they become expensive problems.
+                  You've invested in professional setup, now protect your property with regular maintenance. Property Care members get priority service, monthly inspections, and catch small issues before they become expensive problems.
                 </p>
               </div>
 
