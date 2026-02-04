@@ -741,7 +741,7 @@ export default function PlumberCaboSanLucas() {
                   Property Care Plans:<br />Never Pay Emergency Fees Again
                 </h2>
                 <p className="text-xl text-gray-700 leading-relaxed">
-                  One plumbing emergency can cost $500-800. Property Care members get 24/7 emergency service included, FREE monthly drain cleaning, and 15-25% off all repairs for just $99-299/month.
+                  Plans can be tailored to your property’s needs with predictable pricing.
                 </p>
               </div>
 
