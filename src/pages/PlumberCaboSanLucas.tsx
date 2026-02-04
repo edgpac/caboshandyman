@@ -223,7 +223,7 @@ export default function PlumberCaboSanLucas() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={18} />
-                    <span><strong>Fully stocked trucks</strong> with common parts</span>
+                    <span><strong>Fully stocked</strong> with common parts</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-green-600 flex-shrink-0 mt-1" size={18} />
@@ -735,7 +735,7 @@ export default function PlumberCaboSanLucas() {
                   <span className="text-purple-900 font-semibold text-sm">PREVENT PLUMBING EMERGENCIES</span>
                 </div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                  Property Care Plans: Never Pay Emergency Fees Again
+                  Property Care Plans:<br />Never Pay Emergency Fees Again
                 </h2>
                 <p className="text-xl text-gray-700 leading-relaxed">
                   One plumbing emergency can cost $500-800. Property Care members get 24/7 emergency service included, FREE monthly drain cleaning, and 15-25% off all repairs for just $99-299/month.
