@@ -355,7 +355,7 @@ export default function PropertyCarePlans() {
 
           {/* Pricing Tiers */}
           <div className="mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Choose Your Property Care Plan They can be tailored<br />to your property’s needs with predictable pricing.</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Plans can be tailored to your property’s needs.</h2>
 
             <div className="grid md:grid-cols-3 gap-8 mb-8">
               {/* Basic Care - ORANGE for action/conversion */}

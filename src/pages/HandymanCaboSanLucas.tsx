@@ -737,7 +737,7 @@ export default function HandymanCaboSanLucas() {
                   Property Care Plans:<br />Your On-Call Handyman Team
                 </h2>
                 <p className="text-xl text-gray-700 leading-relaxed">
-                  Stop scrambling to find a handyman every time something breaks. Property Care Plans can be tailored to your property’s needs with predictable pricing.
+                  Stop scrambling to find a handyman every time something breaks. Property Care Plans<br />can be tailored to your property’s needs with predictable pricing.
                 </p>
               </div>
 
