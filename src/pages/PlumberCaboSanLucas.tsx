@@ -478,11 +478,11 @@ export default function PlumberCaboSanLucas() {
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="text-cyan-600 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-gray-700">Water heater repair: $150-400</span>
+                  <span className="text-gray-700">Instant/Tankless Water Heater Installation:: $200-400</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="text-cyan-600 flex-shrink-0 mt-1" size={20} />
-                  <span className="text-gray-700">Water heater replacement: $800-2,500</span>
+                  <span className="text-gray-700">Traditional Water Heater Tank Replacement: $600-1,000</span>
                 </li>
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="text-cyan-600 flex-shrink-0 mt-1" size={20} />
