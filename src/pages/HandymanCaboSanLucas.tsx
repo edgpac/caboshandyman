@@ -761,11 +761,27 @@ export default function HandymanCaboSanLucas() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
-                      <span>Dedicated account manager</span>
+                      <span><strong>1 FREE drain unclog</strong> per month</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
-                      <span>Maintenance reminder service</span>
+                      <span>AC filter cleaning</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Smoke detector battery checks & replacement</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Light bulb replacement (up to 5 bulbs/month)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Door & cabinet hardware tightening</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Window screen mesh repair (up to 2 screens/month)</span>
                     </li>
                   </ul>
                   <p className="mt-4 text-xs text-gray-500 italic">Perfect for homeowners and single vacation rentals</p>
@@ -787,7 +803,7 @@ export default function HandymanCaboSanLucas() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
-                      <span><strong>20% discount on all labor</strong></span>
+                      <span><strong>20% discount</strong> on all labor</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
@@ -795,15 +811,35 @@ export default function HandymanCaboSanLucas() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
-                      <span><strong>Quarterly property inspections</strong></span>
+                      <span><strong>2 FREE drain unclogs</strong> per month</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Shower cartridge replacement</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Monthly faucet leak checks & cartridge service</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Window screen replacement (up to 4 screens/month)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Toilet flapper/fill valve replacement</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Door lock lubrication & adjustment</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Ceiling fan switch & motor replacement</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
                       <span>Same-day service guarantee</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
-                      <span>Photo documentation of all work</span>
                     </li>
                   </ul>
                   <p className="mt-4 text-xs text-cyan-100 italic">Best for vacation rentals and property managers</p>
@@ -826,19 +862,51 @@ export default function HandymanCaboSanLucas() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
-                      <span><strong>Monthly preventive maintenance visits</strong></span>
+                      <span><strong>25% discount</strong> on all labor</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
-                      <span><strong>25% discount on all labor</strong></span>
+                      <span><strong>Unlimited drain unclogs</strong></span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
-                      <span>Property condition reports</span>
+                      <span>Shower cartridge replacement (all bathrooms)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
-                      <span>Hurricane season prep & post-storm inspection</span>
+                      <span>Monthly toilet valve & flapper inspection/replacement</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Window screen replacement (unlimited)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Pool skimmer basket cleaning (weekly)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Exterior door weatherstripping replacement</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Smoke & CO detector full replacement (annually)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Light fixture cleaning & bulb replacement (unlimited)</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Cabinet & drawer adjustment</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span><strong>30-minute emergency response</strong></span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>Priority parts ordering</span>
                     </li>
                   </ul>
                   <p className="mt-4 text-xs text-gray-500 italic">Ideal for luxury properties and multi-unit managers</p>
@@ -853,11 +921,12 @@ export default function HandymanCaboSanLucas() {
                   <div>
                     <p className="font-semibold mb-2">Without Property Care (Typical Year):</p>
                     <ul className="space-y-1 ml-4">
-                      <li>• 6 service calls @ $60 each: <strong>$360</strong></li>
+                      <li>• 6 drain unclogs @ $60 each: <strong>$360</strong></li>
+                      <li>• 2 shower cartridge replacements: <strong>$240</strong></li>
+                      <li>• 4 window screen repairs: <strong>$200</strong></li>
                       <li>• 15 hours labor @ $80/hr: <strong>$1,200</strong></li>
                       <li>• 1 emergency call premium: <strong>$500</strong></li>
-                      <li>• Lost rental income (delays): <strong>$300-800</strong></li>
-                      <li className="pt-2 border-t border-gray-300"><strong>Total: $2,360-2,860/year</strong></li>
+                      <li className="pt-2 border-t border-gray-300"><strong>Total: $2,500+/year</strong></li>
                     </ul>
                   </div>
                   <div>
@@ -865,10 +934,11 @@ export default function HandymanCaboSanLucas() {
                     <ul className="space-y-1 ml-4">
                       <li>• Monthly plan: <strong>$199/month</strong> = $2,388/year</li>
                       <li>• 24 FREE service calls: <strong>$1,440 value</strong></li>
+                      <li>• 24 FREE drain unclogs: <strong>$1,440 value</strong></li>
+                      <li>• Cartridge & screen repairs: <strong>Included</strong></li>
                       <li>• 20% labor discount: <strong>~$240 savings</strong></li>
                       <li>• No emergency premiums: <strong>$500+ saved</strong></li>
-                      <li>• Zero rental downtime: <strong>Priceless</strong></li>
-                      <li className="pt-2 border-t border-gray-300 text-green-700"><strong>Saves $500-1,200/year + peace of mind</strong></li>
+                      <li className="pt-2 border-t border-gray-300 text-green-700"><strong>Saves $1,500+/year + peace of mind</strong></li>
                     </ul>
                   </div>
                 </div>
