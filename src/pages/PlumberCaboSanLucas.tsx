@@ -741,7 +741,7 @@ export default function PlumberCaboSanLucas() {
                   Property Care Plans:<br />Never Pay Emergency Fees Again
                 </h2>
                 <p className="text-xl text-gray-700 leading-relaxed">
-                  Plans can be tailored to your property’s needs with predictable pricing.
+                  Each plan can be tailored to your property’s needs.
                 </p>
               </div>
 
