@@ -176,7 +176,7 @@ export default function PropertySetupCabo() {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Property Setup Packages</h2>
             <p className="text-center text-gray-600 mb-8 text-lg">
-              Transparent pricing based on property size. All packages include labor, tools, and coordination.
+             Plans can be tailored to your property’s needs with predictable pricing. 
             </p>
             <div className="grid md:grid-cols-3 gap-6">
 
