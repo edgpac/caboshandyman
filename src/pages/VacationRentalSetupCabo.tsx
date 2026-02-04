@@ -281,21 +281,22 @@ export default function VacationRentalSetupCabo() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">Turnover inspections included</span>
+                    <span className="text-gray-700"><strong>1 FREE drain unclog</strong> per month ($80 value)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">Priority emergency response</span>
+                    <span className="text-gray-700">AC filter cleaning (monthly - prevents breakdowns)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">15% discount on repairs</span>
+                    <span className="text-gray-700">Window screen repair (up to 3 screens/month)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">Monthly maintenance reports</span>
+                    <span className="text-gray-700"><strong>15% discount</strong> on all repairs</span>
                   </li>
                 </ul>
+                <p className="text-xs text-gray-500 italic mb-4">Perfect for single vacation rental owners</p>
                 <a href="/contact" className="block w-full text-center bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                   Get Started
                 </a>
@@ -314,25 +315,26 @@ export default function VacationRentalSetupCabo() {
                 <ul className="space-y-3 mb-6">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
-                    <span>All single property benefits</span>
+                    <span>All single property benefits × 3</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
-                    <span>Volume pricing ($200/property)</span>
+                    <span><strong>2 FREE drain unclogs</strong> per property/month ($240 value)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
-                    <span>Dedicated account manager</span>
+                    <span>Shower cartridge replacement (when needed, prevents leaks)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
-                    <span>25% discount on all repairs</span>
+                    <span>Window screen replacement (up to 5 screens per property/month)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
-                    <span>Inventory management assistance</span>
+                    <span><strong>25% discount</strong> on all repairs + same-day emergency response</span>
                   </li>
                 </ul>
+                <p className="text-xs text-blue-100 italic mb-4">Best for vacation rental property managers</p>
                 <a href="/contact" className="block w-full text-center bg-white text-blue-600 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
                   Get Started
                 </a>
@@ -352,21 +354,22 @@ export default function VacationRentalSetupCabo() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">Maximum volume discounts</span>
+                    <span className="text-gray-700"><strong>Unlimited drain unclogs</strong> (all properties, no limits)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">On-call dedicated team</span>
+                    <span className="text-gray-700">Quarterly shower cartridge replacement (all bathrooms - proactive)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">30% discount on repairs</span>
+                    <span className="text-gray-700">Window screen replacement (unlimited across portfolio)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
-                    <span className="text-gray-700">Vendor coordination services</span>
+                    <span className="text-gray-700"><strong>30% discount</strong> on all major repairs + 30-minute emergency response</span>
                   </li>
                 </ul>
+                <p className="text-xs text-gray-500 italic mb-4">Ideal for large vacation rental portfolios</p>
                 <a href="/contact" className="block w-full text-center bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
                   Get Custom Quote
                 </a>
