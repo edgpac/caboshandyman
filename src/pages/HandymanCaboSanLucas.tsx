@@ -1,6 +1,7 @@
 import { lazy, useState } from 'react';
 import SEO from '@/components/SEO';
 import { CheckCircle2, Wrench, Home, Zap, Droplet, Fan, Package, Monitor, Users, Clock, Star, Shield, ArrowRight, ChevronDown } from 'lucide-react';
+import Navigation from '@/components/Navigation';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -51,6 +52,8 @@ export default function HandymanCaboSanLucas() {
         geoPosition="22.8866974;-109.9139710"
         schemaMarkup={schemaMarkup}
       />
+
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-teal-600 to-teal-700 text-white overflow-hidden">
