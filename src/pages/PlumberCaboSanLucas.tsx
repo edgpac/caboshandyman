@@ -464,7 +464,7 @@ export default function PlumberCaboSanLucas() {
             <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-8 max-w-2xl mx-auto border border-cyan-200">
               <div className="text-center mb-6">
                 <div className="text-5xl font-bold text-cyan-600 mb-2">$60</div>
-                <p className="text-gray-600">Service call includes diagnosis and first hour of work</p>
+                <p className="text-gray-600">Service call includes diagnosis and first hour of work for most issues</p>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2">
