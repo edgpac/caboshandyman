@@ -213,7 +213,7 @@ export default function HandymanCaboSanLucas() {
                   <Star className="text-blue-600" size={28} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">Vacation Rental Service</h3>
-                <p className="text-gray-600 mb-3">Maintenance contracts for Airbnb/VRBO properties. Protect your 5-star rating. From $300/month.</p>
+                <p className="text-gray-600 mb-3">Maintenance contracts for Airbnb/VRBO properties. Protect your 5-star rating. From $250/month.</p>
                 <div className="flex items-center gap-2 text-blue-600 font-semibold">
                   <span>Learn More</span>
                   <ArrowRight size={18} />
@@ -537,7 +537,7 @@ export default function HandymanCaboSanLucas() {
                 {openQuestion === 'faq1' && (
                   <div className="px-6 pb-6 text-gray-700 leading-relaxed">
                     <p className="mb-3">
-                      Our standard service call is <strong>$60, which includes the first hour of labor and diagnosis</strong>. This transparent pricing means you know exactly what you're paying before we even arrive.
+                      Our standard service call is <strong>$60, which includes the first hour of labor and diagnosis</strong>. For most repairs, this covers the entire job. This transparent pricing means you know exactly what you're paying before we even arrive.
                     </p>
                     <p className="mb-3">
                       For larger projects, we provide free written estimates with detailed scope of work. Package pricing is available when you bundle multiple services (furniture assembly + TV mounting + ceiling fan installation, for example).

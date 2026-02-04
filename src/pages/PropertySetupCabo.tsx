@@ -181,7 +181,7 @@ export default function PropertySetupCabo() {
               <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-teal-500 transition-colors">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Studio/1BR</h3>
-                  <div className="text-4xl font-bold text-teal-600 mb-2">$500-$800</div>
+                  <div className="text-4xl font-bold text-teal-600 mb-2">$300-$500</div>
                   <p className="text-gray-500">Perfect for smaller spaces</p>
                 </div>
                 <ul className="space-y-3 mb-6">
@@ -218,7 +218,7 @@ export default function PropertySetupCabo() {
                 </div>
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold mb-2">2-3 Bedroom</h3>
-                  <div className="text-4xl font-bold mb-2">$800-$1,200</div>
+                  <div className="text-4xl font-bold mb-2">$500-$800</div>
                   <p className="text-teal-100">Ideal for most properties</p>
                 </div>
                 <ul className="space-y-3 mb-6">
@@ -256,7 +256,7 @@ export default function PropertySetupCabo() {
               <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-teal-500 transition-colors">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">3BR+ / Villa</h3>
-                  <div className="text-4xl font-bold text-teal-600 mb-2">$1,200-$2,000</div>
+                  <div className="text-4xl font-bold text-teal-600 mb-2">$800-$1,200</div>
                   <p className="text-gray-500">Large homes & estates</p>
                 </div>
                 <ul className="space-y-3 mb-6">

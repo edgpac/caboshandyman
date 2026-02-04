@@ -570,8 +570,8 @@ export default function PlumberCaboSanLucas() {
                       <li>Simple drain clogs: $60-120</li>
                       <li>Faucet replacement: $80-200</li>
                       <li>Toilet repair/replacement: $120-350</li>
-                      <li>Water heater repair: $150-400</li>
-                      <li>Water heater replacement: $800-2,500</li>
+                      <li>Instant Water heater replacement: $200-400</li>
+                      <li>Water heater replacement: $400-800</li>
                     </ul>
                     <p>
                       Parts are billed at cost. Property Care members receive 15-25% discounts on all services. Emergency calls do NOT have inflated pricing—we charge standard rates even at 2am.
@@ -819,7 +819,7 @@ export default function PlumberCaboSanLucas() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
-                      <span>24/7 VIP emergency access</span>
+                      <span>Water Fixture/Faucet Replacements</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
@@ -828,6 +828,10 @@ export default function PlumberCaboSanLucas() {
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
                       <span>25% off all repairs</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
+                      <span>24/7 VIP emergency access</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />

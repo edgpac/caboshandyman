@@ -219,7 +219,7 @@ export default function ServicesPage() {
                   <h3 className="font-bold text-gray-900 text-lg group-hover:text-blue-600 transition-colors">Rental Service</h3>
                 </div>
                 <p className="text-gray-600 mb-3">Airbnb & VRBO maintenance contracts. Protect your 5-star rating.</p>
-                <p className="text-blue-600 font-semibold text-sm">From $300/month</p>
+                <p className="text-blue-600 font-semibold text-sm">From $250/month</p>
                 <div className="flex items-center gap-1 text-blue-600 font-semibold text-sm mt-3">
                   <span>Learn More</span>
                   <ArrowRight size={14} />

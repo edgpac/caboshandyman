@@ -318,7 +318,7 @@ export default function VacationRentalSetupCabo() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
-                    <span>Volume pricing ($300/property)</span>
+                    <span>Volume pricing ($200/property)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
