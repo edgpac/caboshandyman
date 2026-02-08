@@ -24,6 +24,36 @@ export default function FAQ() {
   // All 50 FAQ questions organized by section
   const faqSections = [
     {
+      title: "Common Handyman Questions",
+      questions: [
+        {
+          id: "common-1",
+          question: "What is the most requested handyman service?",
+          answer: "The most requested handyman services in Cabo San Lucas are door lock replacement, furniture assembly, plumbing repairs, TV mounting, updating electrical fixtures, screen replacements, updating light switch hardware, sliding door repairs, and toilet fill valve replacements. At Cabos Handyman, we handle all of these services daily for both residential homes and vacation rental properties. Our most common service calls are for furniture assembly (especially for vacation rental setups), plumbing repairs (Cabo's hard water causes frequent issues), and TV mounting. Call +52 612 169 8328 for any handyman service!"
+        },
+        {
+          id: "common-2",
+          question: "What would a handyman do?",
+          answer: "Cabos Handyman's main job is to problem-solve and find solutions for all your home maintenance needs in Cabo San Lucas. Our technicians are skilled in a wide variety of household jobs including routine maintenance, repairs, furniture assembly, plumbing, electrical work, painting, tile work, door repairs, and much more. We handle everything from small repairs like fixing a leaky faucet to major projects like kitchen remodeling. Whether you need emergency repairs, vacation rental maintenance, or home improvement projects, we're your one-stop solution in Cabo. Call +52 612 169 8328 for professional handyman services!"
+        },
+        {
+          id: "common-3",
+          question: "What is the most profitable handyman job?",
+          answer: "The most profitable handyman jobs in Cabo San Lucas are kitchen and bathroom remodeling ($5,000-$50,000+ per project), water heater replacement ($800-$3,200), whole-house surge protector installation ($400-$600), complete toilet replacement ($250-$450), and TV mounting with complete home theater setup ($300-$800). However, at Cabos Handyman, we focus on providing VALUE to our clients rather than maximizing profit on individual jobs. We offer fair, competitive pricing on all services from small repairs to major remodeling projects. Our Property Care Plans ($99-$299/month) provide the best value for vacation rental owners. Call +52 612 169 8328 for honest pricing on any project!"
+        },
+        {
+          id: "common-4",
+          question: "What are the duties of a handyman?",
+          answer: "A Cabos Handyman technician conducts basic maintenance on homes and businesses throughout Cabo San Lucas. Our main duties include repairing plumbing issues (leaks, clogs, fixture replacement), installing and repairing electrical fixtures (outlets, switches, lighting, ceiling fans), assembling furniture (beds, dressers, patio sets), performing carpentry work (door repairs, cabinet installation, trim work), painting interior and exterior surfaces, tile installation and repair, general maintenance and repairs, and emergency services for urgent issues. We're skilled in a wide variety of tasks to keep your property in perfect condition. Call +52 612 169 8328 for professional handyman services in Cabo!"
+        },
+        {
+          id: "common-5",
+          question: "What is the proper name for a handyman?",
+          answer: "The proper professional names for a handyman include: Maintenance Technician, Repair Specialist, Property Maintenance Professional, General Contractor (for licensed contractors), or simply Handyman. At Cabos Handyman, we proudly use the title 'Handyman' because it clearly communicates what we do - we're skilled professionals who can handle a wide variety of home repairs, maintenance, and improvement tasks in Cabo San Lucas. Our team includes licensed electricians, licensed plumbers, and experienced carpenters, all working under the Cabos Handyman name. Whatever you call us, we're here to solve your property maintenance problems! Call +52 612 169 8328."
+        }
+      ]
+    },
+    {
       title: "Emergency & Quick Fix Services",
       questions: [
         {
