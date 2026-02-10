@@ -39,7 +39,7 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
       title: "Electrical Services",
       services: [
         { name: "Ceiling Light Installation", startingPrice: "$120", duration: "1-2 hours" },
-        { name: "Ceiling Fan Installation Cabo San Lucas", startingPrice: "$180", duration: "2-3 hours" },
+        { name: "Ceiling Fan Installation Cabo San Lucas", startingPrice: "$125", duration: "2-3 hours" },
         { name: "Outlet Installation/Replacement", startingPrice: "$90", duration: "1 hour" },
         { name: "Under-Cabinet Lighting", startingPrice: "$160", duration: "2-3 hours" },
         { name: "Kitchen Island Electrical", startingPrice: "$220", duration: "3-4 hours" },
@@ -212,8 +212,8 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
     {
       title: "Home Improvement Basics",
       services: [
-        { name: "TV Mounting Cabo San Lucas", startingPrice: "$120", duration: "1-2 hours" },
-        { name: "Picture Hanging Cabo", startingPrice: "$40", duration: "30min-1hr" },
+        { name: "TV Mounting Cabo San Lucas", startingPrice: "$125", duration: "1-2 hours" },
+        { name: "Artwork, Small Mirrors & Decorative Pieces", startingPrice: "$40", duration: "30min-1hr" },
         { name: "Starlink installation", startingPrice: "$80", duration: "1hr-2hr" },
         { name: "Shelf Installation", startingPrice: "$80", duration: "1-2 hours" },
         { name: "Curtain Rod Installation", startingPrice: "$60", duration: "30min-1hr" },

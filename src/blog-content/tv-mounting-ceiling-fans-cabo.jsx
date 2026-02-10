@@ -223,7 +223,7 @@ export default function TVMountingCeilingFansCaboArticle() {
 
       <h3>Expert Picture Hanging Includes</h3>
       <ul>
-        <li>Professional hanging service with proper anchors - $25 per item</li>
+        <li>Professional hanging service with proper anchors - $40 per item</li>
         <li>Level placement guaranteed</li>
         <li>Wall stud location when needed</li>
         <li>Gallery wall design and layout</li>
@@ -313,7 +313,7 @@ export default function TVMountingCeilingFansCaboArticle() {
         <li><strong>Bathroom vanity lights:</strong> $55-110 per bathroom</li>
         <li><strong>Kitchen island lights:</strong> $150 (3 pendants)</li>
         <li><strong>Bedroom lighting:</strong> $125 per installation</li>
-        <li><strong>Picture hanging:</strong> $25 per piece</li>
+        <li><strong>Picture hanging:</strong> $40 per piece</li>
         <li><strong>Wood slat panels:</strong> $690 for living room feature wall</li>
       </ul>
 

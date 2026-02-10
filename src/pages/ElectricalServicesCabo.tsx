@@ -40,7 +40,7 @@ export default function ElectricalServicesCabo() {
     { name: "GFCI Outlet Installation", price: "$120", duration: "1-2 hours", category: "basic" },
     { name: "USB Outlet Installation", price: "$100", duration: "1 hour", category: "basic" },
     { name: "Ceiling Light Installation", price: "$120", duration: "1-2 hours", category: "lighting" },
-    { name: "Ceiling Fan Installation", price: "$180", duration: "2-3 hours", category: "lighting" },
+    { name: "Ceiling Fan Installation", price: "$125", duration: "2-3 hours", category: "lighting" },
     { name: "Under-Cabinet Lighting", price: "$160", duration: "2-3 hours", category: "lighting" },
     { name: "Outdoor Lighting Installation", price: "$150", duration: "2-3 hours", category: "lighting" },
     { name: "Recessed Lighting Installation", price: "$200", duration: "3-4 hours", category: "lighting" },

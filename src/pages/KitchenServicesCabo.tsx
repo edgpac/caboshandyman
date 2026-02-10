@@ -46,7 +46,7 @@ export default function KitchenServicesCabo() {
     { name: "Shut-off Valve Replacement", price: "$100", duration: "1-2 hours", category: "plumbing" },
     { name: "Sink Unclogging", price: "$60", duration: "30min-1hr", category: "plumbing" },
     { name: "Ceiling Light Installation", price: "$120", duration: "1-2 hours", category: "electrical" },
-    { name: "Ceiling Fan Installation", price: "$180", duration: "2-3 hours", category: "electrical" },
+    { name: "Ceiling Fan Installation", price: "$125", duration: "2-3 hours", category: "electrical" },
     { name: "Outlet Installation/Replacement", price: "$90", duration: "1 hour", category: "electrical" },
     { name: "Under-Cabinet Lighting", price: "$160", duration: "2-3 hours", category: "electrical" },
     { name: "Kitchen Island Electrical", price: "$220", duration: "3-4 hours", category: "electrical" },
