@@ -894,13 +894,13 @@ RESPONSE: "I can't speak to other companies' pricing, but I can explain our valu
 
 MODERN KITCHEN:
 Plumbing: Sink Install/Replace $180 (2-4hr) | Faucet $120 (1-2hr) | Disposal $200 (2-3hr) | Dishwasher $250 (3-4hr) | Drain $150 (2-3hr) | Shutoff Valve $100 (1-2hr) | Unclog $80 (30min-1hr)
-Electrical: Ceiling Light $120 (1-2hr) | Ceiling Fan $180 (2-3hr) | Outlet $90 (1hr) | Under-Cabinet Light $160 (2-3hr) | Island Electrical $220 (3-4hr) | Smoke Detector $80 (30min-1hr)
+Electrical: Ceiling Light $120 (1-2hr) | Ceiling Fan $125 (2-3hr) | Outlet $90 (1hr) | Under-Cabinet Light $160 (2-3hr) | Island Electrical $220 (3-4hr) | Smoke Detector $80 (30min-1hr)
 Carpentry: Cabinets $300 (4-8hr) | Countertop $400 (4-6hr) | Backsplash $250 (3-5hr) | Hardware $80 (1-2hr) | Pantry Shelving $200 (2-4hr) | Wall Panels $150 (2-4hr) | Furniture Assembly $65 (1-2hr)
 
 LUXURY BATHROOM:
 Plumbing: Toilet Install $200 (2-3hr) | Vanity $280 (3-4hr) | Shower $600 (1-2 days) | Unclog $80 (1-3hr) | Faucet $120 (1-2hr) | Shower Head $80 (30min-1hr)
 Electrical: Bath Lighting $100 (1-2hr) | Exhaust Fan $180 (2-3hr) | GFCI Outlet $120 (1-2hr) | Heated Towel Rack $220 (2-3hr) | Mirror $125 (1-2hr)
-Installation: Tile $12/sqft (1-3 days) | Grout Repair $8/sqft (1-2 days) | Flooring $15/sqft (1-2 days) | Waterproofing $300 (1 day) | Towel Rack $60 (30min-1hr) | Mirror Hanging $80 (1hr) | Shelving $120 (1-2hr)
+Installation: Tile $12/sqft (1-3 days) | Grout Repair $8/sqft (1-2 days) | Flooring $15/sqft (1-2 days) | Waterproofing $300 (1 day) | Towel Rack $60 (30min-1hr) | Mirror Hanging starting at $40 (1hr) | Shelving $120 (1-2hr)
 
 COMMERCIAL OFFICE:
 Electrical: Office Lighting $150 (2-3hr) | Outlet $100 (1-2hr) | Data Cable $80 (1-2hr) | Panel Upgrade $600 (4-6hr)
@@ -908,7 +908,7 @@ Buildout: Partition Wall $25/sqft (1-2 days) | Office Door $300 (2-4hr) | Drop C
 HVAC: Mini-Split $800 (4-6hr) | Ductwork $20/linear ft (1-2 days) | Ventilation Fan $200 (2-3hr)
 
 HOME IMPROVEMENT BASICS:
-TV Mounting $120 (1-2hr) | Picture Hanging $40 (30min-1hr) | Starlink Install $80 (1-2hr) | Shelf Install $80 (1-2hr) | Curtain Rod $60 (30min-1hr) | Furniture Assembly $100 (1-3hr) | Door Handle/Lock $80 (1hr)
+TV Mounting $125 (1-2hr) | Artwork, Small Mirrors & Decorative Pieces starting at $40 (30min-1hr) | Starlink Install $80 (1-2hr) | Shelf Install $80 (1-2hr) | Curtain Rod $60 (30min-1hr) | Furniture Assembly $100 (1-3hr) | Door Handle/Lock $80 (1hr)
 
 HOA/COMMUNITY:
 Trash Removal $150 (2-4hr) | Pool Pump Replace $400 (3-4hr) | Pool Maintenance $120 (1-2hr) | Landscape $200 (4-6hr) | Common Area Lights $180 (2-3hr) | Lock Replace $150 (1-2hr) | Window Repair $120 (1-3hr) | Paint Touch-up $8/sqft (2-4hr) | Exit Lighting $200 (2-3hr) | Fire Extinguisher $80 (30min-1hr) | Security Camera $250 (2-4hr)
@@ -1011,7 +1011,7 @@ Vanities: 24" $300-500 | 36" $500-900 | 48" double $800-1,500 | 60" premium $1,2
 Water Heaters: 40-gal electric $400-600 | 50-gal gas $500-800 | Tankless electric $800-1,500 | Tankless gas $1,200-2,500 | + Install $500 = Total $900-3,000
 
 ELECTRICAL MATERIALS:
-Ceiling Fans: Basic 52" $100-200 | With light $200-400 | DC motor $400-700 | Smart $600-1,200 | + Install $180 = Total $280-1,380
+Ceiling Fans: Basic 52" $100-200 | With light $200-400 | DC motor $400-700 | Smart $600-1,200 | + Install $125 = Total $225-1,325
 Light Fixtures: Basic ceiling $50-120 | Pendants (3) $150-400 | Chandelier $200-1,000 | Recessed (each) $30-80 | + Install $120 = Total $170-1,120
 Outlets: Standard $3-8 | GFCI $15-30 | USB $20-40 | Smart switch $30-80 | + Install $90 = Total $93-170
 
@@ -1059,7 +1059,7 @@ Q: "How much to install a new toilet?"
 A: "Toilet installation starts at $200 for labor. A typical toilet ranges from $150-400 depending on quality (basic to premium). So total would be approximately $350-600. Our $60 service call is credited toward the work and includes helping you select the right toilet for your needs. Would you like to schedule?"
 
 Q: "How much for a ceiling fan installed?"
-A: "Ceiling fan installation is $180 for labor. A good quality fan with light ranges from $200-400. Total would be approximately $380-580. Our $60 service call is credited, and we'll help you choose the best fan for Cabo's climate. Call +52 612 169 8328 to schedule!"
+A: "Ceiling fan installation starts at $125 for labor. A good quality fan with light ranges from $200-400. Total would be approximately $325-525. Our $60 service call is credited, and we'll help you choose the best fan for Cabo's climate. Call +52 612 169 8328 to schedule!"
 
 Q: "What's the total for kitchen countertops?"
 A: "For countertops, installation starts at $400, and materials run $50-150 per square foot depending on material (granite to quartz). For a typical 40 sqft kitchen, total would be approximately $2,400-6,400. Since this is over $1,000, we provide a FREE detailed estimate. Call +52 612 169 8328!"`;
