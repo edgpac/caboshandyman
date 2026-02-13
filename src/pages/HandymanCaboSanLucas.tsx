@@ -38,7 +38,11 @@ export default function HandymanCaboSanLucas() {
     "areaServed": {
       "@type": "City",
       "name": "Cabo San Lucas"
-    }
+    },
+    "sameAs": [
+      "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
+      "https://www.facebook.com/share/19wvxoz8Cy/"
+    ]
   };
 
   return (

@@ -27,7 +27,11 @@ export default function About() {
     "url": "https://caboshandyman.com",
     "openingHours": "Mo-Su 00:00-23:59",
     "foundingDate": "2019",
-    "description": "Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed. Licensed, insured, and bonded."
+    "description": "Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed. Licensed, insured, and bonded.",
+    "sameAs": [
+      "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
+      "https://www.facebook.com/share/19wvxoz8Cy/"
+    ]
   };
 
   return (

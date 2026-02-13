@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, MapPin, Clock, Wrench, DollarSign, RefreshCw, Facebook, Calendar, HelpCircle } from 'lucide-react';
+import { Phone, Mail, Clock, Wrench, DollarSign, RefreshCw, Facebook, Calendar, HelpCircle } from 'lucide-react';
 
 export default function Footer() {
   const [exchangeRate, setExchangeRate] = useState(null);

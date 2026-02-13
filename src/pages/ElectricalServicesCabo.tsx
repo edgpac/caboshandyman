@@ -26,7 +26,11 @@ export default function ElectricalServicesCabo() {
       },
       "telephone": "+52-612-169-8328",
       "priceRange": "$60+",
-      "openingHours": "Mo-Su 00:00-23:59"
+      "openingHours": "Mo-Su 00:00-23:59",
+      "sameAs": [
+        "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
+        "https://www.facebook.com/share/19wvxoz8Cy/"
+      ]
     },
     "areaServed": {
       "@type": "City",

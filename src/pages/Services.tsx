@@ -57,6 +57,10 @@ export default function ServicesPage() {
               "@type": "City",
               "name": "Cabo San Lucas"
             },
+            "sameAs": [
+              "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
+              "https://www.facebook.com/share/19wvxoz8Cy/"
+            ],
             "hasOfferCatalog": {
               "@type": "OfferCatalog",
               "name": "Handyman Services Cabo San Lucas",
