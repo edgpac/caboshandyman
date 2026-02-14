@@ -265,7 +265,7 @@ export default function CabosHandymanHomepage() {
 
               {/* Value Proposition - No Pricing */}
               <p className="text-base md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
-                Your trusted handyman in Cabo San Lucas for 20+ years. Use our Property Care Plans to protect your investment.<br />
+                Your trusted handyman in Cabo San Lucas for 20+ years.<br />Use our Property Care Plans to protect your investment.<br />
                 600+ projects completed with a 100% satisfaction rate.
               </p>
 
