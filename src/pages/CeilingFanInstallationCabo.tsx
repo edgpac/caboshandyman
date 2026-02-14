@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Fan, Zap, Shield, Clock, ArrowRight, Wind } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import RelatedServices from '../components/RelatedServices';
 
 export default function CeilingFanInstallationCabo() {
   const schemaMarkup = {
@@ -416,6 +417,7 @@ export default function CeilingFanInstallationCabo() {
         </div>
       </section>
 
+      <RelatedServices currentPath="/ceiling-fan-installation-cabo" />
       <Footer />
     </>
   );

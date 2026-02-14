@@ -4,6 +4,7 @@ import { CheckCircle2, Droplet, Wrench, Clock, Shield, Zap, ArrowRight, AlertCir
 import Navigation from '@/components/Navigation';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import RelatedServices from '../components/RelatedServices';
 
 export default function PlumberCaboSanLucas() {
   const [openQuestion, setOpenQuestion] = useState<string | null>(null);
@@ -918,6 +919,7 @@ export default function PlumberCaboSanLucas() {
         </div>
       </section>
 
+      <RelatedServices currentPath="/plumber-cabo-san-lucas" />
       <Footer />
     </>
   );

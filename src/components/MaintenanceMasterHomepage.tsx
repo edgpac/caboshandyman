@@ -74,12 +74,63 @@ export default function CabosHandymanHomepage() {
     setServiceMenuOpen(true);
   };
 
+  const homepageSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Cabos Handyman",
+    "image": "https://caboshandyman.com/CHLOGO.png",
+    "telephone": "+526121698328",
+    "url": "https://caboshandyman.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cabo San Lucas",
+      "addressRegion": "BCS",
+      "addressCountry": "MX"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 22.8905327,
+      "longitude": -109.9167371
+    },
+    "priceRange": "$$",
+    "openingHours": ["Mo-Fr 07:00-18:00", "Sa 08:00-14:00"],
+    "areaServed": {
+      "@type": "City",
+      "name": "Cabo San Lucas"
+    },
+    "sameAs": [
+      "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
+      "https://www.facebook.com/share/19wvxoz8Cy/"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "150"
+    },
+    "description": "Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed. Licensed, insured, and bonded.",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Handyman Services",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Plumbing Services" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electrical Services" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Kitchen Remodeling" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bathroom Remodeling" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "TV Mounting" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ceiling Fan Installation" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Furniture Assembly" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Property Care Plans" } }
+      ]
+    }
+  };
+
   return (
     <>
       <SEO
-        title="Cabos Handyman - Professional Services in Cabo San Lucas"
+        title="Handyman Cabo San Lucas | 20+ Years Experience | Cabos Handyman"
         description="Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed, 24/7 emergency service for Property Care members. Licensed, insured, and bonded."
         canonicalUrl="/"
+        schemaMarkup={homepageSchema}
       />
       <div className="min-h-screen bg-background">
         {/* Navigation */}
@@ -202,6 +253,9 @@ export default function CabosHandymanHomepage() {
               {/* Business Name - Light & Small on Mobile */}
               <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold mb-2 text-primary text-center leading-tight">
                 CABOS HANDYMAN
+                <span className="block text-base sm:text-lg md:text-2xl lg:text-3xl font-normal mt-1 text-white/90">
+                  Professional Handyman Services in Cabo San Lucas
+                </span>
               </h1>
 
               {/* Tagline - Light & Small on Mobile */}
@@ -211,8 +265,8 @@ export default function CabosHandymanHomepage() {
 
               {/* Value Proposition - No Pricing */}
               <p className="text-base md:text-xl text-white/90 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
-                Use our Property Care Plans Protect Your Investment<br />
-                Serving Cabo San Lucas with 100% satisfaction rate.
+                Your trusted handyman in Cabo San Lucas for 20+ years. Use our Property Care Plans to protect your investment.<br />
+                600+ projects completed with a 100% satisfaction rate.
               </p>
 
               {/* Trust Signals */}
@@ -292,7 +346,7 @@ export default function CabosHandymanHomepage() {
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">We Build Projects That Last</h2>
               <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                Explore our completed residential and commercial projects.<br />Click on any project to see our service menu and pricing.
+                As the leading handyman service in Cabo San Lucas, explore our completed residential and commercial projects.<br />Click on any project to see our service menu and pricing.
               </p>
             </div>
             

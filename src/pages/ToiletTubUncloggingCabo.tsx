@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Droplet, Clock, Shield, ArrowRight, AlertCircle } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import RelatedServices from '../components/RelatedServices';
 
 export default function ToiletTubUncloggingCabo() {
   const schemaMarkup = {
@@ -401,6 +402,7 @@ export default function ToiletTubUncloggingCabo() {
         </div>
       </section>
 
+      <RelatedServices currentPath="/toilet-tub-unclogging-cabo" />
       <Footer />
     </>
   );

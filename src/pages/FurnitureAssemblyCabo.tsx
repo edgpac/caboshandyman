@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Package, Wrench, Clock, ArrowRight, Shield } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import RelatedServices from '../components/RelatedServices';
 
 export default function FurnitureAssemblyCabo() {
   const schemaMarkup = {
@@ -425,6 +426,7 @@ export default function FurnitureAssemblyCabo() {
         </div>
       </section>
 
+      <RelatedServices currentPath="/furniture-assembly-cabo" />
       <Footer />
     </>
   );

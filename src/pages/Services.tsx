@@ -139,8 +139,8 @@ export default function ServicesPage() {
       <div className="min-h-screen bg-gray-50">
         {/* SEO Header - Hidden but crawlable */}
         <div className="sr-only">
-          <h1>Handyman Services Cabo San Lucas - Professional Home Repair & Maintenance</h1>
-          <p>Licensed handyman serving Cabo San Lucas with 70+ services including plumbing, electrical, painting, kitchen & bathroom remodeling, toilet unclogging, drain cleaning, and emergency repairs. Transparent pricing starting at $60. Available 24/7.</p>
+          <h1>Handyman Cabo San Lucas - Professional Home Repair & Maintenance Services</h1>
+          <p>Licensed handyman in Cabo San Lucas with 70+ services including plumbing, electrical, painting, kitchen & bathroom remodeling, toilet unclogging, drain cleaning, and emergency repairs. Cabos Handyman offers transparent pricing starting at $60 for handyman services in Cabo San Lucas. Available 24/7.</p>
         </div>
 
         {/* Visible Header */}

@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Wrench, DollarSign, Clock, ArrowRight, Droplet, Zap, Wind } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import RelatedServices from '../components/RelatedServices';
 
 export default function BathroomServicesCabo() {
   const schemaMarkup = {
@@ -392,6 +393,7 @@ export default function BathroomServicesCabo() {
         </div>
       </section>
 
+      <RelatedServices currentPath="/bathroom-services-cabo" />
       <Footer />
     </>
   );

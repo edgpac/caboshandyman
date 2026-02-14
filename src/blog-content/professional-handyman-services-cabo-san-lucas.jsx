@@ -35,6 +35,13 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       </p>
 
       <h4>Kitchen Remodeling and Repairs</h4>
+      <p>
+        Our{' '}
+        <a href="/kitchen-services-cabo" className="text-teal-600 hover:underline font-medium">
+          kitchen remodeling services in Cabo
+        </a>
+        {' '}cover everything from minor fixes to full renovations:
+      </p>
       <ul>
         <li>Custom cabinet installation and refinishing</li>
         <li>Cabinet manufacturing and installation</li>
@@ -45,6 +52,13 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       </ul>
 
       <h4>Bathroom Renovations</h4>
+      <p>
+        See our full{' '}
+        <a href="/bathroom-services-cabo" className="text-teal-600 hover:underline font-medium">
+          bathroom services in Cabo San Lucas
+        </a>
+        {' '}for pricing and details:
+      </p>
       <ul>
         <li>Complete bathroom remodels</li>
         <li>Shower and tub installations</li>

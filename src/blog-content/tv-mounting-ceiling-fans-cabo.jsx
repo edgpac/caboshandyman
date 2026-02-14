@@ -24,11 +24,19 @@ export default function TVMountingCeilingFansCaboArticle() {
 
       <h3>TV Mounting Service Options</h3>
       <p>
-        <strong>Caboshandyman.com</strong> offers comprehensive TV mounting services. View our complete{' '}
+        <strong>Caboshandyman.com</strong> offers comprehensive{' '}
+        <a href="/tv-mounting-cabo" className="text-teal-600 hover:underline font-medium">
+          TV mounting services in Cabo
+        </a>
+        . View our complete{' '}
         <a href="/services" className="text-teal-600 hover:underline font-medium">
           installation services menu
         </a>
-        {' '}with pricing for TV mounting, ceiling fans, lighting, and more in Cabo San Lucas.
+        {' '}with pricing for TV mounting,{' '}
+        <a href="/ceiling-fan-installation-cabo" className="text-teal-600 hover:underline font-medium">
+          ceiling fans
+        </a>
+        , lighting, and more in Cabo San Lucas.
       </p>
       <p>
         Our TV mounting services include:

@@ -7,7 +7,11 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
 
       <h2>Professional Plumbing Services in Cabo San Lucas</h2>
       <p>
-        Since 2006, the team behind <strong>caboshandyman.com</strong> has been serving the Los Cabos region with expert construction and plumbing services. Starting with custom home construction in El Cardonal's East Cape in 2019, we brought our extensive plumbing expertise to Cabo San Lucas in 2023, expanding to offer comprehensive handyman and emergency plumbing services to homeowners and businesses throughout the area.
+        Since 2006, the team behind <strong>caboshandyman.com</strong> has been serving the Los Cabos region with expert construction and{' '}
+        <a href="/plumber-cabo-san-lucas" className="text-teal-600 hover:underline font-medium">
+          plumbing services
+        </a>
+        . Starting with custom home construction in El Cardonal's East Cape in 2019, we brought our extensive plumbing expertise to Cabo San Lucas in 2023, expanding to offer comprehensive handyman and emergency plumbing services to homeowners and businesses throughout the area.
       </p>
 
       <h3>Our Plumbing Experience</h3>
@@ -29,7 +33,11 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
 
       <h3>Professional Drain Auger Services</h3>
       <p>
-        We use commercial-grade drain augers (also called drain snakes or rooters) to clear:
+        Our{' '}
+        <a href="/toilet-tub-unclogging-cabo" className="text-teal-600 hover:underline font-medium">
+          toilet and drain unclogging service
+        </a>
+        {' '}uses commercial-grade drain augers (also called drain snakes or rooters) to clear:
       </p>
       <ul>
         <li><strong>Toilet clogs</strong> - Hair, paper, and foreign objects</li>

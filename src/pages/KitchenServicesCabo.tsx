@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Wrench, DollarSign, Clock, ArrowRight, Droplet, Zap, ChevronDown, Shield } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import RelatedServices from '../components/RelatedServices';
 
 export default function KitchenServicesCabo() {
   const [openQuestion, setOpenQuestion] = useState<string | null>(null);
@@ -823,6 +824,7 @@ export default function KitchenServicesCabo() {
         </div>
       </section>
 
+      <RelatedServices currentPath="/kitchen-services-cabo" />
       <Footer />
     </>
   );

@@ -61,7 +61,7 @@ export default function About() {
               About Cabos Handyman
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Professional handyman and construction services built on 20+ years of expertise, trust, and a commitment to quality in Cabo San Lucas.
+              The most trusted handyman in Cabo San Lucas — 20+ years of expertise, trust, and a commitment to quality construction and repair services.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

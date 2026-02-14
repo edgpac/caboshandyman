@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Monitor, Wrench, Shield, ArrowRight, Zap } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import RelatedServices from '../components/RelatedServices';
 
 export default function TVMountingCabo() {
   const schemaMarkup = {
@@ -402,6 +403,7 @@ export default function TVMountingCabo() {
         </div>
       </section>
 
+      <RelatedServices currentPath="/tv-mounting-cabo" />
       <Footer />
     </>
   );
