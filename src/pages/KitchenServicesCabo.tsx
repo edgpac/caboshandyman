@@ -36,10 +36,16 @@ export default function KitchenServicesCabo() {
         "https://www.facebook.com/share/19wvxoz8Cy/"
       ]
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "Cabo San Lucas"
-    }
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Cabo San Lucas"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Los Cabos"
+      }
+    ]
   };
 
   const services = [
@@ -64,8 +70,8 @@ export default function KitchenServicesCabo() {
   return (
     <>
       <SEO
-        title="Kitchen Services Cabo San Lucas | Remodeling & Repair | Cabos Handyman"
-        description="Complete kitchen services in Cabo San Lucas. Cabinet installation, plumbing, electrical, countertops, and backsplash. Professional kitchen remodeling from $60 service call."
+        title="Kitchen Remodeling Cabo San Lucas & Los Cabos | Cabos Handyman"
+        description="Kitchen remodeling contractors in Los Cabos & Cabo San Lucas. Cabinet installation, plumbing, electrical, countertops, and backsplash. 20+ years experience. From $60 service call."
         canonicalUrl="/kitchen-services-cabo"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -83,7 +89,8 @@ export default function KitchenServicesCabo() {
               <span className="text-sm font-medium">Complete Kitchen Services</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Professional Kitchen Services in Cabo San Lucas
+              Kitchen Remodeling & Repair in Cabo San Lucas
+              <span className="block text-2xl md:text-3xl font-normal mt-2 text-white/90">Serving All of Los Cabos</span>
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
               From simple repairs to complete kitchen remodels. Expert plumbing, electrical, cabinetry, and installation services. 20+ years experience in Los Cabos.

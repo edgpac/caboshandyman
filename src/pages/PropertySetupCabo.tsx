@@ -36,10 +36,16 @@ export default function PropertySetupCabo() {
         "https://www.facebook.com/share/19wvxoz8Cy/"
       ]
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "Cabo San Lucas"
-    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Cabo San Lucas"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Los Cabos"
+      }
+    ],
     "offers": {
       "@type": "AggregateOffer",
       "priceCurrency": "USD",

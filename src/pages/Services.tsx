@@ -53,10 +53,16 @@ export default function ServicesPage() {
             },
             "priceRange": "$60-$1200",
             "openingHours": "Mo-Su 00:00-23:59",
-            "areaServed": {
-              "@type": "City",
-              "name": "Cabo San Lucas"
-            },
+            "areaServed": [
+              {
+                "@type": "City",
+                "name": "Cabo San Lucas"
+              },
+              {
+                "@type": "AdministrativeArea",
+                "name": "Los Cabos"
+              }
+            ],
             "sameAs": [
               "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
               "https://www.facebook.com/share/19wvxoz8Cy/"

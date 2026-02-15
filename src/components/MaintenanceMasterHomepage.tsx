@@ -94,10 +94,16 @@ export default function CabosHandymanHomepage() {
     },
     "priceRange": "$$",
     "openingHours": ["Mo-Fr 07:00-18:00", "Sa 08:00-14:00"],
-    "areaServed": {
-      "@type": "City",
-      "name": "Cabo San Lucas"
-    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Cabo San Lucas"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Los Cabos"
+      }
+    ],
     "sameAs": [
       "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
       "https://www.facebook.com/share/19wvxoz8Cy/"

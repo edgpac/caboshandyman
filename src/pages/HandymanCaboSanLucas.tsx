@@ -35,10 +35,16 @@ export default function HandymanCaboSanLucas() {
       "ratingValue": "5.0",
       "reviewCount": "600"
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "Cabo San Lucas"
-    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Cabo San Lucas"
+      },
+      {
+        "@type": "AdministrativeArea",
+        "name": "Los Cabos"
+      }
+    ],
     "sameAs": [
       "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
       "https://www.facebook.com/share/19wvxoz8Cy/"
