@@ -43,7 +43,7 @@ export default function Footer() {
               <span className="font-bold text-gray-900">Cabos Handyman</span>
             </div>
             <p className="text-gray-600 text-xs">
-              Building visions, shaping the future. Serving Cabo San Lucas.
+              Building visions, shaping the future.<br />Serving Cabo San Lucas.
             </p>
           </div>
 
