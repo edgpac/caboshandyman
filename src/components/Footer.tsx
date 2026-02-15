@@ -72,7 +72,13 @@ export default function Footer() {
               <div className="flex items-center space-x-2 text-gray-600">
                 <Facebook className="h-4 w-4 text-teal-400" />
                 <a href="https://www.facebook.com/share/19wvxoz8Cy/" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500 transition-colors">
-                  Follow us on Facebook
+                  Facebook
+                </a>
+              </div>
+              <div className="flex items-center space-x-2 text-gray-600">
+                <svg className="h-4 w-4 text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+                <a href="https://www.instagram.com/caboshandyman" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500 transition-colors">
+                  Instagram
                 </a>
               </div>
               {/* Schedule Service Button */}

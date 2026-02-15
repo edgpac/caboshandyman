@@ -30,7 +30,8 @@ export default function ToiletTubUncloggingCabo() {
       "openingHours": "Mo-Su 00:00-23:59",
       "sameAs": [
         "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
-        "https://www.facebook.com/share/19wvxoz8Cy/"
+        "https://www.facebook.com/share/19wvxoz8Cy/",
+        "https://www.instagram.com/caboshandyman"
       ]
     },
     "areaServed": [

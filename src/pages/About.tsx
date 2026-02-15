@@ -30,7 +30,8 @@ export default function About() {
     "description": "Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed. Licensed, insured, and bonded.",
     "sameAs": [
       "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
-      "https://www.facebook.com/share/19wvxoz8Cy/"
+      "https://www.facebook.com/share/19wvxoz8Cy/",
+      "https://www.instagram.com/caboshandyman"
     ]
   };
 
