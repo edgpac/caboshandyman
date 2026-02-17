@@ -10,7 +10,7 @@ export default function About() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Cabos Handyman",
-    "image": "https://caboshandyman.com/CHLOGO.png",
+    "image": "https://www.caboshandyman.com/CHLOGO.png",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Cabo San Lucas",
@@ -24,10 +24,10 @@ export default function About() {
     },
     "telephone": "+52-612-169-8328",
     "email": "loscabohandyman@gmail.com",
-    "url": "https://caboshandyman.com",
+    "url": "https://www.caboshandyman.com",
     "openingHours": "Mo-Su 00:00-23:59",
     "foundingDate": "2019",
-    "description": "Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed. Licensed, insured, and bonded.",
+    "description": "Meet the Cabos Handyman team — a bilingual, licensed, and insured crew serving Cabo San Lucas since 2019 with 20+ years of hands-on experience.",
     "sameAs": [
       "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
       "https://www.facebook.com/share/19wvxoz8Cy/",
@@ -38,8 +38,8 @@ export default function About() {
   return (
     <>
       <SEO
-        title="About Cabos Handyman | Professional Services in Cabo San Lucas"
-        description="Learn about Cabos Handyman - serving Cabo San Lucas since 2019 with 20+ years of construction expertise. 600+ completed projects. Licensed, insured, and bonded. Bilingual team. Professional employees, not subcontractors."
+        title="About Us | Meet the Cabos Handyman Team in Cabo San Lucas"
+        description="Meet the team behind Cabos Handyman. Founded in 2019, our bilingual crew brings 20+ years of hands-on experience to Cabo San Lucas. Licensed, insured, bonded. Professional employees, not subcontractors."
         canonicalUrl="/about"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"

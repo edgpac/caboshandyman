@@ -13,7 +13,7 @@ export default function FurnitureAssemblyCabo() {
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cabos Handyman",
-      "image": "https://caboshandyman.com/CHLOGO.png",
+      "image": "https://www.caboshandyman.com/CHLOGO.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Cabo San Lucas",

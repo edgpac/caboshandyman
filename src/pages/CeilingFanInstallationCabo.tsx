@@ -13,7 +13,7 @@ export default function CeilingFanInstallationCabo() {
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cabos Handyman - Ceiling Fan Installation",
-      "image": "https://caboshandyman.com/CHLOGO.png",
+      "image": "https://www.caboshandyman.com/CHLOGO.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Cabo San Lucas",

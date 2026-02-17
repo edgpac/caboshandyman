@@ -385,7 +385,7 @@ export default function FAQ() {
       <Helmet>
         <title>FAQ - Cabos Handyman | 50+ FAQ About Handyman Services in Cabo San Lucas</title>
         <meta name="description" content="Get answers to 50+ common questions about handyman services, emergency repairs, vacation rental maintenance, plumbing, electrical, remodeling, pricing, and more in Cabo San Lucas. 24/7 emergency service available!" />
-        <link rel="canonical" href="https://caboshandyman.com/faq" />
+        <link rel="canonical" href="https://www.caboshandyman.com/faq" />
         <script type="application/ld+json">
           {JSON.stringify(generateSchemaMarkup())}
         </script>

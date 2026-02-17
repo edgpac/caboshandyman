@@ -13,7 +13,7 @@ export default function HandymanCaboSanLucas() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Cabos Handyman",
-    "image": "https://caboshandyman.com/CHLOGO.png",
+    "image": "https://www.caboshandyman.com/CHLOGO.png",
     "description": "Professional handyman services in Cabo San Lucas. 20+ years experience with 600+ completed projects. Residential, commercial, and vacation rental services.",
     "address": {
       "@type": "PostalAddress",
@@ -56,7 +56,7 @@ export default function HandymanCaboSanLucas() {
     <>
       <SEO
         title="Handyman Cabo San Lucas | 20+ Years Experience | Cabos Handyman"
-        description="Trusted handyman service in Cabo San Lucas with 20+ years experience and 600+ completed projects. Residential, commercial, and vacation rental services. 24/7 emergency service available."
+        description="Top-rated handyman in Cabo San Lucas — $60 service calls, same-day availability. Plumbing, electrical, painting, remodels & more. Bilingual team, licensed & insured. Call now for a free estimate."
         canonicalUrl="/handyman-cabo-san-lucas"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"

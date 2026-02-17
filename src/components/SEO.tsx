@@ -13,7 +13,7 @@ interface SEOProps {
 
 export default function SEO({ title, description, canonicalUrl, ogImage, geoRegion, geoPlacename, geoPosition, schemaMarkup }: SEOProps) {
   const defaultOgImage = '/images/cabos-handyman-og.jpg';
-  const siteUrl = 'https://caboshandyman.com';
+  const siteUrl = 'https://www.caboshandyman.com';
   const fullCanonicalUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
   const fullOgImage = ogImage || defaultOgImage;
 

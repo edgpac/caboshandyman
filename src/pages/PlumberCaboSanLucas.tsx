@@ -17,7 +17,7 @@ export default function PlumberCaboSanLucas() {
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cabos Handyman - Plumbing Services",
-      "image": "https://caboshandyman.com/CHLOGO.png",
+      "image": "https://www.caboshandyman.com/CHLOGO.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Cabo San Lucas",

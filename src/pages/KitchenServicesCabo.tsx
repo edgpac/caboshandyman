@@ -16,7 +16,7 @@ export default function KitchenServicesCabo() {
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cabos Handyman - Kitchen Services",
-      "image": "https://caboshandyman.com/CHLOGO.png",
+      "image": "https://www.caboshandyman.com/CHLOGO.png",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Cabo San Lucas",

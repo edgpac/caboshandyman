@@ -22,12 +22,12 @@ export default function ServicesPage() {
           name="keywords"
           content="handyman cabo san lucas, plumbing cabo, electrical cabo, kitchen remodel cabo, bathroom renovation cabo, toilet unclogging cabo, drain cleaning cabo san lucas, handyman pricing, emergency plumbing cabo"
         />
-        <link rel="canonical" href="https://caboshandyman.com/services" />
+        <link rel="canonical" href="https://www.caboshandyman.com/services" />
 
         {/* Open Graph for social sharing */}
         <meta property="og:title" content="Handyman Services & Pricing - Cabo San Lucas" />
         <meta property="og:description" content="70+ handyman services with transparent pricing. Kitchen, bathroom, electrical, plumbing. $60 service call. 24/7 emergency service." />
-        <meta property="og:url" content="https://caboshandyman.com/services" />
+        <meta property="og:url" content="https://www.caboshandyman.com/services" />
         <meta property="og:type" content="website" />
 
         {/* Schema.org Service Catalog Markup */}
@@ -36,10 +36,10 @@ export default function ServicesPage() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             "name": "Cabos Handyman",
-            "image": "https://caboshandyman.com/logo.png",
+            "image": "https://www.caboshandyman.com/logo.png",
             "telephone": "+52-612-169-8328",
             "email": "loscabohandyman@gmail.com",
-            "url": "https://caboshandyman.com",
+            "url": "https://www.caboshandyman.com",
             "address": {
               "@type": "PostalAddress",
               "addressLocality": "Cabo San Lucas",

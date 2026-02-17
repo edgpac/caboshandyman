@@ -78,9 +78,9 @@ export default function CabosHandymanHomepage() {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Cabos Handyman",
-    "image": "https://caboshandyman.com/CHLOGO.png",
+    "image": "https://www.caboshandyman.com/CHLOGO.png",
     "telephone": "+526121698328",
-    "url": "https://caboshandyman.com",
+    "url": "https://www.caboshandyman.com",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Cabo San Lucas",
@@ -135,7 +135,7 @@ export default function CabosHandymanHomepage() {
     <>
       <SEO
         title="Handyman Cabo San Lucas | 20+ Years Experience | Cabos Handyman"
-        description="Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed, 24/7 emergency service for Property Care members. Licensed, insured, and bonded."
+        description="Need a handyman in Cabo San Lucas? 600+ projects completed, $60 service calls, 24/7 emergency service. Kitchen remodels, plumbing, electrical & more. Call +52 612 169 8328 for a free estimate."
         canonicalUrl="/"
         schemaMarkup={homepageSchema}
       />
