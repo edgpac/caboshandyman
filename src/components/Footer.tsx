@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Phone, Mail, Clock, Wrench, DollarSign, RefreshCw, Facebook, Calendar, HelpCircle } from 'lucide-react';
+import GradientText from './GradientText';
 
 export default function Footer() {
   const [exchangeRate, setExchangeRate] = useState(null);
@@ -39,8 +40,8 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center space-x-2 mb-3">
-              <Wrench className="h-6 w-6 text-teal-400" />
-              <span className="font-bold text-gray-900">Cabos Handyman</span>
+              <Wrench className="h-6 w-6 text-[#049d8e]" />
+              <GradientText className="font-bold text-base">Cabos Handyman</GradientText>
             </div>
             <p className="text-gray-600 text-xs">
               Building visions, shaping the future.<br />Serving Cabo San Lucas.
@@ -87,7 +88,7 @@ export default function Footer() {
                   href="https://cal.com/maintenancemaster/residential-consultation"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm"
+                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-sm shadow-[#049d8e]/30"
                 >
                   <Calendar className="h-4 w-4" />
                   <span>Schedule Service</span>
@@ -164,7 +165,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center text-xs">
             <div className="flex flex-col items-start md:items-center space-y-1">
               <div className="flex items-center space-x-4">
-                <span className="text-teal-500 font-medium">Licensed • Insured • Bonded</span>
+                <GradientText className="font-medium">Licensed • Insured • Bonded</GradientText>
                 <span className="text-gray-600">&copy; 2026 Cabos Handyman. All rights reserved.</span>
               </div>
               <div className="text-[10px] text-gray-400">

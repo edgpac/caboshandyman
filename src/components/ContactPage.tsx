@@ -73,7 +73,7 @@ const ContactPage = () => {
 
       <div className="min-h-screen bg-gray-50">
         {/* Hero */}
-        <section className="py-20 bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700 text-white">
+        <section className="py-20 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white">
           <div className="container mx-auto px-4 text-center">
             <Wrench className="w-16 h-16 mx-auto mb-6" />
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
@@ -343,7 +343,7 @@ const ContactPage = () => {
                     <button 
                       type="submit" 
                       disabled={isSubmitting}
-                      className="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                      className="w-full bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {isSubmitting ? (
                         <>

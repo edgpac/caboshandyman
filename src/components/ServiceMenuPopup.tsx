@@ -262,7 +262,7 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-2 sm:p-4">
       <div className="bg-white rounded-lg max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden">
         {/* Header */}
-        <div className="bg-teal-500 text-white p-6 flex justify-between items-center">
+        <div className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white p-6 flex justify-between items-center">
           <div>
             <h2 className="text-2xl font-bold">{projectType} Services</h2>
             <p className="text-teal-100 mt-1">Starting prices - Final cost may vary based on complexity</p>
@@ -286,7 +286,7 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
               className="bg-gradient-to-br from-teal-50 to-teal-100 border-2 border-teal-500 rounded-lg p-4 hover:shadow-lg transition-all group cursor-pointer"
             >
               <div className="flex items-center gap-3 mb-2">
-                <div className="bg-teal-500 w-10 h-10 rounded-full flex items-center justify-center">
+                <div className="bg-gradient-to-br from-[#2dd4bf] to-[#06756b] w-10 h-10 rounded-full flex items-center justify-center">
                   <Home className="text-white" size={20} />
                 </div>
                 <h3 className="font-bold text-gray-900 group-hover:text-teal-600 transition-colors">Property Setup</h3>
@@ -413,7 +413,7 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
                   onGetEstimate();
                 }
               }}
-              className="flex-1 bg-teal-500 hover:bg-teal-600 text-white py-3 px-6 rounded-lg font-semibold transition-colors"
+              className="flex-1 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white py-3 px-6 rounded-lg font-semibold transition-all"
             >
               Get Free Estimate
             </button>

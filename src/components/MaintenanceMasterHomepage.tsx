@@ -252,7 +252,7 @@ export default function CabosHandymanHomepage() {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge - Smaller on Mobile */}
-              <div className="inline-block bg-gradient-to-r from-teal-400 to-teal-600 text-white px-3 py-1 md:px-4 md:py-2 rounded-full mb-3 md:mb-6">
+              <div className="inline-block bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white px-3 py-1 md:px-4 md:py-2 rounded-full mb-3 md:mb-6">
                 <span className="text-xs md:text-sm font-semibold">
                   🏗️ Cabo San Lucas' Leading Handyman Service
                 </span>
@@ -297,7 +297,7 @@ export default function CabosHandymanHomepage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
                   href="tel:+526121698328"
-                  className="bg-gradient-to-r from-teal-400 to-teal-600 hover:from-teal-500 hover:to-teal-700 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all flex items-center justify-center shadow-lg shadow-teal-500/30"
+                  className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all flex items-center justify-center shadow-lg shadow-teal-500/30"
                 >
                   <Phone className="mr-2" size={20} />
                   Call for Free Estimate
@@ -397,7 +397,7 @@ export default function CabosHandymanHomepage() {
         <ReviewsCarousel />
 
         {/* CTA Section - Care Plans Focus */}
-        <section className="py-16 bg-gradient-to-br from-teal-400 via-teal-500 to-teal-700">
+        <section className="py-16 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b]">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center text-white">
 
@@ -443,7 +443,7 @@ export default function CabosHandymanHomepage() {
                 {/* Button 2: Scheduling Assistant (Existing - Secondary) */}
                 <button
                   onClick={() => openAIAssistant('services')}
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-teal-600 to-teal-800 text-white font-bold text-lg rounded-lg hover:from-teal-700 hover:to-teal-900 transition border-2 border-white min-w-[250px]"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#049d8e] to-[#06756b] text-white font-bold text-lg rounded-lg hover:opacity-90 transition border-2 border-white min-w-[250px]"
                 >
                   <span className="mr-2">💬</span>
                   Scheduling Assistant

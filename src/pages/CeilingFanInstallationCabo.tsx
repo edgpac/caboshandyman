@@ -59,7 +59,7 @@ export default function CeilingFanInstallationCabo() {
       />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-emerald-600 to-teal-700 text-white overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -397,7 +397,7 @@ export default function CeilingFanInstallationCabo() {
           </div>
 
           {/* Final CTA */}
-          <div className="bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl p-8 md:p-12 text-center text-white">
+          <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] rounded-2xl p-8 md:p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Stay Cool with Professional Ceiling Fans?</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Same-day installation available. Safe, secure mounting with perfect balancing. Serving all of Cabo San Lucas.

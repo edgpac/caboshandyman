@@ -70,7 +70,7 @@ export default function PropertySetupCabo() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-teal-400 via-teal-600 to-teal-800 text-white overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -93,7 +93,7 @@ export default function PropertySetupCabo() {
               </a>
               <a
                 href="tel:+526121698328"
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-400 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-teal-500 hover:to-teal-700 transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-colors"
               >
                 Call Now: +52 612 169 8328
               </a>
@@ -220,13 +220,13 @@ export default function PropertySetupCabo() {
                     <span className="text-gray-700">4-6 hours of work</span>
                   </li>
                 </ul>
-                <a href="/contact" className="block w-full text-center bg-gradient-to-r from-teal-500 to-teal-700 text-white py-3 rounded-lg font-semibold hover:from-teal-600 hover:to-teal-800 transition-colors">
+                <a href="/contact" className="block w-full text-center bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-all">
                   Get Quote
                 </a>
               </div>
 
               {/* 2BR Package */}
-              <div className="bg-gradient-to-br from-teal-400 via-teal-600 to-teal-800 border-2 border-teal-600 rounded-xl p-6 text-white transform scale-105 shadow-xl">
+              <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] border-2 border-teal-600 rounded-xl p-6 text-white transform scale-105 shadow-xl">
                 <div className="bg-yellow-400 text-teal-900 text-xs font-bold px-3 py-1 rounded-full inline-block mb-4">
                   MOST POPULAR
                 </div>
@@ -299,7 +299,7 @@ export default function PropertySetupCabo() {
                     <span className="text-gray-700">12-16+ hours of work</span>
                   </li>
                 </ul>
-                <a href="/contact" className="block w-full text-center bg-gradient-to-r from-teal-500 to-teal-700 text-white py-3 rounded-lg font-semibold hover:from-teal-600 hover:to-teal-800 transition-colors">
+                <a href="/contact" className="block w-full text-center bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition-all">
                   Get Quote
                 </a>
               </div>
@@ -346,22 +346,22 @@ export default function PropertySetupCabo() {
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Simple Process, Fast Results</h2>
             <div className="grid md:grid-cols-4 gap-6">
               <div className="text-center">
-                <div className="bg-gradient-to-br from-teal-400 to-teal-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
+                <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
                 <h3 className="font-bold text-gray-900 mb-2">Contact Us</h3>
                 <p className="text-gray-600 text-sm">Call, WhatsApp, or email with your property details and timeline</p>
               </div>
               <div className="text-center">
-                <div className="bg-gradient-to-br from-teal-400 to-teal-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
+                <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
                 <h3 className="font-bold text-gray-900 mb-2">Get Quote</h3>
                 <p className="text-gray-600 text-sm">Receive transparent package pricing based on your property size</p>
               </div>
               <div className="text-center">
-                <div className="bg-gradient-to-br from-teal-400 to-teal-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
+                <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
                 <h3 className="font-bold text-gray-900 mb-2">Schedule Setup</h3>
                 <p className="text-gray-600 text-sm">We coordinate delivery dates and plan the complete installation</p>
               </div>
               <div className="text-center">
-                <div className="bg-gradient-to-br from-teal-400 to-teal-600 text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">4</div>
+                <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">4</div>
                 <h3 className="font-bold text-gray-900 mb-2">Move In Ready</h3>
                 <p className="text-gray-600 text-sm">Your property is fully furnished and ready in 1-2 days</p>
               </div>
@@ -800,7 +800,7 @@ export default function PropertySetupCabo() {
           </div>
 
           {/* Final CTA */}
-          <div className="bg-gradient-to-br from-teal-400 via-teal-600 to-teal-800 rounded-2xl p-8 md:p-12 text-center text-white">
+          <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] rounded-2xl p-8 md:p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Make Your Cabo Property Move-In Ready?</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Stop stressing about furniture assembly, TV mounting, and property setup. Get your complete package quote today.
@@ -814,7 +814,7 @@ export default function PropertySetupCabo() {
               </a>
               <a
                 href="tel:+526121698328"
-                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-400 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-teal-500 hover:to-teal-700 transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-colors"
               >
                 Call: +52 612 169 8328
               </a>

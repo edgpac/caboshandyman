@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Phone, Mail, Shield, Menu, ChevronDown } from 'lucide-react';
+import GradientText from './GradientText';
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -17,15 +18,15 @@ export default function Navigation() {
                   alt="Cabos Handyman Logo"
                   className="w-12 h-12 object-contain"
                 />
-                <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
+                <GradientText className="text-xl font-bold">CABOS HANDYMAN</GradientText>
               </a>
             </div>
             <a
               href="tel:+526121698328"
-              className="flex items-center gap-1 text-primary hover:text-primary-hover transition-colors text-sm mt-1"
+              className="flex items-center gap-1 text-sm mt-1"
             >
-              <Phone size={14} />
-              <span>612 169 8328</span>
+              <Phone size={14} className="text-[#049d8e]" />
+              <GradientText className="text-sm">612 169 8328</GradientText>
             </a>
           </div>
 
@@ -46,7 +47,7 @@ export default function Navigation() {
             </a>
             <a
               href="/contact"
-              className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground px-4 py-2 rounded-lg transition-colors font-semibold"
+              className="flex items-center gap-2 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-4 py-2 rounded-lg transition-all font-semibold shadow-md shadow-[#049d8e]/30"
             >
               <Mail size={18} />
               Contact Us
@@ -56,7 +57,7 @@ export default function Navigation() {
           {/* Mobile: Hamburger Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden flex items-center gap-2 px-4 py-2 rounded-lg bg-primary hover:bg-primary-hover text-primary-foreground font-semibold transition-colors"
+            className="md:hidden flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white font-semibold transition-all shadow-md shadow-[#049d8e]/30"
             aria-label="Toggle mobile menu"
           >
             <Menu size={20} />
@@ -89,7 +90,7 @@ export default function Navigation() {
             <a
               href="/contact"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground px-4 py-3 rounded-lg transition-colors font-semibold"
+              className="flex items-center gap-2 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-4 py-3 rounded-lg transition-all font-semibold shadow-md shadow-[#049d8e]/30"
             >
               <Mail size={18} />
               Contact Us

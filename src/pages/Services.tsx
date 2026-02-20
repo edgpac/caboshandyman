@@ -151,7 +151,7 @@ export default function ServicesPage() {
         </div>
 
         {/* Visible Header */}
-        <div className="bg-gradient-to-br from-teal-500 to-teal-600 text-white py-16 px-4 text-center">
+        <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white py-16 px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Service Menu & Pricing</h2>
           <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 mt-4 sm:mt-6">
             {/* Main Subtitle */}
@@ -206,7 +206,7 @@ export default function ServicesPage() {
                 className="bg-gradient-to-br from-teal-50 to-teal-100 border-2 border-teal-500 rounded-lg p-6 hover:shadow-lg transition-all group"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="bg-gradient-to-br from-teal-400 to-teal-600 w-12 h-12 rounded-full flex items-center justify-center">
+                  <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] w-12 h-12 rounded-full flex items-center justify-center">
                     <Home className="text-white" size={24} />
                   </div>
                   <h3 className="font-bold text-gray-900 text-lg group-hover:text-teal-600 transition-colors">Property Setup</h3>
@@ -320,7 +320,7 @@ export default function ServicesPage() {
           </div>
 
           {/* CTA */}
-          <div className="bg-gradient-to-br from-teal-400 via-teal-500 to-teal-700 text-white rounded-xl p-8 text-center">
+          <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white rounded-xl p-8 text-center">
             <h3 className="text-3xl font-bold mb-4">Need a Custom Quote?</h3>
             <p className="text-lg mb-6">Call us for a free estimate on your project or issue</p>
             <a

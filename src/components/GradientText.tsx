@@ -2,8 +2,8 @@ import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useAnimationFrame, useTransform } from 'motion/react';
 import './GradientText.css';
 
-// Teal palette: light → mid → dark → back to light for seamless loop
-const TEAL_COLORS = ['#5eead4', '#14b8a6', '#0d9488', '#0f766e', '#14b8a6', '#5eead4'];
+// Teal palette anchored on #049d8e: light → core → dark → back for seamless loop
+const TEAL_COLORS = ['#5eead4', '#2dd4bf', '#049d8e', '#06756b', '#049d8e', '#2dd4bf', '#5eead4'];
 
 interface GradientTextProps {
   children: React.ReactNode;

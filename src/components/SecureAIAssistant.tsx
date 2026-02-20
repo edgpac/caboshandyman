@@ -392,7 +392,7 @@ Time: ${new Date().toLocaleString()}`;
     try {
       const loadingToast = document.createElement('div');
       loadingToast.textContent = 'Preparing appointment request...';
-      loadingToast.className = 'fixed top-4 right-4 bg-teal-400 text-white px-4 py-2 rounded-lg shadow-lg z-50';
+      loadingToast.className = 'fixed top-4 right-4 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white px-4 py-2 rounded-lg shadow-lg z-50';
       document.body.appendChild(loadingToast);
 
       let imagesToSend = null;
@@ -636,7 +636,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         if (result.vision_success_count === 0 && result.vision_error_count > 0) {
           const infoToast = document.createElement('div');
           infoToast.textContent = 'ℹ️ Estimate based on description (image analysis unavailable)';
-          infoToast.className = 'fixed top-4 right-4 bg-teal-400 text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
+          infoToast.className = 'fixed top-4 right-4 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white px-4 py-2 rounded-lg shadow-lg z-50 text-sm';
           document.body.appendChild(infoToast);
           setTimeout(() => {
             if (document.body.contains(infoToast)) {
@@ -872,7 +872,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 bg-teal-400 hover:bg-teal-500 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50 ${
+        className={`fixed bottom-6 right-6 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 z-50 ${
           isMobile ? 'p-3' : 'p-4'
         }`}
         aria-label="Open Assistant"
@@ -887,7 +887,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsMinimized(false)}
-          className="bg-teal-400 hover:bg-teal-500 text-white px-6 py-3 rounded-full shadow-2xl flex items-center space-x-2 transition-all duration-300"
+          className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-6 py-3 rounded-full shadow-2xl flex items-center space-x-2 transition-all duration-300"
         >
           <Wrench size={20} />
           <span className="font-semibold">Live Support</span>
@@ -906,7 +906,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
   return (
     <div className={containerClasses}>
       {/* UPDATED HEADER WITH MINIMIZE/CLOSE */}
-      <div className={`bg-gradient-to-r from-teal-400 to-teal-500 text-white p-4 ${isMobile ? '' : 'rounded-t-2xl'} flex items-center justify-between`}>
+      <div className={`bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white p-4 ${isMobile ? '' : 'rounded-t-2xl'} flex items-center justify-between`}>
         <div className="flex items-center space-x-3">
           <div className="bg-white p-2 rounded-full">
             <Wrench size={20} className="text-teal-500" />
@@ -974,7 +974,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     )}
                     <div className={`p-3 rounded-2xl text-sm ${
                       msg.role === 'user'
-                        ? 'bg-teal-400 text-white rounded-br-none shadow-sm'
+                        ? 'bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white rounded-br-none shadow-sm'
                         : 'bg-white border border-gray-200 rounded-bl-none shadow-sm'
                     }`}>
                       <div className="whitespace-pre-line">{formatPhoneNumbers(msg.content)}</div>
@@ -1040,7 +1040,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               <button 
                 onClick={handleFeedbackChat}
                 disabled={!feedbackInput.trim() || isAnalyzing}
-                className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-full transition-colors flex-shrink-0"
+                className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 rounded-full transition-colors flex-shrink-0"
               >
                 <Send size={18} />
               </button>
@@ -1099,7 +1099,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             <div className="border-t pt-4">
               <button
                 onClick={() => setCurrentView('booking')}
-                className="w-full bg-teal-400 hover:bg-teal-500 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
+                className="w-full bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2"
               >
                 <Camera size={16} />
                 <span>Analyze Specific Issue</span>
@@ -1200,7 +1200,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   }`}>
                     <button
                       onClick={capturePhoto}
-                      className="bg-teal-400 hover:bg-teal-500 text-white px-4 py-2 rounded-lg font-semibold flex items-center justify-center space-x-2"
+                      className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-4 py-2 rounded-lg font-semibold flex items-center justify-center space-x-2"
                     >
                       <Camera size={16} />
                       <span>Capture</span>
@@ -1271,7 +1271,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <div className={`grid gap-2 ${isMobile ? 'grid-cols-1' : 'grid-cols-2'}`}>
                     <button
                       onClick={startCamera}
-                      className="bg-teal-400 hover:bg-teal-500 text-white px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
+                      className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-3 py-2 rounded text-sm font-semibold flex items-center justify-center space-x-1"
                     >
                       <Camera size={14} />
                       <span>Take Photo</span>
@@ -1307,7 +1307,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[80%] p-3 rounded-lg text-sm ${
                         msg.role === 'user'
-                          ? 'bg-teal-400 text-white rounded-br-none'
+                          ? 'bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white rounded-br-none'
                           : 'bg-white border border-gray-200 rounded-bl-none'
                       }`}>
                         <div className="whitespace-pre-line">{formatPhoneNumbers(msg.content)}</div>
@@ -1336,7 +1336,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <button 
                     onClick={handleChatSend}
                     disabled={!chatInput.trim() || isAnalyzing}
-                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
+                    className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 rounded-lg"
                   >
                     <Send size={16} />
                   </button>
@@ -1368,7 +1368,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <button
                   onClick={analyzeIssue}
                   disabled={selectedImages.length === 0 || !description}
-                  className={`w-full bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
+                  className={`w-full bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white py-3 px-4 rounded-lg font-semibold transition-colors flex items-center justify-center space-x-2 ${
                     isMobile ? 'py-4' : ''
                   }`}
                 >
@@ -1505,7 +1505,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                     <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                       <div className={`max-w-[85%] p-2 rounded-lg text-sm ${
                         msg.role === 'user'
-                          ? 'bg-teal-400 text-white rounded-br-none'
+                          ? 'bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white rounded-br-none'
                           : 'bg-white border border-gray-200 rounded-bl-none'
                       }`}>
                         <div className="whitespace-pre-line">{formatPhoneNumbers(msg.content)}</div>
@@ -1535,7 +1535,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   <button 
                     onClick={handleFeedbackChat}
                     disabled={!feedbackInput.trim() || isAnalyzing}
-                    className="bg-teal-400 hover:bg-teal-500 disabled:bg-gray-300 disabled:cursor-not-allowed text-white px-4 rounded-lg"
+                    className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 rounded-lg"
                   >
                     <Send size={16} />
                   </button>
@@ -1561,7 +1561,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
             <div className="space-y-2">
               <button 
                 onClick={() => handleScheduleAppointment(analysis)}
-                className={`w-full bg-teal-400 hover:bg-teal-500 text-white py-2 px-4 rounded-lg font-semibold text-sm ${
+                className={`w-full bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white py-2 px-4 rounded-lg font-semibold text-sm ${
                   isMobile ? 'py-3' : ''
                 }`}
               >

@@ -395,7 +395,7 @@ export default function FAQ() {
 
       <div className="min-h-screen bg-gray-50">
         {/* Header */}
-        <div className="bg-gradient-to-br from-teal-500 to-teal-600 text-white py-16 px-4 text-center">
+        <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white py-16 px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">
             Frequently Asked Questions
           </h1>
@@ -489,7 +489,7 @@ export default function FAQ() {
         </div>
 
         {/* CTA Section */}
-        <div className="bg-gradient-to-br from-teal-400 via-teal-500 to-teal-700 text-white py-16 px-4 text-center">
+        <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white py-16 px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             Still Have Questions?
           </h2>
@@ -505,7 +505,7 @@ export default function FAQ() {
             </a>
             <a
               href="/contact"
-              className="inline-block bg-gradient-to-r from-teal-500 to-teal-700 text-white border-2 border-white px-8 py-4 rounded-lg text-xl font-bold hover:from-teal-600 hover:to-teal-800 transition-colors shadow-lg"
+              className="inline-block bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white border-2 border-white px-8 py-4 rounded-lg text-xl font-bold hover:opacity-90 transition-all shadow-lg"
             >
               Contact Page
             </a>
