@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
 import { Phone, Mail, MapPin, ArrowRight, MessageCircle, Shield, Menu, ChevronDown } from 'lucide-react';
 import Footer from './Footer';
 import SEO from './SEO';
@@ -25,35 +23,47 @@ export default function CabosHandymanHomepage() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const statsRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  const animateCounter = (element: HTMLElement, endValue: number, prefix = '', suffix = '') => {
-    const obj = { value: 0 };
-    gsap.to(obj, {
-      value: endValue,
-      duration: 2,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: element,
-        start: 'top 85%',
-        toggleActions: 'play none none none',
-      },
-      onUpdate: () => {
-        if (element) {
-          element.textContent = prefix + Math.round(obj.value).toLocaleString() + suffix;
-        }
-      },
-    });
-  };
+  const statsSectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    if (statsRefs.current[0]) animateCounter(statsRefs.current[0], 20, '', '+');
-    if (statsRefs.current[1]) animateCounter(statsRefs.current[1], 600, '', '+');
-    if (statsRefs.current[2]) animateCounter(statsRefs.current[2], 24, '', '/7*');
-    if (statsRefs.current[3]) animateCounter(statsRefs.current[3], 100, '', '%');
+    const configs = [
+      { idx: 0, end: 20,  suffix: '+'   },
+      { idx: 1, end: 600, suffix: '+'   },
+      { idx: 2, end: 24,  suffix: '/7*' },
+      { idx: 3, end: 100, suffix: '%'   },
+    ];
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    const runCounters = () => {
+      configs.forEach(({ idx, end, suffix }) => {
+        const el = statsRefs.current[idx];
+        if (!el) return;
+        const obj = { value: 0 };
+        gsap.to(obj, {
+          value: end,
+          duration: 2,
+          ease: 'power2.out',
+          onUpdate: () => {
+            el.textContent = Math.round(obj.value).toLocaleString() + suffix;
+          },
+        });
+      });
     };
+
+    const section = statsSectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          runCounters();
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
   }, []);
 
   const projects = [
@@ -318,16 +328,17 @@ export default function CabosHandymanHomepage() {
               </div>
 
               {/* Disclaimer */}
-              <p className="text-xs text-gray-800 mt-5">
-                *Handyman services for vacation rentals and homes. Service calls starting at $60 for most repairs.
-              </p>
+              <div className="text-xs text-gray-800 mt-5 space-y-1">
+                <p>*Handyman services for vacation rentals and homes.</p>
+                <p>Service calls starting at $60 for most repairs.</p>
+              </div>
 
             </div>
           </div>
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 bg-muted/20">
+        <section ref={statsSectionRef} className="py-16 bg-muted/20">
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
               <div className="transform hover:scale-105 transition-transform">
