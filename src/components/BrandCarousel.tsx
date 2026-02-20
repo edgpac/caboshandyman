@@ -15,7 +15,7 @@ const brandLogos = [
   { src: '/logos/GE.svg',         alt: 'GE' },
   { src: '/logos/Siemens.svg',    alt: 'Siemens' },
   { src: '/logos/KleinTools.png',  alt: 'Klein Tools' },
-  { src: '/logos/milwaukee.webp',  alt: 'Milwaukee Tool', href: 'https://milwaukeetool.com' },
+  { src: '/logos/milwaukee.png',   alt: 'Milwaukee Tool', href: 'https://milwaukeetool.com' },
   { src: '/logos/Skil.png',        alt: 'Skil' },
 ];
 
