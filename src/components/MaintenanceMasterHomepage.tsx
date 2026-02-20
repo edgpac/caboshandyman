@@ -260,7 +260,7 @@ export default function CabosHandymanHomepage() {
                   CABOS HANDYMAN
                 </GradientText>
                 <span className="block text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold mt-2 text-gray-900">
-                  Professional Handyman Services in Cabo San Lucas
+                  Professional Handyman<br className="lg:hidden" /> Services in Cabo San Lucas
                 </span>
               </h1>
 
