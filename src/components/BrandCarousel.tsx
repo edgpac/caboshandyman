@@ -15,7 +15,7 @@ const brandLogos = [
   { src: '/logos/GE.svg',         alt: 'GE' },
   { src: '/logos/Siemens.svg',    alt: 'Siemens' },
   { src: '/logos/KleinTools.png',  alt: 'Klein Tools' },
-  { src: '/logos/milwaukee.png',   alt: 'Milwaukee Tool', href: 'https://milwaukeetool.com' },
+  { node: <img src="/logos/milwaukee.png" alt="Milwaukee Tool" style={{ height: '52px', width: 'auto', objectFit: 'contain' }} loading="lazy" draggable={false} />, ariaLabel: 'Milwaukee Tool', href: 'https://milwaukeetool.com' },
   { src: '/logos/Skil.png',        alt: 'Skil' },
 ];
 
