@@ -5,6 +5,7 @@ import SEO from './SEO';
 import SecureAIAssistant from './SecureAIAssistant';
 import ServiceMenuPopup from './ServiceMenuPopup';
 import ReviewsCarousel from './ReviewsCarousel';
+import BrandCarousel from './BrandCarousel';
 import GradientText from './GradientText';
 import kitchenImage from '../assets/modern-kitchen-remodel.jpeg';
 import bathroomImage from '../assets/luxury-bathroom.jpeg';
@@ -515,6 +516,9 @@ export default function CabosHandymanHomepage() {
           onGetEstimate={() => openAIAssistant('analysis')}
           onScheduleConsultation={() => openAIAssistant('booking')}
         />
+
+        {/* Brand Partner Carousel */}
+        <BrandCarousel />
 
         {/* Footer */}
         <Footer />
