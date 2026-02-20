@@ -14,8 +14,9 @@ const brandLogos = [
   // International brands
   { src: '/logos/GE.svg',         alt: 'GE' },
   { src: '/logos/Siemens.svg',    alt: 'Siemens' },
-  { src: '/logos/KleinTools.png', alt: 'Klein Tools' },
-  { src: '/logos/Skil.png',       alt: 'Skil' },
+  { src: '/logos/KleinTools.png',  alt: 'Klein Tools' },
+  { src: '/logos/milwaukee.webp',  alt: 'Milwaukee Tool', href: 'https://milwaukeetool.com' },
+  { src: '/logos/Skil.png',        alt: 'Skil' },
 ];
 
 export default function BrandCarousel() {
