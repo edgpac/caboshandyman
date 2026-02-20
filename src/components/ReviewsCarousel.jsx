@@ -202,7 +202,7 @@ export default function ReviewsCarousel() {
                   </div>
 
                   {/* Review Text */}
-                  <p className="text-gray-700 text-base leading-relaxed mb-6">
+                  <p className="text-gray-900 text-base leading-relaxed mb-6">
                     "{review.text}"
                   </p>
 
@@ -211,7 +211,7 @@ export default function ReviewsCarousel() {
                     <p className="font-bold text-gray-900 text-lg">
                       {review.name}
                     </p>
-                    <p className="text-sm text-gray-500 mt-1">
+                    <p className="text-sm text-gray-900 mt-1">
                       {review.location}
                     </p>
                   </div>
@@ -231,7 +231,7 @@ export default function ReviewsCarousel() {
                       <p className="font-semibold text-gray-900 text-sm mb-1">
                         Response from the owner
                       </p>
-                      <p className="text-gray-600 text-sm leading-relaxed">
+                      <p className="text-gray-900 text-sm leading-relaxed">
                         {review.response}
                       </p>
                     </div>

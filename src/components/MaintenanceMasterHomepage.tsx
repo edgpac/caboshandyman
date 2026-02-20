@@ -312,7 +312,7 @@ export default function CabosHandymanHomepage() {
                 </button>
               </div>
               <div className="text-center mt-4">
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-white/70">
                   *Handyman services for vacation rentals and homes.
                 </p>
                 <p className="text-xs text-gray-400 mt-1">
@@ -329,20 +329,20 @@ export default function CabosHandymanHomepage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
               <div className="transform hover:scale-105 transition-transform">
                 <GradientText className="text-4xl md:text-5xl font-bold mb-2">20+</GradientText>
-                <div className="text-muted-foreground font-semibold">Years Experience</div>
+                <div className="text-gray-900 font-semibold">Years Experience</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
                 <GradientText className="text-4xl md:text-5xl font-bold mb-2">600+</GradientText>
-                <div className="text-muted-foreground font-semibold">Projects Completed</div>
+                <div className="text-gray-900 font-semibold">Projects Completed</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
                 <GradientText className="text-4xl md:text-5xl font-bold mb-2">24/7*</GradientText>
-                <div className="text-muted-foreground font-semibold text-sm">Emergency Service</div>
-                <div className="text-xs text-muted-foreground mt-1">*For members</div>
+                <div className="text-gray-900 font-semibold text-sm">Emergency Service</div>
+                <div className="text-xs text-gray-700 mt-1">*For members</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
                 <GradientText className="text-4xl md:text-5xl font-bold mb-2">100%</GradientText>
-                <div className="text-muted-foreground font-semibold">Satisfaction Rate</div>
+                <div className="text-gray-900 font-semibold">Satisfaction Rate</div>
               </div>
             </div>
             <div className="text-center mt-8">
@@ -358,7 +358,7 @@ export default function CabosHandymanHomepage() {
           <div className="container mx-auto px-6">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">We Build Projects That Last</h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-xl text-gray-900 max-w-2xl mx-auto">
                 As the leading handyman service in Cabo San Lucas, explore our completed residential and commercial projects.<br />Click on any project to see our service menu and pricing.
               </p>
             </div>
