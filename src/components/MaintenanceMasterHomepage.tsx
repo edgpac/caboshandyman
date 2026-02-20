@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Calendar, ArrowRight, MessageCircle, Shield, Menu, ChevronDown } from 'lucide-react';
+import { Phone, Mail, MapPin, ArrowRight, MessageCircle, Shield, Menu, ChevronDown } from 'lucide-react';
 import Footer from './Footer';
 import SEO from './SEO';
 import SecureAIAssistant from './SecureAIAssistant';
@@ -243,58 +243,29 @@ export default function CabosHandymanHomepage() {
               muted
               loop
               playsInline
-              className="w-full h-full object-cover opacity-10"
+              className="w-full h-full object-cover opacity-65"
             >
               <source src="/videos/hero-construction-bg.mp4" type="video/mp4" />
             </video>
+            {/* Light overlay so video shows through, text stays readable */}
+            <div className="absolute inset-0 bg-white/35"></div>
           </div>
 
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
-              {/* Badge */}
-              <div className="inline-block bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white px-3 py-1 md:px-4 md:py-2 rounded-full mb-3 md:mb-6">
-                <span className="text-xs md:text-sm font-semibold">
-                  🏗️ Cabo San Lucas' Leading Handyman Service
-                </span>
-              </div>
 
               {/* Business Name */}
-              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold mb-2 text-center leading-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold mb-4 text-center leading-tight">
                 <GradientText className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold leading-tight">
                   CABOS HANDYMAN
                 </GradientText>
-                <span className="block text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold mt-1 text-gray-900">
+                <span className="block text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold mt-2 text-gray-900">
                   Professional Handyman Services in Cabo San Lucas
                 </span>
               </h1>
 
-              {/* Tagline */}
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal md:font-semibold mb-4 md:mb-6">
-                <GradientText className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal md:font-semibold">
-                  Solutions You Can Count On
-                </GradientText>
-              </p>
-
-              {/* Value Proposition */}
-              <p className="text-base md:text-xl text-gray-900 font-medium mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed">
-                Your trusted handyman in Cabo San Lucas.<br />Use our Property Care Plans to protect your investment.<br />
-                600+ projects completed with a 100% satisfaction rate.
-              </p>
-
-              {/* Trust Signals */}
-              <div className="flex flex-wrap justify-center gap-4 mb-8 text-sm md:text-base">
-                <div className="flex items-center gap-2 bg-[#049d8e]/10 border border-[#049d8e]/30 rounded-lg px-4 py-2">
-                  <Shield size={18} className="text-[#049d8e]" />
-                  <span className="text-gray-900 font-semibold">Licensed & Insured</span>
-                </div>
-                <div className="flex items-center gap-2 bg-[#049d8e]/10 border border-[#049d8e]/30 rounded-lg px-4 py-2">
-                  <Calendar size={18} className="text-[#049d8e]" />
-                  <span className="text-gray-900 font-semibold">24/7 Emergency Service*</span>
-                </div>
-              </div>
-
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
                 <a
                   href="tel:+526121698328"
                   className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all flex items-center justify-center shadow-lg shadow-teal-500/30"
@@ -310,14 +281,12 @@ export default function CabosHandymanHomepage() {
                   <ArrowRight className="ml-2 text-[#049d8e]" size={20} />
                 </button>
               </div>
-              <div className="text-center mt-4">
-                <p className="text-xs text-gray-600">
-                  *Handyman services for vacation rentals and homes.
-                </p>
-                <p className="text-xs text-gray-600 mt-1">
-                  Service calls starting at $60 for most repairs.
-                </p>
-              </div>
+
+              {/* Disclaimer */}
+              <p className="text-xs text-gray-800 mt-5">
+                *Handyman services for vacation rentals and homes. Service calls starting at $60 for most repairs.
+              </p>
+
             </div>
           </div>
         </section>
