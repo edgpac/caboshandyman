@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 import { Phone, Mail, MapPin, ArrowRight, MessageCircle, Shield, Menu, ChevronDown } from 'lucide-react';
 import Footer from './Footer';
 import SEO from './SEO';
@@ -20,6 +23,38 @@ export default function CabosHandymanHomepage() {
   const [serviceMenuOpen, setServiceMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const statsRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  const animateCounter = (element: HTMLElement, endValue: number, prefix = '', suffix = '') => {
+    const obj = { value: 0 };
+    gsap.to(obj, {
+      value: endValue,
+      duration: 2,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: element,
+        start: 'top 85%',
+        toggleActions: 'play none none none',
+      },
+      onUpdate: () => {
+        if (element) {
+          element.textContent = prefix + Math.round(obj.value).toLocaleString() + suffix;
+        }
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (statsRefs.current[0]) animateCounter(statsRefs.current[0], 20, '', '+');
+    if (statsRefs.current[1]) animateCounter(statsRefs.current[1], 600, '', '+');
+    if (statsRefs.current[2]) animateCounter(statsRefs.current[2], 24, '', '/7*');
+    if (statsRefs.current[3]) animateCounter(statsRefs.current[3], 100, '', '%');
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
 
   const projects = [
     {
@@ -296,20 +331,32 @@ export default function CabosHandymanHomepage() {
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
               <div className="transform hover:scale-105 transition-transform">
-                <GradientText className="text-4xl md:text-5xl font-bold mb-2">20+</GradientText>
+                <div
+                  ref={el => { statsRefs.current[0] = el; }}
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#5eead4] via-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
+                >0</div>
                 <div className="text-gray-900 font-semibold">Years Experience</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
-                <GradientText className="text-4xl md:text-5xl font-bold mb-2">600+</GradientText>
+                <div
+                  ref={el => { statsRefs.current[1] = el; }}
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#5eead4] via-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
+                >0</div>
                 <div className="text-gray-900 font-semibold">Projects Completed</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
-                <GradientText className="text-4xl md:text-5xl font-bold mb-2">24/7*</GradientText>
+                <div
+                  ref={el => { statsRefs.current[2] = el; }}
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#5eead4] via-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
+                >0</div>
                 <div className="text-gray-900 font-semibold text-sm">Emergency Service</div>
                 <div className="text-xs text-gray-700 mt-1">*For members</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
-                <GradientText className="text-4xl md:text-5xl font-bold mb-2">100%</GradientText>
+                <div
+                  ref={el => { statsRefs.current[3] = el; }}
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#5eead4] via-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
+                >0</div>
                 <div className="text-gray-900 font-semibold">Satisfaction Rate</div>
               </div>
             </div>
