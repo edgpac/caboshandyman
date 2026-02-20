@@ -5,6 +5,7 @@ import SEO from './SEO';
 import SecureAIAssistant from './SecureAIAssistant';
 import ServiceMenuPopup from './ServiceMenuPopup';
 import ReviewsCarousel from './ReviewsCarousel';
+import GradientText from './GradientText';
 import kitchenImage from '../assets/modern-kitchen-remodel.jpeg';
 import bathroomImage from '../assets/luxury-bathroom.jpeg';
 import officeImage from '../assets/commercial-office.jpeg';
@@ -251,23 +252,27 @@ export default function CabosHandymanHomepage() {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
               {/* Badge - Smaller on Mobile */}
-              <div className="inline-block bg-primary text-primary-foreground px-3 py-1 md:px-4 md:py-2 rounded-full mb-3 md:mb-6">
+              <div className="inline-block bg-gradient-to-r from-teal-400 to-teal-600 text-white px-3 py-1 md:px-4 md:py-2 rounded-full mb-3 md:mb-6">
                 <span className="text-xs md:text-sm font-semibold">
                   🏗️ Cabo San Lucas' Leading Handyman Service
                 </span>
               </div>
 
               {/* Business Name - Light & Small on Mobile */}
-              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold mb-2 text-primary text-center leading-tight">
-                CABOS HANDYMAN
+              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold mb-2 text-center leading-tight">
+                <GradientText className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold leading-tight">
+                  CABOS HANDYMAN
+                </GradientText>
                 <span className="block text-base sm:text-lg md:text-2xl lg:text-3xl font-normal mt-1 text-white/90">
                   Professional Handyman Services in Cabo San Lucas
                 </span>
               </h1>
 
               {/* Tagline - Light & Small on Mobile */}
-              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal md:font-semibold text-primary mb-4 md:mb-6">
-                Solutions You Can Count On
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal md:font-semibold mb-4 md:mb-6">
+                <GradientText className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal md:font-semibold">
+                  Solutions You Can Count On
+                </GradientText>
               </p>
 
               {/* Value Proposition - No Pricing */}
@@ -292,7 +297,7 @@ export default function CabosHandymanHomepage() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <a
                   href="tel:+526121698328"
-                  className="bg-primary hover:bg-primary-hover text-primary-foreground px-8 py-4 rounded-lg text-lg font-bold transition-colors flex items-center justify-center"
+                  className="bg-gradient-to-r from-teal-400 to-teal-600 hover:from-teal-500 hover:to-teal-700 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all flex items-center justify-center shadow-lg shadow-teal-500/30"
                 >
                   <Phone className="mr-2" size={20} />
                   Call for Free Estimate
@@ -322,20 +327,20 @@ export default function CabosHandymanHomepage() {
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
               <div className="transform hover:scale-105 transition-transform">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">20+</div>
+                <GradientText className="text-4xl md:text-5xl font-bold mb-2">20+</GradientText>
                 <div className="text-muted-foreground font-semibold">Years Experience</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">600+</div>
+                <GradientText className="text-4xl md:text-5xl font-bold mb-2">600+</GradientText>
                 <div className="text-muted-foreground font-semibold">Projects Completed</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">24/7*</div>
+                <GradientText className="text-4xl md:text-5xl font-bold mb-2">24/7*</GradientText>
                 <div className="text-muted-foreground font-semibold text-sm">Emergency Service</div>
                 <div className="text-xs text-muted-foreground mt-1">*For members</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
-                <div className="text-4xl md:text-5xl font-bold text-primary mb-2">100%</div>
+                <GradientText className="text-4xl md:text-5xl font-bold mb-2">100%</GradientText>
                 <div className="text-muted-foreground font-semibold">Satisfaction Rate</div>
               </div>
             </div>
@@ -392,7 +397,7 @@ export default function CabosHandymanHomepage() {
         <ReviewsCarousel />
 
         {/* CTA Section - Care Plans Focus */}
-        <section className="py-16 bg-[#02b19f]">
+        <section className="py-16 bg-gradient-to-br from-teal-400 via-teal-500 to-teal-700">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center text-white">
 
@@ -438,7 +443,7 @@ export default function CabosHandymanHomepage() {
                 {/* Button 2: Scheduling Assistant (Existing - Secondary) */}
                 <button
                   onClick={() => openAIAssistant('services')}
-                  className="inline-flex items-center justify-center px-8 py-4 bg-[#018c7e] text-white font-bold text-lg rounded-lg hover:bg-[#017168] transition border-2 border-white min-w-[250px]"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-teal-600 to-teal-800 text-white font-bold text-lg rounded-lg hover:from-teal-700 hover:to-teal-900 transition border-2 border-white min-w-[250px]"
                 >
                   <span className="mr-2">💬</span>
                   Scheduling Assistant

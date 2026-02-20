@@ -67,7 +67,7 @@ export default function HandymanCaboSanLucas() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-teal-600 to-teal-700 text-white overflow-hidden">
+      <section className="relative py-20 bg-gradient-to-br from-teal-400 via-teal-600 to-teal-800 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -90,7 +90,7 @@ export default function HandymanCaboSanLucas() {
               </a>
               <a
                 href="tel:+526121698328"
-                className="inline-flex items-center justify-center gap-2 bg-teal-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-teal-400 transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-400 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-teal-500 hover:to-teal-700 transition-colors"
               >
                 Call Now: +52 612 169 8328
               </a>
@@ -246,7 +246,7 @@ export default function HandymanCaboSanLucas() {
                 </div>
               </a>
 
-              <a href="/services" className="bg-gradient-to-br from-teal-600 to-teal-700 border-2 border-teal-600 rounded-lg p-6 hover:shadow-lg transition-all group text-white">
+              <a href="/services" className="bg-gradient-to-br from-teal-400 via-teal-600 to-teal-800 border-2 border-teal-600 rounded-lg p-6 hover:shadow-lg transition-all group text-white">
                 <div className="bg-white/20 w-14 h-14 rounded-full flex items-center justify-center mb-4 group-hover:bg-white/30 transition-colors">
                   <Wrench className="text-white" size={28} />
                 </div>
@@ -976,7 +976,7 @@ export default function HandymanCaboSanLucas() {
           </div>
 
           {/* Final CTA */}
-          <div className="bg-gradient-to-br from-teal-600 to-teal-700 rounded-2xl p-8 md:p-12 text-center text-white">
+          <div className="bg-gradient-to-br from-teal-400 via-teal-600 to-teal-800 rounded-2xl p-8 md:p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Work with Cabo's Most Trusted Handyman?</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               20+ years of experience. 600+ completed projects. 100% satisfaction rate. Get your free quote today.
@@ -990,7 +990,7 @@ export default function HandymanCaboSanLucas() {
               </a>
               <a
                 href="tel:+526121698328"
-                className="inline-flex items-center justify-center gap-2 bg-teal-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-teal-400 transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-400 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-teal-500 hover:to-teal-700 transition-colors"
               >
                 Call: +52 612 169 8328
               </a>

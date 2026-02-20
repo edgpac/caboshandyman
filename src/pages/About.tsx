@@ -67,7 +67,7 @@ export default function About() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-teal-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-teal-600 transition-colors shadow-xl"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-400 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-teal-500 hover:to-teal-700 transition-colors shadow-xl"
               >
                 Get a Free Estimate <ArrowRight size={20} />
               </a>
@@ -129,7 +129,7 @@ export default function About() {
             <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">What Sets Us Apart</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-gradient-to-br from-teal-50 to-cyan-50 p-6 rounded-lg border-2 border-teal-200">
-                <div className="bg-teal-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
+                <div className="bg-gradient-to-br from-teal-400 to-teal-600 w-12 h-12 rounded-full flex items-center justify-center mb-4">
                   <Users className="text-white" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Professional Employees</h3>
@@ -230,7 +230,7 @@ export default function About() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="tel:+526121698328"
-                className="inline-flex items-center justify-center gap-2 bg-teal-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-teal-600 transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-400 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-teal-500 hover:to-teal-700 transition-colors"
               >
                 <Phone size={20} />
                 +52 612 169 8328
