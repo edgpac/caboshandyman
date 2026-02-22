@@ -8,12 +8,12 @@ import ServiceMenuPopup from './ServiceMenuPopup';
 import ReviewsCarousel from './ReviewsCarousel';
 import BrandCarousel from './BrandCarousel';
 import GradientText from './GradientText';
-import kitchenImage from '../assets/modern-kitchen-remodel.jpeg';
-import bathroomImage from '../assets/luxury-bathroom.jpeg';
-import officeImage from '../assets/commercial-office.jpeg';
-import communityImage from '../assets/community-center.jpeg';
-import restaurantImage from '../assets/restaurant-buildout.jpeg';
-import homeImage from '../assets/home-addition.jpeg';
+import kitchenImage from '../assets/modern-kitchen-remodel.webp';
+import bathroomImage from '../assets/luxury-bathroom.webp';
+import officeImage from '../assets/commercial-office.webp';
+import communityImage from '../assets/community-center.webp';
+import restaurantImage from '../assets/restaurant-buildout.webp';
+import homeImage from '../assets/home-addition.webp';
 
 export default function CabosHandymanHomepage() {
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
@@ -283,6 +283,7 @@ export default function CabosHandymanHomepage() {
           </div>
         </nav>
 
+        <main>
         {/* Hero Section */}
         <section className="relative bg-white py-20 min-h-[80vh] flex items-center overflow-hidden">
           <div className="absolute inset-0">
@@ -291,9 +292,11 @@ export default function CabosHandymanHomepage() {
               muted
               loop
               playsInline
+              aria-hidden="true"
               className="w-full h-full object-cover opacity-65"
             >
               <source src="/videos/hero-construction-bg.mp4" type="video/mp4" />
+              <track kind="captions" srcLang="en" label="English" />
             </video>
             {/* Light overlay so video shows through, text stays readable */}
             <div className="absolute inset-0 bg-white/35"></div>
@@ -347,21 +350,21 @@ export default function CabosHandymanHomepage() {
               <div className="transform hover:scale-105 transition-transform">
                 <div
                   ref={el => { statsRefs.current[0] = el; }}
-                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#5eead4] via-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
                 >0</div>
                 <div className="text-gray-900 font-semibold">Years Experience</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
                 <div
                   ref={el => { statsRefs.current[1] = el; }}
-                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#5eead4] via-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
                 >0</div>
                 <div className="text-gray-900 font-semibold">Projects Completed</div>
               </div>
               <div className="transform hover:scale-105 transition-transform">
                 <div
                   ref={el => { statsRefs.current[2] = el; }}
-                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#5eead4] via-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
                 >0</div>
                 <div className="text-gray-900 font-semibold text-sm">Emergency Service</div>
                 <div className="text-xs text-gray-700 mt-1">*For members</div>
@@ -369,7 +372,7 @@ export default function CabosHandymanHomepage() {
               <div className="transform hover:scale-105 transition-transform">
                 <div
                   ref={el => { statsRefs.current[3] = el; }}
-                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#5eead4] via-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
+                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
                 >0</div>
                 <div className="text-gray-900 font-semibold">Satisfaction Rate</div>
               </div>
@@ -551,6 +554,8 @@ export default function CabosHandymanHomepage() {
 
         {/* Brand Partner Carousel */}
         <BrandCarousel />
+
+        </main>
 
         {/* Footer */}
         <Footer />
