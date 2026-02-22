@@ -17,6 +17,9 @@ export default function Navigation() {
                   src="/CHLOGO.png"
                   alt="Cabos Handyman Logo"
                   className="w-12 h-12 object-contain"
+                  width="48"
+                  height="48"
+                  fetchPriority="high"
                 />
                 <GradientText className="text-xl font-bold">CABOS HANDYMAN</GradientText>
               </a>

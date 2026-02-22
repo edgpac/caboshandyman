@@ -198,6 +198,9 @@ export default function CabosHandymanHomepage() {
                     src="/CHLOGO.png"
                     alt="Cabos Handyman Logo"
                     className="w-12 h-12 object-contain"
+                    width="48"
+                    height="48"
+                    fetchPriority="high"
                   />
                   <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
                 </div>
@@ -401,6 +404,9 @@ export default function CabosHandymanHomepage() {
                       src={project.image}
                       alt={project.alt}
                       loading="lazy"
+                      decoding="async"
+                      width="600"
+                      height="400"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       style={{ objectPosition: project.imagePosition }}
                     />
