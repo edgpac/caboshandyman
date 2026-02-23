@@ -378,7 +378,7 @@ export default function CabosHandymanHomepage() {
               </div>
             </div>
             <div className="text-center mt-8">
-              <a href="/about" className="text-primary hover:underline font-medium text-sm">
+              <a href="/about" className="text-[#06756b] hover:underline font-medium text-sm">
                 Learn more about our team &rarr;
               </a>
             </div>
@@ -406,7 +406,8 @@ export default function CabosHandymanHomepage() {
                     <img
                       src={project.image}
                       alt={project.alt}
-                      loading="lazy"
+                      loading={index === 0 ? "eager" : "lazy"}
+                      fetchPriority={index === 0 ? "high" : undefined}
                       decoding="async"
                       width="600"
                       height="400"
@@ -415,11 +416,11 @@ export default function CabosHandymanHomepage() {
                     />
                   </div>
                   <div className="p-6">
-                    <div className="text-sm text-primary font-semibold mb-2">{project.category}</div>
-                    <h3 className="text-xl font-bold text-card-foreground group-hover:text-primary transition-colors">
+                    <div className="text-sm text-[#06756b] font-semibold mb-2">{project.category}</div>
+                    <h3 className="text-xl font-bold text-card-foreground group-hover:text-[#06756b] transition-colors">
                       {project.name}
                     </h3>
-                    <button className="mt-4 text-primary font-semibold text-sm hover:text-primary-hover transition-colors">
+                    <button className="mt-4 text-[#06756b] font-semibold text-sm hover:text-[#049d8e] transition-colors">
                       View Services & Pricing →
                     </button>
                   </div>
@@ -470,7 +471,7 @@ export default function CabosHandymanHomepage() {
                 {/* Button 1: View Property Care Plans (Primary) */}
                 <a
                   href="/property-care-plans"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#02b19f] font-bold text-lg rounded-lg hover:bg-gray-100 transition shadow-lg min-w-[250px]"
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#06756b] font-bold text-lg rounded-lg hover:bg-gray-100 transition shadow-lg min-w-[250px]"
                 >
                   <span className="mr-2">🛡️</span>
                   View Property Care Plans

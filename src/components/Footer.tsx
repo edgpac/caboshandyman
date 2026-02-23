@@ -25,10 +25,13 @@ export default function Footer() {
   };
 
   useEffect(() => {
-    fetchExchangeRate();
-    // Update every 30 minutes
+    // Defer initial fetch so it doesn't block critical path
+    const timer = setTimeout(fetchExchangeRate, 2000);
     const interval = setInterval(fetchExchangeRate, 30 * 60 * 1000);
-    return () => clearInterval(interval);
+    return () => {
+      clearTimeout(timer);
+      clearInterval(interval);
+    };
   }, []);
 
   const convertedAmount = exchangeRate ? (parseFloat(usdAmount) * exchangeRate).toFixed(2) : '0.00';
@@ -65,7 +68,7 @@ export default function Footer() {
                 </div>
                 <div className="ml-6 text-xs text-gray-500">
                   7am-6pm daily<br/>
-                  <a href="/property-care-plans" className="text-teal-600 hover:underline">
+                  <a href="/property-care-plans" className="text-teal-700 hover:underline">
                     Members: 24/7 access
                   </a>
                 </div>
@@ -105,7 +108,7 @@ export default function Footer() {
             </p>
             <a
               href="/faq"
-              className="inline-flex items-center space-x-2 bg-white border-2 border-teal-400 text-teal-600 hover:bg-teal-50 px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm"
+              className="inline-flex items-center space-x-2 bg-white border-2 border-teal-400 text-teal-700 hover:bg-teal-50 px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm"
             >
               <HelpCircle className="h-4 w-4" />
               <span>View FAQ</span>
@@ -131,7 +134,7 @@ export default function Footer() {
               </div>
               
               <div className="flex items-center space-x-2">
-                <span className="text-sm font-medium text-teal-600">
+                <span className="text-sm font-medium text-teal-700">
                   ${convertedAmount} MXN
                 </span>
                 <button
@@ -152,7 +155,7 @@ export default function Footer() {
               )}
               
               {lastUpdated && (
-                <div className="text-xs text-gray-400">
+                <div className="text-xs text-gray-600">
                   Updated: {lastUpdated.toLocaleTimeString()}
                 </div>
               )}
@@ -168,7 +171,7 @@ export default function Footer() {
                 <GradientText className="font-medium">Licensed • Insured • Bonded</GradientText>
                 <span className="text-gray-600">&copy; 2026 Cabos Handyman. All rights reserved.</span>
               </div>
-              <div className="text-[10px] text-gray-400">
+              <div className="text-[10px] text-gray-600">
                 To hire the architect of this website call +52 612 169 8328
               </div>
             </div>
