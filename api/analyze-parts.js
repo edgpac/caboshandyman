@@ -5,6 +5,8 @@
 // FIXED: AI labor estimation now references actual service menu durations
 // FIXED: Quick tasks correctly identified (doorknobs, switches = 0.5-1hr, not 2hr)
 
+import { checkOrigin, rateLimit, getClientIp, validateHistory, MAX_MESSAGE_LENGTH, MAX_IMAGE_COUNT } from './_security.js';
+
 export const config = {
   maxDuration: 60,
   api: {
@@ -1259,17 +1261,16 @@ function getDefaultStores() {
 // ========================================
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (!checkOrigin(req, res)) return;
   res.setHeader('Cache-Control', 'no-store, max-age=0');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  // Rate limit: 5 requests per hour per IP (each request = 2 paid API calls)
+  const ip = getClientIp(req);
+  if (!rateLimit(ip, 5, 60 * 60 * 1000)) {
+    return res.status(429).json({ error: 'Too many requests. Please try again later.', success: false });
   }
 
   const startTime = Date.now();
@@ -1278,17 +1279,19 @@ export default async function handler(req, res) {
     const { images, description, location, service_context, chat_history } = req.body;
 
     if (!images || images.length === 0) {
-      return res.status(400).json({ 
-        error: 'At least one image is required',
-        success: false 
-      });
+      return res.status(400).json({ error: 'At least one image is required', success: false });
     }
 
-    if (!description || description.trim().length === 0) {
-      return res.status(400).json({
-        error: 'Description is required',
-        success: false
-      });
+    if (images.length > MAX_IMAGE_COUNT) {
+      return res.status(400).json({ error: `Maximum ${MAX_IMAGE_COUNT} images allowed per request`, success: false });
+    }
+
+    if (!description || typeof description !== 'string' || description.trim().length === 0) {
+      return res.status(400).json({ error: 'Description is required', success: false });
+    }
+
+    if (description.length > MAX_MESSAGE_LENGTH) {
+      return res.status(400).json({ error: 'Description too long', success: false });
     }
 
     // ========================================

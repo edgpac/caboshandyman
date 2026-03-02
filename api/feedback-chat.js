@@ -2,14 +2,15 @@
 // Built for exceptional customer experience with 200+ quick task detection + Multi-task intelligence + Follow-up detection
 
 import { createClient } from '@supabase/supabase-js';
+import { checkOrigin, rateLimit, getClientIp, validateHistory, MAX_MESSAGE_LENGTH } from './_security.js';
 
 export const config = {
   maxDuration: 30
 };
 
 const supabase = createClient(
-  'https://okwcasooleetwvfuwtuz.supabase.co',
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9rd2Nhc29vbGVldHd2ZnV3dHV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTkzNjUwMzEsImV4cCI6MjA3NDk0MTAzMX0.942cbD0ITALrlHoI0A5o8kGx3h-XQ1k4DPSxrXoIcXc'
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_ANON_KEY
 );
 
 // ========================================
@@ -1128,8 +1129,8 @@ Example: "🚨 STOP! Your ${context.emergencyType || 'issue'} can cause THOUSAND
         model: 'llama-3.3-70b-versatile',
         messages: [
           { role: 'system', content: systemPrompt },
-          ...history.slice(-6),
-          { role: 'user', content: question }
+          ...validateHistory(history),
+          { role: 'user', content: question.slice(0, MAX_MESSAGE_LENGTH) }
         ],
         temperature: 0.7,
         max_tokens: 300
@@ -1149,16 +1150,24 @@ Example: "🚨 STOP! Your ${context.emergencyType || 'issue'} can cause THOUSAND
 // ========================================
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-
+  if (!checkOrigin(req, res)) return;
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
+  // Rate limit: 15 requests per 15 minutes per IP
+  const ip = getClientIp(req);
+  if (!rateLimit(ip, 15, 15 * 60 * 1000)) {
+    return res.status(429).json({ error: 'Too many requests. Please try again later.' });
+  }
+
   try {
     const { question, history = [] } = req.body;
-    if (!question) return res.status(400).json({ error: 'Question required' });
+    if (!question || typeof question !== 'string') {
+      return res.status(400).json({ error: 'Question required' });
+    }
+    if (question.length > MAX_MESSAGE_LENGTH) {
+      return res.status(400).json({ error: 'Message too long' });
+    }
 
     console.log('💬 User:', question.substring(0, 100));
 

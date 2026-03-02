@@ -1,7 +1,16 @@
 // api/send-whatsapp.js
+import { checkOrigin, rateLimit, getClientIp, MAX_WHATSAPP_LENGTH } from './_security.js';
+
+const BASE_URL = process.env.SITE_URL || 'https://www.caboshandyman.com';
+
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (!checkOrigin(req, res)) return;
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  // Rate limit: 20 messages per hour per IP
+  const ip = getClientIp(req);
+  if (!rateLimit(ip, 20, 60 * 60 * 1000)) {
+    return res.status(429).json({ error: 'Too many requests. Please try again later.' });
   }
 
   try {
@@ -9,6 +18,10 @@ export default async function handler(req, res) {
 
     if (!message || !phone) {
       return res.status(400).json({ error: 'Missing message or phone number' });
+    }
+
+    if (typeof message !== 'string' || message.length > MAX_WHATSAPP_LENGTH) {
+      return res.status(400).json({ error: 'Message too long' });
     }
 
     // Clean phone number
@@ -19,7 +32,7 @@ export default async function handler(req, res) {
 
     // Try WhatsApp first, then fallback to SMS
     if (process.env.TWILIO_ACCOUNT_SID && process.env.TWILIO_AUTH_TOKEN) {
-      
+
       // Option 1: Try WhatsApp first
       try {
         const whatsappResponse = await fetch(`https://api.twilio.com/2010-04-01/Accounts/${process.env.TWILIO_ACCOUNT_SID}/Messages.json`, {
@@ -37,21 +50,17 @@ export default async function handler(req, res) {
 
         if (whatsappResponse.ok) {
           const result = await whatsappResponse.json();
-          return res.status(200).json({ 
-            success: true, 
+          return res.status(200).json({
+            success: true,
             messageId: result.sid,
             provider: 'whatsapp',
             to: cleanPhone
           });
-        } else {
-          const error = await whatsappResponse.json();
-          console.log('WhatsApp failed, trying SMS fallback:', error.message);
-          
-          // If WhatsApp fails, immediately try SMS
-          throw new Error('WhatsApp failed, falling back to SMS');
         }
+        // WhatsApp failed — fall through to SMS
+        console.log('WhatsApp unavailable, trying SMS fallback');
       } catch (whatsappError) {
-        console.log('WhatsApp error, falling back to SMS:', whatsappError.message);
+        console.log('WhatsApp error, falling back to SMS');
       }
 
       // Option 2: SMS Fallback
@@ -63,42 +72,36 @@ export default async function handler(req, res) {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: new URLSearchParams({
-            From: process.env.TWILIO_PHONE_NUMBER, // Your SMS phone number
-            To: cleanPhone, // No whatsapp: prefix for SMS
+            From: process.env.TWILIO_PHONE_NUMBER,
+            To: cleanPhone,
             Body: message
           })
         });
 
         if (smsResponse.ok) {
           const result = await smsResponse.json();
-          return res.status(200).json({ 
-            success: true, 
+          return res.status(200).json({
+            success: true,
             messageId: result.sid,
             provider: 'sms',
             to: cleanPhone,
             note: 'Sent via SMS (WhatsApp unavailable)'
           });
-        } else {
-          const smsError = await smsResponse.json();
-          console.error('SMS also failed:', smsError);
-          throw new Error(`SMS failed: ${smsError.message}`);
         }
+        console.error('SMS also failed');
       } catch (smsError) {
-        console.error('Both WhatsApp and SMS failed:', smsError);
+        console.error('Both WhatsApp and SMS failed');
       }
     }
 
-    // Option 3: Email fallback if both messaging options fail
+    // Option 3: Email fallback — use absolute URL (MED-2 fix)
     console.log('All messaging options failed, using email fallback');
-    
-    const emailResponse = await fetch('/api/send-booking-email', {
+    const emailResponse = await fetch(`${BASE_URL}/api/send-booking-email`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         customerInfo: {
-          message: message,
+          message,
           phone: cleanPhone,
           timestamp: new Date().toISOString(),
           fallbackReason: 'SMS and WhatsApp unavailable'
@@ -107,47 +110,35 @@ export default async function handler(req, res) {
     });
 
     if (emailResponse.ok) {
-      return res.status(200).json({ 
-        success: true, 
+      return res.status(200).json({
+        success: true,
         provider: 'email',
-        message: 'Sent via email (messaging services unavailable)',
-        to: 'business email'
+        message: 'Sent via email (messaging services unavailable)'
       });
-    } else {
-      throw new Error('All notification methods failed');
     }
+
+    throw new Error('All notification methods failed');
 
   } catch (error) {
     console.error('Complete notification failure:', error);
-    return res.status(500).json({ 
-      success: false, 
-      error: 'Failed to send notification',
-      details: error.message 
+    return res.status(500).json({
+      success: false,
+      error: 'Notification service temporarily unavailable'
     });
   }
 }
 
-// Utility function to validate and format phone numbers
+// Validate and format phone numbers
 function validatePhoneNumber(phone) {
-  if (!phone) return null;
-  
-  // Remove all non-digit characters
+  if (!phone || typeof phone !== 'string') return null;
+
   const cleaned = phone.replace(/\D/g, '');
-  
-  // Check if it's a valid length (10-15 digits)
-  if (cleaned.length < 10 || cleaned.length > 15) {
-    return null;
-  }
-  
-  // Add country code if missing (assume Mexico +52 for Cabo)
+
+  if (cleaned.length < 10 || cleaned.length > 15) return null;
+
   if (cleaned.length === 10 && !cleaned.startsWith('52')) {
     return '+52' + cleaned;
   }
-  
-  // Add + if missing
-  if (!phone.startsWith('+')) {
-    return '+' + cleaned;
-  }
-  
+
   return '+' + cleaned;
 }
