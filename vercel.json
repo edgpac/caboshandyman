@@ -10,7 +10,25 @@
       ],
       "destination": "https://www.caboshandyman.com/:path",
       "permanent": true
-    }
+    },
+    { "source": "/plumber", "destination": "/plumber-cabo-san-lucas", "permanent": true },
+    { "source": "/plumber-cabo", "destination": "/plumber-cabo-san-lucas", "permanent": true },
+    { "source": "/electrical", "destination": "/electrical-services-cabo", "permanent": true },
+    { "source": "/electrical-cabo", "destination": "/electrical-services-cabo", "permanent": true },
+    { "source": "/kitchen", "destination": "/kitchen-services-cabo", "permanent": true },
+    { "source": "/kitchen-remodeling", "destination": "/kitchen-services-cabo", "permanent": true },
+    { "source": "/kitchen-remodeling-cabo", "destination": "/kitchen-services-cabo", "permanent": true },
+    { "source": "/bathroom", "destination": "/bathroom-services-cabo", "permanent": true },
+    { "source": "/bathroom-remodeling", "destination": "/bathroom-services-cabo", "permanent": true },
+    { "source": "/handyman", "destination": "/handyman-cabo-san-lucas", "permanent": true },
+    { "source": "/drain-cleaning", "destination": "/toilet-tub-unclogging-cabo", "permanent": true },
+    { "source": "/toilet-unclogging", "destination": "/toilet-tub-unclogging-cabo", "permanent": true },
+    { "source": "/ceiling-fan", "destination": "/ceiling-fan-installation-cabo", "permanent": true },
+    { "source": "/ceiling-fan-installation", "destination": "/ceiling-fan-installation-cabo", "permanent": true },
+    { "source": "/furniture-assembly", "destination": "/furniture-assembly-cabo", "permanent": true },
+    { "source": "/tv-mounting", "destination": "/tv-mounting-cabo", "permanent": true },
+    { "source": "/property-setup", "destination": "/property-setup-cabo", "permanent": true },
+    { "source": "/vacation-rental", "destination": "/vacation-rental-setup-cabo", "permanent": true }
   ],
   "rewrites": [
     {

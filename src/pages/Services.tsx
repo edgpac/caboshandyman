@@ -1,14 +1,10 @@
-import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Home, Star, Droplet, Wrench, ArrowRight, Shield } from 'lucide-react';
-import ServiceMenuPopup from '../components/ServiceMenuPopup';
+import { Home, Star, Droplet, Wrench, ArrowRight, Shield, Zap, Bath, Fan, Tv, Armchair } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
 export default function ServicesPage() {
-  const [selectedProject, setSelectedProject] = React.useState<string>('Modern Kitchen');
-  const [isMenuOpen, setIsMenuOpen] = React.useState<boolean>(false);
 
   return (
     <>
@@ -293,30 +289,95 @@ export default function ServicesPage() {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {[
-              { name: 'Modern Kitchen', icon: '🍳', description: 'Plumbing, electrical, installation' },
-              { name: 'Luxury Bathroom', icon: '🛁', description: 'Toilet unclogging, installation, tile' },
-              { name: 'Commercial Office', icon: '🏢', description: 'Office buildout, electrical, HVAC' },
-              { name: 'Community Center', icon: '🏘️', description: 'Maintenance, facility repairs, safety' },
-              { name: 'Restaurant Buildout', icon: '🍽️', description: 'Commercial kitchen, compliance' },
-              { name: 'Home Addition', icon: '🏠', description: 'Construction, emergency plumbing, basics' }
-            ].map((category) => (
-              <button
-                key={category.name}
-                onClick={() => {
-                  setSelectedProject(category.name);
-                  setIsMenuOpen(true);
-                }}
-                className={`bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all text-left ${
-                  selectedProject === category.name ? 'ring-2 ring-teal-500' : ''
-                }`}
-              >
-                <div className="text-4xl mb-3">{category.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{category.name}</h3>
-                <p className="text-gray-600 text-sm">{category.description}</p>
-              </button>
-            ))}
+          {/* All Individual Services */}
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">All Services</h2>
+            <p className="text-gray-600 text-center mb-6">Click any service for details, pricing, and availability</p>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              <Link to="/plumber-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-cyan-300 transition-all group">
+                <Droplet className="text-cyan-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-cyan-600 transition-colors">Plumber 24/7</h3>
+                <p className="text-gray-500 text-xs mt-1">Emergency plumbing, repairs, installations</p>
+                <span className="text-cyan-600 text-xs font-semibold mt-2 flex items-center gap-1">From $60 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/electrical-services-cabo" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-yellow-300 transition-all group">
+                <Zap className="text-yellow-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-yellow-600 transition-colors">Electrical Services</h3>
+                <p className="text-gray-500 text-xs mt-1">Wiring, outlets, panels, lighting</p>
+                <span className="text-yellow-600 text-xs font-semibold mt-2 flex items-center gap-1">From $80 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/kitchen-services-cabo" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-orange-300 transition-all group">
+                <Wrench className="text-orange-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-orange-600 transition-colors">Kitchen Remodeling</h3>
+                <p className="text-gray-500 text-xs mt-1">Cabinets, countertops, plumbing, tile</p>
+                <span className="text-orange-600 text-xs font-semibold mt-2 flex items-center gap-1">From $500 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/bathroom-services-cabo" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-blue-300 transition-all group">
+                <Bath className="text-blue-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Bathroom Services</h3>
+                <p className="text-gray-500 text-xs mt-1">Tile, fixtures, toilet, shower install</p>
+                <span className="text-blue-600 text-xs font-semibold mt-2 flex items-center gap-1">From $200 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/handyman-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-gray-400 transition-all group">
+                <Wrench className="text-gray-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-gray-700 transition-colors">Handyman Services</h3>
+                <p className="text-gray-500 text-xs mt-1">General repairs, maintenance, 70+ services</p>
+                <span className="text-gray-700 text-xs font-semibold mt-2 flex items-center gap-1">From $60 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/toilet-tub-unclogging-cabo" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-teal-300 transition-all group">
+                <Droplet className="text-teal-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-teal-600 transition-colors">Drain Cleaning</h3>
+                <p className="text-gray-500 text-xs mt-1">Toilet & tub unclogging, drain clearing</p>
+                <span className="text-teal-600 text-xs font-semibold mt-2 flex items-center gap-1">From $60 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/ceiling-fan-installation-cabo" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-indigo-300 transition-all group">
+                <Fan className="text-indigo-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">Ceiling Fan Install</h3>
+                <p className="text-gray-500 text-xs mt-1">Installation, replacement, wiring</p>
+                <span className="text-indigo-600 text-xs font-semibold mt-2 flex items-center gap-1">From $180 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/furniture-assembly-cabo" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-amber-300 transition-all group">
+                <Armchair className="text-amber-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-amber-600 transition-colors">Furniture Assembly</h3>
+                <p className="text-gray-500 text-xs mt-1">IKEA, flatpack, office furniture</p>
+                <span className="text-amber-600 text-xs font-semibold mt-2 flex items-center gap-1">From $60 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/tv-mounting-cabo" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-slate-400 transition-all group">
+                <Tv className="text-slate-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-slate-700 transition-colors">TV Mounting</h3>
+                <p className="text-gray-500 text-xs mt-1">Wall mount, cable management, setup</p>
+                <span className="text-slate-700 text-xs font-semibold mt-2 flex items-center gap-1">From $80 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/property-setup-cabo" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-teal-400 transition-all group">
+                <Home className="text-teal-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-teal-700 transition-colors">Property Setup</h3>
+                <p className="text-gray-500 text-xs mt-1">Move-in ready: fans, furniture, TV, more</p>
+                <span className="text-teal-700 text-xs font-semibold mt-2 flex items-center gap-1">Packages from $500 <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/vacation-rental-setup-cabo" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-blue-400 transition-all group">
+                <Star className="text-blue-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Vacation Rental</h3>
+                <p className="text-gray-500 text-xs mt-1">Airbnb & VRBO maintenance contracts</p>
+                <span className="text-blue-600 text-xs font-semibold mt-2 flex items-center gap-1">From $250/mo <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/property-care-plans" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-purple-400 transition-all group">
+                <Shield className="text-purple-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-purple-600 transition-colors">Property Care Plans</h3>
+                <p className="text-gray-500 text-xs mt-1">Monthly maintenance + free unclog</p>
+                <span className="text-purple-600 text-xs font-semibold mt-2 flex items-center gap-1">From $99/mo <ArrowRight size={12} /></span>
+              </Link>
+            </div>
           </div>
 
           {/* CTA */}
@@ -331,12 +392,6 @@ export default function ServicesPage() {
             </a>
           </div>
         </div>
-
-        <ServiceMenuPopup
-          isOpen={isMenuOpen}
-          onClose={() => setIsMenuOpen(false)}
-          projectType={selectedProject}
-        />
       </div>
 
       <Footer />

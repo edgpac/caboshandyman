@@ -1,9 +1,25 @@
 import { useState } from 'react';
-import { Phone, Mail, Shield, Menu, ChevronDown } from 'lucide-react';
+import { Phone, Mail, Shield, Menu, ChevronDown, Wrench } from 'lucide-react';
 import GradientText from './GradientText';
+
+const SERVICE_LINKS = [
+  { href: '/plumber-cabo-san-lucas', label: 'Plumber 24/7' },
+  { href: '/electrical-services-cabo', label: 'Electrical Services' },
+  { href: '/kitchen-services-cabo', label: 'Kitchen Remodeling' },
+  { href: '/bathroom-services-cabo', label: 'Bathroom Services' },
+  { href: '/handyman-cabo-san-lucas', label: 'Handyman Services' },
+  { href: '/toilet-tub-unclogging-cabo', label: 'Drain Cleaning' },
+  { href: '/ceiling-fan-installation-cabo', label: 'Ceiling Fan Installation' },
+  { href: '/furniture-assembly-cabo', label: 'Furniture Assembly' },
+  { href: '/tv-mounting-cabo', label: 'TV Mounting' },
+  { href: '/property-setup-cabo', label: 'Property Setup' },
+  { href: '/vacation-rental-setup-cabo', label: 'Vacation Rental Service' },
+];
 
 export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
   return (
     <nav className="bg-dark-surface text-white py-4 sticky top-0 z-40 shadow-lg">
@@ -35,12 +51,46 @@ export default function Navigation() {
 
           {/* Right: Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-4">
-            <a
-              href="/services"
-              className="flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-semibold"
+            {/* Services Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsServicesOpen(true)}
+              onMouseLeave={() => setIsServicesOpen(false)}
             >
-              Services & Pricing
-            </a>
+              <a
+                href="/services"
+                className="flex items-center gap-1 text-primary hover:text-primary-hover transition-colors font-semibold"
+              >
+                Services & Pricing
+                <ChevronDown
+                  size={16}
+                  className={`transition-transform ${isServicesOpen ? 'rotate-180' : ''}`}
+                />
+              </a>
+              {isServicesOpen && (
+                <div className="absolute top-full left-0 mt-1 w-56 bg-dark-surface-elevated rounded-lg shadow-xl border border-primary/20 py-1 z-50">
+                  {SERVICE_LINKS.map(link => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      className="flex items-center gap-2 px-4 py-2 text-sm text-white hover:bg-dark-surface hover:text-primary transition-colors"
+                    >
+                      <Wrench size={12} className="text-primary/60" />
+                      {link.label}
+                    </a>
+                  ))}
+                  <div className="border-t border-primary/20 mt-1 pt-1">
+                    <a
+                      href="/services"
+                      className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-primary hover:bg-dark-surface transition-colors"
+                    >
+                      View All Services & Pricing →
+                    </a>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <a
               href="/property-care-plans"
               className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold hover:from-purple-600 hover:to-indigo-600 transition shadow-lg"
@@ -75,13 +125,40 @@ export default function Navigation() {
         {/* Mobile Dropdown Menu */}
         {isMobileMenuOpen && (
           <div className="md:hidden mt-4 space-y-2 bg-dark-surface-elevated rounded-lg p-4 shadow-xl border border-primary/20">
-            <a
-              href="/services"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2 text-primary hover:text-primary-hover transition-colors font-semibold py-3 px-4 rounded-lg hover:bg-dark-surface"
+            {/* Mobile Services Accordion */}
+            <button
+              onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+              className="w-full flex items-center justify-between text-primary hover:text-primary-hover transition-colors font-semibold py-3 px-4 rounded-lg hover:bg-dark-surface"
             >
-              Services & Pricing
-            </a>
+              <span>Services & Pricing</span>
+              <ChevronDown
+                size={16}
+                className={`transition-transform ${isMobileServicesOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+            {isMobileServicesOpen && (
+              <div className="pl-4 space-y-1 pb-2">
+                {SERVICE_LINKS.map(link => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center gap-2 py-2 px-4 text-sm text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-surface"
+                  >
+                    <Wrench size={12} className="text-primary/60" />
+                    {link.label}
+                  </a>
+                ))}
+                <a
+                  href="/services"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 py-2 px-4 text-sm font-semibold text-primary hover:bg-dark-surface rounded-lg"
+                >
+                  View All Services & Pricing →
+                </a>
+              </div>
+            )}
+
             <a
               href="/property-care-plans"
               onClick={() => setIsMobileMenuOpen(false)}
