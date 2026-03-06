@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Home, Star, Droplet, Wrench, ArrowRight, Shield, Zap, Bath, Fan, Tv, Armchair } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+import LogoLoop from '../components/LogoLoop';
 
 const WORK_IMAGES: { file: string; alt: string }[] = [
   { file: 'image1.jpeg',  alt: 'Bathroom vanity with vessel sink, faucet, and LED mirror installed in Cabo San Lucas' },
@@ -81,27 +82,26 @@ function ServiceSection({ title, intro, children }: SectionProps) {
 const TOP_IMAGES = WORK_IMAGES.slice(0, 15);
 const BOT_IMAGES = WORK_IMAGES.slice(15);
 
-function MarqueeRow({ images, direction }: { images: typeof WORK_IMAGES; direction: 'left' | 'right' }) {
-  const doubled = [...images, ...images];
-  return (
-    <div className="overflow-hidden">
-      <div className={`flex ${direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'}`}>
-        {doubled.map((img, i) => (
-          <div key={`${img.file}-${i}`} className="flex-none w-40 h-40 mr-1.5 rounded-lg overflow-hidden bg-gray-100">
-            <img
-              src={`/service-sections/${img.file}`}
-              alt={img.alt}
-              className="w-full h-full object-cover"
-              loading={i < 6 ? 'eager' : 'lazy'}
-              decoding="async"
-              width="160"
-              height="160"
-            />
-          </div>
-        ))}
+const TILE_SIZE = 160;
+const TILE_GAP = 6;
+
+function makeGalleryItems(images: typeof WORK_IMAGES) {
+  return images.map(img => ({
+    node: (
+      <div style={{ width: TILE_SIZE, height: TILE_SIZE, borderRadius: 8, overflow: 'hidden', background: '#f3f4f6' }}>
+        <img
+          src={`/service-sections/${img.file}`}
+          alt={img.alt}
+          loading="lazy"
+          decoding="async"
+          width={TILE_SIZE}
+          height={TILE_SIZE}
+          style={{ width: TILE_SIZE, height: TILE_SIZE, objectFit: 'cover', display: 'block' }}
+        />
       </div>
-    </div>
-  );
+    ),
+    alt: img.alt,
+  }));
 }
 
 function WorkGallery() {
@@ -111,9 +111,9 @@ function WorkGallery() {
         <h2 className="text-2xl font-bold text-gray-900">Our Work</h2>
         <p className="text-gray-500 text-sm mt-1">Real projects completed across Los Cabos — not limited to what you see here, just give us a call.</p>
       </div>
-      <div className="space-y-1.5">
-        <MarqueeRow images={TOP_IMAGES} direction="left" />
-        <MarqueeRow images={BOT_IMAGES} direction="right" />
+      <div className="space-y-1.5 overflow-hidden">
+        <LogoLoop logos={makeGalleryItems(TOP_IMAGES)} direction="left" speed={120} gap={TILE_GAP} logoHeight={TILE_SIZE} ariaLabel="Cabos Handyman work photos top row" />
+        <LogoLoop logos={makeGalleryItems(BOT_IMAGES)} direction="right" speed={120} gap={TILE_GAP} logoHeight={TILE_SIZE} ariaLabel="Cabos Handyman work photos bottom row" />
       </div>
     </div>
   );
