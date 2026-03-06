@@ -1,7 +1,6 @@
-import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Home, Star, Droplet, Wrench, ArrowRight, Shield, Zap, Bath, Fan, Tv, Armchair, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Home, Star, Droplet, Wrench, ArrowRight, Shield, Zap, Bath, Fan, Tv, Armchair } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
@@ -79,51 +78,42 @@ function ServiceSection({ title, intro, children }: SectionProps) {
   );
 }
 
+const TOP_IMAGES = WORK_IMAGES.slice(0, 15);
+const BOT_IMAGES = WORK_IMAGES.slice(15);
+
+function MarqueeRow({ images, direction }: { images: typeof WORK_IMAGES; direction: 'left' | 'right' }) {
+  const doubled = [...images, ...images];
+  return (
+    <div className="overflow-hidden">
+      <div className={`flex gap-1.5 ${direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'}`}>
+        {doubled.map((img, i) => (
+          <div key={`${img.file}-${i}`} className="flex-none w-40 h-40 rounded-lg overflow-hidden bg-gray-100">
+            <img
+              src={`/service-sections/${img.file}`}
+              alt={img.alt}
+              className="w-full h-full object-cover"
+              loading={i < 6 ? 'eager' : 'lazy'}
+              decoding="async"
+              width="160"
+              height="160"
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function WorkGallery() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const scroll = (dir: 'left' | 'right') => {
-    scrollRef.current?.scrollBy({ left: dir === 'left' ? -340 : 340, behavior: 'smooth' });
-  };
   return (
     <div className="mb-14">
       <div className="mb-4 border-b border-gray-200 pb-3">
         <h2 className="text-2xl font-bold text-gray-900">Our Work</h2>
         <p className="text-gray-500 text-sm mt-1">Real projects completed across Los Cabos — not limited to what you see here, just give us a call.</p>
       </div>
-      <div className="relative">
-        <button
-          onClick={() => scroll('left')}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 bg-white border border-gray-200 shadow rounded-full p-1.5 hover:bg-gray-50 transition"
-          aria-label="Scroll left"
-        >
-          <ChevronLeft size={18} className="text-gray-600" />
-        </button>
-        <div
-          ref={scrollRef}
-          className="grid gap-1.5 overflow-x-auto scrollbar-hide"
-          style={{ gridTemplateRows: 'repeat(2, 160px)', gridAutoFlow: 'column', gridAutoColumns: '160px' }}
-        >
-          {WORK_IMAGES.map((img, i) => (
-            <div key={img.file} className="rounded-lg overflow-hidden bg-gray-100">
-              <img
-                src={`/service-sections/${img.file}`}
-                alt={img.alt}
-                className="w-full h-full object-cover"
-                loading={i < 6 ? 'eager' : 'lazy'}
-                decoding="async"
-                width="160"
-                height="160"
-              />
-            </div>
-          ))}
-        </div>
-        <button
-          onClick={() => scroll('right')}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 bg-white border border-gray-200 shadow rounded-full p-1.5 hover:bg-gray-50 transition"
-          aria-label="Scroll right"
-        >
-          <ChevronRight size={18} className="text-gray-600" />
-        </button>
+      <div className="space-y-1.5">
+        <MarqueeRow images={TOP_IMAGES} direction="left" />
+        <MarqueeRow images={BOT_IMAGES} direction="right" />
       </div>
     </div>
   );
