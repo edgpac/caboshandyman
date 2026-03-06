@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 const WORK_IMAGES: { file: string; alt: string }[] = [
   { file: 'image1.jpeg',  alt: 'Bathroom vanity with vessel sink, faucet, and LED mirror installed in Cabo San Lucas' },
   { file: 'image2.jpeg',  alt: 'Bar stool furniture assembly in progress in Cabo San Lucas' },
-  { file: 'image3.jpg',   alt: 'Property setup with ceiling fan, bed frame, and furniture in Cabo San Lucas' },
+  { file: 'image3.png',   alt: 'Bedroom property setup with ceiling fan, bed frame, and mini-split AC in Cabo San Lucas' },
   { file: 'image4.jpeg',  alt: 'Rattan cabinet with interior shelving assembled in Cabo San Lucas home' },
   { file: 'image5.jpeg',  alt: 'Three-door rattan sideboard cabinet assembled in Cabo San Lucas property' },
   { file: 'image6.jpeg',  alt: 'Bed frame and nightstand furniture assembly in Cabo San Lucas bedroom' },
@@ -18,7 +18,7 @@ const WORK_IMAGES: { file: string; alt: string }[] = [
   { file: 'image11.jpeg', alt: 'Wood slat wall paneling materials staged for installation in Cabo San Lucas' },
   { file: 'image12.jpeg', alt: 'Cabos Handyman electrician working on electrical panel with laser level in Cabo San Lucas' },
   { file: 'image13.png',  alt: 'Before and after kitchen renovation completed by Cabos Handyman in Cabo San Lucas' },
-  { file: 'image14.jpeg', alt: 'Modern open-plan kitchen and living room completed during property setup in Cabo San Lucas' },
+  { file: 'image14.png',  alt: 'Modern open-plan kitchen and living room with island and TV wall completed in Cabo San Lucas' },
   { file: 'image15.jpeg', alt: 'Cabos Handyman technician arriving at job site carrying tools in Cabo San Lucas' },
   { file: 'image16.jpeg', alt: 'TV bracket and floating media shelf installed ready for TV mounting in Cabo San Lucas' },
   { file: 'image17.jpeg', alt: 'Cabos Handyman team installing pendant ceiling light fixture in Cabo San Lucas' },
