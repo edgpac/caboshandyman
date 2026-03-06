@@ -28,7 +28,19 @@
     { "source": "/furniture-assembly", "destination": "/furniture-assembly-cabo", "permanent": true },
     { "source": "/tv-mounting", "destination": "/tv-mounting-cabo", "permanent": true },
     { "source": "/property-setup", "destination": "/property-setup-cabo", "permanent": true },
-    { "source": "/vacation-rental", "destination": "/vacation-rental-setup-cabo", "permanent": true }
+    { "source": "/vacation-rental", "destination": "/vacation-rental-setup-cabo", "permanent": true },
+    { "source": "/toilet-installation", "destination": "/toilet-installation-cabo-san-lucas", "permanent": true },
+    { "source": "/water-heater", "destination": "/water-heater-cabo-san-lucas", "permanent": true },
+    { "source": "/hot-water-heater", "destination": "/water-heater-cabo-san-lucas", "permanent": true },
+    { "source": "/faucet-installation", "destination": "/faucet-installation-cabo-san-lucas", "permanent": true },
+    { "source": "/faucet-replacement", "destination": "/faucet-installation-cabo-san-lucas", "permanent": true },
+    { "source": "/tile-installation", "destination": "/tile-installation-cabo-san-lucas", "permanent": true },
+    { "source": "/backsplash-installation", "destination": "/tile-installation-cabo-san-lucas", "permanent": true },
+    { "source": "/cabinet-installation", "destination": "/cabinet-installation-cabo-san-lucas", "permanent": true },
+    { "source": "/outlet-installation", "destination": "/outlet-installation-cabo-san-lucas", "permanent": true },
+    { "source": "/shower-installation", "destination": "/shower-installation-cabo-san-lucas", "permanent": true },
+    { "source": "/garbage-disposal", "destination": "/garbage-disposal-cabo-san-lucas", "permanent": true },
+    { "source": "/ceiling-light-installation", "destination": "/ceiling-light-installation-cabo-san-lucas", "permanent": true }
   ],
   "rewrites": [
     {
