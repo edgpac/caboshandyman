@@ -55,8 +55,8 @@ export default function HandymanCaboSanLucas() {
   return (
     <>
       <SEO
-        title="Handyman Cabo San Lucas | 20+ Years Experience | Cabos Handyman"
-        description="Top-rated handyman in Cabo San Lucas — $60 service calls, same-day availability. Plumbing, electrical, painting, remodels & more. Bilingual team, licensed & insured. Call now for a free estimate."
+        title="Handyman Services Cabo San Lucas | 70+ Services | Cabos Handyman"
+        description="Need a handyman in Cabo San Lucas? 70+ services: plumbing, electrical, TV mounting, furniture assembly, painting & more. Same-day from $60. Bilingual team. Call: +52 612 169 8328"
         canonicalUrl="/handyman-cabo-san-lucas"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"

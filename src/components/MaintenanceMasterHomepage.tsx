@@ -181,8 +181,8 @@ export default function CabosHandymanHomepage() {
   return (
     <>
       <SEO
-        title="Handyman Cabo San Lucas | 20+ Years Experience | Cabos Handyman"
-        description="Need a handyman in Cabo San Lucas? 600+ projects completed, $60 service calls, 24/7 emergency service. Kitchen remodels, plumbing, electrical & more. Call +52 612 169 8328 for a free estimate."
+        title="Kitchen Remodeling & Handyman Cabo San Lucas | Cabos Handyman"
+        description="Licensed kitchen remodeling & handyman contractor in Cabo San Lucas & Los Cabos. Cabinets, countertops, plumbing, electrical & more. 600+ projects, 20+ yrs exp. Free estimate: +52 612 169 8328"
         canonicalUrl="/"
         schemaMarkup={homepageSchema}
       />

@@ -75,8 +75,8 @@ export default function PropertyCarePlans() {
   return (
     <>
       <SEO
-        title="Property Care Plans Cabo San Lucas | Preventive Maintenance | Cabos Handyman"
-        description="Preventive property maintenance plans in Cabo San Lucas. Monthly inspections, free unclog service, 24/7 emergency response. Save thousands on water damage. Perfect for vacation rentals. Plans from $99/month. Call +52 612 169 8328"
+        title="Property Care Plans Cabo San Lucas | From $99/mo | Cabos Handyman"
+        description="Property maintenance plans for Cabo vacation rentals & homeowners. Free monthly drain unclog + 24/7 emergency response. Protect your investment. Plans from $99/mo. Call: +52 612 169 8328"
         canonicalUrl="/property-care-plans"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
