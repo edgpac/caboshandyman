@@ -5,13 +5,37 @@ import { Home, Star, Droplet, Wrench, ArrowRight, Shield, Zap, Bath, Fan, Tv, Ar
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 
-const WORK_IMAGES = [
-  'image1.jpeg','image2.jpeg','image3.jpg','image4.jpeg','image5.jpeg',
-  'image6.jpeg','image7.png','image8.jpeg','image9.jpeg','image10.jpeg',
-  'image11.jpeg','image12.jpeg','image13.png','image14.jpeg','image15.jpeg',
-  'image16.jpeg','image17.jpeg','image18.jpeg','image19.jpeg','image20.jpeg',
-  'image21.jpeg','image22.jpeg','image23.jpeg','image24.jpeg','image25.jpeg',
-  'image26.jpeg','image27.jpeg','image28.jpeg','image29.jpeg','image30.jpeg',
+const WORK_IMAGES: { file: string; alt: string }[] = [
+  { file: 'image1.jpeg',  alt: 'Bathroom vanity with vessel sink, faucet, and LED mirror installed in Cabo San Lucas' },
+  { file: 'image2.jpeg',  alt: 'Bar stool furniture assembly in progress in Cabo San Lucas' },
+  { file: 'image3.jpg',   alt: 'Property setup with ceiling fan, bed frame, and furniture in Cabo San Lucas' },
+  { file: 'image4.jpeg',  alt: 'Rattan cabinet with interior shelving assembled in Cabo San Lucas home' },
+  { file: 'image5.jpeg',  alt: 'Three-door rattan sideboard cabinet assembled in Cabo San Lucas property' },
+  { file: 'image6.jpeg',  alt: 'Bed frame and nightstand furniture assembly in Cabo San Lucas bedroom' },
+  { file: 'image7.png',   alt: 'Cabos Handyman technician installing kitchen cabinet drawer in Cabo San Lucas' },
+  { file: 'image8.jpeg',  alt: 'TV mounted on wood slat accent wall with ceiling fan installed in Cabo San Lucas condo' },
+  { file: 'image9.jpeg',  alt: 'TV wall mount and floating media shelf on wood slat accent wall in Cabo San Lucas' },
+  { file: 'image10.jpeg', alt: 'Cabos Handyman technician on ladder installing wood slat wall panels in Cabo San Lucas' },
+  { file: 'image11.jpeg', alt: 'Wood slat wall paneling materials staged for installation in Cabo San Lucas' },
+  { file: 'image12.jpeg', alt: 'Cabos Handyman electrician working on electrical panel with laser level in Cabo San Lucas' },
+  { file: 'image13.png',  alt: 'Before and after kitchen renovation completed by Cabos Handyman in Cabo San Lucas' },
+  { file: 'image14.jpeg', alt: 'Modern open-plan kitchen and living room completed during property setup in Cabo San Lucas' },
+  { file: 'image15.jpeg', alt: 'Cabos Handyman technician arriving at job site carrying tools in Cabo San Lucas' },
+  { file: 'image16.jpeg', alt: 'TV bracket and floating media shelf installed ready for TV mounting in Cabo San Lucas' },
+  { file: 'image17.jpeg', alt: 'Cabos Handyman team installing pendant ceiling light fixture in Cabo San Lucas' },
+  { file: 'image18.jpeg', alt: 'Glass globe pendant light installed on ceiling in Cabo San Lucas property' },
+  { file: 'image19.jpeg', alt: 'Wall panel materials staged at Cabo San Lucas condo with ocean view before installation' },
+  { file: 'image20.jpeg', alt: 'Cabos Handyman team assembling ceiling fan components on floor in Cabo San Lucas' },
+  { file: 'image21.jpeg', alt: 'TV wall mount bracket installed during property setup in Cabo San Lucas' },
+  { file: 'image22.jpeg', alt: 'Cabos Handyman team leveling and securing TV wall bracket in Cabo San Lucas' },
+  { file: 'image23.jpeg', alt: 'Cabos Handyman technician installing ceiling fan on ladder in Cabo San Lucas' },
+  { file: 'image24.jpeg', alt: 'Kitchen cabinet, backsplash tile, and sink installation project by Cabos Handyman in Cabo San Lucas' },
+  { file: 'image25.jpeg', alt: 'Cabos Handyman technician carrying large wall panel during property setup in Cabo San Lucas' },
+  { file: 'image26.jpeg', alt: 'Cabos Handyman plumber repairing under-sink garbage disposal in Cabo San Lucas' },
+  { file: 'image27.jpeg', alt: 'Cabos Handyman technician taking outdoor measurements at Cabo San Lucas property' },
+  { file: 'image28.jpeg', alt: 'Under-sink drain P-trap and plumbing connections installed in Cabo San Lucas' },
+  { file: 'image29.jpeg', alt: 'Cabos Handyman plumber clearing toilet clog with auger in Cabo San Lucas' },
+  { file: 'image30.jpeg', alt: 'Cabos Handyman team sourcing materials at local hardware store in Cabo San Lucas' },
 ];
 
 type CardProps = {
@@ -80,10 +104,10 @@ function WorkGallery() {
           style={{ gridTemplateRows: 'repeat(2, 160px)', gridAutoFlow: 'column', gridAutoColumns: '160px' }}
         >
           {WORK_IMAGES.map((img, i) => (
-            <div key={img} className="rounded-lg overflow-hidden bg-gray-100">
+            <div key={img.file} className="rounded-lg overflow-hidden bg-gray-100">
               <img
-                src={`/service%20sections/${img}`}
-                alt={`Cabos Handyman project ${i + 1}`}
+                src={`/service%20sections/${img.file}`}
+                alt={img.alt}
                 className="w-full h-full object-cover"
                 loading={i < 6 ? 'eager' : 'lazy'}
                 decoding="async"
