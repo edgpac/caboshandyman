@@ -106,7 +106,7 @@ function WorkGallery() {
           {WORK_IMAGES.map((img, i) => (
             <div key={img.file} className="rounded-lg overflow-hidden bg-gray-100">
               <img
-                src={`/service%20sections/${img.file}`}
+                src={`/service-sections/${img.file}`}
                 alt={img.alt}
                 className="w-full h-full object-cover"
                 loading={i < 6 ? 'eager' : 'lazy'}
