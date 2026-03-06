@@ -1,8 +1,18 @@
+import { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Home, Star, Droplet, Wrench, ArrowRight, Shield, Zap, Bath, Fan, Tv, Armchair } from 'lucide-react';
+import { Home, Star, Droplet, Wrench, ArrowRight, Shield, Zap, Bath, Fan, Tv, Armchair, ChevronLeft, ChevronRight } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
+
+const WORK_IMAGES = [
+  'image1.jpeg','image2.jpeg','image3.jpg','image4.jpeg','image5.jpeg',
+  'image6.jpeg','image7.png','image8.jpeg','image9.jpeg','image10.jpeg',
+  'image11.jpeg','image12.jpeg','image13.png','image14.jpeg','image15.jpeg',
+  'image16.jpeg','image17.jpeg','image18.jpeg','image19.jpeg','image20.jpeg',
+  'image21.jpeg','image22.jpeg','image23.jpeg','image24.jpeg','image25.jpeg',
+  'image26.jpeg','image27.jpeg','image28.jpeg','image29.jpeg','image30.jpeg',
+];
 
 type CardProps = {
   to: string;
@@ -40,6 +50,56 @@ function ServiceSection({ title, intro, children }: SectionProps) {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {children}
+      </div>
+    </div>
+  );
+}
+
+function WorkGallery() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const scroll = (dir: 'left' | 'right') => {
+    scrollRef.current?.scrollBy({ left: dir === 'left' ? -340 : 340, behavior: 'smooth' });
+  };
+  return (
+    <div className="mb-14">
+      <div className="mb-4 border-b border-gray-200 pb-3">
+        <h2 className="text-2xl font-bold text-gray-900">Our Work</h2>
+        <p className="text-gray-500 text-sm mt-1">Real projects completed across Los Cabos — not limited to what you see here, just give us a call.</p>
+      </div>
+      <div className="relative">
+        <button
+          onClick={() => scroll('left')}
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 z-10 bg-white border border-gray-200 shadow rounded-full p-1.5 hover:bg-gray-50 transition"
+          aria-label="Scroll left"
+        >
+          <ChevronLeft size={18} className="text-gray-600" />
+        </button>
+        <div
+          ref={scrollRef}
+          className="grid gap-1.5 overflow-x-auto scrollbar-hide"
+          style={{ gridTemplateRows: 'repeat(2, 160px)', gridAutoFlow: 'column', gridAutoColumns: '160px' }}
+        >
+          {WORK_IMAGES.map((img, i) => (
+            <div key={img} className="rounded-lg overflow-hidden bg-gray-100">
+              <img
+                src={`/service%20sections/${img}`}
+                alt={`Cabos Handyman project ${i + 1}`}
+                className="w-full h-full object-cover"
+                loading={i < 6 ? 'eager' : 'lazy'}
+                decoding="async"
+                width="160"
+                height="160"
+              />
+            </div>
+          ))}
+        </div>
+        <button
+          onClick={() => scroll('right')}
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 z-10 bg-white border border-gray-200 shadow rounded-full p-1.5 hover:bg-gray-50 transition"
+          aria-label="Scroll right"
+        >
+          <ChevronRight size={18} className="text-gray-600" />
+        </button>
       </div>
     </div>
   );
@@ -294,17 +354,7 @@ export default function ServicesPage() {
             <ServiceCard to="/property-care-plans" icon={<Shield className="text-purple-500" size={28} />} title="Property Care Plans" desc="Monthly maintenance + free drain unclog" accent="hover:border-purple-400" />
           </ServiceSection>
 
-          {/* CTA */}
-          <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white rounded-xl p-8 text-center">
-            <h3 className="text-3xl font-bold mb-4">Need a Custom Quote?</h3>
-            <p className="text-lg mb-6">Call us for a free estimate on your project or issue — no job too small or too specific.</p>
-            <a
-              href="tel:+526121698328"
-              className="inline-block bg-white text-teal-600 px-8 py-4 rounded-lg text-xl font-bold hover:bg-gray-100 transition-colors"
-            >
-              Call +52 612 169 8328
-            </a>
-          </div>
+          <WorkGallery />
         </div>
       </div>
 
