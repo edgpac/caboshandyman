@@ -40,6 +40,25 @@ const CountertopInstallationCabo = lazy(() => import("./pages/CountertopInstalla
 const BacksplashInstallationCabo = lazy(() => import("./pages/BacksplashInstallationCabo"));
 const KitchenHardwareCabo = lazy(() => import("./pages/KitchenHardwareCabo"));
 const PantryShelvingCabo = lazy(() => import("./pages/PantryShelvingCabo"));
+const BathroomLightingCabo = lazy(() => import("./pages/BathroomLightingCabo"));
+const ShowerHeadReplacementCabo = lazy(() => import("./pages/ShowerHeadReplacementCabo"));
+const ToiletLeakRepairCabo = lazy(() => import("./pages/ToiletLeakRepairCabo"));
+const TowelRackInstallationCabo = lazy(() => import("./pages/TowelRackInstallationCabo"));
+const MirrorInstallationCabo = lazy(() => import("./pages/MirrorInstallationCabo"));
+const BathroomShelvingCabo = lazy(() => import("./pages/BathroomShelvingCabo"));
+const OfficeLightingCabo = lazy(() => import("./pages/OfficeLightingCabo"));
+const GeneratorHookupCabo = lazy(() => import("./pages/GeneratorHookupCabo"));
+const LandscapeMaintenanceCabo = lazy(() => import("./pages/LandscapeMaintenanceCabo"));
+const CommonAreaLightingCabo = lazy(() => import("./pages/CommonAreaLightingCabo"));
+const DoorLockReplacementCabo = lazy(() => import("./pages/DoorLockReplacementCabo"));
+const WindowRepairCabo = lazy(() => import("./pages/WindowRepairCabo"));
+const PaintingCabo = lazy(() => import("./pages/PaintingCabo"));
+const WaterLeakDetectorCabo = lazy(() => import("./pages/WaterLeakDetectorCabo"));
+const CommercialSinkCabo = lazy(() => import("./pages/CommercialSinkCabo"));
+const BoothInstallationCabo = lazy(() => import("./pages/BoothInstallationCabo"));
+const BarInstallationCabo = lazy(() => import("./pages/BarInstallationCabo"));
+const DecorativeLightingCabo = lazy(() => import("./pages/DecorativeLightingCabo"));
+const BathroomSinkInstallationCabo = lazy(() => import("./pages/BathroomSinkInstallationCabo"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -97,6 +116,25 @@ const App = () => {
               <Route path="/backsplash-installation-cabo-san-lucas" element={<BacksplashInstallationCabo />} />
               <Route path="/kitchen-hardware-installation-cabo-san-lucas" element={<KitchenHardwareCabo />} />
               <Route path="/pantry-shelving-cabo-san-lucas" element={<PantryShelvingCabo />} />
+              <Route path="/bathroom-lighting-cabo-san-lucas" element={<BathroomLightingCabo />} />
+              <Route path="/shower-head-replacement-cabo-san-lucas" element={<ShowerHeadReplacementCabo />} />
+              <Route path="/toilet-leak-repair-cabo-san-lucas" element={<ToiletLeakRepairCabo />} />
+              <Route path="/towel-rack-installation-cabo-san-lucas" element={<TowelRackInstallationCabo />} />
+              <Route path="/mirror-installation-cabo-san-lucas" element={<MirrorInstallationCabo />} />
+              <Route path="/bathroom-shelving-cabo-san-lucas" element={<BathroomShelvingCabo />} />
+              <Route path="/office-lighting-cabo-san-lucas" element={<OfficeLightingCabo />} />
+              <Route path="/generator-hookup-cabo-san-lucas" element={<GeneratorHookupCabo />} />
+              <Route path="/landscape-maintenance-cabo-san-lucas" element={<LandscapeMaintenanceCabo />} />
+              <Route path="/common-area-lighting-cabo-san-lucas" element={<CommonAreaLightingCabo />} />
+              <Route path="/door-lock-replacement-cabo-san-lucas" element={<DoorLockReplacementCabo />} />
+              <Route path="/window-repair-cabo-san-lucas" element={<WindowRepairCabo />} />
+              <Route path="/painting-cabo-san-lucas" element={<PaintingCabo />} />
+              <Route path="/water-leak-detector-cabo-san-lucas" element={<WaterLeakDetectorCabo />} />
+              <Route path="/commercial-sink-installation-cabo-san-lucas" element={<CommercialSinkCabo />} />
+              <Route path="/booth-installation-cabo-san-lucas" element={<BoothInstallationCabo />} />
+              <Route path="/bar-installation-cabo-san-lucas" element={<BarInstallationCabo />} />
+              <Route path="/decorative-lighting-cabo-san-lucas" element={<DecorativeLightingCabo />} />
+              <Route path="/bathroom-sink-installation-cabo-san-lucas" element={<BathroomSinkInstallationCabo />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

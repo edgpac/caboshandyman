@@ -475,6 +475,139 @@ export default function ServicesPage() {
                 <p className="text-gray-500 text-xs mt-1">Pantry, closet, wall, and built-in shelving</p>
                 <span className="text-amber-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
               </Link>
+
+              <Link to="/bathroom-lighting-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-yellow-300 transition-all group">
+                <Zap className="text-yellow-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-yellow-600 transition-colors">Bathroom Lighting</h3>
+                <p className="text-gray-500 text-xs mt-1">Vanity lights, sconces, exhaust fan lights</p>
+                <span className="text-yellow-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/shower-head-replacement-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-blue-300 transition-all group">
+                <Droplet className="text-blue-400 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Shower Head Replacement</h3>
+                <p className="text-gray-500 text-xs mt-1">Install, upgrade, rain head, handheld</p>
+                <span className="text-blue-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/toilet-leak-repair-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-cyan-300 transition-all group">
+                <Droplet className="text-cyan-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-cyan-600 transition-colors">Toilet Leak Repair</h3>
+                <p className="text-gray-500 text-xs mt-1">Running toilet, base leaks, tank repair</p>
+                <span className="text-cyan-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/towel-rack-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-gray-400 transition-all group">
+                <Wrench className="text-gray-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-gray-700 transition-colors">Towel Rack Installation</h3>
+                <p className="text-gray-500 text-xs mt-1">Towel bars, hooks, rings, heated bars</p>
+                <span className="text-gray-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/mirror-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-slate-400 transition-all group">
+                <Wrench className="text-slate-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-slate-700 transition-colors">Mirror Installation</h3>
+                <p className="text-gray-500 text-xs mt-1">Bathroom mirrors, framed, frameless, large</p>
+                <span className="text-slate-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/bathroom-shelving-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-blue-300 transition-all group">
+                <Home className="text-blue-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Bathroom Shelving</h3>
+                <p className="text-gray-500 text-xs mt-1">Wall shelves, over-toilet storage, floating</p>
+                <span className="text-blue-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/bathroom-sink-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-blue-400 transition-all group">
+                <Droplet className="text-blue-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-blue-600 transition-colors">Bathroom Sink Install</h3>
+                <p className="text-gray-500 text-xs mt-1">Vessel, undermount, pedestal, vanity basin</p>
+                <span className="text-blue-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/office-lighting-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-yellow-400 transition-all group">
+                <Zap className="text-yellow-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-yellow-700 transition-colors">Office Lighting</h3>
+                <p className="text-gray-500 text-xs mt-1">LED panels, task lighting, smart fixtures</p>
+                <span className="text-yellow-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/generator-hookup-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-orange-400 transition-all group">
+                <Zap className="text-orange-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-orange-700 transition-colors">Generator Hookup</h3>
+                <p className="text-gray-500 text-xs mt-1">220V inlet, transfer switch for CFE outages</p>
+                <span className="text-orange-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/common-area-lighting-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-yellow-300 transition-all group">
+                <Zap className="text-yellow-400 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-yellow-600 transition-colors">Common Area Lighting</h3>
+                <p className="text-gray-500 text-xs mt-1">Hallways, lobbies, parking, exterior</p>
+                <span className="text-yellow-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/decorative-lighting-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-amber-400 transition-all group">
+                <Zap className="text-amber-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-amber-600 transition-colors">Decorative Lighting</h3>
+                <p className="text-gray-500 text-xs mt-1">String lights, accent, LED strips, landscape</p>
+                <span className="text-amber-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/door-lock-replacement-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-gray-400 transition-all group">
+                <Wrench className="text-gray-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-gray-700 transition-colors">Door Lock Replacement</h3>
+                <p className="text-gray-500 text-xs mt-1">Deadbolt, smart lock, knob, lever sets</p>
+                <span className="text-gray-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/window-repair-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-sky-300 transition-all group">
+                <Wrench className="text-sky-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-sky-600 transition-colors">Window Repair</h3>
+                <p className="text-gray-500 text-xs mt-1">Seals, screens, hardware, sliding windows</p>
+                <span className="text-sky-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/painting-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-rose-300 transition-all group">
+                <Wrench className="text-rose-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-rose-600 transition-colors">Paint Touch-ups</h3>
+                <p className="text-gray-500 text-xs mt-1">Interior & exterior, accent walls, full rooms</p>
+                <span className="text-rose-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/water-leak-detector-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-cyan-400 transition-all group">
+                <Droplet className="text-cyan-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-cyan-700 transition-colors">Water Leak Detector</h3>
+                <p className="text-gray-500 text-xs mt-1">Smart sensor installation, leak detection</p>
+                <span className="text-cyan-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/landscape-maintenance-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-green-400 transition-all group">
+                <Wrench className="text-green-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-green-700 transition-colors">Landscape Maintenance</h3>
+                <p className="text-gray-500 text-xs mt-1">Palm tree pruning, irrigation, yard cleanup</p>
+                <span className="text-green-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/commercial-sink-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-teal-400 transition-all group">
+                <Droplet className="text-teal-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-teal-700 transition-colors">Commercial Sink</h3>
+                <p className="text-gray-500 text-xs mt-1">Restaurant, bar, 3-compartment, prep sinks</p>
+                <span className="text-teal-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/booth-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-indigo-300 transition-all group">
+                <Armchair className="text-indigo-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors">Booth Installation</h3>
+                <p className="text-gray-500 text-xs mt-1">Restaurant & dining area booth seating</p>
+                <span className="text-indigo-600 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/bar-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-amber-500 transition-all group">
+                <Wrench className="text-amber-700 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-amber-800 transition-colors">Bar Installation</h3>
+                <p className="text-gray-500 text-xs mt-1">Custom bar tops, cabinetry, under-bar setup</p>
+                <span className="text-amber-800 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
             </div>
           </div>
 
