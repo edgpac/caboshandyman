@@ -85,9 +85,9 @@ function MarqueeRow({ images, direction }: { images: typeof WORK_IMAGES; directi
   const doubled = [...images, ...images];
   return (
     <div className="overflow-hidden">
-      <div className={`flex gap-1.5 ${direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'}`}>
+      <div className={`flex ${direction === 'left' ? 'animate-marquee-left' : 'animate-marquee-right'}`}>
         {doubled.map((img, i) => (
-          <div key={`${img.file}-${i}`} className="flex-none w-40 h-40 rounded-lg overflow-hidden bg-gray-100">
+          <div key={`${img.file}-${i}`} className="flex-none w-40 h-40 mr-1.5 rounded-lg overflow-hidden bg-gray-100">
             <img
               src={`/service-sections/${img.file}`}
               alt={img.alt}
