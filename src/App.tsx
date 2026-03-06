@@ -35,6 +35,11 @@ const OutletInstallationCabo = lazy(() => import("./pages/OutletInstallationCabo
 const ShowerInstallationCabo = lazy(() => import("./pages/ShowerInstallationCabo"));
 const GarbageDisposalCabo = lazy(() => import("./pages/GarbageDisposalCabo"));
 const CeilingLightInstallationCabo = lazy(() => import("./pages/CeilingLightInstallationCabo"));
+const SinkInstallationCabo = lazy(() => import("./pages/SinkInstallationCabo"));
+const CountertopInstallationCabo = lazy(() => import("./pages/CountertopInstallationCabo"));
+const BacksplashInstallationCabo = lazy(() => import("./pages/BacksplashInstallationCabo"));
+const KitchenHardwareCabo = lazy(() => import("./pages/KitchenHardwareCabo"));
+const PantryShelvingCabo = lazy(() => import("./pages/PantryShelvingCabo"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -87,6 +92,11 @@ const App = () => {
               <Route path="/shower-installation-cabo-san-lucas" element={<ShowerInstallationCabo />} />
               <Route path="/garbage-disposal-cabo-san-lucas" element={<GarbageDisposalCabo />} />
               <Route path="/ceiling-light-installation-cabo-san-lucas" element={<CeilingLightInstallationCabo />} />
+              <Route path="/sink-installation-cabo-san-lucas" element={<SinkInstallationCabo />} />
+              <Route path="/countertop-installation-cabo-san-lucas" element={<CountertopInstallationCabo />} />
+              <Route path="/backsplash-installation-cabo-san-lucas" element={<BacksplashInstallationCabo />} />
+              <Route path="/kitchen-hardware-installation-cabo-san-lucas" element={<KitchenHardwareCabo />} />
+              <Route path="/pantry-shelving-cabo-san-lucas" element={<PantryShelvingCabo />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

@@ -440,6 +440,41 @@ export default function ServicesPage() {
                 <p className="text-gray-500 text-xs mt-1">Installation, replacement, repair</p>
                 <span className="text-gray-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
               </Link>
+
+              <Link to="/sink-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-cyan-300 transition-all group">
+                <Droplet className="text-cyan-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-cyan-700 transition-colors">Sink Installation</h3>
+                <p className="text-gray-500 text-xs mt-1">Kitchen & bathroom sinks, undermount, drop-in</p>
+                <span className="text-cyan-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/countertop-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-stone-400 transition-all group">
+                <Wrench className="text-stone-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-stone-700 transition-colors">Countertop Installation</h3>
+                <p className="text-gray-500 text-xs mt-1">Granite, quartz, marble, tile, laminate</p>
+                <span className="text-stone-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/backsplash-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-emerald-300 transition-all group">
+                <Wrench className="text-emerald-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-emerald-700 transition-colors">Backsplash Installation</h3>
+                <p className="text-gray-500 text-xs mt-1">Subway, mosaic, talavera, stone tile</p>
+                <span className="text-emerald-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/kitchen-hardware-installation-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-slate-400 transition-all group">
+                <Wrench className="text-slate-500 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-slate-700 transition-colors">Kitchen Hardware</h3>
+                <p className="text-gray-500 text-xs mt-1">Cabinet handles, pulls, hinges, knobs</p>
+                <span className="text-slate-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
+
+              <Link to="/pantry-shelving-cabo-san-lucas" className="bg-white p-5 rounded-xl shadow-sm hover:shadow-md border border-gray-100 hover:border-amber-400 transition-all group">
+                <Home className="text-amber-600 mb-2" size={28} />
+                <h3 className="font-bold text-gray-900 group-hover:text-amber-700 transition-colors">Pantry Shelving</h3>
+                <p className="text-gray-500 text-xs mt-1">Pantry, closet, wall, and built-in shelving</p>
+                <span className="text-amber-700 text-xs font-semibold mt-2 flex items-center gap-1">Learn More <ArrowRight size={12} /></span>
+              </Link>
             </div>
           </div>
 
