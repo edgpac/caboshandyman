@@ -36,6 +36,36 @@ const WORK_IMAGES: { file: string; alt: string }[] = [
   { file: 'image28.jpeg', alt: 'Under-sink drain P-trap and plumbing connections installed in Cabo San Lucas' },
   { file: 'image29.jpeg', alt: 'Cabos Handyman plumber clearing toilet clog with auger in Cabo San Lucas' },
   { file: 'image30.jpeg', alt: 'Cabos Handyman team sourcing materials at local hardware store in Cabo San Lucas' },
+  { file: 'image31.png',  alt: 'Cabos Handyman technician assembling sofa furniture in Cabo San Lucas property' },
+  { file: 'image32.png',  alt: 'Cabos Handyman technician repairing under-sink kitchen plumbing in Cabo San Lucas' },
+  { file: 'image33.png',  alt: 'Cabos Handyman technician holding mini-split AC filter during maintenance in Cabo San Lucas' },
+  { file: 'image34.png',  alt: 'Cabos Handyman technician on ladder installing mini-split AC unit in Cabo San Lucas' },
+  { file: 'image35.png',  alt: 'Cabos Handyman technician assembling black metal shelving unit in Cabo San Lucas bedroom' },
+  { file: 'image36.png',  alt: 'Cabos Handyman technician on ladder installing door frame trim in Cabo San Lucas' },
+  { file: 'image37.png',  alt: 'Cabos Handyman technician installing interior door in Cabo San Lucas bedroom' },
+  { file: 'image38.png',  alt: 'Cabos Handyman technician working on kitchen appliance installation in Cabo San Lucas' },
+  { file: 'image39.png',  alt: 'Cabos Handyman technician installing window hardware in Cabo San Lucas property' },
+  { file: 'image40.png',  alt: 'Custom carpentry door panel staged for installation by Cabos Handyman in Cabo San Lucas' },
+  { file: 'image41.png',  alt: 'Cabos Handyman technician on ladder installing ceiling fan with ocean view in Cabo San Lucas' },
+  { file: 'image42.png',  alt: 'Cabos Handyman technician on ladder hanging large wall art in Cabo San Lucas' },
+  { file: 'image43.png',  alt: 'Kitchen cabinetry work completed by Cabos Handyman in Cabo San Lucas' },
+  { file: 'image44.png',  alt: 'Living room with ceiling fan and custom wall art installed by Cabos Handyman in Cabo San Lucas' },
+  { file: 'image45.png',  alt: 'Cabos Handyman technician using drill for wall installation in Cabo San Lucas' },
+  { file: 'image46.jpeg', alt: 'Completed bedroom with ceiling fan and framed wall art installed by Cabos Handyman in Cabo San Lucas' },
+  { file: 'image47.png',  alt: 'Cabos Handyman team hanging framed artwork above bed in Cabo San Lucas property' },
+  { file: 'image48.jpeg', alt: 'Completed bedroom with ceiling fan and triptych wall art installed by Cabos Handyman in Cabo San Lucas' },
+  { file: 'image49.png',  alt: 'Cabos Handyman team hanging wall art in bedroom during property setup in Cabo San Lucas' },
+  { file: 'image50.png',  alt: 'Cabos Handyman team installing wall art and light fixture in bedroom in Cabo San Lucas' },
+  { file: 'image51.png',  alt: 'Cabos Handyman team installing ceiling light and wall art in bedroom in Cabo San Lucas' },
+  { file: 'image52.png',  alt: 'Cabos Handyman technician measuring wall for installation in Cabo San Lucas' },
+  { file: 'image53.png',  alt: 'Cabos Handyman team assembling bed frame and sofa in Cabo San Lucas property' },
+  { file: 'image54.png',  alt: 'Cabos Handyman technician installing upper kitchen cabinets in Cabo San Lucas' },
+  { file: 'image55.png',  alt: 'Cabos Handyman team installing rooftop drain plumbing in Cabo San Lucas' },
+  { file: 'image56.png',  alt: 'Cabos Handyman technician applying finish work during property setup in Cabo San Lucas' },
+  { file: 'image57.png',  alt: 'Cabos Handyman technician repairing kitchen appliance in Cabo San Lucas' },
+  { file: 'image58.png',  alt: 'Cabos Handyman team doing exterior rooftop plumbing work in Cabo San Lucas' },
+  { file: 'image59.png',  alt: 'Cabos Handyman technician assembling ceiling fan on rooftop in Cabo San Lucas' },
+  { file: 'image60.png',  alt: 'Cabos Handyman plumber working under kitchen sink in Cabo San Lucas property' },
 ];
 
 type CardProps = {
@@ -79,8 +109,10 @@ function ServiceSection({ title, intro, children }: SectionProps) {
   );
 }
 
-const TOP_IMAGES = WORK_IMAGES.slice(0, 15);
-const BOT_IMAGES = WORK_IMAGES.slice(15);
+const ROW1 = WORK_IMAGES.slice(0, 15);
+const ROW2 = WORK_IMAGES.slice(15, 30);
+const ROW3 = WORK_IMAGES.slice(30, 45);
+const ROW4 = WORK_IMAGES.slice(45);
 
 const TILE_SIZE = 160;
 const TILE_GAP = 6;
@@ -112,8 +144,10 @@ function WorkGallery() {
         <p className="text-gray-500 text-sm mt-1">Real projects completed across Los Cabos — not limited to what you see here, just give us a call.</p>
       </div>
       <div className="space-y-1.5 overflow-hidden">
-        <LogoLoop logos={makeGalleryItems(TOP_IMAGES)} direction="left" speed={120} gap={TILE_GAP} logoHeight={TILE_SIZE} ariaLabel="Cabos Handyman work photos top row" />
-        <LogoLoop logos={makeGalleryItems(BOT_IMAGES)} direction="right" speed={120} gap={TILE_GAP} logoHeight={TILE_SIZE} ariaLabel="Cabos Handyman work photos bottom row" />
+        <LogoLoop logos={makeGalleryItems(ROW1)} direction="left"  speed={120} gap={TILE_GAP} logoHeight={TILE_SIZE} ariaLabel="Cabos Handyman work photos row 1" />
+        <LogoLoop logos={makeGalleryItems(ROW2)} direction="right" speed={120} gap={TILE_GAP} logoHeight={TILE_SIZE} ariaLabel="Cabos Handyman work photos row 2" />
+        <LogoLoop logos={makeGalleryItems(ROW3)} direction="left"  speed={120} gap={TILE_GAP} logoHeight={TILE_SIZE} ariaLabel="Cabos Handyman work photos row 3" />
+        <LogoLoop logos={makeGalleryItems(ROW4)} direction="right" speed={120} gap={TILE_GAP} logoHeight={TILE_SIZE} ariaLabel="Cabos Handyman work photos row 4" />
       </div>
     </div>
   );
@@ -180,11 +214,7 @@ export default function ServicesPage() {
         <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white py-16 px-4 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Service Menu & Pricing</h2>
           <div className="max-w-3xl mx-auto text-center px-4 sm:px-6 mt-4 sm:mt-6">
-            <p className="text-xl sm:text-2xl text-white font-semibold mb-3 sm:mb-4">Pricing Reference Guide</p>
             <div className="space-y-2 sm:space-y-3 mb-4 sm:mb-5">
-              <p className="text-base sm:text-lg text-white/90 leading-relaxed">
-                Browse our most common services and starting prices below.
-              </p>
               <p className="text-base sm:text-lg text-white/90 leading-relaxed">
                 <a href="tel:+526121698328" className="text-white font-bold hover:underline transition-all">Call us</a>
                 {' '}for a personalized quote based on your project or issue.
