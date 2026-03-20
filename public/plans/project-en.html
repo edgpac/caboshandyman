@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Build Your Own Maintenance - Cabos Handyman</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+
+        .page {
+            width: 8.5in;
+            background: white;
+            margin: 0 auto;
+            padding: 38px 50px 28px 50px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.12);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+        .company-name { font-size: 21px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+        .company-info p { font-size: 10.5px; color: #444; margin-bottom: 2px; }
+        .doc-info { text-align: right; }
+        .doc-info p { font-size: 11px; color: #333; margin-bottom: 3px; }
+        .doc-info .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            background: #1a1a1a;
+            color: white;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a, #3a3a3a);
+            color: white;
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .hero .hero-title { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .hero .hero-sub { font-size: 11.5px; color: #aaa; max-width: 420px; line-height: 1.5; }
+        .hero .hero-right { text-align: right; }
+        .hero .hero-tag {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 5px;
+            padding: 8px 14px;
+            font-size: 10.5px;
+            color: #ddd;
+            line-height: 1.6;
+        }
+        .hero .hero-tag strong { color: white; display: block; font-size: 12px; margin-bottom: 3px; }
+
+        .section-heading {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #888;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
+            margin-bottom: 12px;
+            margin-top: 16px;
+        }
+
+        .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+        .step { border: 1px solid #e0e0e0; border-radius: 5px; padding: 12px; position: relative; }
+        .step .step-num {
+            width: 24px; height: 24px;
+            background: #1a1a1a;
+            color: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .step .step-title { font-size: 11.5px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+        .step .step-desc { font-size: 10px; color: #666; line-height: 1.5; }
+
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+        .info-card { border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden; }
+        .info-card-header { background: #1a1a1a; color: white; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 7px 12px; }
+        .info-card-body { padding: 10px 12px; }
+        .info-card-body p { font-size: 10.5px; color: #444; padding: 3px 0 3px 13px; position: relative; line-height: 1.5; border-bottom: 1px solid #f0f0f0; }
+        .info-card-body p:last-child { border-bottom: none; }
+        .info-card-body p::before { content: '•'; position: absolute; left: 0; color: #888; }
+
+        .note-box {
+            background: #fffbe6;
+            border-left: 4px solid #f0c000;
+            padding: 10px 14px;
+            margin-bottom: 14px;
+            font-size: 10.5px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .work-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+        .work-tag {
+            background: #f4f4f4;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 10px;
+            color: #444;
+            font-weight: 500;
+        }
+
+        .cta-block {
+            background: #1a1a1a;
+            color: white;
+            border-radius: 5px;
+            padding: 14px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+        }
+        .cta-block .cta-text { font-size: 13px; font-weight: 700; }
+        .cta-block .cta-sub { font-size: 10px; color: #aaa; margin-top: 3px; }
+        .cta-block .cta-contact { text-align: right; font-size: 12px; font-weight: 700; }
+        .cta-block .cta-contact small { display: block; font-size: 9.5px; font-weight: 400; color: #aaa; margin-top: 2px; }
+
+        .page-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 8px;
+            margin-top: 14px;
+            font-size: 9px;
+            color: #aaa;
+        }
+
+        .page-btn { display: flex; justify-content: center; margin-top: 10px; margin-bottom: 3px; }
+        .page-btn button { background: #444; color: white; border: none; padding: 7px 18px; border-radius: 5px; cursor: pointer; font-size: 11px; font-weight: 500; }
+        .page-btn button:hover { background: #111; }
+
+        .export-buttons { position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 1000; }
+        .export-btn { background: #1a1a1a; color: white; border: none; padding: 11px 20px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
+        .export-btn:hover { background: #000; }
+
+        @media print {
+            @page { size: 8.5in 11in; margin: 0.3in 0.4in; }
+            html, body { background: white; padding: 0; margin: 0; }
+            .page { box-shadow: none; margin: 0; padding: 18px 25px 20px 25px; width: 100%; }
+            .export-buttons, .page-btn { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="export-buttons">
+    <button class="export-btn" onclick="window.print()">🖨️ Print / PDF</button>
+</div>
+
+<div class="page" id="page1">
+    <div class="header">
+        <div class="company-info">
+            <p class="company-name">Cabos Handyman</p>
+            <p style="font-weight:500; margin-bottom:3px;">Professional Property Maintenance Services</p>
+            <p>📞 +52 612 169 8328</p>
+            <p>loscabohandyman&#64;gmail.com &nbsp;|&nbsp; caboshandyman.com</p>
+            <p style="color:#666;">Cabo San Lucas, México</p>
+        </div>
+        <div class="doc-info">
+            <div class="badge">Build Your Own</div>
+            <p><strong>TO:</strong> Valued Property Owner</p>
+            <p><strong>DATE:</strong> March 2026</p>
+        </div>
+    </div>
+
+    <div class="hero">
+        <div>
+            <div class="hero-title">Have a project in mind?</div>
+            <div class="hero-sub">No monthly contract needed. Tell us what you need, share your budget and expectations — we handle the rest. No surprises, no long-term commitments.</div>
+        </div>
+        <div class="hero-right">
+            <div class="hero-tag">
+                <strong>How does it work?</strong>
+                You propose · We quote<br>
+                We agree · We execute · Done
+            </div>
+        </div>
+    </div>
+
+    <div class="section-heading">Step-by-Step Process</div>
+
+    <div class="steps">
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-title">Share Your Project</div>
+            <div class="step-desc">Describe the work you need — it can be something small or a large project. There is no scope limit.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-title">Tell Us Your Budget</div>
+            <div class="step-desc">Share the budget you have available and your expected outcome. We work with you to fit within your means.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-title">Receive Your Quote</div>
+            <div class="step-desc">We send a detailed quote with a breakdown of materials, labor, and delivery timelines. No fine print.</div>
+        </div>
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-title">Approve &amp; Execute</div>
+            <div class="step-desc">Once you approve the quote, we schedule the work and complete it to the highest quality standards.</div>
+        </div>
+    </div>
+
+    <div class="section-heading">What We Need From You</div>
+
+    <div class="two-col">
+        <div class="info-card">
+            <div class="info-card-header">Project Information</div>
+            <div class="info-card-body">
+                <p>Description of the work to be done</p>
+                <p>Location of your property in Los Cabos</p>
+                <p>Photos or videos of the area if possible</p>
+                <p>Desired start date or completion deadline</p>
+                <p>Material or finish preferences</p>
+            </div>
+        </div>
+        <div class="info-card">
+            <div class="info-card-header">Budget &amp; Expectations</div>
+            <div class="info-card-body">
+                <p>Budget available for the project</p>
+                <p>Expected result when work is complete</p>
+                <p>Desired finish level (basic, standard, premium)</p>
+                <p>Project priority (normal or urgent)</p>
+                <p>Any access restrictions or scheduling constraints</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="note-box">
+        <strong>📋 Important:</strong> Your budget is the starting point, not a barrier. If the project scope exceeds the available budget, we offer options — we can adjust the scope, prioritize the most urgent tasks, or divide the work into phases. We always find a solution that works for you.
+    </div>
+
+    <div class="section-heading">Types of Work We Handle by Project</div>
+
+    <div class="work-tags">
+        <span class="work-tag">🔨 Remodeling</span>
+        <span class="work-tag">🚿 Full bathrooms</span>
+        <span class="work-tag">🏊 Pool &amp; deck areas</span>
+        <span class="work-tag">🪟 Doors &amp; windows</span>
+        <span class="work-tag">🪵 Custom carpentry</span>
+        <span class="work-tag">🎨 Interior &amp; exterior painting</span>
+        <span class="work-tag">💧 Waterproofing</span>
+        <span class="work-tag">🧱 Cement &amp; tile finishes</span>
+        <span class="work-tag">⚡ Electrical installations</span>
+        <span class="work-tag">🔧 Full plumbing</span>
+        <span class="work-tag">🌿 Outdoor &amp; terrace areas</span>
+        <span class="work-tag">❄️ AC installation</span>
+        <span class="work-tag">🏗️ Kitchens &amp; cabinets</span>
+        <span class="work-tag">🔐 Locks &amp; security</span>
+        <span class="work-tag">📦 And much more...</span>
+    </div>
+
+    <div class="cta-block">
+        <div>
+            <div class="cta-text">Tell us about your project today</div>
+            <div class="cta-sub">Response within 24 hours · No-obligation quote · Cabo San Lucas &amp; Los Cabos</div>
+        </div>
+        <div class="cta-contact">
+            +52 612 169 8328
+            <small>loscabohandyman&#64;gmail.com</small>
+            <small>caboshandyman.com</small>
+        </div>
+    </div>
+
+    <div class="page-btn">
+        <button onclick="downloadPagePNG('page1','cabos-handyman-build-your-own')">📥 Download PNG</button>
+    </div>
+    <div class="page-footer">
+        <span>Cabos Handyman · +52 612 169 8328 · loscabohandyman&#64;gmail.com · caboshandyman.com</span>
+        <span>Build Your Own Maintenance · Cabo San Lucas, México</span>
+    </div>
+</div>
+
+<script>
+async function downloadPagePNG(pageId, filename) {
+    const page = document.getElementById(pageId);
+    const btns = page.querySelectorAll('.page-btn');
+    const exportBtns = document.querySelector('.export-buttons');
+    btns.forEach(b => b.style.display = 'none');
+    if (exportBtns) exportBtns.style.display = 'none';
+    const canvas = await html2canvas(page, { scale: 3, backgroundColor: '#ffffff', logging: false, useCORS: true });
+    btns.forEach(b => b.style.display = '');
+    if (exportBtns) exportBtns.style.display = '';
+    const link = document.createElement('a');
+    link.download = filename + '.png';
+    link.href = canvas.toDataURL('image/png', 1.0);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Auto-download when opened with ?autodownload=1
+(function () {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has('autodownload')) return;
+
+    window.addEventListener('load', async function () {
+        const exportBtns = document.querySelector('.export-buttons');
+        if (exportBtns) exportBtns.style.display = 'none';
+        document.querySelectorAll('.page-btn').forEach(b => b.style.display = 'none');
+
+        await new Promise(r => setTimeout(r, 900));
+        await downloadPagePNG('page1', 'cabos-handyman-build-your-own');
+    });
+})();
+</script>
+</body>
+</html>

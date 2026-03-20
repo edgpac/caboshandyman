@@ -625,6 +625,48 @@ export default function PropertyCarePlans() {
               </div>
             </div>
 
+            {/* Build Your Own / Servicio por Proyecto */}
+            <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-8 mb-8 text-white">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div className="flex-1">
+                  <div className="inline-block bg-white/10 border border-white/20 text-white text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3">
+                    Build Your Own
+                  </div>
+                  <h3 className="text-2xl md:text-3xl font-bold mb-2">Have a specific project in mind?</h3>
+                  <p className="text-gray-300 text-sm leading-relaxed max-w-xl mb-4">
+                    No monthly contract needed. Tell us what you need, share your budget and expectations — we quote, agree, and get it done. No surprises, no long-term commitments.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-2">
+                    {['Remodeling','Full bathrooms','Painting','Electrical','Plumbing','Kitchens','AC install','Custom carpentry','And more...'].map(tag => (
+                      <span key={tag} className="bg-white/10 border border-white/20 text-gray-200 text-xs px-3 py-1 rounded-full">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-3 md:min-w-[220px]">
+                  <div className="bg-white/10 border border-white/20 rounded-lg p-4 text-sm text-gray-300 leading-relaxed">
+                    <p className="text-white font-semibold mb-1">How it works</p>
+                    You propose · We quote<br />We agree · We execute · Done
+                  </div>
+                  <a
+                    href="/plans/project-en.html?autodownload=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-white text-gray-900 py-3 px-4 rounded-lg font-semibold text-sm hover:bg-gray-100 transition-colors"
+                  >
+                    📥 Download Brochure EN
+                  </a>
+                  <a
+                    href="/plans/proyecto-es.html?autodownload=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 bg-gray-700 hover:bg-gray-600 text-white py-3 px-4 rounded-lg font-semibold text-sm transition-colors"
+                  >
+                    📥 Descargar Folleto ES
+                  </a>
+                </div>
+              </div>
+            </div>
+
             {/* Emergency Service Comparison */}
             <div className="bg-gradient-to-r from-red-50 to-orange-50 border-2 border-red-200 rounded-lg p-6 md:p-8 mb-8">
               <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 text-center">
