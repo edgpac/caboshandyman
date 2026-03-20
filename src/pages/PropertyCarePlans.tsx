@@ -1,6 +1,6 @@
 import { lazy } from 'react';
 import SEO from '@/components/SEO';
-import { Shield, CheckCircle2, ArrowRight, DollarSign } from 'lucide-react';
+import { Shield, CheckCircle2, ArrowRight } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 
 const Footer = lazy(() => import('@/components/Footer'));
@@ -669,35 +669,46 @@ export default function PropertyCarePlans() {
             </div>
           </div>
 
-          {/* CTA Section */}
-          <div className="bg-gradient-to-br from-blue-600 to-cyan-700 text-white rounded-xl p-12 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Protect Your Cabo Property Investment
-            </h2>
-            <p className="text-xl mb-4">
-              Start preventive maintenance today and avoid tomorrow's expensive emergencies
-            </p>
-            <p className="text-lg text-blue-100 mb-8">
-              Call now to discuss which Property Care Plan is right for your property
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* Property Management Crosslink */}
+          <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-xl p-10 flex flex-col md:flex-row items-center gap-8">
+            <div className="flex-1">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#4AC1C3] mb-3">Also Available</p>
+              <h2 className="text-3xl font-bold mb-3">Need Full Property Management?</h2>
+              <p className="text-gray-300 leading-relaxed mb-4">
+                A Care Plan covers recurring maintenance — but if you're an absentee owner or vacation rental host, you may need more. Our Property Management service handles inspections, vendor coordination, emergency response, and key holding so your property runs itself while you're away.
+              </p>
+              <ul className="space-y-2 mb-6">
+                {[
+                  '24/7 emergency response',
+                  'Monthly inspections with photo reports',
+                  'Vendor & contractor management',
+                  'Key holding and access control',
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-2 text-sm text-gray-200">
+                    <CheckCircle2 size={15} className="text-[#4AC1C3] shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
               <a
-                href="tel:+526121698328"
-                className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors shadow-xl"
+                href="/property-management-cabo-san-lucas"
+                className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors"
               >
-                <DollarSign size={20} />
-                Call: +52 612 169 8328
-              </a>
-              <a
-                href="/contact"
-                className="inline-flex items-center justify-center gap-2 bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-400 transition-colors border-2 border-white"
-              >
-                Request Quote Online <ArrowRight size={20} />
+                Learn About Property Management <ArrowRight size={18} />
               </a>
             </div>
-            <p className="mt-6 text-blue-100 text-sm">
-              Serving Cabo San Lucas and the nearby Tourist Corridor
-            </p>
+            <div className="md:w-56 shrink-0 text-center bg-white/5 border border-white/10 rounded-xl p-6">
+              <p className="text-4xl mb-3">🏢</p>
+              <p className="font-bold text-lg mb-1">Property Management</p>
+              <p className="text-sm text-gray-400 mb-4">Full-scope oversight for Cabo properties</p>
+              <a
+                href="tel:+526121698328"
+                className="block text-[#4AC1C3] font-semibold text-sm hover:underline"
+              >
+                +52 612 169 8328
+              </a>
+              <p className="text-gray-500 text-xs mt-1">Free quote · No long-term contract</p>
+            </div>
           </div>
 
         </div>
