@@ -385,7 +385,7 @@ export default function PropertyManagementCabo() {
             <Star size={32} className="text-[#4AC1C3] mx-auto mb-5" />
             <h2 className="text-4xl font-bold mb-4">Stop managing your Cabo property from a distance.</h2>
             <p className="text-gray-300 mb-3 text-lg leading-relaxed">
-              Tell us about your property —<br />we'll tell you exactly how we'd take it off your hands.
+              Tell us about your property —<br />so you can enjoy the investment, not manage it.
             </p>
             <p className="text-gray-400 text-sm mb-10">No long-term contract required to get started. No-obligation quote within 24 hours.</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
