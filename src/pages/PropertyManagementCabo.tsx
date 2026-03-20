@@ -231,7 +231,7 @@ export default function PropertyManagementCabo() {
               Own property in Cabo.<br className="hidden md:block" /> Not the headaches.
             </h1>
             <p className="text-xl text-gray-300 mb-4 max-w-2xl mx-auto leading-relaxed">
-              We handle every inspection, vendor, emergency, and key —<br /><span className="text-white font-semibold">so you can enjoy owning here without living here.</span>
+              We handle every inspection, vendor, and emergency<br /><span className="text-white font-semibold">so you can enjoy owning here without living here.</span>
             </p>
             <p className="text-sm text-gray-400 mb-10 max-w-xl mx-auto">
               Most Cabo property owners live in the US, Canada, or Europe.<br />We're the local team that makes distance irrelevant.
@@ -289,7 +289,7 @@ export default function PropertyManagementCabo() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl font-bold text-gray-900 text-center mb-3">What we do — and why it matters to you</h2>
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-3">What we do, and why it matters to you</h2>
             <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
               Every service exists for one reason: to remove something you shouldn't have to deal with from a distance.
             </p>
@@ -312,7 +312,7 @@ export default function PropertyManagementCabo() {
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold mb-2 text-center">Everything included</h2>
-            <p className="text-gray-400 text-center mb-10">What we do — and what that means for you.</p>
+            <p className="text-gray-400 text-center mb-10">What we do, and what that means for you.</p>
             <div className="space-y-3">
               {included.map((item) => (
                 <div key={item.feature} className="flex items-start gap-4 bg-white/5 rounded-lg px-5 py-4">
