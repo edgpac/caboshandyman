@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Fan, Zap, Shield, Clock, ArrowRight, Wind } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import Navigation from '@/components/Navigation';
 import RelatedServices from '../components/RelatedServices';
 
 export default function CeilingFanInstallationCabo() {
@@ -57,6 +58,7 @@ export default function CeilingFanInstallationCabo() {
         geoPosition="22.8866974;-109.9139710"
         schemaMarkup={schemaMarkup}
       />
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white overflow-hidden">

@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Wrench, DollarSign, Clock, ArrowRight, Droplet, Zap, ChevronDown, Shield } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import Navigation from '@/components/Navigation';
 import RelatedServices from '../components/RelatedServices';
 
 export default function KitchenServicesCabo() {
@@ -79,6 +80,7 @@ export default function KitchenServicesCabo() {
         geoPosition="22.8866974;-109.9139710"
         schemaMarkup={schemaMarkup}
       />
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-orange-600 to-red-700 text-white overflow-hidden">

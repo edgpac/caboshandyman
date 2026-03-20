@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Monitor, Wrench, Shield, ArrowRight, Zap } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import Navigation from '@/components/Navigation';
 import RelatedServices from '../components/RelatedServices';
 
 export default function TVMountingCabo() {
@@ -57,6 +58,7 @@ export default function TVMountingCabo() {
         geoPosition="22.8866974;-109.9139710"
         schemaMarkup={schemaMarkup}
       />
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-purple-600 to-purple-700 text-white overflow-hidden">

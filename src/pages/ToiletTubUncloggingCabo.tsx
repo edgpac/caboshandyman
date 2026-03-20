@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Droplet, Clock, Shield, ArrowRight, AlertCircle } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import Navigation from '@/components/Navigation';
 import RelatedServices from '../components/RelatedServices';
 
 export default function ToiletTubUncloggingCabo() {
@@ -57,6 +58,7 @@ export default function ToiletTubUncloggingCabo() {
         geoPosition="22.8866974;-109.9139710"
         schemaMarkup={schemaMarkup}
       />
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-blue-600 to-cyan-700 text-white overflow-hidden">

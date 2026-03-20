@@ -3,6 +3,7 @@ import SEO from '@/components/SEO';
 import { CheckCircle2, Zap, DollarSign, Clock, ArrowRight, Shield, AlertCircle } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
+import Navigation from '@/components/Navigation';
 import RelatedServices from '../components/RelatedServices';
 
 export default function ElectricalServicesCabo() {
@@ -75,6 +76,7 @@ export default function ElectricalServicesCabo() {
         geoPosition="22.8866974;-109.9139710"
         schemaMarkup={schemaMarkup}
       />
+      <Navigation />
 
       {/* Hero Section */}
       <section className="relative py-20 bg-gradient-to-br from-yellow-500 to-orange-500 text-white overflow-hidden">
