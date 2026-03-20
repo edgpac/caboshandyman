@@ -193,7 +193,8 @@ export default function PropertyCarePlans() {
               {/* Basic Care - ORANGE for action/conversion */}
               <div className="bg-white rounded-lg shadow-xl border-2 border-orange-400 overflow-hidden hover:shadow-2xl transition-all transform hover:scale-105">
                 <div className="bg-gradient-to-br from-orange-500 to-red-500 text-white p-6 text-center">
-                  <h3 className="text-2xl font-bold mb-2">Basic Care</h3>
+                  <h3 className="text-2xl font-bold mb-1">Basic Care</h3>
+                  <p className="text-white/80 text-sm italic mb-3">so you can stop ignoring small problems</p>
                   <div className="text-5xl font-bold mb-2">$99</div>
                   <div className="text-white/90 mb-4">per month</div>
 
@@ -276,7 +277,8 @@ export default function PropertyCarePlans() {
                   ⭐ MOST POPULAR
                 </div>
                 <div className="bg-gradient-to-br from-blue-600 to-cyan-700 text-white p-6 text-center">
-                  <h3 className="text-2xl font-bold mb-2">Premium Care</h3>
+                  <h3 className="text-2xl font-bold mb-1">Premium Care</h3>
+                  <p className="text-white/80 text-sm italic mb-3">so you can own your property, not manage it</p>
                   <div className="text-5xl font-bold mb-2">$199</div>
                   <div className="text-blue-100 mb-4">per month</div>
 
@@ -360,7 +362,8 @@ export default function PropertyCarePlans() {
               {/* Elite Care */}
               <div className="bg-white rounded-lg shadow-xl border-2 border-purple-300 overflow-hidden hover:shadow-2xl transition-all">
                 <div className="bg-gradient-to-br from-purple-600 to-pink-700 text-white p-6 text-center">
-                  <h3 className="text-2xl font-bold mb-2">Elite Care</h3>
+                  <h3 className="text-2xl font-bold mb-1">Elite Care</h3>
+                  <p className="text-white/80 text-sm italic mb-3">so you can forget your property even exists</p>
                   <div className="text-5xl font-bold mb-2">$299</div>
                   <div className="text-purple-100 mb-4">per month</div>
 

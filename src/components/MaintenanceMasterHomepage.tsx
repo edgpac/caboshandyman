@@ -440,13 +440,13 @@ export default function CabosHandymanHomepage() {
 
               {/* Updated Title - Subscription Focus */}
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Smart Property Owners Choose Prevention
+                One monthly plan — so you can stop thinking about your property and start enjoying it.
               </h2>
 
               {/* Updated Subtitle */}
               <p className="text-xl mb-8 text-white/90">
-                Get preventive maintenance with a <strong>FREE monthly unclog</strong> for just $99/month.
-                <br />Or save even more with annual plans - <strong>pay for 11 months, get 1 month FREE!</strong>
+                Preventive maintenance from <strong>$99/month</strong> — includes a <strong>FREE monthly unclog</strong>.
+                <br />Pay annually and <strong>get 1 month FREE</strong> — so you can save while we handle the rest.
               </p>
 
               {/* Annual Savings Highlight */}

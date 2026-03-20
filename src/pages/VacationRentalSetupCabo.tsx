@@ -79,7 +79,7 @@ export default function VacationRentalSetupCabo() {
               Vacation Rental Setup & Maintenance in Los Cabos
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Keep your Airbnb and VRBO properties guest-ready with professional turnover service, ongoing maintenance contracts, and 24/7 emergency repairs. Maximize your 5-star reviews and rental income.
+              We keep your Airbnb and VRBO properties guest-ready — so you can earn 5-star reviews without being there.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -454,9 +454,9 @@ export default function VacationRentalSetupCabo() {
 
           {/* Final CTA */}
           <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-8 md:p-12 text-center text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Protect Your Rental Income & Guest Satisfaction</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Your guests arrive to a perfect property — every time.</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Stop losing bookings to maintenance issues. Get a custom maintenance plan for your Cabo vacation rentals today.
+              Tell us about your rental — so you can stop worrying about what happens between checkouts and start collecting 5-star reviews.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
