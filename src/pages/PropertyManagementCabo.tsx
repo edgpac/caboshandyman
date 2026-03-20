@@ -291,7 +291,7 @@ export default function PropertyManagementCabo() {
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-3">What we do, and why it matters to you</h2>
             <p className="text-gray-500 text-center mb-12 max-w-2xl mx-auto">
-              Every service exists for one reason: to remove something you shouldn't have to deal with from a distance.
+              Every service exists for one reason:<br />to remove something you shouldn't have to deal with from a distance.
             </p>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((s) => (
