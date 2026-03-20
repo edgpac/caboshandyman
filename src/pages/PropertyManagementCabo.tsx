@@ -1,7 +1,7 @@
-import { lazy } from 'react';
+import { lazy, useState } from 'react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import { CheckCircle2, ArrowRight, Shield, Clock, Home, Wrench, Phone, Star, DollarSign, Calendar } from 'lucide-react';
+import { CheckCircle2, ArrowRight, Shield, Clock, Home, Wrench, Phone, Star, DollarSign, Calendar, ChevronDown } from 'lucide-react';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -169,7 +169,36 @@ const whoItsFor = [
   }
 ];
 
+const faqs = [
+  {
+    q: "What does property management in Cabo San Lucas include?",
+    a: "It includes routine maintenance coordination, vendor management, regular property inspections with photo reports, key holding, emergency response, utility oversight, and direct communication with you as the owner. Cabos Handyman handles all of this so you don't have to be on-site."
+  },
+  {
+    q: "Do I need property management if I own a vacation rental in Los Cabos?",
+    a: "Yes — most Cabo vacation rental owners are not local. Without a trusted local contact, small issues like a broken AC, a leak, or a faulty lock can escalate quickly and lead to bad reviews or property damage. A property manager acts as your eyes and hands on the ground."
+  },
+  {
+    q: "What is the difference between property management and a maintenance plan?",
+    a: "A maintenance plan covers scheduled recurring tasks on a monthly basis (like our Property Care Plans). Property management is broader — it includes vendor coordination, inspections, emergency response, key management, and owner communication. Both can be combined for complete coverage."
+  },
+  {
+    q: "How quickly do you respond to emergencies at managed properties?",
+    a: "We provide 24/7 emergency response for managed properties in Cabo San Lucas and Los Cabos. For critical issues like leaks, electrical failures, or security concerns, we aim to be on-site within 2–4 hours."
+  },
+  {
+    q: "Can you manage my property if I live outside of Mexico?",
+    a: "Yes — this is the most common scenario. We act as your local point of contact, handle all on-site coordination, send you photo reports after inspections, and communicate via WhatsApp, email, or video call. You stay informed without needing to travel."
+  },
+  {
+    q: "How much does property management cost in Cabo San Lucas?",
+    a: "Costs vary based on property size, services needed, and inspection frequency. We offer flexible scopes — from basic oversight to full-service management. Contact us for a no-obligation quote tailored to your property."
+  }
+];
+
 export default function PropertyManagementCabo() {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
   return (
     <>
       <SEO
@@ -330,42 +359,30 @@ export default function PropertyManagementCabo() {
         </div>
       </section>
 
-      {/* FAQ — AEO structured Q&A */}
+      {/* FAQ — AEO structured Q&A with accordion */}
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl font-bold text-gray-900 text-center mb-3">Frequently Asked Questions</h2>
             <p className="text-gray-500 text-center mb-10">Common questions about property management in Cabo San Lucas.</p>
-            <div className="space-y-5">
-              {[
-                {
-                  q: "What does property management in Cabo San Lucas include?",
-                  a: "It includes routine maintenance coordination, vendor management, regular property inspections with photo reports, key holding, emergency response, utility oversight, and direct communication with you as the owner. Cabos Handyman handles all of this so you don't have to be on-site."
-                },
-                {
-                  q: "Do I need property management if I own a vacation rental in Los Cabos?",
-                  a: "Yes — most Cabo vacation rental owners are not local. Without a trusted local contact, small issues like a broken AC, a leak, or a faulty lock can escalate quickly and lead to bad reviews or property damage. A property manager acts as your eyes and hands on the ground."
-                },
-                {
-                  q: "What is the difference between property management and a maintenance plan?",
-                  a: "A maintenance plan covers scheduled recurring tasks on a monthly basis (like our Property Care Plans). Property management is broader — it includes vendor coordination, inspections, emergency response, key management, and owner communication. Both can be combined for complete coverage."
-                },
-                {
-                  q: "How quickly do you respond to emergencies at managed properties?",
-                  a: "We provide 24/7 emergency response for managed properties in Cabo San Lucas and Los Cabos. For critical issues like leaks, electrical failures, or security concerns, we aim to be on-site within 2–4 hours."
-                },
-                {
-                  q: "Can you manage my property if I live outside of Mexico?",
-                  a: "Yes — this is the most common scenario. We act as your local point of contact, handle all on-site coordination, send you photo reports after inspections, and communicate via WhatsApp, email, or video call. You stay informed without needing to travel."
-                },
-                {
-                  q: "How much does property management cost in Cabo San Lucas?",
-                  a: "Costs vary based on property size, services needed, and inspection frequency. We offer flexible scopes — from basic oversight to full-service management. Contact us for a no-obligation quote tailored to your property."
-                }
-              ].map(({ q, a }) => (
-                <div key={q} className="bg-white border border-gray-200 rounded-xl p-6">
-                  <h3 className="font-semibold text-gray-900 mb-2">{q}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{a}</p>
+            <div className="space-y-3">
+              {faqs.map(({ q, a }, i) => (
+                <div key={i} className="bg-white border-2 border-gray-200 rounded-xl overflow-hidden">
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex justify-between items-start gap-4 px-6 py-5 text-left hover:bg-gray-50 transition-colors"
+                  >
+                    <h3 className="font-semibold text-gray-900 leading-snug">{q}</h3>
+                    <ChevronDown
+                      size={20}
+                      className={`text-[#06756b] shrink-0 mt-0.5 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  {openFaq === i && (
+                    <div className="px-6 pb-5 pt-0 border-t-2 border-gray-200">
+                      <p className="text-gray-600 leading-relaxed text-sm pt-4">{a}</p>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

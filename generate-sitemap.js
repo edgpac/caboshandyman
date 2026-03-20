@@ -21,6 +21,7 @@ const staticPages = [
   { url: '/plumber-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
   { url: '/handyman-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
   { url: '/property-care-plans', changefreq: 'monthly', priority: '0.95' },
+  { url: '/property-management-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
   { url: '/kitchen-services-cabo', changefreq: 'monthly', priority: '0.90' },
   { url: '/property-setup-cabo', changefreq: 'monthly', priority: '0.90' },
   { url: '/bathroom-services-cabo', changefreq: 'monthly', priority: '0.85' },

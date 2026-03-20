@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Phone, Mail, Shield, Menu, ChevronDown, Wrench } from 'lucide-react';
+import { Phone, Mail, Shield, Menu, ChevronDown, Wrench, Home } from 'lucide-react';
 import GradientText from './GradientText';
 
 const SERVICE_LINKS = [
@@ -53,6 +53,8 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isPropertyCareOpen, setIsPropertyCareOpen] = useState(false);
+  const [isMobilePropertyCareOpen, setIsMobilePropertyCareOpen] = useState(false);
 
   return (
     <nav className="bg-dark-surface text-white py-4 sticky top-0 z-40 shadow-lg">
@@ -124,13 +126,41 @@ export default function Navigation() {
               )}
             </div>
 
-            <a
-              href="/property-care-plans"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold hover:from-purple-600 hover:to-indigo-600 transition shadow-lg"
+            {/* Property Care Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsPropertyCareOpen(true)}
+              onMouseLeave={() => setIsPropertyCareOpen(false)}
             >
-              <Shield size={18} />
-              Property Care
-            </a>
+              <button
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold hover:from-purple-600 hover:to-indigo-600 transition shadow-lg"
+              >
+                <Shield size={18} />
+                Property Care
+                <ChevronDown
+                  size={15}
+                  className={`transition-transform ${isPropertyCareOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+              {isPropertyCareOpen && (
+                <div className="absolute top-full right-0 mt-1 w-56 bg-dark-surface-elevated rounded-lg shadow-xl border border-primary/20 py-1 z-50">
+                  <a
+                    href="/property-care-plans"
+                    className="flex items-center gap-2 px-4 py-3 text-sm text-white hover:bg-dark-surface hover:text-primary transition-colors"
+                  >
+                    <Shield size={14} className="text-purple-400" />
+                    Property Care Plans
+                  </a>
+                  <a
+                    href="/property-management-cabo-san-lucas"
+                    className="flex items-center gap-2 px-4 py-3 text-sm text-white hover:bg-dark-surface hover:text-primary transition-colors"
+                  >
+                    <Home size={14} className="text-purple-400" />
+                    Property Management
+                  </a>
+                </div>
+              )}
+            </div>
             <a
               href="/contact"
               className="flex items-center gap-2 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-4 py-2 rounded-lg transition-all font-semibold shadow-md shadow-[#049d8e]/30"
@@ -192,14 +222,35 @@ export default function Navigation() {
               </div>
             )}
 
-            <a
-              href="/property-care-plans"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center gap-2 px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold hover:from-purple-600 hover:to-indigo-600 transition shadow-lg"
+            {/* Mobile Property Care Accordion */}
+            <button
+              onClick={() => setIsMobilePropertyCareOpen(!isMobilePropertyCareOpen)}
+              className="w-full flex items-center justify-between px-4 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold transition shadow-lg"
             >
-              <Shield size={18} />
-              Property Care
-            </a>
+              <span className="flex items-center gap-2"><Shield size={18} /> Property Care</span>
+              <ChevronDown
+                size={16}
+                className={`transition-transform ${isMobilePropertyCareOpen ? 'rotate-180' : ''}`}
+              />
+            </button>
+            {isMobilePropertyCareOpen && (
+              <div className="pl-4 space-y-1 pb-1">
+                <a
+                  href="/property-care-plans"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 py-2 px-4 text-sm text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-surface"
+                >
+                  <Shield size={14} className="text-purple-400" /> Property Care Plans
+                </a>
+                <a
+                  href="/property-management-cabo-san-lucas"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="flex items-center gap-2 py-2 px-4 text-sm text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-surface"
+                >
+                  <Home size={14} className="text-purple-400" /> Property Management
+                </a>
+              </div>
+            )}
             <a
               href="/contact"
               onClick={() => setIsMobileMenuOpen(false)}
