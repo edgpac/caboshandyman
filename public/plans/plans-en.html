@@ -126,7 +126,7 @@
         <div class="doc-info">
             <div class="plan-badge" style="background:#e8f5e9; color:#2a8a2a;">Basic Plan</div>
             <p><strong>TO:</strong> Valued Property Owner</p>
-            <p><strong>DATE:</strong> March 2026</p>
+            <p><strong>DATE:</strong> <span class="doc-date"></span></p>
             <p><strong>PAGE:</strong> 1 of 3</p>
         </div>
     </div>
@@ -230,7 +230,7 @@
         <div class="doc-info">
             <div class="plan-badge" style="background:#e3f2fd; color:#1565c0;">Most Popular</div>
             <p><strong>TO:</strong> Valued Property Owner</p>
-            <p><strong>DATE:</strong> March 2026</p>
+            <p><strong>DATE:</strong> <span class="doc-date"></span></p>
             <p><strong>PAGE:</strong> 2 of 3</p>
         </div>
     </div>
@@ -337,7 +337,7 @@
         <div class="doc-info">
             <div class="plan-badge" style="background:#1a1a1a; color:#f0c000;">⭐ Elite Plan</div>
             <p><strong>TO:</strong> Valued Property Owner</p>
-            <p><strong>DATE:</strong> March 2026</p>
+            <p><strong>DATE:</strong> <span class="doc-date"></span></p>
             <p><strong>PAGE:</strong> 3 of 3</p>
         </div>
     </div>
@@ -435,6 +435,11 @@
 </div>
 
 <script>
+// Fill current date in all date spans
+document.querySelectorAll('.doc-date').forEach(el => {
+    el.textContent = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+});
+
 async function downloadPagePNG(pageId, filename) {
     const page = document.getElementById(pageId);
     const btns = page.querySelectorAll('.page-btn');

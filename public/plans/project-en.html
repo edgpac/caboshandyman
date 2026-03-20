@@ -182,7 +182,7 @@
         <div class="doc-info">
             <div class="badge">Build Your Own</div>
             <p><strong>TO:</strong> Valued Property Owner</p>
-            <p><strong>DATE:</strong> March 2026</p>
+            <p><strong>DATE:</strong> <span class="doc-date"></span></p>
         </div>
     </div>
 
@@ -296,6 +296,11 @@
 </div>
 
 <script>
+// Fill current date in all date spans
+document.querySelectorAll('.doc-date').forEach(el => {
+    el.textContent = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+});
+
 async function downloadPagePNG(pageId, filename) {
     const page = document.getElementById(pageId);
     const btns = page.querySelectorAll('.page-btn');
