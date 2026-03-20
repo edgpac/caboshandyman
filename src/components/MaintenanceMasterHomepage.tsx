@@ -440,13 +440,13 @@ export default function CabosHandymanHomepage() {
 
               {/* Updated Title - Subscription Focus */}
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                One monthly plan — so you can stop thinking about your property and start enjoying it.
+                One monthly plan, so you can stop thinking about your property and start enjoying it.
               </h2>
 
               {/* Updated Subtitle */}
               <p className="text-xl mb-8 text-white/90">
-                Preventive maintenance from <strong>$99/month</strong> — includes a <strong>FREE monthly unclog</strong>.
-                <br />Pay annually and <strong>get 1 month FREE</strong> — so you can save while we handle the rest.
+                Preventive maintenance from <strong>$99/month</strong>, includes a <strong>FREE monthly unclog</strong>.
+                <br />Pay annually and <strong>get 1 month FREE</strong>, so you can save while we handle the rest.
               </p>
 
               {/* Annual Savings Highlight */}
