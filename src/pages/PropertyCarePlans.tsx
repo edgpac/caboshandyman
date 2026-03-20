@@ -428,12 +428,24 @@ export default function PropertyCarePlans() {
                   <p className="text-sm text-gray-600 mb-4">
                     <strong>Perfect for:</strong> Single-family homes, small vacation rentals, part-time residents
                   </p>
-                  <a
-                    href="/contact"
-                    className="block w-full bg-orange-600 hover:bg-orange-700 text-white text-center py-3 rounded-lg font-semibold transition-colors shadow-lg"
-                  >
-                    Choose Basic Care
-                  </a>
+                  <div className="flex gap-2">
+                    <a
+                      href="/plans/plans-en.html?plan=1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-orange-600 hover:bg-orange-700 text-white text-center py-3 rounded-lg font-semibold transition-colors shadow-lg text-sm"
+                    >
+                      📥 Download EN
+                    </a>
+                    <a
+                      href="/plans/planes-es.html?plan=1"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-gray-700 hover:bg-gray-800 text-white text-center py-3 rounded-lg font-semibold transition-colors shadow-lg text-sm"
+                    >
+                      📥 Descargar ES
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -503,12 +515,24 @@ export default function PropertyCarePlans() {
                   <p className="text-sm text-gray-600 mb-4">
                     <strong>Perfect for:</strong> Active vacation rentals, high-value properties, remote owners
                   </p>
-                  <a
-                    href="/contact"
-                    className="block w-full bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    Choose Premium Care
-                  </a>
+                  <div className="flex gap-2">
+                    <a
+                      href="/plans/plans-en.html?plan=2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center py-3 rounded-lg font-semibold transition-colors text-sm"
+                    >
+                      📥 Download EN
+                    </a>
+                    <a
+                      href="/plans/planes-es.html?plan=2"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-gray-700 hover:bg-gray-800 text-white text-center py-3 rounded-lg font-semibold transition-colors text-sm"
+                    >
+                      📥 Descargar ES
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -579,12 +603,24 @@ export default function PropertyCarePlans() {
                   <p className="text-sm text-gray-600 mb-4">
                     <strong>Perfect for:</strong> Luxury rentals, property portfolios, commercial properties
                   </p>
-                  <a
-                    href="/contact"
-                    className="block w-full bg-purple-600 hover:bg-purple-700 text-white text-center py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    Choose Elite Care
-                  </a>
+                  <div className="flex gap-2">
+                    <a
+                      href="/plans/plans-en.html?plan=3"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-center py-3 rounded-lg font-semibold transition-colors text-sm"
+                    >
+                      📥 Download EN
+                    </a>
+                    <a
+                      href="/plans/planes-es.html?plan=3"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 bg-gray-700 hover:bg-gray-800 text-white text-center py-3 rounded-lg font-semibold transition-colors text-sm"
+                    >
+                      📥 Descargar ES
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

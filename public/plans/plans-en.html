@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Care Plans - Cabos Handyman</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+
+        .page {
+            width: 8.5in;
+            background: white;
+            margin: 0 auto 40px auto;
+            padding: 38px 50px 28px 50px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.12);
+            position: relative;
+            page-break-after: always;
+            break-after: page;
+        }
+        .page:last-of-type { page-break-after: auto; break-after: auto; }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            padding-bottom: 14px;
+            border-bottom: 3px solid #1a1a1a;
+        }
+        .company-name { font-size: 21px; font-weight: 700; color: #1a1a1a; margin-bottom: 4px; }
+        .company-info p { font-size: 10.5px; color: #444; margin-bottom: 2px; }
+        .doc-info { text-align: right; }
+        .doc-info p { font-size: 11px; color: #333; margin-bottom: 3px; }
+        .doc-info .plan-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .plan-hero {
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .plan-hero .hero-left .plan-name { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+        .plan-hero .hero-left .plan-tagline { font-size: 11.5px; opacity: 0.85; }
+        .plan-hero .hero-right { text-align: right; }
+        .plan-hero .hero-right .price { font-size: 36px; font-weight: 800; line-height: 1; }
+        .plan-hero .hero-right .price-label { font-size: 10px; opacity: 0.75; margin-top: 2px; }
+        .plan-hero .hero-right .annual-price { margin-top: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; padding: 5px 10px; font-size: 10px; font-weight: 600; }
+        .plan-hero .hero-right .annual-price .annual-total { font-size: 13px; font-weight: 700; }
+
+        .notice-box { background: #fffbe6; border-left: 4px solid #f0c000; padding: 9px 14px; margin-bottom: 16px; font-size: 10.5px; color: #555; line-height: 1.6; }
+
+        .section-heading { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #888; border-bottom: 1px solid #e0e0e0; padding-bottom: 5px; margin-bottom: 12px; margin-top: 16px; }
+
+        .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+        .service-card { border: 1px solid #e0e0e0; border-radius: 5px; padding: 10px 13px; }
+        .service-card .svc-icon { font-size: 16px; margin-bottom: 4px; }
+        .service-card .svc-title { font-size: 11.5px; font-weight: 700; color: #1a1a1a; margin-bottom: 3px; }
+        .service-card .svc-desc { font-size: 10px; color: #666; line-height: 1.5; }
+        .service-card.highlight { border-color: #1a1a1a; background: #fafafa; }
+
+        .features-list { list-style: none; margin-bottom: 14px; }
+        .features-list li { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; border-bottom: 1px solid #f5f5f5; font-size: 11px; color: #333; line-height: 1.45; }
+        .features-list li:last-child { border-bottom: none; }
+        .features-list li .check { width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: white; flex-shrink: 0; margin-top: 1px; }
+        .features-list li strong { font-weight: 600; color: #1a1a1a; }
+
+        .perfect-for { border-radius: 5px; padding: 11px 15px; margin-bottom: 14px; }
+        .perfect-for .pf-title { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+        .perfect-for .pf-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .perfect-for .pf-tag { padding: 3px 10px; border-radius: 20px; font-size: 10px; font-weight: 500; }
+
+        .cta-block { border-radius: 5px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+        .cta-block .cta-text { font-size: 12px; font-weight: 600; }
+        .cta-block .cta-sub { font-size: 10px; margin-top: 2px; opacity: 0.8; }
+        .cta-block .cta-contact { text-align: right; font-size: 11px; font-weight: 700; }
+        .cta-block .cta-contact small { display: block; font-size: 9.5px; font-weight: 400; margin-top: 1px; opacity: 0.8; }
+
+        .page-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e0e0e0; padding-top: 8px; margin-top: 16px; font-size: 9px; color: #aaa; }
+        .page-btn { display: flex; justify-content: center; margin-top: 10px; margin-bottom: 3px; }
+        .page-btn button { background: #444; color: white; border: none; padding: 7px 18px; border-radius: 5px; cursor: pointer; font-size: 11px; font-weight: 500; }
+        .page-btn button:hover { background: #111; }
+
+        .export-buttons { position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 1000; }
+        .export-btn { background: #1a1a1a; color: white; border: none; padding: 11px 20px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; }
+        .export-btn:hover { background: #000; }
+
+        @media print {
+            @page { size: 8.5in 11in; margin: 0.3in 0.4in; }
+            html, body { background: white; padding: 0; margin: 0; }
+            .page { box-shadow: none; margin: 0; padding: 18px 25px 20px 25px; width: 100%; page-break-after: always; break-after: page; }
+            .page:last-of-type { page-break-after: avoid; break-after: avoid; }
+            .export-buttons, .page-btn { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="export-buttons">
+    <button class="export-btn" onclick="window.print()">🖨️ Print / PDF</button>
+</div>
+
+<!-- PAGE 1 — BASIC CARE $99 -->
+<div class="page" id="page1">
+    <div class="header">
+        <div class="company-info">
+            <p class="company-name">Cabos Handyman</p>
+            <p style="font-weight:500; margin-bottom:3px;">Professional Property Maintenance Services</p>
+            <p>📞 +52 612 169 8328</p>
+            <p>loscabohandyman&#64;gmail.com &nbsp;|&nbsp; caboshandyman.com</p>
+            <p style="color:#666;">Cabo San Lucas, México</p>
+        </div>
+        <div class="doc-info">
+            <div class="plan-badge" style="background:#e8f5e9; color:#2a8a2a;">Basic Plan</div>
+            <p><strong>TO:</strong> Valued Property Owner</p>
+            <p><strong>DATE:</strong> March 2026</p>
+            <p><strong>PAGE:</strong> 1 of 3</p>
+        </div>
+    </div>
+
+    <div class="plan-hero" style="background: linear-gradient(135deg, #2a8a2a, #1a5c1a); color: white;">
+        <div class="hero-left">
+            <div class="plan-name">Basic Care</div>
+            <div class="plan-tagline">Reliable monthly maintenance — peace of mind for your property</div>
+        </div>
+        <div class="hero-right">
+            <div class="price">$99</div>
+            <div class="price-label">per month (USD)</div>
+            <div class="annual-price">
+                💰 Pay annually &amp; save<br>
+                <span class="annual-total">$1,089/year</span> &nbsp;·&nbsp; Save $99!<br>
+                <span style="font-size:9px;">($90.75/month)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="notice-box">
+        <strong>📋 Flexible Monthly Services:</strong> Monthly tasks are not fixed. Each visit can be customized to your property's current needs — services are interchangeable month to month so you always get the most value from every visit.
+    </div>
+
+    <div class="section-heading">Included Services — Monthly Visit</div>
+
+    <div class="services-grid">
+        <div class="service-card highlight">
+            <div class="svc-icon">🔍</div>
+            <div class="svc-title">Monthly Property Inspection</div>
+            <div class="svc-desc">1 full visit per month. General walk-through — plumbing, electrical, AC, appliances, and exterior. Written report included.</div>
+        </div>
+        <div class="service-card">
+            <div class="svc-icon">🚿</div>
+            <div class="svc-title">1 FREE Unclog Included</div>
+            <div class="svc-desc">One drain, toilet, or sink unclog per month (a $60 value). Additional unclogs available at member discount rates.</div>
+        </div>
+        <div class="service-card">
+            <div class="svc-icon">❄️</div>
+            <div class="svc-title">AC Filter Inspection &amp; Cleaning</div>
+            <div class="svc-desc">Air conditioning filter check and clean during your monthly visit. Keeps your system efficient in Cabo's coastal climate.</div>
+        </div>
+        <div class="service-card">
+            <div class="svc-icon">🔧</div>
+            <div class="svc-title">15% Discount on Repairs</div>
+            <div class="svc-desc">15% off all repair services for active members. Applies to labor on all scheduled repairs throughout the month.</div>
+        </div>
+    </div>
+
+    <div class="section-heading">Full Benefits</div>
+
+    <ul class="features-list">
+        <li><span class="check" style="background:#2a8a2a;">✓</span><span><strong>1 monthly property inspection</strong> — complete walk-through with written report</span></li>
+        <li><span class="check" style="background:#2a8a2a;">✓</span><span><strong>1 FREE unclog per month</strong> — drain, toilet, or sink (a $60 value)</span></li>
+        <li><span class="check" style="background:#2a8a2a;">✓</span><span><strong>AC filter inspection &amp; cleaning</strong> during your monthly visit</span></li>
+        <li><span class="check" style="background:#2a8a2a;">✓</span><span><strong>15% discount</strong> on all repair services</span></li>
+        <li><span class="check" style="background:#2a8a2a;">✓</span><span><strong>48-hour emergency response</strong> for urgent property issues</span></li>
+        <li><span class="check" style="background:#2a8a2a;">✓</span><span><strong>Monthly service report</strong> — status notes and recommendations</span></li>
+        <li><span class="check" style="background:#2a8a2a;">✓</span><span><strong>Flexible task selection</strong> — customize your monthly visit based on current needs</span></li>
+        <li><span class="check" style="background:#2a8a2a;">✓</span><span><strong>Member-preferred pricing</strong> on all additional services</span></li>
+    </ul>
+
+    <div class="perfect-for" style="background:#f1f8f1; border: 1px solid #c8e6c9;">
+        <div class="pf-title" style="color:#2a8a2a;">Perfect For</div>
+        <div class="pf-tags">
+            <span class="pf-tag" style="background:#e8f5e9; color:#2a8a2a;">Condo owners</span>
+            <span class="pf-tag" style="background:#e8f5e9; color:#2a8a2a;">Vacation homes</span>
+            <span class="pf-tag" style="background:#e8f5e9; color:#2a8a2a;">Part-time residents</span>
+            <span class="pf-tag" style="background:#e8f5e9; color:#2a8a2a;">New Los Cabos property owners</span>
+        </div>
+    </div>
+
+    <div class="cta-block" style="background:#1a1a1a; color:white;">
+        <div>
+            <div class="cta-text">Ready to protect your property?</div>
+            <div class="cta-sub">Start your Basic Care plan today — cancel anytime, no contracts</div>
+        </div>
+        <div class="cta-contact">
+            +52 612 169 8328
+            <small>loscabohandyman&#64;gmail.com</small>
+            <small>caboshandyman.com</small>
+        </div>
+    </div>
+
+    <div class="page-btn">
+        <button onclick="downloadPagePNG('page1','cabos-handyman-basic-care')">📥 Download Page 1 PNG</button>
+    </div>
+    <div class="page-footer">
+        <span>Cabos Handyman · +52 612 169 8328 · loscabohandyman&#64;gmail.com · caboshandyman.com</span>
+        <span>Property Care Plans · Page 1 of 3</span>
+    </div>
+</div>
+
+<!-- PAGE 2 — PREMIUM CARE $199 -->
+<div class="page" id="page2">
+    <div class="header">
+        <div class="company-info">
+            <p class="company-name">Cabos Handyman</p>
+            <p style="font-weight:500;">Professional Property Maintenance Services</p>
+        </div>
+        <div class="doc-info">
+            <div class="plan-badge" style="background:#e3f2fd; color:#1565c0;">Most Popular</div>
+            <p><strong>TO:</strong> Valued Property Owner</p>
+            <p><strong>DATE:</strong> March 2026</p>
+            <p><strong>PAGE:</strong> 2 of 3</p>
+        </div>
+    </div>
+
+    <div class="plan-hero" style="background: linear-gradient(135deg, #1565c0, #0d3b8a); color: white;">
+        <div class="hero-left">
+            <div class="plan-name">Premium Care</div>
+            <div class="plan-tagline">Bi-weekly visits — ideal for Airbnb and VRBO property owners</div>
+        </div>
+        <div class="hero-right">
+            <div class="price">$199</div>
+            <div class="price-label">per month (USD)</div>
+            <div class="annual-price">
+                💰 Pay annually &amp; save<br>
+                <span class="annual-total">$2,189/year</span> &nbsp;·&nbsp; Save $199!<br>
+                <span style="font-size:9px;">($182.42/month)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="notice-box">
+        <strong>📋 Flexible Monthly Services:</strong> Monthly tasks are not fixed. Each visit can be customized to your property's current needs — services are interchangeable month to month so you always get the most value from every visit.
+    </div>
+
+    <div class="section-heading">Included Services — Bi-Weekly Visits</div>
+
+    <div class="services-grid">
+        <div class="service-card highlight">
+            <div class="svc-icon">🔍</div>
+            <div class="svc-title">2 Inspections Per Month</div>
+            <div class="svc-desc">Two full property inspections per month — ideal for active vacation rentals with frequent guest turnovers.</div>
+        </div>
+        <div class="service-card highlight">
+            <div class="svc-icon">🚿</div>
+            <div class="svc-title">2 FREE Unclogs Included</div>
+            <div class="svc-desc">Two unclogs per month (a $120 value). Covers drains, showers, sinks, and toilets throughout the property.</div>
+        </div>
+        <div class="service-card highlight">
+            <div class="svc-icon">❄️</div>
+            <div class="svc-title">AC Filter Cleaning (2x/month)</div>
+            <div class="svc-desc">Filter cleaning at both visits. Maximizes efficiency and extends equipment life in Cabo's coastal climate.</div>
+        </div>
+        <div class="service-card">
+            <div class="svc-icon">🔧</div>
+            <div class="svc-title">20% Discount on Repairs</div>
+            <div class="svc-desc">20% off all repair services for active members. Applies to both scheduled and emergency repair labor.</div>
+        </div>
+    </div>
+
+    <div class="section-heading">Full Benefits</div>
+
+    <ul class="features-list">
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>2 property inspections per month</strong> — full walk-through with written report each visit</span></li>
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>2 FREE unclogs per month</strong> — any drains (a $120 value)</span></li>
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>AC filter cleaning at both visits</strong> — thorough clean every time</span></li>
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>20% discount</strong> on all repair services</span></li>
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>24-hour emergency response</strong> — priority over non-members</span></li>
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>Digital property report</strong> — photos and status notes after every visit</span></li>
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>Guest turnover coordination</strong> — property ready for check-in on schedule</span></li>
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>Flexible task selection</strong> — customize each visit to your current needs</span></li>
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>Free minor repair included</strong> — up to $50 USD value per month at no extra charge</span></li>
+        <li><span class="check" style="background:#1565c0;">✓</span><span><strong>Member-preferred pricing</strong> on all additional services</span></li>
+    </ul>
+
+    <div class="perfect-for" style="background:#e8f1fc; border: 1px solid #bbdefb;">
+        <div class="pf-title" style="color:#1565c0;">Perfect For</div>
+        <div class="pf-tags">
+            <span class="pf-tag" style="background:#e3f2fd; color:#1565c0;">Airbnb hosts</span>
+            <span class="pf-tag" style="background:#e3f2fd; color:#1565c0;">VRBO property owners</span>
+            <span class="pf-tag" style="background:#e3f2fd; color:#1565c0;">Expats with properties</span>
+            <span class="pf-tag" style="background:#e3f2fd; color:#1565c0;">Multi-bedroom vacation rentals</span>
+            <span class="pf-tag" style="background:#e3f2fd; color:#1565c0;">Remote property owners</span>
+        </div>
+    </div>
+
+    <div class="cta-block" style="background:#1565c0; color:white;">
+        <div>
+            <div class="cta-text">The most popular plan for vacation rental owners</div>
+            <div class="cta-sub">Join Premium Care today — flexible, no long-term commitment required</div>
+        </div>
+        <div class="cta-contact">
+            +52 612 169 8328
+            <small>loscabohandyman&#64;gmail.com</small>
+            <small>caboshandyman.com</small>
+        </div>
+    </div>
+
+    <div class="page-btn">
+        <button onclick="downloadPagePNG('page2','cabos-handyman-premium-care')">📥 Download Page 2 PNG</button>
+    </div>
+    <div class="page-footer">
+        <span>Cabos Handyman · +52 612 169 8328 · loscabohandyman&#64;gmail.com · caboshandyman.com</span>
+        <span>Property Care Plans · Page 2 of 3</span>
+    </div>
+</div>
+
+<!-- PAGE 3 — ELITE CARE $299 -->
+<div class="page" id="page3">
+    <div class="header">
+        <div class="company-info">
+            <p class="company-name">Cabos Handyman</p>
+            <p style="font-weight:500;">Professional Property Maintenance Services</p>
+        </div>
+        <div class="doc-info">
+            <div class="plan-badge" style="background:#1a1a1a; color:#f0c000;">⭐ Elite Plan</div>
+            <p><strong>TO:</strong> Valued Property Owner</p>
+            <p><strong>DATE:</strong> March 2026</p>
+            <p><strong>PAGE:</strong> 3 of 3</p>
+        </div>
+    </div>
+
+    <div class="plan-hero" style="background: linear-gradient(135deg, #1a1a1a, #3a3a3a); color: white;">
+        <div class="hero-left">
+            <div class="plan-name" style="color:#f0c000;">Elite Care</div>
+            <div class="plan-tagline">Weekly inspections · Unlimited service · 24/7 VIP access</div>
+        </div>
+        <div class="hero-right">
+            <div class="price" style="color:#f0c000;">$299</div>
+            <div class="price-label">per month (USD)</div>
+            <div class="annual-price">
+                💰 Pay annually &amp; save<br>
+                <span class="annual-total" style="color:#f0c000;">$3,289/year</span> &nbsp;·&nbsp; Save $299!<br>
+                <span style="font-size:9px;">($274.08/month)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="notice-box">
+        <strong>📋 Flexible Monthly Services:</strong> Monthly tasks are not fixed. Each visit can be fully customized to your property's current needs — services are interchangeable month to month so every visit delivers exactly what your property needs at that moment.
+    </div>
+
+    <div class="section-heading">Included Services — Elite Monthly Plan</div>
+
+    <div class="services-grid">
+        <div class="service-card" style="border-color:#f0c000; background:#fffdf0;">
+            <div class="svc-icon">🔍</div>
+            <div class="svc-title">Weekly Inspections (4x/month)</div>
+            <div class="svc-desc">Full property audit every week. Nothing is missed — appliances, plumbing, AC, electrical, exterior, and more.</div>
+        </div>
+        <div class="service-card" style="border-color:#f0c000; background:#fffdf0;">
+            <div class="svc-icon">🚿</div>
+            <div class="svc-title">Unlimited Unclogs</div>
+            <div class="svc-desc">All drains, anytime. Toilets, sinks, showers, tubs — unlimited unclogs included every month, no extra charge.</div>
+        </div>
+        <div class="service-card" style="border-color:#f0c000; background:#fffdf0;">
+            <div class="svc-icon">❄️</div>
+            <div class="svc-title">Unlimited AC Filter Cleaning</div>
+            <div class="svc-desc">All filters cleaned at every monthly visit. Complete system care for Cabo's coastal climate demands.</div>
+        </div>
+        <div class="service-card" style="border-color:#f0c000; background:#fffdf0;">
+            <div class="svc-icon">🚨</div>
+            <div class="svc-title">24/7 VIP Emergency Access</div>
+            <div class="svc-desc">Fastest response of any plan — 1-hour guarantee, any time of day or night, even after midnight.</div>
+        </div>
+    </div>
+
+    <div class="section-heading">Full Elite Plan Benefits</div>
+
+    <ul class="features-list">
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>Weekly inspections (4x per month)</strong> — full property audit at every visit</span></li>
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>Unlimited unclogs</strong> — all drains, any time during the month</span></li>
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>Unlimited AC filter cleaning</strong> at every monthly visit</span></li>
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>25% discount</strong> on all repair services — the highest member discount available</span></li>
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>24/7 VIP emergency access</strong> — 1-hour response guarantee, even after midnight</span></li>
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>Full digital reports</strong> — photos, videos, and recommendations after every visit</span></li>
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>Free minor repairs included</strong> — up to $100 USD value per month at no extra charge</span></li>
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>Dedicated property technician</strong> — same person every visit, knows your property inside out</span></li>
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>Concierge coordination</strong> — vendors, deliveries, and contractors managed on your behalf</span></li>
+        <li><span class="check" style="background:#b8860b;">✓</span><span><strong>Flexible task selection</strong> — every visit fully customized to your current property needs</span></li>
+    </ul>
+
+    <div class="perfect-for" style="background:#1a1a1a; border: 1px solid #333;">
+        <div class="pf-title" style="color:#f0c000;">Perfect For</div>
+        <div class="pf-tags">
+            <span class="pf-tag" style="background:#2a2a2a; color:#f0c000;">Luxury rentals</span>
+            <span class="pf-tag" style="background:#2a2a2a; color:#f0c000;">Property portfolios</span>
+            <span class="pf-tag" style="background:#2a2a2a; color:#f0c000;">Commercial properties</span>
+            <span class="pf-tag" style="background:#2a2a2a; color:#f0c000;">High-volume Airbnb &amp; VRBO</span>
+            <span class="pf-tag" style="background:#2a2a2a; color:#f0c000;">Absentee property owners</span>
+        </div>
+    </div>
+
+    <div class="cta-block" style="background: linear-gradient(135deg, #1a1a1a, #3a3a3a); color:white;">
+        <div>
+            <div class="cta-text" style="color:#f0c000;">Maximum protection for your property</div>
+            <div class="cta-sub">Join Elite Care — protect your 5-star rating with total VIP coverage</div>
+        </div>
+        <div class="cta-contact">
+            +52 612 169 8328
+            <small>loscabohandyman&#64;gmail.com</small>
+            <small>caboshandyman.com</small>
+        </div>
+    </div>
+
+    <div class="page-btn">
+        <button onclick="downloadPagePNG('page3','cabos-handyman-elite-care')">📥 Download Page 3 PNG</button>
+    </div>
+    <div class="page-footer">
+        <span>Cabos Handyman · +52 612 169 8328 · loscabohandyman&#64;gmail.com · caboshandyman.com</span>
+        <span>Property Care Plans · Page 3 of 3</span>
+    </div>
+</div>
+
+<script>
+async function downloadPagePNG(pageId, filename) {
+    const page = document.getElementById(pageId);
+    const btns = page.querySelectorAll('.page-btn');
+    const exportBtns = document.querySelector('.export-buttons');
+    btns.forEach(b => b.style.display = 'none');
+    if (exportBtns) exportBtns.style.display = 'none';
+    const canvas = await html2canvas(page, { scale: 3, backgroundColor: '#ffffff', logging: false, useCORS: true });
+    btns.forEach(b => b.style.display = '');
+    if (exportBtns) exportBtns.style.display = '';
+    const link = document.createElement('a');
+    link.download = filename + '.png';
+    link.href = canvas.toDataURL('image/png', 1.0);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Auto-download when opened with ?plan= parameter
+(function () {
+    const params = new URLSearchParams(window.location.search);
+    const planNum = params.get('plan');
+    if (!planNum) return;
+
+    const filenameMap = {
+        '1': 'cabos-handyman-basic-care',
+        '2': 'cabos-handyman-premium-care',
+        '3': 'cabos-handyman-elite-care'
+    };
+
+    window.addEventListener('load', async function () {
+        // Hide export bar
+        const exportBtns = document.querySelector('.export-buttons');
+        if (exportBtns) exportBtns.style.display = 'none';
+
+        // Hide all pages, show only requested
+        document.querySelectorAll('.page').forEach(p => { p.style.display = 'none'; });
+        const page = document.getElementById('page' + planNum);
+        if (!page) return;
+        page.style.display = 'block';
+
+        // Hide manual download button inside that page
+        page.querySelectorAll('.page-btn').forEach(b => b.style.display = 'none');
+
+        // Wait for fonts/layout to settle
+        await new Promise(r => setTimeout(r, 900));
+
+        const filename = filenameMap[planNum] || ('cabos-handyman-plan-' + planNum);
+        await downloadPagePNG('page' + planNum, filename);
+    });
+})();
+</script>
+</body>
+</html>
