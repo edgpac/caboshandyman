@@ -383,7 +383,7 @@ export default function PropertyManagementCabo() {
         <div className="container mx-auto px-6 text-center">
           <div className="max-w-2xl mx-auto">
             <Star size={32} className="text-[#4AC1C3] mx-auto mb-5" />
-            <h2 className="text-4xl font-bold mb-4">Stop managing your Cabo property from a distance.</h2>
+            <h2 className="text-4xl font-bold mb-4">Stop managing your<br />Cabo property from a distance.</h2>
             <p className="text-gray-300 mb-3 text-lg leading-relaxed">
               Tell us about your property —<br />so you can enjoy the investment, not manage it.
             </p>
