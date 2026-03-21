@@ -1,131 +1,278 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import SEO from './SEO';
-import Footer from './Footer';
-import { Phone, Mail, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Phone } from 'lucide-react';
 import blogPosts from '../blog-posts.json';
+
+type Post = {
+  title: string;
+  slug: string;
+  publishDate: string;
+  description: string;
+  category: string;
+  author?: string;
+};
+
+function estimateReadTime(): string {
+  return '6 min read';
+}
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  });
+}
 
 export default function BlogPost() {
   const { slug } = useParams();
-  
-  // Find the blog post by slug
-  const post = blogPosts.find(p => p.slug === slug);
-  
-  // If post not found, redirect to homepage
-  if (!post) {
-    return <Navigate to="/" replace />;
-  }
+  const posts = blogPosts as Post[];
+  const post = posts.find(p => p.slug === slug);
 
-  // Import the blog content dynamically
-  const BlogContent = React.lazy(() => 
-    import(`../blog-content/${post.slug}.jsx`).catch(() => 
+  if (!post) return <Navigate to="/blog" replace />;
+
+  const BlogContent = React.lazy(() =>
+    import(`../blog-content/${post.slug}.jsx`).catch(() =>
       import('../blog-content/DefaultBlogContent.jsx')
     )
   );
 
+  const related = posts
+    .filter(p => p.slug !== post.slug && p.category === post.category)
+    .slice(0, 3);
+
+  const others = related.length < 3
+    ? [...related, ...posts.filter(p => p.slug !== post.slug && p.category !== post.category)].slice(0, 3)
+    : related;
+
   return (
     <>
-      <SEO 
-        title={post.title}
+      <SEO
+        title={`${post.title} | Cabos Handyman`}
         description={post.description}
         canonicalUrl={`/blog/${post.slug}`}
       />
-      
-      <div className="min-h-screen bg-background">
-        {/* Simple Header - No Navigation */}
-        <header className="bg-dark-surface text-white py-4 sticky top-0 z-40 shadow-lg">
-          <div className="container mx-auto px-6 flex justify-between items-center">
-            <a href="/" className="flex items-center space-x-3 hover:opacity-80 transition-opacity">
-              <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-xl">CH</span>
-              </div>
-              <span className="text-xl font-bold text-primary">CABOS HANDYMAN</span>
+
+      <div className="min-h-screen bg-white">
+
+        {/* Minimal sticky header — Medium style */}
+        <header className="sticky top-0 z-40 bg-white border-b border-gray-200">
+          <div className="max-w-5xl mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="/blog" className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors font-medium">
+              <ArrowLeft size={16} />
+              Blog
             </a>
-            <div className="flex items-center space-x-6">
-              <a 
-                href="tel:+526121698328" 
-                className="hidden sm:flex items-center gap-2 text-white hover:text-primary transition-colors font-semibold"
-              >
-                <Phone size={18} />
-                <span className="hidden lg:inline">612 169 8328</span>
-              </a>
-              <a 
-                href="/contact" 
-                className="flex items-center gap-2 bg-primary hover:bg-primary-hover text-primary-foreground px-4 py-2 rounded-lg transition-colors font-semibold"
-              >
-                <Mail size={18} />
-                Contact Us
-              </a>
-            </div>
+            <a href="/" className="text-base font-bold text-gray-900 tracking-tight">
+              Cabos Handyman
+            </a>
+            <a
+              href="tel:+526121698328"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#06756b] hover:text-[#049d8e] transition-colors"
+            >
+              <Phone size={15} />
+              612 169 8328
+            </a>
           </div>
         </header>
 
-        {/* Blog Article Content */}
-        <article className="py-12 bg-white">
-          <div className="container mx-auto px-6 max-w-4xl">
-            {/* Back Link (optional - can remove if you want it completely hidden) */}
-            <a 
-              href="/" 
-              className="inline-flex items-center text-primary hover:text-primary-hover mb-6 text-sm font-medium"
+        {/* Article */}
+        <article className="py-14 px-6">
+          <div className="max-w-[680px] mx-auto">
+
+            {/* Category */}
+            <p className="text-xs font-bold uppercase tracking-widest text-[#06756b] mb-5">
+              {post.category}
+            </p>
+
+            {/* Title — large serif */}
+            <h1
+              className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-6"
+              style={{ fontFamily: 'Georgia, "Times New Roman", serif', letterSpacing: '-0.5px' }}
             >
-              <ArrowLeft size={16} className="mr-2" />
-              Back to Home
-            </a>
+              {post.title}
+            </h1>
 
-            {/* Article Header */}
-            <header className="mb-8">
-              <div className="text-sm text-muted-foreground mb-2">
-                {post.category} • {new Date(post.publishDate).toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
+            {/* Description / subtitle */}
+            <p
+              className="text-xl text-gray-500 leading-relaxed mb-8"
+              style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+            >
+              {post.description}
+            </p>
+
+            {/* Author row */}
+            <div className="flex items-center gap-3 pb-6 border-b border-gray-200 mb-10">
+              <div className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center shrink-0">
+                <span className="text-white text-sm font-bold">CH</span>
               </div>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                {post.title}
-              </h1>
-              {post.author && (
-                <div className="text-muted-foreground">
-                  By {post.author}
+              <div>
+                <p className="text-sm font-semibold text-gray-900">{post.author || 'Cabos Handyman'}</p>
+                <p className="text-xs text-gray-400">
+                  {formatDate(post.publishDate)} · {estimateReadTime()}
+                </p>
+              </div>
+            </div>
+
+            {/* Body — serif, generous size and line-height */}
+            <div
+              className="text-gray-800 leading-[1.85] text-[19px]"
+              style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
+            >
+              <style>{`
+                .blog-body h2 {
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                  font-size: 1.6rem;
+                  font-weight: 700;
+                  color: #111;
+                  margin-top: 2.5rem;
+                  margin-bottom: 0.75rem;
+                  letter-spacing: -0.3px;
+                  line-height: 1.3;
+                }
+                .blog-body h3 {
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                  font-size: 1.25rem;
+                  font-weight: 700;
+                  color: #111;
+                  margin-top: 2rem;
+                  margin-bottom: 0.5rem;
+                  line-height: 1.4;
+                }
+                .blog-body h4 {
+                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                  font-size: 1.05rem;
+                  font-weight: 700;
+                  color: #333;
+                  margin-top: 1.5rem;
+                  margin-bottom: 0.4rem;
+                }
+                .blog-body p {
+                  margin-bottom: 1.5rem;
+                  color: #292929;
+                }
+                .blog-body ul, .blog-body ol {
+                  margin-bottom: 1.5rem;
+                  padding-left: 1.5rem;
+                }
+                .blog-body li {
+                  margin-bottom: 0.5rem;
+                  color: #292929;
+                }
+                .blog-body ul li { list-style-type: disc; }
+                .blog-body ol li { list-style-type: decimal; }
+                .blog-body strong { color: #111; font-weight: 700; }
+                .blog-body a {
+                  color: #06756b;
+                  text-decoration: underline;
+                  text-underline-offset: 3px;
+                }
+                .blog-body a:hover { color: #049d8e; }
+                .blog-body blockquote {
+                  border-left: 3px solid #e0e0e0;
+                  padding-left: 1.25rem;
+                  margin: 1.5rem 0;
+                  color: #666;
+                  font-style: italic;
+                }
+                .blog-body .lead {
+                  font-size: 1.2rem;
+                  color: #555;
+                  line-height: 1.7;
+                }
+              `}</style>
+              <div className="blog-body">
+                <Suspense fallback={
+                  <div className="animate-pulse space-y-4">
+                    {[...Array(6)].map((_, i) => (
+                      <div key={i} className="h-4 bg-gray-100 rounded" style={{ width: `${75 + Math.random() * 25}%` }} />
+                    ))}
+                  </div>
+                }>
+                  <BlogContent />
+                </Suspense>
+              </div>
+            </div>
+
+            {/* Single bottom CTA — clean, not redundant */}
+            <div className="mt-14 pt-10 border-t border-gray-200">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-gray-900 flex items-center justify-center shrink-0">
+                  <span className="text-white text-sm font-bold">CH</span>
                 </div>
-              )}
-            </header>
-
-            {/* Article Body */}
-            <div className="prose prose-lg max-w-none">
-              <React.Suspense fallback={<div>Loading...</div>}>
-                <BlogContent />
-              </React.Suspense>
-            </div>
-
-            {/* Call to Action at Bottom */}
-            <div className="mt-12 p-8 bg-primary/5 rounded-lg border border-primary/20">
-              <h3 className="text-2xl font-bold text-foreground mb-4">
-                Need Professional Handyman Services?
-              </h3>
-              <p className="text-muted-foreground mb-6">
-                Contact Cabos Handyman for expert service in Cabo San Lucas. 20+ years experience, 600+ completed projects.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a 
-                  href="tel:+526121698328"
-                  className="bg-primary hover:bg-primary-hover text-primary-foreground px-6 py-3 rounded-lg font-semibold text-center transition-colors"
-                >
-                  Call: 612 169 8328
-                </a>
-                <a 
-                  href="/contact"
-                  className="bg-white hover:bg-gray-50 text-primary border-2 border-primary px-6 py-3 rounded-lg font-semibold text-center transition-colors"
-                >
-                  Get Free Estimate
-                </a>
+                <div>
+                  <p className="text-sm font-bold text-gray-900 mb-1">Cabos Handyman</p>
+                  <p className="text-sm text-gray-500 mb-4">
+                    Professional property maintenance in Cabo San Lucas & Los Cabos. <a href="/contact" className="text-[#06756b] underline underline-offset-2 hover:text-[#049d8e]">Get a free quote →</a>
+                  </p>
+                  <a
+                    href="tel:+526121698328"
+                    className="inline-flex items-center gap-2 bg-gray-900 text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-gray-700 transition-colors"
+                  >
+                    <Phone size={14} />
+                    +52 612 169 8328
+                  </a>
+                </div>
               </div>
             </div>
+
           </div>
         </article>
 
-        {/* Footer */}
-        <Footer />
+        {/* More posts */}
+        {others.length > 0 && (
+          <section className="border-t border-gray-200 py-12 px-6 bg-gray-50">
+            <div className="max-w-[680px] mx-auto">
+              <h2
+                className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-8"
+                style={{ fontFamily: '-apple-system, BlinkMacSystemFont, sans-serif' }}
+              >
+                More from Cabos Handyman
+              </h2>
+              <div className="space-y-6">
+                {others.map(p => (
+                  <a
+                    key={p.slug}
+                    href={`/blog/${p.slug}`}
+                    className="flex gap-5 group"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center shrink-0 mt-0.5">
+                      <span className="text-white text-xs font-bold">CH</span>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-400 mb-1">{p.category} · {formatDate(p.publishDate)}</p>
+                      <p className="font-bold text-gray-900 leading-snug group-hover:text-[#06756b] transition-colors"
+                        style={{ fontFamily: 'Georgia, serif' }}>
+                        {p.title}
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1 line-clamp-2">{p.description}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <a
+                href="/blog"
+                className="inline-block mt-8 text-sm font-semibold text-[#06756b] hover:text-[#049d8e] transition-colors"
+              >
+                See all posts →
+              </a>
+            </div>
+          </section>
+        )}
+
+        {/* Minimal footer */}
+        <footer className="border-t border-gray-200 py-6 px-6">
+          <div className="max-w-[680px] mx-auto flex flex-col sm:flex-row justify-between items-center gap-3 text-xs text-gray-400">
+            <span>© 2026 Cabos Handyman · Cabo San Lucas, México</span>
+            <div className="flex gap-4">
+              <a href="/" className="hover:text-gray-700 transition-colors">Home</a>
+              <a href="/services" className="hover:text-gray-700 transition-colors">Services</a>
+              <a href="/contact" className="hover:text-gray-700 transition-colors">Contact</a>
+              <a href="/blog" className="hover:text-gray-700 transition-colors">Blog</a>
+            </div>
+          </div>
+        </footer>
+
       </div>
     </>
   );
