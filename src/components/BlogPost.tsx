@@ -11,6 +11,8 @@ type Post = {
   description: string;
   category: string;
   author?: string;
+  image?: string;
+  imageCaption?: string;
 };
 
 function estimateReadTime(): string {
@@ -113,6 +115,23 @@ export default function BlogPost() {
                 </p>
               </div>
             </div>
+
+            {/* Hero image — Medium style: full-width, after author row */}
+            {post.image && (
+              <figure className="mb-10 -mx-6 sm:-mx-10 md:-mx-16">
+                <img
+                  src={post.image}
+                  alt={post.imageCaption || post.title}
+                  className="w-full object-cover max-h-[520px]"
+                  loading="eager"
+                />
+                {post.imageCaption && (
+                  <figcaption className="text-center text-xs text-gray-400 mt-3 px-6 italic">
+                    {post.imageCaption}
+                  </figcaption>
+                )}
+              </figure>
+            )}
 
             {/* Body — serif, generous size and line-height */}
             <div
