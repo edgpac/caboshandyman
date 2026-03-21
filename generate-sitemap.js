@@ -5,32 +5,78 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const SITE_URL = 'https://caboshandyman.com';
+const SITE_URL = 'https://www.caboshandyman.com';
 const OUTPUT_PATH = path.join(__dirname, 'public', 'sitemap.xml');
 
 const staticPages = [
+  // Core
   { url: '/', changefreq: 'weekly', priority: '1.0' },
   { url: '/services', changefreq: 'monthly', priority: '0.9' },
   { url: '/contact', changefreq: 'monthly', priority: '0.9' },
+  { url: '/about', changefreq: 'monthly', priority: '0.8' },
+  { url: '/faq', changefreq: 'monthly', priority: '0.8' },
   { url: '/privacy', changefreq: 'yearly', priority: '0.3' },
   { url: '/terms', changefreq: 'yearly', priority: '0.3' },
-  { url: '/faq', changefreq: 'monthly', priority: '0.8' },
-  { url: '/about', changefreq: 'monthly', priority: '0.8' },
 
-  // Service pages - HIGH PRIORITY
-  { url: '/plumber-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
-  { url: '/handyman-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
+  // Property services - highest priority
   { url: '/property-care-plans', changefreq: 'monthly', priority: '0.95' },
   { url: '/property-management-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
-  { url: '/kitchen-services-cabo', changefreq: 'monthly', priority: '0.90' },
   { url: '/property-setup-cabo', changefreq: 'monthly', priority: '0.90' },
-  { url: '/bathroom-services-cabo', changefreq: 'monthly', priority: '0.85' },
-  { url: '/electrical-services-cabo', changefreq: 'monthly', priority: '0.85' },
-  { url: '/furniture-assembly-cabo', changefreq: 'monthly', priority: '0.85' },
-  { url: '/tv-mounting-cabo', changefreq: 'monthly', priority: '0.85' },
-  { url: '/ceiling-fan-installation-cabo', changefreq: 'monthly', priority: '0.85' },
-  { url: '/toilet-tub-unclogging-cabo', changefreq: 'monthly', priority: '0.85' },
-  { url: '/vacation-rental-setup-cabo', changefreq: 'monthly', priority: '0.85' },
+  { url: '/vacation-rental-setup-cabo', changefreq: 'monthly', priority: '0.90' },
+
+  // Main service category pages
+  { url: '/plumber-cabo-san-lucas', changefreq: 'monthly', priority: '0.90' },
+  { url: '/handyman-cabo-san-lucas', changefreq: 'monthly', priority: '0.90' },
+  { url: '/electrical-services-cabo', changefreq: 'monthly', priority: '0.88' },
+  { url: '/kitchen-services-cabo', changefreq: 'monthly', priority: '0.88' },
+  { url: '/bathroom-services-cabo', changefreq: 'monthly', priority: '0.88' },
+
+  // Plumbing sub-pages
+  { url: '/toilet-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/toilet-leak-repair-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/toilet-tub-unclogging-cabo', changefreq: 'monthly', priority: '0.82' },
+  { url: '/faucet-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/sink-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/bathroom-sink-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/water-heater-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/garbage-disposal-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/water-leak-detector-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/commercial-sink-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+
+  // Electrical sub-pages
+  { url: '/ceiling-fan-installation-cabo', changefreq: 'monthly', priority: '0.82' },
+  { url: '/ceiling-light-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/outlet-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/generator-hookup-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/bathroom-lighting-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/office-lighting-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/common-area-lighting-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/decorative-lighting-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+
+  // Kitchen sub-pages
+  { url: '/cabinet-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/countertop-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/backsplash-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/tile-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/kitchen-hardware-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/pantry-shelving-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+
+  // Bathroom sub-pages
+  { url: '/shower-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/shower-head-replacement-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/towel-rack-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/mirror-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/bathroom-shelving-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+
+  // Handyman sub-pages
+  { url: '/furniture-assembly-cabo', changefreq: 'monthly', priority: '0.82' },
+  { url: '/tv-mounting-cabo', changefreq: 'monthly', priority: '0.82' },
+  { url: '/painting-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
+  { url: '/door-lock-replacement-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/window-repair-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/landscape-maintenance-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/booth-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.78' },
+  { url: '/bar-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.78' },
 ];
 
 function getBlogPosts() {
