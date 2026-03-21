@@ -84,6 +84,21 @@ export default function TVMountingCeilingFansCaboArticle() {
         Ceiling fans are essential in Cabo San Lucas, providing year-round comfort while reducing energy costs. Professional ceiling fan installation ensures safe operation, optimal airflow, and quiet performance.
       </p>
 
+      <figure style={{ margin: '2rem 0' }}>
+        <div style={{ background: '#f9f9f9', borderRadius: '4px', display: 'flex', justifyContent: 'center' }}>
+          <img
+            src="/Blogs/Ceiling fan replacement.jpeg"
+            alt="Cabos Handyman technician installing a ceiling fan in a Cabo San Lucas home"
+            style={{ maxWidth: '100%', maxHeight: '520px', objectFit: 'contain' }}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption style={{ textAlign: 'center', fontSize: '0.8rem', color: '#999', marginTop: '0.75rem', fontStyle: 'italic' }}>
+          Cabos Handyman technician installing a ceiling fan in a Cabo San Lucas home.
+        </figcaption>
+      </figure>
+
       <h3>Benefits of Professional Ceiling Fan Installation</h3>
       <p>
         Expert installation from <strong>caboshandyman.com</strong> provides:
@@ -130,6 +145,21 @@ export default function TVMountingCeilingFansCaboArticle() {
         <li><strong>Style coordination</strong> - Matching finishes to your décor</li>
         <li><strong>Lighting needs</strong> - Integrated light kits vs. fan-only options</li>
       </ul>
+
+      <figure style={{ margin: '2rem 0' }}>
+        <div style={{ background: '#f9f9f9', borderRadius: '4px', display: 'flex', justifyContent: 'center' }}>
+          <img
+            src="/Blogs/Ceiling fan replacement2.jpeg"
+            alt="Cabos Handyman technician fitting a ceiling fan blade assembly during installation in Cabo San Lucas"
+            style={{ maxWidth: '100%', maxHeight: '520px', objectFit: 'contain' }}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption style={{ textAlign: 'center', fontSize: '0.8rem', color: '#999', marginTop: '0.75rem', fontStyle: 'italic' }}>
+          Every installation is checked for balance, electrical safety, and secure mounting before we leave.
+        </figcaption>
+      </figure>
 
       <h2>Kitchen Cabinet Installation and Refinishing</h2>
       <p>
