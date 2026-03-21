@@ -118,15 +118,18 @@ export default function BlogPost() {
 
             {/* Hero image — Medium style: full-width, after author row */}
             {post.image && (
-              <figure className="mb-10 -mx-6 sm:-mx-10 md:-mx-16">
-                <img
-                  src={post.image}
-                  alt={post.imageCaption || post.title}
-                  className="w-full object-cover max-h-[520px]"
-                  loading="eager"
-                />
+              <figure className="mb-10">
+                <div className="bg-gray-50 rounded-sm flex justify-center">
+                  <img
+                    src={post.image}
+                    alt={post.imageCaption || post.title}
+                    className="max-w-full object-contain"
+                    style={{ maxHeight: '600px' }}
+                    loading="eager"
+                  />
+                </div>
                 {post.imageCaption && (
-                  <figcaption className="text-center text-xs text-gray-400 mt-3 px-6 italic">
+                  <figcaption className="text-center text-xs text-gray-400 mt-3 italic">
                     {post.imageCaption}
                   </figcaption>
                 )}
