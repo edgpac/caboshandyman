@@ -272,6 +272,21 @@ export default function TVMountingCeilingFansCaboArticle() {
         <li>V-in-one style for modern aesthetic</li>
       </ul>
 
+      <figure style={{ margin: '2rem 0' }}>
+        <div style={{ background: '#f9f9f9', borderRadius: '4px', display: 'flex', justifyContent: 'center' }}>
+          <img
+            src="/Blogs/Hanging a TV2.jpeg"
+            alt="Completed TV mounted on wood slat accent wall with ceiling fan in a Cabo San Lucas living room"
+            style={{ maxWidth: '100%', maxHeight: '520px', objectFit: 'contain' }}
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+        <figcaption style={{ textAlign: 'center', fontSize: '0.8rem', color: '#999', marginTop: '0.75rem', fontStyle: 'italic' }}>
+          Completed installation: TV mounted on a custom oak wood slat feature wall, with ceiling fan — all by Cabos Handyman.
+        </figcaption>
+      </figure>
+
       <h3>Wallpaper Selection Guidance</h3>
       <p>
         Professional handyman services help with:
