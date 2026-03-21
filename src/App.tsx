@@ -60,6 +60,7 @@ const BarInstallationCabo = lazy(() => import("./pages/BarInstallationCabo"));
 const DecorativeLightingCabo = lazy(() => import("./pages/DecorativeLightingCabo"));
 const BathroomSinkInstallationCabo = lazy(() => import("./pages/BathroomSinkInstallationCabo"));
 const PropertyManagementCabo = lazy(() => import("./pages/PropertyManagementCabo"));
+const Blog = lazy(() => import("./pages/Blog"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -137,6 +138,7 @@ const App = () => {
               <Route path="/decorative-lighting-cabo-san-lucas" element={<DecorativeLightingCabo />} />
               <Route path="/bathroom-sink-installation-cabo-san-lucas" element={<BathroomSinkInstallationCabo />} />
               <Route path="/property-management-cabo-san-lucas" element={<PropertyManagementCabo />} />
+              <Route path="/blog" element={<Blog />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>

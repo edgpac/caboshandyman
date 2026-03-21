@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, Clock, Wrench, DollarSign, RefreshCw, Facebook, Calendar, HelpCircle } from 'lucide-react';
+import { Phone, Mail, Clock, Wrench, DollarSign, RefreshCw, Facebook, Calendar, HelpCircle, BookOpen } from 'lucide-react';
 import GradientText from './GradientText';
 
 export default function Footer() {
@@ -100,19 +100,28 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* FAQ Section - REPLACES Services */}
+          {/* FAQ + Blog */}
           <div>
-            <h3 className="font-semibold mb-3 text-gray-900">Have Questions?</h3>
+            <h3 className="font-semibold mb-3 text-gray-900">Resources</h3>
             <p className="text-sm text-gray-600 mb-4">
-              Get instant answers to common questions about our services, pricing, and areas we serve.
+              Answers to common questions and guides for property owners in Cabo San Lucas.
             </p>
-            <a
-              href="/faq"
-              className="inline-flex items-center space-x-2 bg-white border-2 border-teal-400 text-teal-700 hover:bg-teal-50 px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm"
-            >
-              <HelpCircle className="h-4 w-4" />
-              <span>View FAQ</span>
-            </a>
+            <div className="flex flex-col space-y-2">
+              <a
+                href="/faq"
+                className="inline-flex items-center space-x-2 bg-white border-2 border-teal-400 text-teal-700 hover:bg-teal-50 px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm"
+              >
+                <HelpCircle className="h-4 w-4" />
+                <span>View FAQ</span>
+              </a>
+              <a
+                href="/blog"
+                className="inline-flex items-center space-x-2 bg-white border-2 border-gray-300 text-gray-700 hover:border-teal-400 hover:text-teal-700 px-4 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm"
+              >
+                <BookOpen className="h-4 w-4" />
+                <span>Read the Blog</span>
+              </a>
+            </div>
           </div>
 
           {/* Currency Converter */}
