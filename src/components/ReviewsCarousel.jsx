@@ -18,13 +18,6 @@ const reviews = [
     response: "Thank you for the wonderful review! We truly appreciate property owners like you who trust us with vacation rentals. That kitchen turned out beautifully - we're honored to be your go-to team. Looking forward to our continued partnership! - Eddy, Cabos Handyman"
   },
   {
-    name: "Roberto M.",
-    location: "Cabo San Lucas",
-    rating: 5,
-    text: "Emergency plumbing issue at 6 PM - they answered immediately and came within 30 minutes. Saved us from major water damage!",
-    response: "Thank you for the fantastic review, Roberto! Emergency situations are stressful, and we're glad we could respond quickly to prevent further damage. 24/7 emergency service is a priority for us because we know these things don't happen on a schedule! - Eddy"
-  },
-  {
     name: "Kevin & Monica B.",
     location: "Pedregal, Cabo San Lucas",
     rating: 5,
