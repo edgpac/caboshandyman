@@ -322,8 +322,10 @@ export default function CabosHandymanHomepage() {
 
                 {/* Main name */}
                 <div ref={heroNameRef}>
-                  <GradientText className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-none tracking-tight">
-                    CABOS HANDYMAN
+                  {/* Mobile/tablet: stacked. Desktop: one line */}
+                  <GradientText className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none tracking-tight">
+                    <span className="block lg:inline">CABOS</span>
+                    <span className="block lg:inline lg:ml-4">HANDYMAN</span>
                   </GradientText>
                 </div>
 
