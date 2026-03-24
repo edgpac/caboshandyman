@@ -28,7 +28,7 @@ const reviews = [
     name: "Lisa P.",
     location: "Property Manager, Cabo San Lucas",
     rating: 5,
-    text: "We manage 5 rental properties and Cabos Handyman is our go-to for everything. Reliable, fast, and great pricing.",
+    text: "We manage 5 rental properties and Cabos Handyman is our go-to for everything. We've been on their Property Care Plan for over a year — all units stay in top shape without us having to chase anyone down. Reliable, fast, and great pricing.",
     response: "Thank you, Lisa! We truly appreciate property managers like you who trust us with multiple units. Reliability and quality work are essential for vacation rentals. We're honored to be your go-to team!"
   },
   {
@@ -105,7 +105,7 @@ const reviews = [
     name: "James & Linda H.",
     location: "Vacation Rental Owners, Cabo San Lucas",
     rating: 5,
-    text: "5 years using their services for our vacation rentals. Never disappointed. They're like family now!",
+    text: "5 years using their services for our vacation rentals. We signed up for their Property Care Plan two years ago and haven't looked back — everything just gets handled. Never disappointed. They're like family now!",
     response: "Thank you so much, James & Linda! 5 years of partnership means the world to us. We're honored to be part of your team and grateful for your continued trust. Here's to many more years!"
   }
 ];
