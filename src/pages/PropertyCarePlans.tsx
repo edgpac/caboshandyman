@@ -1,16 +1,42 @@
-import { lazy } from 'react';
+import { lazy, useState } from 'react';
 import SEO from '@/components/SEO';
-import { Shield, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Shield, CheckCircle2, ArrowRight, Home, Wrench, Clock, Calendar, DollarSign, Phone, ChevronDown } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
 export default function PropertyCarePlans() {
 
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const pmServices = [
+    { icon: <Home size={22} />, title: "Monthly Inspections", tagline: "so you can know your property is fine without flying down to check", desc: "We walk every room, every system — plumbing, electrical, AC, pool, exterior — and send you a photo report. Problems caught early cost a fraction of what they cost discovered late." },
+    { icon: <Wrench size={22} />, title: "Maintenance Coordination", tagline: "so you can stop juggling vendors from a different timezone", desc: "One message to us and it's handled. We schedule, supervise, and sign off on every job — you never have to chase a contractor in a country you're not in." },
+    { icon: <Shield size={22} />, title: "Vendor & Contractor Management", tagline: "so you can stop paying crisis prices for unknown contractors", desc: "We have a vetted local network and get competitive quotes before any job starts. No markups, no surprises — just work done right the first time." },
+    { icon: <Clock size={22} />, title: "24/7 Emergency Response", tagline: "so you can sleep through the night", desc: "Burst pipe at 2am? AC failure before guest check-in? We get the call, not you. On-site within 2–4 hours — and you get a message when it's resolved." },
+    { icon: <Calendar size={22} />, title: "Key Holding & Access", tagline: "so you can let the right people in without being there", desc: "Secure key holding and access coordination for guests, cleaning crews, and contractors. We make sure the right people get in — and no one else does." },
+    { icon: <DollarSign size={22} />, title: "Utility Monitoring", tagline: "so you can catch a leak before it turns into a $10,000 repair", desc: "Abnormal water or electricity usage is almost always a sign of a problem. We monitor it, flag it, and act before it escalates." },
+  ];
+
+  const pmScenarios = [
+    { situation: "You wake up to a WhatsApp from a neighbor saying there's water under the door.", without: "You panic. You don't know any plumbers in Cabo. You start calling people in a timezone 3 hours ahead.", with: "We already got the call. A plumber is on-site. You get a message: \"Handled. Here are photos.\"" },
+    { situation: "A guest checks in and the AC isn't working. It's July. They're furious.", without: "You get a 1-star review before you can do anything. You scramble for a technician you've never used.", with: "We're on it within the hour. Guest gets a resolution. Your rating stays intact." },
+    { situation: "You haven't visited your property in 6 months. You have no idea what condition it's in.", without: "You find out on your next trip — or when something expensive breaks.", with: "You've received 6 photo inspection reports. You know exactly what's happening and what was done." },
+  ];
+
+  const pmFaqs = [
+    { q: "What does property management in Cabo San Lucas include?", a: "It includes routine maintenance coordination, vendor management, regular property inspections with photo reports, key holding, emergency response, utility oversight, and direct communication with you as the owner. Cabos Handyman handles all of this so you don't have to be on-site." },
+    { q: "Do I need property management if I own a vacation rental in Los Cabos?", a: "Yes — most Cabo vacation rental owners are not local. Without a trusted local contact, small issues like a broken AC, a leak, or a faulty lock can escalate quickly and lead to bad reviews or property damage. A property manager acts as your eyes and hands on the ground." },
+    { q: "What is the difference between property management and a care plan?", a: "A care plan covers scheduled recurring maintenance tasks on a monthly basis. Property management is broader — it includes vendor coordination, inspections, emergency response, key management, and owner communication. Both can be combined for complete coverage." },
+    { q: "How quickly do you respond to emergencies at managed properties?", a: "We provide 24/7 emergency response for managed properties in Cabo San Lucas and Los Cabos. For critical issues like leaks, electrical failures, or security concerns, we aim to be on-site within 2–4 hours." },
+    { q: "Can you manage my property if I live outside of Mexico?", a: "Yes — this is the most common scenario. We act as your local point of contact, handle all on-site coordination, send you photo reports after inspections, and communicate via WhatsApp, email, or video call. You stay informed without needing to travel." },
+    { q: "How much does property management cost in Cabo San Lucas?", a: "Costs vary based on property size, services needed, and inspection frequency. We offer flexible scopes — from a basic care plan to full-service management. Contact us for a no-obligation quote tailored to your property." },
+  ];
+
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": "Property Maintenance and Care Plans",
+    "serviceType": "Property Maintenance, Care Plans, and Property Management",
     "provider": {
       "@type": "LocalBusiness",
       "name": "Cabos Handyman - Property Care Plans",
@@ -73,8 +99,8 @@ export default function PropertyCarePlans() {
   return (
     <>
       <SEO
-        title="Property Care Plans Cabo San Lucas | From $99/mo | Cabos Handyman"
-        description="Property maintenance plans for Cabo vacation rentals & homeowners. Free monthly drain unclog + 24/7 emergency response. Protect your investment. Plans from $99/mo. Call: +52 612 169 8328"
+        title="Property Care & Management Cabo San Lucas | Cabos Handyman"
+        description="Monthly care plans from $99 and full property management for Cabo vacation rentals and absentee owners. Inspections, 24/7 emergency response, vendor coordination, and key holding."
         canonicalUrl="/property-care-plans"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -91,13 +117,13 @@ export default function PropertyCarePlans() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
               <Shield size={20} />
-              <span className="text-sm font-medium">Preventive Property Maintenance</span>
+              <span className="text-sm font-medium">Property Care & Management · Cabo San Lucas</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Property Care Plans<br />in Cabo San Lucas
+              Property Care Plans<br />&amp; Management in Cabo
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Preventive maintenance saves thousands in water damage. Regular inspections catch small issues before they become expensive emergencies.
+              Monthly maintenance plans from $99 — plus full property management for absentee owners and vacation rentals. One team, everything covered.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -672,45 +698,88 @@ export default function PropertyCarePlans() {
             </div>
           </div>
 
-          {/* Property Management Crosslink */}
-          <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-xl p-10 flex flex-col md:flex-row items-center gap-8">
-            <div className="flex-1">
-              <p className="text-xs font-bold uppercase tracking-widest text-[#4AC1C3] mb-3">Also Available</p>
-              <h2 className="text-3xl font-bold mb-3">Need Full Property Management?</h2>
-              <p className="text-gray-300 leading-relaxed mb-4">
-                A Care Plan covers recurring maintenance — but if you're an absentee owner or vacation rental host, you may need more. Our Property Management service handles inspections, vendor coordination, emergency response, and key holding so your property runs itself while you're away.
-              </p>
-              <ul className="space-y-2 mb-6">
-                {[
-                  '24/7 emergency response',
-                  'Monthly inspections with photo reports',
-                  'Vendor & contractor management',
-                  'Key holding and access control',
-                ].map(item => (
-                  <li key={item} className="flex items-center gap-2 text-sm text-gray-200">
-                    <CheckCircle2 size={15} className="text-[#4AC1C3] shrink-0" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <a
-                href="/property-management-cabo-san-lucas"
-                className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                Learn About Property Management <ArrowRight size={18} />
-              </a>
+          {/* Property Management — For Absentee Owners */}
+          <div className="mb-16">
+            <div className="text-center mb-10">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#06756b] mb-3">For Remote & Absentee Owners</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-3">Full Property Management in Cabo San Lucas</h2>
+              <p className="text-gray-500 max-w-2xl mx-auto">Own property in Cabo but don't live here? We act as your eyes, hands, and point of contact — so you can enjoy the investment without managing it from a distance.</p>
             </div>
-            <div className="md:w-56 shrink-0 text-center bg-white/5 border border-white/10 rounded-xl p-6">
-              <p className="text-4xl mb-3">🏢</p>
-              <p className="font-bold text-lg mb-1">Property Management</p>
-              <p className="text-sm text-gray-400 mb-4">Full-scope oversight for Cabo properties</p>
-              <a
-                href="tel:+526121698328"
-                className="block text-[#4AC1C3] font-semibold text-sm hover:underline"
-              >
-                +52 612 169 8328
-              </a>
-              <p className="text-gray-500 text-xs mt-1">Free quote · No long-term contract</p>
+
+            {/* Scenarios */}
+            <div className="space-y-5 mb-12">
+              {pmScenarios.map((s, i) => (
+                <div key={i} className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                  <div className="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                    <p className="font-semibold text-gray-800 text-sm">📍 {s.situation}</p>
+                  </div>
+                  <div className="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-gray-200">
+                    <div className="px-6 py-4">
+                      <p className="text-xs font-bold text-red-500 uppercase tracking-wider mb-2">Without us</p>
+                      <p className="text-sm text-gray-600 leading-relaxed">{s.without}</p>
+                    </div>
+                    <div className="px-6 py-4 bg-green-50/50">
+                      <p className="text-xs font-bold text-[#06756b] uppercase tracking-wider mb-2">With Cabos Handyman</p>
+                      <p className="text-sm text-gray-700 leading-relaxed font-medium">{s.with}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* PM Services Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+              {pmServices.map((s) => (
+                <div key={s.title} className="border border-gray-200 rounded-xl p-6 hover:border-[#06756b] hover:shadow-sm transition-all">
+                  <div className="text-[#06756b] mb-3">{s.icon}</div>
+                  <h3 className="font-bold text-gray-900 mb-1">{s.title}</h3>
+                  <p className="text-xs text-[#06756b] font-semibold mb-3 italic">— {s.tagline}</p>
+                  <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-xl p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 className="text-2xl font-bold mb-2">Ready to stop managing from a distance?</h3>
+                <p className="text-gray-300 text-sm">No long-term contract required. Free quote within 24 hours.</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3 shrink-0">
+                <a href="/contact" className="inline-flex items-center gap-2 bg-white text-gray-900 font-bold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors">
+                  Get a Free Quote <ArrowRight size={18} />
+                </a>
+                <a href="https://wa.me/526121698328" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-white/10 border border-white/30 text-white font-semibold px-6 py-3 rounded-lg hover:bg-white/20 transition-colors">
+                  <Phone size={18} /> WhatsApp Us
+                </a>
+              </div>
+            </div>
+          </div>
+
+          {/* FAQ */}
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold text-gray-900 text-center mb-3">Questions we hear often</h2>
+            <p className="text-gray-500 text-center mb-10">Honest answers about property care plans and management in Cabo San Lucas.</p>
+            <div className="space-y-3 max-w-3xl mx-auto">
+              {pmFaqs.map(({ q, a }, i) => (
+                <div key={i} className="bg-gray-50 border-2 border-gray-200 rounded-xl overflow-hidden">
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="w-full flex justify-between items-start gap-4 px-6 py-5 text-left hover:bg-gray-100 transition-colors"
+                  >
+                    <h3 className="font-semibold text-gray-900 leading-snug">{q}</h3>
+                    <ChevronDown
+                      size={20}
+                      className={`text-[#06756b] shrink-0 mt-0.5 transition-transform duration-300 ${openFaq === i ? 'rotate-180' : ''}`}
+                    />
+                  </button>
+                  {openFaq === i && (
+                    <div className="px-6 pb-5 pt-0 border-t-2 border-gray-200">
+                      <p className="text-gray-600 leading-relaxed text-sm pt-4">{a}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
