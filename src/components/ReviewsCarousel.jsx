@@ -25,6 +25,13 @@ const reviews = [
     response: "Thank you for the fantastic review, Roberto! Emergency situations are stressful, and we're glad we could respond quickly to prevent further damage. 24/7 emergency service is a priority for us because we know these things don't happen on a schedule! - Eddy"
   },
   {
+    name: "Kevin & Monica B.",
+    location: "Pedregal, Cabo San Lucas",
+    rating: 5,
+    text: "Full kitchen remodel from scratch — new cabinets, quartz countertops, backsplash, and all new plumbing. Done in 12 days. We were shocked by the quality. Looks like something out of a magazine.",
+    response: "Kevin & Monica, this one was a labor of love for our whole crew. Seeing the finished kitchen come together — the quartz against that backsplash — was one of those jobs we're genuinely proud of. Thank you for trusting us with something this important. Come back anytime! - Eddy, Cabos Handyman & Remodeling"
+  },
+  {
     name: "Lisa P.",
     location: "Property Manager, Cabo San Lucas",
     rating: 5,
