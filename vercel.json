@@ -13,6 +13,7 @@
     },
     { "source": "/plumber", "destination": "/plumber-cabo-san-lucas", "permanent": true },
     { "source": "/plumber-cabo", "destination": "/plumber-cabo-san-lucas", "permanent": true },
+    { "source": "/plumbing", "destination": "/plumber-cabo-san-lucas", "permanent": true },
     { "source": "/electrical", "destination": "/electrical-services-cabo", "permanent": true },
     { "source": "/electrical-cabo", "destination": "/electrical-services-cabo", "permanent": true },
     { "source": "/kitchen", "destination": "/kitchen-services-cabo", "permanent": true },
