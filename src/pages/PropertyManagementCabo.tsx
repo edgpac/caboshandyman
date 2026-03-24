@@ -23,7 +23,7 @@ const schemaMarkup = {
         "telephone": "+52-612-169-8328",
         "email": "loscabohandyman@gmail.com",
         "priceRange": "$$",
-        "openingHours": "Mo-Su 00:00-23:59",
+        "openingHours": "Mo-Su 07:00-18:00",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Cabo San Lucas",

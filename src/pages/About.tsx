@@ -25,7 +25,7 @@ export default function About() {
     "telephone": "+52-612-169-8328",
     "email": "loscabohandyman@gmail.com",
     "url": "https://www.caboshandyman.com",
-    "openingHours": "Mo-Su 00:00-23:59",
+    "openingHours": "Mo-Su 07:00-18:00",
     "foundingDate": "2019",
     "description": "Meet the Cabos Handyman team — a bilingual, licensed, and insured crew serving Cabo San Lucas since 2019 with 20+ years of hands-on experience.",
     "sameAs": [

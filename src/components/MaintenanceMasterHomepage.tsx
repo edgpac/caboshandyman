@@ -181,8 +181,8 @@ export default function CabosHandymanHomepage() {
   return (
     <>
       <SEO
-        title="Kitchen Remodeling & Handyman Cabo San Lucas | Cabos Handyman"
-        description="Licensed kitchen remodeling & handyman contractor in Cabo San Lucas & Los Cabos. Cabinets, countertops, plumbing, electrical & more. 600+ projects, 20+ yrs exp. Free estimate: +52 612 169 8328"
+        title="Handyman & Remodeling Contractor Cabo San Lucas | Cabos Handyman"
+        description="Licensed handyman & remodeling contractor in Cabo San Lucas. Kitchens, bathrooms, plumbing, electrical & more. 600+ projects, 20+ years experience. Free estimate: +52 612 169 8328"
         canonicalUrl="/"
         schemaMarkup={homepageSchema}
       />
@@ -310,8 +310,11 @@ export default function CabosHandymanHomepage() {
                 <GradientText className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold leading-tight">
                   CABOS HANDYMAN
                 </GradientText>
+                <span className="block text-sm sm:text-base md:text-xl lg:text-2xl font-semibold mt-1 text-[#06756b] tracking-wide uppercase">
+                  & Remodeling
+                </span>
                 <span className="block text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold mt-2 text-gray-900">
-                  Professional Handyman<br className="lg:hidden" /> Services in Cabo San Lucas
+                  Handyman & Remodeling<br className="lg:hidden" /> Contractor in Cabo San Lucas
                 </span>
               </h1>
 

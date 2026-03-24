@@ -187,7 +187,7 @@ export default function ServicesPage() {
             },
             "geo": { "@type": "GeoCoordinates", "latitude": "22.8866974", "longitude": "-109.9139710" },
             "priceRange": "$60-$1200",
-            "openingHours": "Mo-Su 00:00-23:59",
+            "openingHours": "Mo-Su 07:00-18:00",
             "areaServed": [
               { "@type": "City", "name": "Cabo San Lucas" },
               { "@type": "AdministrativeArea", "name": "Los Cabos" }
