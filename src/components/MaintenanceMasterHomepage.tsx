@@ -322,22 +322,22 @@ export default function CabosHandymanHomepage() {
 
                 {/* Main name */}
                 <div ref={heroNameRef}>
-                  <GradientText className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none tracking-tight">
+                  <GradientText className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-black leading-none tracking-tight">
                     CABOS HANDYMAN
                   </GradientText>
                 </div>
 
                 {/* & Remodeling with decorative lines */}
-                <div ref={heroSubBrandRef} className="flex items-center justify-center gap-3 mt-3">
-                  <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-transparent to-[#049d8e]" />
-                  <GradientText className="text-lg sm:text-xl md:text-2xl font-bold tracking-[0.35em] uppercase">
+                <div ref={heroSubBrandRef} className="flex items-center justify-center gap-2 sm:gap-3 mt-3">
+                  <div className="h-px flex-1 max-w-[40px] sm:max-w-[60px] bg-gradient-to-r from-transparent to-[#049d8e]" />
+                  <GradientText className="text-sm sm:text-base md:text-xl lg:text-2xl font-bold tracking-widest sm:tracking-[0.25em] md:tracking-[0.35em] uppercase">
                     &nbsp;&amp;&nbsp;Remodeling
                   </GradientText>
-                  <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-transparent to-[#049d8e]" />
+                  <div className="h-px flex-1 max-w-[40px] sm:max-w-[60px] bg-gradient-to-l from-transparent to-[#049d8e]" />
                 </div>
 
                 {/* Location descriptor */}
-                <p ref={heroLocationRef} className="mt-4 text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-gray-600">
+                <p ref={heroLocationRef} className="mt-3 text-xs font-semibold tracking-[0.2em] uppercase text-gray-600">
                   Cabo San Lucas &nbsp;·&nbsp; Los Cabos, México
                 </p>
 
