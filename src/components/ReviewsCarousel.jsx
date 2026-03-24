@@ -203,7 +203,7 @@ export default function ReviewsCarousel() {
 
                   {/* Review Text */}
                   <p className="text-gray-900 text-base leading-relaxed mb-6">
-                    "{review.text}"
+                    {review.text}
                   </p>
 
                   {/* Reviewer Info */}
