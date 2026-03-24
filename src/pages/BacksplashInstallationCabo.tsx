@@ -10,7 +10,7 @@ export default function BacksplashInstallationCabo() {
   return (
     <>
       <SEO
-        title="Backsplash Installation Cabo San Lucas | Kitchen Backsplash Tile | Cabos Handyman"
+        title="Backsplash Installation Cabo San Lucas | Cabos Handyman"
         description="Professional kitchen backsplash installation in Cabo San Lucas. Subway tile, mosaic, talavera, and stone backsplash. Licensed tile installers serving Los Cabos."
         canonicalUrl="/backsplash-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

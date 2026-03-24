@@ -10,7 +10,7 @@ export default function CountertopInstallationCabo() {
   return (
     <>
       <SEO
-        title="Countertop Installation Cabo San Lucas | Kitchen & Bathroom Countertops | Cabos Handyman"
+        title="Countertop Installation Cabo San Lucas | Cabos Handyman"
         description="Professional countertop installation in Cabo San Lucas. Granite, quartz, marble, tile, and laminate countertops for kitchens and bathrooms. Licensed installers in Los Cabos."
         canonicalUrl="/countertop-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

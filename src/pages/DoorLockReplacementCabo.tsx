@@ -10,7 +10,7 @@ export default function DoorLockReplacementCabo() {
   return (
     <>
       <SEO
-        title="Door Lock Replacement Cabo San Lucas | Lockset & Deadbolt Installation | Cabos Handyman"
+        title="Door Lock Replacement Cabo San Lucas | Cabos Handyman"
         description="Professional door lock replacement and installation in Cabo San Lucas. Deadbolts, locksets, smart locks, and security upgrades. Fast service for homes and vacation rentals in Los Cabos."
         canonicalUrl="/door-lock-replacement-cabo-san-lucas"
         geoRegion="MX-BCS"

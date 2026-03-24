@@ -10,7 +10,7 @@ export default function TowelRackInstallationCabo() {
   return (
     <>
       <SEO
-        title="Towel Rack Installation Cabo San Lucas | Towel Bar & Holder | Cabos Handyman"
+        title="Towel Rack Installation Cabo San Lucas | Cabos Handyman"
         description="Professional towel rack and towel bar installation in Cabo San Lucas. Towel rings, toilet paper holders, robe hooks, and bathroom accessories mounted securely. Handyman in Los Cabos."
         canonicalUrl="/towel-rack-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

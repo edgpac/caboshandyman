@@ -10,7 +10,7 @@ export default function WaterLeakDetectorCabo() {
   return (
     <>
       <SEO
-        title="Water Leak Detector Installation Cabo San Lucas | Leak Sensor | Cabos Handyman"
+        title="Water Leak Detector Installation Cabo San Lucas | Cabos Handyman"
         description="Professional water leak detector installation in Cabo San Lucas. Smart water sensors, leak alarms, and water shutoff devices for homes and vacation rentals. Protect your property in Los Cabos."
         canonicalUrl="/water-leak-detector-cabo-san-lucas"
         geoRegion="MX-BCS"

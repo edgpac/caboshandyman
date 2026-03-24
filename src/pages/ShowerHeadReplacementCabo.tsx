@@ -10,7 +10,7 @@ export default function ShowerHeadReplacementCabo() {
   return (
     <>
       <SEO
-        title="Shower Head Replacement Cabo San Lucas | Shower Valve Repair | Cabos Handyman"
+        title="Shower Head Replacement Cabo San Lucas | Cabos Handyman"
         description="Professional shower head replacement and shower valve repair in Cabo San Lucas. Rain shower heads, handheld showers, low pressure fixes. Licensed plumbers in Los Cabos."
         canonicalUrl="/shower-head-replacement-cabo-san-lucas"
         geoRegion="MX-BCS"

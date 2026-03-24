@@ -10,7 +10,7 @@ export default function ToiletInstallationCabo() {
   return (
     <>
       <SEO
-        title="Toilet Installation Cabo San Lucas | Replace & Install Toilets | Cabos Handyman"
+        title="Toilet Installation Cabo San Lucas | Cabos Handyman"
         description="Professional toilet installation and replacement in Cabo San Lucas. Licensed plumbers for new toilet installs, toilet replacements, and running toilet repairs. Call for same-day service."
         canonicalUrl="/toilet-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

@@ -10,7 +10,7 @@ export default function CommercialSinkCabo() {
   return (
     <>
       <SEO
-        title="Commercial Sink Installation Cabo San Lucas | Restaurant & Office Sinks | Cabos Handyman"
+        title="Commercial Sink Installation Cabo San Lucas | Cabos Handyman"
         description="Professional commercial sink installation in Cabo San Lucas. Restaurant kitchen sinks, three-compartment sinks, hand wash stations, and commercial plumbing. Licensed plumbers in Los Cabos."
         canonicalUrl="/commercial-sink-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

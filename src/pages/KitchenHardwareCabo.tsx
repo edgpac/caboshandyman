@@ -10,7 +10,7 @@ export default function KitchenHardwareCabo() {
   return (
     <>
       <SEO
-        title="Kitchen Hardware Installation Cabo San Lucas | Cabinet Handles & Pulls | Cabos Handyman"
+        title="Kitchen Hardware Installation Cabo San Lucas | Cabos Handyman"
         description="Professional kitchen hardware installation in Cabo San Lucas. Cabinet handles, drawer pulls, hinges, knobs, and kitchen fixture upgrades. Quick service throughout Los Cabos."
         canonicalUrl="/kitchen-hardware-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

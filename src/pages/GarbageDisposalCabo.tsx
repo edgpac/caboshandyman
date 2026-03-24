@@ -10,7 +10,7 @@ export default function GarbageDisposalCabo() {
   return (
     <>
       <SEO
-        title="Garbage Disposal Installation Cabo San Lucas | Disposal Repair | Cabos Handyman"
+        title="Garbage Disposal Installation Cabo San Lucas | Cabos Handyman"
         description="Professional garbage disposal installation and repair in Cabo San Lucas. All major brands installed, noisy or leaking disposal repaired. Licensed plumbers in Los Cabos."
         canonicalUrl="/garbage-disposal-cabo-san-lucas"
         geoRegion="MX-BCS"

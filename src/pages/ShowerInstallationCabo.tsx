@@ -10,7 +10,7 @@ export default function ShowerInstallationCabo() {
   return (
     <>
       <SEO
-        title="Shower Installation Cabo San Lucas | Shower Replacement & Repair | Cabos Handyman"
+        title="Shower Installation Cabo San Lucas | Cabos Handyman"
         description="Professional shower installation and replacement in Cabo San Lucas. Walk-in showers, shower tile, shower valves, and shower heads. Licensed plumbers serving Los Cabos."
         canonicalUrl="/shower-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

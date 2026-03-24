@@ -10,7 +10,7 @@ export default function DecorativeLightingCabo() {
   return (
     <>
       <SEO
-        title="Decorative Lighting Installation Cabo San Lucas | String Lights & Accent Lighting | Cabos Handyman"
+        title="Decorative Lighting Cabo San Lucas | Cabos Handyman"
         description="Professional decorative lighting installation in Cabo San Lucas. String lights, bistro lights, LED strip lighting, accent lights, and outdoor decorative lighting. Licensed electricians in Los Cabos."
         canonicalUrl="/decorative-lighting-cabo-san-lucas"
         geoRegion="MX-BCS"

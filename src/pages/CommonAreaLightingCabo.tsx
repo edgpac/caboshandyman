@@ -10,7 +10,7 @@ export default function CommonAreaLightingCabo() {
   return (
     <>
       <SEO
-        title="Common Area Lighting Cabo San Lucas | HOA & Condo Lighting | Cabos Handyman"
+        title="Common Area Lighting Cabo San Lucas | Cabos Handyman"
         description="Professional common area lighting installation and repair in Cabo San Lucas. Condo hallways, parking lots, pool areas, and community lighting. Licensed electricians in Los Cabos."
         canonicalUrl="/common-area-lighting-cabo-san-lucas"
         geoRegion="MX-BCS"

@@ -50,7 +50,7 @@ export default function ToiletTubUncloggingCabo() {
   return (
     <>
       <SEO
-        title="Toilet & Drain Unclogging Cabo San Lucas | 24/7 Service | Cabos Handyman"
+        title="Toilet & Drain Unclogging Cabo San Lucas | Cabos Handyman"
         description="Fast toilet and drain unclogging service in Cabo San Lucas. Professional drain cleaning for clogged toilets, sinks, tubs, and showers. Same-day service available. Starting at $60."
         canonicalUrl="/toilet-tub-unclogging-cabo"
         geoRegion="MX-BCS"

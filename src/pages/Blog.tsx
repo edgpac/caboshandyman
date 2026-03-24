@@ -54,7 +54,7 @@ export default function Blog() {
   return (
     <>
       <SEO
-        title="Blog & Resources | Handyman Tips & Guides | Cabos Handyman Cabo San Lucas"
+        title="Blog & Resources | Cabos Handyman Cabo San Lucas"
         description="Guides, tips, and resources from Cabos Handyman — covering plumbing, electrical, kitchen remodeling, property management, and more in Cabo San Lucas, México."
         canonicalUrl="/blog"
         geoRegion="MX-BCS"

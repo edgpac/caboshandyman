@@ -10,7 +10,7 @@ export default function ToiletLeakRepairCabo() {
   return (
     <>
       <SEO
-        title="Toilet Leak Repair Cabo San Lucas | Running Toilet Fix | Cabos Handyman"
+        title="Toilet Leak Repair Cabo San Lucas | Cabos Handyman"
         description="Professional toilet leak repair in Cabo San Lucas. Fix running toilets, leaking base, tank leaks, and supply line leaks. Licensed plumbers with fast response in Los Cabos."
         canonicalUrl="/toilet-leak-repair-cabo-san-lucas"
         geoRegion="MX-BCS"

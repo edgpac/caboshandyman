@@ -10,7 +10,7 @@ export default function OfficeLightingCabo() {
   return (
     <>
       <SEO
-        title="Office Lighting Installation Cabo San Lucas | Commercial Lighting | Cabos Handyman"
+        title="Office Lighting Installation Cabo San Lucas | Cabos Handyman"
         description="Professional office and commercial lighting installation in Cabo San Lucas. LED panel lights, track lighting, task lighting, and office lighting upgrades. Licensed electricians in Los Cabos."
         canonicalUrl="/office-lighting-cabo-san-lucas"
         geoRegion="MX-BCS"

@@ -207,8 +207,8 @@ export default function PropertyManagementCabo() {
   return (
     <>
       <SEO
-        title="Property Management Cabo San Lucas | Local Property Manager Los Cabos | Cabos Handyman"
-        description="Trusted property management in Cabo San Lucas for foreign owners and vacation rentals. Inspections, maintenance coordination, 24/7 emergency response, and vendor management. You stay informed — we handle everything on the ground."
+        title="Property Management Cabo San Lucas | Cabos Handyman"
+        description="Local property management in Cabo San Lucas for absentee owners and vacation rentals. Inspections, maintenance coordination, vendor management, and key holding. You own it — we run it."
         canonicalUrl="/property-management-cabo-san-lucas"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"

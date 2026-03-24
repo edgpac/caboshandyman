@@ -10,7 +10,7 @@ export default function LandscapeMaintenanceCabo() {
   return (
     <>
       <SEO
-        title="Landscape Maintenance Cabo San Lucas | Palm Tree Pruning | Cabos Handyman"
+        title="Landscape Maintenance Cabo San Lucas | Cabos Handyman"
         description="Professional landscape maintenance in Cabo San Lucas. Palm tree pruning, yard cleanup, irrigation system check, and property maintenance. Serving all of Los Cabos."
         canonicalUrl="/landscape-maintenance-cabo-san-lucas"
         geoRegion="MX-BCS"

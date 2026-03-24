@@ -10,7 +10,7 @@ export default function FaucetInstallationCabo() {
   return (
     <>
       <SEO
-        title="Faucet Installation Cabo San Lucas | Faucet Replacement & Repair | Cabos Handyman"
+        title="Faucet Installation Cabo San Lucas | Cabos Handyman"
         description="Professional faucet installation and replacement in Cabo San Lucas. Kitchen faucets, bathroom faucets, shower heads, and outdoor faucets. Licensed plumbers in Los Cabos."
         canonicalUrl="/faucet-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

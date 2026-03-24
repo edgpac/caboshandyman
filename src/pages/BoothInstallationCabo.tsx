@@ -10,7 +10,7 @@ export default function BoothInstallationCabo() {
   return (
     <>
       <SEO
-        title="Booth Installation Cabo San Lucas | Restaurant Booth Seating | Cabos Handyman"
+        title="Booth Installation Cabo San Lucas | Cabos Handyman"
         description="Professional booth installation in Cabo San Lucas. Restaurant booth seating, banquette seating, and custom dining area furniture installation. Commercial services in Los Cabos."
         canonicalUrl="/booth-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

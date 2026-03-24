@@ -10,7 +10,7 @@ export default function WindowRepairCabo() {
   return (
     <>
       <SEO
-        title="Window Repair Cabo San Lucas | Window Screen & Frame Repair | Cabos Handyman"
+        title="Window Repair Cabo San Lucas | Cabos Handyman"
         description="Professional window repair in Cabo San Lucas. Broken window screens, stuck windows, window frame repair, and window hardware replacement. Handyman serving all of Los Cabos."
         canonicalUrl="/window-repair-cabo-san-lucas"
         geoRegion="MX-BCS"

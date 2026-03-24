@@ -10,7 +10,7 @@ export default function PaintingCabo() {
   return (
     <>
       <SEO
-        title="Painting Cabo San Lucas | Interior & Exterior Paint Touch-Ups | Cabos Handyman"
+        title="Painting Cabo San Lucas | Cabos Handyman"
         description="Professional painting and paint touch-ups in Cabo San Lucas. Interior and exterior painting, vacation rental refresh, wall repairs and repainting. Painters serving Los Cabos."
         canonicalUrl="/painting-cabo-san-lucas"
         geoRegion="MX-BCS"

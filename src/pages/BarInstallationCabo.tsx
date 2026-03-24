@@ -10,7 +10,7 @@ export default function BarInstallationCabo() {
   return (
     <>
       <SEO
-        title="Bar Installation Cabo San Lucas | Home Bar & Restaurant Bar | Cabos Handyman"
+        title="Bar Installation Cabo San Lucas | Cabos Handyman"
         description="Professional bar installation in Cabo San Lucas. Home bars, restaurant bars, outdoor palapa bars, and bar counter installation. Custom bar buildouts serving Los Cabos."
         canonicalUrl="/bar-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

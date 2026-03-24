@@ -10,7 +10,7 @@ export default function PantryShelvingCabo() {
   return (
     <>
       <SEO
-        title="Pantry Shelving Installation Cabo San Lucas | Custom Shelves | Cabos Handyman"
+        title="Pantry Shelving Installation Cabo San Lucas | Cabos Handyman"
         description="Professional pantry and shelving installation in Cabo San Lucas. Custom pantry shelves, closet shelving, wall shelves, and built-in storage. Licensed handymen in Los Cabos."
         canonicalUrl="/pantry-shelving-cabo-san-lucas"
         geoRegion="MX-BCS"

@@ -10,7 +10,7 @@ export default function CeilingLightInstallationCabo() {
   return (
     <>
       <SEO
-        title="Ceiling Light Installation Cabo San Lucas | Light Fixture Install | Cabos Handyman"
+        title="Ceiling Light Installation Cabo San Lucas | Cabos Handyman"
         description="Professional ceiling light installation in Cabo San Lucas. Recessed lighting, pendant lights, chandeliers, and LED fixture installation. Licensed electricians in Los Cabos."
         canonicalUrl="/ceiling-light-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

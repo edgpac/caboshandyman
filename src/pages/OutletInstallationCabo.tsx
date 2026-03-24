@@ -10,7 +10,7 @@ export default function OutletInstallationCabo() {
   return (
     <>
       <SEO
-        title="Outlet Installation Cabo San Lucas | GFCI, USB & Electrical Outlets | Cabos Handyman"
+        title="Outlet Installation Cabo San Lucas | Cabos Handyman"
         description="Licensed electricians for outlet installation in Cabo San Lucas. GFCI outlets, USB outlets, 220V outlets, and outlet replacement. Safe and code-compliant electrical work in Los Cabos."
         canonicalUrl="/outlet-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

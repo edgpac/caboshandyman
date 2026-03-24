@@ -10,7 +10,7 @@ export default function MirrorInstallationCabo() {
   return (
     <>
       <SEO
-        title="Mirror Installation Cabo San Lucas | Bathroom Mirror Hanging | Cabos Handyman"
+        title="Mirror Installation Cabo San Lucas | Cabos Handyman"
         description="Professional mirror installation and hanging in Cabo San Lucas. Bathroom mirrors, decorative mirrors, framed mirrors, and large wall mirrors. Secure mounting in tile and concrete walls."
         canonicalUrl="/mirror-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

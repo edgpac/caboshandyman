@@ -10,7 +10,7 @@ export default function TileInstallationCabo() {
   return (
     <>
       <SEO
-        title="Tile Installation Cabo San Lucas | Floor & Wall Tile | Backsplash | Cabos Handyman"
+        title="Tile Installation Cabo San Lucas | Floor, Wall & Backsplash | Cabos Handyman"
         description="Professional tile installation in Cabo San Lucas. Bathroom tile, kitchen backsplash, floor tile, shower tile, and grout repair. Licensed tile installers in Los Cabos."
         canonicalUrl="/tile-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

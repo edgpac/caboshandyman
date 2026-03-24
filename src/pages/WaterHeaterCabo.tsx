@@ -10,7 +10,7 @@ export default function WaterHeaterCabo() {
   return (
     <>
       <SEO
-        title="Water Heater Installation Cabo San Lucas | Hot Water Heater Repair | Cabos Handyman"
+        title="Water Heater Installation Cabo San Lucas | Cabos Handyman"
         description="Water heater installation and repair in Cabo San Lucas. Tankless, electric, and gas water heaters. Fast response for no-hot-water emergencies in Los Cabos. Call for same-day service."
         canonicalUrl="/water-heater-cabo-san-lucas"
         geoRegion="MX-BCS"

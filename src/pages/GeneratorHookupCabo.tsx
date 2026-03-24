@@ -10,7 +10,7 @@ export default function GeneratorHookupCabo() {
   return (
     <>
       <SEO
-        title="Generator Hookup Cabo San Lucas | Generator Transfer Switch | Cabos Handyman"
+        title="Generator Hookup Cabo San Lucas | Cabos Handyman"
         description="Generator hookup and transfer switch installation in Cabo San Lucas. Connect your portable generator to your electrical panel when CFE power goes out. Licensed electricians in Los Cabos."
         canonicalUrl="/generator-hookup-cabo-san-lucas"
         geoRegion="MX-BCS"

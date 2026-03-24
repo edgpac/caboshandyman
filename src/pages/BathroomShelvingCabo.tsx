@@ -10,7 +10,7 @@ export default function BathroomShelvingCabo() {
   return (
     <>
       <SEO
-        title="Bathroom Shelving Installation Cabo San Lucas | Storage Solutions | Cabos Handyman"
+        title="Bathroom Shelving Installation Cabo San Lucas | Cabos Handyman"
         description="Professional bathroom shelving installation in Cabo San Lucas. Floating shelves, shower shelves, over-toilet storage, and bathroom storage units. Handyman in Los Cabos."
         canonicalUrl="/bathroom-shelving-cabo-san-lucas"
         geoRegion="MX-BCS"

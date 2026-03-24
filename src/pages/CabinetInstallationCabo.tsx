@@ -10,7 +10,7 @@ export default function CabinetInstallationCabo() {
   return (
     <>
       <SEO
-        title="Cabinet Installation Cabo San Lucas | Kitchen & Bathroom Cabinets | Cabos Handyman"
+        title="Cabinet Installation Cabo San Lucas | Cabos Handyman"
         description="Professional cabinet installation in Cabo San Lucas. Kitchen cabinets, bathroom vanities, built-in storage, and shelving. Licensed carpenters serving Los Cabos."
         canonicalUrl="/cabinet-installation-cabo-san-lucas"
         geoRegion="MX-BCS"

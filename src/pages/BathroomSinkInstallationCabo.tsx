@@ -10,7 +10,7 @@ export default function BathroomSinkInstallationCabo() {
   return (
     <>
       <SEO
-        title="Bathroom Sink Installation Cabo San Lucas | Vanity Sink Replacement | Cabos Handyman"
+        title="Bathroom Sink Installation Cabo San Lucas | Cabos Handyman"
         description="Professional bathroom sink installation and replacement in Cabo San Lucas. Vessel sinks, undermount, pedestal, and vanity sink installation. Licensed plumbers in Los Cabos."
         canonicalUrl="/bathroom-sink-installation-cabo-san-lucas"
         geoRegion="MX-BCS"
