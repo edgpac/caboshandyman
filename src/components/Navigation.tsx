@@ -151,13 +151,6 @@ export default function Navigation() {
                     <Shield size={14} className="text-purple-400" />
                     Property Care Plans
                   </a>
-                  <a
-                    href="/property-management-cabo-san-lucas"
-                    className="flex items-center gap-2 px-4 py-3 text-sm text-white hover:bg-dark-surface hover:text-primary transition-colors"
-                  >
-                    <Home size={14} className="text-purple-400" />
-                    Property Management
-                  </a>
                 </div>
               )}
             </div>
@@ -241,13 +234,6 @@ export default function Navigation() {
                   className="flex items-center gap-2 py-2 px-4 text-sm text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-surface"
                 >
                   <Shield size={14} className="text-purple-400" /> Property Care Plans
-                </a>
-                <a
-                  href="/property-management-cabo-san-lucas"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center gap-2 py-2 px-4 text-sm text-white hover:text-primary transition-colors rounded-lg hover:bg-dark-surface"
-                >
-                  <Home size={14} className="text-purple-400" /> Property Management
                 </a>
               </div>
             )}
