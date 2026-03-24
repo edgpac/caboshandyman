@@ -24,6 +24,10 @@ export default function CabosHandymanHomepage() {
 
   const statsRefs = useRef<(HTMLDivElement | null)[]>([]);
   const statsSectionRef = useRef<HTMLElement>(null);
+  const heroNameRef = useRef<HTMLDivElement>(null);
+  const heroSubBrandRef = useRef<HTMLDivElement>(null);
+  const heroLocationRef = useRef<HTMLParagraphElement>(null);
+  const heroCtaRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const configs = [
@@ -64,6 +68,14 @@ export default function CabosHandymanHomepage() {
 
     observer.observe(section);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const tl = gsap.timeline({ delay: 0.2 });
+    tl.from(heroNameRef.current, { opacity: 0, y: 60, duration: 0.9, ease: 'power3.out' })
+      .from(heroSubBrandRef.current, { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, '-=0.5')
+      .from(heroLocationRef.current, { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' }, '-=0.4')
+      .from(heroCtaRef.current, { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' }, '-=0.3');
   }, []);
 
   const projects = [
@@ -305,21 +317,34 @@ export default function CabosHandymanHomepage() {
           <div className="container mx-auto px-6 relative z-10">
             <div className="max-w-4xl mx-auto text-center">
 
-              {/* Business Name */}
-              <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold mb-4 text-center leading-tight">
-                <GradientText className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold md:font-bold leading-tight">
-                  CABOS HANDYMAN
-                </GradientText>
-                <span className="block text-sm sm:text-base md:text-xl lg:text-2xl font-semibold mt-1 text-[#06756b] tracking-wide uppercase">
-                  & Remodeling
-                </span>
-                <span className="block text-base sm:text-lg md:text-2xl lg:text-3xl font-semibold mt-2 text-gray-900">
-                  Handyman & Remodeling<br className="lg:hidden" /> Contractor in Cabo San Lucas
-                </span>
+              {/* Brand lockup */}
+              <h1 className="mb-6">
+
+                {/* Main name */}
+                <div ref={heroNameRef}>
+                  <GradientText className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none tracking-tight">
+                    CABOS HANDYMAN
+                  </GradientText>
+                </div>
+
+                {/* & Remodeling with decorative lines */}
+                <div ref={heroSubBrandRef} className="flex items-center justify-center gap-3 mt-3">
+                  <div className="h-px flex-1 max-w-[60px] bg-gradient-to-r from-transparent to-[#049d8e]" />
+                  <GradientText className="text-lg sm:text-xl md:text-2xl font-bold tracking-[0.35em] uppercase">
+                    &nbsp;&amp;&nbsp;Remodeling
+                  </GradientText>
+                  <div className="h-px flex-1 max-w-[60px] bg-gradient-to-l from-transparent to-[#049d8e]" />
+                </div>
+
+                {/* Location descriptor */}
+                <p ref={heroLocationRef} className="mt-4 text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-gray-600">
+                  Cabo San Lucas &nbsp;·&nbsp; Los Cabos, México
+                </p>
+
               </h1>
 
               {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <div ref={heroCtaRef} className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
                 <a
                   href="tel:+526121698328"
                   className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all flex items-center justify-center shadow-lg shadow-teal-500/30"
@@ -337,9 +362,8 @@ export default function CabosHandymanHomepage() {
               </div>
 
               {/* Disclaimer */}
-              <div className="text-xs text-gray-800 mt-5 space-y-1">
-                <p>*Handyman services for vacation rentals and homes.</p>
-                <p>Service calls starting at $60 for most repairs.</p>
+              <div className="text-xs text-gray-700 mt-5 space-y-1">
+                <p>Service calls starting at $60 · Vacation rentals &amp; homes</p>
               </div>
 
             </div>
