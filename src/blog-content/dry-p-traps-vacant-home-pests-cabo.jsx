@@ -4,7 +4,7 @@ export default function DryPTrapsVacantHomePestsCaboArticle() {
       <p className="lead">
         We arrived at one of our Property Care Plan clients' homes in Cabo San Lucas for a routine
         visit and immediately knew something was wrong. Gnats — everywhere. On the floors, crawling
-        across the AC unit, packed into the filters. The home had been empty for about six weeks. No
+        across the AC unit, packed into the filters. The home had been empty for about four weeks. No
         broken windows, no open doors, no obvious point of entry. The house looked sealed from the
         outside.
       </p>
@@ -133,7 +133,7 @@ export default function DryPTrapsVacantHomePestsCaboArticle() {
       <h2>This Is Exactly What the Property Care Plan Is For</h2>
       <p>
         This client's home wasn't neglected in any obvious way — it was locked, clean, and in good
-        condition. But six weeks without a visit in Cabo's climate was enough for a small, invisible
+        condition. But four weeks without a visit in Cabo's climate was enough for a small, invisible
         problem (evaporating water in drain traps) to turn into a property-wide pest infestation that
         also damaged the AC system.
       </p>
