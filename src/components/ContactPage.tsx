@@ -64,8 +64,8 @@ const ContactPage = () => {
   return (
     <>
       <SEO
-        title="Contact Cabos Handyman - Free Estimates in Cabo San Lucas"
-        description="Get in touch with Cabos Handyman for free estimates. 24/7 emergency service for Property Care members. Call +52 612 169 8328 or schedule online."
+        title="Contact Cabos Handyman | Cabo San Lucas"
+        description="Call or message Cabos Handyman for a free quote. Serving Cabo San Lucas and Los Cabos. Call +52 612 169 8328 or send us a message and we'll get back to you the same day."
         canonicalUrl="/contact"
       />
 
