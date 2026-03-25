@@ -91,7 +91,7 @@ export default function About() {
           <div className="prose prose-lg max-w-none mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
             <p className="text-xl text-gray-700 leading-relaxed">
-              Cabos Handyman was founded in 2019 to bring reliable, professional handyman and construction services to Cabo San Lucas and the surrounding Los Cabos area. While the company is young, the experience behind it is anything but. With over 20 years of hands-on construction expertise, our founder saw a gap in the market: property owners in Cabo needed a trustworthy, bilingual service provider who could handle everything from a simple toilet unclog to a full kitchen remodel.
+              Cabos Handyman was founded in 2019 to bring reliable, professional handyman and construction services to Cabo San Lucas and the surrounding Los Cabos area. While the company is young, the experience behind it is anything but. With over 20 years of hands-on construction expertise, our founder saw a gap in the market: property owners in Cabo needed a trustworthy, bilingual service provider who could handle everything from a simple repair to a full remodeling project.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               Since opening our doors, we've completed over 600 projects for homeowners, vacation rental managers, commercial property owners, and expats throughout Baja California Sur. Our growth has been built entirely on word-of-mouth referrals and repeat customers, which tells us we're doing something right.
@@ -164,7 +164,7 @@ export default function About() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Full-Service Capabilities</h3>
                 <p className="text-gray-700">
-                  From plumbing and electrical to kitchen remodels and commercial buildouts — one trusted team for everything. No need to coordinate multiple contractors.
+                  From plumbing and electrical to full remodeling and commercial buildouts — one trusted team for everything. No need to coordinate multiple contractors.
                 </p>
               </div>
 
