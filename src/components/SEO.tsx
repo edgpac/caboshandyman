@@ -9,9 +9,10 @@ interface SEOProps {
   geoPlacename?: string;
   geoPosition?: string;
   schemaMarkup?: object;
+  noindex?: boolean;
 }
 
-export default function SEO({ title, description, canonicalUrl, ogImage, geoRegion, geoPlacename, geoPosition, schemaMarkup }: SEOProps) {
+export default function SEO({ title, description, canonicalUrl, ogImage, geoRegion, geoPlacename, geoPosition, schemaMarkup, noindex }: SEOProps) {
   const defaultOgImage = '/images/cabos-handyman-og.jpg';
   const siteUrl = 'https://www.caboshandyman.com';
   const fullCanonicalUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
@@ -23,6 +24,7 @@ export default function SEO({ title, description, canonicalUrl, ogImage, geoRegi
       <title>{title}</title>
       <meta name="title" content={title} />
       <meta name="description" content={description} />
+      {noindex && <meta name="robots" content="noindex, nofollow" />}
       <link rel="canonical" href={fullCanonicalUrl} />
 
       {/* Open Graph / Facebook */}
