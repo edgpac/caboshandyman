@@ -43,7 +43,7 @@ export default function DryPTrapsVacantHomePestsCaboArticle() {
 
       <figure style={{ margin: '2rem 0', textAlign: 'center' }}>
         <img
-          src="/Blogs/Screenshot 2026-03-25 at 2.11.51 PM.png"
+          src="/Blogs/gnat-ac-vent-cabo.png"
           alt="Gnats covering the AC vent of a vacant home in Cabo San Lucas due to dry p-traps"
           style={{ maxWidth: '100%', maxHeight: '480px', objectFit: 'contain', borderRadius: '8px', margin: '0 auto', display: 'block' }}
           loading="lazy"
@@ -66,7 +66,7 @@ export default function DryPTrapsVacantHomePestsCaboArticle() {
 
       <figure style={{ margin: '2rem 0', textAlign: 'center' }}>
         <img
-          src="/Blogs/Screenshot 2026-03-25 at 2.12.14 PM.png"
+          src="/Blogs/gnat-ac-filter-cabo.png"
           alt="AC filter covered in gnats in a vacant Cabo San Lucas property with dry p-traps"
           style={{ maxWidth: '100%', maxHeight: '480px', objectFit: 'contain', borderRadius: '8px', margin: '0 auto', display: 'block' }}
           loading="lazy"
