@@ -50,6 +50,21 @@ export default function ACCondensationLineCleaningCaboArticle() {
         Two problems feeding each other. We fixed both.
       </p>
 
+      <figure style={{ margin: '2rem 0', textAlign: 'center' }}>
+        <img
+          src="/Blogs/ac-drain-sludge-cabo.png"
+          alt="Black sludge draining from a clogged AC condensation drain line in Cabo San Lucas"
+          style={{ maxWidth: '100%', maxHeight: '520px', objectFit: 'contain', borderRadius: '8px', margin: '0 auto', display: 'block' }}
+          loading="lazy"
+          decoding="async"
+          width="400"
+          height="600"
+        />
+        <figcaption style={{ textAlign: 'center', fontSize: '0.8rem', color: '#999', marginTop: '0.75rem', fontStyle: 'italic' }}>
+          Black algae sludge coming out of a clogged AC drain line — this is what builds up inside the pipe and causes the unit to overflow and leak.
+        </figcaption>
+      </figure>
+
       <h2>How We Clear a Clogged Condensation Drain Line</h2>
       <p>
         Clearing a blocked drain line is a straightforward job when you have the right tools. Here's
