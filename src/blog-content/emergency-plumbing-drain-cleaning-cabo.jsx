@@ -26,7 +26,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
         <li><strong>24/7 emergency availability</strong> exclusively for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a> — standard hours are 7am–6pm daily</li>
       </ul>
 
-      <h2>Emergency Drain Cleaning Services</h2>
+      <h2>Emergency Drain Cleaning in Cabo San Lucas</h2>
       <p>
         Clogged drains are more than an inconvenience — they can cause water damage, health hazards, and expensive repairs if not addressed quickly. Professional drain cleaning from <strong>caboshandyman.com</strong> uses professional-grade equipment to clear even the toughest blockages.
       </p>
@@ -74,7 +74,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
         <li>Clean and sanitize work area</li>
       </ul>
 
-      <h2>Common Drain Cleaning Problems We Solve</h2>
+      <h2>Common Drain Cleaning Problems in Cabo San Lucas</h2>
 
       <h3>Recurring Toilet Clogs</h3>
       <p>
@@ -161,7 +161,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
         <li>Cleanup and sanitization</li>
       </ul>
 
-      <h2>Complete Plumbing Repair Services</h2>
+      <h2>Plumbing Repair Services in Cabo San Lucas</h2>
 
       <h3>Leak Detection and Repair</h3>
       <p>
