@@ -231,6 +231,56 @@ export default function ACCondensationLineCleaningCaboArticle() {
         24/7 emergency response is available exclusively for{' '}
         <a href="/property-care-plans" style={{ color: '#06756b' }}>Property Care Plan members</a>.
       </p>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "How to Clear a Clogged AC Condensation Drain Line",
+          "description": "Step-by-step process for clearing a blocked condensation drain line on a mini-split AC unit in Cabo San Lucas.",
+          "totalTime": "PT90M",
+          "supply": [
+            { "@type": "HowToSupply", "name": "Algae inhibitor tablet or diluted bleach" },
+            { "@type": "HowToSupply", "name": "Water" }
+          ],
+          "tool": [
+            { "@type": "HowToTool", "name": "Compressed air or wet-dry vacuum" }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Locate the drain line access point",
+              "text": "On most mini-splits, the access point is a capped port on the drain pan inside the unit, or accessible from the pipe exit point on the exterior wall."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Flush with compressed air or a wet-dry vacuum",
+              "text": "Attach to the access port and either push the blockage out toward the exterior or pull it back from the drain pan side. For stubborn clogs, use a combination of both."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Flush with water to confirm flow",
+              "text": "Pour water directly into the drain pan and verify it drains freely through the line and exits at the exterior."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Treat with algae inhibitor",
+              "text": "Add a small amount of diluted bleach or an algae treatment tablet to the drain pan to slow regrowth inside the line."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "Check and clear the drain pan",
+              "text": "Remove any standing water from the drain pan and wipe it clean before reassembling the unit."
+            }
+          ]
+        })}}
+      />
     </>
   );
 }

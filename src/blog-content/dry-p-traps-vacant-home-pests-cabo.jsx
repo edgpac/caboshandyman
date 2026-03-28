@@ -153,6 +153,53 @@ export default function DryPTrapsVacantHomePestsCaboArticle() {
         in, give us a call. We'll do a full inspection and get everything back in order — before the
         next guest arrives or before you fly down yourself.
       </p>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "How to Prevent Dry P-Traps and Pest Entry in a Vacant Cabo San Lucas Home",
+          "description": "Steps to keep p-traps sealed and prevent insects from entering through drains in a vacant property in Cabo San Lucas.",
+          "totalTime": "PT30M",
+          "supply": [
+            { "@type": "HowToSupply", "name": "Mineral oil or cooking oil" },
+            { "@type": "HowToSupply", "name": "Rubber drain plugs (optional)" }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Run all faucets before leaving",
+              "text": "Run every faucet, shower, and sink for 30 seconds before closing the property. This refills every p-trap with fresh water at the start of the vacancy."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Add mineral oil to low-use drains",
+              "text": "Pour a tablespoon of mineral oil or cooking oil into floor drains and any low-use sink drains. Oil floats on top of the water and slows evaporation significantly, extending the water seal by several weeks."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Schedule water runs every 2–3 weeks",
+              "text": "Have a neighbor, property manager, or maintenance team run water through all drains every two to three weeks. In Cabo's summer heat, p-traps can dry out in as little as two weeks."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Plug unused floor drains",
+              "text": "For floor drains and utility drains that get no regular use, install a rubber drain plug as a backup seal against insects."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "Check AC filters on return",
+              "text": "When you return or before guests arrive, inspect AC filters. If p-traps dried out, insects may have accumulated on the filters, restricting airflow and straining the unit."
+            }
+          ]
+        })}}
+      />
     </>
   );
 }

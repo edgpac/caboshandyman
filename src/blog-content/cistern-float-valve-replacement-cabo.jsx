@@ -149,6 +149,59 @@ export default function CisternFloatValveReplacementCaboArticle() {
         is usually quick. We carry brass float valves on the truck for most standard cistern sizes —
         in most cases it's a same-day repair. Call us or send a WhatsApp and we'll take a look.
       </p>
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "HowTo",
+          "name": "How to Replace a Cistern Float Valve in Cabo San Lucas",
+          "description": "Step-by-step process for replacing a worn float valve in a residential cistern (tinaco or cisterna) in Los Cabos.",
+          "totalTime": "PT60M",
+          "tool": [
+            { "@type": "HowToTool", "name": "Wrench" },
+            { "@type": "HowToTool", "name": "Replacement brass float valve (Foset 1/2\" 200 PSI recommended)" }
+          ],
+          "step": [
+            {
+              "@type": "HowToStep",
+              "position": 1,
+              "name": "Shut off the supply line",
+              "text": "Close the water supply valve feeding the cistern to stop flow before opening the tank."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 2,
+              "name": "Drain cistern to working level",
+              "text": "Allow the cistern to drain down enough to comfortably access the water inlet at the top of the tank."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 3,
+              "name": "Remove the old float valve",
+              "text": "Unthread the existing float valve from the inlet fitting. Plastic valves are usually hand-tight; older installations may require a wrench."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 4,
+              "name": "Install the new brass float valve",
+              "text": "Thread the new valve into the inlet fitting and tighten securely so there is no drip at the connection. For Cabo's mineral-rich water, a brass valve rated to 200 PSI is recommended over plastic."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 5,
+              "name": "Adjust the float arm to the correct fill level",
+              "text": "Bend or adjust the float arm so the valve closes when the water reaches the correct fill height — too high and it overflows, too low and the household runs short."
+            },
+            {
+              "@type": "HowToStep",
+              "position": 6,
+              "name": "Restore supply and confirm shutoff",
+              "text": "Open the supply valve, allow the cistern to fill to full, and confirm the float valve closes completely at the set level with no dripping or overflow."
+            }
+          ]
+        })}}
+      />
     </>
   );
 }
