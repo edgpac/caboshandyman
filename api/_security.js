@@ -112,7 +112,7 @@ function validateHistory(history) {
     }));
 }
 
-module.exports = {
+export {
   checkOrigin,
   rateLimit,
   getClientIp,

@@ -956,42 +956,34 @@ Respond ONLY with valid JSON (no markdown):
   }
 }`;
 
-    console.log('Calling Groq API...');
+    console.log('Calling Claude API...');
 
-    const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const claudeAnalysisResponse = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
-        messages: [
-          {
-            role: 'system',
-            content: 'You are an expert contractor cost estimator. TOP PRIORITIES: (1) CRITICAL: Differentiate simple clogs ($60 service call) from professional drain cleaning ($150-400). Simple clogs = toilet clogs, sink clogs, shower drains - these are $60 with labor_hours=0.5-1.0. Only mention drain cleaning if customer asks about jetting, main line, tree roots, or ALL drains backing up. (2) Correctly identify quick tasks like doorknobs, switches, picture hanging - labor_hours=0.5-1.0 and is_quick_task=true. Reference service menu durations. Most clogs = $60, NOT drain cleaning! Respond with ONLY valid JSON.'
-          },
-          {
-            role: 'user',
-            content: prompt
-          }
-        ],
+        model: 'claude-haiku-4-5-20251001',
+        system: 'You are an expert contractor cost estimator. TOP PRIORITIES: (1) CRITICAL: Differentiate simple clogs ($60 service call) from professional drain cleaning ($150-400). Simple clogs = toilet clogs, sink clogs, shower drains - these are $60 with labor_hours=0.5-1.0. Only mention drain cleaning if customer asks about jetting, main line, tree roots, or ALL drains backing up. (2) Correctly identify quick tasks like doorknobs, switches, picture hanging - labor_hours=0.5-1.0 and is_quick_task=true. Reference service menu durations. Most clogs = $60, NOT drain cleaning! Respond with ONLY valid JSON, no markdown code blocks.',
+        messages: [{ role: 'user', content: prompt }],
         temperature: 0.3,
-        max_tokens: 1500,
-        response_format: { type: "json_object" }
+        max_tokens: 1500
       })
     });
 
-    if (!groqResponse.ok) {
-      console.error('Groq API Error:', groqResponse.status);
-      throw new Error(`Groq API failed: ${groqResponse.status}`);
+    if (!claudeAnalysisResponse.ok) {
+      console.error('Claude API Error:', claudeAnalysisResponse.status);
+      throw new Error(`Claude API failed: ${claudeAnalysisResponse.status}`);
     }
 
-    const groqData = await groqResponse.json();
-    const groqContent = groqData.choices[0]?.message?.content;
+    const claudeAnalysisData = await claudeAnalysisResponse.json();
+    const groqContent = claudeAnalysisData.content?.[0]?.text;
 
     if (!groqContent) {
-      throw new Error('No content from Groq API');
+      throw new Error('No content from Claude API');
     }
 
     let groqAnalysis;
@@ -1000,7 +992,7 @@ Respond ONLY with valid JSON (no markdown):
       groqAnalysis = JSON.parse(cleanedContent);
     } catch (parseError) {
       console.error('JSON Parse Error:', parseError);
-      throw new Error('Invalid JSON from Groq');
+      throw new Error('Invalid JSON from Claude');
     }
 
     // ========================================
