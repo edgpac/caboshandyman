@@ -158,7 +158,7 @@ export default function PropertyCarePlans() {
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start gap-2">
                     <span className="text-red-600 font-bold">•</span>
-                    <span>$60-$150 per service call adds up quickly</span>
+                    <span>$60-$150 per diagnostic visit adds up quickly</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-red-600 font-bold">•</span>

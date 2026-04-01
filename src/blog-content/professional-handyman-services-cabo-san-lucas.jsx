@@ -156,7 +156,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       </p>
       <ul>
         <li>Free estimates for project work</li>
-        <li><strong>$60 USD service call</strong> includes diagnosis and first hour of labor</li>
+        <li><strong>$60 USD diagnostic visit</strong> includes diagnosis and first hour of labor</li>
         <li>No hidden fees or surprise charges</li>
         <li>Written quotes for larger projects</li>
       </ul>
@@ -248,7 +248,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
         Understanding pricing helps you budget for maintenance and improvements:
       </p>
       <p>
-        <strong>Service Call:</strong> $60 USD includes diagnosis and first hour of labor
+        <strong>Diagnostic Visit:</strong> $60 USD includes diagnosis and first hour of labor
       </p>
       <p>
         <strong>Typical Project Ranges:</strong>

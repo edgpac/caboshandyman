@@ -262,11 +262,11 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
         <li><strong>Same rates</strong> — No after-hours premium for members</li>
       </ul>
 
-      <h2>Pricing and Service Call Information</h2>
+      <h2>Pricing and Diagnostic Visit Information</h2>
 
-      <h3>Standard Service Call</h3>
+      <h3>Standard Diagnostic Visit</h3>
       <p>
-        <strong>$60 USD service call</strong> includes:
+        <strong>$60 USD diagnostic visit</strong> includes:
       </p>
       <ul>
         <li>Professional diagnosis of your plumbing problem</li>

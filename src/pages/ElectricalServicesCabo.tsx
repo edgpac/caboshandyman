@@ -69,7 +69,7 @@ export default function ElectricalServicesCabo() {
     <>
       <SEO
         title="Electrical Services Cabo San Lucas | Licensed Electrician | Cabos Handyman"
-        description="Professional electrical services in Cabo San Lucas. Outlets, lighting, ceiling fans, panel upgrades. Licensed electricians available 24/7. Starting at $60 service call."
+        description="Professional electrical services in Cabo San Lucas. Outlets, lighting, ceiling fans, panel upgrades. Licensed electricians available 24/7. Starting at $60 diagnostic visit."
         canonicalUrl="/electrical-services-cabo"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -176,7 +176,7 @@ export default function ElectricalServicesCabo() {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Complete Electrical Services & Pricing</h2>
             <p className="text-center text-gray-600 mb-8 text-lg">
-              Transparent pricing for all electrical services. $60 service call includes first hour of labor.
+              Transparent pricing for all electrical services. $60 diagnostic visit includes first hour of labor.
             </p>
 
             {/* Basic Electrical Services */}

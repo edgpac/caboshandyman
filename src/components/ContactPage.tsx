@@ -194,14 +194,14 @@ const ContactPage = () => {
                   </div>
                 </div>
 
-                {/* Service Call Info */}
+                {/* Diagnostic Visit Info */}
                 <div className="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-xl border-2 border-teal-200">
                   <h3 className="text-xl font-bold mb-3 text-gray-900 flex items-center gap-2">
                     <Wrench className="w-5 h-5 text-teal-600" />
-                    Service Call Information
+                    Diagnostic Visit Information
                   </h3>
                   <p className="text-gray-700 mb-2">
-                    <strong className="text-teal-700">$60 USD</strong> service call includes:
+                    <strong className="text-teal-700">$60 USD</strong> diagnostic visit includes:
                   </p>
                   <ul className="text-sm text-gray-700 space-y-1 ml-4">
                     <li>✓ Professional diagnosis</li>

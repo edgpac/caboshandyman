@@ -323,7 +323,7 @@ export default function FurnitureAssemblyCabo() {
             <div className="bg-gradient-to-br from-orange-50 to-yellow-50 rounded-xl p-8 max-w-2xl mx-auto border border-orange-200">
               <div className="text-center mb-6">
                 <div className="text-5xl font-bold text-orange-600 mb-2">$60</div>
-                <p className="text-gray-600">Service call includes diagnosis and first hour of assembly</p>
+                <p className="text-gray-600">Diagnostic visit includes diagnosis and first hour of assembly</p>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2">

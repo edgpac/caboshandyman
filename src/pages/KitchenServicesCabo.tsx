@@ -165,7 +165,7 @@ export default function KitchenServicesCabo() {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Complete Kitchen Services & Pricing</h2>
             <p className="text-center text-gray-600 mb-8 text-lg">
-              Transparent pricing for all kitchen services. $60 service call includes first hour of labor.
+              Transparent pricing for all kitchen services. $60 diagnostic visit includes first hour of labor.
             </p>
 
             {/* Plumbing Services */}
@@ -366,7 +366,7 @@ export default function KitchenServicesCabo() {
                   <DollarSign className="text-orange-600" size={32} />
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2">Transparent Pricing</h3>
-                <p className="text-gray-600 text-sm">Written estimates, no hidden fees, $60 service call includes first hour</p>
+                <p className="text-gray-600 text-sm">Written estimates, no hidden fees, $60 diagnostic visit includes first hour</p>
               </div>
               <div className="text-center">
                 <div className="bg-orange-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">

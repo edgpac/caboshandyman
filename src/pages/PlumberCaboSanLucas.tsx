@@ -476,7 +476,7 @@ export default function PlumberCaboSanLucas() {
             <div className="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl p-8 max-w-2xl mx-auto border border-cyan-200">
               <div className="text-center mb-6">
                 <div className="text-5xl font-bold text-cyan-600 mb-2">$60</div>
-                <p className="text-gray-600">Service call includes diagnosis and first hour of work for most issues</p>
+                <p className="text-gray-600">Diagnostic visit includes diagnosis and first hour of work for most issues</p>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2">
@@ -576,7 +576,7 @@ export default function PlumberCaboSanLucas() {
                 {openQuestion === 'faq2' && (
                   <div className="px-6 pb-6 text-gray-700 leading-relaxed">
                     <p className="mb-3">
-                      Our plumbing service starts at <strong>$60</strong>, which includes the service call, diagnosis, and the first hour of labor. This transparent pricing ensures you know what you're paying upfront with no hidden fees.
+                      Our plumbing service starts at <strong>$60</strong>, which includes the diagnostic visit, diagnosis, and the first hour of labor. This transparent pricing ensures you know what you're paying upfront with no hidden fees.
                     </p>
                     <p className="mb-3">
                       <strong>Common plumbing costs in Cabo:</strong>

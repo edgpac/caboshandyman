@@ -70,7 +70,7 @@ export default function BathroomServicesCabo() {
     <>
       <SEO
         title="Bathroom Remodeling Cabo San Lucas & Los Cabos | Cabos Handyman"
-        description="Bathroom remodeling contractors in Los Cabos & Cabo San Lucas. Toilet installation, vanity, shower, tile work, and unclogging. 20+ years experience. From $60 service call."
+        description="Bathroom remodeling contractors in Los Cabos & Cabo San Lucas. Toilet installation, vanity, shower, tile work, and unclogging. 20+ years experience. From $60 diagnostic visit."
         canonicalUrl="/bathroom-services-cabo"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -162,7 +162,7 @@ export default function BathroomServicesCabo() {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Complete Bathroom Services & Pricing</h2>
             <p className="text-center text-gray-600 mb-8 text-lg">
-              Transparent pricing for all bathroom services. $60 service call includes first hour of labor.
+              Transparent pricing for all bathroom services. $60 diagnostic visit includes first hour of labor.
             </p>
 
             {/* Plumbing Services */}

@@ -202,7 +202,7 @@ export default function ACCondensationLineCleaningCaboArticle() {
       <p>
         A condensation drain line cleaning combined with filter cleaning typically takes 45–90
         minutes depending on how the unit is installed and how badly the line is blocked. Our
-        standard service call is <strong>$60 USD</strong>, which includes diagnosis and the first
+        standard diagnostic visit is <strong>$60 USD</strong>, which includes diagnosis and the first
         hour of labor. Most drain line cleanings are completed within that window.
       </p>
       <p>
@@ -214,7 +214,7 @@ export default function ACCondensationLineCleaningCaboArticle() {
       <h2>Call Us Before It Becomes Water Damage</h2>
       <p>
         If your mini-split is dripping, or if you can't remember the last time the filters were
-        cleaned, don't wait. A service call now costs a fraction of what drywall repairs,
+        cleaned, don't wait. A diagnostic visit now costs a fraction of what drywall repairs,
         mold remediation, or a compressor replacement will run you later.
       </p>
       <p>

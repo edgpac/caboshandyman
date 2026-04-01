@@ -184,7 +184,7 @@ export default function About() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Transparent Pricing</h3>
                 <p className="text-gray-700">
-                  No surprise bills or hidden fees. We provide clear estimates upfront and communicate openly about costs throughout every project. Service calls start at $60.
+                  No surprise bills or hidden fees. We provide clear estimates upfront and communicate openly about costs throughout every project. Diagnostic visits start at $60.
                 </p>
               </div>
             </div>

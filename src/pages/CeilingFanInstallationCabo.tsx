@@ -342,7 +342,7 @@ export default function CeilingFanInstallationCabo() {
             <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-xl p-8 max-w-2xl mx-auto border border-emerald-200">
               <div className="text-center mb-6">
                 <div className="text-5xl font-bold text-emerald-600 mb-2">$60</div>
-                <p className="text-gray-600">Service call includes first hour of installation</p>
+                <p className="text-gray-600">Diagnostic visit includes first hour of installation</p>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2">

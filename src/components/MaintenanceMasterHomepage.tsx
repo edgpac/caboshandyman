@@ -365,7 +365,7 @@ export default function CabosHandymanHomepage() {
 
               {/* Disclaimer */}
               <div className="text-xs text-gray-700 mt-5 space-y-1">
-                <p>Service calls starting at $60 · Vacation rentals &amp; homes</p>
+                <p>Diagnostic visits from $60 USD · Vacation rentals &amp; homes</p>
               </div>
 
             </div>
@@ -518,7 +518,7 @@ export default function CabosHandymanHomepage() {
 
               {/* Desktop Note */}
               <p className="text-sm text-white/70 mt-6">
-                Handyman service calls starting at $60 for most repairs.
+                Diagnostic visits from $60 USD for most repairs.
               </p>
 
             </div>

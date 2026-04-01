@@ -325,7 +325,7 @@ export default function ToiletTubUncloggingCabo() {
             <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-8 max-w-2xl mx-auto border border-blue-200">
               <div className="text-center mb-6">
                 <div className="text-5xl font-bold text-blue-600 mb-2">$60</div>
-                <p className="text-gray-600">Service call includes first hour of drain cleaning</p>
+                <p className="text-gray-600">Diagnostic visit includes first hour of drain cleaning</p>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2">

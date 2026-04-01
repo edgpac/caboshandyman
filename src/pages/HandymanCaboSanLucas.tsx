@@ -199,7 +199,7 @@ export default function HandymanCaboSanLucas() {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 mb-2">Transparent Pricing</h3>
-                  <p className="text-gray-600">$60 service call includes first hour of labor for most repairs. No hidden fees. Written quotes for larger projects. You know exactly what you're paying.</p>
+                  <p className="text-gray-600">$60 diagnostic visit includes first hour of labor for most repairs. No hidden fees. Written quotes for larger projects. You know exactly what you're paying.</p>
                 </div>
               </div>
             </div>
@@ -484,7 +484,7 @@ export default function HandymanCaboSanLucas() {
             <div className="bg-gradient-to-br from-teal-50 to-blue-50 rounded-xl p-8 max-w-2xl mx-auto border border-teal-200">
               <div className="text-center mb-6">
                 <div className="text-5xl font-bold text-teal-600 mb-2">$60</div>
-                <p className="text-gray-600">Service call includes diagnosis and first hour of labor for most repairs</p>
+                <p className="text-gray-600">Diagnostic visit includes diagnosis and first hour of labor for most repairs</p>
               </div>
               <ul className="space-y-3 mb-6">
                 <li className="flex items-start gap-2">
@@ -551,7 +551,7 @@ export default function HandymanCaboSanLucas() {
                 {openQuestion === 'faq1' && (
                   <div className="px-6 pb-6 text-gray-700 leading-relaxed">
                     <p className="mb-3">
-                      Our standard service call is <strong>$60, which includes the first hour of labor and diagnosis</strong>. For most repairs, this covers the entire job. This transparent pricing means you know exactly what you're paying before we even arrive.
+                      Our standard diagnostic visit is <strong>$60, which includes the first hour of labor and diagnosis</strong>. For most repairs, this covers the entire job. This transparent pricing means you know exactly what you're paying before we even arrive.
                     </p>
                     <p className="mb-3">
                       For larger projects, we provide free written estimates with detailed scope of work. Package pricing is available when you bundle multiple services (furniture assembly + TV mounting + ceiling fan installation, for example).
@@ -771,7 +771,7 @@ export default function HandymanCaboSanLucas() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
-                      <span><strong>1 FREE service call/month</strong> ($60 value)</span>
+                      <span><strong>1 FREE diagnostic visit/month</strong> ($60 value)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-0.5" size={16} />
@@ -821,7 +821,7 @@ export default function HandymanCaboSanLucas() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
-                      <span><strong>2 FREE service calls/month</strong> ($120 value)</span>
+                      <span><strong>2 FREE diagnostic visits/month</strong> ($120 value)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-yellow-300 flex-shrink-0 mt-0.5" size={16} />
@@ -872,7 +872,7 @@ export default function HandymanCaboSanLucas() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
-                      <span><strong>3 FREE service calls/month</strong> ($180 value)</span>
+                      <span><strong>3 FREE diagnostic visits/month</strong> ($180 value)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="text-purple-600 flex-shrink-0 mt-0.5" size={16} />
@@ -947,7 +947,7 @@ export default function HandymanCaboSanLucas() {
                     <p className="font-semibold mb-2">With Premium Property Care:</p>
                     <ul className="space-y-1 ml-4">
                       <li>• Monthly plan: <strong>$199/month</strong> = $2,388/year</li>
-                      <li>• 24 FREE service calls: <strong>$1,440 value</strong></li>
+                      <li>• 24 FREE diagnostic visits: <strong>$1,440 value</strong></li>
                       <li>• 24 FREE drain unclogs: <strong>$1,440 value</strong></li>
                       <li>• Cartridge & screen repairs: <strong>Included</strong></li>
                       <li>• 20% labor discount: <strong>~$240 savings</strong></li>
