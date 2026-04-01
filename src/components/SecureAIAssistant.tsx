@@ -1,6 +1,6 @@
 // Force rebuild - mobile compression fix v3 - WITH FEEDBACK CHAT + CHAT-ONLY MODE + CLICKABLE PHONE
-import React, { useState, useEffect } from 'react';
-import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone, Paperclip, ChevronDown, X } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Camera, Send, Bot, Wrench, AlertCircle, MapPin, DollarSign, Clock, ExternalLink, Loader, Home, Zap, Building, Users, Calendar, MessageCircle, Phone, Paperclip, ChevronDown, X, Mic, MicOff, Volume2, VolumeX } from 'lucide-react';
 import { useIsMobile } from '../hooks/use-mobile';
 
 // Format phone numbers in text to clickable links
@@ -75,6 +75,11 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
   const [feedbackMode, setFeedbackMode] = useState(false);
   const [feedbackInput, setFeedbackInput] = useState('');
   const [feedbackHistory, setFeedbackHistory] = useState([]);
+
+  const [isListening, setIsListening] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(false);
+  const recognitionRef = useRef<any>(null);
 
   const [bookingData, setBookingData] = useState({
     name: '',
@@ -713,6 +718,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       };
 
       setFeedbackHistory([...newFeedbackHistory, aiMessage]);
+      speakText(result.response);
 
     } catch (error) {
       console.error('Feedback chat error:', error);
@@ -721,6 +727,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
         content: 'Sorry, I had trouble processing that. Could you rephrase your question?'
       };
       setFeedbackHistory([...newFeedbackHistory, errorMessage]);
+      speakText('Sorry, I had trouble processing that. Could you rephrase your question?');
     } finally {
       setIsAnalyzing(false);
     }
@@ -864,6 +871,46 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
     setSelectedImages([...selectedImages, ...imageUrls]);
   };
 
+  const startVoiceInput = () => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert('Voice input is not supported in this browser. Please use Chrome or Edge.');
+      return;
+    }
+    if (isListening) {
+      recognitionRef.current?.stop();
+      setIsListening(false);
+      return;
+    }
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+    recognition.onstart = () => setIsListening(true);
+    recognition.onend = () => setIsListening(false);
+    recognition.onerror = () => setIsListening(false);
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setFeedbackInput(transcript);
+    };
+    recognition.start();
+    recognitionRef.current = recognition;
+  };
+
+  const speakText = (text: string) => {
+    if (!voiceEnabled || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const clean = text.replace(/[*_#`>]/g, '').replace(/\n+/g, ' ').substring(0, 500);
+    const utterance = new SpeechSynthesisUtterance(clean);
+    utterance.rate = 1.0;
+    utterance.pitch = 1.05;
+    utterance.volume = 1.0;
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    utterance.onerror = () => setIsSpeaking(false);
+    window.speechSynthesis.speak(utterance);
+  };
+
   if (!assistantIsOpen) {
     if (externalIsOpen !== undefined) {
       return null;
@@ -890,7 +937,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
           className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-6 py-3 rounded-full shadow-2xl flex items-center space-x-2 transition-all duration-300"
         >
           <Wrench size={20} />
-          <span className="font-semibold">Live Support</span>
+          <span className="font-semibold">Ask Eddy</span>
           <div className="w-2 h-2 bg-white rounded-full animate-pulse"></div>
         </button>
       </div>
@@ -908,15 +955,28 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
       {/* UPDATED HEADER WITH MINIMIZE/CLOSE */}
       <div className={`bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white p-4 ${isMobile ? '' : 'rounded-t-2xl'} flex items-center justify-between`}>
         <div className="flex items-center space-x-3">
-          <div className="bg-white p-2 rounded-full">
-            <Wrench size={20} className="text-teal-500" />
+          <div className="relative">
+            <div className={`bg-white p-2 rounded-full ${isSpeaking ? 'ring-2 ring-white ring-offset-2 ring-offset-teal-500' : ''}`}>
+              <Wrench size={20} className="text-teal-500" />
+            </div>
+            {isSpeaking && (
+              <span className="absolute inset-0 rounded-full bg-white/40 animate-ping" />
+            )}
           </div>
           <div>
-            <h3 className="font-bold text-lg">Live Support</h3>
-            <p className="text-xs opacity-90">How can we help you?</p>
+            <h3 className="font-bold text-lg">Eddy</h3>
+            <p className="text-xs opacity-90">{isListening ? '🎤 Listening...' : isSpeaking ? '🔊 Speaking...' : 'Cabos Handyman AI'}</p>
           </div>
         </div>
         <div className="flex items-center space-x-2">
+          <button
+            onClick={() => { setVoiceEnabled(!voiceEnabled); if (voiceEnabled) { window.speechSynthesis?.cancel(); setIsSpeaking(false); } }}
+            className={`p-2 rounded-full transition-colors ${voiceEnabled ? 'bg-white/30' : 'hover:bg-white/20'}`}
+            aria-label={voiceEnabled ? 'Disable voice' : 'Enable voice'}
+            title={voiceEnabled ? 'Voice ON — click to mute' : 'Voice OFF — click to enable'}
+          >
+            {voiceEnabled ? <Volume2 size={18} /> : <VolumeX size={18} />}
+          </button>
           {!isMobile && (
             <button
               onClick={() => setIsMinimized(true)}
@@ -926,7 +986,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               <ChevronDown size={20} />
             </button>
           )}
-          <button 
+          <button
             onClick={handleClose}
             className="hover:bg-white/20 p-2 rounded-full transition-colors"
             aria-label="Close assistant"
@@ -945,10 +1005,10 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 <Wrench size={16} className="text-teal-500" />
               </div>
               <div className="max-w-[85%]">
-                <div className="text-xs text-gray-500 mb-1 ml-1">Cabos Handyman</div>
+                <div className="text-xs text-gray-500 mb-1 ml-1">Eddy</div>
                 <div className="bg-white border border-gray-200 rounded-2xl rounded-bl-none shadow-sm p-3">
-                  <p className="text-sm">Hey there 👋 I'm your Cabos Handyman Assistant.</p>
-                  <p className="text-sm mt-1">What can we help you with?</p>
+                  <p className="text-sm">Hey there 👋 I'm Eddy, your Cabos Handyman assistant.</p>
+                  <p className="text-sm mt-1">What can I help you with today?</p>
                 </div>
               </div>
             </div>
@@ -970,7 +1030,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                   )}
                   <div className={`max-w-[85%] ${msg.role === 'user' ? 'order-1' : 'order-2'}`}>
                     {msg.role === 'assistant' && (
-                      <div className="text-xs text-gray-500 mb-1 ml-1">Cabos Handyman</div>
+                      <div className="text-xs text-gray-500 mb-1 ml-1">Eddy</div>
                     )}
                     <div className={`p-3 rounded-2xl text-sm ${
                       msg.role === 'user'
@@ -1014,7 +1074,7 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
               </div>
             )}
 
-            {/* Input with Paperclip */}
+            {/* Input with Paperclip and Voice */}
             <div className="flex space-x-2">
               <label className="cursor-pointer hover:bg-gray-100 p-2 rounded-full transition-colors flex-shrink-0">
                 <input
@@ -1030,14 +1090,22 @@ ${analysisData.analysis?.time_estimate && analysisData.analysis.time_estimate !=
                 value={feedbackInput}
                 onChange={(e) => setFeedbackInput(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && !isAnalyzing && handleFeedbackChat()}
-                placeholder="Type a message"
-                className={`flex-1 p-3 border-2 border-gray-200 focus:border-teal-400 rounded-full text-sm outline-none transition-colors ${
+                placeholder={isListening ? 'Listening...' : 'Type or speak a message'}
+                className={`flex-1 p-3 border-2 ${isListening ? 'border-red-400 bg-red-50' : 'border-gray-200 focus:border-teal-400'} rounded-full text-sm outline-none transition-colors ${
                   isMobile ? 'text-base' : ''
                 }`}
                 disabled={isAnalyzing}
                 autoFocus
               />
-              <button 
+              <button
+                onClick={startVoiceInput}
+                className={`p-3 rounded-full transition-colors flex-shrink-0 ${isListening ? 'bg-red-500 text-white animate-pulse' : 'hover:bg-gray-100 text-gray-500'}`}
+                aria-label={isListening ? 'Stop listening' : 'Start voice input'}
+                title="Voice input"
+              >
+                {isListening ? <MicOff size={18} /> : <Mic size={18} />}
+              </button>
+              <button
                 onClick={handleFeedbackChat}
                 disabled={!feedbackInput.trim() || isAnalyzing}
                 className="bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 rounded-full transition-colors flex-shrink-0"

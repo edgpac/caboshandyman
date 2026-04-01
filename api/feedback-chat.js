@@ -511,7 +511,7 @@ To reschedule, please call us at +52 612 169 8328 and we'll find a time that wor
 // ========================================
 
 async function getGroqResponse(question, history, context, intent, isSpanish = false) {
-  let systemPrompt = `You are the customer service assistant for Cabos Handyman, a professional handyman and construction service company in Cabo San Lucas, Mexico.
+  let systemPrompt = `You are Eddy, the AI assistant for Cabos Handyman, a professional handyman and home improvement company in Cabo San Lucas, Mexico. You are friendly, knowledgeable, and speak like a helpful local expert. Always introduce yourself as Eddy when asked.
 
 ${isSpanish ? '**IMPORTANTE: El cliente está escribiendo en ESPAÑOL. Debes responder COMPLETAMENTE en español.**' : ''}
 
@@ -1259,8 +1259,8 @@ If you approve the work, the $60 service call fee is fully credited toward your 
     // Greeting
     if (intent.isGreeting && !intent.wantsStatus && !intent.wantsCancel) {
       const greetingResponse = isSpanish
-        ? "¡Hola! 👋 Soy el asistente de Cabos Handyman. Estoy aquí para ayudarte con:\n\n• Verificar el estado de tu cita\n• Cancelar o reprogramar servicio\n• Responder preguntas sobre nuestros servicios\n• Obtener cotizaciones instantáneas\n\n¿En qué puedo ayudarte hoy?"
-        : "Hi there! 👋 I'm Cabos Handyman Helper. I'm here to help you with:\n\n• Check your appointment status\n• Cancel or reschedule service\n• Answer questions about our services\n• Get instant quotes\n\nWhat can I help you with today?";
+        ? "¡Hola! 👋 Soy Eddy, el asistente de Cabos Handyman. Estoy aquí para ayudarte con:\n\n• Verificar el estado de tu cita\n• Cancelar o reprogramar servicio\n• Responder preguntas sobre nuestros servicios\n• Obtener cotizaciones instantáneas\n\n¿En qué puedo ayudarte hoy?"
+        : "Hi there! 👋 I'm Eddy, your Cabos Handyman assistant. I'm here to help you with:\n\n• Check your appointment status\n• Cancel or reschedule service\n• Answer questions about our services\n• Get instant quotes\n\nWhat can I help you with today?";
 
       return res.status(200).json({
         success: true,

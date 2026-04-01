@@ -554,6 +554,54 @@ function generateSmartQuestions(description, detectedItems, vaguenessReason, ser
 }
 
 // ========================================
+// CLAUDE VISION - REPLACES GOOGLE VISION
+// ========================================
+
+async function analyzeImageWithClaude(imageBase64) {
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 256,
+        messages: [{
+          role: 'user',
+          content: [
+            {
+              type: 'image',
+              source: { type: 'base64', media_type: 'image/jpeg', data: imageBase64 }
+            },
+            {
+              type: 'text',
+              text: 'You are analyzing a home repair or maintenance image. List the specific repair issues, damaged components, and conditions you observe. Be specific and concise. Output a comma-separated list of items only. Examples: "leaking faucet, corroded pipe fitting, worn washer" or "cracked drywall, water stain, nail holes" or "broken door hinge, stripped screw holes, misaligned frame".'
+            }
+          ]
+        }]
+      }),
+      signal: AbortSignal.timeout(20000)
+    });
+
+    if (!response.ok) {
+      console.error(`Claude Vision HTTP ${response.status}`);
+      return null;
+    }
+
+    const data = await response.json();
+    const description = data.content?.[0]?.text?.trim() || null;
+    console.log(`Claude Vision result: ${description}`);
+    return description;
+  } catch (err) {
+    console.error('Claude Vision error:', err.message);
+    return null;
+  }
+}
+
+// ========================================
 // GROQ ANALYSIS WITH ENHANCED MULTI-TASK INTELLIGENCE
 // ========================================
 
@@ -564,15 +612,21 @@ async function analyzeWithGroq(description, visionAnnotationsArray = [], service
     if (visionAnnotationsArray && visionAnnotationsArray.length > 0) {
       visionAnnotationsArray.forEach((annotations, imageIndex) => {
         if (!annotations || typeof annotations !== 'object') return;
-        
+
+        // Claude Vision format: { claudeDescription: "leaking faucet, corroded pipe" }
+        if (annotations.claudeDescription) {
+          const items = annotations.claudeDescription.split(',').map(s => s.trim()).filter(Boolean);
+          allDetectedItems.push(...items);
+          return;
+        }
+
+        // Legacy Google Vision format
         const objects = annotations.localizedObjectAnnotations || [];
         const labels = annotations.labelAnnotations || [];
-        
         const imageItems = [
           ...objects.map(obj => obj.name),
           ...labels.map(label => label.description)
         ].filter(Boolean);
-
         allDetectedItems.push(...imageItems);
       });
     }
@@ -1397,14 +1451,14 @@ export default async function handler(req, res) {
       imageSizes: images.map(img => `${Math.round(img.length * 0.75 / 1024)}KB`)
     });
 
-    // Process images with error handling
+    // Process images with Claude Vision
     const visionAnnotations = [];
     let visionErrors = 0;
-    
+
     for (let i = 0; i < images.length; i++) {
       try {
         let imageBase64 = images[i];
-        
+
         if (imageBase64.includes('base64,')) {
           imageBase64 = imageBase64.split('base64,')[1];
         } else if (imageBase64.startsWith('data:')) {
@@ -1412,58 +1466,30 @@ export default async function handler(req, res) {
           visionErrors++;
           continue;
         }
-        
+
         if (!imageBase64 || imageBase64.length < 100) {
           console.error(`Image ${i + 1}: Base64 string too short or empty`);
           visionErrors++;
           continue;
         }
-        
-        console.log(`Processing image ${i + 1}/${images.length} (${Math.round(imageBase64.length * 0.75 / 1024)}KB)...`);
-        
-        const visionResponse = await fetch(
-          `https://vision.googleapis.com/v1/images:annotate?key=${process.env.GOOGLE_CLOUD_VISION_API_KEY}`,
-          {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              requests: [{
-                image: { content: imageBase64 },
-                features: [
-                  { type: 'LABEL_DETECTION', maxResults: 10 },
-                  { type: 'OBJECT_LOCALIZATION', maxResults: 10 },
-                  { type: 'TEXT_DETECTION', maxResults: 5 }
-                ]
-              }]
-            }),
-            signal: AbortSignal.timeout(15000)
-          }
-        );
 
-        if (visionResponse.ok) {
-          const visionData = await visionResponse.json();
-          
-          if (visionData.responses && visionData.responses[0]) {
-            if (visionData.responses[0].error) {
-              console.error(`Vision API error for image ${i + 1}:`, visionData.responses[0].error);
-              visionErrors++;
-            } else {
-              visionAnnotations.push(visionData.responses[0]);
-              console.log(`Image ${i + 1} processed successfully`);
-            }
-          }
+        console.log(`Processing image ${i + 1}/${images.length} with Claude Vision (${Math.round(imageBase64.length * 0.75 / 1024)}KB)...`);
+
+        const claudeDescription = await analyzeImageWithClaude(imageBase64);
+
+        if (claudeDescription) {
+          visionAnnotations.push({ claudeDescription });
+          console.log(`Image ${i + 1} processed successfully`);
         } else {
-          const errorText = await visionResponse.text().catch(() => 'Unknown error');
-          console.error(`Vision API HTTP ${visionResponse.status} for image ${i + 1}:`, errorText);
           visionErrors++;
         }
-      } catch (visionError) {
-        console.error(`Error processing image ${i + 1}:`, visionError.message);
+      } catch (err) {
+        console.error(`Error processing image ${i + 1}:`, err.message);
         visionErrors++;
       }
     }
 
-    console.log(`Vision: ${visionAnnotations.length} success, ${visionErrors} errors`);
+    console.log(`Claude Vision: ${visionAnnotations.length} success, ${visionErrors} errors`);
 
     const analysis = await analyzeWithGroq(
       description,
