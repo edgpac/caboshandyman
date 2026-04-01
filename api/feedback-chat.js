@@ -1119,16 +1119,17 @@ Example: "🚨 STOP! Your ${context.emergencyType || 'issue'} can cause THOUSAND
   }
 
   try {
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.GROQ_API_KEY}`,
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'claude-haiku-4-5-20251001',
+        system: systemPrompt,
         messages: [
-          { role: 'system', content: systemPrompt },
           ...validateHistory(history),
           { role: 'user', content: question.slice(0, MAX_MESSAGE_LENGTH) }
         ],
@@ -1138,9 +1139,9 @@ Example: "🚨 STOP! Your ${context.emergencyType || 'issue'} can cause THOUSAND
     });
 
     const data = await response.json();
-    return data.choices[0]?.message?.content || 'I\'m here to help! What can I assist you with?';
+    return data.content?.[0]?.text || 'I\'m here to help! What can I assist you with?';
   } catch (error) {
-    console.error('Groq failed:', error);
+    console.error('Claude chat failed:', error);
     return 'I\'m having a technical issue. Please call +52 612 169 8328 for immediate assistance.';
   }
 }
