@@ -1129,10 +1129,7 @@ Example: "🚨 STOP! Your ${context.emergencyType || 'issue'} can cause THOUSAND
       body: JSON.stringify({
         model: 'claude-haiku-4-5-20251001',
         system: systemPrompt,
-        messages: [
-          ...validateHistory(history),
-          { role: 'user', content: question.slice(0, MAX_MESSAGE_LENGTH) }
-        ],
+        messages: validateHistory(history),
         temperature: 0.7,
         max_tokens: 300
       })
