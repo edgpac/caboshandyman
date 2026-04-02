@@ -91,7 +91,7 @@ export default function About() {
           <div className="prose prose-lg max-w-none mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
             <p className="text-xl text-gray-700 leading-relaxed">
-              Cabos Handyman was founded in 2019 to bring reliable, professional handyman and home improvement services to Cabo San Lucas and the surrounding Los Cabos area. While the company is young, the experience behind it is anything but. With over 20 years of hands-on expertise, our founder saw a gap in the market: property owners in Cabo needed a trustworthy, bilingual service provider who could handle everything from a simple repair to a full renovation.
+              Cabos Handyman was founded in 2019 to bring reliable, professional handyman and home improvement services to Cabo San Lucas and the surrounding Los Cabos area. While the company is young, the experience behind it is anything but. With over 20 years of hands-on expertise, our founder saw a gap in the market: property owners in Cabo needed a trustworthy, bilingual handyman service — one that could handle everything from a quick fix to a large-scale property improvement.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               Since opening our doors, we've completed over 600 projects for homeowners, vacation rental managers, commercial property owners, and expats throughout Baja California Sur. Our growth has been built entirely on word-of-mouth referrals and repeat customers, which tells us we're doing something right.
@@ -164,7 +164,7 @@ export default function About() {
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Full-Service Capabilities</h3>
                 <p className="text-gray-700">
-                  From plumbing and electrical to full renovations and commercial buildouts — one trusted team for everything. No need to coordinate multiple contractors.
+                  From plumbing and electrical to property upgrades and commercial maintenance — one trusted handyman team for everything. No need to coordinate multiple contractors.
                 </p>
               </div>
 
@@ -203,7 +203,7 @@ export default function About() {
               <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Full-Time Residents</h3>
                 <p className="text-gray-600">
-                  From routine home repairs to major renovations, we're your go-to team. Predictable pricing with Property Care Plans gives you peace of mind and priority service when you need it.
+                  From routine home repairs to major property improvements, we're your go-to team. Predictable pricing with Property Care Plans gives you peace of mind and priority service when you need it.
                 </p>
               </div>
               <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
@@ -215,7 +215,7 @@ export default function About() {
               <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
                 <h3 className="text-xl font-bold text-gray-900 mb-3">Commercial Properties</h3>
                 <p className="text-gray-600">
-                  Restaurants, offices, retail spaces, and HOA facilities. We handle commercial buildouts, ongoing maintenance, and emergency repairs to keep your business running smoothly.
+                  Restaurants, offices, retail spaces, and HOA facilities. We handle commercial repairs, tenant improvements, ongoing maintenance, and emergency fixes to keep your business running smoothly.
                 </p>
               </div>
             </div>
@@ -225,7 +225,7 @@ export default function About() {
           <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl p-8 md:p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Work With Us?</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              Whether it's a quick repair or a full renovation, we'd love to hear about your project. Call us for a free estimate or reach out online.
+              Whether it's a quick repair or a full property upgrade, we'd love to hear about your project. Call us for a free estimate or reach out online.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
