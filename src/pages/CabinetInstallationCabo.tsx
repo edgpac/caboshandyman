@@ -16,6 +16,7 @@ export default function CabinetInstallationCabo() {
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
         geoPosition="22.8866974;-109.9139710"
+        noindex={true}
       />
       <Navigation />
 

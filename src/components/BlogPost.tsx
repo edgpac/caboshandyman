@@ -13,6 +13,7 @@ type Post = {
   author?: string;
   image?: string;
   imageCaption?: string;
+  noindex?: boolean;
 };
 
 function estimateReadTime(): string {
@@ -54,6 +55,7 @@ export default function BlogPost() {
         title={`${post.title} | Cabos Handyman`}
         description={post.description}
         canonicalUrl={`/blog/${post.slug}`}
+        noindex={post.noindex}
       />
 
       <div className="min-h-screen bg-white">

@@ -57,6 +57,7 @@ export default function TVMountingCabo() {
         geoPlacename="Cabo San Lucas"
         geoPosition="22.8866974;-109.9139710"
         schemaMarkup={schemaMarkup}
+        noindex={true}
       />
       <Navigation />
 

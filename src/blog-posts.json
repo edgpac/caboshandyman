@@ -64,6 +64,7 @@
   "category": "Emergency Services",
   "author": "Cabos Handyman",
   "image": "/Blogs/Plumbing02.png",
-  "imageCaption": "A Cabos Handyman technician on-site for an emergency plumbing call in Cabo San Lucas."
+  "imageCaption": "A Cabos Handyman technician on-site for an emergency plumbing call in Cabo San Lucas.",
+  "noindex": true
 }
 ]
