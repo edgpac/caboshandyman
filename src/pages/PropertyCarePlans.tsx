@@ -2,6 +2,7 @@ import { lazy, useState } from 'react';
 import SEO from '@/components/SEO';
 import { Shield, CheckCircle2, ArrowRight, Home, Wrench, Clock, Calendar, DollarSign, Phone, ChevronDown } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import PropertyPlanReviews from '@/components/PropertyPlanReviews';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -474,6 +475,8 @@ export default function PropertyCarePlans() {
                 </div>
               </div>
             </div>
+
+            <PropertyPlanReviews />
 
             {/* Build Your Own / Servicio por Proyecto */}
             <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-xl p-8 mb-8 text-white">
