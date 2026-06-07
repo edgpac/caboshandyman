@@ -187,9 +187,9 @@ export default function ReviewsCarousel() {
                 className="review-card flex-shrink-0 w-[420px] bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300"
               >
                 {/* Main Review Card */}
-                <div className="p-8">
+                <div className="p-5">
                   {/* Stars + Google icon */}
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center justify-between mb-3">
                     <div className="flex gap-1">
                       {[...Array(review.rating)].map((_, i) => (
                         <Star
@@ -210,12 +210,12 @@ export default function ReviewsCarousel() {
                   </div>
 
                   {/* Review Text */}
-                  <p className="text-gray-900 text-base leading-relaxed mb-6">
+                  <p className="text-gray-900 text-base leading-relaxed mb-3">
                     {review.text}
                   </p>
 
                   {/* Reviewer Info */}
-                  <div className="border-t border-gray-200 pt-4 mb-4">
+                  <div className="border-t border-gray-200 pt-3 mb-3">
                     <p className="font-bold text-gray-900 text-lg">
                       {review.name}
                     </p>
@@ -226,7 +226,7 @@ export default function ReviewsCarousel() {
                 </div>
 
                 {/* Owner Response */}
-                <div className="bg-gray-50 px-8 py-6 border-t border-gray-200">
+                <div className="bg-gray-50 px-5 py-4 border-t border-gray-200">
                   <div className="flex items-start gap-3">
                     <div className="flex-shrink-0">
                       <img
