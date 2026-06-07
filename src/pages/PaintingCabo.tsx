@@ -115,24 +115,23 @@ export default function PaintingCabo() {
 
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 max-w-5xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">Painting Pricing Guide</h2>
-          <p className="text-gray-500 text-center mb-10">Rates are per m² — square footage available on request. Final price depends on surface condition, coats needed, and paint supplied.</p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">How We Price Painting</h2>
+          <p className="text-gray-500 text-center mb-10">All painting services are priced per m². Final price depends on surface condition, number of coats, and whether paint is supplied.</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { label: "Interior Walls", from: "$18", unit: "per m²", note: "1–2 coats, standard finish", color: "border-rose-300" },
-              { label: "Exterior Walls", from: "$22", unit: "per m²", note: "Weather-resistant paint included", color: "border-orange-300" },
-              { label: "Ceiling", from: "$20", unit: "per m²", note: "Flat or semi-gloss finish", color: "border-pink-300" },
-              { label: "Wall Repair + Repaint", from: "$28", unit: "per m²", note: "Crack/hole fill, sand, 2 coats", color: "border-red-300" },
-            ].map(({ label, from, unit, note, color }) => (
+              { label: "Interior Walls", note: "1–2 coats, standard finish", color: "border-rose-300" },
+              { label: "Exterior Walls", note: "Weather-resistant paint for Cabo climate", color: "border-orange-300" },
+              { label: "Ceiling", note: "Flat or semi-gloss finish", color: "border-pink-300" },
+              { label: "Wall Repair + Repaint", note: "Crack/hole fill, sand, 2 coats", color: "border-red-300" },
+            ].map(({ label, note, color }) => (
               <div key={label} className={`bg-white rounded-xl border-2 ${color} p-6 text-center shadow-sm`}>
-                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">{label}</p>
-                <p className="text-4xl font-bold text-gray-900">{from}</p>
-                <p className="text-sm text-gray-500 mb-3">{unit}</p>
+                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">{label}</p>
+                <p className="text-lg font-bold text-gray-900 mb-2">Priced per m²</p>
                 <p className="text-xs text-gray-400">{note}</p>
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-gray-400 mt-6">All prices in USD. Minimum job applies. <a href="/contact" className="text-rose-500 font-semibold hover:underline">Get a free estimate →</a></p>
+          <p className="text-center text-sm text-gray-400 mt-6">Call or message for a free estimate — we'll measure and quote on the spot. <a href="/contact" className="text-rose-500 font-semibold hover:underline">Contact us →</a></p>
         </div>
       </section>
 

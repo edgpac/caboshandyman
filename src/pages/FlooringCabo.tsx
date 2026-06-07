@@ -117,24 +117,23 @@ export default function FlooringCabo() {
 
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-6 max-w-5xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">Flooring Pricing Guide</h2>
-          <p className="text-gray-500 text-center mb-10">Labor rates per m² — material cost not included. Final price depends on pattern complexity, subfloor condition, and tile size.</p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">How We Price Flooring</h2>
+          <p className="text-gray-500 text-center mb-10">All flooring installation is priced per m². Final price depends on tile size, pattern complexity, and subfloor condition.</p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { label: "Standard Tile", from: "$22", unit: "per m² labor", note: "Ceramic / porcelain up to 60×60", color: "border-amber-300" },
-              { label: "Large Format Tile", from: "$30", unit: "per m² labor", note: "80×80, 120×60, rectified edges", color: "border-orange-300" },
-              { label: "Vinyl Plank (LVP)", from: "$18", unit: "per m² labor", note: "Click-lock or glue-down install", color: "border-yellow-300" },
-              { label: "Old Floor Removal", from: "$10", unit: "per m²", note: "Demo, haul-away, subfloor prep", color: "border-red-300" },
-            ].map(({ label, from, unit, note, color }) => (
+              { label: "Standard Tile", note: "Ceramic / porcelain up to 60×60", color: "border-amber-300" },
+              { label: "Large Format Tile", note: "80×80, 120×60, rectified edges", color: "border-orange-300" },
+              { label: "Vinyl Plank (LVP)", note: "Click-lock or glue-down install", color: "border-yellow-300" },
+              { label: "Old Floor Removal", note: "Demo, haul-away, subfloor prep", color: "border-red-300" },
+            ].map(({ label, note, color }) => (
               <div key={label} className={`bg-white rounded-xl border-2 ${color} p-6 text-center shadow-sm`}>
-                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">{label}</p>
-                <p className="text-4xl font-bold text-gray-900">{from}</p>
-                <p className="text-sm text-gray-500 mb-3">{unit}</p>
+                <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">{label}</p>
+                <p className="text-lg font-bold text-gray-900 mb-2">Priced per m²</p>
                 <p className="text-xs text-gray-400">{note}</p>
               </div>
             ))}
           </div>
-          <p className="text-center text-sm text-gray-400 mt-6">All prices in USD. Minimum job applies. <a href="/contact" className="text-amber-600 font-semibold hover:underline">Get a free estimate →</a></p>
+          <p className="text-center text-sm text-gray-400 mt-6">Call or message for a free estimate — we'll measure and quote on the spot. <a href="/contact" className="text-amber-600 font-semibold hover:underline">Contact us →</a></p>
         </div>
       </section>
 
