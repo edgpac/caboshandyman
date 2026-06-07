@@ -21,6 +21,8 @@ const WORK_IMAGES: { file: string; alt: string }[] = [
   { file: 'image13.png',  alt: 'Before and after kitchen renovation completed by Cabos Handyman in Cabo San Lucas' },
   { file: 'image14.png',  alt: 'Modern open-plan kitchen and living room with island and TV wall completed in Cabo San Lucas' },
   { file: 'image15.jpeg', alt: 'Cabos Handyman technician arriving at job site carrying tools in Cabo San Lucas' },
+  { file: 'ch-plumbing.webp', alt: 'Cabos Handyman plumber repairing outdoor sink plumbing in Los Cabos' },
+  { file: 'ch-electrical.webp', alt: 'Cabos Handyman electrician working on electrical outlet in Cabo San Lucas' },
   { file: 'image16.jpeg', alt: 'TV bracket and floating media shelf installed ready for TV mounting in Cabo San Lucas' },
   { file: 'image17.jpeg', alt: 'Cabos Handyman team installing pendant ceiling light fixture in Cabo San Lucas' },
   { file: 'image18.jpeg', alt: 'Glass globe pendant light installed on ceiling in Cabo San Lucas property' },
@@ -36,6 +38,8 @@ const WORK_IMAGES: { file: string; alt: string }[] = [
   { file: 'image28.jpeg', alt: 'Under-sink drain P-trap and plumbing connections installed in Cabo San Lucas' },
   { file: 'image29.jpeg', alt: 'Cabos Handyman plumber clearing toilet clog with auger in Cabo San Lucas' },
   { file: 'image30.jpeg', alt: 'Cabos Handyman team sourcing materials at local hardware store in Cabo San Lucas' },
+  { file: 'ch-painting.webp', alt: 'Cabos Handyman painter rolling interior walls in Cabo San Lucas property' },
+  { file: 'ch-masonry.webp', alt: 'Cabos Handyman technician doing stucco masonry wall repair in Los Cabos' },
   { file: 'image31.png',  alt: 'Cabos Handyman technician assembling sofa furniture in Cabo San Lucas property' },
   { file: 'image32.png',  alt: 'Cabos Handyman technician repairing under-sink kitchen plumbing in Cabo San Lucas' },
   { file: 'image33.png',  alt: 'Cabos Handyman technician holding mini-split AC filter during maintenance in Cabo San Lucas' },
@@ -51,6 +55,8 @@ const WORK_IMAGES: { file: string; alt: string }[] = [
   { file: 'image43.png',  alt: 'Kitchen cabinetry work completed by Cabos Handyman in Cabo San Lucas' },
   { file: 'image44.png',  alt: 'Living room with ceiling fan and custom wall art installed by Cabos Handyman in Cabo San Lucas' },
   { file: 'image45.png',  alt: 'Cabos Handyman technician using drill for wall installation in Cabo San Lucas' },
+  { file: 'ch-drywall.webp', alt: 'Cabos Handyman technician on ladder doing drywall plastering in Cabo San Lucas' },
+  { file: 'ch-ceiling-repair.webp', alt: 'Cabos Handyman technician repairing ceiling damage in Los Cabos property' },
   { file: 'image46.jpeg', alt: 'Completed bedroom with ceiling fan and framed wall art installed by Cabos Handyman in Cabo San Lucas' },
   { file: 'image47.png',  alt: 'Cabos Handyman team hanging framed artwork above bed in Cabo San Lucas property' },
   { file: 'image48.jpeg', alt: 'Completed bedroom with ceiling fan and triptych wall art installed by Cabos Handyman in Cabo San Lucas' },
@@ -109,10 +115,10 @@ function ServiceSection({ title, intro, children }: SectionProps) {
   );
 }
 
-const ROW1 = WORK_IMAGES.slice(0, 15);
-const ROW2 = WORK_IMAGES.slice(15, 30);
-const ROW3 = WORK_IMAGES.slice(30, 45);
-const ROW4 = WORK_IMAGES.slice(45);
+const ROW1 = WORK_IMAGES.slice(0, 17);
+const ROW2 = WORK_IMAGES.slice(17, 34);
+const ROW3 = WORK_IMAGES.slice(34, 51);
+const ROW4 = WORK_IMAGES.slice(51);
 
 const TILE_SIZE = 160;
 const TILE_GAP = 6;
