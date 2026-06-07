@@ -356,6 +356,19 @@ export default function ServicesPage() {
             <ServiceCard to="/pantry-shelving-cabo-san-lucas" icon={<Home className="text-amber-600" size={28} />} title="Pantry Shelving" desc="Pantry, closet, wall, and built-in shelving" accent="hover:border-amber-400" />
           </ServiceSection>
 
+          {/* ── REMODELING & FLOORING ── */}
+          <ServiceSection
+            title="Remodeling & Flooring"
+            intro="Full kitchen and bathroom remodels, custom cabinetry, flooring, and painting — priced by the job or per square meter."
+          >
+            <ServiceCard to="/kitchen-services-cabo" icon={<Wrench className="text-orange-500" size={28} />} title="Kitchen Remodeling" desc="Full kitchen remodel, cabinets, countertops, tile" accent="hover:border-orange-300" />
+            <ServiceCard to="/bathroom-services-cabo" icon={<Wrench className="text-blue-500" size={28} />} title="Bathroom Remodeling" desc="Shower, tile, fixtures, vanity, full reno" accent="hover:border-blue-300" />
+            <ServiceCard to="/flooring-cabo-san-lucas" icon={<Wrench className="text-amber-600" size={28} />} title="Flooring Installation" desc="Tile, porcelain, vinyl plank — priced per m²" accent="hover:border-amber-300" />
+            <ServiceCard to="/cabinet-installation-cabo-san-lucas" icon={<Wrench className="text-green-600" size={28} />} title="Custom Cabinetry" desc="Custom, flat-pack, IKEA, built-in storage" accent="hover:border-green-300" />
+            <ServiceCard to="/painting-cabo-san-lucas" icon={<Wrench className="text-rose-500" size={28} />} title="Painting" desc="Interior, exterior, ceiling — priced per m²" accent="hover:border-rose-300" />
+            <ServiceCard to="/tile-installation-cabo-san-lucas" icon={<Wrench className="text-stone-500" size={28} />} title="Tile Installation" desc="Floor, wall, backsplash, shower tile" accent="hover:border-stone-400" />
+          </ServiceSection>
+
           {/* ── BATHROOM ── */}
           <ServiceSection
             title="Bathroom"

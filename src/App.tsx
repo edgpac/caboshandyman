@@ -53,6 +53,7 @@ const CommonAreaLightingCabo = lazy(() => import("./pages/CommonAreaLightingCabo
 const DoorLockReplacementCabo = lazy(() => import("./pages/DoorLockReplacementCabo"));
 const WindowRepairCabo = lazy(() => import("./pages/WindowRepairCabo"));
 const PaintingCabo = lazy(() => import("./pages/PaintingCabo"));
+const FlooringCabo = lazy(() => import("./pages/FlooringCabo"));
 const WaterLeakDetectorCabo = lazy(() => import("./pages/WaterLeakDetectorCabo"));
 const CommercialSinkCabo = lazy(() => import("./pages/CommercialSinkCabo"));
 const BoothInstallationCabo = lazy(() => import("./pages/BoothInstallationCabo"));
@@ -131,6 +132,7 @@ const App = () => {
               <Route path="/door-lock-replacement-cabo-san-lucas" element={<DoorLockReplacementCabo />} />
               <Route path="/window-repair-cabo-san-lucas" element={<WindowRepairCabo />} />
               <Route path="/painting-cabo-san-lucas" element={<PaintingCabo />} />
+              <Route path="/flooring-cabo-san-lucas" element={<FlooringCabo />} />
               <Route path="/water-leak-detector-cabo-san-lucas" element={<WaterLeakDetectorCabo />} />
               <Route path="/commercial-sink-installation-cabo-san-lucas" element={<CommercialSinkCabo />} />
               <Route path="/booth-installation-cabo-san-lucas" element={<BoothInstallationCabo />} />
