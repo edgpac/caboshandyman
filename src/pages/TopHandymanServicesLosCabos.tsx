@@ -269,18 +269,18 @@ export default function TopHandymanServicesLosCabos() {
           <p className="text-center text-slate-500 mb-8">Photos from actual jobs completed across Los Cabos.</p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
-              { src: "/service-sections/ch-plumbing.webp", alt: "Plumbing repair by Cabos Handyman in Los Cabos" },
-              { src: "/service-sections/ch-electrical.webp", alt: "Electrical work by Cabos Handyman in Cabo San Lucas" },
-              { src: "/service-sections/ch-painting.webp", alt: "Interior painting by Cabos Handyman Los Cabos" },
-              { src: "/service-sections/ch-masonry.webp", alt: "Masonry and stucco repair by Cabos Handyman" },
-              { src: "/service-sections/ch-drywall.webp", alt: "Drywall and ceiling work by Cabos Handyman" },
-              { src: "/service-sections/ch-ceiling-repair.webp", alt: "Ceiling repair by Cabos Handyman Cabo San Lucas" }
-            ].map(({ src, alt }) => (
+              { src: "/service-sections/ch-plumbing.webp", alt: "Plumbing repair by Cabos Handyman in Los Cabos", position: "object-center" },
+              { src: "/service-sections/ch-electrical.webp", alt: "Electrical work by Cabos Handyman in Cabo San Lucas", position: "object-center" },
+              { src: "/service-sections/ch-painting.webp", alt: "Interior painting by Cabos Handyman Los Cabos", position: "object-center" },
+              { src: "/service-sections/ch-masonry.webp", alt: "Masonry and stucco repair by Cabos Handyman", position: "object-center" },
+              { src: "/service-sections/ch-drywall.webp", alt: "Drywall and ceiling work by Cabos Handyman", position: "object-top" },
+              { src: "/service-sections/ch-ceiling-repair.webp", alt: "Ceiling repair by Cabos Handyman Cabo San Lucas", position: "object-center" }
+            ].map(({ src, alt, position }) => (
               <div key={src} className="aspect-video rounded-xl overflow-hidden bg-slate-200">
                 <img
                   src={src}
                   alt={alt}
-                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                  className={`w-full h-full object-cover ${position} hover:scale-105 transition-transform duration-300`}
                   loading="lazy"
                 />
               </div>
