@@ -269,12 +269,12 @@ export default function TopHandymanServicesLosCabos() {
           <p className="text-center text-slate-500 mb-8">Photos from actual jobs completed across Los Cabos.</p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
-              { src: "/service-sections/image9.jpeg", alt: "Plumbing repair in Los Cabos" },
-              { src: "/service-sections/image22.jpeg", alt: "Electrical installation Cabo San Lucas" },
-              { src: "/service-sections/image5.jpeg", alt: "AC service mini-split Los Cabos" },
-              { src: "/service-sections/image20.jpeg", alt: "Tile installation Los Cabos handyman" },
-              { src: "/service-sections/image17.jpeg", alt: "Painting services Cabo San Lucas" },
-              { src: "/service-sections/image19.jpeg", alt: "Bathroom repair Los Cabos" }
+              { src: "/service-sections/ch-plumbing.webp", alt: "Plumbing repair by Cabos Handyman in Los Cabos" },
+              { src: "/service-sections/ch-electrical.webp", alt: "Electrical work by Cabos Handyman in Cabo San Lucas" },
+              { src: "/service-sections/ch-painting.webp", alt: "Interior painting by Cabos Handyman Los Cabos" },
+              { src: "/service-sections/ch-masonry.webp", alt: "Masonry and stucco repair by Cabos Handyman" },
+              { src: "/service-sections/ch-drywall.webp", alt: "Drywall and ceiling work by Cabos Handyman" },
+              { src: "/service-sections/ch-ceiling-repair.webp", alt: "Ceiling repair by Cabos Handyman Cabo San Lucas" }
             ].map(({ src, alt }) => (
               <div key={src} className="aspect-video rounded-xl overflow-hidden bg-slate-200">
                 <img
