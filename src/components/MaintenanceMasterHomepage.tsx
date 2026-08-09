@@ -12,8 +12,8 @@ import kitchenImage from '../assets/modern-kitchen-remodel.webp';
 import bathroomImage from '../assets/luxury-bathroom.webp';
 import officeImage from '../assets/commercial-office.webp';
 import communityImage from '../assets/community-center.webp';
-import restaurantImage from '../assets/restaurant-buildout.webp';
 import homeImage from '../assets/home-addition.webp';
+import propertyCareImage from '../assets/cabo-property-care.webp';
 
 export default function CabosHandymanHomepage() {
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
@@ -101,6 +101,13 @@ export default function CabosHandymanHomepage() {
       imagePosition: "center 30%"
     },
     {
+      name: "Home Addition",
+      category: "Residential",
+      image: homeImage,
+      alt: "Home addition and expansion project in Cabo San Lucas featuring new construction, structural work, and seamless integration by Cabos Handyman",
+      imagePosition: "center 35%"
+    },
+    {
       name: "Community Center",
       category: "HOA",
       image: communityImage,
@@ -108,18 +115,14 @@ export default function CabosHandymanHomepage() {
       imagePosition: "center 25%"
     },
     {
-      name: "Restaurant Buildout",
-      category: "Commercial",
-      image: restaurantImage,
-      alt: "Restaurant construction and commercial buildout project in Cabo San Lucas with custom design and professional finishing by Cabos Handyman",
-      imagePosition: "center 35%"
-    },
-    {
-      name: "Home Addition",
-      category: "Residential",
-      image: homeImage,
-      alt: "Home addition and expansion project in Cabo San Lucas featuring new construction, structural work, and seamless integration by Cabos Handyman",
-      imagePosition: "center 35%"
+      name: "Cabo Property Care",
+      category: "Property Services",
+      image: propertyCareImage,
+      alt: "Property inspection and maintenance visit in Cabo San Lucas, with a technician documenting a home condition check as part of a Cabo Property Care plan by Cabos Handyman",
+      imagePosition: "center 35%",
+      tagline: "Your property. Checked. Maintained. Protected.",
+      href: "/property-care-plans",
+      cta: "View Property Care →"
     }
   ];
 
@@ -420,41 +423,63 @@ export default function CabosHandymanHomepage() {
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">We Build Projects That Last</h2>
               <p className="text-xl text-gray-900 max-w-2xl mx-auto">
-                As the leading handyman service in Cabo San Lucas, explore our completed residential and commercial projects.<br />Click on any project to see our service menu and pricing.
+                From individual repairs and renovations to ongoing property care, we help Cabo property owners keep their homes and businesses in excellent condition.
               </p>
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {projects.map((project, index) => (
-                <div
-                  key={index}
-                  className="bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer"
-                  onClick={() => openServiceMenu(project.name)}
-                >
-                  <div className="h-64 bg-muted overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.alt}
-                      loading={index === 0 ? "eager" : "lazy"}
-                      fetchPriority={index === 0 ? "high" : undefined}
-                      decoding="async"
-                      width="600"
-                      height="400"
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      style={{ objectPosition: project.imagePosition }}
-                    />
+              {projects.map((project, index) => {
+                const cardClassName = "bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer";
+                const cardBody = (
+                  <>
+                    <div className="h-64 bg-muted overflow-hidden">
+                      <img
+                        src={project.image}
+                        alt={project.alt}
+                        loading={index === 0 ? "eager" : "lazy"}
+                        fetchPriority={index === 0 ? "high" : undefined}
+                        decoding="async"
+                        width="600"
+                        height="400"
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        style={{ objectPosition: project.imagePosition }}
+                      />
+                    </div>
+                    <div className="p-6">
+                      <div className="text-sm text-[#06756b] font-semibold mb-2">{project.category}</div>
+                      <h3 className="text-xl font-bold text-card-foreground group-hover:text-[#06756b] transition-colors">
+                        {project.name}
+                      </h3>
+                      {project.tagline && (
+                        <p className="mt-2 text-sm text-gray-700">{project.tagline}</p>
+                      )}
+                      {project.href ? (
+                        <span className="mt-4 block text-[#06756b] font-semibold text-sm group-hover:text-[#049d8e] transition-colors">
+                          {project.cta}
+                        </span>
+                      ) : (
+                        <button className="mt-4 text-[#06756b] font-semibold text-sm hover:text-[#049d8e] transition-colors">
+                          View Services & Pricing →
+                        </button>
+                      )}
+                    </div>
+                  </>
+                );
+
+                return project.href ? (
+                  <a key={index} href={project.href} className={`${cardClassName} block`}>
+                    {cardBody}
+                  </a>
+                ) : (
+                  <div
+                    key={index}
+                    className={cardClassName}
+                    onClick={() => openServiceMenu(project.name)}
+                  >
+                    {cardBody}
                   </div>
-                  <div className="p-6">
-                    <div className="text-sm text-[#06756b] font-semibold mb-2">{project.category}</div>
-                    <h3 className="text-xl font-bold text-card-foreground group-hover:text-[#06756b] transition-colors">
-                      {project.name}
-                    </h3>
-                    <button className="mt-4 text-[#06756b] font-semibold text-sm hover:text-[#049d8e] transition-colors">
-                      View Services & Pricing →
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
