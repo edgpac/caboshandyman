@@ -83,43 +83,37 @@ export default function CabosHandymanHomepage() {
       name: "Modern Kitchen",
       category: "Residential",
       image: kitchenImage,
-      alt: "Modern kitchen remodeling project in Cabo San Lucas featuring custom cabinets, granite countertops, and stainless steel appliances by Cabos Handyman",
-      imagePosition: "center 30%"
+      alt: "Modern kitchen remodeling project in Cabo San Lucas featuring custom cabinets, granite countertops, and stainless steel appliances by Cabos Handyman"
     },
     {
       name: "Luxury Bathroom",
       category: "Residential",
       image: bathroomImage,
-      alt: "Luxury bathroom renovation in Cabo San Lucas with custom tile work, modern fixtures, and elegant design by Cabos Handyman",
-      imagePosition: "center 35%"
+      alt: "Luxury bathroom renovation in Cabo San Lucas with custom tile work, modern fixtures, and elegant design by Cabos Handyman"
     },
     {
       name: "Commercial Office",
       category: "Commercial",
       image: officeImage,
-      alt: "Commercial office construction and renovation project in Cabo San Lucas with professional workspace design by Cabos Handyman",
-      imagePosition: "center 30%"
+      alt: "Commercial office construction and renovation project in Cabo San Lucas with professional workspace design by Cabos Handyman"
     },
     {
       name: "Home Addition",
       category: "Residential",
       image: homeImage,
-      alt: "Home addition and expansion project in Cabo San Lucas featuring new construction, structural work, and seamless integration by Cabos Handyman",
-      imagePosition: "center 35%"
+      alt: "Home addition and expansion project in Cabo San Lucas featuring new construction, structural work, and seamless integration by Cabos Handyman"
     },
     {
       name: "Community Center",
       category: "HOA",
       image: communityImage,
-      alt: "Community center construction and maintenance project in Cabo San Lucas for HOA and residential communities by Cabos Handyman",
-      imagePosition: "center 25%"
+      alt: "Community center construction and maintenance project in Cabo San Lucas for HOA and residential communities by Cabos Handyman"
     },
     {
       name: "Cabo Property Care",
       category: "Property Services",
       image: propertyCareImage,
       alt: "Property inspection and maintenance visit in Cabo San Lucas, with a technician documenting a home condition check as part of a Cabo Property Care plan by Cabos Handyman",
-      imagePosition: "center 35%",
       tagline: "Your property. Checked. Maintained. Protected.",
       href: "/property-care-plans",
       cta: "View Property Care →"
@@ -429,45 +423,44 @@ export default function CabosHandymanHomepage() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, index) => {
-                const cardClassName = "bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer";
+                const cardClassName = "bg-card rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer flex flex-col h-full";
+                const ctaClassName = "mt-auto pt-4 border-t border-gray-100 text-left text-[#06756b] font-semibold text-sm group-hover:text-[#049d8e] transition-colors";
                 const cardBody = (
                   <>
-                    <div className="h-64 bg-muted overflow-hidden">
+                    {/* Square frame matches the 500x500 sources, so nothing is cropped */}
+                    <div className="aspect-square bg-muted overflow-hidden">
                       <img
                         src={project.image}
                         alt={project.alt}
                         loading={index === 0 ? "eager" : "lazy"}
                         fetchPriority={index === 0 ? "high" : undefined}
                         decoding="async"
-                        width="600"
-                        height="400"
+                        width="500"
+                        height="500"
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        style={{ objectPosition: project.imagePosition }}
                       />
                     </div>
-                    <div className="p-6">
-                      <div className="text-sm text-[#06756b] font-semibold mb-2">{project.category}</div>
-                      <h3 className="text-xl font-bold text-card-foreground group-hover:text-[#06756b] transition-colors">
+                    <div className="p-6 flex flex-col flex-1">
+                      <div className="text-xs font-semibold uppercase tracking-wider text-[#06756b] mb-2">
+                        {project.category}
+                      </div>
+                      <h3 className="text-xl font-bold leading-snug text-card-foreground group-hover:text-[#06756b] transition-colors">
                         {project.name}
                       </h3>
                       {project.tagline && (
-                        <p className="mt-2 text-sm text-gray-700">{project.tagline}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-gray-700">{project.tagline}</p>
                       )}
                       {project.href ? (
-                        <span className="mt-4 block text-[#06756b] font-semibold text-sm group-hover:text-[#049d8e] transition-colors">
-                          {project.cta}
-                        </span>
+                        <span className={`${ctaClassName} block`}>{project.cta}</span>
                       ) : (
-                        <button className="mt-4 text-[#06756b] font-semibold text-sm hover:text-[#049d8e] transition-colors">
-                          View Services & Pricing →
-                        </button>
+                        <button className={ctaClassName}>View Services &amp; Pricing →</button>
                       )}
                     </div>
                   </>
                 );
 
                 return project.href ? (
-                  <a key={index} href={project.href} className={`${cardClassName} block`}>
+                  <a key={index} href={project.href} className={cardClassName}>
                     {cardBody}
                   </a>
                 ) : (
