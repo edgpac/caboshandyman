@@ -14,7 +14,7 @@ export default function PropertyCarePlans() {
     { icon: <Home size={22} />, title: "Monthly Inspections", tagline: "so you can know your property is fine without flying down to check", desc: "We walk every room, every system — plumbing, electrical, AC, pool, exterior — and send you a photo report. Problems caught early cost a fraction of what they cost discovered late." },
     { icon: <Wrench size={22} />, title: "Maintenance Coordination", tagline: "so you can stop juggling vendors from a different timezone", desc: "One message to us and it's handled. We schedule, supervise, and sign off on every job — you never have to chase a contractor in a country you're not in." },
     { icon: <Shield size={22} />, title: "Vendor & Contractor Management", tagline: "so you can stop paying crisis prices for unknown contractors", desc: "We have a vetted local network and get competitive quotes before any job starts. No markups, no surprises — just work done right the first time." },
-    { icon: <Clock size={22} />, title: "24/7 Emergency Response", tagline: "so you can sleep through the night", desc: "Burst pipe at 2am? AC failure before guest check-in? We get the call, not you. On-site within 2–4 hours — and you get a message when it's resolved." },
+    { icon: <Clock size={22} />, title: "24/7 Emergency Response", tagline: "so you can sleep through the night", desc: "Burst pipe at 2am? AC failure before guest check-in? We get the call, not you. On-site within 2 hours — and you get a message when it's resolved." },
     { icon: <Calendar size={22} />, title: "Key Holding & Access", tagline: "so you can let the right people in without being there", desc: "Secure key holding and access coordination for guests, cleaning crews, and contractors. We make sure the right people get in — and no one else does." },
     { icon: <DollarSign size={22} />, title: "Utility Monitoring", tagline: "so you can catch a leak before it turns into a $10,000 repair", desc: "Abnormal water or electricity usage is almost always a sign of a problem. We monitor it, flag it, and act before it escalates." },
   ];
@@ -29,7 +29,7 @@ export default function PropertyCarePlans() {
     { q: "What does property management in Cabo San Lucas include?", a: "It includes routine maintenance coordination, vendor management, regular property inspections with photo reports, key holding, emergency response, utility oversight, and direct communication with you as the owner. Cabos Handyman handles all of this so you don't have to be on-site." },
     { q: "Do I need property management if I own a vacation rental in Los Cabos?", a: "Yes — most Cabo vacation rental owners are not local. Without a trusted local contact, small issues like a broken AC, a leak, or a faulty lock can escalate quickly and lead to bad reviews or property damage. A property manager acts as your eyes and hands on the ground." },
     { q: "What is the difference between property management and a care plan?", a: "A care plan covers scheduled recurring maintenance tasks on a monthly basis. Property management is broader — it includes vendor coordination, inspections, emergency response, key management, and owner communication. Both can be combined for complete coverage." },
-    { q: "How quickly do you respond to emergencies at managed properties?", a: "We provide 24/7 emergency response for managed properties in Cabo San Lucas and Los Cabos. For critical issues like leaks, electrical failures, or security concerns, we aim to be on-site within 2–4 hours." },
+    { q: "How quickly do you respond to emergencies at managed properties?", a: "We provide 24/7 emergency response for managed properties in Cabo San Lucas and Los Cabos. For critical issues like leaks, electrical failures, or security concerns, we aim to be on-site within 2 hours." },
     { q: "Can you manage my property if I live outside of Mexico?", a: "Yes — this is the most common scenario. We act as your local point of contact, handle all on-site coordination, send you photo reports after inspections, and communicate via WhatsApp, email, or video call. You stay informed without needing to travel." },
     { q: "How much does property management cost in Cabo San Lucas?", a: "Costs vary based on property size, services needed, and inspection frequency. We offer flexible scopes — from a basic care plan to full-service management. Contact us for a no-obligation quote tailored to your property." },
   ];
@@ -610,7 +610,7 @@ export default function PropertyCarePlans() {
                 <div className="bg-green-50 rounded-lg p-4 border-2 border-green-500">
                   <h4 className="font-bold text-green-800 mb-2">✅ Property Care Member</h4>
                   <ul className="space-y-2 text-sm text-gray-700">
-                    <li><strong>2am Emergency:</strong> We're on our way (2-4 hours)</li>
+                    <li><strong>2am Emergency:</strong> We're on our way (within 2 hours)</li>
                     <li><strong>Cost:</strong> $0 extra (included in plan)</li>
                     <li><strong>Annual:</strong> $1,188-3,588 + inspections + free unclogs</li>
                     <li><strong>Peace of Mind:</strong> 😴 Sleep soundly</li>

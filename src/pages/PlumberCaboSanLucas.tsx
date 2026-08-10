@@ -547,7 +547,7 @@ export default function PlumberCaboSanLucas() {
                 {openQuestion === 'faq1' && (
                   <div className="px-6 pb-6 text-gray-700 leading-relaxed">
                     <p className="mb-3">
-                      Yes! Property Care members receive true 24/7 emergency plumbing service, including after midnight. We provide 2-4 hour response times depending on your plan level (Elite: 2 hours, Premium/Basic: 4 hours).
+                      Yes! Property Care members receive true 24/7 emergency plumbing service, including after midnight. We provide 2-hour response times for Property Care members.
                     </p>
                     <p className="mb-3">
                       For non-members, emergency service is available 7am-6pm for safety reasons. After 6pm, emergency service is available to Property Care members only. For extreme flooding emergencies after hours, non-members can request service for a $300 callout fee plus 2x standard rates.
