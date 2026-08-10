@@ -34,8 +34,7 @@ export default function PropertyCarePlans() {
     { q: "How much does property management cost in Cabo San Lucas?", a: "Costs vary based on property size, services needed, and inspection frequency. We offer flexible scopes — from a basic care plan to full-service management. Contact us for a no-obligation quote tailored to your property." },
   ];
 
-  const schemaMarkup = {
-    "@context": "https://schema.org",
+  const serviceSchema = {
     "@type": "Service",
     "serviceType": "Property Maintenance, Care Plans, and Property Management",
     "provider": {
@@ -93,6 +92,27 @@ export default function PropertyCarePlans() {
         "priceCurrency": "USD",
         "price": "299",
         "description": "Weekly inspections with unlimited emergency service"
+      }
+    ]
+  };
+
+  // The pmFaqs above were visible copy only. Publishing them as FAQPage in the
+  // same @graph keeps this page to a single JSON-LD block, and the questions
+  // stay the single source for both the markup and what renders below.
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@graph": [
+      serviceSchema,
+      {
+        "@type": "FAQPage",
+        "mainEntity": pmFaqs.map(({ q, a }) => ({
+          "@type": "Question",
+          "name": q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": a
+          }
+        }))
       }
     ]
   };
