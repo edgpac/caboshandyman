@@ -6,8 +6,37 @@ import Navigation from '@/components/Navigation';
 const Footer = lazy(() => import('@/components/Footer'));
 
 export default function About() {
-  const schemaMarkup = {
-    "@context": "https://schema.org",
+  // Absentee-owner questions: the friction is not finding a contractor, it is
+  // getting one who answers, shows up, charges what was agreed, and proves it.
+  const propertyOwnerFaqs = [
+    {
+      question: "Who do I call when something breaks at my Cabo property and I'm not in Mexico?",
+      answer:
+        "One message to us is the whole process. Send us the problem — \"the AC isn't cooling,\" \"water leaking under the sink\" — and we take it from there: we schedule the technician, send before photos, diagnose the issue, get your approval, complete the repair, then send after photos and an itemized invoice. You never coordinate a contractor from another country or chase anyone for an update. Our team is bilingual, so nothing gets lost in translation."
+    },
+    {
+      question: "How do I know the work was actually done if I'm not there to check?",
+      answer:
+        "Every job is documented: before photos, a description of the work performed, the technician who did it, after photos, and an itemized cost. You get that record for each visit, so your property builds a maintenance history you can look back through instead of a verbal claim and a bill. For owners who are not in Cabo, this documentation is the point — you can see exactly what was wrong, what was done, and what it cost."
+    },
+    {
+      question: "Can you handle a repair while guests are staying in my vacation rental?",
+      answer:
+        "Yes. We coordinate directly with your guests or property manager, schedule around check-in and check-out, and keep the interruption as short as possible. Afterward you receive a report showing what failed, what was repaired, and how long the guest was affected — so you can respond to a review or a refund request with facts rather than guesses. Protecting your rating is part of the job."
+    },
+    {
+      question: "What does a Property Care plan actually check every month?",
+      answer:
+        "A monthly walkthrough of every room and every system: plumbing and visible leaks, water pressure, electrical, AC, pool equipment, doors and windows, and the exterior for storm or water damage. You receive a photo report plus maintenance recommendations after each inspection. The purpose is catching problems early — a slow leak found on an inspection costs a fraction of the same leak discovered months later."
+    },
+    {
+      question: "How fast can someone reach my property in an emergency in Cabo San Lucas?",
+      answer:
+        "Property Care members get 24/7 emergency response, with a technician on-site within two to four hours for urgent problems like a burst pipe, an AC failure before a guest arrival, or storm damage. We take the call so you are not trying to find a contractor at 2am from a different time zone, and you get a message when the issue is resolved."
+    }
+  ];
+
+  const localBusinessSchema = {
     "@type": "LocalBusiness",
     "name": "Cabos Handyman",
     "image": "https://www.caboshandyman.com/CHLOGO.png",
@@ -32,6 +61,25 @@ export default function About() {
       "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
       "https://www.facebook.com/share/19wvxoz8Cy/",
       "https://www.instagram.com/caboshandyman"
+    ]
+  };
+
+  // One @graph so the page emits a single JSON-LD block covering both types
+  const schemaMarkup = {
+    "@context": "https://schema.org",
+    "@graph": [
+      localBusinessSchema,
+      {
+        "@type": "FAQPage",
+        "mainEntity": propertyOwnerFaqs.map(({ question, answer }) => ({
+          "@type": "Question",
+          "name": question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": answer
+          }
+        }))
+      }
     ]
   };
 
@@ -219,6 +267,36 @@ export default function About() {
                 </p>
               </div>
             </div>
+          </div>
+
+          {/* Owning a Property in Cabo — absentee-owner Q&A (mirrors FAQPage schema above) */}
+          <div className="mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-3 text-center">
+              Owning a Property in Cabo When You Don't Live Here
+            </h2>
+            <p className="text-lg text-gray-700 mb-8 text-center max-w-3xl mx-auto">
+              The hard part usually isn't finding a contractor. It's finding one who answers, shows up,
+              charges what was agreed, does good work, and proves it. Here's how we handle that.
+            </p>
+            <div className="space-y-4 max-w-4xl mx-auto">
+              {propertyOwnerFaqs.map((faq) => (
+                <div key={faq.question} className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3">{faq.question}</h3>
+                  <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-center text-gray-700 mt-8">
+              See what's covered in a{' '}
+              <a href="/property-care-plans" className="text-[#06756b] font-semibold hover:underline">
+                Cabo Property Care plan
+              </a>
+              , or{' '}
+              <a href="/contact" className="text-[#06756b] font-semibold hover:underline">
+                tell us about your property
+              </a>
+              .
+            </p>
           </div>
 
           {/* Contact CTA */}
