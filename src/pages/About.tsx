@@ -32,7 +32,7 @@ export default function About() {
     {
       question: "How fast can someone reach my property in an emergency in Cabo San Lucas?",
       answer:
-        "Property Care members get 24/7 emergency response, with a technician on-site within two to four hours for urgent problems like a burst pipe, an AC failure before a guest arrival, or storm damage. We take the call so you are not trying to find a contractor at 2am from a different time zone, and you get a message when the issue is resolved."
+        "Property Care members get 24/7 emergency response, with a technician on-site within two hours for urgent problems like a burst pipe, an AC failure before a guest arrival, or storm damage. We take the call so you are not trying to find a contractor at 2am from a different time zone, and you get a message when the issue is resolved."
     }
   ];
 
