@@ -14,7 +14,7 @@ import officeImage from '../assets/commercial-office.webp';
 import communityImage from '../assets/community-center.webp';
 import homeImage from '../assets/home-addition.webp';
 import propertyCareImage from '../assets/cabo-property-care.webp';
-import { businessStats, aggregateRatingSchema, projectsCompletedLabel, yearsExperienceLabel } from '../config/businessStats';
+import { aggregateRatingSchema, projectsCompletedLabel, yearsExperienceLabel, googleRatingSentence, projectsSinceLabel } from '../config/businessStats';
 
 export default function CabosHandymanHomepage() {
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
@@ -23,56 +23,10 @@ export default function CabosHandymanHomepage() {
   const [selectedProject, setSelectedProject] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const statsRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const statsSectionRef = useRef<HTMLElement>(null);
   const heroNameRef = useRef<HTMLDivElement>(null);
   const heroSubBrandRef = useRef<HTMLDivElement>(null);
   const heroLocationRef = useRef<HTMLParagraphElement>(null);
   const heroCtaRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const configs = [
-      { idx: 0, end: businessStats.yearsExperience,   suffix: '+',   decimals: 0 },
-      { idx: 1, end: businessStats.projectsCompleted, suffix: '+',   decimals: 0 },
-      { idx: 2, end: 24,                              suffix: '/7*', decimals: 0 },
-      { idx: 3, end: businessStats.googleRating,      suffix: '/5',  decimals: 1 },
-    ];
-
-    const runCounters = () => {
-      configs.forEach(({ idx, end, suffix, decimals }) => {
-        const el = statsRefs.current[idx];
-        if (!el) return;
-        const obj = { value: 0 };
-        gsap.to(obj, {
-          value: end,
-          duration: 2,
-          ease: 'power2.out',
-          onUpdate: () => {
-            const shown = decimals > 0
-              ? obj.value.toFixed(decimals)
-              : Math.round(obj.value).toLocaleString();
-            el.textContent = shown + suffix;
-          },
-        });
-      });
-    };
-
-    const section = statsSectionRef.current;
-    if (!section) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          runCounters();
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.2 });
@@ -369,42 +323,12 @@ export default function CabosHandymanHomepage() {
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section ref={statsSectionRef} className="py-16 bg-muted/20">
+        {/* Team link — the stats row that used to live here was removed: two of its
+            four numbers were self-reported, and review count understates the work
+            volume. Proof now sits under the portfolio heading instead. */}
+        <section className="py-10 bg-muted/20">
           <div className="container mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
-              <div className="transform hover:scale-105 transition-transform">
-                <div
-                  ref={el => { statsRefs.current[0] = el; }}
-                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
-                >0</div>
-                <div className="text-gray-900 font-semibold">Years Experience</div>
-              </div>
-              <div className="transform hover:scale-105 transition-transform">
-                <div
-                  ref={el => { statsRefs.current[1] = el; }}
-                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
-                >0</div>
-                <div className="text-gray-900 font-semibold">Projects Completed</div>
-              </div>
-              <div className="transform hover:scale-105 transition-transform">
-                <div
-                  ref={el => { statsRefs.current[2] = el; }}
-                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
-                >0</div>
-                <div className="text-gray-900 font-semibold text-sm">Emergency Service</div>
-                <div className="text-xs text-gray-700 mt-1">*For members</div>
-              </div>
-              <div className="transform hover:scale-105 transition-transform">
-                <div
-                  ref={el => { statsRefs.current[3] = el; }}
-                  className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
-                >0</div>
-                <div className="text-gray-900 font-semibold">Google Rating</div>
-                <div className="text-xs text-gray-700 mt-1">{businessStats.googleReviewCount}+ reviews</div>
-              </div>
-            </div>
-            <div className="text-center mt-8">
+            <div className="text-center">
               <a href="/about" className="text-[#06756b] hover:underline font-medium text-sm">
                 Learn more about our team &rarr;
               </a>
@@ -419,6 +343,9 @@ export default function CabosHandymanHomepage() {
               <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">We Build Projects That Last</h2>
               <p className="text-xl text-gray-900 max-w-2xl mx-auto">
                 From individual repairs and renovations to ongoing property care, we help Cabo property owners keep their homes and businesses in excellent condition.
+              </p>
+              <p className="mt-4 text-base font-semibold text-[#06756b]">
+                {googleRatingSentence} &middot; {projectsSinceLabel}
               </p>
             </div>
             

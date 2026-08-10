@@ -183,7 +183,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
 
       <h3>4. Customer Reviews and Portfolio</h3>
       <p>
-        Review completed projects and customer testimonials. With over 600 completed projects and a 4.8-star Google rating, established handyman services demonstrate proven reliability.
+        Review completed projects and customer testimonials. With over 600 completed projects and a perfect 5.0 Google rating, established handyman services demonstrate proven reliability.
       </p>
 
       <h3>5. Modern Technology</h3>
@@ -305,7 +305,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
         <li><strong>20+ years</strong> of experience in Cabo San Lucas</li>
         <li><strong>600+ completed projects</strong> across residential, commercial, and HOA properties</li>
         <li><strong>Emergency service 7am–6pm daily</strong> (24/7 for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a>)</li>
-        <li><strong>4.8-star Google rating</strong> from verified customers</li>
+        <li><strong>Perfect 5.0 Google rating</strong> from verified customers</li>
         <li><strong>Licensed, insured, and bonded</strong> for your protection</li>
         <li><strong>Free instant estimates</strong> through AI-powered scheduling assistant</li>
         <li><strong>Transparent pricing</strong> with no hidden fees</li>

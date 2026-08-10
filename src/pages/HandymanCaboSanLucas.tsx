@@ -2,7 +2,7 @@ import { lazy, useState } from 'react';
 import SEO from '@/components/SEO';
 import { CheckCircle2, Wrench, Home, Zap, Droplet, Fan, Package, Monitor, Users, Clock, Star, Shield, ArrowRight, ChevronDown } from 'lucide-react';
 import Navigation from '@/components/Navigation';
-import { aggregateRatingSchema, googleRatingLabel, googleReviewsLabel } from '@/config/businessStats';
+import { aggregateRatingSchema, googleRatingLabel, projectsSinceLabel } from '@/config/businessStats';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -120,7 +120,7 @@ export default function HandymanCaboSanLucas() {
               Finding a reliable handyman in Cabo San Lucas can be challenging, especially when you need someone who understands both the unique demands of coastal living and the expectations of the international community. Cabos Handyman brings 20+ years of trade experience to homeowners, vacation rental owners, property managers, and commercial clients throughout Los Cabos.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              From simple repairs to complete property renovations, our bilingual team (English/Spanish) handles every job with the same commitment to quality, transparency, and customer satisfaction. With 600+ completed projects since 2019 and a 4.8-star Google rating, we've built our reputation one satisfied customer at a time.
+              From simple repairs to complete property renovations, our bilingual team (English/Spanish) handles every job with the same commitment to quality, transparency, and customer satisfaction. With 600+ completed projects since 2019 and a perfect 5.0 Google rating, we've built our reputation one satisfied customer at a time.
             </p>
           </div>
 
@@ -171,8 +171,8 @@ export default function HandymanCaboSanLucas() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-2">{googleRatingLabel}-Star Google Rating</h3>
-                  <p className="text-gray-600">{googleRatingLabel} stars from {googleReviewsLabel}, across 600+ completed projects. We don't consider the job done until you're completely happy.</p>
+                  <h3 className="font-bold text-gray-900 mb-2">{googleRatingLabel} Google Rating</h3>
+                  <p className="text-gray-600">A perfect {googleRatingLabel} on Google, across {projectsSinceLabel}. We don't consider the job done until you're completely happy.</p>
                 </div>
               </div>
 
@@ -976,7 +976,7 @@ export default function HandymanCaboSanLucas() {
           <div className="bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] rounded-2xl p-8 md:p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Work with Cabo's Most Trusted Handyman?</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              20+ years of experience. 600+ completed projects. 4.8 stars on Google. Get your free quote today.
+              20+ years of experience. 600+ completed projects. 5.0 stars on Google. Get your free quote today.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
               <a

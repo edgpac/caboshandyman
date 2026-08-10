@@ -23,11 +23,22 @@ export const businessStats = {
   /** Jobs completed since founding. Not the same as review count. */
   projectsCompleted: 600,
 
-  /** Current Google Business Profile average. Verify before changing. */
-  googleRating: 4.8,
+  /**
+   * Current Google Business Profile average.
+   * Verified against the live GBP listing on 2026-08-10.
+   */
+  googleRating: 5.0,
 
-  /** Current Google Business Profile review count. Verify before changing. */
-  googleReviewCount: 150,
+  /**
+   * Current Google Business Profile review count.
+   * Verified against the live GBP listing on 2026-08-10: 16 reviews.
+   *
+   * This is deliberately far lower than projectsCompleted — most customers
+   * never leave a review. Do not substitute the project count here, and do
+   * not round it up: Schema.org aggregateRating must match the real listing.
+   * Prefer surfacing the rating rather than the count in visible copy.
+   */
+  googleReviewCount: 16,
 } as const;
 
 /** "20+ years of experience" — describes the trade, not the company's age. */
@@ -36,11 +47,19 @@ export const yearsExperienceLabel = `${businessStats.yearsExperience}+`;
 /** "600+" */
 export const projectsCompletedLabel = `${businessStats.projectsCompleted}+`;
 
-/** "4.8" */
+/** "5.0" */
 export const googleRatingLabel = businessStats.googleRating.toFixed(1);
 
-/** "150+ Google reviews" */
-export const googleReviewsLabel = `${businessStats.googleReviewCount}+ Google reviews`;
+/**
+ * "Rated 5.0 on Google" — leads with the rating, not the count.
+ * The count is small because reviews are rare, not because work is; the
+ * volume story is carried by projectsCompleted and the project photos.
+ */
+export const googleRatingSentence = `Rated ${googleRatingLabel} on Google`;
+
+/** "600+ projects completed since 2019" */
+export const projectsSinceLabel =
+  `${projectsCompletedLabel} projects completed since ${businessStats.foundingYear}`;
 
 /** Schema.org AggregateRating node, shared by every page that publishes one. */
 export const aggregateRatingSchema = {

@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import SEO from '@/components/SEO';
 import { CheckCircle2, ArrowRight, Phone, Mail, Shield, Users, Clock, Wrench } from 'lucide-react';
 import Navigation from '@/components/Navigation';
-import { businessStats, googleRatingLabel } from '@/config/businessStats';
+import { googleRatingLabel } from '@/config/businessStats';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -164,7 +164,6 @@ export default function About() {
               <div>
                 <div className="text-4xl md:text-5xl font-bold mb-2">{googleRatingLabel}</div>
                 <div className="text-teal-100 font-medium">Google Rating</div>
-                <div className="text-xs text-teal-200 mt-1">{businessStats.googleReviewCount}+ reviews</div>
               </div>
               <div>
                 <div className="text-4xl md:text-5xl font-bold mb-2">24/7</div>
