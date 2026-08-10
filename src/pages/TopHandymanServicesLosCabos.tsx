@@ -5,6 +5,7 @@ import {
   Shield, ArrowRight, ChevronDown, Phone, MessageCircle
 } from 'lucide-react';
 import Navigation from '@/components/Navigation';
+import { aggregateRatingSchema, googleRatingLabel } from '@/config/businessStats';
 
 const Footer = lazy(() => import('@/components/Footer'));
 
@@ -32,11 +33,7 @@ export default function TopHandymanServicesLosCabos() {
     "email": "loscabohandyman@gmail.com",
     "priceRange": "$60+",
     "openingHours": "Mo-Su 07:00-18:00",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "600"
-    },
+    "aggregateRating": aggregateRatingSchema,
     "areaServed": [
       { "@type": "City", "name": "Cabo San Lucas" },
       { "@type": "City", "name": "San José del Cabo" },
@@ -184,7 +181,7 @@ export default function TopHandymanServicesLosCabos() {
         <div className="max-w-5xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 bg-teal-500/20 border border-teal-400/30 rounded-full px-4 py-1.5 text-sm text-teal-300 mb-6">
             <Star className="w-4 h-4 fill-teal-400 text-teal-400" />
-            <span>5.0 Rating · 600+ Completed Projects · 20+ Years in Los Cabos</span>
+            <span>{googleRatingLabel} Google Rating · 600+ Completed Projects · 20+ Years of Experience</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-5">
             Top Handyman Services in Los Cabos

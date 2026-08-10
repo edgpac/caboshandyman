@@ -14,6 +14,7 @@ import officeImage from '../assets/commercial-office.webp';
 import communityImage from '../assets/community-center.webp';
 import homeImage from '../assets/home-addition.webp';
 import propertyCareImage from '../assets/cabo-property-care.webp';
+import { businessStats, aggregateRatingSchema, projectsCompletedLabel, yearsExperienceLabel } from '../config/businessStats';
 
 export default function CabosHandymanHomepage() {
   const [isAIAssistantOpen, setIsAIAssistantOpen] = useState(false);
@@ -31,14 +32,14 @@ export default function CabosHandymanHomepage() {
 
   useEffect(() => {
     const configs = [
-      { idx: 0, end: 20,  suffix: '+'   },
-      { idx: 1, end: 600, suffix: '+'   },
-      { idx: 2, end: 24,  suffix: '/7*' },
-      { idx: 3, end: 100, suffix: '%'   },
+      { idx: 0, end: businessStats.yearsExperience,   suffix: '+',   decimals: 0 },
+      { idx: 1, end: businessStats.projectsCompleted, suffix: '+',   decimals: 0 },
+      { idx: 2, end: 24,                              suffix: '/7*', decimals: 0 },
+      { idx: 3, end: businessStats.googleRating,      suffix: '/5',  decimals: 1 },
     ];
 
     const runCounters = () => {
-      configs.forEach(({ idx, end, suffix }) => {
+      configs.forEach(({ idx, end, suffix, decimals }) => {
         const el = statsRefs.current[idx];
         if (!el) return;
         const obj = { value: 0 };
@@ -47,7 +48,10 @@ export default function CabosHandymanHomepage() {
           duration: 2,
           ease: 'power2.out',
           onUpdate: () => {
-            el.textContent = Math.round(obj.value).toLocaleString() + suffix;
+            const shown = decimals > 0
+              ? obj.value.toFixed(decimals)
+              : Math.round(obj.value).toLocaleString();
+            el.textContent = shown + suffix;
           },
         });
       });
@@ -165,12 +169,8 @@ export default function CabosHandymanHomepage() {
       "https://www.facebook.com/share/19wvxoz8Cy/",
       "https://www.instagram.com/caboshandyman"
     ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.8",
-      "reviewCount": "150"
-    },
-    "description": "Professional handyman and construction services in Cabo San Lucas. 20+ years experience, 600+ projects completed. Licensed, insured, and bonded.",
+    "aggregateRating": aggregateRatingSchema,
+    "description": `Professional handyman and construction services in Cabo San Lucas. ${yearsExperienceLabel} years experience, ${projectsCompletedLabel} projects completed. Licensed, insured, and bonded.`,
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Handyman Services",
@@ -400,7 +400,8 @@ export default function CabosHandymanHomepage() {
                   ref={el => { statsRefs.current[3] = el; }}
                   className="text-4xl md:text-5xl font-bold mb-2 bg-gradient-to-r from-[#049d8e] to-[#06756b] bg-clip-text text-transparent"
                 >0</div>
-                <div className="text-gray-900 font-semibold">Satisfaction Rate</div>
+                <div className="text-gray-900 font-semibold">Google Rating</div>
+                <div className="text-xs text-gray-700 mt-1">{businessStats.googleReviewCount}+ reviews</div>
               </div>
             </div>
             <div className="text-center mt-8">

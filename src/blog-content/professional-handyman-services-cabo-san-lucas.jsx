@@ -7,7 +7,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
 
       <h2>Why Professional Handyman Services Matter in Cabo San Lucas</h2>
       <p>
-        The unique climate and coastal environment of Los Cabos creates specific maintenance challenges that require experienced professionals. Salt air, intense sun exposure, and occasional tropical storms can take a toll on residential and commercial properties. That's why <strong>caboshandyman.com</strong> has been serving the area for over 20 years, completing more than 600 successful projects.
+        The unique climate and coastal environment of Los Cabos creates specific maintenance challenges that require experienced professionals. Salt air, intense sun exposure, and occasional tropical storms can take a toll on residential and commercial properties. That's why the team at <strong>caboshandyman.com</strong> brings over 20 years of trade experience to Los Cabos, completing more than 600 projects since 2019.
       </p>
       <p>
         For a complete list of our services with transparent pricing, visit our{' '}
@@ -183,7 +183,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
 
       <h3>4. Customer Reviews and Portfolio</h3>
       <p>
-        Review completed projects and customer testimonials. With over 600 completed projects and a 100% satisfaction rate, established handyman services demonstrate proven reliability.
+        Review completed projects and customer testimonials. With over 600 completed projects and a 4.8-star Google rating, established handyman services demonstrate proven reliability.
       </p>
 
       <h3>5. Modern Technology</h3>
@@ -305,7 +305,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
         <li><strong>20+ years</strong> of experience in Cabo San Lucas</li>
         <li><strong>600+ completed projects</strong> across residential, commercial, and HOA properties</li>
         <li><strong>Emergency service 7am–6pm daily</strong> (24/7 for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a>)</li>
-        <li><strong>100% satisfaction rate</strong> from verified customers</li>
+        <li><strong>4.8-star Google rating</strong> from verified customers</li>
         <li><strong>Licensed, insured, and bonded</strong> for your protection</li>
         <li><strong>Free instant estimates</strong> through AI-powered scheduling assistant</li>
         <li><strong>Transparent pricing</strong> with no hidden fees</li>
@@ -340,7 +340,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       <hr className="my-8" />
 
       <p className="text-sm text-muted-foreground italic">
-        Cabos Handyman has been providing professional handyman services for over 20 years. With 600+ completed projects and emergency service 7am–6pm daily (24/7 for Property Care Plan members), we're your trusted partner for all residential, commercial, and HOA maintenance needs in Los Cabos.
+        Cabos Handyman brings over 20 years of trade experience to professional handyman work in Los Cabos. With 600+ completed projects and emergency service 7am–6pm daily (24/7 for Property Care Plan members), we're your trusted partner for all residential, commercial, and HOA maintenance needs in Los Cabos.
       </p>
     </>
   );
