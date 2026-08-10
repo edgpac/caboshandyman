@@ -323,19 +323,6 @@ export default function CabosHandymanHomepage() {
           </div>
         </section>
 
-        {/* Team link — the stats row that used to live here was removed: two of its
-            four numbers were self-reported, and review count understates the work
-            volume. Proof now sits under the portfolio heading instead. */}
-        <section className="py-10 bg-muted/20">
-          <div className="container mx-auto px-6">
-            <div className="text-center">
-              <a href="/about" className="text-[#06756b] hover:underline font-medium text-sm">
-                Learn more about our team &rarr;
-              </a>
-            </div>
-          </div>
-        </section>
-
         {/* Portfolio Section */}
         <section id="portfolio" className="py-20 bg-background">
           <div className="container mx-auto px-6">

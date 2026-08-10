@@ -49,6 +49,12 @@ export default function Footer() {
             <p className="text-gray-600 text-xs">
               Building visions, shaping the future.<br />Serving Cabo San Lucas.
             </p>
+            <a
+              href="/about"
+              className="inline-block mt-3 text-teal-700 hover:underline font-medium text-xs"
+            >
+              Learn more about our team &rarr;
+            </a>
           </div>
 
           {/* Contact */}
