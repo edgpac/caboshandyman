@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, Mail, Clock, Wrench, DollarSign, RefreshCw, Facebook, Calendar, HelpCircle, BookOpen } from 'lucide-react';
+import { Phone, Mail, Clock, Wrench, DollarSign, RefreshCw, Facebook, Youtube, Linkedin, Calendar, HelpCircle, BookOpen } from 'lucide-react';
 import GradientText from './GradientText';
 
 export default function Footer() {
@@ -55,6 +55,18 @@ export default function Footer() {
             >
               Learn more about our team &rarr;
             </a>
+            {/* Moved out of the Contact column to make room for the social links */}
+            <div className="mt-4">
+              <a
+                href="https://cal.com/maintenancemaster/residential-consultation"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-sm shadow-[#049d8e]/30"
+              >
+                <Calendar className="h-4 w-4" />
+                <span>Schedule Service</span>
+              </a>
+            </div>
           </div>
 
           {/* Contact */}
@@ -97,16 +109,16 @@ export default function Footer() {
                   TikTok
                 </a>
               </div>
-              {/* Schedule Service Button */}
-              <div className="pt-2">
-                <a
-                  href="https://cal.com/maintenancemaster/residential-consultation"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center space-x-2 bg-gradient-to-r from-[#2dd4bf] via-[#049d8e] to-[#06756b] hover:opacity-90 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-sm shadow-[#049d8e]/30"
-                >
-                  <Calendar className="h-4 w-4" />
-                  <span>Schedule Service</span>
+              <div className="flex items-center space-x-2 text-gray-600">
+                <Youtube className="h-4 w-4 text-teal-400" />
+                <a href="https://www.youtube.com/@caboshandyman" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500 transition-colors">
+                  YouTube
+                </a>
+              </div>
+              <div className="flex items-center space-x-2 text-gray-600">
+                <Linkedin className="h-4 w-4 text-teal-400" />
+                <a href="https://www.linkedin.com/in/caboshandyman" target="_blank" rel="noopener noreferrer" className="hover:text-teal-500 transition-colors">
+                  LinkedIn
                 </a>
               </div>
             </div>
