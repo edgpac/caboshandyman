@@ -72,8 +72,8 @@ export default function KitchenServicesCabo() {
   return (
     <>
       <SEO
-        title="Kitchen Remodeling Contractors Los Cabos | Cabos Handyman"
-        description="Top-rated kitchen remodeling contractors in Los Cabos & Cabo San Lucas. Cabinets, countertops, backsplash, plumbing & electrical. 600+ projects completed. Free estimate: +52 612 169 8328"
+        title="Kitchen Remodeling Los Cabos | Licensed & Bilingual Crew"
+        description="Licensed, insured, bilingual kitchen remodels in Cabo San Lucas. Cabinets, countertops, backsplash, plumbing, electrical. Photo updates for owners abroad."
         canonicalUrl="/kitchen-services-cabo"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
