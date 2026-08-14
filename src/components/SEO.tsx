@@ -16,7 +16,12 @@ export default function SEO({ title, description, canonicalUrl, ogImage, geoRegi
   const defaultOgImage = '/images/cabos-handyman-og.jpg';
   const siteUrl = 'https://www.caboshandyman.com';
   const fullCanonicalUrl = canonicalUrl ? `${siteUrl}${canonicalUrl}` : siteUrl;
-  const fullOgImage = ogImage || defaultOgImage;
+  // og:image must be an absolute URL — relative paths are not resolved by
+  // Facebook, WhatsApp or LinkedIn when they build a link preview.
+  const ogImagePath = ogImage || defaultOgImage;
+  const fullOgImage = ogImagePath.startsWith('http')
+    ? ogImagePath
+    : `${siteUrl}${ogImagePath}`;
 
   return (
     <Helmet>

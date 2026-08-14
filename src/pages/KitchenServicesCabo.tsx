@@ -5,6 +5,7 @@ import { CheckCircle2, Wrench, DollarSign, Clock, ArrowRight, Droplet, Zap, Chev
 const Footer = lazy(() => import('@/components/Footer'));
 import Navigation from '@/components/Navigation';
 import RelatedServices from '../components/RelatedServices';
+import kitchenBeforeAfter from '../assets/kitchen-before-after.webp';
 
 export default function KitchenServicesCabo() {
   const [openQuestion, setOpenQuestion] = useState<string | null>(null);
@@ -75,6 +76,7 @@ export default function KitchenServicesCabo() {
         title="Kitchen Remodels Los Cabos | Bilingual, Photos, Free Quote"
         description="Licensed, insured, bilingual kitchen remodels in Cabo San Lucas. Cabinets, countertops, backsplash, plumbing, electrical. Photo updates for owners abroad."
         canonicalUrl="/kitchen-services-cabo"
+        ogImage="/images/kitchen-before-after-og.jpg"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
         geoPosition="22.8866974;-109.9139710"
@@ -119,6 +121,25 @@ export default function KitchenServicesCabo() {
       {/* Main Content */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6 max-w-6xl">
+
+          {/* Proof before pitch — the title promises photos, so lead with one */}
+          <figure className="mb-12">
+            <img
+              src={kitchenBeforeAfter}
+              alt="Before and after of a kitchen remodel in Cabo San Lucas — dated wood cabinets and damaged countertop replaced with dark shaker cabinets, quartz counters, subway tile backsplash and under-cabinet lighting by Cabos Handyman"
+              width="1600"
+              height="1037"
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-auto rounded-lg shadow-lg"
+            />
+            <figcaption className="mt-3 text-sm text-gray-700">
+              A real Cabo San Lucas kitchen we remodeled — cabinets, quartz countertops, backsplash
+              and under-cabinet lighting. Owners who aren't in Cabo get this same before/after
+              record for every job.
+            </figcaption>
+          </figure>
 
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
