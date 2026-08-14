@@ -72,7 +72,7 @@ export default function KitchenServicesCabo() {
   return (
     <>
       <SEO
-        title="Kitchen Remodeling Los Cabos | Licensed & Bilingual Crew"
+        title="Kitchen Remodels Los Cabos | Bilingual, Photos, Free Quote"
         description="Licensed, insured, bilingual kitchen remodels in Cabo San Lucas. Cabinets, countertops, backsplash, plumbing, electrical. Photo updates for owners abroad."
         canonicalUrl="/kitchen-services-cabo"
         geoRegion="MX-BCS"
