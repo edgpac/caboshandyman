@@ -53,6 +53,7 @@ const staticPages = [
   { url: '/office-lighting-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
   { url: '/common-area-lighting-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
   { url: '/decorative-lighting-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
+  { url: '/ac-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
 
   // Kitchen sub-pages
   { url: '/cabinet-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },

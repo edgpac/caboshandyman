@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Home, Star, Droplet, Wrench, ArrowRight, Shield, Zap, Bath, Fan, Tv, Armchair } from 'lucide-react';
+import { Home, Star, Droplet, Wrench, ArrowRight, Shield, Zap, Bath, Fan, Tv, Armchair, Wind } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import LogoLoop from '../components/LogoLoop';
@@ -340,6 +340,7 @@ export default function ServicesPage() {
             <ServiceCard to="/office-lighting-cabo-san-lucas" icon={<Zap className="text-yellow-600" size={28} />} title="Office Lighting" desc="LED panels, task lighting, smart fixtures" accent="hover:border-yellow-400" />
             <ServiceCard to="/common-area-lighting-cabo-san-lucas" icon={<Zap className="text-yellow-400" size={28} />} title="Common Area Lighting" desc="Hallways, lobbies, parking, exterior" accent="hover:border-yellow-300" />
             <ServiceCard to="/decorative-lighting-cabo-san-lucas" icon={<Zap className="text-amber-500" size={28} />} title="Decorative Lighting" desc="String lights, accent, LED strips, landscape" accent="hover:border-amber-400" />
+            <ServiceCard to="/ac-installation-cabo-san-lucas" icon={<Wind className="text-sky-500" size={28} />} title="AC Installation & Repair" desc="Mini-split install, filter service, diagnostics" accent="hover:border-sky-300" />
           </ServiceSection>
 
           {/* ── KITCHEN ── */}

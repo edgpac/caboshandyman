@@ -23,6 +23,7 @@ const SERVICE_LINKS = [
   { href: '/office-lighting-cabo-san-lucas', label: '↳ Office Lighting' },
   { href: '/common-area-lighting-cabo-san-lucas', label: '↳ Common Area Lighting' },
   { href: '/decorative-lighting-cabo-san-lucas', label: '↳ Decorative Lighting' },
+  { href: '/ac-installation-cabo-san-lucas', label: '↳ AC Installation & Repair' },
   { href: '/kitchen-services-cabo', label: 'Kitchen Remodeling' },
   { href: '/cabinet-installation-cabo-san-lucas', label: '↳ Cabinet Installation' },
   { href: '/countertop-installation-cabo-san-lucas', label: '↳ Countertop Installation' },
