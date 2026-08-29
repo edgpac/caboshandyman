@@ -251,12 +251,12 @@ export default function BathroomServicesCabo() {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Bathroom Remodeling Packages</h2>
             <p className="text-center text-gray-600 mb-8">
-              Complete bathroom renovations with transparent package pricing based on scope and materials.
+              Every bathroom remodel is unique — scope and materials vary by property. Call for a custom quote.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 transition-colors">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">Basic Update</h3>
-                <div className="text-4xl font-bold text-blue-600 mb-4 text-center">$2,500-$6,000</div>
+                <a href="tel:+526121698328" className="block text-center text-blue-600 font-semibold mb-4 hover:underline">Call for a Quote</a>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />
@@ -286,7 +286,7 @@ export default function BathroomServicesCabo() {
                   MOST POPULAR
                 </div>
                 <h3 className="text-2xl font-bold mb-2 text-center">Standard Remodel</h3>
-                <div className="text-4xl font-bold mb-4 text-center">$6,000-$15,000</div>
+                <a href="tel:+526121698328" className="block text-center text-yellow-400 font-semibold mb-4 hover:underline">Call for a Quote</a>
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
@@ -313,7 +313,7 @@ export default function BathroomServicesCabo() {
 
               <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 transition-colors">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">Luxury Renovation</h3>
-                <div className="text-4xl font-bold text-blue-600 mb-4 text-center">$15,000+</div>
+                <a href="tel:+526121698328" className="block text-center text-blue-600 font-semibold mb-4 hover:underline">Call for a Quote</a>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-blue-600 flex-shrink-0 mt-1" size={18} />

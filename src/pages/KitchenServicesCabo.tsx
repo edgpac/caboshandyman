@@ -275,12 +275,12 @@ export default function KitchenServicesCabo() {
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Kitchen Remodeling Packages</h2>
             <p className="text-center text-gray-600 mb-8">
-              Complete kitchen renovations with transparent package pricing based on scope and materials.
+              Every kitchen remodel is unique — scope and materials vary by property. Call for a custom quote.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-orange-500 transition-colors">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">Basic Refresh</h3>
-                <div className="text-4xl font-bold text-orange-600 mb-4 text-center">$3,000-$8,000</div>
+                <a href="tel:+526121698328" className="block text-center text-orange-600 font-semibold mb-4 hover:underline">Call for a Quote</a>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={18} />
@@ -310,7 +310,7 @@ export default function KitchenServicesCabo() {
                   MOST POPULAR
                 </div>
                 <h3 className="text-2xl font-bold mb-2 text-center">Standard Remodel</h3>
-                <div className="text-4xl font-bold mb-4 text-center">$8,000-$20,000</div>
+                <a href="tel:+526121698328" className="block text-center text-yellow-400 font-semibold mb-4 hover:underline">Call for a Quote</a>
                 <ul className="space-y-2">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-yellow-400 flex-shrink-0 mt-1" size={18} />
@@ -337,7 +337,7 @@ export default function KitchenServicesCabo() {
 
               <div className="bg-white border-2 border-gray-200 rounded-xl p-6 hover:border-orange-500 transition-colors">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">Complete Renovation</h3>
-                <div className="text-4xl font-bold text-orange-600 mb-4 text-center">$20,000+</div>
+                <a href="tel:+526121698328" className="block text-center text-orange-600 font-semibold mb-4 hover:underline">Call for a Quote</a>
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={18} />
@@ -439,10 +439,13 @@ export default function KitchenServicesCabo() {
                       Kitchen remodel costs in Cabo San Lucas vary widely based on scope, materials, and finishes:
                     </p>
                     <ul className="list-disc list-inside space-y-2 mb-3 ml-4">
-                      <li><strong>Basic Refresh ($3,000-$8,000):</strong> New countertops, backsplash, sink/faucet, updated lighting, and cabinet hardware upgrades</li>
-                      <li><strong>Standard Remodel ($8,000-$20,000):</strong> Cabinet refacing/replacement, appliance installation, new flooring, electrical upgrades, plus all Basic Refresh items</li>
-                      <li><strong>Complete Renovation ($20,000+):</strong> Custom cabinetry, layout modifications, high-end finishes, complete electrical/plumbing overhaul</li>
+                      <li><strong>Basic Refresh:</strong> New countertops, backsplash, sink/faucet, updated lighting, and cabinet hardware upgrades</li>
+                      <li><strong>Standard Remodel:</strong> Cabinet refacing/replacement, appliance installation, new flooring, electrical upgrades, plus all Basic Refresh items</li>
+                      <li><strong>Complete Renovation:</strong> Custom cabinetry, layout modifications, high-end finishes, complete electrical/plumbing overhaul</li>
                     </ul>
+                    <p className="mb-3">
+                      Every kitchen is different, so we quote by scope, not off a price list — call us and we'll walk the space (or review photos/video for remote owners) and give you a real number.
+                    </p>
                     <p className="mb-3">
                       For smaller repairs and installations:
                     </p>
