@@ -224,6 +224,24 @@ export default function ACInstallationCabo() {
                   </li>
                 ))}
               </ul>
+              <div className="flex gap-2 mt-6">
+                <a
+                  href="/plans/ac-en.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 bg-orange-600 hover:bg-orange-700 text-white text-center py-3 rounded-lg font-semibold transition-colors shadow-lg text-sm"
+                >
+                  📥 Download EN
+                </a>
+                <a
+                  href="/plans/ac-es.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 bg-gray-700 hover:bg-gray-800 text-white text-center py-3 rounded-lg font-semibold transition-colors shadow-lg text-sm"
+                >
+                  📥 Descargar ES
+                </a>
+              </div>
             </div>
 
             <div className="space-y-6">
