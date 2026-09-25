@@ -484,9 +484,9 @@ export default function CabosHandymanHomepage() {
             </svg>
           </a>
 
-          {/* AI Chat Button */}
+          {/* AI Chat Button — opens Job It Ready's widget, not the legacy assistant */}
           <button
-            onClick={() => openAIAssistant('chat')}
+            onClick={() => (window as any).JIRWidget?.open()}
             className="bg-primary hover:bg-primary-hover text-primary-foreground rounded-full p-4 shadow-2xl transition-all duration-300 transform hover:scale-110 flex items-center justify-center group"
             style={{
               width: '64px',
@@ -511,7 +511,7 @@ export default function CabosHandymanHomepage() {
           isOpen={serviceMenuOpen}
           onClose={() => setServiceMenuOpen(false)}
           projectType={selectedProject}
-          onGetEstimate={() => openAIAssistant('analysis')}
+          onGetEstimate={() => (window as any).JIRWidget?.open()}
           onScheduleConsultation={() => openAIAssistant('booking')}
         />
 

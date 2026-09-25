@@ -87,6 +87,17 @@
 
   <body>
     <div id="root"></div>
+    <!--
+      Job It Ready's estimate widget. This is a plain, non-module script,
+      so it runs synchronously and window.JIRWidget exists before the
+      module script below (which is deferred by the browser) ever runs —
+      required since MaintenanceMasterHomepage.tsx's buttons call
+      window.JIRWidget.open() directly. data-hide-button="true" because
+      this page already has its own "Get an estimate" buttons; the
+      widget's own built-in floating button is skipped to avoid a
+      duplicate.
+    -->
+    <script src="https://www.jobitready.com/widget.js" data-shop="tiktok-eddy6six-cabos" data-hide-button="true"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
