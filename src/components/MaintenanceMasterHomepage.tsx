@@ -459,10 +459,7 @@ export default function CabosHandymanHomepage() {
         </section>
 
         {/* FLOATING BUTTONS - Bottom Right */}
-        <div
-          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col gap-3"
-          style={{ transform: "translateZ(0)" }}
-        >
+        <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col gap-3">
           {/* WhatsApp Button — disconnected, not deleted: only Job It Ready's
               widget should show as the floating button for now. Flip this
               back to `true` to bring it back exactly as it was. */}
