@@ -306,10 +306,10 @@ export default function CabosHandymanHomepage() {
                   Call for Free Estimate
                 </a>
                 <button
-                  onClick={() => openAIAssistant('booking')}
+                  onClick={() => (window as any).JIRWidget?.open()}
                   className="bg-white hover:bg-gray-50 text-gray-900 border-2 border-[#049d8e] px-8 py-4 rounded-lg text-lg font-bold transition-colors flex items-center justify-center shadow-sm"
                 >
-                  Schedule Service
+                  Free Quick Estimate
                   <ArrowRight className="ml-2 text-[#049d8e]" size={20} />
                 </button>
               </div>
