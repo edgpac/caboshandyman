@@ -30,7 +30,7 @@ export default function TopHandymanServicesLosCabos() {
       "longitude": "-109.9139710"
     },
     "telephone": "+52-612-169-8328",
-    "email": "loscabohandyman@gmail.com",
+    "email": "caboshandymanservice@gmail.com",
     "priceRange": "$60+",
     "openingHours": "Mo-Su 07:00-18:00",
     "aggregateRating": aggregateRatingSchema,
@@ -457,7 +457,7 @@ export default function TopHandymanServicesLosCabos() {
             </a>
           </div>
           <p className="text-teal-200 text-sm mt-5">
-            Or email us at <a href="mailto:loscabohandyman@gmail.com" className="underline">loscabohandyman@gmail.com</a>
+            Or email us at <a href="mailto:caboshandymanservice@gmail.com" className="underline">caboshandymanservice@gmail.com</a>
           </p>
         </div>
       </section>

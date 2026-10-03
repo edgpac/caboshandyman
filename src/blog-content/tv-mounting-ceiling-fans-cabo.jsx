@@ -504,7 +504,7 @@ export default function TVMountingCeilingFansCaboArticle() {
       <ul>
         <li><strong>Phone:</strong> +52 612 169 8328</li>
         <li><strong>Website:</strong> caboshandyman.com</li>
-        <li><strong>Email:</strong> loscabohandyman@gmail.com</li>
+        <li><strong>Email:</strong> caboshandymanservice@gmail.com</li>
         <li><strong>WhatsApp:</strong> Fast response for quick questions</li>
       </ul>
 

@@ -129,8 +129,8 @@ const ContactPage = () => {
                       </div>
                       <div>
                         <h3 className="font-semibold mb-1 text-gray-900">Email</h3>
-                        <a href="mailto:loscabohandyman@gmail.com" className="text-lg text-gray-700 hover:text-blue-600 transition-colors break-all">
-                          loscabohandyman@gmail.com
+                        <a href="mailto:caboshandymanservice@gmail.com" className="text-lg text-gray-700 hover:text-blue-600 transition-colors break-all">
+                          caboshandymanservice@gmail.com
                         </a>
                         <p className="text-sm text-gray-600 mt-1">For non-urgent inquiries - We reply within 24 hours</p>
                       </div>

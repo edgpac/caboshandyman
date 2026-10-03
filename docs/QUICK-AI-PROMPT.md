@@ -48,7 +48,7 @@ Format: Add to JSON array:
 - Multiple H2/H3/H4 headers
 - Bullet points for scannability
 - Bold `<strong>` important terms
-- Include contact: +52 612 169 8328, caboshandyman.com, loscabohandyman@gmail.com
+- Include contact: +52 612 169 8328, caboshandyman.com, caboshandymanservice@gmail.com
 - Business details: 20+ years, 600+ projects, $100 service call, 24/7 emergency
 
 **After adding article:**

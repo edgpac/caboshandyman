@@ -228,7 +228,7 @@ H2: Types of Handyman Services
 Always mention throughout the article:
 - **Website:** caboshandyman.com
 - **Phone:** +52 612 169 8328
-- **Email:** loscabohandyman@gmail.com
+- **Email:** caboshandymanservice@gmail.com
 - **Service details:** 20+ years experience, 600+ projects, 24/7 emergency service, $100 service call
 
 ---

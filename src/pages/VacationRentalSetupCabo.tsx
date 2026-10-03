@@ -261,8 +261,8 @@ export default function VacationRentalSetupCabo() {
                     <a href="tel:+526121698328" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">
                       <span>📞</span> +52 612 169 8328
                     </a>
-                    <a href="mailto:loscabohandyman@gmail.com" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">
-                      <span>✉️</span> loscabohandyman@gmail.com
+                    <a href="mailto:caboshandymanservice@gmail.com" className="flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">
+                      <span>✉️</span> caboshandymanservice@gmail.com
                     </a>
                   </div>
                 </div>

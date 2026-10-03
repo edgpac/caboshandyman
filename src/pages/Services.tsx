@@ -183,7 +183,7 @@ export default function ServicesPage() {
             "@type": "LocalBusiness",
             "name": "Cabos Handyman",
             "telephone": "+52-612-169-8328",
-            "email": "loscabohandyman@gmail.com",
+            "email": "caboshandymanservice@gmail.com",
             "url": "https://www.caboshandyman.com",
             "address": {
               "@type": "PostalAddress",

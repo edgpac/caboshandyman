@@ -53,7 +53,7 @@ export default function About() {
       "longitude": "-109.9139710"
     },
     "telephone": "+52-612-169-8328",
-    "email": "loscabohandyman@gmail.com",
+    "email": "caboshandymanservice@gmail.com",
     "url": "https://www.caboshandyman.com",
     "openingHours": "Mo-Su 07:00-18:00",
     "foundingDate": "2019",
@@ -315,11 +315,11 @@ export default function About() {
                 +52 612 169 8328
               </a>
               <a
-                href="mailto:loscabohandyman@gmail.com"
+                href="mailto:caboshandymanservice@gmail.com"
                 className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white border-2 border-white/30 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-white/20 transition-colors"
               >
                 <Mail size={20} />
-                loscabohandyman@gmail.com
+                caboshandymanservice@gmail.com
               </a>
             </div>
             <p className="text-gray-400 mt-6 text-sm">

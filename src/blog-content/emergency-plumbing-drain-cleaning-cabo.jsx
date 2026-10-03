@@ -328,7 +328,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
 
       <ul>
         <li><strong>Phone / WhatsApp:</strong> +52 612 169 8328</li>
-        <li><strong>Email:</strong> loscabohandyman@gmail.com</li>
+        <li><strong>Email:</strong> caboshandymanservice@gmail.com</li>
         <li><strong>Service Area:</strong> Cabo San Lucas and Los Cabos corridor</li>
         <li><strong>Hours:</strong> 7am–6pm daily · 24/7 for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">members</a></li>
       </ul>

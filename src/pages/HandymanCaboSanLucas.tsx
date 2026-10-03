@@ -28,7 +28,7 @@ export default function HandymanCaboSanLucas() {
       "longitude": "-109.9139710"
     },
     "telephone": "+52-612-169-8328",
-    "email": "loscabohandyman@gmail.com",
+    "email": "caboshandymanservice@gmail.com",
     "priceRange": "$60+",
     "openingHours": "Mo-Su 07:00-18:00",
     "aggregateRating": aggregateRatingSchema,
@@ -1003,7 +1003,7 @@ export default function HandymanCaboSanLucas() {
                 </div>
                 <div>
                   <p className="font-semibold">Email</p>
-                  <p>loscabohandyman@gmail.com</p>
+                  <p>caboshandymanservice@gmail.com</p>
                 </div>
                 <div>
                   <p className="font-semibold">Service Area</p>

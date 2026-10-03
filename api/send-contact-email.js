@@ -1,5 +1,10 @@
 import nodemailer from 'nodemailer';
 
+// SMTP login (paired with CONTACTEMAIL_APP_PASSWORD) is separate from the inbox
+// that receives requests, so the inbox can change without a new app password.
+const SMTP_USER = process.env.GMAIL_USER || 'caboshandymanservice@gmail.com';
+const BUSINESS_INBOX = process.env.BUSINESS_EMAIL || 'caboshandymanservice@gmail.com';
+
 export default async function handler(req, res) {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
@@ -35,7 +40,7 @@ export default async function handler(req, res) {
       console.error('CONTACTEMAIL_APP_PASSWORD not configured');
       return res.status(500).json({ 
         success: false, 
-        error: 'Email service not configured. Please contact us directly at loscabohandyman@gmail.com' 
+        error: 'Email service not configured. Please contact us directly at caboshandymanservice@gmail.com' 
       });
     }
 
@@ -43,7 +48,7 @@ export default async function handler(req, res) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.GMAIL_USER || 'loscabohandyman@gmail.com',
+        user: SMTP_USER,
         pass: process.env.CONTACTEMAIL_APP_PASSWORD
       }
     });
@@ -118,8 +123,8 @@ export default async function handler(req, res) {
 
     // Send email to business
     const mailOptions = {
-      from: process.env.GMAIL_USER || 'loscabohandyman@gmail.com',
-      to: process.env.GMAIL_USER || 'loscabohandyman@gmail.com',
+      from: SMTP_USER,
+      to: BUSINESS_INBOX,
       subject: `🔧 ${urgency === 'emergency' ? '🚨 EMERGENCY - ' : ''}New Contact: ${serviceName} - ${name}`,
       html: businessEmailHtml,
       replyTo: email
@@ -171,7 +176,7 @@ export default async function handler(req, res) {
             <h3 style="margin-top: 0; color: #333;">Need Immediate Assistance?</h3>
             <p style="margin: 5px 0;">📱 <strong>Call/WhatsApp:</strong> <a href="tel:+526121698328" style="color: #02af9f;">+52 612 169 8328</a></p>
             <p style="margin: 5px 0;">⚡ <strong>Emergency Service:</strong> Available 24/7</p>
-            <p style="margin: 5px 0;">📧 <strong>Email:</strong> <a href="mailto:loscabohandyman@gmail.com" style="color: #02af9f;">loscabohandyman@gmail.com</a></p>
+            <p style="margin: 5px 0;">📧 <strong>Email:</strong> <a href="mailto:caboshandymanservice@gmail.com" style="color: #02af9f;">caboshandymanservice@gmail.com</a></p>
           </div>
           
           <div style="background: #e0e7ff; padding: 15px; border-radius: 8px; margin: 20px 0;">
@@ -206,8 +211,9 @@ export default async function handler(req, res) {
     `;
 
     const customerMailOptions = {
-      from: process.env.GMAIL_USER || 'loscabohandyman@gmail.com',
+      from: SMTP_USER,
       to: email,
+      replyTo: BUSINESS_INBOX,
       subject: `We Received Your ${urgency === 'emergency' ? 'Emergency ' : ''}Request - Cabos Handyman`,
       html: customerEmailHtml
     };
