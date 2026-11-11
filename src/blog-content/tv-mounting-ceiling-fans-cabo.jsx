@@ -542,7 +542,7 @@ export default function TVMountingCeilingFansCaboArticle() {
       <hr className="my-8" />
 
       <p className="text-sm text-muted-foreground italic">
-        Cabos Handyman provides professional TV mounting, ceiling fan installation, light fixture services, and custom cabinet work throughout Cabo San Lucas and Los Cabos. With 20+ years of experience and hundreds of successful installations, we're your trusted partner for home improvement projects large and small.
+        Cabos Handyman provides professional TV mounting, ceiling fan installation, light fixture services, and custom cabinet work throughout Cabo San Lucas, Los Cabos. With 20+ years of experience and hundreds of successful installations, we're your trusted partner for home improvement projects large and small.
       </p>
     </>
   );

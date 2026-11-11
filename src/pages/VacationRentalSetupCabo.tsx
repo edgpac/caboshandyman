@@ -38,10 +38,6 @@ export default function VacationRentalSetupCabo() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ],
     "offers": {

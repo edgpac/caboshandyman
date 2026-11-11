@@ -11,6 +11,7 @@
       "destination": "https://www.caboshandyman.com/:path",
       "permanent": true
     },
+    { "source": "/%20sitemap.xml", "destination": "/sitemap.xml", "permanent": true },
     { "source": "/plumber", "destination": "/plumber-cabo-san-lucas", "permanent": true },
     { "source": "/plumber-cabo", "destination": "/plumber-cabo-san-lucas", "permanent": true },
     { "source": "/plumbing", "destination": "/plumber-cabo-san-lucas", "permanent": true },
@@ -82,7 +83,7 @@
   "rewrites": [
     {
       "source": "/((?!api/|plans/).*)",
-      "destination": "/index.html"
+      "destination": "/spa-shell.html"
     }
   ],
   "headers": [

@@ -29,7 +29,7 @@ export default function ToiletInstallationCabo() {
             Toilet Installation<br />Cabo San Lucas
           </h1>
           <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Professional toilet installation, replacement, and repair throughout Los Cabos. We handle everything from standard swaps to complete bathroom plumbing upgrades.
+            Professional toilet installation, replacement, and repair throughout Cabo San Lucas, Los Cabos. We handle everything from standard swaps to complete bathroom plumbing upgrades.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+526121698328" className="inline-flex items-center justify-center gap-2 bg-white text-cyan-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
@@ -81,7 +81,7 @@ export default function ToiletInstallationCabo() {
                     'Bilingual service (English & Spanish)',
                     'Same-day service available',
                     '1-year workmanship warranty',
-                    'Serving Cabo, San José, CSL corridor',
+                    'Serving Cabo San Lucas in Los Cabos',
                   ].map(item => (
                     <li key={item} className="flex items-center gap-2">
                       <CheckCircle2 className="text-teal-500 shrink-0" size={16} />
@@ -104,7 +104,7 @@ export default function ToiletInstallationCabo() {
                   </div>
                   <div>
                     <p className="font-semibold">Do you serve vacation rentals?</p>
-                    <p>Absolutely. We serve Airbnb, VRBO, and long-term rental properties throughout Los Cabos.</p>
+                    <p>Absolutely. We serve Airbnb, VRBO, and long-term rental properties throughout Cabo San Lucas, Los Cabos.</p>
                   </div>
                 </div>
               </div>
@@ -116,7 +116,7 @@ export default function ToiletInstallationCabo() {
       <section className="py-12 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold mb-4">Need a Toilet Installed or Replaced?</h2>
-          <p className="text-white/90 mb-6">Call us for a free estimate or to schedule service anywhere in Los Cabos.</p>
+          <p className="text-white/90 mb-6">Call us for a free estimate or to schedule service anywhere in Cabo San Lucas, Los Cabos.</p>
           <a href="tel:+526121698328" className="inline-flex items-center gap-2 bg-white text-teal-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
             <Phone size={22} /> +52 612 169 8328
           </a>

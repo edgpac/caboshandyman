@@ -36,10 +36,6 @@ export default function HandymanCaboSanLucas() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ],
     "sameAs": [
@@ -70,7 +66,7 @@ export default function HandymanCaboSanLucas() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
               <Wrench size={20} />
-              <span className="text-sm font-medium">20+ Years Serving Los Cabos</span>
+              <span className="text-sm font-medium">20+ Years Serving Cabo San Lucas in Los Cabos</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Professional Handyman Service in Cabo San Lucas
@@ -117,7 +113,7 @@ export default function HandymanCaboSanLucas() {
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-gray-700 leading-relaxed">
-              Finding a reliable handyman in Cabo San Lucas can be challenging, especially when you need someone who understands both the unique demands of coastal living and the expectations of the international community. Cabos Handyman brings 20+ years of trade experience to homeowners, vacation rental owners, property managers, and commercial clients throughout Los Cabos.
+              Finding a reliable handyman in Cabo San Lucas can be challenging, especially when you need someone who understands both the unique demands of coastal living and the expectations of the international community. Cabos Handyman brings 20+ years of trade experience to homeowners, vacation rental owners, property managers, and commercial clients throughout Cabo San Lucas, Los Cabos.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               From simple repairs to complete property renovations, our bilingual team (English/Spanish) handles every job with the same commitment to quality, transparency, and customer satisfaction. With 600+ completed projects since 2019 and a perfect 5.0 Google rating, we've built our reputation one satisfied customer at a time.
@@ -257,6 +253,13 @@ export default function HandymanCaboSanLucas() {
 
             </div>
           </div>
+
+          <p className="-mt-6 mb-12 text-center text-gray-700">
+            Need cabinets, shelving, trim or a custom build? See our{' '}
+            <a href="/carpentry-cabo-san-lucas" className="font-semibold text-teal-700 underline hover:text-teal-800">carpentry services in Cabo San Lucas</a>
+            {' '}&middot; en español:{' '}
+            <a href="/carpintero-cabo-san-lucas" hrefLang="es" lang="es" className="font-semibold text-teal-700 underline hover:text-teal-800">carpintero en Cabo San Lucas</a>
+          </p>
 
           {/* Comprehensive Services List */}
           <div className="mb-12">
@@ -577,10 +580,10 @@ export default function HandymanCaboSanLucas() {
                 {openQuestion === 'faq2' && (
                   <div className="px-6 pb-6 text-gray-700 leading-relaxed">
                     <p className="mb-3">
-                      We serve <strong>all of Los Cabos</strong>, including Cabo San Lucas, San José del Cabo, the Tourist Corridor, and surrounding areas like El Tezal, Pedregal, Palmilla, and Puerto Los Cabos.
+                      We serve <strong>Cabo San Lucas, Los Cabos</strong> — downtown Cabo San Lucas, Pedregal and Pedregal Hills, El Médano and Médano Beach, the Pacific-side developments, the Marina and Golden Zone, and Cabo Bello. We don't regularly service San José del Cabo or the Tourist Corridor.
                     </p>
                     <p className="mb-3">
-                      With 20+ years as a local handyman, we know every neighborhood in Los Cabos and can navigate quickly to your property. We regularly service vacation rentals in Médano Beach, luxury homes in Pedregal, and commercial properties throughout the corridor.
+                      With 20+ years as a local handyman, we know every neighborhood in Cabo San Lucas and can navigate quickly to your property. We regularly service vacation rentals in Médano Beach, luxury homes in Pedregal, and commercial properties throughout Cabo San Lucas.
                     </p>
                     <p>
                       Service area extends approximately 30km from Cabo San Lucas. For locations outside this range, please call <a href="tel:+526121698328" className="text-teal-600 hover:underline font-medium">+52 612 169 8328</a> to confirm availability.
@@ -619,7 +622,7 @@ export default function HandymanCaboSanLucas() {
                       <li>Understanding of Airbnb/VRBO standards for 5-star ratings</li>
                     </ul>
                     <p>
-                      We currently maintain 50+ vacation rental properties throughout Los Cabos. Call <a href="tel:+526121698328" className="text-teal-600 hover:underline font-medium">+52 612 169 8328</a> to discuss a maintenance plan for your rental.
+                      We currently maintain 50+ vacation rental properties throughout Cabo San Lucas, Los Cabos. Call <a href="tel:+526121698328" className="text-teal-600 hover:underline font-medium">+52 612 169 8328</a> to discuss a maintenance plan for your rental.
                     </p>
                   </div>
                 )}

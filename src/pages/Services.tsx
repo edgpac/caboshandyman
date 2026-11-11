@@ -147,7 +147,7 @@ function WorkGallery() {
     <div className="mb-14">
       <div className="mb-4 border-b border-gray-200 pb-3">
         <h2 className="text-2xl font-bold text-gray-900">Our Work</h2>
-        <p className="text-gray-500 text-sm mt-1">Real projects completed across Los Cabos — not limited to what you see here, just give us a call.</p>
+        <p className="text-gray-500 text-sm mt-1">Real projects completed across Cabo San Lucas, Los Cabos — not limited to what you see here, just give us a call.</p>
       </div>
       <div className="space-y-1.5 overflow-hidden">
         <LogoLoop logos={makeGalleryItems(ROW1)} direction="left"  speed={120} gap={TILE_GAP} logoHeight={TILE_SIZE} ariaLabel="Cabos Handyman work photos row 1" />
@@ -195,8 +195,7 @@ export default function ServicesPage() {
             "priceRange": "$60-$1200",
             "openingHours": "Mo-Su 07:00-18:00",
             "areaServed": [
-              { "@type": "City", "name": "Cabo San Lucas" },
-              { "@type": "AdministrativeArea", "name": "Los Cabos" }
+              { "@type": "City", "name": "Cabo San Lucas" }
             ],
             "sameAs": [
               "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
@@ -400,7 +399,7 @@ export default function ServicesPage() {
           {/* ── COMMERCIAL & HOSPITALITY ── */}
           <ServiceSection
             title="Commercial & Hospitality"
-            intro="We work with restaurants, bars, hotels, and HOAs across Los Cabos — not limited to residential projects."
+            intro="We work with restaurants, bars, hotels, and HOAs across Cabo San Lucas, Los Cabos — not limited to residential projects."
           >
             <ServiceCard to="/booth-installation-cabo-san-lucas" icon={<Armchair className="text-indigo-500" size={28} />} title="Booth Installation" desc="Restaurant & dining area booth seating" accent="hover:border-indigo-300" />
             <ServiceCard to="/bar-installation-cabo-san-lucas" icon={<Wrench className="text-amber-700" size={28} />} title="Bar Installation" desc="Custom bar tops, cabinetry, under-bar setup" accent="hover:border-amber-500" />

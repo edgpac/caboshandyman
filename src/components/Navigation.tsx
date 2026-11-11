@@ -38,6 +38,7 @@ const SERVICE_LINKS = [
   { href: '/mirror-installation-cabo-san-lucas', label: '↳ Mirror Installation' },
   { href: '/bathroom-shelving-cabo-san-lucas', label: '↳ Bathroom Shelving' },
   { href: '/handyman-cabo-san-lucas', label: 'Handyman Services' },
+  { href: '/carpentry-cabo-san-lucas', label: '↳ Carpentry' },
   { href: '/furniture-assembly-cabo', label: '↳ Furniture Assembly' },
   { href: '/tv-mounting-cabo', label: '↳ TV Mounting' },
   { href: '/door-lock-replacement-cabo-san-lucas', label: '↳ Door Lock Replacement' },

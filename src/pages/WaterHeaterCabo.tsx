@@ -29,7 +29,7 @@ export default function WaterHeaterCabo() {
             Water Heater Installation<br />Cabo San Lucas
           </h1>
           <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Fast water heater installation, replacement, and repair throughout Los Cabos. No hot water? Our plumbers respond quickly for emergency service.
+            Fast water heater installation, replacement, and repair throughout Cabo San Lucas, Los Cabos. No hot water? Our plumbers respond quickly for emergency service.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+526121698328" className="inline-flex items-center justify-center gap-2 bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
@@ -116,7 +116,7 @@ export default function WaterHeaterCabo() {
       <section className="py-12 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold mb-4">No Hot Water? We Can Help.</h2>
-          <p className="text-white/90 mb-6">Call for fast water heater service anywhere in Los Cabos — Cabo San Lucas, San José del Cabo, and the corridor.</p>
+          <p className="text-white/90 mb-6">Call for fast water heater service anywhere in Cabo San Lucas, Los Cabos.</p>
           <a href="tel:+526121698328" className="inline-flex items-center gap-2 bg-white text-teal-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
             <Phone size={22} /> +52 612 169 8328
           </a>

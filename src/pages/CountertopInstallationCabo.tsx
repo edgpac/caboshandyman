@@ -29,7 +29,7 @@ export default function CountertopInstallationCabo() {
             Countertop Installation<br />Cabo San Lucas
           </h1>
           <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Granite, quartz, marble, tile, and laminate countertops installed in kitchens and bathrooms throughout Los Cabos. Professional installation from measurement to finish.
+            Granite, quartz, marble, tile, and laminate countertops installed in kitchens and bathrooms throughout Cabo San Lucas, Los Cabos. Professional installation from measurement to finish.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+526121698328" className="inline-flex items-center justify-center gap-2 bg-white text-stone-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">

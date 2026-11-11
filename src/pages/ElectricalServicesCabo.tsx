@@ -39,10 +39,6 @@ export default function ElectricalServicesCabo() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ]
   };
@@ -118,7 +114,7 @@ export default function ElectricalServicesCabo() {
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-gray-700 leading-relaxed">
-              Electrical work isn't a DIY project—it requires professional expertise, proper tools, and knowledge of local building codes to ensure safety and compliance. Whether you need a simple outlet installation, complete lighting upgrades for your vacation rental, or emergency electrical repairs, Cabos Handyman provides licensed electrical services throughout Los Cabos. With over 20 years of experience, our team handles residential and commercial electrical projects with the precision and safety that electrical work demands.
+              Electrical work isn't a DIY project—it requires professional expertise, proper tools, and knowledge of local building codes to ensure safety and compliance. Whether you need a simple outlet installation, complete lighting upgrades for your vacation rental, or emergency electrical repairs, Cabos Handyman provides licensed electrical services throughout Cabo San Lucas, Los Cabos. With over 20 years of experience, our team handles residential and commercial electrical projects with the precision and safety that electrical work demands.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               Cabo San Lucas properties face unique electrical challenges—salt air accelerates corrosion on outdoor fixtures, power fluctuations can damage sensitive electronics, and high humidity affects electrical components. Our bilingual team (English/Spanish) understands these local conditions and uses corrosion-resistant materials, proper grounding techniques, and surge protection to ensure reliable, safe electrical systems. From basic repairs to comprehensive upgrades, we prioritize safety and code compliance on every project.

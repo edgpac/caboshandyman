@@ -39,10 +39,6 @@ export default function FurnitureAssemblyCabo() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ]
   };
@@ -103,7 +99,7 @@ export default function FurnitureAssemblyCabo() {
               Ordering furniture online to Cabo San Lucas is convenient until you realize it arrives in 47 pieces with instructions in three languages—none of which make sense. Whether you're an expat setting up your new home, a vacation rental owner furnishing a property, or simply don't have the time or tools for assembly, professional furniture assembly service saves hours of frustration.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              With over 20 years serving Los Cabos and thousands of furniture pieces assembled, our bilingual team (English/Spanish) expertly handles everything from simple nightstands to complex bedroom sets, outdoor furniture, and office workstations. You relax while we handle the heavy lifting, confusing instructions, and precise assembly.
+              With over 20 years serving Cabo San Lucas in Los Cabos and thousands of furniture pieces assembled, our bilingual team (English/Spanish) expertly handles everything from simple nightstands to complex bedroom sets, outdoor furniture, and office workstations. You relax while we handle the heavy lifting, confusing instructions, and precise assembly.
             </p>
           </div>
 

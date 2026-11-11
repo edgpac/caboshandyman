@@ -17,7 +17,7 @@ type Post = {
 
 const categoryDescriptions: Record<string, string> = {
   'Services': 'Guides and overviews of our handyman and maintenance services in Cabo San Lucas.',
-  'Installation Services': 'Step-by-step insights on professional installation projects across Los Cabos.',
+  'Installation Services': 'Step-by-step insights on professional installation projects across Cabo San Lucas, Los Cabos.',
   'Emergency Services': '24/7 emergency repair guides and what to do when something goes wrong.',
   'Property Management': 'Tips for absentee owners and vacation rental hosts managing property in Cabo.',
 };
@@ -25,7 +25,8 @@ const categoryDescriptions: Record<string, string> = {
 const categoryOrder = ['Services', 'Installation Services', 'Emergency Services', 'Property Management'];
 
 function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  // Calendar date parsed as UTC midnight — format in UTC so it never shifts a day.
+  return new Date(dateStr).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' });
 }
 
 export default function Blog() {

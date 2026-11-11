@@ -11,7 +11,7 @@ export default function ShowerInstallationCabo() {
     <>
       <SEO
         title="Shower Installation Cabo San Lucas | Cabos Handyman"
-        description="Professional shower installation and replacement in Cabo San Lucas. Walk-in showers, shower tile, shower valves, and shower heads. Licensed plumbers serving Los Cabos."
+        description="Professional shower installation and replacement in Cabo San Lucas. Walk-in showers, shower tile, shower valves, and shower heads. Licensed plumbers serving Cabo San Lucas in Los Cabos."
         canonicalUrl="/shower-installation-cabo-san-lucas"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -29,7 +29,7 @@ export default function ShowerInstallationCabo() {
             Shower Installation<br />Cabo San Lucas
           </h1>
           <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Walk-in showers, shower tile, plumbing, and fixtures — professional shower installation and replacement throughout Los Cabos.
+            Walk-in showers, shower tile, plumbing, and fixtures — professional shower installation and replacement throughout Cabo San Lucas, Los Cabos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+526121698328" className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
@@ -116,7 +116,7 @@ export default function ShowerInstallationCabo() {
       <section className="py-12 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold mb-4">Ready to Upgrade Your Shower?</h2>
-          <p className="text-white/90 mb-6">Call for a free estimate on shower installation anywhere in Los Cabos.</p>
+          <p className="text-white/90 mb-6">Call for a free estimate on shower installation anywhere in Cabo San Lucas, Los Cabos.</p>
           <a href="tel:+526121698328" className="inline-flex items-center gap-2 bg-white text-teal-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
             <Phone size={22} /> +52 612 169 8328
           </a>

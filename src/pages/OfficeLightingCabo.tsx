@@ -29,7 +29,7 @@ export default function OfficeLightingCabo() {
             Office Lighting Installation<br />Cabo San Lucas
           </h1>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            LED panels, track lighting, task lighting, and full office lighting upgrades — installed by licensed electricians serving businesses throughout Los Cabos.
+            LED panels, track lighting, task lighting, and full office lighting upgrades — installed by licensed electricians serving businesses throughout Cabo San Lucas, Los Cabos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+526121698328" className="inline-flex items-center gap-2 bg-white text-orange-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
@@ -81,7 +81,7 @@ export default function OfficeLightingCabo() {
                     'Bilingual service (English & Spanish)',
                     '1-year workmanship warranty',
                     'Same-day service available',
-                    'Serving all of Los Cabos',
+                    'Serving Cabo San Lucas in Los Cabos',
                   ].map(item => (
                     <li key={item} className="flex items-center gap-2">
                       <CheckCircle2 className="text-yellow-500 shrink-0" size={16} />

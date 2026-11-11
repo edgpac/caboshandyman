@@ -2,12 +2,12 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
   return (
     <>
       <p className="lead text-xl text-muted-foreground mb-6">
-        When a drain backs up, a toilet overflows, or a pipe bursts in your Cabo San Lucas home, you need fast, professional help. Cabos Handyman provides emergency plumbing and drain cleaning services throughout Los Cabos — combining nearly two decades of construction and plumbing experience with the specialized tools to handle any plumbing situation.
+        When a drain backs up, a toilet overflows, or a pipe bursts in your Cabo San Lucas home, you need fast, professional help. Cabos Handyman provides emergency plumbing and drain cleaning services throughout Cabo San Lucas, Los Cabos — combining nearly two decades of construction and plumbing experience with the specialized tools to handle any plumbing situation.
       </p>
 
       <h2>Professional Plumbing Services in Cabo San Lucas</h2>
       <p>
-        Since 2006, the team behind <strong>caboshandyman.com</strong> has been serving the Los Cabos region with expert construction and{' '}
+        Since 2006, the team behind <strong>caboshandyman.com</strong> has been serving Cabo San Lucas in the Los Cabos region with expert construction and{' '}
         <a href="/plumber-cabo-san-lucas" className="text-teal-600 hover:underline font-medium">
           plumbing services
         </a>
@@ -329,7 +329,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
       <ul>
         <li><strong>Phone / WhatsApp:</strong> +52 612 169 8328</li>
         <li><strong>Email:</strong> caboshandymanservice@gmail.com</li>
-        <li><strong>Service Area:</strong> Cabo San Lucas and Los Cabos corridor</li>
+        <li><strong>Service Area:</strong> Cabo San Lucas, Los Cabos</li>
         <li><strong>Hours:</strong> 7am–6pm daily · 24/7 for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">members</a></li>
       </ul>
 

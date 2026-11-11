@@ -29,7 +29,7 @@ export default function CisternFloatValveReplacementCaboArticle() {
       <h2>What We Found on This Job</h2>
       <p>
         When we arrived and opened the cistern lid, the problem was immediately visible. The existing
-        float valve was an older plastic unit — common in residential installations across Los Cabos —
+        float valve was an older plastic unit — common in residential installations across Cabo San Lucas, Los Cabos —
         and the internal seat had worn to the point where it could no longer hold pressure. The float arm
         was reaching its upper limit and the valve was still letting water trickle through. The tank was
         perpetually full and perpetually overflowing, sending water straight down the drain.
@@ -61,7 +61,7 @@ export default function CisternFloatValveReplacementCaboArticle() {
       <h2>What We Installed: Foset Brass Float Valve</h2>
       <p>
         We replaced the old unit with a Foset brand brass float valve — a 1/2" model rated to 200 PSI.
-        Foset is a well-established Mexican plumbing brand with reliable distribution across Los Cabos,
+        Foset is a well-established Mexican plumbing brand with reliable distribution across Cabo San Lucas, Los Cabos,
         which matters for parts availability if anything ever needs servicing down the road.
       </p>
       <p>

@@ -112,10 +112,6 @@ export default function CabosHandymanHomepage() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ],
     "sameAs": [
@@ -333,6 +329,12 @@ export default function CabosHandymanHomepage() {
               </p>
               <p className="mt-4 text-base font-semibold text-[#06756b]">
                 {googleRatingSentence} &middot; {projectsSinceLabel}
+              </p>
+              <p className="mt-3 text-base text-gray-900">
+                Custom woodwork too — see our{' '}
+                <a href="/carpentry-cabo-san-lucas" className="font-semibold text-[#06756b] underline hover:text-[#049d8e]">carpentry services in Cabo San Lucas</a>
+                {' '}&middot;{' '}
+                <a href="/carpintero-cabo-san-lucas" hrefLang="es" lang="es" className="font-semibold text-[#06756b] underline hover:text-[#049d8e]">carpintero en Cabo San Lucas</a>
               </p>
             </div>
             

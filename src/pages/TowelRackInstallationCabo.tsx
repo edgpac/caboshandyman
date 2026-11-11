@@ -81,7 +81,7 @@ export default function TowelRackInstallationCabo() {
                     'Bilingual service (English & Spanish)',
                     '1-year workmanship warranty',
                     'Same-day service available',
-                    'Serving all of Los Cabos',
+                    'Serving Cabo San Lucas in Los Cabos',
                   ].map(item => (
                     <li key={item} className="flex items-center gap-2">
                       <CheckCircle2 className="text-teal-500 shrink-0" size={16} />

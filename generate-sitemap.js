@@ -8,6 +8,9 @@ const __dirname = path.dirname(__filename);
 const SITE_URL = 'https://www.caboshandyman.com';
 const OUTPUT_PATH = path.join(__dirname, 'public', 'sitemap.xml');
 
+// Pages marked noindex (TV mounting, cabinet installation, water leak
+// detector, and blog posts with "noindex": true) are deliberately left out —
+// a sitemap should only list URLs we want indexed.
 const staticPages = [
   // Core
   { url: '/', changefreq: 'weekly', priority: '1.0' },
@@ -21,7 +24,6 @@ const staticPages = [
 
   // Property services - highest priority
   { url: '/property-care-plans', changefreq: 'monthly', priority: '0.95' },
-  { url: '/property-management-cabo-san-lucas', changefreq: 'monthly', priority: '0.95' },
   { url: '/property-setup-cabo', changefreq: 'monthly', priority: '0.90' },
   { url: '/vacation-rental-setup-cabo', changefreq: 'monthly', priority: '0.90' },
 
@@ -31,6 +33,8 @@ const staticPages = [
   { url: '/electrical-services-cabo', changefreq: 'monthly', priority: '0.88' },
   { url: '/kitchen-services-cabo', changefreq: 'monthly', priority: '0.88' },
   { url: '/bathroom-services-cabo', changefreq: 'monthly', priority: '0.88' },
+  { url: '/carpentry-cabo-san-lucas', changefreq: 'monthly', priority: '0.88' },
+  { url: '/carpintero-cabo-san-lucas', changefreq: 'monthly', priority: '0.88' },
 
   // Plumbing sub-pages
   { url: '/toilet-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
@@ -41,7 +45,6 @@ const staticPages = [
   { url: '/bathroom-sink-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
   { url: '/water-heater-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
   { url: '/garbage-disposal-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
-  { url: '/water-leak-detector-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
   { url: '/commercial-sink-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
 
   // Electrical sub-pages
@@ -56,7 +59,6 @@ const staticPages = [
   { url: '/ac-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
 
   // Kitchen sub-pages
-  { url: '/cabinet-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
   { url: '/countertop-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
   { url: '/backsplash-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
   { url: '/tile-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
@@ -72,7 +74,6 @@ const staticPages = [
 
   // Handyman sub-pages
   { url: '/furniture-assembly-cabo', changefreq: 'monthly', priority: '0.82' },
-  { url: '/tv-mounting-cabo', changefreq: 'monthly', priority: '0.82' },
   { url: '/painting-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
   { url: '/door-lock-replacement-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
   { url: '/window-repair-cabo-san-lucas', changefreq: 'monthly', priority: '0.80' },
@@ -110,7 +111,7 @@ function generateSitemap() {
     xml += '  </url>\n';
   });
   
-  blogPosts.forEach(post => {
+  blogPosts.filter(post => !post.noindex).forEach(post => {
     xml += '  <url>\n';
     xml += `    <loc>${SITE_URL}/blog/${post.slug}</loc>\n`;
     xml += `    <lastmod>${post.publishDate}</lastmod>\n`;

@@ -48,7 +48,7 @@ export default function CommonAreaLightingCabo() {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Common Area Lighting Services</h2>
               <p className="text-gray-600 mb-6">
-                We work with HOAs, condo associations, and property management companies throughout Los Cabos to install, repair, and maintain lighting in common areas — keeping communities safe, well-lit, and attractive.
+                We work with HOAs, condo associations, and property management companies throughout Cabo San Lucas, Los Cabos to install, repair, and maintain lighting in common areas — keeping communities safe, well-lit, and attractive.
               </p>
               <ul className="space-y-3">
                 {[
@@ -81,7 +81,7 @@ export default function CommonAreaLightingCabo() {
                     'Bilingual service (English & Spanish)',
                     '1-year workmanship warranty',
                     'Same-day service available',
-                    'Serving all of Los Cabos',
+                    'Serving Cabo San Lucas in Los Cabos',
                   ].map(item => (
                     <li key={item} className="flex items-center gap-2">
                       <CheckCircle2 className="text-violet-500 shrink-0" size={16} />

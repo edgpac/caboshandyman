@@ -39,10 +39,6 @@ export default function TVMountingCabo() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ]
   };
@@ -104,7 +100,7 @@ export default function TVMountingCabo() {
               That expensive 65" TV deserves more than a wobbly mount and tangled wires hanging down the wall. Whether you're setting up a home theater, outfitting a vacation rental, or upgrading your bedroom, professional TV mounting service ensures perfect placement, secure installation, and clean concealed wiring that looks like it was built into the home.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              With over 20 years serving Los Cabos and thousands of TVs professionally mounted, our bilingual team (English/Spanish) handles all TV sizes, all wall types (drywall, concrete, stucco), and complex wiring situations. Same-day service available for most installations.
+              With over 20 years serving Cabo San Lucas in Los Cabos and thousands of TVs professionally mounted, our bilingual team (English/Spanish) handles all TV sizes, all wall types (drywall, concrete, stucco), and complex wiring situations. Same-day service available for most installations.
             </p>
           </div>
 

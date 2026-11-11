@@ -35,9 +35,7 @@ export default function TopHandymanServicesLosCabos() {
     "openingHours": "Mo-Su 07:00-18:00",
     "aggregateRating": aggregateRatingSchema,
     "areaServed": [
-      { "@type": "City", "name": "Cabo San Lucas" },
-      { "@type": "City", "name": "San José del Cabo" },
-      { "@type": "AdministrativeArea", "name": "Los Cabos" }
+      { "@type": "City", "name": "Cabo San Lucas" }
     ],
     "sameAs": [
       "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
@@ -137,7 +135,7 @@ export default function TopHandymanServicesLosCabos() {
   const faqs = [
     {
       q: "What areas in Los Cabos do you serve?",
-      a: "We serve all of Los Cabos — Cabo San Lucas, San José del Cabo, Todos Santos, East Cape, Palmilla, and all communities in between."
+      a: "We serve Cabo San Lucas in Los Cabos — downtown Cabo San Lucas, Pedregal and Pedregal Hills, El Médano and Médano Beach, the Pacific-side developments, the Marina and Golden Zone, and Cabo Bello. We don't regularly service San José del Cabo or the Tourist Corridor."
     },
     {
       q: "How much does a service call cost?",
@@ -157,7 +155,7 @@ export default function TopHandymanServicesLosCabos() {
     },
     {
       q: "Do you work on vacation rentals and HOA properties?",
-      a: "Yes. We work with vacation rental owners, property managers, HOAs, and commercial businesses throughout Los Cabos."
+      a: "Yes. We work with vacation rental owners, property managers, HOAs, and commercial businesses throughout Cabo San Lucas, Los Cabos."
     }
   ];
 
@@ -263,7 +261,7 @@ export default function TopHandymanServicesLosCabos() {
       <section className="py-14 px-4 bg-slate-50">
         <div className="max-w-5xl mx-auto">
           <h2 className="text-3xl font-bold text-slate-800 text-center mb-3">Real Work, Real Results</h2>
-          <p className="text-center text-slate-500 mb-8">Photos from actual jobs completed across Los Cabos.</p>
+          <p className="text-center text-slate-500 mb-8">Photos from actual jobs completed across Cabo San Lucas, Los Cabos.</p>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
             {[
               { src: "/service-sections/ch-plumbing.webp", alt: "Plumbing repair by Cabos Handyman in Los Cabos", position: "object-center" },
@@ -343,7 +341,7 @@ export default function TopHandymanServicesLosCabos() {
             Los Cabos' coastal environment is hard on properties. Salt air corrodes fixtures, intense UV fades paint, and the summer humidity puts AC systems under constant stress. Finding a <strong>top handyman in Los Cabos</strong> who understands these specific conditions — not just a general contractor — makes a real difference in the quality and longevity of repairs.
           </p>
           <p>
-            Cabos Handyman has been operating in the region for over 20 years, completing more than 600 residential, commercial, and HOA projects across Cabo San Lucas, San José del Cabo, and the surrounding corridor.
+            Cabos Handyman has been operating in the region for over 20 years, completing more than 600 residential, commercial, and HOA projects across Cabo San Lucas, Los Cabos.
           </p>
 
           <h2>Plumbing Services in Los Cabos</h2>

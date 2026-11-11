@@ -39,10 +39,6 @@ export default function CeilingFanInstallationCabo() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ]
   };
@@ -103,7 +99,7 @@ export default function CeilingFanInstallationCabo() {
               Ceiling fans aren't a luxury in Cabo San Lucas—they're essential. With summer temperatures regularly exceeding 35°C (95°F) and high humidity, ceiling fans provide constant air circulation that makes indoor spaces comfortable while reducing AC costs. But improper installation can lead to dangerous wobbling, electrical failures, or fans that fall from the ceiling.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              With over 20 years serving Los Cabos and thousands of ceiling fans installed, our licensed electricians ensure safe, secure installation with proper wiring and balanced operation. From bedrooms and living rooms to outdoor patios and vacation rentals, we handle all ceiling fan installation and repair needs. Same-day service available for most installations.
+              With over 20 years serving Cabo San Lucas in Los Cabos and thousands of ceiling fans installed, our licensed electricians ensure safe, secure installation with proper wiring and balanced operation. From bedrooms and living rooms to outdoor patios and vacation rentals, we handle all ceiling fan installation and repair needs. Same-day service available for most installations.
             </p>
           </div>
 

@@ -39,10 +39,6 @@ export default function ToiletTubUncloggingCabo() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ]
   };
@@ -108,7 +104,7 @@ export default function ToiletTubUncloggingCabo() {
               A clogged toilet or slow drain isn't just inconvenient—it can be a disaster, especially if you have guests arriving at your vacation rental or family visiting your Cabo home. DIY methods like plungers and chemical drain cleaners rarely solve the problem completely, and often make it worse by damaging pipes or pushing clogs deeper into the system.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              With over 20 years serving Los Cabos, our professional drain cleaning service uses proper tools and techniques to completely clear clogs without damaging your plumbing. From simple toilet clogs to stubborn shower drain blockages, we handle all drain cleaning needs quickly and affordably. Same-day service available for most situations.
+              With over 20 years serving Cabo San Lucas in Los Cabos, our professional drain cleaning service uses proper tools and techniques to completely clear clogs without damaging your plumbing. From simple toilet clogs to stubborn shower drain blockages, we handle all drain cleaning needs quickly and affordably. Same-day service available for most situations.
             </p>
           </div>
 

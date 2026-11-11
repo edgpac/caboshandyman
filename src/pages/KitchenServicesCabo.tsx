@@ -43,10 +43,6 @@ export default function KitchenServicesCabo() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ]
   };
@@ -144,7 +140,7 @@ export default function KitchenServicesCabo() {
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-gray-700 leading-relaxed">
-              Your kitchen is the heart of your Cabo home, whether it's a permanent residence or vacation rental. From outdated appliances and worn-out countertops to clogged sinks and malfunctioning lighting, kitchen issues demand professional expertise. With over 20 years serving Los Cabos, Cabos Handyman provides comprehensive kitchen services that combine skilled plumbing, electrical work, and carpentry to transform or repair your kitchen efficiently and affordably.
+              Your kitchen is the heart of your Cabo home, whether it's a permanent residence or vacation rental. From outdated appliances and worn-out countertops to clogged sinks and malfunctioning lighting, kitchen issues demand professional expertise. With over 20 years serving Cabo San Lucas in Los Cabos, Cabos Handyman provides comprehensive kitchen services that combine skilled plumbing, electrical work, and carpentry to transform or repair your kitchen efficiently and affordably.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               The coastal climate of Cabo San Lucas creates unique challenges for kitchens—salt air accelerates corrosion on fixtures, hard water clogs faucets and disposal units, and high humidity affects cabinetry. Our bilingual team (English/Spanish) understands these local conditions and uses appropriate materials and techniques to ensure lasting results. Whether you need a simple faucet replacement, complete cabinet installation, or full kitchen renovation, we handle every aspect with professional craftsmanship.

@@ -39,10 +39,6 @@ export default function BathroomServicesCabo() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ]
   };
@@ -69,8 +65,8 @@ export default function BathroomServicesCabo() {
   return (
     <>
       <SEO
-        title="Bathroom Remodeling Cabo San Lucas & Los Cabos | Cabos Handyman"
-        description="Bathroom remodeling contractors in Los Cabos & Cabo San Lucas. Toilet installation, vanity, shower, tile work, and unclogging. 20+ years experience. From $60 diagnostic visit."
+        title="Bathroom Remodeling Cabo San Lucas, Los Cabos | Cabos Handyman"
+        description="Bathroom remodeling contractors in Cabo San Lucas, Los Cabos. Toilet installation, vanity, shower, tile work, and unclogging. 20+ years experience. From $60 diagnostic visit."
         canonicalUrl="/bathroom-services-cabo"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -120,7 +116,7 @@ export default function BathroomServicesCabo() {
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-gray-700 leading-relaxed">
-              Bathrooms in Cabo San Lucas face constant challenges from high humidity, hard water, and salt air exposure. Whether it's a clogged toilet before guests arrive at your vacation rental, a leaky shower causing water damage, or an outdated bathroom needing a complete renovation, professional bathroom services are essential for maintaining functionality and property value. With over 20 years serving Los Cabos, Cabos Handyman provides comprehensive bathroom solutions that combine expert plumbing, electrical work, and tile installation.
+              Bathrooms in Cabo San Lucas face constant challenges from high humidity, hard water, and salt air exposure. Whether it's a clogged toilet before guests arrive at your vacation rental, a leaky shower causing water damage, or an outdated bathroom needing a complete renovation, professional bathroom services are essential for maintaining functionality and property value. With over 20 years serving Cabo San Lucas in Los Cabos, Cabos Handyman provides comprehensive bathroom solutions that combine expert plumbing, electrical work, and tile installation.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               The coastal environment requires special attention—moisture control is critical to prevent mold, proper ventilation prevents humidity damage, and waterproofing must be done correctly to avoid expensive structural issues. Our bilingual team (English/Spanish) understands these local challenges and uses appropriate materials and techniques designed for Cabo's climate. From emergency unclogging services to complete luxury bathroom remodels, we handle every project with professional craftsmanship and attention to detail.

@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, type ReactNode } from 'react';
 
 const Index = lazy(() => import("./pages/Index"));
 const Services = lazy(() => import("./pages/Services"));
@@ -64,6 +64,8 @@ const BathroomSinkInstallationCabo = lazy(() => import("./pages/BathroomSinkInst
 const Blog = lazy(() => import("./pages/Blog"));
 const TopHandymanServicesLosCabos = lazy(() => import("./pages/TopHandymanServicesLosCabos"));
 
+const CarpentryCaboSanLucas = lazy(() => import("./pages/CarpentryCaboSanLucas"));
+const CarpinteroCaboSanLucas = lazy(() => import("./pages/CarpinteroCaboSanLucas"));
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -73,13 +75,21 @@ const queryClient = new QueryClient({
   },
 });
 
-const App = () => {
+type AppProps = {
+  // Build-time pre-rendering (src/entry-server.tsx) passes a StaticRouter
+  // for one URL; in the browser the app always uses BrowserRouter.
+  renderRouter?: (routes: ReactNode) => ReactNode;
+};
+
+const browserRouter = (routes: ReactNode) => <BrowserRouter>{routes}</BrowserRouter>;
+
+const App = ({ renderRouter = browserRouter }: AppProps) => {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
+        {renderRouter(
           <Suspense fallback={
             <div className="min-h-screen flex items-center justify-center">
               <div className="text-primary text-lg">Loading...</div>
@@ -141,12 +151,14 @@ const App = () => {
               <Route path="/bar-installation-cabo-san-lucas" element={<BarInstallationCabo />} />
               <Route path="/decorative-lighting-cabo-san-lucas" element={<DecorativeLightingCabo />} />
               <Route path="/bathroom-sink-installation-cabo-san-lucas" element={<BathroomSinkInstallationCabo />} />
+              <Route path="/carpentry-cabo-san-lucas" element={<CarpentryCaboSanLucas />} />
+              <Route path="/carpintero-cabo-san-lucas" element={<CarpinteroCaboSanLucas />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/top-handyman-services-in-los-cabos-plumbing-electrical-repairs-more" element={<TopHandymanServicesLosCabos />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
-        </BrowserRouter>
+        )}
       </TooltipProvider>
     </QueryClientProvider>
   );

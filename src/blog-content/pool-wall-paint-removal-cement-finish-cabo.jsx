@@ -186,7 +186,7 @@ export default function PoolWallPaintRemovalCementFinishCabo() {
         isn't the problem. What's underneath is.
       </p>
       <p>
-        We do this work throughout Cabo San Lucas and Los Cabos — pool areas, exterior walls,
+        We do this work throughout Cabo San Lucas, Los Cabos — pool areas, exterior walls,
         terraces, and any surface where accumulated paint has become a recurring maintenance problem.
         Call or WhatsApp us at <strong>+52 612 169 8328</strong> and we'll take a look.{' '}
         <a href="/contact">Send us a message here</a> if you'd prefer to start online.
@@ -196,7 +196,7 @@ export default function PoolWallPaintRemovalCementFinishCabo() {
 
       <p style={{ fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
         Cabos Handyman handles exterior wall preparation, paint removal, and cement fine finish
-        work throughout Cabo San Lucas and Los Cabos. Service hours are 7am–6pm daily.
+        work throughout Cabo San Lucas, Los Cabos. Service hours are 7am–6pm daily.
         Property Care Plan members receive priority scheduling —{' '}
         <a href="/property-care-plans" style={{ color: '#06756b' }}>learn more here</a>.
       </p>

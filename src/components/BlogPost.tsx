@@ -21,7 +21,11 @@ function estimateReadTime(): string {
 }
 
 function formatDate(dateStr: string) {
+  // publishDate is a calendar date ("2025-12-10"), parsed as UTC midnight —
+  // format it in UTC too, or a browser west of UTC shows the previous day
+  // (and the pre-rendered HTML wouldn't match what hydration renders).
   return new Date(dateStr).toLocaleDateString('en-US', {
+    timeZone: 'UTC',
     month: 'long',
     day: 'numeric',
     year: 'numeric',
@@ -143,7 +147,11 @@ export default function BlogPost() {
               className="text-gray-800 leading-[1.85] text-[19px]"
               style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}
             >
-              <style>{`
+              {/* Raw CSS via dangerouslySetInnerHTML: React 18's server renderer
+                  HTML-escapes text children of <style> (' -> &#x27;), which browsers
+                  don't decode inside <style> — broken CSS in the pre-rendered page and
+                  a hydration mismatch. */}
+              <style dangerouslySetInnerHTML={{ __html: `
                 .blog-body h2 {
                   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
                   font-size: 1.6rem;
@@ -204,7 +212,7 @@ export default function BlogPost() {
                   color: #555;
                   line-height: 1.7;
                 }
-              `}</style>
+              ` }} />
               <div className="blog-body">
                 <Suspense fallback={
                   <div className="animate-pulse space-y-4">
@@ -227,7 +235,7 @@ export default function BlogPost() {
                 <div>
                   <p className="text-sm font-bold text-gray-900 mb-1">Cabos Handyman</p>
                   <p className="text-sm text-gray-500 mb-4">
-                    Professional property maintenance in Cabo San Lucas & Los Cabos. <a href="/contact" className="text-[#06756b] underline underline-offset-2 hover:text-[#049d8e]">Get a free quote →</a>
+                    Professional property maintenance in Cabo San Lucas, Los Cabos. <a href="/contact" className="text-[#06756b] underline underline-offset-2 hover:text-[#049d8e]">Get a free quote →</a>
                   </p>
                   <a
                     href="tel:+526121698328"

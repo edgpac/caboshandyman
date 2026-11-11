@@ -41,10 +41,6 @@ export default function PropertySetupCabo() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ],
     "offers": {
@@ -112,7 +108,7 @@ export default function PropertySetupCabo() {
               Moving to Cabo San Lucas should be exciting, not exhausting. Whether you're relocating from the US or Canada, setting up a vacation rental, or preparing a property for guests, our complete property setup service transforms empty spaces into move-in ready homes in just 1-2 days.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              With over 20 years of experience serving Los Cabos, our bilingual team (English/Spanish) handles everything from furniture assembly and TV mounting to ceiling fan installation and complete property staging. You focus on enjoying paradise while we handle the heavy lifting.
+              With over 20 years of experience serving Cabo San Lucas in Los Cabos, our bilingual team (English/Spanish) handles everything from furniture assembly and TV mounting to ceiling fan installation and complete property staging. You focus on enjoying paradise while we handle the heavy lifting.
             </p>
           </div>
 
@@ -820,7 +816,7 @@ export default function PropertySetupCabo() {
               </a>
             </div>
             <p className="text-teal-100 mt-6 text-sm">
-              Serving Cabo San Lucas and all of Los Cabos • 20+ Years Experience • Bilingual Team • Licensed & Insured
+              Serving Cabo San Lucas, Los Cabos • 20+ Years Experience • Bilingual Team • Licensed & Insured
             </p>
           </div>
 

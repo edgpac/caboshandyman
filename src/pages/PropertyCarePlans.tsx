@@ -29,7 +29,7 @@ export default function PropertyCarePlans() {
     { q: "What does property management in Cabo San Lucas include?", a: "It includes routine maintenance coordination, vendor management, regular property inspections with photo reports, key holding, emergency response, utility oversight, and direct communication with you as the owner. Cabos Handyman handles all of this so you don't have to be on-site." },
     { q: "Do I need property management if I own a vacation rental in Los Cabos?", a: "Yes — most Cabo vacation rental owners are not local. Without a trusted local contact, small issues like a broken AC, a leak, or a faulty lock can escalate quickly and lead to bad reviews or property damage. A property manager acts as your eyes and hands on the ground." },
     { q: "What is the difference between property management and a care plan?", a: "A care plan covers scheduled recurring maintenance tasks on a monthly basis. Property management is broader — it includes vendor coordination, inspections, emergency response, key management, and owner communication. Both can be combined for complete coverage." },
-    { q: "How quickly do you respond to emergencies at managed properties?", a: "We provide 24/7 emergency response for managed properties in Cabo San Lucas and Los Cabos. For critical issues like leaks, electrical failures, or security concerns, we aim to be on-site within 2 hours." },
+    { q: "How quickly do you respond to emergencies at managed properties?", a: "We provide 24/7 emergency response for managed properties in Cabo San Lucas, Los Cabos. For critical issues like leaks, electrical failures, or security concerns, we aim to be on-site within 2 hours." },
     { q: "Can you manage my property if I live outside of Mexico?", a: "Yes — this is the most common scenario. We act as your local point of contact, handle all on-site coordination, send you photo reports after inspections, and communicate via WhatsApp, email, or video call. You stay informed without needing to travel." },
     { q: "How much does property management cost in Cabo San Lucas?", a: "Costs vary based on property size, services needed, and inspection frequency. We offer flexible scopes — from a basic care plan to full-service management. Contact us for a no-obligation quote tailored to your property." },
   ];
@@ -65,10 +65,6 @@ export default function PropertyCarePlans() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ],
     "offers": [

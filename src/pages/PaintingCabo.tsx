@@ -11,7 +11,7 @@ export default function PaintingCabo() {
     <>
       <SEO
         title="Painting Cabo San Lucas | Cabos Handyman"
-        description="Professional painting and paint touch-ups in Cabo San Lucas. Interior and exterior painting, vacation rental refresh, wall repairs and repainting. Painters serving Los Cabos."
+        description="Professional painting and paint touch-ups in Cabo San Lucas. Interior and exterior painting, vacation rental refresh, wall repairs and repainting. Painters serving Cabo San Lucas in Los Cabos."
         canonicalUrl="/painting-cabo-san-lucas"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -29,7 +29,7 @@ export default function PaintingCabo() {
             Painting Services<br />Cabo San Lucas
           </h1>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Interior touch-ups, full room painting, exterior walls, vacation rental refreshes, and stucco surface painting — professional painters serving all of Los Cabos.
+            Interior touch-ups, full room painting, exterior walls, vacation rental refreshes, and stucco surface painting — professional painters serving Cabo San Lucas in Los Cabos.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+526121698328" className="inline-flex items-center gap-2 bg-white text-rose-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
@@ -81,7 +81,7 @@ export default function PaintingCabo() {
                     'Bilingual service (English & Spanish)',
                     '1-year workmanship warranty',
                     'Same-day service available',
-                    'Serving all of Los Cabos',
+                    'Serving Cabo San Lucas in Los Cabos',
                   ].map(item => (
                     <li key={item} className="flex items-center gap-2">
                       <CheckCircle2 className="text-rose-500 shrink-0" size={16} />
@@ -138,7 +138,7 @@ export default function PaintingCabo() {
       <section className="py-12 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold mb-4">Ready to Freshen Up Your Space?</h2>
-          <p className="text-white/90 mb-6">Call for a free painting estimate anywhere in Los Cabos.</p>
+          <p className="text-white/90 mb-6">Call for a free painting estimate anywhere in Cabo San Lucas, Los Cabos.</p>
           <a href="tel:+526121698328" className="inline-flex items-center gap-2 bg-white text-teal-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
             <Phone size={22} /> +52 612 169 8328
           </a>

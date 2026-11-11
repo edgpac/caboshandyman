@@ -331,7 +331,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
         <li><strong>Phone:</strong> +52 612 169 8328</li>
         <li><strong>Email:</strong> caboshandymanservice@gmail.com</li>
         <li><strong>WhatsApp:</strong> Available for instant communication</li>
-        <li><strong>Service Area:</strong> All of Cabo San Lucas and Los Cabos region</li>
+        <li><strong>Service Area:</strong> All of Cabo San Lucas, Los Cabos region</li>
       </ul>
       <p>
         Get your <strong>free instant estimate</strong> today through the scheduling assistant at <strong>caboshandyman.com</strong>, or call for immediate assistance with emergency repairs.

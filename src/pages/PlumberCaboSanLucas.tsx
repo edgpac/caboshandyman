@@ -42,10 +42,6 @@ export default function PlumberCaboSanLucas() {
       {
         "@type": "City",
         "name": "Cabo San Lucas"
-      },
-      {
-        "@type": "AdministrativeArea",
-        "name": "Los Cabos"
       }
     ]
   };
@@ -77,7 +73,7 @@ export default function PlumberCaboSanLucas() {
               Professional Plumber<br />in Cabo San Lucas
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Licensed plumbers for emergency repairs, installations, and maintenance. 24/7 service for Property Care members. Emergency service 7am-6pm for non-members. Serving all of Los Cabos.
+              Licensed plumbers for emergency repairs, installations, and maintenance. 24/7 service for Property Care members. Emergency service 7am-6pm for non-members. Serving Cabo San Lucas in Los Cabos.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -112,7 +108,7 @@ export default function PlumberCaboSanLucas() {
               Plumbing emergencies don't wait for business hours. A burst pipe at 2 AM, a clogged toilet before guests arrive, or a failed water heater in the middle of summer demands immediate professional help. With over 20 years serving Cabo San Lucas, our licensed plumbers provide 24/7 emergency service for Property Care members with a 2-4 hour response time for critical situations.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              From simple repairs to complete system installations, our bilingual team (English/Spanish) handles all plumbing needs for residential, commercial, and vacation rental properties throughout Los Cabos. We combine local expertise with professional-grade equipment to solve plumbing problems quickly and correctly the first time.
+              From simple repairs to complete system installations, our bilingual team (English/Spanish) handles all plumbing needs for residential, commercial, and vacation rental properties throughout Cabo San Lucas, Los Cabos. We combine local expertise with professional-grade equipment to solve plumbing problems quickly and correctly the first time.
             </p>
           </div>
 
@@ -728,7 +724,7 @@ export default function PlumberCaboSanLucas() {
                       <li>Workers' compensation for all employees</li>
                       <li>Background-checked and uniformed staff</li>
                       <li>Ongoing training on latest plumbing techniques</li>
-                      <li>20+ years serving Los Cabos</li>
+                      <li>20+ years serving Cabo San Lucas in Los Cabos</li>
                     </ul>
                     <p>
                       We guarantee our work with a 90-day labor warranty. If a repair fails due to our workmanship within 90 days, we'll fix it free. Call <strong>+52 612 169 8328</strong> to work with Cabo's most trusted licensed plumbers.

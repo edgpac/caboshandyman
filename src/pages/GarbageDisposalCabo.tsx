@@ -116,7 +116,7 @@ export default function GarbageDisposalCabo() {
       <section className="py-12 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold mb-4">Need a Garbage Disposal Installed?</h2>
-          <p className="text-white/90 mb-6">Call for a free estimate anywhere in Los Cabos.</p>
+          <p className="text-white/90 mb-6">Call for a free estimate anywhere in Cabo San Lucas, Los Cabos.</p>
           <a href="tel:+526121698328" className="inline-flex items-center gap-2 bg-white text-teal-600 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
             <Phone size={22} /> +52 612 169 8328
           </a>
