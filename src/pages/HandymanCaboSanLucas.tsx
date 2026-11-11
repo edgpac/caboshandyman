@@ -1010,7 +1010,7 @@ export default function HandymanCaboSanLucas() {
                 </div>
                 <div>
                   <p className="font-semibold">Service Area</p>
-                  <p>All of Los Cabos</p>
+                  <p>Cabo San Lucas, Los Cabos</p>
                 </div>
               </div>
             </div>

@@ -371,7 +371,7 @@ export default function ElectricalServicesCabo() {
               </a>
             </div>
             <p className="text-yellow-100 mt-6 text-sm">
-              Serving All of Los Cabos • Licensed Electricians • 20+ Years Experience • 24/7 Emergency Service
+              Serving Cabo San Lucas, Los Cabos • Licensed Electricians • 20+ Years Experience • 24/7 Emergency Service
             </p>
           </div>
 

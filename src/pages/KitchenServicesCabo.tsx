@@ -91,7 +91,7 @@ export default function KitchenServicesCabo() {
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               Kitchen Remodeling & Repair in Cabo San Lucas
-              <span className="block text-2xl md:text-3xl font-normal mt-2 text-white/90">Serving All of Los Cabos</span>
+              <span className="block text-2xl md:text-3xl font-normal mt-2 text-white/90">Serving Cabo San Lucas, Los Cabos</span>
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
               From simple repairs to complete kitchen remodels. Expert plumbing, electrical, cabinetry, and installation services. 20+ years experience in Los Cabos.
@@ -847,7 +847,7 @@ export default function KitchenServicesCabo() {
               </a>
             </div>
             <p className="text-orange-100 mt-6 text-sm">
-              Serving All of Los Cabos • 20+ Years Experience • Bilingual Team • Licensed & Insured
+              Serving Cabo San Lucas, Los Cabos • 20+ Years Experience • Bilingual Team • Licensed & Insured
             </p>
           </div>
 
