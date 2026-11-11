@@ -31,7 +31,7 @@ export default function PlumberCaboSanLucas() {
       },
       "telephone": "+52-612-169-8328",
       "priceRange": "$60+",
-      "openingHours": "Mo-Su 07:00-18:00",
+      "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
       "sameAs": [
         "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
         "https://www.facebook.com/share/19wvxoz8Cy/",
@@ -73,7 +73,7 @@ export default function PlumberCaboSanLucas() {
               Professional Plumber<br />in Cabo San Lucas
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Licensed plumbers for emergency repairs, installations, and maintenance. 24/7 service for Property Care members. Emergency service 7am-6pm for non-members. Serving Cabo San Lucas in Los Cabos.
+              Licensed plumbers for emergency repairs, installations, and maintenance. 24/7 service for Property Care members. Emergency service Mon–Sat 8am–6pm for non-members. Serving Cabo San Lucas in Los Cabos.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -155,10 +155,10 @@ export default function PlumberCaboSanLucas() {
                 <div className="space-y-2">
                   <div className="flex items-center text-gray-700 font-bold text-lg mb-2">
                     <Clock className="mr-2" size={20} />
-                    Emergency Service: 7am - 6pm
+                    Emergency Service: Mon–Sat 8am–6pm
                   </div>
                   <p className="text-gray-700">
-                    Same-day emergency service available between 7am-6pm.
+                    Same-day emergency service available Monday–Saturday, 8am–6pm.
                   </p>
                   <p className="text-gray-700 mt-2">
                     <strong>After 6pm:</strong> Emergency service available to Property Care members only for safety reasons.
@@ -546,7 +546,7 @@ export default function PlumberCaboSanLucas() {
                       Yes! Property Care members receive true 24/7 emergency plumbing service, including after midnight. We provide 2-hour response times for Property Care members.
                     </p>
                     <p className="mb-3">
-                      For non-members, emergency service is available 7am-6pm for safety reasons. After 6pm, emergency service is available to Property Care members only. For extreme flooding emergencies after hours, non-members can request service for a $300 callout fee plus 2x standard rates.
+                      For non-members, emergency service is available Mon–Sat 8am–6pm for safety reasons. After 6pm, emergency service is available to Property Care members only. For extreme flooding emergencies after hours, non-members can request service for a $300 callout fee plus 2x standard rates.
                     </p>
                     <p>
                       <strong>Call +52 612 169 8328</strong> for immediate emergency assistance or to join Property Care for 24/7 access.
@@ -897,7 +897,7 @@ export default function PlumberCaboSanLucas() {
           <div className="bg-gradient-to-br from-cyan-600 to-blue-700 rounded-2xl p-8 md:p-12 text-center text-white">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Need a Plumber in Cabo San Lucas?</h2>
             <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-              24/7 emergency service with 30-minute response time. Licensed, experienced plumbers ready to help.
+              24/7 emergency service with 30-minute response time for Property Care Plan members. Licensed, experienced plumbers ready to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -915,7 +915,7 @@ export default function PlumberCaboSanLucas() {
               </a>
             </div>
             <p className="text-cyan-100 mt-6 text-sm">
-              24/7 Emergency Service • 30-Minute Response • Licensed Plumbers • 20+ Years Experience
+              24/7 Emergency Service for Members • 30-Minute Response • Licensed Plumbers • 20+ Years Experience
             </p>
           </div>
 

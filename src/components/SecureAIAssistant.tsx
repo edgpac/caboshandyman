@@ -134,7 +134,7 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
       title: "Emergency Services", 
       description: "Intelligent response for water damage, structural issues, and urgent repairs. 30-minute response time.",
       icon: Zap,
-      details: "24/7 emergency response for water damage, electrical issues, structural problems, and urgent repairs. Our system helps prioritize and dispatch the right team immediately.",
+      details: "24/7 emergency response for Property Care Plan members — water damage, electrical issues, structural problems, and urgent repairs. Our system helps prioritize and dispatch the right team immediately.",
       calendlyUrl: "https://cal.com/maintenancemaster/emergency-service-assessment"
     },
     {

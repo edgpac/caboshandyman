@@ -107,7 +107,7 @@ export default function CabosHandymanHomepage() {
       "longitude": -109.9167371
     },
     "priceRange": "$$",
-    "openingHours": ["Mo-Fr 07:00-18:00", "Sa 08:00-14:00"],
+    "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
     "areaServed": [
       {
         "@type": "City",

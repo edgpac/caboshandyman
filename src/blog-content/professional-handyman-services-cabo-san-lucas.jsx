@@ -21,7 +21,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       </p>
       <ul>
         <li><strong>Preventive maintenance</strong> that catches small issues before they become expensive problems</li>
-        <li><strong>Emergency repair services</strong> available 7am–6pm daily (24/7 for Property Care Plan members)</li>
+        <li><strong>Emergency repair services</strong> available Mon–Sat 8am–6pm (24/7 for Property Care Plan members)</li>
         <li><strong>Skilled craftsmanship</strong> backed by years of experience and proper licensing</li>
         <li><strong>Time savings</strong> so you can focus on enjoying your Cabo lifestyle</li>
         <li><strong>Cost efficiency</strong> through expert problem-solving and quality workmanship</li>
@@ -113,7 +113,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
 
       <h2>Emergency Handyman Services</h2>
       <p>
-        Emergencies don't follow a schedule. Cabos Handyman responds to urgent situations <strong>7am–6pm daily</strong> for all customers — including:
+        Emergencies don't follow a schedule. Cabos Handyman responds to urgent situations <strong>Mon–Sat 8am–6pm</strong> for all customers — including:
       </p>
       <ul>
         <li>Burst pipes and water damage</li>
@@ -304,7 +304,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       <ul>
         <li><strong>20+ years</strong> of experience in Cabo San Lucas</li>
         <li><strong>600+ completed projects</strong> across residential, commercial, and HOA properties</li>
-        <li><strong>Emergency service 7am–6pm daily</strong> (24/7 for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a>)</li>
+        <li><strong>Emergency service Mon–Sat 8am–6pm</strong> (24/7 for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a>)</li>
         <li><strong>Perfect 5.0 Google rating</strong> from verified customers</li>
         <li><strong>Licensed, insured, and bonded</strong> for your protection</li>
         <li><strong>Free instant estimates</strong> through AI-powered scheduling assistant</li>
@@ -340,7 +340,7 @@ export default function ProfessionalHandymanServicesCaboArticle() {
       <hr className="my-8" />
 
       <p className="text-sm text-muted-foreground italic">
-        Cabos Handyman brings over 20 years of trade experience to professional handyman work in Los Cabos. With 600+ completed projects and emergency service 7am–6pm daily (24/7 for Property Care Plan members), we're your trusted partner for all residential, commercial, and HOA maintenance needs in Los Cabos.
+        Cabos Handyman brings over 20 years of trade experience to professional handyman work in Los Cabos. With 600+ completed projects and emergency service Mon–Sat 8am–6pm (24/7 for Property Care Plan members), we're your trusted partner for all residential, commercial, and HOA maintenance needs in Los Cabos.
       </p>
     </>
   );

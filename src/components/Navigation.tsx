@@ -3,7 +3,7 @@ import { Phone, Mail, Shield, Menu, ChevronDown, Wrench, Home } from 'lucide-rea
 import GradientText from './GradientText';
 
 const SERVICE_LINKS = [
-  { href: '/plumber-cabo-san-lucas', label: 'Plumber 24/7' },
+  { href: '/plumber-cabo-san-lucas', label: 'Plumber' },
   { href: '/toilet-installation-cabo-san-lucas', label: '↳ Toilet Installation' },
   { href: '/toilet-leak-repair-cabo-san-lucas', label: '↳ Toilet Leak Repair' },
   { href: '/faucet-installation-cabo-san-lucas', label: '↳ Faucet Installation' },

@@ -28,7 +28,7 @@ export default function ToiletTubUncloggingCabo() {
       },
       "telephone": "+52-612-169-8328",
       "priceRange": "$60+",
-      "openingHours": "Mo-Su 07:00-18:00",
+      "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
       "sameAs": [
         "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
         "https://www.facebook.com/share/19wvxoz8Cy/",
@@ -69,7 +69,7 @@ export default function ToiletTubUncloggingCabo() {
               Fast Toilet & Drain Unclogging in Cabo San Lucas
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Clogged toilet, slow drain, or backed-up shower? Professional unclogging service available 24/7. Same-day service for most jobs. Starting at $60.
+              Clogged toilet, slow drain, or backed-up shower? Professional unclogging service with same-day appointments for most jobs, and 24/7 emergency response for Property Care Plan members. Starting at $60.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -88,7 +88,7 @@ export default function ToiletTubUncloggingCabo() {
             </div>
             <p className="mt-6 text-white/80 text-lg">
               <Clock className="inline mr-2" size={20} />
-              <strong>Same-Day Service Available</strong> • 24/7 Emergency Response
+              <strong>Same-Day Service Available</strong> • 24/7 Emergency Response for Members
             </p>
           </div>
         </div>
@@ -400,7 +400,7 @@ export default function ToiletTubUncloggingCabo() {
               </a>
             </div>
             <p className="text-blue-100 mt-6 text-sm">
-              Same-Day Service • 24/7 Emergency Available • Professional Equipment • 20+ Years Experience
+              Same-Day Service • 24/7 Emergency for Members • Professional Equipment • 20+ Years Experience
             </p>
           </div>
 

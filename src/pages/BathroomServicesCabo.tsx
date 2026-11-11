@@ -28,7 +28,7 @@ export default function BathroomServicesCabo() {
       },
       "telephone": "+52-612-169-8328",
       "priceRange": "$60+",
-      "openingHours": "Mo-Su 07:00-18:00",
+      "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
       "sameAs": [
         "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
         "https://www.facebook.com/share/19wvxoz8Cy/",
@@ -142,7 +142,7 @@ export default function BathroomServicesCabo() {
               <div>
                 <h3 className="font-bold text-gray-900 mb-3">Vacation Rental Critical</h3>
                 <p className="text-gray-700 mb-3">
-                  A clogged toilet or non-functional shower destroys guest experience and your 5-star rating instantly. Professional maintenance and emergency response keep bathrooms guest-ready 24/7.
+                  A clogged toilet or non-functional shower destroys guest experience and your 5-star rating instantly. Professional maintenance and emergency response keep bathrooms guest-ready.
                 </p>
               </div>
               <div>
@@ -365,8 +365,8 @@ export default function BathroomServicesCabo() {
                 <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Clock className="text-blue-600" size={32} />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2">24/7 Emergency Service</h3>
-                <p className="text-gray-600 text-sm">Available for urgent bathroom plumbing emergencies</p>
+                <h3 className="font-bold text-gray-900 mb-2">24/7 Emergency Service for Members</h3>
+                <p className="text-gray-600 text-sm">For urgent bathroom plumbing emergencies — available to Property Care Plan members</p>
               </div>
             </div>
           </div>

@@ -32,7 +32,7 @@ export default function TopHandymanServicesLosCabos() {
     "telephone": "+52-612-169-8328",
     "email": "caboshandymanservice@gmail.com",
     "priceRange": "$60+",
-    "openingHours": "Mo-Su 07:00-18:00",
+    "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
     "aggregateRating": aggregateRatingSchema,
     "areaServed": [
       { "@type": "City", "name": "Cabo San Lucas" }
@@ -147,7 +147,7 @@ export default function TopHandymanServicesLosCabos() {
     },
     {
       q: "What are your hours?",
-      a: "We operate 7am–6pm daily. Property Care Plan members get 24/7 emergency coverage for urgent situations outside those hours."
+      a: "We operate Monday–Saturday, 8am–6pm (closed Sunday). Property Care Plan members get 24/7 emergency coverage for urgent situations outside those hours."
     },
     {
       q: "Can you compete with caboestatemgmt.com or other property management sites for handyman work?",
@@ -163,7 +163,7 @@ export default function TopHandymanServicesLosCabos() {
     <>
       <SEO
         title="Top Handyman Services in Los Cabos | Plumbing, Electrical Repairs & More"
-        description="Need a top handyman in Los Cabos? Cabos Handyman offers plumbing repairs, electrical work, AC service, painting & 70+ services. 20+ yrs · 600+ projects · 7am–6pm daily."
+        description="Need a top handyman in Los Cabos? Cabos Handyman offers plumbing repairs, electrical work, AC service, painting & 70+ services. 20+ yrs · 600+ projects · Mon–Sat 8am–6pm."
         canonicalUrl="/top-handyman-services-in-los-cabos-plumbing-electrical-repairs-more"
         ogImage="/images/cabos-handyman-og.jpg"
         geoRegion="MX-BCS"
@@ -216,7 +216,7 @@ export default function TopHandymanServicesLosCabos() {
             "✓ 20+ Years Experience",
             "✓ 600+ Projects Completed",
             "✓ Licensed & Insured",
-            "✓ 7am–6pm Daily",
+            "✓ Mon–Sat 8am–6pm",
             "✓ Plumbing · Electrical · AC · Painting"
           ].map(item => (
             <span key={item}>{item}</span>
@@ -295,7 +295,7 @@ export default function TopHandymanServicesLosCabos() {
               {
                 icon: <Clock className="w-8 h-8 text-teal-500" />,
                 title: "Fast Response",
-                desc: "7am–6pm daily, same-day service for most jobs. Property Care Plan members get 24/7 emergency coverage."
+                desc: "Mon–Sat 8am–6pm, same-day service for most jobs. Property Care Plan members get 24/7 emergency coverage."
               },
               {
                 icon: <Shield className="w-8 h-8 text-teal-500" />,
@@ -359,7 +359,7 @@ export default function TopHandymanServicesLosCabos() {
             <li>Shower head and valve replacement</li>
           </ul>
           <p>
-            Emergency plumbing available 7am–6pm daily. For 24/7 coverage, see our <a href="/property-care-plans">Property Care Plans</a>.
+            Emergency plumbing available Mon–Sat 8am–6pm. For 24/7 coverage, see our <a href="/property-care-plans">Property Care Plans</a>.
           </p>
 
           <h2>Electrical Repairs in Los Cabos</h2>

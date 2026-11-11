@@ -18,7 +18,7 @@ type Post = {
 const categoryDescriptions: Record<string, string> = {
   'Services': 'Guides and overviews of our handyman and maintenance services in Cabo San Lucas.',
   'Installation Services': 'Step-by-step insights on professional installation projects across Cabo San Lucas, Los Cabos.',
-  'Emergency Services': '24/7 emergency repair guides and what to do when something goes wrong.',
+  'Emergency Services': 'Emergency repair guides and what to do when something goes wrong.',
   'Property Management': 'Tips for absentee owners and vacation rental hosts managing property in Cabo.',
 };
 

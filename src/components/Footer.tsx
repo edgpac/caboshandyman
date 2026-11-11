@@ -85,7 +85,7 @@ export default function Footer() {
                   <span className="text-sm">Emergency Service:</span>
                 </div>
                 <div className="ml-6 text-xs text-gray-500">
-                  7am-6pm daily<br/>
+                  Mon–Sat 8am–6pm<br/>
                   <a href="/property-care-plans" className="text-teal-700 hover:underline">
                     Members: 24/7 access
                   </a>

@@ -174,7 +174,7 @@ export default function ServicesPage() {
         />
         <link rel="canonical" href="https://www.caboshandyman.com/services" />
         <meta property="og:title" content="Handyman Services & Pricing - Cabo San Lucas" />
-        <meta property="og:description" content="70+ handyman services with transparent pricing. Kitchen, bathroom, electrical, plumbing. $60 diagnostic visit. 24/7 emergency service." />
+        <meta property="og:description" content="70+ handyman services with transparent pricing. Kitchen, bathroom, electrical, plumbing. $60 diagnostic visit. 24/7 emergency service for Property Care members." />
         <meta property="og:url" content="https://www.caboshandyman.com/services" />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">
@@ -193,7 +193,7 @@ export default function ServicesPage() {
             },
             "geo": { "@type": "GeoCoordinates", "latitude": "22.8866974", "longitude": "-109.9139710" },
             "priceRange": "$60-$1200",
-            "openingHours": "Mo-Su 07:00-18:00",
+            "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
             "areaServed": [
               { "@type": "City", "name": "Cabo San Lucas" }
             ],
@@ -274,7 +274,7 @@ export default function ServicesPage() {
                   <div className="bg-cyan-500 w-12 h-12 rounded-full flex items-center justify-center">
                     <Droplet className="text-white" size={24} />
                   </div>
-                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-cyan-600 transition-colors">Plumber 24/7</h3>
+                  <h3 className="font-bold text-gray-900 text-lg group-hover:text-cyan-600 transition-colors">Plumber</h3>
                 </div>
                 <p className="text-gray-600 mb-3">Emergency plumbing service. 30-minute response time for urgent situations.</p>
                 <p className="text-cyan-600 font-semibold text-sm">Starting at $60</p>
@@ -312,7 +312,7 @@ export default function ServicesPage() {
             title="Plumbing"
             intro="Emergency or routine — our licensed plumbers handle it all. Not limited to the list below, call us with your specific issue."
           >
-            <ServiceCard to="/plumber-cabo-san-lucas" icon={<Droplet className="text-cyan-500" size={28} />} title="Plumber 24/7" desc="Emergency plumbing, repairs, installations" accent="hover:border-cyan-300" />
+            <ServiceCard to="/plumber-cabo-san-lucas" icon={<Droplet className="text-cyan-500" size={28} />} title="Plumber" desc="Emergency plumbing, repairs, installations" accent="hover:border-cyan-300" />
             <ServiceCard to="/toilet-tub-unclogging-cabo" icon={<Droplet className="text-teal-500" size={28} />} title="Drain Cleaning" desc="Toilet & tub unclogging, drain clearing" accent="hover:border-teal-300" />
             <ServiceCard to="/toilet-installation-cabo-san-lucas" icon={<Droplet className="text-cyan-400" size={28} />} title="Toilet Installation" desc="New install, replacement, running toilet" accent="hover:border-cyan-300" />
             <ServiceCard to="/toilet-leak-repair-cabo-san-lucas" icon={<Droplet className="text-cyan-500" size={28} />} title="Toilet Leak Repair" desc="Running toilet, base leaks, tank repair" accent="hover:border-cyan-300" />

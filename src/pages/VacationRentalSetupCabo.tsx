@@ -27,7 +27,7 @@ export default function VacationRentalSetupCabo() {
       },
       "telephone": "+52-612-169-8328",
       "priceRange": "$250-$1000",
-      "openingHours": "Mo-Su 07:00-18:00",
+      "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
       "sameAs": [
         "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
         "https://www.facebook.com/share/19wvxoz8Cy/",
@@ -105,7 +105,7 @@ export default function VacationRentalSetupCabo() {
               Managing vacation rentals in Cabo San Lucas is profitable, but maintenance issues can destroy your 5-star rating overnight. One broken AC unit, clogged toilet, or malfunctioning ceiling fan during peak season can cost you thousands in lost bookings and negative reviews.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              With over 20 years serving Cabo's vacation rental market, our bilingual team (English/Spanish) provides complete setup, turnover service, preventive maintenance contracts, and 24/7 emergency response. Focus on guest experience and bookings while we handle everything else.
+              With over 20 years serving Cabo's vacation rental market, our bilingual team (English/Spanish) provides complete setup, turnover service, preventive maintenance contracts, and 24/7 emergency response for Property Care Plan members. Focus on guest experience and bookings while we handle everything else.
             </p>
           </div>
 
@@ -202,10 +202,10 @@ export default function VacationRentalSetupCabo() {
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
                 <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
                   <Clock className="text-blue-600" size={24} />
-                  24/7 Emergency Response
+                  24/7 Emergency Response for Members
                 </h3>
                 <p className="text-gray-600 mb-3">
-                  Guests don't wait for business hours. Neither do we:
+                  Guests don't wait for business hours. For Property Care Plan members, neither do we:
                 </p>
                 <ul className="space-y-1 text-gray-700 text-sm">
                   <li>• 30-minute emergency response time</li>
@@ -469,7 +469,7 @@ export default function VacationRentalSetupCabo() {
               </a>
             </div>
             <p className="text-blue-100 mt-6 text-sm">
-              24/7 Emergency Service • Bilingual Team • 20+ Years Experience • Licensed & Insured
+              24/7 Emergency Service for Members • Bilingual Team • 20+ Years Experience • Licensed & Insured
             </p>
           </div>
 

@@ -23,7 +23,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
         <li><strong>Custom home construction background</strong> — We've installed complete plumbing systems from the ground up</li>
         <li><strong>600+ completed projects</strong> across residential, commercial, and custom home builds</li>
         <li><strong>Cabo San Lucas focused service</strong> — Fast response times in our primary service area</li>
-        <li><strong>24/7 emergency availability</strong> exclusively for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a> — standard hours are 7am–6pm daily</li>
+        <li><strong>24/7 emergency availability</strong> exclusively for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a> — standard hours are Mon–Sat 8am–6pm</li>
       </ul>
 
       <h2>Emergency Drain Cleaning in Cabo San Lucas</h2>
@@ -124,7 +124,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
 
       <h2>Emergency Plumbing Services</h2>
       <p>
-        Plumbing emergencies don't wait for business hours. Our standard service hours are <strong>7am–6pm daily</strong>. For <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a>, we provide 24/7 emergency response — nights, weekends, and holidays included.
+        Plumbing emergencies don't wait for business hours. Our standard service hours are <strong>Mon–Sat 8am–6pm</strong>. For <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a>, we provide 24/7 emergency response — nights, weekends, and holidays included.
       </p>
 
       <h3>Common Plumbing Emergencies We Handle</h3>
@@ -257,7 +257,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
       <h3>Emergency Response for Members</h3>
       <ul>
         <li><strong>24/7 availability</strong> exclusively for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a></li>
-        <li><strong>Standard hours 7am–6pm daily</strong> for all other clients</li>
+        <li><strong>Standard hours Mon–Sat 8am–6pm</strong> for all other clients</li>
         <li><strong>Fully equipped</strong> — We arrive with tools and common parts</li>
         <li><strong>Same rates</strong> — No after-hours premium for members</li>
       </ul>
@@ -289,7 +289,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
 
       <h3>What are your service hours?</h3>
       <p>
-        Standard service hours are <strong>7am–6pm daily</strong>. 24/7 emergency response is a benefit exclusively for{' '}
+        Standard service hours are <strong>Mon–Sat 8am–6pm</strong>. 24/7 emergency response is a benefit exclusively for{' '}
         <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">Property Care Plan members</a>
         . If you're not yet a member and have an urgent situation, call us and we'll do our best to help.
       </p>
@@ -330,7 +330,7 @@ export default function EmergencyPlumbingDrainCleaningCabo() {
         <li><strong>Phone / WhatsApp:</strong> +52 612 169 8328</li>
         <li><strong>Email:</strong> caboshandymanservice@gmail.com</li>
         <li><strong>Service Area:</strong> Cabo San Lucas, Los Cabos</li>
-        <li><strong>Hours:</strong> 7am–6pm daily · 24/7 for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">members</a></li>
+        <li><strong>Hours:</strong> Mon–Sat 8am–6pm · 24/7 for <a href="/property-care-plans" className="text-teal-600 hover:underline font-medium">members</a></li>
       </ul>
 
       <hr className="my-8" />

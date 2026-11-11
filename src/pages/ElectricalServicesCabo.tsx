@@ -28,7 +28,7 @@ export default function ElectricalServicesCabo() {
       },
       "telephone": "+52-612-169-8328",
       "priceRange": "$60+",
-      "openingHours": "Mo-Su 07:00-18:00",
+      "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
       "sameAs": [
         "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
         "https://www.facebook.com/share/19wvxoz8Cy/",
@@ -65,7 +65,7 @@ export default function ElectricalServicesCabo() {
     <>
       <SEO
         title="Electrical Services Cabo San Lucas | Licensed Electrician | Cabos Handyman"
-        description="Professional electrical services in Cabo San Lucas. Outlets, lighting, ceiling fans, panel upgrades. Licensed electricians available 24/7. Starting at $60 diagnostic visit."
+        description="Professional electrical services in Cabo San Lucas. Outlets, lighting, ceiling fans, panel upgrades. Licensed electricians, 24/7 emergency service for Property Care members. $60 diagnostic visit."
         canonicalUrl="/electrical-services-cabo"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -344,8 +344,8 @@ export default function ElectricalServicesCabo() {
                 <div className="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Clock className="text-yellow-600" size={32} />
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2">24/7 Emergency Service</h3>
-                <p className="text-gray-600 text-sm">Available for urgent electrical emergencies</p>
+                <h3 className="font-bold text-gray-900 mb-2">24/7 Emergency Service for Members</h3>
+                <p className="text-gray-600 text-sm">For urgent electrical emergencies — available to Property Care Plan members</p>
               </div>
             </div>
           </div>
@@ -371,7 +371,7 @@ export default function ElectricalServicesCabo() {
               </a>
             </div>
             <p className="text-yellow-100 mt-6 text-sm">
-              Serving Cabo San Lucas, Los Cabos • Licensed Electricians • 20+ Years Experience • 24/7 Emergency Service
+              Serving Cabo San Lucas, Los Cabos • Licensed Electricians • 20+ Years Experience • 24/7 Emergency Service for Members
             </p>
           </div>
 

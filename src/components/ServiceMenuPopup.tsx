@@ -323,7 +323,7 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
                 <div className="bg-cyan-500 w-10 h-10 rounded-full flex items-center justify-center">
                   <Droplet className="text-white" size={20} />
                 </div>
-                <h3 className="font-bold text-gray-900 group-hover:text-cyan-600 transition-colors">Plumber 24/7</h3>
+                <h3 className="font-bold text-gray-900 group-hover:text-cyan-600 transition-colors">Plumber</h3>
               </div>
               <p className="text-sm text-gray-600 mb-2">Emergency plumbing service</p>
               <div className="flex items-center gap-1 text-cyan-600 font-semibold text-sm">
@@ -398,7 +398,7 @@ export default function ServiceMenuPopup({ isOpen, onClose, projectType, onGetEs
             <ul className="text-sm text-blue-800 space-y-1">
               <li>• Prices shown are starting estimates and may vary based on project complexity</li>
               <li>• Material costs are additional unless specified</li>
-              <li>• Emergency services available 24/7 with premium rates</li>
+              <li>• 24/7 emergency service for Property Care Plan members</li>
               <li>• All work includes 1-year workmanship warranty</li>
               <li>• Licensed, insured, and bonded in Cabo San Lucas</li>
             </ul>

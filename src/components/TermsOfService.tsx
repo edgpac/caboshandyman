@@ -60,7 +60,7 @@ export default function TermsOfService() {
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">Service Scheduling and Estimates</h2>
               <ul className="list-disc pl-6 text-gray-700 space-y-2">
                 <li><strong>Appointments:</strong> All service appointments must be scheduled in advance through our website, phone, or AI assistant</li>
-                <li><strong>Emergency Services:</strong> Available 24/7 with 30-minute response time goals, subject to weather and accessibility</li>
+                <li><strong>Emergency Services:</strong> Available 24/7 to Property Care Plan members with 30-minute response time goals, subject to weather and accessibility</li>
                 <li><strong>Estimates:</strong> Free estimates are provided for informational purposes and may change based on actual conditions discovered during work</li>
                 <li><strong>AI Analysis:</strong> Our AI tool provides preliminary assessments only and does not replace professional inspection</li>
                 <li><strong>Cancellations:</strong> Service cancellations must be made at least 24 hours in advance to avoid cancellation fees</li>

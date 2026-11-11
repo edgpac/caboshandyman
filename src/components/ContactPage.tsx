@@ -92,7 +92,7 @@ const ContactPage = () => {
             <div className="flex items-center justify-center gap-2">
               <AlertCircle className="w-5 h-5" />
               <p className="font-semibold">
-                EMERGENCY? Call or WhatsApp +52 612 169 8328 (24/7 for Property Care members, 7am-6pm for non-members)
+                EMERGENCY? Call or WhatsApp +52 612 169 8328 (24/7 for Property Care members, Mon–Sat 8am–6pm for non-members)
               </p>
             </div>
           </div>
@@ -117,7 +117,7 @@ const ContactPage = () => {
                         <a href="tel:+526121698328" className="text-lg text-gray-700 hover:text-teal-600 transition-colors">
                           +52 612 169 8328
                         </a>
-                        <p className="text-sm text-gray-600 mt-1">Click to call - Available 7 AM - 5 PM</p>
+                        <p className="text-sm text-gray-600 mt-1">Click to call - Mon–Sat 8 AM – 6 PM</p>
                       </div>
                     </div>
                   </div>
@@ -177,13 +177,12 @@ const ContactPage = () => {
                       <div>
                         <h3 className="font-semibold mb-1 text-gray-900">Business Hours</h3>
                         <div className="text-gray-700">
-                          <p>Monday - Friday: 7:00 AM - 5:00 PM</p>
-                          <p>Saturday: 9:00 AM - 2:00 PM</p>
-                          <p>Sunday: Closed</p>
+                          <p>Monday - Saturday: 8:00 AM - 6:00 PM</p>
+                                                    <p>Sunday: Closed</p>
                           <div className="bg-yellow-50 border-l-4 border-yellow-500 p-3 mt-3 rounded text-sm">
                             <h4 className="font-bold text-gray-800 mb-1">Emergency Service Hours</h4>
                             <p className="text-gray-700"><strong>Property Care Members:</strong> 24/7 emergency service</p>
-                            <p className="text-gray-700"><strong>Non-Members:</strong> 7am-6pm emergency service</p>
+                            <p className="text-gray-700"><strong>Non-Members:</strong> Mon–Sat 8am–6pm emergency service</p>
                             <p className="text-xs text-gray-600 mt-1">
                               For 24/7 access, <a href="/property-care-plans" className="text-teal-600 hover:underline">join Property Care</a>.
                             </p>

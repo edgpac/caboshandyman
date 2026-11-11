@@ -196,7 +196,7 @@ export default function PoolWallPaintRemovalCementFinishCabo() {
 
       <p style={{ fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
         Cabos Handyman handles exterior wall preparation, paint removal, and cement fine finish
-        work throughout Cabo San Lucas, Los Cabos. Service hours are 7am–6pm daily.
+        work throughout Cabo San Lucas, Los Cabos. Service hours are Mon–Sat 8am–6pm.
         Property Care Plan members receive priority scheduling —{' '}
         <a href="/property-care-plans" style={{ color: '#06756b' }}>learn more here</a>.
       </p>

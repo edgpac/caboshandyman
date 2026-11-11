@@ -30,7 +30,7 @@ export default function HandymanCaboSanLucas() {
     "telephone": "+52-612-169-8328",
     "email": "caboshandymanservice@gmail.com",
     "priceRange": "$60+",
-    "openingHours": "Mo-Su 07:00-18:00",
+    "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
     "aggregateRating": aggregateRatingSchema,
     "areaServed": [
       {
@@ -72,7 +72,7 @@ export default function HandymanCaboSanLucas() {
               Professional Handyman Service in Cabo San Lucas
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              Your trusted local handyman with 20+ years of experience and 600+ completed projects. Residential, commercial, and vacation rental services. Available 24/7 for emergencies.
+              Your trusted local handyman with 20+ years of experience and 600+ completed projects. Residential, commercial, and vacation rental services. 24/7 emergency response for Property Care Plan members.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
               <a
@@ -99,7 +99,7 @@ export default function HandymanCaboSanLucas() {
               </div>
               <div className="flex items-center gap-2">
                 <Clock size={20} />
-                <span className="font-semibold">24/7 Emergency</span>
+                <span className="font-semibold">24/7 Emergency for Members</span>
               </div>
             </div>
           </div>
@@ -155,8 +155,8 @@ export default function HandymanCaboSanLucas() {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-2">24/7 Emergency Service</h3>
-                  <p className="text-gray-600">Emergencies don't wait for business hours. We offer 24/7 emergency response with 30-minute arrival time for critical situations.</p>
+                  <h3 className="font-bold text-gray-900 mb-2">24/7 Emergency Service for Members</h3>
+                  <p className="text-gray-600">Emergencies don't wait for business hours. Property Care Plan members get 24/7 emergency response with 30-minute arrival time for critical situations.</p>
                 </div>
               </div>
 
@@ -232,7 +232,7 @@ export default function HandymanCaboSanLucas() {
                   <Droplet className="text-cyan-600" size={28} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-cyan-600 transition-colors">Plumbing Services</h3>
-                <p className="text-gray-600 mb-3">24/7 emergency plumbing. Repairs, installations, and water heater service. Licensed plumbers.</p>
+                <p className="text-gray-600 mb-3">Emergency plumbing (24/7 for Property Care members). Repairs, installations, and water heater service. Licensed plumbers.</p>
                 <div className="flex items-center gap-2 text-cyan-600 font-semibold">
                   <span>Learn More</span>
                   <ArrowRight size={18} />
@@ -274,7 +274,7 @@ export default function HandymanCaboSanLucas() {
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-teal-600 flex-shrink-0 mt-1" size={16} />
-                    <span>Emergency plumbing (24/7)</span>
+                    <span>Emergency plumbing (24/7 for members)</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-teal-600 flex-shrink-0 mt-1" size={16} />
@@ -684,7 +684,7 @@ export default function HandymanCaboSanLucas() {
                     </p>
                     <ul className="list-disc list-inside space-y-2 mb-3 ml-4">
                       <li><strong>Property Care Members:</strong> 24/7 emergency service with 30-minute response time for critical situations (flooding, electrical hazards, AC failure in summer)</li>
-                      <li><strong>Non-Members:</strong> Same-day or next-day service during business hours (7am-6pm), with emergency service available for urgent situations at premium rates</li>
+                      <li><strong>Non-Members:</strong> Same-day or next-day service during business hours (Mon–Sat 8am–6pm), with emergency service available for urgent situations at premium rates</li>
                     </ul>
                     <p className="mb-3">
                       Most routine repairs (fixing a door, installing a ceiling fan, minor plumbing) can be scheduled within 24-48 hours depending on our current workload.

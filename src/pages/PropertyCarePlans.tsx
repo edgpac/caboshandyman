@@ -54,7 +54,7 @@ export default function PropertyCarePlans() {
       },
       "telephone": "+52-612-169-8328",
       "priceRange": "$99-$299",
-      "openingHours": "Mo-Su 07:00-18:00",
+      "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],
       "sameAs": [
         "https://maps.app.goo.gl/hJRcahhtYjF5tkv4A",
         "https://www.facebook.com/share/19wvxoz8Cy/",
@@ -560,7 +560,7 @@ export default function PropertyCarePlans() {
                       <td className="py-4 px-6 font-semibold">Emergency at 2am</td>
                       <td className="text-center py-4 px-6">
                         <div className="text-red-600 font-bold mb-1">❌ Not Available</div>
-                        <div className="text-sm text-gray-600">Must wait until 7am</div>
+                        <div className="text-sm text-gray-600">Must wait until 8am</div>
                         <div className="text-xs text-red-500 mt-1">Could be $1,000s in damage overnight</div>
                       </td>
                       <td className="text-center py-4 px-6 bg-green-50">
@@ -616,7 +616,7 @@ export default function PropertyCarePlans() {
                 <div className="bg-white rounded-lg p-4 border-2 border-red-300">
                   <h4 className="font-bold text-gray-800 mb-2">❌ Non-Member</h4>
                   <ul className="space-y-2 text-sm text-gray-700">
-                    <li><strong>2am Emergency:</strong> Not available until 7am</li>
+                    <li><strong>2am Emergency:</strong> Not available until 8am</li>
                     <li><strong>Cost:</strong> $500-800 per emergency call</li>
                     <li><strong>Annual:</strong> $1,000-1,600 (just emergencies)</li>
                     <li><strong>Peace of Mind:</strong> 😰 Hope nothing breaks</li>

@@ -227,7 +227,7 @@ export default function ACCondensationLineCleaningCaboArticle() {
 
       <p style={{ fontSize: '0.85rem', color: '#888', fontStyle: 'italic' }}>
         Cabos Handyman provides AC filter cleaning, condensation drain line clearing, and general
-        HVAC maintenance throughout Cabo San Lucas, Los Cabos. Service hours are 7am–6pm daily.
+        HVAC maintenance throughout Cabo San Lucas, Los Cabos. Service hours are Mon–Sat 8am–6pm.
         24/7 emergency response is available exclusively for{' '}
         <a href="/property-care-plans" style={{ color: '#06756b' }}>Property Care Plan members</a>.
       </p>
