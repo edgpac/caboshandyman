@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/carpintero-cabo-san-lucas",
+      "destination": "/carpentry-cabo-san-lucas",
+      "permanent": true
+    },
+    {
       "source": "/:path(.*)",
       "has": [
         {

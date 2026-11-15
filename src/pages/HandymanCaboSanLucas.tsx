@@ -253,8 +253,6 @@ export default function HandymanCaboSanLucas() {
           <p className="-mt-6 mb-12 text-center text-gray-700">
             Need cabinets, shelving, trim or a custom build? See our{' '}
             <a href="/carpentry-cabo-san-lucas" className="font-semibold text-teal-700 underline hover:text-teal-800">carpentry services in Cabo San Lucas</a>
-            {' '}&middot; en español:{' '}
-            <a href="/carpintero-cabo-san-lucas" hrefLang="es" lang="es" className="font-semibold text-teal-700 underline hover:text-teal-800">carpintero en Cabo San Lucas</a>
           </p>
 
           {/* Comprehensive Services List */}

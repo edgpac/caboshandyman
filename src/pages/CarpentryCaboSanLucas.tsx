@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-import { Helmet } from 'react-helmet-async';
 import SEO from '@/components/SEO';
 import { CheckCircle2, Hammer, Phone, ArrowRight, Shield } from 'lucide-react';
 import Navigation from '@/components/Navigation';
@@ -127,11 +126,6 @@ export default function CarpentryCaboSanLucas() {
           ],
         }}
       />
-      <Helmet>
-        <link rel="alternate" hrefLang="en" href={`${SITE_URL}/carpentry-cabo-san-lucas`} />
-        <link rel="alternate" hrefLang="es" href={`${SITE_URL}/carpintero-cabo-san-lucas`} />
-        <link rel="alternate" hrefLang="x-default" href={`${SITE_URL}/carpentry-cabo-san-lucas`} />
-      </Helmet>
       <Navigation />
 
       <section className="py-20 bg-gradient-to-br from-amber-700 to-yellow-700 text-white">
@@ -154,9 +148,6 @@ export default function CarpentryCaboSanLucas() {
               Free Estimate <ArrowRight size={20} />
             </a>
           </div>
-          <p className="mt-6 text-white/90">
-            ¿Prefiere español? <a href="/carpintero-cabo-san-lucas" hrefLang="es" className="underline font-semibold">Carpintero en Cabo San Lucas</a>
-          </p>
         </div>
       </section>
 

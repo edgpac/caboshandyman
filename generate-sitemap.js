@@ -34,7 +34,6 @@ const staticPages = [
   { url: '/kitchen-services-cabo', changefreq: 'monthly', priority: '0.88' },
   { url: '/bathroom-services-cabo', changefreq: 'monthly', priority: '0.88' },
   { url: '/carpentry-cabo-san-lucas', changefreq: 'monthly', priority: '0.88' },
-  { url: '/carpintero-cabo-san-lucas', changefreq: 'monthly', priority: '0.88' },
 
   // Plumbing sub-pages
   { url: '/toilet-installation-cabo-san-lucas', changefreq: 'monthly', priority: '0.82' },
