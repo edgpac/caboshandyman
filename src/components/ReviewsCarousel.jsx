@@ -169,6 +169,11 @@ export default function ReviewsCarousel() {
           <p className="text-xl text-white/90 max-w-2xl mx-auto">
             Reviews from customers across Cabo San Lucas, Los Cabos
           </p>
+          <p className="mt-4 text-white/90">
+            <a href="https://www.google.com/maps/place/?q=place_id:ChIJvXxMtHm-mEoR0EpJULrdt70" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-white">Read all our Google reviews</a>
+            {' '}&middot;{' '}
+            <a href="https://search.google.com/local/writereview?placeid=ChIJvXxMtHm-mEoR0EpJULrdt70" target="_blank" rel="noopener noreferrer" className="underline font-semibold hover:text-white">Leave us a review</a>
+          </p>
         </div>
 
         <div 

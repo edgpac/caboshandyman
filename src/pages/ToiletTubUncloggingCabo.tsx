@@ -13,14 +13,10 @@ export default function ToiletTubUncloggingCabo() {
     "serviceType": "Drain Cleaning and Unclogging Service",
     "provider": {
       "@type": "LocalBusiness",
-      "name": "Cabos Handyman - Drain Cleaning",
+      "name": "Cabos Handyman Services",
+      "alternateName": "Cabos Handyman",
       "image": "https://www.caboshandyman.com/CHLOGO.png",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Cabo San Lucas",
-        "addressRegion": "BCS",
-        "addressCountry": "MX"
-      },
+      "address": { "@type": "PostalAddress", "streetAddress": "Blvd. Paseo de la Marina s/n", "addressLocality": "Cabo San Lucas", "addressRegion": "Baja California Sur", "postalCode": "23450", "addressCountry": "MX" },
       "geo": {
         "@type": "GeoCoordinates",
         "latitude": "22.8866974",

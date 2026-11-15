@@ -181,16 +181,12 @@ export default function ServicesPage() {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
-            "name": "Cabos Handyman",
+            "name": "Cabos Handyman Services",
+            "alternateName": "Cabos Handyman",
             "telephone": "+52-612-169-8328",
             "email": "caboshandymanservice@gmail.com",
             "url": "https://www.caboshandyman.com",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Cabo San Lucas",
-              "addressRegion": "Baja California Sur",
-              "addressCountry": "MX"
-            },
+            "address": { "@type": "PostalAddress", "streetAddress": "Blvd. Paseo de la Marina s/n", "addressLocality": "Cabo San Lucas", "addressRegion": "Baja California Sur", "postalCode": "23450", "addressCountry": "MX" },
             "geo": { "@type": "GeoCoordinates", "latitude": "22.8866974", "longitude": "-109.9139710" },
             "priceRange": "$60-$1200",
             "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "opens": "08:00", "closes": "18:00" }],

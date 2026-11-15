@@ -15,15 +15,11 @@ export default function TopHandymanServicesLosCabos() {
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Cabos Handyman",
+    "name": "Cabos Handyman Services",
+    "alternateName": "Cabos Handyman",
     "image": "https://www.caboshandyman.com/CHLOGO.png",
     "description": "Top handyman services in Los Cabos — plumbing repairs, electrical work, AC service, painting, and 70+ more. 20+ years experience, 600+ projects completed.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Cabo San Lucas",
-      "addressRegion": "BCS",
-      "addressCountry": "MX"
-    },
+    "address": { "@type": "PostalAddress", "streetAddress": "Blvd. Paseo de la Marina s/n", "addressLocality": "Cabo San Lucas", "addressRegion": "Baja California Sur", "postalCode": "23450", "addressCountry": "MX" },
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": "22.8866974",
@@ -135,7 +131,7 @@ export default function TopHandymanServicesLosCabos() {
   const faqs = [
     {
       q: "What areas in Los Cabos do you serve?",
-      a: "We serve Cabo San Lucas in Los Cabos — downtown Cabo San Lucas, Pedregal and Pedregal Hills, El Médano and Médano Beach, the Pacific-side developments, the Marina and Golden Zone, and Cabo Bello. We don't regularly service San José del Cabo or the Tourist Corridor."
+      a: "We serve Cabo San Lucas in Los Cabos — downtown Cabo San Lucas, Pedregal and Pedregal Hills, El Tezal, El Médano and Médano Beach, the Pacific-side developments, the Marina and Golden Zone, and Cabo Bello. We don't regularly service San José del Cabo or the Tourist Corridor."
     },
     {
       q: "How much does a service call cost?",

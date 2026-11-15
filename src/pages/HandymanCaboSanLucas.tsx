@@ -13,15 +13,11 @@ export default function HandymanCaboSanLucas() {
   const schemaMarkup = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Cabos Handyman",
+    "name": "Cabos Handyman Services",
+    "alternateName": "Cabos Handyman",
     "image": "https://www.caboshandyman.com/CHLOGO.png",
     "description": "Professional handyman services in Cabo San Lucas. 20+ years experience with 600+ completed projects. Residential, commercial, and vacation rental services.",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Cabo San Lucas",
-      "addressRegion": "BCS",
-      "addressCountry": "MX"
-    },
+    "address": { "@type": "PostalAddress", "streetAddress": "Blvd. Paseo de la Marina s/n", "addressLocality": "Cabo San Lucas", "addressRegion": "Baja California Sur", "postalCode": "23450", "addressCountry": "MX" },
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": "22.8866974",
@@ -580,7 +576,7 @@ export default function HandymanCaboSanLucas() {
                 {openQuestion === 'faq2' && (
                   <div className="px-6 pb-6 text-gray-700 leading-relaxed">
                     <p className="mb-3">
-                      We serve <strong>Cabo San Lucas, Los Cabos</strong> — downtown Cabo San Lucas, Pedregal and Pedregal Hills, El Médano and Médano Beach, the Pacific-side developments, the Marina and Golden Zone, and Cabo Bello. We don't regularly service San José del Cabo or the Tourist Corridor.
+                      We serve <strong>Cabo San Lucas, Los Cabos</strong> — downtown Cabo San Lucas, Pedregal and Pedregal Hills, El Tezal, El Médano and Médano Beach, the Pacific-side developments, the Marina and Golden Zone, and Cabo Bello. We don't regularly service San José del Cabo or the Tourist Corridor.
                     </p>
                     <p className="mb-3">
                       With 20+ years as a local handyman, we know every neighborhood in Cabo San Lucas and can navigate quickly to your property. We regularly service vacation rentals in Médano Beach, luxury homes in Pedregal, and commercial properties throughout Cabo San Lucas.

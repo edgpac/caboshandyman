@@ -91,16 +91,12 @@ export default function CabosHandymanHomepage() {
   const homepageSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Cabos Handyman",
+    "name": "Cabos Handyman Services",
+    "alternateName": "Cabos Handyman",
     "image": "https://www.caboshandyman.com/CHLOGO.png",
     "telephone": "+526121698328",
     "url": "https://www.caboshandyman.com",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Cabo San Lucas",
-      "addressRegion": "BCS",
-      "addressCountry": "MX"
-    },
+    "address": { "@type": "PostalAddress", "streetAddress": "Blvd. Paseo de la Marina s/n", "addressLocality": "Cabo San Lucas", "addressRegion": "Baja California Sur", "postalCode": "23450", "addressCountry": "MX" },
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": 22.8905327,

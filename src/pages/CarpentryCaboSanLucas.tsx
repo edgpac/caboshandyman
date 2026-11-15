@@ -110,7 +110,8 @@ export default function CarpentryCaboSanLucas() {
               areaServed: ['Cabo San Lucas'],
               provider: {
                 '@type': 'LocalBusiness',
-                name: 'Cabos Handyman',
+                name: 'Cabos Handyman Services',
+                alternateName: 'Cabos Handyman',
                 telephone: '+52 612 169 8328',
                 url: SITE_URL,
               },

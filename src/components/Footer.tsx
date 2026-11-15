@@ -72,6 +72,17 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h3 className="font-semibold mb-3 text-gray-900">Contact</h3>
+            {/* NAP — matches the Google Business Profile exactly. */}
+            <address className="not-italic text-sm text-gray-700 mb-3">
+              <p className="font-semibold text-gray-900">Cabos Handyman Services</p>
+              <p>Blvd. Paseo de la Marina s/n, Col. Centro</p>
+              <p>Cabo San Lucas, B.C.S., C.P. 23450, México</p>
+              <p className="text-xs text-gray-600 mt-1">Mon–Sat 8am–6pm · Closed Sunday</p>
+            </address>
+            <div className="flex flex-col space-y-1 mb-3 text-xs">
+              <a href="https://www.google.com/maps/place/?q=place_id:ChIJvXxMtHm-mEoR0EpJULrdt70" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline font-medium">Read our Google reviews →</a>
+              <a href="https://search.google.com/local/writereview?placeid=ChIJvXxMtHm-mEoR0EpJULrdt70" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:underline font-medium">Leave us a review →</a>
+            </div>
             <div className="space-y-2 text-sm">
               <div className="flex items-center space-x-2 text-gray-600">
                 <Phone className="h-4 w-4 text-teal-400" />

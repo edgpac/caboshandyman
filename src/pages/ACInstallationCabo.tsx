@@ -147,15 +147,11 @@ export default function ACInstallationCabo() {
     serviceType: 'Mini-Split AC Installation and Repair',
     provider: {
       '@type': 'LocalBusiness',
-      name: 'Cabos Handyman',
+      name: 'Cabos Handyman Services',
+      alternateName: 'Cabos Handyman',
       telephone: '+52-612-169-8328',
       url: 'https://www.caboshandyman.com',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'Cabo San Lucas',
-        addressRegion: 'Baja California Sur',
-        addressCountry: 'MX',
-      },
+      address: { '@type': 'PostalAddress', streetAddress: 'Blvd. Paseo de la Marina s/n', addressLocality: 'Cabo San Lucas', addressRegion: 'Baja California Sur', postalCode: '23450', addressCountry: 'MX' },
     },
     areaServed: [
       { '@type': 'City', name: 'Cabo San Lucas' },

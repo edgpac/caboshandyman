@@ -39,14 +39,10 @@ export default function About() {
 
   const localBusinessSchema = {
     "@type": "LocalBusiness",
-    "name": "Cabos Handyman",
+    "name": "Cabos Handyman Services",
+    "alternateName": "Cabos Handyman",
     "image": "https://www.caboshandyman.com/CHLOGO.png",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Cabo San Lucas",
-      "addressRegion": "BCS",
-      "addressCountry": "MX"
-    },
+    "address": { "@type": "PostalAddress", "streetAddress": "Blvd. Paseo de la Marina s/n", "addressLocality": "Cabo San Lucas", "addressRegion": "Baja California Sur", "postalCode": "23450", "addressCountry": "MX" },
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": "22.8866974",
@@ -111,7 +107,7 @@ export default function About() {
               About Cabos Handyman
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
-              The most trusted handyman in Cabo San Lucas — 20+ years of expertise, trust, and a commitment to quality repairs and home improvement services.
+              Cabos Handyman Services — the most trusted handyman in Cabo San Lucas — 20+ years of expertise, trust, and a commitment to quality repairs and home improvement services.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

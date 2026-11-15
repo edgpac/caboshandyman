@@ -403,10 +403,9 @@ const ContactPage = () => {
                       <div className="flex items-start gap-2">
                         <MapPin className="h-4 w-4 text-purple-600 flex-shrink-0 mt-0.5" />
                         <div className="flex-1">
-                          <p className="group-hover:underline">Boulevard Marina s/n</p>
-                          <p className="group-hover:underline">Manzana 31, Colonia Centro</p>
-                          <p className="group-hover:underline">Cabo San Lucas, Baja California Sur</p>
-                          <p className="group-hover:underline">México, C.P. 23400</p>
+                          <p className="group-hover:underline">Blvd. Paseo de la Marina s/n, Col. Centro</p>
+                          <p className="group-hover:underline">Cabo San Lucas, B.C.S., C.P. 23450</p>
+                          <p className="group-hover:underline">México</p>
                           <span className="text-xs text-purple-600 mt-1 inline-block">
                             📷 Click to see Street View →
                           </span>
