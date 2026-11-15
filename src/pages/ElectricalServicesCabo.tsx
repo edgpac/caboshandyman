@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import MergedServiceSections from '@/components/MergedServiceSections';
 import SEO from '@/components/SEO';
 import { CheckCircle2, Zap, DollarSign, Clock, ArrowRight, Shield, AlertCircle } from 'lucide-react';
 
@@ -373,6 +374,8 @@ export default function ElectricalServicesCabo() {
 
         </div>
       </section>
+
+      <MergedServiceSections hub="electrical" />
 
       <RelatedServices currentPath="/electrical-services-cabo" />
       <Footer />

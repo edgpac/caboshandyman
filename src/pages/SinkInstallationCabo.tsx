@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import MergedServiceSections from '@/components/MergedServiceSections';
 import SEO from '@/components/SEO';
 import { CheckCircle2, Wrench, Phone, ArrowRight, Shield } from 'lucide-react';
 import Navigation from '@/components/Navigation';
@@ -112,6 +113,8 @@ export default function SinkInstallationCabo() {
           </div>
         </div>
       </section>
+
+      <MergedServiceSections hub="sink" />
 
       <section className="py-12 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white text-center">
         <div className="container mx-auto px-6 max-w-2xl">

@@ -148,7 +148,7 @@ export default function SecureAIAssistant({ isOpen: externalIsOpen, onClose, ini
       title: "HOA & Property Maintenance",
       description: "Comprehensive maintenance solutions designed to enhance community value and resident satisfaction.",
       icon: Users,
-      details: "Complete property management services for HOAs and multi-unit properties including landscaping, common area maintenance, and tenant improvement coordination.",
+      details: "Complete property management services for HOAs and multi-unit properties including common area maintenance and tenant improvement coordination.",
       calendlyUrl: "https://cal.com/maintenancemaster/hoa-property-assessment"
     }
   ];

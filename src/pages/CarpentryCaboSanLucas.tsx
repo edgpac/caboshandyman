@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import MergedServiceSections from '@/components/MergedServiceSections';
 import SEO from '@/components/SEO';
 import { CheckCircle2, Hammer, Phone, ArrowRight, Shield } from 'lucide-react';
 import Navigation from '@/components/Navigation';
@@ -240,6 +241,8 @@ export default function CarpentryCaboSanLucas() {
         </div>
       </section>
 
+      <MergedServiceSections hub="carpentry" />
+
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-6 max-w-5xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Related Services</h2>
@@ -247,8 +250,8 @@ export default function CarpentryCaboSanLucas() {
             {[
               { href: '/kitchen-services-cabo', label: 'Kitchen Remodeling' },
               { href: '/window-repair-cabo-san-lucas', label: 'Window Repair' },
-              { href: '/pantry-shelving-cabo-san-lucas', label: 'Pantry Shelving' },
-              { href: '/bar-installation-cabo-san-lucas', label: 'Bar Installation' },
+              { href: '/cabinet-installation-cabo-san-lucas', label: 'Cabinet Installation' },
+              { href: '/furniture-assembly-cabo', label: 'Furniture Assembly' },
             ].map(link => (
               <a key={link.href} href={link.href} className="bg-white border border-gray-200 rounded-lg p-4 text-center font-semibold text-gray-900 hover:border-amber-500 hover:shadow transition-all">
                 {link.label}

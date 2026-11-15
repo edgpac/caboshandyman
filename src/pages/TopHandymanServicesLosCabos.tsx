@@ -121,8 +121,7 @@ export default function TopHandymanServicesLosCabos() {
         "Door lock replacement",
         "Window repair & sealing",
         "TV mounting & cabinet install",
-        "Furniture assembly",
-        "Landscape maintenance"
+        "Furniture assembly"
       ],
       link: "/services"
     }
@@ -390,7 +389,6 @@ export default function TopHandymanServicesLosCabos() {
             <li>Door lock and deadbolt replacement</li>
             <li>Window repair and weather sealing</li>
             <li>Furniture assembly</li>
-            <li>Landscape maintenance</li>
           </ul>
           <p>
             Browse our complete <a href="/services">service menu with pricing</a> — 70+ services, all with transparent rates.

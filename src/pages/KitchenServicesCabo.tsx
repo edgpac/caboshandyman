@@ -1,4 +1,5 @@
 import { lazy, useState } from 'react';
+import MergedServiceSections from '@/components/MergedServiceSections';
 import SEO from '@/components/SEO';
 import { CheckCircle2, Wrench, DollarSign, Clock, ArrowRight, Droplet, Zap, ChevronDown, Shield } from 'lucide-react';
 
@@ -849,6 +850,8 @@ export default function KitchenServicesCabo() {
 
         </div>
       </section>
+
+      <MergedServiceSections hub="kitchen" />
 
       <RelatedServices currentPath="/kitchen-services-cabo" />
       <Footer />

@@ -912,7 +912,7 @@ HOME IMPROVEMENT BASICS:
 TV Mounting $125 (1-2hr) | Artwork, Small Mirrors & Decorative Pieces starting at $40 (30min-1hr) | Starlink Install $80 (1-2hr) | Shelf Install $80 (1-2hr) | Curtain Rod $60 (30min-1hr) | Furniture Assembly $100 (1-3hr) | Door Handle/Lock $80 (1hr)
 
 HOA/COMMUNITY:
-Trash Removal $150 (2-4hr) | Pool Pump Replace $400 (3-4hr) | Pool Maintenance $120 (1-2hr) | Landscape $200 (4-6hr) | Common Area Lights $180 (2-3hr) | Lock Replace $150 (1-2hr) | Window Repair $120 (1-3hr) | Paint Touch-up $8/sqft (2-4hr) | Exit Lighting $200 (2-3hr) | Fire Extinguisher $80 (30min-1hr) | Security Camera $250 (2-4hr)
+Trash Removal $150 (2-4hr) | Pool Pump Replace $400 (3-4hr) | Pool Maintenance $120 (1-2hr) | Common Area Lights $180 (2-3hr) | Lock Replace $150 (1-2hr) | Window Repair $120 (1-3hr) | Paint Touch-up $8/sqft (2-4hr) | Exit Lighting $200 (2-3hr) | Fire Extinguisher $80 (30min-1hr) | Security Camera $250 (2-4hr)
 
 RESTAURANT:
 Commercial Sink $400 (4-6hr) | Grease Trap $600 (6-8hr) | Exhaust Hood $800 (1 day) | Gas Line $300 (3-4hr) | Water Heater $500 (4-6hr) | Booth Install $400 (4-6hr) | Bar Install $600 (1-2 days) | ADA Compliance $300 (4-8hr) | Fire Suppression $1200 (1-2 days)

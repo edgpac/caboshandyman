@@ -318,7 +318,6 @@ export default function ServicesPage() {
             <ServiceCard to="/water-heater-cabo-san-lucas" icon={<Wrench className="text-orange-500" size={28} />} title="Water Heater" desc="Installation, replacement, no-hot-water repair" accent="hover:border-orange-300" />
             <ServiceCard to="/garbage-disposal-cabo-san-lucas" icon={<Wrench className="text-gray-500" size={28} />} title="Garbage Disposal" desc="Installation, replacement, repair" accent="hover:border-gray-400" />
             <ServiceCard to="/water-leak-detector-cabo-san-lucas" icon={<Droplet className="text-cyan-600" size={28} />} title="Water Leak Detector" desc="Smart sensor installation, leak detection" accent="hover:border-cyan-400" />
-            <ServiceCard to="/commercial-sink-installation-cabo-san-lucas" icon={<Droplet className="text-teal-600" size={28} />} title="Commercial Sink" desc="Restaurant, bar, 3-compartment, prep sinks" accent="hover:border-teal-400" />
           </ServiceSection>
 
           {/* ── ELECTRICAL ── */}
@@ -331,10 +330,6 @@ export default function ServicesPage() {
             <ServiceCard to="/ceiling-light-installation-cabo-san-lucas" icon={<Zap className="text-yellow-400" size={28} />} title="Ceiling Light Install" desc="Recessed, pendant, chandeliers, LED" accent="hover:border-yellow-400" />
             <ServiceCard to="/outlet-installation-cabo-san-lucas" icon={<Zap className="text-yellow-500" size={28} />} title="Outlet Installation" desc="GFCI, USB, 220V, new outlets" accent="hover:border-yellow-300" />
             <ServiceCard to="/generator-hookup-cabo-san-lucas" icon={<Zap className="text-orange-600" size={28} />} title="Generator Hookup" desc="220V inlet, transfer switch for CFE outages" accent="hover:border-orange-400" />
-            <ServiceCard to="/bathroom-lighting-cabo-san-lucas" icon={<Zap className="text-yellow-500" size={28} />} title="Bathroom Lighting" desc="Vanity lights, sconces, exhaust fan lights" accent="hover:border-yellow-300" />
-            <ServiceCard to="/office-lighting-cabo-san-lucas" icon={<Zap className="text-yellow-600" size={28} />} title="Office Lighting" desc="LED panels, task lighting, smart fixtures" accent="hover:border-yellow-400" />
-            <ServiceCard to="/common-area-lighting-cabo-san-lucas" icon={<Zap className="text-yellow-400" size={28} />} title="Common Area Lighting" desc="Hallways, lobbies, parking, exterior" accent="hover:border-yellow-300" />
-            <ServiceCard to="/decorative-lighting-cabo-san-lucas" icon={<Zap className="text-amber-500" size={28} />} title="Decorative Lighting" desc="String lights, accent, LED strips, landscape" accent="hover:border-amber-400" />
             <ServiceCard to="/ac-installation-cabo-san-lucas" icon={<Wind className="text-sky-500" size={28} />} title="AC Installation & Repair" desc="Mini-split install, filter service, diagnostics" accent="hover:border-sky-300" />
           </ServiceSection>
 
@@ -348,8 +343,6 @@ export default function ServicesPage() {
             <ServiceCard to="/countertop-installation-cabo-san-lucas" icon={<Wrench className="text-stone-600" size={28} />} title="Countertop Installation" desc="Granite, quartz, marble, tile, laminate" accent="hover:border-stone-400" />
             <ServiceCard to="/backsplash-installation-cabo-san-lucas" icon={<Wrench className="text-emerald-600" size={28} />} title="Backsplash Installation" desc="Subway, mosaic, talavera, stone tile" accent="hover:border-emerald-300" />
             <ServiceCard to="/tile-installation-cabo-san-lucas" icon={<Wrench className="text-amber-600" size={28} />} title="Tile Installation" desc="Floor, wall, backsplash, shower tile" accent="hover:border-amber-300" />
-            <ServiceCard to="/kitchen-hardware-installation-cabo-san-lucas" icon={<Wrench className="text-slate-500" size={28} />} title="Kitchen Hardware" desc="Cabinet handles, pulls, hinges, knobs" accent="hover:border-slate-400" />
-            <ServiceCard to="/pantry-shelving-cabo-san-lucas" icon={<Home className="text-amber-600" size={28} />} title="Pantry Shelving" desc="Pantry, closet, wall, and built-in shelving" accent="hover:border-amber-400" />
           </ServiceSection>
 
           {/* ── REMODELING & FLOORING ── */}
@@ -372,10 +365,6 @@ export default function ServicesPage() {
           >
             <ServiceCard to="/bathroom-services-cabo" icon={<Bath className="text-blue-500" size={28} />} title="Bathroom Services" desc="Tile, fixtures, toilet, shower install" accent="hover:border-blue-300" />
             <ServiceCard to="/shower-installation-cabo-san-lucas" icon={<Bath className="text-blue-400" size={28} />} title="Shower Installation" desc="Walk-in shower, tub conversion, tile" accent="hover:border-blue-300" />
-            <ServiceCard to="/shower-head-replacement-cabo-san-lucas" icon={<Droplet className="text-blue-400" size={28} />} title="Shower Head Replacement" desc="Install, upgrade, rain head, handheld" accent="hover:border-blue-300" />
-            <ServiceCard to="/towel-rack-installation-cabo-san-lucas" icon={<Wrench className="text-gray-500" size={28} />} title="Towel Rack Installation" desc="Towel bars, hooks, rings, heated bars" accent="hover:border-gray-400" />
-            <ServiceCard to="/mirror-installation-cabo-san-lucas" icon={<Wrench className="text-slate-500" size={28} />} title="Mirror Installation" desc="Bathroom mirrors, framed, frameless, large" accent="hover:border-slate-400" />
-            <ServiceCard to="/bathroom-shelving-cabo-san-lucas" icon={<Home className="text-blue-500" size={28} />} title="Bathroom Shelving" desc="Wall shelves, over-toilet storage, floating" accent="hover:border-blue-300" />
           </ServiceSection>
 
           {/* ── HANDYMAN & GENERAL ── */}
@@ -389,7 +378,6 @@ export default function ServicesPage() {
             <ServiceCard to="/door-lock-replacement-cabo-san-lucas" icon={<Wrench className="text-gray-600" size={28} />} title="Door Lock Replacement" desc="Deadbolt, smart lock, knob, lever sets" accent="hover:border-gray-400" />
             <ServiceCard to="/window-repair-cabo-san-lucas" icon={<Wrench className="text-sky-500" size={28} />} title="Window Repair" desc="Seals, screens, hardware, sliding windows" accent="hover:border-sky-300" />
             <ServiceCard to="/painting-cabo-san-lucas" icon={<Wrench className="text-rose-500" size={28} />} title="Paint Touch-ups" desc="Interior & exterior, accent walls, full rooms" accent="hover:border-rose-300" />
-            <ServiceCard to="/landscape-maintenance-cabo-san-lucas" icon={<Wrench className="text-green-600" size={28} />} title="Landscape Maintenance" desc="Palm tree pruning, irrigation, yard cleanup" accent="hover:border-green-400" />
           </ServiceSection>
 
           {/* ── COMMERCIAL & HOSPITALITY ── */}
@@ -397,10 +385,6 @@ export default function ServicesPage() {
             title="Commercial & Hospitality"
             intro="We work with restaurants, bars, hotels, and HOAs across Cabo San Lucas, Los Cabos — not limited to residential projects."
           >
-            <ServiceCard to="/booth-installation-cabo-san-lucas" icon={<Armchair className="text-indigo-500" size={28} />} title="Booth Installation" desc="Restaurant & dining area booth seating" accent="hover:border-indigo-300" />
-            <ServiceCard to="/bar-installation-cabo-san-lucas" icon={<Wrench className="text-amber-700" size={28} />} title="Bar Installation" desc="Custom bar tops, cabinetry, under-bar setup" accent="hover:border-amber-500" />
-            <ServiceCard to="/commercial-sink-installation-cabo-san-lucas" icon={<Droplet className="text-teal-600" size={28} />} title="Commercial Sink" desc="Restaurant, bar, 3-compartment, prep sinks" accent="hover:border-teal-400" />
-            <ServiceCard to="/common-area-lighting-cabo-san-lucas" icon={<Zap className="text-yellow-400" size={28} />} title="Common Area Lighting" desc="Hallways, lobbies, parking, exterior lighting" accent="hover:border-yellow-300" />
           </ServiceSection>
 
           {/* ── PROPERTY & RENTAL ── */}

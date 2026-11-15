@@ -128,8 +128,7 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
       services: [
         { name: "Trash Removal Service", startingPrice: "$150", duration: "2-4 hours" },
         { name: "Pool Pump Replacement", startingPrice: "$400", duration: "3-4 hours" },
-        { name: "Pool Equipment Maintenance", startingPrice: "$120", duration: "1-2 hours" },
-        { name: "Landscape Maintenance", startingPrice: "$200", duration: "4-6 hours" }
+        { name: "Pool Equipment Maintenance", startingPrice: "$120", duration: "1-2 hours" }
       ]
     },
     {

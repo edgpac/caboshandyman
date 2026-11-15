@@ -1,4 +1,5 @@
 import { lazy } from 'react';
+import MergedServiceSections from '@/components/MergedServiceSections';
 import SEO from '@/components/SEO';
 import { CheckCircle2, Wrench, DollarSign, Clock, ArrowRight, Droplet, Zap, Wind } from 'lucide-react';
 
@@ -394,6 +395,8 @@ export default function BathroomServicesCabo() {
 
         </div>
       </section>
+
+      <MergedServiceSections hub="bathroom" />
 
       <RelatedServices currentPath="/bathroom-services-cabo" />
       <Footer />

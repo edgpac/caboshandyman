@@ -338,7 +338,7 @@ export default function HandymanCaboSanLucas() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-teal-600 flex-shrink-0 mt-1" size={16} />
-                    <span>Cabinet installation</span>
+                    <span>Cabinet installation — <a href="/carpentry-cabo-san-lucas" className="font-semibold text-teal-700 underline hover:text-teal-800">custom cabinets</a></span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-teal-600 flex-shrink-0 mt-1" size={16} />
