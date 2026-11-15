@@ -65,7 +65,7 @@ export default function BathroomServicesCabo() {
   return (
     <>
       <SEO
-        title="Bathroom Remodeling Cabo San Lucas, Los Cabos | Cabos Handyman"
+        title="Bathroom Remodeling Contractor in Cabo San Lucas, Los Cabos | Cabos Handyman"
         description="Bathroom remodeling contractors in Cabo San Lucas, Los Cabos. Toilet installation, vanity, shower, tile work, and unclogging. 20+ years experience. From $60 diagnostic visit."
         canonicalUrl="/bathroom-services-cabo"
         geoRegion="MX-BCS"
@@ -85,8 +85,8 @@ export default function BathroomServicesCabo() {
               <span className="text-sm font-medium">Complete Bathroom Services</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Bathroom Remodeling & Repair in Cabo San Lucas
-              <span className="block text-2xl md:text-3xl font-normal mt-2 text-white/90">Serving Cabo San Lucas, Los Cabos</span>
+              Bathroom Remodeling Contractor in Cabo San Lucas
+              <span className="block text-2xl md:text-3xl font-normal mt-2 text-white/90">Remodels &amp; Repairs · Bilingual Crew</span>
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
               From simple repairs to complete bathroom renovations. Expert plumbing, electrical, tile work, and installation services. 20+ years experience in Los Cabos.

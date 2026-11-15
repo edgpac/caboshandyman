@@ -9,28 +9,121 @@ const Footer = lazy(() => import('@/components/Footer'));
 
 const SITE_URL = 'https://www.caboshandyman.com';
 
+// Only services the business has confirmed (owner + Business Profile service
+// list) — no wood-treatment product or furniture-restoration claims.
+const SERVICE_GROUPS = [
+  {
+    title: 'Custom Carpentry & Built-Ins',
+    intro:
+      'Woodwork designed and built to fit your space — not off-the-shelf pieces forced into a Cabo home.',
+    items: [
+      'Custom kitchen cabinets',
+      'Laundry room cabinets',
+      'Closets and built-ins',
+      'Under-stair storage',
+      'Custom shelving, floating shelves and closet systems',
+      'Custom doors, including barn doors and screen doors',
+    ],
+  },
+  {
+    title: 'Carpentry Repair & Refurbishing',
+    intro:
+      'Not everything needs replacing. We repair and refurbish existing woodwork, and replace it when repair no longer makes sense.',
+    items: [
+      'Repair of swollen or damaged doors, cabinets and frames',
+      'Door and window repair, replacement and manufacturing',
+      'Sliding door track repair',
+      'Weatherproofing doors and windows',
+      'Refurbishing existing cabinets and woodwork',
+    ],
+  },
+  {
+    title: 'Outdoor Carpentry: Pergolas, Palapas & Shade',
+    intro:
+      'Outdoor living is a big part of a Cabo home, and outdoor structures need to be built for sun, wind and salt air.',
+    items: [
+      'Custom pergola design and installation',
+      'Palapa repair and construction',
+      'Shade sails',
+      'Covered patio structures',
+    ],
+  },
+  {
+    title: 'Hurricane & Storm Preparation',
+    intro: 'Protect windows before storm season instead of scrambling when a storm is on the way.',
+    items: ['Custom-made storm window shutters'],
+  },
+];
+
+const FAQS = [
+  {
+    q: 'Do you build custom cabinets in Cabo San Lucas?',
+    a: 'Yes. We build custom kitchen cabinets, laundry room cabinets, closets, built-ins and under-stair storage, designed and built to fit your space.',
+  },
+  {
+    q: 'Can you repair doors and cabinets that are swollen or damaged?',
+    a: 'Yes. We repair, refurbish or replace swollen or damaged doors, cabinets and frames, and we also repair sliding door tracks and weatherproof doors and windows.',
+  },
+  {
+    q: 'Do you build pergolas and palapas?',
+    a: 'Yes. We design and install custom pergolas, repair and build palapas, and install shade sails and covered patio structures.',
+  },
+  {
+    q: 'Do you make storm shutters?',
+    a: 'Yes. As part of hurricane and storm preparation, we make custom storm window shutters.',
+  },
+  {
+    q: 'Which areas do you serve?',
+    a: 'Cabo San Lucas — including the Marina, Pedregal, El Tezal, El Médano and Centro. We don’t regularly serve San José del Cabo or the Tourist Corridor.',
+  },
+  {
+    q: 'Can I explain the project in Spanish?',
+    a: 'Yes. Our crew is bilingual, so you can talk through the project in English or Spanish.',
+  },
+  {
+    q: 'How do I get a price for carpentry work?',
+    a: 'Call +52 612 169 8328 or request a free estimate on our contact page. Photos and rough measurements of the space help us quote faster.',
+  },
+  {
+    q: 'What are your hours?',
+    a: 'Monday to Saturday, 8am to 6pm. We’re closed on Sunday.',
+  },
+];
+
 export default function CarpentryCaboSanLucas() {
   return (
     <>
       <SEO
-        title="Carpenter in Cabo San Lucas | Carpentry Services | Cabos Handyman"
-        description="Carpentry in Cabo San Lucas, Los Cabos: cabinets, shelving, trim, doors and custom bar & booth builds. Bilingual, licensed & insured. Free estimate."
+        title="Carpenter in Cabo San Lucas | Carpentry in Los Cabos | Cabos Handyman"
+        description="Carpenter in Cabo San Lucas, Los Cabos: custom cabinets, closets, doors, pergolas & palapas, repairs and refurbishing. Bilingual crew. Free estimate."
         canonicalUrl="/carpentry-cabo-san-lucas"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
         geoPosition="22.8866974;-109.9139710"
         schemaMarkup={{
           '@context': 'https://schema.org',
-          '@type': 'Service',
-          serviceType: 'Carpentry',
-          name: 'Carpentry Services in Cabo San Lucas',
-          areaServed: ['Cabo San Lucas'],
-          provider: {
-            '@type': 'LocalBusiness',
-            name: 'Cabos Handyman',
-            telephone: '+52 612 169 8328',
-            url: SITE_URL,
-          },
+          '@graph': [
+            {
+              '@type': 'Service',
+              serviceType: 'Carpentry',
+              name: 'Carpentry Services in Cabo San Lucas',
+              areaServed: ['Cabo San Lucas'],
+              provider: {
+                '@type': 'LocalBusiness',
+                name: 'Cabos Handyman',
+                telephone: '+52 612 169 8328',
+                url: SITE_URL,
+              },
+            },
+            {
+              '@type': 'FAQPage',
+              mainEntity: FAQS.map(faq => ({
+                '@type': 'Question',
+                name: faq.q,
+                acceptedAnswer: { '@type': 'Answer', text: faq.a },
+              })),
+            },
+          ],
         }}
       />
       <Helmet>
@@ -44,20 +137,20 @@ export default function CarpentryCaboSanLucas() {
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-6">
             <Hammer size={18} />
-            <span className="text-sm font-medium">Carpentry · Cabo San Lucas</span>
+            <span className="text-sm font-medium">Custom · Repair · Refurbish</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
-            Carpentry Services<br />in Cabo San Lucas
+            Carpenter in<br />Cabo San Lucas
           </h1>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Cabinets, shelving, trim and custom woodwork for homes, vacation rentals and businesses across Cabo San Lucas, Los Cabos — done by a bilingual, licensed and insured crew.
+            Looking for a carpenter in Cabo San Lucas? Cabos Handyman builds, repairs and refurbishes woodwork for homes, vacation rentals and businesses in Cabo San Lucas, Los Cabos — custom cabinets, closets, doors, pergolas and palapas, done by a bilingual, licensed and insured crew.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+526121698328" className="inline-flex items-center gap-2 bg-white text-amber-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
               <Phone size={20} /> Call +52 612 169 8328
             </a>
             <a href="/contact" className="inline-flex items-center gap-2 bg-yellow-900/60 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-900 transition-colors">
-              Schedule Service <ArrowRight size={20} />
+              Free Estimate <ArrowRight size={20} />
             </a>
           </div>
           <p className="mt-6 text-white/90">
@@ -68,83 +161,102 @@ export default function CarpentryCaboSanLucas() {
 
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6 max-w-5xl">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Carpentry Work We Do</h2>
-              <p className="text-gray-700 mb-6">
-                From a new cabinet or a run of pantry shelves to a full bar or booth build, we handle carpentry projects throughout Cabo San Lucas, Los Cabos — and coordinate any plumbing or electrical the job needs, so you deal with one crew.
-              </p>
-              <ul className="space-y-3">
-                {[
-                  'Cabinet installation, adjustment and repair',
-                  'Custom shelving for pantries, closets and bathrooms',
-                  'Trim, baseboard and molding installation',
-                  'Door adjustment, hinges and hardware',
-                  'Bar and booth builds for homes and restaurants',
-                  'Furniture assembly',
-                  'Kitchen hardware installation',
-                ].map(item => (
-                  <li key={item} className="flex items-start gap-3">
-                    <CheckCircle2 className="text-amber-600 mt-0.5 shrink-0" size={20} />
-                    <span className="text-gray-700">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Carpentry in Cabo San Lucas: Custom, Repair and Refurbishing</h2>
+          <p className="text-gray-700 mb-4">
+            Carpentry in Cabo San Lucas comes in three kinds of jobs: building something new that fits the space, repairing woodwork that has been damaged, and refurbishing what is already there so it looks and works like new. We do all three, so you don’t need one company for custom cabinets and another for a door that sticks.
+          </p>
+          <p className="text-gray-700 mb-10">
+            Because we’re a handyman and remodeling crew, carpentry projects that also need plumbing, electrical or paint — a laundry room with new cabinets and a sink, or a closet with lighting — are handled by one team, coordinated from start to finish.
+          </p>
 
-            <div className="space-y-6">
-              <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <Shield className="text-amber-600" size={22} /> Why Cabos Handyman?
-                </h3>
-                <ul className="space-y-2 text-gray-700">
-                  {[
-                    '20+ years experience in Los Cabos',
-                    'Licensed & insured',
-                    'Bilingual service (English & Spanish)',
-                    '1-year workmanship warranty',
-                    'Same-day service available',
-                    'Serving Cabo San Lucas in Los Cabos',
-                  ].map(item => (
-                    <li key={item} className="flex items-center gap-2">
-                      <CheckCircle2 className="text-amber-500 shrink-0" size={16} />
-                      {item}
+          <div className="grid md:grid-cols-2 gap-8">
+            {SERVICE_GROUPS.map(group => (
+              <div key={group.title} className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{group.title}</h3>
+                <p className="text-gray-700 mb-4">{group.intro}</p>
+                <ul className="space-y-2">
+                  {group.items.map(item => (
+                    <li key={item} className="flex items-start gap-3">
+                      <CheckCircle2 className="text-amber-600 mt-0.5 shrink-0" size={20} />
+                      <span className="text-gray-800">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <div className="bg-gray-50 rounded-xl p-6">
-                <h3 className="text-xl font-bold text-gray-900 mb-3">Common Questions</h3>
-                <div className="space-y-4 text-sm text-gray-700">
-                  <div>
-                    <p className="font-semibold">Do you build to my design?</p>
-                    <p>Yes — we work from your design, or help you develop one, and handle the build and installation.</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold">Can I explain the job in Spanish?</p>
-                    <p>Yes. Our crew is bilingual, so you can talk through the project in English or Spanish.</p>
-                  </div>
-                  <div>
-                    <p className="font-semibold">How do I get a price?</p>
-                    <p>Call +52 612 169 8328 or request a free estimate on our contact page. Photos of the space help us quote faster.</p>
-                  </div>
-                </div>
-              </div>
+      <section className="py-16 bg-amber-50">
+        <div className="container mx-auto px-6 max-w-5xl grid md:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">How a Carpentry Project Works</h2>
+            <ol className="space-y-4 text-gray-800">
+              <li><strong>1. Tell us what you need.</strong> Call, or send photos and rough measurements through our contact page. You can explain it in English or Spanish.</li>
+              <li><strong>2. Free estimate.</strong> We look at the space and the scope and give you a clear quote.</li>
+              <li><strong>3. Build and install.</strong> Custom pieces are built to fit, then installed; repairs and refurbishing are done on site.</li>
+              <li><strong>4. One crew for the rest.</strong> Any plumbing, electrical or paint the job needs is coordinated by the same team.</li>
+            </ol>
+            <p className="text-gray-700 mt-6">
+              Owners who aren’t in Cabo can get photo updates while the work is in progress.
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="bg-white border border-amber-200 rounded-xl p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                <Shield className="text-amber-600" size={22} /> Why Cabos Handyman?
+              </h3>
+              <ul className="space-y-2 text-gray-800">
+                {[
+                  '20+ years experience in Los Cabos',
+                  'Licensed & insured',
+                  'Bilingual service (English & Spanish)',
+                  '1-year workmanship warranty',
+                  'Same-day service available',
+                  'Serving Cabo San Lucas in Los Cabos',
+                ].map(item => (
+                  <li key={item} className="flex items-center gap-2">
+                    <CheckCircle2 className="text-amber-500 shrink-0" size={16} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
+            <div className="bg-white border border-gray-200 rounded-xl p-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Where We Work</h3>
+              <p className="text-gray-800">
+                Cabo San Lucas only — including the Marina, Pedregal, El Tezal, El Médano and Centro. Hours: Monday to Saturday, 8am–6pm.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-6 max-w-3xl">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Carpentry Questions We Get Asked</h2>
+          <div className="space-y-6">
+            {FAQS.map(faq => (
+              <div key={faq.q} className="border-b border-gray-200 pb-5">
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{faq.q}</h3>
+                <p className="text-gray-700">{faq.a}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="py-12 bg-gray-50">
         <div className="container mx-auto px-6 max-w-5xl">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Related Carpentry Services</h2>
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">Related Services</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { href: '/cabinet-installation-cabo-san-lucas', label: 'Cabinet Installation' },
+              { href: '/kitchen-services-cabo', label: 'Kitchen Remodeling' },
+              { href: '/window-repair-cabo-san-lucas', label: 'Window Repair' },
               { href: '/pantry-shelving-cabo-san-lucas', label: 'Pantry Shelving' },
               { href: '/bar-installation-cabo-san-lucas', label: 'Bar Installation' },
-              { href: '/booth-installation-cabo-san-lucas', label: 'Booth Installation' },
             ].map(link => (
               <a key={link.href} href={link.href} className="bg-white border border-gray-200 rounded-lg p-4 text-center font-semibold text-gray-900 hover:border-amber-500 hover:shadow transition-all">
                 {link.label}
@@ -156,8 +268,8 @@ export default function CarpentryCaboSanLucas() {
 
       <section className="py-12 bg-gradient-to-br from-[#2dd4bf] via-[#049d8e] to-[#06756b] text-white text-center">
         <div className="container mx-auto px-6 max-w-2xl">
-          <h2 className="text-3xl font-bold mb-4">Need a Carpenter in Cabo?</h2>
-          <p className="text-white/90 mb-6">Call for a free estimate on carpentry anywhere in Cabo San Lucas, Los Cabos.</p>
+          <h2 className="text-3xl font-bold mb-4">Need a Carpenter in Cabo San Lucas?</h2>
+          <p className="text-white/90 mb-6">Call for a free carpentry estimate anywhere in Cabo San Lucas, Los Cabos.</p>
           <a href="tel:+526121698328" className="inline-flex items-center gap-2 bg-white text-teal-700 px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors">
             <Phone size={22} /> +52 612 169 8328
           </a>
