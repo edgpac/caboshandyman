@@ -69,7 +69,7 @@ export default function KitchenServicesCabo() {
   return (
     <>
       <SEO
-        title="Kitchen Remodels Los Cabos | Bilingual, Photos, Free Quote"
+        title="Kitchen Remodeling Contractor in Cabo San Lucas, Los Cabos | Cabos Handyman"
         description="Licensed, insured, bilingual kitchen remodels in Cabo San Lucas. Cabinets, countertops, backsplash, plumbing, electrical. Photo updates for owners abroad."
         canonicalUrl="/kitchen-services-cabo"
         ogImage="/images/kitchen-before-after-og.jpg"
@@ -90,8 +90,8 @@ export default function KitchenServicesCabo() {
               <span className="text-sm font-medium">Complete Kitchen Services</span>
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Kitchen Remodeling & Repair in Cabo San Lucas
-              <span className="block text-2xl md:text-3xl font-normal mt-2 text-white/90">Serving Cabo San Lucas, Los Cabos</span>
+              Kitchen Remodeling Contractor in Cabo San Lucas
+              <span className="block text-2xl md:text-3xl font-normal mt-2 text-white/90">Remodels &amp; Repairs · Bilingual Crew</span>
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
               From simple repairs to complete kitchen remodels. Expert plumbing, electrical, cabinetry, and installation services. 20+ years experience in Los Cabos.
