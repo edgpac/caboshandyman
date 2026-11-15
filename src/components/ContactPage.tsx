@@ -67,7 +67,6 @@ const ContactPage = () => {
         title="Contact Cabos Handyman | Cabo San Lucas"
         description="Call or message Cabos Handyman for a free quote. Serving Cabo San Lucas, Los Cabos. Call +52 612 169 8328 or send us a message and we'll get back to you the same day."
         canonicalUrl="/contact"
-        noindex={true}
       />
 
       <Navigation />

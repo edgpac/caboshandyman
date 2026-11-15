@@ -57,6 +57,12 @@ for (const route of routes) {
     const { html, helmet } = await render(route);
     if (!helmet) throw new Error("no Helmet output");
     if (!/<h1[\s>]/.test(html)) console.warn(`⚠️  ${route}: no <h1> in rendered HTML`);
+    // Every sitemap URL is meant to be indexed — a robots noindex here (e.g.
+    // a leftover noindex prop on SEO) would silently drop the page from
+    // Google, so it fails the build instead.
+    if (/<meta[^>]*name="robots"[^>]*content="[^"]*noindex/i.test(helmet.meta.toString())) {
+      throw new Error("renders a robots noindex but is in the sitemap — remove the noindex or drop it from generate-sitemap.js");
+    }
     const out = route === "/" ? path.join(dist, "index.html") : path.join(dist, route.replace(/^\//, ""), "index.html");
     fs.mkdirSync(path.dirname(out), { recursive: true });
     fs.writeFileSync(out, buildPage(html, helmet));
