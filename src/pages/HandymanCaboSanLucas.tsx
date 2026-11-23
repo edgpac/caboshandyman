@@ -408,7 +408,7 @@ export default function HandymanCaboSanLucas() {
                 <ul className="space-y-2 text-gray-700">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-teal-600 flex-shrink-0 mt-1" size={16} />
-                    <span>Kitchen & bathroom remodels</span>
+                    <span><a href="/kitchen-services-cabo" className="font-semibold text-teal-700 underline hover:text-teal-800">Kitchen remodeling</a> & <a href="/bathroom-services-cabo" className="font-semibold text-teal-700 underline hover:text-teal-800">bathroom remodeling</a></span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-teal-600 flex-shrink-0 mt-1" size={16} />
@@ -708,7 +708,7 @@ export default function HandymanCaboSanLucas() {
                       Recent projects include:
                     </p>
                     <ul className="list-disc list-inside space-y-1 mb-3 ml-4">
-                      <li>Complete kitchen and bathroom remodels ($5,000-30,000)</li>
+                      <li>Complete <a href="/kitchen-services-cabo" className="text-teal-600 hover:underline font-medium">kitchen</a> and <a href="/bathroom-services-cabo" className="text-teal-600 hover:underline font-medium">bathroom</a> remodels ($5,000-30,000)</li>
                       <li>Vacation rental property setup packages ($500-2,000)</li>
                       <li>Commercial space build-outs for restaurants and offices</li>
                       <li>Hurricane damage repairs and restoration</li>
