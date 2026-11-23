@@ -2,7 +2,7 @@ export default function TVMountingCeilingFansCaboArticle() {
   return (
     <>
       <p className="lead text-xl text-muted-foreground mb-6">
-        Whether you're upgrading your entertainment setup, improving air circulation, or renovating your kitchen, professional installation services make all the difference. From TV wall mounting to ceiling fan installation and custom cabinet work, Cabo San Lucas homeowners trust experienced handyman services for quality results that last.
+        Whether you're upgrading your entertainment setup, improving air circulation, or renovating your kitchen, professional installation services make all the difference. From TV wall mounting to ceiling fan and light fixture installation, Cabo San Lucas homeowners trust experienced handyman services for quality results that last.
       </p>
 
       <h2>Professional TV Mounting Services in Cabo San Lucas</h2>
@@ -160,47 +160,6 @@ export default function TVMountingCeilingFansCaboArticle() {
           Every installation is checked for balance, electrical safety, and secure mounting before we leave.
         </figcaption>
       </figure>
-
-      <h2>Kitchen Cabinet Installation and Refinishing</h2>
-      <p>
-        Kitchen cabinets define your space and provide essential storage. Whether installing new cabinets or refinishing existing ones, professional services ensure beautiful, functional results.
-      </p>
-
-      <h3>Custom Cabinet Installation Services</h3>
-      <p>
-        Professional cabinet installation from <strong>caboshandyman.com</strong> includes:
-      </p>
-      <ul>
-        <li>Precise measurements and layout planning</li>
-        <li>Level installation for proper door operation</li>
-        <li>Secure mounting to wall studs</li>
-        <li>Hardware installation (hinges, handles, pulls)</li>
-        <li>Countertop coordination and support</li>
-      </ul>
-
-      <h3>Cabinet Refinishing and Renovation</h3>
-      <p>
-        Transform existing cabinets without complete replacement:
-      </p>
-      <ul>
-        <li><strong>Cabinet painting</strong> - Professional finish in any color</li>
-        <li><strong>Staining and varnishing</strong> - Enhance natural wood beauty</li>
-        <li><strong>Hardware upgrades</strong> - Modern handles and hinges</li>
-        <li><strong>Door replacement</strong> - New cabinet doors on existing frames</li>
-        <li><strong>Surface repair</strong> - Fix damage before refinishing</li>
-      </ul>
-
-      <h3>Kitchen Island Cabinets</h3>
-      <p>
-        Add functionality and style with professional island installation:
-      </p>
-      <ul>
-        <li>Custom sizing to fit your kitchen layout</li>
-        <li>Storage optimization with drawers and cabinets</li>
-        <li>Countertop installation coordination</li>
-        <li>Electrical outlet integration</li>
-        <li>Structural anchoring for stability</li>
-      </ul>
 
       <h2>Light Fixture Installation Services</h2>
       <p>
@@ -378,7 +337,7 @@ export default function TVMountingCeilingFansCaboArticle() {
         <li>Living room entertainment package (TV + wood panels + artwork)</li>
         <li>Master bedroom comfort package (ceiling fan + nightstand lights + artwork)</li>
         <li>Complete lighting upgrade (all rooms)</li>
-        <li>Kitchen renovation package (cabinets + lighting + backsplash)</li>
+        <li>Kitchen refresh package (lighting + backsplash)</li>
       </ul>
 
       <h2>Why Choose Cabos Handyman for Installation Services</h2>
@@ -497,7 +456,7 @@ export default function TVMountingCeilingFansCaboArticle() {
 
       <h2>Schedule Your Installation Service Today</h2>
       <p>
-        Ready to upgrade your Cabo home with professional TV mounting, ceiling fan installation, or custom cabinet work? <strong>Caboshandyman.com</strong> makes it easy:
+        Ready to upgrade your Cabo home with professional TV mounting, ceiling fan installation, or light fixture work? <strong>Caboshandyman.com</strong> makes it easy:
       </p>
 
       <h3>Contact Cabos Handyman</h3>
@@ -542,7 +501,7 @@ export default function TVMountingCeilingFansCaboArticle() {
       <hr className="my-8" />
 
       <p className="text-sm text-muted-foreground italic">
-        Cabos Handyman provides professional TV mounting, ceiling fan installation, light fixture services, and custom cabinet work throughout Cabo San Lucas, Los Cabos. With 20+ years of experience and hundreds of successful installations, we're your trusted partner for home improvement projects large and small.
+        Cabos Handyman provides professional TV mounting, ceiling fan installation, light fixture services, and picture hanging throughout Cabo San Lucas, Los Cabos. With 20+ years of experience and hundreds of successful installations, we're your trusted partner for home improvement projects large and small.
       </p>
     </>
   );

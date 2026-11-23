@@ -41,7 +41,7 @@ export default function CabosHandymanHomepage() {
       name: "Modern Kitchen",
       category: "Residential",
       image: kitchenImage,
-      alt: "Modern kitchen remodeling project in Cabo San Lucas featuring custom cabinets, granite countertops, and stainless steel appliances by Cabos Handyman"
+      alt: "Modern kitchen remodeling project in Cabo San Lucas featuring granite countertops, and stainless steel appliances by Cabos Handyman"
     },
     {
       name: "Luxury Bathroom",

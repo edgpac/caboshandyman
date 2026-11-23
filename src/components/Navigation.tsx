@@ -20,7 +20,6 @@ const SERVICE_LINKS = [
   { href: '/generator-hookup-cabo-san-lucas', label: '↳ Generator Hookup' },
   { href: '/ac-installation-cabo-san-lucas', label: '↳ AC Installation & Repair' },
   { href: '/kitchen-services-cabo', label: 'Kitchen Remodeling' },
-  { href: '/cabinet-installation-cabo-san-lucas', label: '↳ Cabinet Installation' },
   { href: '/countertop-installation-cabo-san-lucas', label: '↳ Countertop Installation' },
   { href: '/backsplash-installation-cabo-san-lucas', label: '↳ Backsplash Installation' },
   { href: '/tile-installation-cabo-san-lucas', label: '↳ Tile Installation' },

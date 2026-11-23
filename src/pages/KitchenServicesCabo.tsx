@@ -338,10 +338,6 @@ export default function KitchenServicesCabo() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={18} />
-                    <span>Custom cabinetry</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle2 className="text-orange-600 flex-shrink-0 mt-1" size={18} />
                     <span>Layout modifications</span>
                   </li>
                   <li className="flex items-start gap-2">
@@ -434,7 +430,7 @@ export default function KitchenServicesCabo() {
                     <ul className="list-disc list-inside space-y-2 mb-3 ml-4">
                       <li><strong>Basic Refresh:</strong> New countertops, backsplash, sink/faucet, updated lighting, and cabinet hardware upgrades</li>
                       <li><strong>Standard Remodel:</strong> Cabinet refacing/replacement, appliance installation, new flooring, electrical upgrades, plus all Basic Refresh items</li>
-                      <li><strong>Complete Renovation:</strong> Custom cabinetry, layout modifications, high-end finishes, complete electrical/plumbing overhaul</li>
+                      <li><strong>Complete Renovation:</strong> Layout modifications, high-end finishes, complete electrical/plumbing overhaul</li>
                     </ul>
                     <p className="mb-3">
                       Every kitchen is different, so we quote by scope, not off a price list — call us and we'll walk the space (or review photos/video for remote owners) and give you a real number.
@@ -552,7 +548,7 @@ export default function KitchenServicesCabo() {
                     <ul className="list-disc list-inside space-y-2 mb-3 ml-4">
                       <li><strong>Basic Refresh (1-3 days):</strong> Countertop, backsplash, sink/faucet, and lighting updates can typically be completed in 1-3 days of work, spread over 1-2 weeks for material delivery and curing time</li>
                       <li><strong>Standard Remodel (1-3 weeks):</strong> Cabinet installation, flooring, electrical upgrades, and appliances require 5-15 working days, spread over 2-4 weeks for deliveries and inspections</li>
-                      <li><strong>Complete Renovation (4-8 weeks):</strong> Custom cabinetry, layout changes, and complete electrical/plumbing overhauls take 15-30 working days, spread over 1-2 months for material sourcing, permits, and inspections</li>
+                      <li><strong>Complete Renovation (4-8 weeks):</strong> Layout changes and complete electrical/plumbing overhauls take 15-30 working days, spread over 1-2 months for material sourcing, permits, and inspections</li>
                     </ul>
                     <p className="mb-3">
                       <strong>Cabo-Specific Delays:</strong> Material availability can be less predictable in Los Cabos than in major US cities. We maintain relationships with local suppliers and can source from the US when needed to minimize delays. Custom items (special-order cabinets, imported countertops) may add 2-4 weeks to the timeline.

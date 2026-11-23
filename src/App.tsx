@@ -30,7 +30,6 @@ const ToiletInstallationCabo = lazy(() => import("./pages/ToiletInstallationCabo
 const WaterHeaterCabo = lazy(() => import("./pages/WaterHeaterCabo"));
 const FaucetInstallationCabo = lazy(() => import("./pages/FaucetInstallationCabo"));
 const TileInstallationCabo = lazy(() => import("./pages/TileInstallationCabo"));
-const CabinetInstallationCabo = lazy(() => import("./pages/CabinetInstallationCabo"));
 const OutletInstallationCabo = lazy(() => import("./pages/OutletInstallationCabo"));
 const ShowerInstallationCabo = lazy(() => import("./pages/ShowerInstallationCabo"));
 const GarbageDisposalCabo = lazy(() => import("./pages/GarbageDisposalCabo"));
@@ -104,7 +103,6 @@ const App = ({ renderRouter = browserRouter }: AppProps) => {
               <Route path="/water-heater-cabo-san-lucas" element={<WaterHeaterCabo />} />
               <Route path="/faucet-installation-cabo-san-lucas" element={<FaucetInstallationCabo />} />
               <Route path="/tile-installation-cabo-san-lucas" element={<TileInstallationCabo />} />
-              <Route path="/cabinet-installation-cabo-san-lucas" element={<CabinetInstallationCabo />} />
               <Route path="/outlet-installation-cabo-san-lucas" element={<OutletInstallationCabo />} />
               <Route path="/shower-installation-cabo-san-lucas" element={<ShowerInstallationCabo />} />
               <Route path="/garbage-disposal-cabo-san-lucas" element={<GarbageDisposalCabo />} />

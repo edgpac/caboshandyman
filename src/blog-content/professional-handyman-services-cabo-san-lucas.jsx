@@ -43,8 +43,6 @@ export default function ProfessionalHandymanServicesCaboArticle() {
         {' '}cover everything from minor fixes to full renovations:
       </p>
       <ul>
-        <li>Custom cabinet installation and refinishing</li>
-        <li>Cabinet manufacturing and installation</li>
         <li>Countertop replacement (granite, quartz, tile)</li>
         <li>Plumbing fixture upgrades</li>
         <li>Electrical work for modern appliances</li>

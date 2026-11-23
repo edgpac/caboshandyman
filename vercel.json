@@ -58,7 +58,6 @@
     { "source": "/kitchen-hardware", "destination": "/kitchen-services-cabo", "permanent": true },
     { "source": "/pantry-shelving", "destination": "/kitchen-services-cabo", "permanent": true },
     { "source": "/shelving", "destination": "/kitchen-services-cabo", "permanent": true },
-    { "source": "/cabinet-installation", "destination": "/cabinet-installation-cabo-san-lucas", "permanent": true },
     { "source": "/outlet-installation", "destination": "/outlet-installation-cabo-san-lucas", "permanent": true },
     { "source": "/shower-installation", "destination": "/shower-installation-cabo-san-lucas", "permanent": true },
     { "source": "/garbage-disposal", "destination": "/garbage-disposal-cabo-san-lucas", "permanent": true },
@@ -92,6 +91,8 @@
   ],
   "rewrites": [
     { "source": "/carpentry-cabo-san-lucas", "destination": "/api/gone" },
+    { "source": "/cabinet-installation-cabo-san-lucas", "destination": "/api/gone" },
+    { "source": "/cabinet-installation", "destination": "/api/gone" },
     { "source": "/carpintero-cabo-san-lucas", "destination": "/api/gone" },
     { "source": "/booth-installation-cabo-san-lucas", "destination": "/api/gone" },
     { "source": "/bar-installation-cabo-san-lucas", "destination": "/api/gone" },
