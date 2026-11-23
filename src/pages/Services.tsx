@@ -317,7 +317,6 @@ export default function ServicesPage() {
             <ServiceCard to="/bathroom-sink-installation-cabo-san-lucas" icon={<Droplet className="text-blue-500" size={28} />} title="Bathroom Sink Install" desc="Vessel, undermount, pedestal, vanity basin" accent="hover:border-blue-400" />
             <ServiceCard to="/water-heater-cabo-san-lucas" icon={<Wrench className="text-orange-500" size={28} />} title="Water Heater" desc="Installation, replacement, no-hot-water repair" accent="hover:border-orange-300" />
             <ServiceCard to="/garbage-disposal-cabo-san-lucas" icon={<Wrench className="text-gray-500" size={28} />} title="Garbage Disposal" desc="Installation, replacement, repair" accent="hover:border-gray-400" />
-            <ServiceCard to="/water-leak-detector-cabo-san-lucas" icon={<Droplet className="text-cyan-600" size={28} />} title="Water Leak Detector" desc="Smart sensor installation, leak detection" accent="hover:border-cyan-400" />
           </ServiceSection>
 
           {/* ── ELECTRICAL ── */}

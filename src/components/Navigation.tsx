@@ -12,7 +12,6 @@ const SERVICE_LINKS = [
   { href: '/water-heater-cabo-san-lucas', label: '↳ Water Heater' },
   { href: '/garbage-disposal-cabo-san-lucas', label: '↳ Garbage Disposal' },
   { href: '/toilet-tub-unclogging-cabo', label: '↳ Drain Cleaning' },
-  { href: '/water-leak-detector-cabo-san-lucas', label: '↳ Water Leak Detector' },
   { href: '/electrical-services-cabo', label: 'Electrical Services' },
   { href: '/ceiling-fan-installation-cabo', label: '↳ Ceiling Fan Install' },
   { href: '/ceiling-light-installation-cabo-san-lucas', label: '↳ Ceiling Light Install' },

@@ -13,6 +13,7 @@ type Post = {
   description: string;
   category: string;
   author?: string;
+  noindex?: boolean;
 };
 
 const categoryDescriptions: Record<string, string> = {
@@ -30,7 +31,8 @@ function formatDate(dateStr: string) {
 }
 
 export default function Blog() {
-  const posts = blogPosts as Post[];
+  // noindex posts stay reachable by URL but aren't linked from the listing.
+  const posts = (blogPosts as Post[]).filter(p => !p.noindex);
 
   const categories = categoryOrder.filter(cat =>
     posts.some(p => p.category === cat)

@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { execFileSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -8,9 +9,9 @@ const __dirname = path.dirname(__filename);
 const SITE_URL = 'https://www.caboshandyman.com';
 const OUTPUT_PATH = path.join(__dirname, 'public', 'sitemap.xml');
 
-// Pages marked noindex (TV mounting, cabinet installation, water leak
-// detector, and blog posts with "noindex": true) are deliberately left out —
-// a sitemap should only list URLs we want indexed.
+// Pages marked noindex (TV mounting, water leak detector, and blog posts
+// with "noindex": true) and flooring are deliberately left out — a sitemap
+// should only list URLs we want indexed.
 const staticPages = [
   // Core
   { url: '/', changefreq: 'weekly', priority: '1.0' },
@@ -79,9 +80,77 @@ function getBlogPosts() {
   return [];
 }
 
+// Shared layout pieces change every page at once; counting them would put
+// the same date on every URL again, so only a page's own files count.
+const SHARED_COMPONENTS = new Set(['Navigation', 'Footer', 'SEO', 'RelatedServices', 'GradientText']);
+
+function git(args) {
+  return execFileSync('git', args, { cwd: __dirname, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+}
+
+function hasFullGitHistory() {
+  try {
+    return git(['rev-parse', '--is-shallow-repository']) === 'false';
+  } catch {
+    return false;
+  }
+}
+
+function resolveSource(fromFile, spec) {
+  const base = spec.startsWith('@/') ? path.join(__dirname, 'src', spec.slice(2)) : path.resolve(path.dirname(fromFile), spec);
+  return ['.tsx', '.ts', '.jsx', '.js'].map(ext => base + ext).find(f => fs.existsSync(f)) ?? null;
+}
+
+// Route -> its page file plus the page's own local imports (one level),
+// read from App.tsx so the map never drifts from the real routes.
+function routeSourceFiles() {
+  const appFile = path.join(__dirname, 'src', 'App.tsx');
+  const app = fs.readFileSync(appFile, 'utf8');
+  const components = Object.fromEntries(
+    [...app.matchAll(/const (\w+) = lazy\(\(\) => import\("([^"]+)"\)\)/g)].map(m => [m[1], resolveSource(appFile, m[2])]),
+  );
+  const routes = {};
+  for (const m of app.matchAll(/<Route path="([^"]+)" element={<(\w+) \/>}/g)) {
+    const pageFile = components[m[2]];
+    if (!pageFile) continue;
+    const imports = [...fs.readFileSync(pageFile, 'utf8').matchAll(/from ['"]((?:\.{1,2}|@)\/[^'"]+)['"]/g)]
+      .map(i => i[1])
+      .filter(spec => !SHARED_COMPONENTS.has(path.basename(spec)))
+      .map(spec => resolveSource(pageFile, spec))
+      .filter(Boolean);
+    routes[m[1]] = [pageFile, ...imports];
+  }
+  return routes;
+}
+
+// Last commit date touching a page's own files. Without full git history (a
+// shallow CI clone) the date would be wrong, so lastmod is left out instead:
+// Google ignores lastmod it can't trust, and a missing one is neutral.
+function lastModifiedByRoute() {
+  if (!hasFullGitHistory()) {
+    console.warn('⚠️  Shallow or missing git history — sitemap lastmod omitted for static pages');
+    return {};
+  }
+  const result = {};
+  for (const [route, files] of Object.entries(routeSourceFiles())) {
+    const dates = files
+      .map(f => {
+        try {
+          return git(['log', '-1', '--format=%cs', '--', path.relative(__dirname, f)]);
+        } catch {
+          return '';
+        }
+      })
+      .filter(Boolean)
+      .sort();
+    if (dates.length) result[route] = dates[dates.length - 1];
+  }
+  return result;
+}
+
 function generateSitemap() {
   const blogPosts = getBlogPosts();
-  const today = new Date().toISOString().split('T')[0];
+  const lastmods = lastModifiedByRoute();
 
   let xml = '<?xml version="1.0" encoding="UTF-8"?>\n';
   xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n';
@@ -89,7 +158,7 @@ function generateSitemap() {
   staticPages.forEach(page => {
     xml += '  <url>\n';
     xml += `    <loc>${SITE_URL}${page.url}</loc>\n`;
-    xml += `    <lastmod>${today}</lastmod>\n`;
+    if (lastmods[page.url]) xml += `    <lastmod>${lastmods[page.url]}</lastmod>\n`;
     xml += `    <changefreq>${page.changefreq}</changefreq>\n`;
     xml += `    <priority>${page.priority}</priority>\n`;
     xml += '  </url>\n';

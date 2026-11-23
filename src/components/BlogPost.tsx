@@ -45,12 +45,13 @@ export default function BlogPost() {
     )
   );
 
-  const related = posts
+  const linkable = posts.filter(p => !p.noindex);
+  const related = linkable
     .filter(p => p.slug !== post.slug && p.category === post.category)
     .slice(0, 3);
 
   const others = related.length < 3
-    ? [...related, ...posts.filter(p => p.slug !== post.slug && p.category !== post.category)].slice(0, 3)
+    ? [...related, ...linkable.filter(p => p.slug !== post.slug && p.category !== post.category)].slice(0, 3)
     : related;
 
   return (
