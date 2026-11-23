@@ -54,7 +54,7 @@ export default function FAQ() {
     {
       id: "common-6",
       question: "What is the hardest part of being a handyman?",
-      answer: "One of the primary challenges for handymen is the sheer breadth of knowledge required to competently handle a wide array of tasks. Plumbing, electrical work, carpentry, painting, and appliance repair are just the tip of the iceberg. At Cabos Handyman in Cabo San Lucas, our team specializes in diverse skills to meet all your maintenance needs. Call +52 612 169 8328!"
+      answer: "One of the primary challenges for handymen is the sheer breadth of knowledge required to competently handle a wide array of tasks. Plumbing, electrical work, painting, and appliance repair are just the tip of the iceberg. At Cabos Handyman in Cabo San Lucas, our team specializes in diverse skills to meet all your maintenance needs. Call +52 612 169 8328!"
     }
   ]
   },
@@ -339,7 +339,7 @@ export default function FAQ() {
         {
           id: "about-2",
           question: "Are your technicians employees or subcontractors? Who actually does the work?",
-          answer: "ALL our technicians are full-time employees of Cabos Handyman, NOT subcontractors. This is a major difference between us and many other handyman services in Cabo. Why this matters: consistent quality control - all technicians trained to our standards, accountability - we directly supervise all work, insurance coverage - all workers covered by our liability insurance, no surprises, you won't get different people with different quality each time, background checked all employees vetted for professionalism and honesty, and uniformed and identified - all technicians wear company uniforms. Our team includes: licensed electricians for electrical work, licensed plumbers for plumbing work, experienced carpenters for woodworking and cabinetry, tile specialists for bathroom/kitchen tile, and general handymen for smaller repairs and installations. We do NOT subcontract work to random contractors - everything is done by our trained, employed team. This is why we can guarantee our work and maintain consistent 5-star quality. Call +52 612 169 8328 to work with our professional employee team!"
+          answer: "ALL our technicians are full-time employees of Cabos Handyman, NOT subcontractors. This is a major difference between us and many other handyman services in Cabo. Why this matters: consistent quality control - all technicians trained to our standards, accountability - we directly supervise all work, insurance coverage - all workers covered by our liability insurance, no surprises, you won't get different people with different quality each time, background checked all employees vetted for professionalism and honesty, and uniformed and identified - all technicians wear company uniforms. Our team includes: licensed electricians for electrical work, licensed plumbers for plumbing work, experienced installers for cabinetry, tile specialists for bathroom/kitchen tile, and general handymen for smaller repairs and installations. We do NOT subcontract work to random contractors - everything is done by our trained, employed team. This is why we can guarantee our work and maintain consistent 5-star quality. Call +52 612 169 8328 to work with our professional employee team!"
         },
         {
           id: "about-3",

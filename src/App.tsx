@@ -50,7 +50,6 @@ const BathroomSinkInstallationCabo = lazy(() => import("./pages/BathroomSinkInst
 const Blog = lazy(() => import("./pages/Blog"));
 const TopHandymanServicesLosCabos = lazy(() => import("./pages/TopHandymanServicesLosCabos"));
 
-const CarpentryCaboSanLucas = lazy(() => import("./pages/CarpentryCaboSanLucas"));
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -122,7 +121,6 @@ const App = ({ renderRouter = browserRouter }: AppProps) => {
               <Route path="/flooring-cabo-san-lucas" element={<FlooringCabo />} />
               <Route path="/water-leak-detector-cabo-san-lucas" element={<WaterLeakDetectorCabo />} />
               <Route path="/bathroom-sink-installation-cabo-san-lucas" element={<BathroomSinkInstallationCabo />} />
-              <Route path="/carpentry-cabo-san-lucas" element={<CarpentryCaboSanLucas />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/top-handyman-services-in-los-cabos-plumbing-electrical-repairs-more" element={<TopHandymanServicesLosCabos />} />
               <Route path="*" element={<NotFound />} />

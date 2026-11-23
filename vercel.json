@@ -10,15 +10,8 @@
     { "source": "/decorative-lighting-cabo-san-lucas", "destination": "/electrical-services-cabo", "permanent": true },
     { "source": "/kitchen-hardware-installation-cabo-san-lucas", "destination": "/kitchen-services-cabo", "permanent": true },
     { "source": "/pantry-shelving-cabo-san-lucas", "destination": "/kitchen-services-cabo", "permanent": true },
-    { "source": "/booth-installation-cabo-san-lucas", "destination": "/carpentry-cabo-san-lucas", "permanent": true },
-    { "source": "/bar-installation-cabo-san-lucas", "destination": "/carpentry-cabo-san-lucas", "permanent": true },
     { "source": "/commercial-sink-installation-cabo-san-lucas", "destination": "/sink-installation-cabo-san-lucas", "permanent": true },
     { "source": "/landscape-maintenance-cabo-san-lucas", "destination": "/", "permanent": true },
-    {
-      "source": "/carpintero-cabo-san-lucas",
-      "destination": "/carpentry-cabo-san-lucas",
-      "permanent": true
-    },
     {
       "source": "/:path(.*)",
       "has": [
@@ -95,11 +88,15 @@
     { "source": "/paint-touch-ups", "destination": "/painting-cabo-san-lucas", "permanent": true },
     { "source": "/water-leak-detector", "destination": "/water-leak-detector-cabo-san-lucas", "permanent": true },
     { "source": "/commercial-sink", "destination": "/sink-installation-cabo-san-lucas", "permanent": true },
-    { "source": "/booth-installation", "destination": "/carpentry-cabo-san-lucas", "permanent": true },
-    { "source": "/bar-installation", "destination": "/carpentry-cabo-san-lucas", "permanent": true },
     { "source": "/decorative-lighting", "destination": "/electrical-services-cabo", "permanent": true }
   ],
   "rewrites": [
+    { "source": "/carpentry-cabo-san-lucas", "destination": "/api/gone" },
+    { "source": "/carpintero-cabo-san-lucas", "destination": "/api/gone" },
+    { "source": "/booth-installation-cabo-san-lucas", "destination": "/api/gone" },
+    { "source": "/bar-installation-cabo-san-lucas", "destination": "/api/gone" },
+    { "source": "/booth-installation", "destination": "/api/gone" },
+    { "source": "/bar-installation", "destination": "/api/gone" },
     {
       "source": "/((?!api/|plans/).*)",
       "destination": "/spa-shell.html"

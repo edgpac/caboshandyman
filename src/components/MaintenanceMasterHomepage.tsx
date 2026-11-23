@@ -326,10 +326,6 @@ export default function CabosHandymanHomepage() {
               <p className="mt-4 text-base font-semibold text-[#06756b]">
                 {googleRatingSentence} &middot; {projectsSinceLabel}
               </p>
-              <p className="mt-3 text-base text-gray-900">
-                Custom woodwork too — see our{' '}
-                <a href="/carpentry-cabo-san-lucas" className="font-semibold text-[#06756b] underline hover:text-[#049d8e]">carpentry services in Cabo San Lucas</a>
-              </p>
             </div>
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

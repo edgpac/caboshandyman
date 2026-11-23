@@ -57,10 +57,10 @@ export default function KitchenServicesCabo() {
     { name: "Outlet Installation/Replacement", price: "$90", duration: "1 hour", category: "electrical" },
     { name: "Under-Cabinet Lighting", price: "$160", duration: "2-3 hours", category: "electrical" },
     { name: "Kitchen Island Electrical", price: "$220", duration: "3-4 hours", category: "electrical" },
-    { name: "Cabinet Installation", price: "$300+", duration: "4-8 hours", category: "carpentry" },
-    { name: "Countertop Installation", price: "$400+", duration: "4-6 hours", category: "carpentry" },
-    { name: "Backsplash Installation", price: "$250+", duration: "3-5 hours", category: "carpentry" },
-    { name: "Kitchen Hardware Installation", price: "$80", duration: "1-2 hours", category: "carpentry" }
+    { name: "Cabinet Installation", price: "$300+", duration: "4-8 hours", category: "installation" },
+    { name: "Countertop Installation", price: "$400+", duration: "4-6 hours", category: "installation" },
+    { name: "Backsplash Installation", price: "$250+", duration: "3-5 hours", category: "installation" },
+    { name: "Kitchen Hardware Installation", price: "$80", duration: "1-2 hours", category: "installation" }
   ];
 
   return (
@@ -137,7 +137,7 @@ export default function KitchenServicesCabo() {
           {/* Introduction */}
           <div className="prose prose-lg max-w-none mb-12">
             <p className="text-xl text-gray-700 leading-relaxed">
-              Your kitchen is the heart of your Cabo home, whether it's a permanent residence or vacation rental. From outdated appliances and worn-out countertops to clogged sinks and malfunctioning lighting, kitchen issues demand professional expertise. With over 20 years serving Cabo San Lucas in Los Cabos, Cabos Handyman provides comprehensive kitchen services that combine skilled plumbing, electrical work, and carpentry to transform or repair your kitchen efficiently and affordably.
+              Your kitchen is the heart of your Cabo home, whether it's a permanent residence or vacation rental. From outdated appliances and worn-out countertops to clogged sinks and malfunctioning lighting, kitchen issues demand professional expertise. With over 20 years serving Cabo San Lucas in Los Cabos, Cabos Handyman provides comprehensive kitchen services that combine skilled plumbing, electrical work, and installation to transform or repair your kitchen efficiently and affordably.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
               The coastal climate of Cabo San Lucas creates unique challenges for kitchens—salt air accelerates corrosion on fixtures, hard water clogs faucets and disposal units, and high humidity affects cabinetry. Our bilingual team (English/Spanish) understands these local conditions and uses appropriate materials and techniques to ensure lasting results. Whether you need a simple faucet replacement, complete cabinet installation, or full kitchen renovation, we handle every aspect with professional craftsmanship.
@@ -236,16 +236,16 @@ export default function KitchenServicesCabo() {
               </div>
             </div>
 
-            {/* Carpentry & Installation */}
+            {/* Cabinets, Counters & Installation */}
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-4">
                 <div className="bg-orange-500 w-12 h-12 rounded-full flex items-center justify-center">
                   <Wrench className="text-white" size={24} />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900">Carpentry & Installation</h3>
+                <h3 className="text-2xl font-bold text-gray-900">Cabinets, Counters & Installation</h3>
               </div>
               <div className="grid md:grid-cols-2 gap-4">
-                {services.filter(s => s.category === 'carpentry').map((service, idx) => (
+                {services.filter(s => s.category === 'installation').map((service, idx) => (
                   <div key={idx} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                     <h4 className="font-semibold text-gray-900 mb-2">{service.name}</h4>
                     <div className="flex justify-between items-center">

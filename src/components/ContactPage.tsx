@@ -294,7 +294,6 @@ const ContactPage = () => {
                         <option value="plumbing">Plumbing Repairs</option>
                         <option value="electrical">Electrical Services</option>
                         <option value="painting">Painting & Drywall</option>
-                        <option value="carpentry">Carpentry</option>
                         <option value="commercial">Commercial Projects</option>
                         <option value="hoa">HOA Property Maintenance</option>
                         <option value="emergency">Emergency Repairs</option>

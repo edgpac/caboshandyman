@@ -49,7 +49,7 @@ const WORK_IMAGES: { file: string; alt: string }[] = [
   { file: 'image37.png',  alt: 'Cabos Handyman technician installing interior door in Cabo San Lucas bedroom' },
   { file: 'image38.png',  alt: 'Cabos Handyman technician working on kitchen appliance installation in Cabo San Lucas' },
   { file: 'image39.png',  alt: 'Cabos Handyman technician installing window hardware in Cabo San Lucas property' },
-  { file: 'image40.png',  alt: 'Custom carpentry door panel staged for installation by Cabos Handyman in Cabo San Lucas' },
+  { file: 'image40.png',  alt: 'Custom door panel staged for installation by Cabos Handyman in Cabo San Lucas' },
   { file: 'image41.png',  alt: 'Cabos Handyman technician on ladder installing ceiling fan with ocean view in Cabo San Lucas' },
   { file: 'image42.png',  alt: 'Cabos Handyman technician on ladder hanging large wall art in Cabo San Lucas' },
   { file: 'image43.png',  alt: 'Kitchen cabinetry work completed by Cabos Handyman in Cabo San Lucas' },
@@ -378,13 +378,6 @@ export default function ServicesPage() {
             <ServiceCard to="/door-lock-replacement-cabo-san-lucas" icon={<Wrench className="text-gray-600" size={28} />} title="Door Lock Replacement" desc="Deadbolt, smart lock, knob, lever sets" accent="hover:border-gray-400" />
             <ServiceCard to="/window-repair-cabo-san-lucas" icon={<Wrench className="text-sky-500" size={28} />} title="Window Repair" desc="Seals, screens, hardware, sliding windows" accent="hover:border-sky-300" />
             <ServiceCard to="/painting-cabo-san-lucas" icon={<Wrench className="text-rose-500" size={28} />} title="Paint Touch-ups" desc="Interior & exterior, accent walls, full rooms" accent="hover:border-rose-300" />
-          </ServiceSection>
-
-          {/* ── COMMERCIAL & HOSPITALITY ── */}
-          <ServiceSection
-            title="Commercial & Hospitality"
-            intro="We work with restaurants, bars, hotels, and HOAs across Cabo San Lucas, Los Cabos — not limited to residential projects."
-          >
           </ServiceSection>
 
           {/* ── PROPERTY & RENTAL ── */}

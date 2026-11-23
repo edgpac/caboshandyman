@@ -502,7 +502,7 @@ export default function PropertyCarePlans() {
                     No monthly contract needed. Tell us what you need, share your budget and expectations — we quote, agree, and get it done. No surprises, no long-term commitments.
                   </p>
                   <div className="flex flex-wrap gap-2 mb-2">
-                    {['Remodeling','Full bathrooms','Painting','Electrical','Plumbing','Kitchens','AC install','Custom carpentry','And more...'].map(tag => (
+                    {['Remodeling','Full bathrooms','Painting','Electrical','Plumbing','Kitchens','AC install','And more...'].map(tag => (
                       <span key={tag} className="bg-white/10 border border-white/20 text-gray-200 text-xs px-3 py-1 rounded-full">{tag}</span>
                     ))}
                   </div>
@@ -707,7 +707,7 @@ export default function PropertyCarePlans() {
                 <div className="text-4xl mb-4 text-center">🔧</div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3 text-center">Full-Service Capabilities</h3>
                 <p className="text-gray-700 text-center">
-                  From preventive maintenance to major repairs, we handle it all. Plumbing, electrical, carpentry, painting—one trusted team for everything.
+                  From preventive maintenance to major repairs, we handle it all. Plumbing, electrical, painting—one trusted team for everything.
                 </p>
               </div>
             </div>

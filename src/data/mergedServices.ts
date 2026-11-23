@@ -21,7 +21,7 @@ export interface MergedServiceGroup {
   services: MergedService[];
 }
 
-export type MergedServiceHub = 'bathroom' | 'electrical' | 'kitchen' | 'sink' | 'carpentry';
+export type MergedServiceHub = 'bathroom' | 'electrical' | 'kitchen' | 'sink';
 
 export const MERGED_SERVICES: Record<MergedServiceHub, MergedServiceGroup> = {
   bathroom: {
@@ -303,56 +303,6 @@ export const MERGED_SERVICES: Record<MergedServiceHub, MergedServiceGroup> = {
           {
             question: 'Can you source commercial sink equipment?',
             answer: 'We can help source equipment from local suppliers, or install equipment you’ve already purchased.',
-          },
-        ],
-      },
-    ],
-  },
-  carpentry: {
-    heading: 'Bars and Booth Seating',
-    intro: 'Custom builds for homes and restaurants that combine carpentry with plumbing and electrical.',
-    services: [
-      {
-        id: 'bar-installation',
-        title: 'Bar Installation',
-        intro:
-          'Home bars, restaurant bars and outdoor palapa bars — countertop work, cabinetry, sink plumbing and bar lighting handled as one coordinated project.',
-        items: [
-          'Home bar installation',
-          'Restaurant bar counters',
-          'Outdoor and palapa bars',
-          'Bar cabinets, shelving and back-bar displays',
-          'Bar sink and plumbing connection',
-          'Bar lighting',
-          'Bar stool mounting',
-        ],
-        faqs: [
-          {
-            question: 'Can you build a bar from scratch?',
-            answer: 'Yes — we work with your design or help develop one, and coordinate the carpentry, plumbing and electrical.',
-          },
-          {
-            question: 'How long does bar installation take?',
-            answer: 'A typical bar takes 1–2 days depending on complexity and whether plumbing and electrical are involved.',
-          },
-        ],
-      },
-      {
-        id: 'booth-installation',
-        title: 'Booth & Banquette Seating',
-        intro:
-          'Restaurant booths and banquette seating — assembled, placed and anchored to concrete floors, for new restaurants and dining room renovations in Cabo San Lucas.',
-        items: [
-          'Restaurant booth seating',
-          'Banquette seating',
-          'Back-to-back, L-shaped and corner booths',
-          'Booth assembly and wall mounting',
-          'Booth base anchoring to concrete floors',
-        ],
-        faqs: [
-          {
-            question: 'How long does booth installation take?',
-            answer: 'A set of 4–6 booths typically takes 4–8 hours depending on complexity and anchoring.',
           },
         ],
       },

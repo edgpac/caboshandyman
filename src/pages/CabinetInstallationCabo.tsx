@@ -11,7 +11,7 @@ export default function CabinetInstallationCabo() {
     <>
       <SEO
         title="Cabinet Installation Cabo San Lucas | Cabos Handyman"
-        description="Professional cabinet installation in Cabo San Lucas. Kitchen cabinets, bathroom vanities, built-in storage, and shelving. Licensed carpenters serving Cabo San Lucas in Los Cabos."
+        description="Professional cabinet installation in Cabo San Lucas. Kitchen cabinets, bathroom vanities, built-in storage, and shelving, installed in Cabo San Lucas, Los Cabos."
         canonicalUrl="/cabinet-installation-cabo-san-lucas"
         geoRegion="MX-BCS"
         geoPlacename="Cabo San Lucas"
@@ -24,13 +24,13 @@ export default function CabinetInstallationCabo() {
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 bg-white/20 px-4 py-2 rounded-full mb-6">
             <Wrench size={18} />
-            <span className="text-sm font-medium">Carpentry & Installation · Cabo San Lucas</span>
+            <span className="text-sm font-medium">Kitchen & Bath Installation · Cabo San Lucas</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold mb-6">
             Cabinet Installation<br />Cabo San Lucas
           </h1>
           <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-2xl mx-auto">
-            Kitchen cabinets, bathroom vanities, built-in shelving, and custom storage solutions installed by experienced carpenters in Cabo San Lucas.
+            Kitchen cabinets, bathroom vanities, built-in shelving, and custom storage solutions installed by our experienced crew in Cabo San Lucas.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="tel:+526121698328" className="inline-flex items-center justify-center gap-2 bg-white text-green-700 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-gray-100 transition-colors">
@@ -49,7 +49,7 @@ export default function CabinetInstallationCabo() {
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-4">Cabinet Services We Offer</h2>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                New kitchen or bathroom? Upgrading your storage? Our experienced carpenters install wall cabinets, base cabinets, vanities, and built-in shelving throughout Cabo San Lucas. We work with flat-pack, custom, and pre-assembled cabinets.
+                New kitchen or bathroom? Upgrading your storage? Our experienced installers install wall cabinets, base cabinets, vanities, and built-in shelving throughout Cabo San Lucas. We work with flat-pack, custom, and pre-assembled cabinets.
               </p>
               <ul className="space-y-3">
                 {[
@@ -78,7 +78,7 @@ export default function CabinetInstallationCabo() {
                 <ul className="space-y-2 text-gray-700">
                   {[
                     '20+ years experience in Los Cabos',
-                    'Experienced carpenters on every job',
+                    'Experienced installers on every job',
                     'Flat-pack, custom, and pre-built cabinets',
                     'Bilingual service (English & Spanish)',
                     '1-year workmanship warranty',

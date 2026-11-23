@@ -184,7 +184,6 @@ export default async function handler(req, res) {
             <p style="margin: 5px 0; font-size: 14px;">✓ Kitchen & Bathroom Remodeling</p>
             <p style="margin: 5px 0; font-size: 14px;">✓ Plumbing & Electrical</p>
             <p style="margin: 5px 0; font-size: 14px;">✓ Painting & Drywall</p>
-            <p style="margin: 5px 0; font-size: 14px;">✓ Carpentry & Woodwork</p>
             <p style="margin: 5px 0; font-size: 14px;">✓ Commercial Projects & HOA Maintenance</p>
             <p style="margin: 5px 0; font-size: 14px;">✓ Emergency Repairs</p>
           </div>

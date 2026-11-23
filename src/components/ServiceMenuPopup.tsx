@@ -47,7 +47,7 @@ const serviceMenus: Record<string, ServiceCategory[]> = {
       ]
     },
     {
-      title: "Installation & Carpentry",
+      title: "Installation",
       services: [
         { name: "Cabinet Installation", startingPrice: "$300", duration: "4-8 hours" },
         { name: "Countertop Installation", startingPrice: "$400", duration: "4-6 hours" },

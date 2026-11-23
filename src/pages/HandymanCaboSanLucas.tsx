@@ -250,11 +250,6 @@ export default function HandymanCaboSanLucas() {
             </div>
           </div>
 
-          <p className="-mt-6 mb-12 text-center text-gray-700">
-            Need cabinets, shelving, trim or a custom build? See our{' '}
-            <a href="/carpentry-cabo-san-lucas" className="font-semibold text-teal-700 underline hover:text-teal-800">carpentry services in Cabo San Lucas</a>
-          </p>
-
           {/* Comprehensive Services List */}
           <div className="mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Complete Handyman Services in Cabo San Lucas</h2>
@@ -338,7 +333,7 @@ export default function HandymanCaboSanLucas() {
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-teal-600 flex-shrink-0 mt-1" size={16} />
-                    <span>Cabinet installation — <a href="/carpentry-cabo-san-lucas" className="font-semibold text-teal-700 underline hover:text-teal-800">custom cabinets</a></span>
+                    <span>Cabinet installation</span>
                   </li>
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="text-teal-600 flex-shrink-0 mt-1" size={16} />

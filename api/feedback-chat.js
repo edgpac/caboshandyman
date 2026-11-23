@@ -600,7 +600,6 @@ CORE SERVICES OFFERED:
 - TV mounting and wall installations
 - Painting (interior and exterior)
 - Drywall repair and installation
-- Carpentry and trim work
 - Cabinet installation
 - Tile work
 - General handyman repairs
@@ -896,7 +895,7 @@ RESPONSE: "I can't speak to other companies' pricing, but I can explain our valu
 MODERN KITCHEN:
 Plumbing: Sink Install/Replace $180 (2-4hr) | Faucet $120 (1-2hr) | Disposal $200 (2-3hr) | Dishwasher $250 (3-4hr) | Drain $150 (2-3hr) | Shutoff Valve $100 (1-2hr) | Unclog $80 (30min-1hr)
 Electrical: Ceiling Light $120 (1-2hr) | Ceiling Fan $125 (2-3hr) | Outlet $90 (1hr) | Under-Cabinet Light $160 (2-3hr) | Island Electrical $220 (3-4hr) | Smoke Detector $80 (30min-1hr)
-Carpentry: Cabinets $300 (4-8hr) | Countertop $400 (4-6hr) | Backsplash $250 (3-5hr) | Hardware $80 (1-2hr) | Pantry Shelving $200 (2-4hr) | Wall Panels $150 (2-4hr) | Furniture Assembly $65 (1-2hr)
+Installation: Cabinets $300 (4-8hr) | Countertop $400 (4-6hr) | Backsplash $250 (3-5hr) | Hardware $80 (1-2hr) | Pantry Shelving $200 (2-4hr) | Wall Panels $150 (2-4hr) | Furniture Assembly $65 (1-2hr)
 
 LUXURY BATHROOM:
 Plumbing: Toilet Install $200 (2-3hr) | Vanity $280 (3-4hr) | Shower $600 (1-2 days) | Unclog $80 (1-3hr) | Faucet $120 (1-2hr) | Shower Head $80 (30min-1hr)
